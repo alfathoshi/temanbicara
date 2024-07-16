@@ -35,6 +35,12 @@ TextStyle h6Regular = GoogleFonts.poppins(
   fontSize: 13,
 );
 
+TextStyle h7Regular = GoogleFonts.poppins(
+  fontWeight: FontWeight.w400,
+  color: font,
+  fontSize: 10,
+);
+
 TextStyle h1Bold = GoogleFonts.poppins(
   fontWeight: FontWeight.w700,
   color: font,
@@ -194,12 +200,12 @@ TextStyle buttonLinkMBold = GoogleFonts.poppins(
 );
 TextStyle buttonLinkSBold = GoogleFonts.poppins(
   fontWeight: FontWeight.w700,
-  color: font,
+  color: whiteColor,
   fontSize: 15,
 );
 TextStyle buttonLinkXSBold = GoogleFonts.poppins(
   fontWeight: FontWeight.w700,
-  color: font,
+  color: whiteColor,
   fontSize: 12,
 );
 

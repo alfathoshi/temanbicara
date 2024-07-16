@@ -22,3 +22,8 @@ const Color grey3Color = Color(0xffB0AAAA);
 const Color grey4Color = Color(0xffD9D9D9);
 const Color boxAbu = Color(0xffD3D3D3);
 const Color placeHolderIcon = Color(0xffBDBDBD);
+
+const Color lightGreen = Color(0xffF2F5EB);
+const Color lightBlue = Color(0xffC5E4FB);
+const Color lightYellow = Color(0xffFCF7C8);
+const Color lightPurple = Color(0xffEFEBFF);
