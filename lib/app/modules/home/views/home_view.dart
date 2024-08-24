@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/mental_matrix.dart';
+import 'package:temanbicara/app/widgets/my_journal.dart';
+import 'package:temanbicara/app/widgets/top_article.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -14,7 +17,7 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: border,
+      backgroundColor: whiteColor,
       body: CustomScrollView(slivers: [
         SliverAppBar(
           toolbarHeight: 85,
@@ -70,9 +73,12 @@ class HomeView extends GetView<HomeController> {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: whiteColor,
-                ),
+                    borderRadius: BorderRadius.circular(16),
+                    color: whiteColor,
+                    border: BorderDirectional(
+                        bottom: BorderSide(
+                      color: border,
+                    ))),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(32, 21, 32, 32),
                   child: Column(
@@ -185,6 +191,7 @@ class HomeView extends GetView<HomeController> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
                   color: whiteColor,
+                  border: Border.all(color: border),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(32, 21, 32, 32),
@@ -243,6 +250,7 @@ class HomeView extends GetView<HomeController> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
                   color: whiteColor,
+                  border: Border.all(color: border),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(32, 21, 32, 32),
@@ -305,24 +313,36 @@ class HomeView extends GetView<HomeController> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
                   color: whiteColor,
+                  border: Border.all(color: border),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(32, 21, 32, 32),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'My Journal',
-                        style: h4SemiBold,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'My Journal',
+                            style: h4SemiBold,
+                          ),
+                          Text(
+                            'See More',
+                            style: h4SemiBoldPrime,
+                          )
+                        ],
                       ),
                       const SizedBox(
                         height: 16,
                       ),
-                      const Row(
-                        children: [],
-                      ),
-                      const SizedBox(
-                        height: 16,
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            for (int i = 0; i < 4; i++) MyJournal(),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -335,21 +355,47 @@ class HomeView extends GetView<HomeController> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
                   color: whiteColor,
+                  border: BorderDirectional(
+                      top: BorderSide(
+                    color: border,
+                  )),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(32, 21, 32, 32),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Top Article',
-                        style: h4SemiBold,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Top Article',
+                            style: h4SemiBold,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              Get.toNamed(Routes.ARTICLE);
+                            },
+                            child: Text(
+                              'See More',
+                              style: h4SemiBoldPrime,
+                            ),
+                          )
+                        ],
                       ),
                       const SizedBox(
                         height: 16,
                       ),
-                      const Row(
-                        children: [],
+                      Row(
+                        children: [
+                          SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                for (int i = 0; i < 4; i++) TopArticle(),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(
                         height: 16,

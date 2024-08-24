@@ -5,6 +5,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:temanbicara/app/modules/article/views/article_view.dart';
 import 'package:temanbicara/app/modules/chatbot/views/chatbot_view.dart';
 import 'package:temanbicara/app/modules/consult/views/consult_view.dart';
+import 'package:temanbicara/app/modules/journal/views/journal_view.dart';
 import 'package:temanbicara/app/modules/profile/views/profile_view.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
@@ -15,7 +16,7 @@ import '../controllers/navigation_bar_controller.dart';
 class NavigationBarView extends GetView<NavigationBarController> {
   final List<Widget> _pages = [
     HomeView(),
-    ArticleView(),
+    JournalView(),
     ChatbotView(),
     ConsultView(),
     ProfileView(),
@@ -43,7 +44,7 @@ class NavigationBarView extends GetView<NavigationBarController> {
             items: const [
               BottomNavigationBarItem(icon: Icon(Iconsax.home), label: 'Home'),
               BottomNavigationBarItem(
-                  icon: Icon(Iconsax.book), label: 'Article'),
+                  icon: Icon(Iconsax.book), label: 'Journal'),
               BottomNavigationBarItem(
                   icon: Icon(Iconsax.emoji_happy), label: 'Chatbot'),
               BottomNavigationBarItem(

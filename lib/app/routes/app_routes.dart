@@ -10,6 +10,7 @@ abstract class Routes {
   static const CHATBOT = _Paths.CHATBOT;
   static const CONSULT = _Paths.CONSULT;
   static const PROFILE = _Paths.PROFILE;
+  static const JOURNAL = _Paths.JOURNAL;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const CHATBOT = '/chatbot';
   static const CONSULT = '/consult';
   static const PROFILE = '/profile';
+  static const JOURNAL = '/journal';
 }

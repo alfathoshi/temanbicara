@@ -135,6 +135,12 @@ TextStyle h6SemiBold = GoogleFonts.poppins(
   fontSize: 13,
 );
 
+TextStyle h7SemiBold = GoogleFonts.poppins(
+  fontWeight: FontWeight.w600,
+  color: font,
+  fontSize: 10,
+);
+
 TextStyle bodyRegular = GoogleFonts.poppins(
   fontWeight: FontWeight.w500,
   fontSize: 16,
@@ -245,4 +251,10 @@ TextStyle trackingButton = GoogleFonts.poppins(
   fontWeight: FontWeight.w600,
   color: primaryColor,
   fontSize: 13,
+);
+
+TextStyle h4SemiBoldPrime = GoogleFonts.poppins(
+  fontWeight: FontWeight.w600,
+  color: primaryColor,
+  fontSize: 16,
 );
