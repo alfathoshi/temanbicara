@@ -1,4 +1,5 @@
 # temanbicara
+//<img src="" width=40% height=40%/>
 
 ## Day 1
 <img src="https://github.com/user-attachments/assets/675fcf20-99ae-438a-81f1-cc4ea8b5bcbd" width=40% height=40%/>
@@ -12,6 +13,12 @@
 <img src="https://github.com/user-attachments/assets/814e0966-1408-47d4-9510-a10fbaeb2d16" width=40% height=40%/>
 <img src="https://github.com/user-attachments/assets/52b003b8-9c4f-4df3-b9d2-5a44cfffde44" width=40% height=40%/>
 <img src="https://github.com/user-attachments/assets/740ab9d0-6e26-4e17-82e5-526f8f6fc9ca" width=40% height=40%/>
+
+## Day 4
+<img src="https://github.com/user-attachments/assets/74619ce8-f99a-4603-8f7c-355213a2848e" width=40% height=40%/>
+
+
+
 
 
 
