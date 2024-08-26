@@ -230,7 +230,9 @@ class HomeView extends GetView<HomeController> {
                                   height: 16,
                                 ),
                                 MyButton(
-                                    color: primaryColor, text: 'Consult Now')
+                                    get: () => Get.toNamed(Routes.CONSULT),
+                                    color: primaryColor,
+                                    text: 'Consult Now')
                               ],
                             ),
                           )
@@ -291,9 +293,10 @@ class HomeView extends GetView<HomeController> {
                                 const SizedBox(
                                   height: 16,
                                 ),
-                                const MyButton(
+                                MyButton(
+                                    get: () => Get.toNamed(Routes.CHATBOT),
                                     color: Colors.lightBlue,
-                                    text: 'Consult Now')
+                                    text: 'Talk')
                               ],
                             ),
                           )
@@ -327,9 +330,14 @@ class HomeView extends GetView<HomeController> {
                             'My Journal',
                             style: h4SemiBold,
                           ),
-                          Text(
-                            'See More',
-                            style: h4SemiBoldPrime,
+                          GestureDetector(
+                            onTap: () {
+                              Get.toNamed(Routes.JOURNAL);
+                            },
+                            child: Text(
+                              'See More',
+                              style: h4SemiBoldPrime,
+                            ),
                           )
                         ],
                       ),

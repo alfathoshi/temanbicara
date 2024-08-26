@@ -1,12 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
 class MyButton extends StatelessWidget {
+  final Function()? get;
   final Color color;
   final String text;
   const MyButton({
     super.key,
+    required this.get,
     required this.color,
     required this.text,
   });
@@ -15,7 +18,7 @@ class MyButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print('hello');
+        get?.call();
       },
       child: Container(
         height: 36,
