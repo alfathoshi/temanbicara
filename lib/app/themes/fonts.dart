@@ -41,6 +41,18 @@ TextStyle h7Regular = GoogleFonts.poppins(
   fontSize: 10,
 );
 
+TextStyle h6RegularShade = GoogleFonts.poppins(
+  fontWeight: FontWeight.w400,
+  color: Colors.black26,
+  fontSize: 13,
+);
+
+TextStyle h7RegularShade = GoogleFonts.poppins(
+  fontWeight: FontWeight.w400,
+  color: Colors.black26,
+  fontSize: 10,
+);
+
 TextStyle h1Bold = GoogleFonts.poppins(
   fontWeight: FontWeight.w700,
   color: font,
