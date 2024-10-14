@@ -84,6 +84,12 @@ TextStyle h6Bold = GoogleFonts.poppins(
   fontSize: 13,
 );
 
+TextStyle h7Bold = GoogleFonts.poppins(
+  fontWeight: FontWeight.w700,
+  color: font,
+  fontSize: 12,
+);
+
 TextStyle h1Medium = GoogleFonts.poppins(
   fontWeight: FontWeight.w500,
   color: font,

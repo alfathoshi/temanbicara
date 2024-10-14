@@ -15,6 +15,8 @@ abstract class Routes {
   static const CHATBOT_ROOM = _Paths.CHATBOT_ROOM;
   static const LOGIN = _Paths.LOGIN;
   static const SIGNUP = _Paths.SIGNUP;
+  static const TRANSACTION = _Paths.TRANSACTION;
+  static const TRANSACTION_METHOD = _Paths.TRANSACTION_METHOD;
 }
 
 abstract class _Paths {
@@ -29,4 +31,6 @@ abstract class _Paths {
   static const CHATBOT_ROOM = '/chatbot-room';
   static const LOGIN = '/login';
   static const SIGNUP = '/signup';
+  static const TRANSACTION = '/transaction';
+  static const TRANSACTION_METHOD = '/transaction-method';
 }
