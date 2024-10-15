@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:temanbicara/app/modules/transaction_method/views/transaction_method_view.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
@@ -49,7 +50,9 @@ class TransactionView extends GetView<TransactionController> {
                                 color: Colors.white,
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold)),
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(() => TransactionMethodView());
+                        },
                         style: ButtonStyle(
                           backgroundColor:
                               MaterialStatePropertyAll<Color>(primaryColor),

@@ -18,7 +18,7 @@ void main() {
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
         title: "Application",
-        initialRoute: Routes.TRANSACTION,
+        initialRoute: Routes.TRANSACTION_METHOD,
         getPages: AppPages.routes,
       ),
     ),
