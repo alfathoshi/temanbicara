@@ -5,6 +5,7 @@ import 'package:temanbicara/app/themes/fonts.dart';
 
 import '../themes/colors.dart';
 
+
 class MyJournal extends StatelessWidget {
   const MyJournal({super.key});
 

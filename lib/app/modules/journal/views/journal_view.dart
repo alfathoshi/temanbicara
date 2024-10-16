@@ -7,7 +7,6 @@ import 'package:temanbicara/app/widgets/journal_card.dart';
 
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
-import '../../../widgets/history_chatbot.dart';
 import '../controllers/journal_controller.dart';
 
 class JournalView extends GetView<JournalController> {

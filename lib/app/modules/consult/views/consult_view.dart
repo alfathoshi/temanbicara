@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/widgets/counselor_card.dart';
 
 import '../../../themes/fonts.dart';
-import '../../../widgets/top_article.dart';
 import '../controllers/consult_controller.dart';
 
 class ConsultView extends GetView<ConsultController> {
