@@ -1,9 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
-import 'package:temanbicara/app/widgets/history_chatbot.dart';
 
 class CounselorCard extends StatelessWidget {
   const CounselorCard({super.key});

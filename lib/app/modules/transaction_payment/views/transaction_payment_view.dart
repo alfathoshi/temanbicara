@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:temanbicara/app/modules/transaction_payment/views/transaction_payment_view.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
-import 'package:temanbicara/app/widgets/transaction/chooseMethod.dart';
-import 'package:temanbicara/app/widgets/transaction/concultationPrice.dart';
+import 'package:temanbicara/app/widgets/transaction/transactionPriceDetail.dart';
+import 'package:temanbicara/app/widgets/transaction/transactionRemainingTime.dart';
 
-import '../controllers/transaction_method_controller.dart';
+import '../controllers/transaction_payment_controller.dart';
 
-class TransactionMethodView extends GetView<TransactionMethodController> {
-  const TransactionMethodView({super.key});
+class TransactionPaymentView extends GetView<TransactionPaymentController> {
+  const TransactionPaymentView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,11 +38,35 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
           children: [
             Text("Anggap ini progress bar ya blud", style: h4Bold),
             SizedBox(height: 30),
-            Text("Payment Method", style: h5Bold),
+            Text("Payment", style: h5Bold),
             SizedBox(height: 22),
-            ChooseMethod(),
+            TransactionRemainingTime(),
             SizedBox(height: 22),
-            ConcultationPrice(price: 321670),
+            TransactionPriceDetail(
+                invoice: "dummy",
+                paymentMethod: "dummy",
+                price: 321670,
+                appTax: 15000,
+                admTax: 1000),
+            SizedBox(height: 17),
+            Center(
+              child: RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  text: 'By processing this transaction, you agree to all the ',
+                  style: h7Regular,
+                  children: [
+                    TextSpan(
+                        text: 'Terms and Condition',
+                        style: h7Regular.copyWith(color: Colors.blue)),
+                    TextSpan(text: ' of'),
+                    TextSpan(
+                        text: ' Teman Bicara',
+                        style: h7Regular.copyWith(color: primaryColor))
+                  ],
+                ),
+              ),
+            ),
             Spacer(),
             Padding(
               padding: const EdgeInsets.only(bottom: 45),
@@ -57,9 +80,7 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
                             color: Colors.white,
                             fontSize: 14,
                             fontWeight: FontWeight.bold)),
-                    onPressed: () {
-                      Get.to(() => TransactionPaymentView());
-                    },
+                    onPressed: () {},
                     style: ButtonStyle(
                       backgroundColor:
                           MaterialStatePropertyAll<Color>(primaryColor),

@@ -156,7 +156,7 @@ TextStyle h6SemiBold = GoogleFonts.poppins(
 TextStyle h7SemiBold = GoogleFonts.poppins(
   fontWeight: FontWeight.w600,
   color: font,
-  fontSize: 10,
+  fontSize: 12,
 );
 
 TextStyle bodyRegular = GoogleFonts.poppins(

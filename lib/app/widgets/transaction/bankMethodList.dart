@@ -66,16 +66,6 @@ class BankPaymentMethodList extends StatelessWidget {
             ),
             PaymentMethodRow(
                 label: "BSI", value: bankTransferList[4], logo: "bsiLogo"),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 15),
-              child: Divider(
-                height: 1,
-                thickness: 1.5,
-                color: grey4Color,
-              ),
-            ),
-            PaymentMethodRow(
-                label: "NOBU", value: bankTransferList[5], logo: "nobuLogo"),
           ],
         ),
       ),

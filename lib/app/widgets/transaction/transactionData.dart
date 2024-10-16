@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/widgets/transaction/idrFormatter.dart';
 
 class TransactionData extends StatelessWidget {
   final String namaPsikiater, topik, metode, jadwalSesi, waktuSesi, kadaluarsa;
@@ -131,7 +132,8 @@ class TransactionData extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Price", style: h6Bold),
-                    Text(harga.toString())
+                    Text(CurrencyFormat.convertToIdr(harga, 2),
+                        style: h6Bold.copyWith(color: primaryColor))
                   ],
                 ),
               ],

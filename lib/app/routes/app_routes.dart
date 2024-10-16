@@ -17,6 +17,9 @@ abstract class Routes {
   static const SIGNUP = _Paths.SIGNUP;
   static const TRANSACTION = _Paths.TRANSACTION;
   static const TRANSACTION_METHOD = _Paths.TRANSACTION_METHOD;
+  static const TRANSACTION_PAYMENT = _Paths.TRANSACTION_PAYMENT;
+  static const TRANSACTION_SUCCESS = _Paths.TRANSACTION_SUCCESS;
+  static const TRANSACTION_INVOICE = _Paths.TRANSACTION_INVOICE;
 }
 
 abstract class _Paths {
@@ -33,4 +36,7 @@ abstract class _Paths {
   static const SIGNUP = '/signup';
   static const TRANSACTION = '/transaction';
   static const TRANSACTION_METHOD = '/transaction-method';
+  static const TRANSACTION_PAYMENT = '/transaction-payment';
+  static const TRANSACTION_SUCCESS = '/transaction-success';
+  static const TRANSACTION_INVOICE = '/transaction-invoice';
 }

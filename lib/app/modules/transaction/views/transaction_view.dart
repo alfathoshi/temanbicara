@@ -39,7 +39,7 @@ class TransactionView extends GetView<TransactionController> {
                       jadwalSesi: "dummy",
                       waktuSesi: "dummy",
                       kadaluarsa: "dummy",
-                      harga: 99999999),
+                      harga: 321670),
                   SizedBox(height: 50),
                   Center(
                     child: SizedBox(

@@ -1,10 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
 import '../themes/colors.dart';
-
 
 class MyJournal extends StatelessWidget {
   const MyJournal({super.key});

@@ -24,8 +24,14 @@ import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
 import '../modules/transaction/bindings/transaction_binding.dart';
 import '../modules/transaction/views/transaction_view.dart';
+import '../modules/transaction_invoice/bindings/transaction_invoice_binding.dart';
+import '../modules/transaction_invoice/views/transaction_invoice_view.dart';
 import '../modules/transaction_method/bindings/transaction_method_binding.dart';
 import '../modules/transaction_method/views/transaction_method_view.dart';
+import '../modules/transaction_payment/bindings/transaction_payment_binding.dart';
+import '../modules/transaction_payment/views/transaction_payment_view.dart';
+import '../modules/transaction_success/bindings/transaction_success_binding.dart';
+import '../modules/transaction_success/views/transaction_success_view.dart';
 
 part 'app_routes.dart';
 
@@ -99,6 +105,21 @@ class AppPages {
       name: _Paths.TRANSACTION_METHOD,
       page: () => const TransactionMethodView(),
       binding: TransactionMethodBinding(),
+    ),
+    GetPage(
+      name: _Paths.TRANSACTION_PAYMENT,
+      page: () => const TransactionPaymentView(),
+      binding: TransactionPaymentBinding(),
+    ),
+    GetPage(
+      name: _Paths.TRANSACTION_SUCCESS,
+      page: () => const TransactionSuccessView(),
+      binding: TransactionSuccessBinding(),
+    ),
+    GetPage(
+      name: _Paths.TRANSACTION_INVOICE,
+      page: () => const TransactionInvoiceView(),
+      binding: TransactionInvoiceBinding(),
     ),
   ];
 }
