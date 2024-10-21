@@ -3,16 +3,20 @@ version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
 environment:
-  sdk: '>=3.4.3 <4.0.0'
+  sdk: ">=3.4.3 <4.0.0"
 
 dependencies:
   cupertino_icons: ^1.0.6
   curved_navigation_bar: ^1.0.6
+  device_preview: ^1.2.0
+  dropdown_search: ^6.0.1
   flutter:
     sdk: flutter
   get: 4.6.6
   google_fonts: ^6.2.1
   iconsax: ^0.0.8
+  syncfusion_flutter_datepicker: ^27.1.53
+  table_calendar: ^3.1.2
 
 dev_dependencies:
   flutter_lints: ^3.0.0

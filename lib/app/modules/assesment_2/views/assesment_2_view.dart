@@ -2,21 +2,20 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/login_controller.dart';
+import '../controllers/assesment_2_controller.dart';
 
-class LoginView extends GetView<LoginController> {
-  const LoginView({super.key});
-
+class Assesment2View extends GetView<Assesment2Controller> {
+  const Assesment2View({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('LoginView'),
+        title: const Text('Assesment2View'),
         centerTitle: true,
       ),
-      body: const Center(
+      body: Center(
         child: Text(
-          'LoginView is working',
+          'Assesment2View is working',
           style: TextStyle(fontSize: 20),
         ),
       ),
