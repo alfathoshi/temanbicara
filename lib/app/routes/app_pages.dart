@@ -104,7 +104,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ASSESMENT_2,
-      page: () => const Assesment2View(),
+      page: () => Assesment2View(),
       binding: Assesment2Binding(),
     ),
   ];

@@ -1,23 +1,9 @@
 import 'package:get/get.dart';
 
 class Assesment2Controller extends GetxController {
-  //TODO: Implement Assesment2Controller
+   var tappedIndex = (-1).obs;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  void toggleTap(int index) {
+    tappedIndex.value = tappedIndex.value == index ? -1 : index;
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

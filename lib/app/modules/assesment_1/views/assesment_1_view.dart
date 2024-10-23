@@ -12,10 +12,9 @@ import '../../../widgets/favorite_button.dart';
 import '../../../widgets/gender_selector.dart';
 import '../controllers/assesment_1_controller.dart';
 
+// ignore: must_be_immutable
 class Assesment1View extends GetView<Assesment1Controller> {
   Assesment1View({Key? key}) : super(key: key);
-  final Assesment1Controller _assesment1controller =
-      Get.put(Assesment1Controller());
   String selectedGender = '';
   String selectedDateOfBirth = '';
   String selectedMBTI = '';
@@ -30,10 +29,10 @@ class Assesment1View extends GetView<Assesment1Controller> {
               'assets/images/logo.png',
               scale: 4,
             ),
-            SizedBox(
+            const SizedBox(
               width: 16,
             ),
-            Text(
+            const Text(
               'Assesment',
               style: TextStyle(
                 fontSize: 24,
@@ -64,19 +63,19 @@ class Assesment1View extends GetView<Assesment1Controller> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(32),
+          padding: const EdgeInsets.all(32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               form(),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               Text(
                 'Gender',
                 style: textDescriptionSemiBold,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               Obx(
@@ -85,40 +84,38 @@ class Assesment1View extends GetView<Assesment1Controller> {
                   children: [
                     GenderSelector(
                         gender: Gender.male,
-                        selectedGender:
-                            _assesment1controller.selectedGender.value,
+                        selectedGender: controller.selectedGender.value,
                         onSelect: (gender) {
-                          _assesment1controller.toggleGender(gender);
+                          controller.toggleGender(gender);
                         }),
                     GenderSelector(
                         gender: Gender.female,
-                        selectedGender:
-                            _assesment1controller.selectedGender.value,
+                        selectedGender: controller.selectedGender.value,
                         onSelect: (gender) {
-                          _assesment1controller.toggleGender(gender);
+                          controller.toggleGender(gender);
                         })
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               Text(
                 'Tanggal Lahir',
                 style: textDescriptionSemiBold,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               date(),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               Text(
                 'MBTI',
                 style: textDescriptionSemiBold,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               DropdownSearch<String>(
@@ -140,7 +137,7 @@ class Assesment1View extends GetView<Assesment1Controller> {
                   'ESTP',
                   'ESTJ'
                 ],
-                suffixProps: DropdownSuffixProps(
+                suffixProps: const DropdownSuffixProps(
                   dropdownButtonProps: DropdownButtonProps(
                     iconClosed: Icon(Icons.keyboard_arrow_down),
                     iconOpened: Icon(Icons.keyboard_arrow_up),
@@ -148,12 +145,12 @@ class Assesment1View extends GetView<Assesment1Controller> {
                 ),
                 decoratorProps: DropDownDecoratorProps(
                   decoration: InputDecoration(
-                      contentPadding: EdgeInsets.all(15),
+                      contentPadding: const EdgeInsets.all(15),
                       filled: true,
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16),
-                        borderSide: BorderSide(
+                        borderSide: const BorderSide(
                           color: Colors.black26,
                           width: 2,
                         ),
@@ -172,26 +169,26 @@ class Assesment1View extends GetView<Assesment1Controller> {
                       ),
                     );
                   },
-                  constraints: BoxConstraints(maxHeight: 160),
-                  menuProps: MenuProps(
+                  constraints: const BoxConstraints(maxHeight: 160),
+                  menuProps: const MenuProps(
                     margin: EdgeInsets.only(top: 12),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(12))),
                   ),
                 ),
                 onChanged: (mbti) {
-                  _assesment1controller.setMBTI(mbti ?? '');
+                  controller.setMBTI(mbti ?? '');
                 },
-                selectedItem: _assesment1controller.selectedMBTI.value,
+                selectedItem: controller.selectedMBTI.value,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               Text(
                 'Favorite Topic',
                 style: textDescriptionSemiBold,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               Obx(
@@ -201,106 +198,95 @@ class Assesment1View extends GetView<Assesment1Controller> {
                       children: [
                         FavoriteButton(
                           get: () {
-                            _assesment1controller.toggleTopis('Sport');
+                            controller.toggleTopis('Sport');
                           },
-                          colorBorder: _assesment1controller.isSportTap.value
+                          colorBorder: controller.isSportTap.value
                               ? whiteColor
                               : primaryColor,
-                          colorBackground:
-                              _assesment1controller.isSportTap.value
-                                  ? primaryColor
-                                  : whiteColor,
+                          colorBackground: controller.isSportTap.value
+                              ? primaryColor
+                              : whiteColor,
                           text: 'Sport',
                         ),
                         FavoriteButton(
                             get: () {
-                              _assesment1controller.toggleTopis('Art');
+                              controller.toggleTopis('Art');
                             },
-                            colorBorder: _assesment1controller.isArtTap.value
+                            colorBorder: controller.isArtTap.value
                                 ? whiteColor
                                 : primaryColor,
-                            colorBackground:
-                                _assesment1controller.isArtTap.value
-                                    ? primaryColor
-                                    : whiteColor,
+                            colorBackground: controller.isArtTap.value
+                                ? primaryColor
+                                : whiteColor,
                             text: 'Art'),
                         FavoriteButton(
                             get: () {
-                              _assesment1controller.toggleTopis('Politics');
+                              controller.toggleTopis('Politics');
                             },
-                            colorBorder:
-                                _assesment1controller.isPoliticsTap.value
-                                    ? whiteColor
-                                    : primaryColor,
-                            colorBackground:
-                                _assesment1controller.isPoliticsTap.value
-                                    ? primaryColor
-                                    : whiteColor,
+                            colorBorder: controller.isPoliticsTap.value
+                                ? whiteColor
+                                : primaryColor,
+                            colorBackground: controller.isPoliticsTap.value
+                                ? primaryColor
+                                : whiteColor,
                             text: 'Politics'),
                         FavoriteButton(
                             get: () {
-                              _assesment1controller.toggleTopis('Anxiety');
+                              controller.toggleTopis('Anxiety');
                             },
-                            colorBorder:
-                                _assesment1controller.isAnxietyTap.value
-                                    ? whiteColor
-                                    : primaryColor,
-                            colorBackground:
-                                _assesment1controller.isAnxietyTap.value
-                                    ? primaryColor
-                                    : whiteColor,
+                            colorBorder: controller.isAnxietyTap.value
+                                ? whiteColor
+                                : primaryColor,
+                            colorBackground: controller.isAnxietyTap.value
+                                ? primaryColor
+                                : whiteColor,
                             text: 'Anxiety'),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     Row(
                       children: [
                         FavoriteButton(
                             get: () {
-                              _assesment1controller.toggleTopis('Tech');
+                              controller.toggleTopis('Tech');
                             },
-                            colorBorder: _assesment1controller.isTechTap.value
+                            colorBorder: controller.isTechTap.value
                                 ? whiteColor
                                 : primaryColor,
-                            colorBackground:
-                                _assesment1controller.isTechTap.value
-                                    ? primaryColor
-                                    : whiteColor,
+                            colorBackground: controller.isTechTap.value
+                                ? primaryColor
+                                : whiteColor,
                             text: 'Tech'),
                         FavoriteButton(
                             get: () {
-                              _assesment1controller.toggleTopis('Innovation');
+                              controller.toggleTopis('Innovation');
                             },
-                            colorBorder:
-                                _assesment1controller.isInnovationTap.value
-                                    ? whiteColor
-                                    : primaryColor,
-                            colorBackground:
-                                _assesment1controller.isInnovationTap.value
-                                    ? primaryColor
-                                    : whiteColor,
+                            colorBorder: controller.isInnovationTap.value
+                                ? whiteColor
+                                : primaryColor,
+                            colorBackground: controller.isInnovationTap.value
+                                ? primaryColor
+                                : whiteColor,
                             text: 'Innovation'),
                         FavoriteButton(
                             get: () {
-                              _assesment1controller.toggleTopis('Lainnya');
+                              controller.toggleTopis('Lainnya');
                             },
-                            colorBorder:
-                                _assesment1controller.isLainnyaTap.value
-                                    ? whiteColor
-                                    : primaryColor,
-                            colorBackground:
-                                _assesment1controller.isLainnyaTap.value
-                                    ? primaryColor
-                                    : whiteColor,
+                            colorBorder: controller.isLainnyaTap.value
+                                ? whiteColor
+                                : primaryColor,
+                            colorBackground: controller.isLainnyaTap.value
+                                ? primaryColor
+                                : whiteColor,
                             text: 'Lainnya'),
                       ],
                     ),
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 24,
               ),
               Center(

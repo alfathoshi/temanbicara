@@ -302,3 +302,9 @@ TextStyle TextLogo = GoogleFonts.poppins(
   color: whiteColor,
   fontSize: 16,
 );
+
+TextStyle warningGoals = GoogleFonts.poppins(
+  fontWeight: FontWeight.bold,
+  color: doneStatus,
+  fontSize: 14,
+);
