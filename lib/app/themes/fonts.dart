@@ -328,3 +328,13 @@ TextStyle sleepQualityTimeTap = GoogleFonts.poppins(
   color: whiteColor,
   fontSize: 13,
 );
+TextStyle ConsultOption = GoogleFonts.poppins(
+  fontWeight: FontWeight.w600,
+  color: primaryColor,
+  fontSize: 16,
+);
+TextStyle ConsultOptionTap = GoogleFonts.poppins(
+  fontWeight: FontWeight.w600,
+  color: whiteColor,
+  fontSize: 16,
+);

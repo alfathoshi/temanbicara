@@ -8,6 +8,8 @@ import '../modules/assesment_2/bindings/assesment_2_binding.dart';
 import '../modules/assesment_2/views/assesment_2_view.dart';
 import '../modules/assesment_3/bindings/assesment_3_binding.dart';
 import '../modules/assesment_3/views/assesment_3_view.dart';
+import '../modules/assesment_4/bindings/assesment_4_binding.dart';
+import '../modules/assesment_4/views/assesment_4_view.dart';
 import '../modules/chatbot/bindings/chatbot_binding.dart';
 import '../modules/chatbot/views/chatbot_view.dart';
 import '../modules/chatbot_room/bindings/chatbot_room_binding.dart';
@@ -113,6 +115,11 @@ class AppPages {
       name: _Paths.ASSESMENT_3,
       page: () => const Assesment3View(),
       binding: Assesment3Binding(),
+    ),
+    GetPage(
+      name: _Paths.ASSESMENT_4,
+      page: () => const Assesment4View(),
+      binding: Assesment4Binding(),
     ),
   ];
 }
