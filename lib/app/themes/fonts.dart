@@ -308,3 +308,23 @@ TextStyle warningGoals = GoogleFonts.poppins(
   color: doneStatus,
   fontSize: 14,
 );
+TextStyle sleepQualityTitle = GoogleFonts.poppins(
+  fontWeight: FontWeight.w700,
+  color: primaryColor,
+  fontSize: 15,
+);
+TextStyle sleepQualityTime = GoogleFonts.poppins(
+  fontWeight: FontWeight.w700,
+  color: primaryColor,
+  fontSize: 13,
+);
+TextStyle sleepQualityTitleTap = GoogleFonts.poppins(
+  fontWeight: FontWeight.w700,
+  color: whiteColor,
+  fontSize: 15,
+);
+TextStyle sleepQualityTimeTap = GoogleFonts.poppins(
+  fontWeight: FontWeight.w700,
+  color: whiteColor,
+  fontSize: 13,
+);

@@ -18,6 +18,7 @@ abstract class Routes {
   static const SPLASH_SCREEN = _Paths.SPLASH_SCREEN;
   static const ASSESMENT_1 = _Paths.ASSESMENT_1;
   static const ASSESMENT_2 = _Paths.ASSESMENT_2;
+  static const ASSESMENT_3 = _Paths.ASSESMENT_3;
 }
 
 abstract class _Paths {
@@ -35,4 +36,5 @@ abstract class _Paths {
   static const SPLASH_SCREEN = '/splash-screen';
   static const ASSESMENT_1 = '/assesment-1';
   static const ASSESMENT_2 = '/assesment-2';
+  static const ASSESMENT_3 = '/assesment-3';
 }
