@@ -17,6 +17,7 @@ abstract class Routes {
   static const SIGNUP = _Paths.SIGNUP;
   static const REPORT = _Paths.REPORT;
   static const MOOD_REPORT = _Paths.MOOD_REPORT;
+  static const SLEEP_QUALITY = _Paths.SLEEP_QUALITY;
 }
 
 abstract class _Paths {
@@ -33,4 +34,5 @@ abstract class _Paths {
   static const SIGNUP = '/signup';
   static const REPORT = '/report';
   static const MOOD_REPORT = '/mood-report';
+  static const SLEEP_QUALITY = '/sleep-quality';
 }

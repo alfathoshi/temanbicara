@@ -3,7 +3,7 @@ version: 1.0.0+1
 publish_to: none
 description: A new Flutter project.
 environment:
-  sdk: '>=3.4.3 <4.0.0'
+  sdk: ">=3.4.3 <4.0.0"
 
 dependencies:
   cupertino_icons: ^1.0.6
@@ -11,6 +11,7 @@ dependencies:
   device_preview: ^1.2.0
   flutter:
     sdk: flutter
+  flutter_sliding_up_panel: ^2.1.1
   get: 4.6.6
   google_fonts: ^6.2.1
   iconsax: ^0.0.8

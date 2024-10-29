@@ -26,6 +26,8 @@ import '../modules/report/bindings/report_binding.dart';
 import '../modules/report/views/report_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
+import '../modules/sleep_quality/bindings/sleep_quality_binding.dart';
+import '../modules/sleep_quality/views/sleep_quality_view.dart';
 
 part 'app_routes.dart';
 
@@ -99,6 +101,11 @@ class AppPages {
       name: _Paths.MOOD_REPORT,
       page: () => const MoodReportView(),
       binding: MoodReportBinding(),
+    ),
+    GetPage(
+      name: _Paths.SLEEP_QUALITY,
+      page: () => const SleepQualityView(),
+      binding: SleepQualityBinding(),
     ),
   ];
 }
