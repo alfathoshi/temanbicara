@@ -27,7 +27,7 @@ class PaymentMethodRow extends StatelessWidget {
             Spacer(),
             Radio<String>(
               value: value,
-              groupValue: RadioButtonController.bankType,
+              groupValue: RadioButtonController.methodType,
               onChanged: (String? value) =>
                   RadioButtonController.setMethodType(value!),
               activeColor: primaryColor,

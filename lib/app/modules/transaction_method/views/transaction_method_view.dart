@@ -6,11 +6,13 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/transaction/chooseMethod.dart';
 import 'package:temanbicara/app/widgets/transaction/concultationPrice.dart';
+import 'package:temanbicara/app/widgets/transaction/transactionTimelineView.dart';
 
 import '../controllers/transaction_method_controller.dart';
 
 class TransactionMethodView extends GetView<TransactionMethodController> {
-  const TransactionMethodView({super.key});
+  final int? price;
+  const TransactionMethodView({this.price, super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,40 +34,22 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
         ),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 28),
+      body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Anggap ini progress bar ya blud", style: h4Bold),
-            SizedBox(height: 30),
-            Text("Payment Method", style: h5Bold),
-            SizedBox(height: 22),
-            ChooseMethod(),
-            SizedBox(height: 22),
-            ConcultationPrice(price: 321670),
-            Spacer(),
+            SizedBox(height: 20),
+            TransactionTimeLineViewIndex(index: 2),
             Padding(
-              padding: const EdgeInsets.only(bottom: 45),
-              child: Center(
-                child: SizedBox(
-                  width: 205,
-                  height: 42,
-                  child: ElevatedButton(
-                    child: Text('Next',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold)),
-                    onPressed: () {
-                      Get.to(() => TransactionPaymentView());
-                    },
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStatePropertyAll<Color>(primaryColor),
-                    ),
+              padding: const EdgeInsets.only(bottom: 28.0, right: 28, left: 28),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Payment Method", style: h5Bold),
+                  SizedBox(height: 22),
+                  ChooseMethod(
+                    price: price!,
                   ),
-                ),
+                ],
               ),
             ),
           ],

@@ -1,6 +1,9 @@
-import 'package:flutter/material.dart';
+// ignore_for_file: prefer_const_constructors
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:temanbicara/app/widgets/transaction/transactionTimeline.dart';
+import 'package:temanbicara/app/widgets/transaction/transactionTimelineView.dart';
 
 import '../controllers/transaction_invoice_controller.dart';
 
@@ -13,12 +16,8 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
         title: const Text('TransactionInvoiceView'),
         centerTitle: true,
       ),
-      body: const Center(
-        child: Text(
-          'TransactionInvoiceView is working',
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
+      // body: Text("test")
+      //body: TransactionTimeLineView(),
     );
   }
 }

@@ -98,7 +98,18 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.TRANSACTION,
-      page: () => const TransactionView(),
+      // ini cuman buat tes data aja
+      page: () => const TransactionView(
+        namaPsikiater: "dummy",
+        topik: "dummy",
+        metode: "dummy",
+        durasi: 100,
+        jmlSesi: 1,
+        jadwalSesi: "dummy",
+        waktuSesi: "dummy",
+        kadaluarsa: "dummy",
+        harga: 321671,
+      ),
       binding: TransactionBinding(),
     ),
     GetPage(

@@ -27,7 +27,7 @@ class TransactionMethodController extends GetxController {
 
 class RadioButtonController extends GetxController {
   String _methodType = "";
-  String get bankType => _methodType;
+  String get methodType => _methodType;
   void setMethodType(String type) {
     _methodType = type;
     update();
