@@ -9,6 +9,8 @@ import 'package:temanbicara/app/themes/fonts.dart';
 import '../controllers/signup_controller.dart';
 
 class SignupView extends GetView<SignupController> {
+  const SignupView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +41,7 @@ class SignupView extends GetView<SignupController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 60,
                   ),
                   Center(
@@ -131,10 +133,10 @@ class SignupView extends GetView<SignupController> {
                     height: 68,
                   ),
                   Obx(() => ElevatedButton(
-                        onPressed: () => null,
+                        onPressed: () {},
                         style: ElevatedButton.styleFrom(
                             backgroundColor: controller.isButtonActive.value
-                                ? Color(0xFFc4c4c4)
+                                ? const Color(0xFFc4c4c4)
                                 : Colors.blue,
                             foregroundColor: Colors.white,
                             minimumSize: const Size(
@@ -172,7 +174,8 @@ class SignupView extends GetView<SignupController> {
                       onTap: () => Get.toNamed(Routes.LOGIN),
                       child: Text(
                         'Masuk',
-                        style: GoogleFonts.poppins(color: Color(0xFF60ABEE)),
+                        style:
+                            GoogleFonts.poppins(color: const Color(0xFF60ABEE)),
                       ),
                     ),
                   ],
