@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:temanbicara/app/widgets/sleep_quality.dart';
 
+import '../../../routes/app_pages.dart';
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
 import '../../../widgets/buttons.dart';
@@ -106,10 +107,8 @@ class Assesment3View extends GetView<Assesment3Controller> {
                 height: 32,
               ),
               Text('Silahkan pilih salah satu!', style: warningGoals),
-              const SizedBox(
-                height: 32,
-              ),
-              MyButton(get: () {}, color: primaryColor, text: 'Lanjutkan')
+              Spacer(),
+              MyButton(get: () {Get.toNamed(Routes.ASSESMENT_4);}, color: primaryColor, text: 'Lanjutkan')
             ],
           ),
         ));

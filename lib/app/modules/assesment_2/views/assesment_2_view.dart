@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/goalsOptions.dart';
 
+import '../../../routes/app_pages.dart';
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
 import '../controllers/assesment_2_controller.dart';
@@ -101,10 +102,8 @@ class Assesment2View extends GetView<Assesment2Controller> {
                 height: 32,
               ),
               Text('Silahkan pilih goalsmu', style: warningGoals),
-              const SizedBox(
-                height: 32,
-              ),
-              MyButton(get: (){}, color: primaryColor, text: 'Lanjutkan')
+              Spacer(),
+              MyButton(get: (){Get.toNamed(Routes.ASSESMENT_3);}, color: primaryColor, text: 'Lanjutkan')
             ],
           ),
         ));

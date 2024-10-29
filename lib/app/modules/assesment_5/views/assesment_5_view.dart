@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:temanbicara/app/widgets/buttons.dart';
 
 import '../../../routes/app_pages.dart';
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
-import '../controllers/assesment_4_controller.dart';
+import '../../../widgets/buttons.dart';
+import '../controllers/assesment_5_controller.dart';
 
-class Assesment4View extends GetView<Assesment4Controller> {
-  const Assesment4View({Key? key}) : super(key: key);
+class Assesment5View extends GetView<Assesment5Controller> {
+  const Assesment5View({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +44,7 @@ class Assesment4View extends GetView<Assesment4Controller> {
               ),
               child: Center(
                 child: Text(
-                  '4 of 7',
+                  '5 of 7',
                   style: assestmentPoint,
                 ),
               ),
@@ -52,25 +52,25 @@ class Assesment4View extends GetView<Assesment4Controller> {
           ),
         ],
       ),
-      body: Padding(
+     body: Padding(
         padding: const EdgeInsets.all(32.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
-              'Pernah gak kamu konsultasi ke tenaga profesional sebelumnya?',
+              'Apakah kamu sedang atau pernah mengkonsumsi obat?',
               textAlign: TextAlign.center,
               style: h3Bold,
             ),
             const SizedBox(
-              height: 50,
+              height: 100,
             ),
             Image.asset(
-              'assets/images/consultImg.png',
+              'assets/images/medicine.png',
               scale: 2,
             ),
             const SizedBox(
-              height: 50,
+              height: 100,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -132,7 +132,7 @@ class Assesment4View extends GetView<Assesment4Controller> {
                           ],
                           color: controller.isSelected.value == 1
                               ? primaryColor
-                              : whiteColor, 
+                              : whiteColor, // Warna berdasarkan pilihan
                         ),
                         padding: const EdgeInsets.all(8),
                         child: Center(
@@ -149,7 +149,7 @@ class Assesment4View extends GetView<Assesment4Controller> {
             ),
             Spacer(),
             MyButton(get: () {
-              Get.toNamed(Routes.ASSESMENT_5);
+              Get.toNamed(Routes.ASSESMENT_6);
             }, color: primaryColor, text: 'Lanjutkan')
           ],
         ),

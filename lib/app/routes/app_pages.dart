@@ -10,6 +10,12 @@ import '../modules/assesment_3/bindings/assesment_3_binding.dart';
 import '../modules/assesment_3/views/assesment_3_view.dart';
 import '../modules/assesment_4/bindings/assesment_4_binding.dart';
 import '../modules/assesment_4/views/assesment_4_view.dart';
+import '../modules/assesment_5/bindings/assesment_5_binding.dart';
+import '../modules/assesment_5/views/assesment_5_view.dart';
+import '../modules/assesment_6/bindings/assesment_6_binding.dart';
+import '../modules/assesment_6/views/assesment_6_view.dart';
+import '../modules/assesment_7/bindings/assesment_7_binding.dart';
+import '../modules/assesment_7/views/assesment_7_view.dart';
 import '../modules/chatbot/bindings/chatbot_binding.dart';
 import '../modules/chatbot/views/chatbot_view.dart';
 import '../modules/chatbot_room/bindings/chatbot_room_binding.dart';
@@ -113,13 +119,28 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ASSESMENT_3,
-      page: () => const Assesment3View(),
+      page: () => Assesment3View(),
       binding: Assesment3Binding(),
     ),
     GetPage(
       name: _Paths.ASSESMENT_4,
-      page: () => const Assesment4View(),
+      page: () => Assesment4View(),
       binding: Assesment4Binding(),
+    ),
+    GetPage(
+      name: _Paths.ASSESMENT_5,
+      page: () => Assesment5View(),
+      binding: Assesment5Binding(),
+    ),
+    GetPage(
+      name: _Paths.ASSESMENT_6,
+      page: () => Assesment6View(),
+      binding: Assesment6Binding(),
+    ),
+    GetPage(
+      name: _Paths.ASSESMENT_7,
+      page: () => Assesment7View(),
+      binding: Assesment7Binding(),
     ),
   ];
 }
