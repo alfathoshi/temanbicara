@@ -171,9 +171,9 @@ class TransactionTimelineItems {
     TransactionTimeline(
         isFirst: false,
         isLast: false,
-        isPast: false,
+        isPast: true,
         text: "Success",
         lineLength: 60,
-        isCurrent: true),
+        isCurrent: false),
   ];
 }

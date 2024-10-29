@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:temanbicara/app/modules/transaction_invoice/views/transaction_invoice_view.dart';
 import 'package:temanbicara/app/modules/transaction_success/views/transaction_success_view.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
@@ -90,7 +91,7 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold)),
                           onPressed: () {
-                            Get.to(TransactionSuccessView());
+                            Get.to(TransactionInvoiceView());
                           },
                           style: ButtonStyle(
                             backgroundColor:
