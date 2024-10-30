@@ -18,6 +18,8 @@ abstract class Routes {
   static const REPORT = _Paths.REPORT;
   static const MOOD_REPORT = _Paths.MOOD_REPORT;
   static const SLEEP_QUALITY = _Paths.SLEEP_QUALITY;
+  static const STRESS_LEVEL = _Paths.STRESS_LEVEL;
+  static const MOOD_TRACKER = _Paths.MOOD_TRACKER;
 }
 
 abstract class _Paths {
@@ -35,4 +37,6 @@ abstract class _Paths {
   static const REPORT = '/report';
   static const MOOD_REPORT = '/mood-report';
   static const SLEEP_QUALITY = '/sleep-quality';
+  static const STRESS_LEVEL = '/stress-level';
+  static const MOOD_TRACKER = '/mood-tracker';
 }

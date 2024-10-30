@@ -1,8 +1,10 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
 
 import 'package:get/get.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/widgets/custom_bar_chart.dart';
 
 import '../controllers/sleep_quality_controller.dart';
 
@@ -10,6 +12,13 @@ class SleepQualityView extends GetView<SleepQualityController> {
   const SleepQualityView({super.key});
   @override
   Widget build(BuildContext context) {
+    List<dynamic> dummyData = [
+      {"month": "Dec", "date": "31", "sleep_hours": 20},
+      {"month": "Dec", "date": "30", "sleep_hours": 5},
+      {"month": "Dec", "date": "29", "sleep_hours": 4},
+      {"month": "Dec", "date": "28", "sleep_hours": 5},
+      {"month": "Dec", "date": "27", "sleep_hours": 8},
+    ];
     SlidingUpPanelController slidingUpController = SlidingUpPanelController();
     return Stack(
       children: [
@@ -19,7 +28,12 @@ class SleepQualityView extends GetView<SleepQualityController> {
               'Sleep Quality',
               style: h2Bold,
             ),
-            leading: const Icon(Icons.arrow_back),
+            leading: GestureDetector(
+              onTap: () {
+                Get.back();
+              },
+              child: const Icon(Icons.arrow_back),
+            ),
             centerTitle: true,
           ),
           body: SizedBox(
@@ -58,7 +72,7 @@ class SleepQualityView extends GetView<SleepQualityController> {
                     style: h1Bold.copyWith(color: const Color(0xFFFEBE58)),
                   ),
                   Image.asset(
-                    "/images/happy_bg.png",
+                    "assets/images/happy_bg.png",
                   ),
                 ],
               ),
@@ -89,8 +103,8 @@ class SleepQualityView extends GetView<SleepQualityController> {
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: ListView(
+                physics: const NeverScrollableScrollPhysics(),
                 children: [
                   Center(
                     child: Container(
@@ -121,7 +135,11 @@ class SleepQualityView extends GetView<SleepQualityController> {
                     style: h3Bold,
                   ),
                   const SizedBox(
-                    height: 24,
+                    height: 20,
+                  ),
+                  CustomBarChart(dummyData: dummyData),
+                  const SizedBox(
+                    height: 20,
                   ),
                   for (int i = 0; i < 5; i++) const SleepHistoryItem(),
                 ],
@@ -163,6 +181,20 @@ class SleepHistoryItem extends StatelessWidget {
                     color: Color(0xFFBDCF99),
                     spreadRadius: 1,
                     blurRadius: 0.5,
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Des",
+                    style: h6Medium,
+                  ),
+                  Text(
+                    "31",
+                    style: h4Bold,
                   ),
                 ],
               ),

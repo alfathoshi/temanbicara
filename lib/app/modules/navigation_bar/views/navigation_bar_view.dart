@@ -15,11 +15,11 @@ import '../controllers/navigation_bar_controller.dart';
 
 class NavigationBarView extends GetView<NavigationBarController> {
   final List<Widget> _pages = [
-    HomeView(),
-    JournalView(),
-    ChatbotView(),
-    ConsultView(),
-    ProfileView(),
+    const HomeView(),
+    const JournalView(),
+    const ChatbotView(),
+    const ConsultView(),
+    const ProfileView(),
   ];
 
   NavigationBarView({super.key});

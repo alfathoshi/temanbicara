@@ -9,6 +9,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   curved_navigation_bar: ^1.0.6
   device_preview: ^1.2.0
+  fl_chart: ^0.69.0
   flutter:
     sdk: flutter
   flutter_sliding_up_panel: ^2.1.1

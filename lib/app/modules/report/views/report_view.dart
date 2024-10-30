@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:temanbicara/app/modules/mood_report/views/mood_report_view.dart';
 import 'package:temanbicara/app/modules/sleep_quality/views/sleep_quality_view.dart';
+import 'package:temanbicara/app/modules/stress_level/views/stress_level_view.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
 import '../controllers/report_controller.dart';
@@ -74,27 +75,30 @@ class ReportView extends GetView<ReportController> {
             ),
             ReportCategory(
               onPressed: () {
-                Get.to(const SleepQualityView());
+                Get.to(() => const SleepQualityView());
               },
               title: "Sleep Quality",
               description: "Normal (~5h average)",
               value: 63,
+              image: "assets/images/sleepquality.png",
             ),
             ReportCategory(
               onPressed: () {
-                print("object");
+                Get.to(() => const StressLevelView());
               },
               title: "Stress Level",
               description: "Level 3",
               value: 60,
+              image: "assets/images/stresslevel.png",
             ),
             ReportCategory(
               onPressed: () {
-                print("object");
+                Get.to(() => const MoodReportView());
               },
               title: "Mood Tracker",
               description: "Level 3 (Normal)",
               value: 60,
+              image: "assets/images/moodtracker.png",
             ),
             const SizedBox(
               height: 20,
@@ -147,6 +151,7 @@ class ReportView extends GetView<ReportController> {
 }
 
 class ReportCategory extends StatelessWidget {
+  final String image;
   final Function onPressed;
   final String title;
   final String description;
@@ -156,7 +161,8 @@ class ReportCategory extends StatelessWidget {
       required this.onPressed,
       required this.title,
       required this.description,
-      required this.value});
+      required this.value,
+      required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -201,6 +207,10 @@ class ReportCategory extends StatelessWidget {
                           offset: Offset(0, 3),
                         ),
                       ],
+                    ),
+                    child: Image.asset(
+                      image,
+                      scale: 1.5,
                     ),
                   ),
                   const SizedBox(
