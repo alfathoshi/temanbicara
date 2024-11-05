@@ -9,6 +9,8 @@ import '../../../themes/fonts.dart';
 import '../controllers/chatbot_room_controller.dart';
 
 class ChatbotRoomView extends GetView<ChatbotRoomController> {
+  const ChatbotRoomView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

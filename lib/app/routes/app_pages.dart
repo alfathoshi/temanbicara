@@ -1,27 +1,43 @@
 import 'package:get/get.dart';
 
-import 'package:temanbicara/app/modules/article/bindings/article_binding.dart';
-import 'package:temanbicara/app/modules/article/views/article_view.dart';
-import 'package:temanbicara/app/modules/chatbot/bindings/chatbot_binding.dart';
-import 'package:temanbicara/app/modules/chatbot/views/chatbot_view.dart';
-import 'package:temanbicara/app/modules/chatbot_room/bindings/chatbot_room_binding.dart';
-import 'package:temanbicara/app/modules/chatbot_room/views/chatbot_room_view.dart';
-import 'package:temanbicara/app/modules/consult/bindings/consult_binding.dart';
-import 'package:temanbicara/app/modules/consult/views/consult_view.dart';
-import 'package:temanbicara/app/modules/create_journal/bindings/create_journal_binding.dart';
-import 'package:temanbicara/app/modules/create_journal/views/create_journal_view.dart';
-import 'package:temanbicara/app/modules/home/bindings/home_binding.dart';
-import 'package:temanbicara/app/modules/home/views/home_view.dart';
-import 'package:temanbicara/app/modules/journal/bindings/journal_binding.dart';
-import 'package:temanbicara/app/modules/journal/views/journal_view.dart';
-import 'package:temanbicara/app/modules/login/bindings/login_binding.dart';
-import 'package:temanbicara/app/modules/login/views/login_view.dart';
-import 'package:temanbicara/app/modules/navigation_bar/bindings/navigation_bar_binding.dart';
-import 'package:temanbicara/app/modules/navigation_bar/views/navigation_bar_view.dart';
-import 'package:temanbicara/app/modules/profile/bindings/profile_binding.dart';
-import 'package:temanbicara/app/modules/profile/views/profile_view.dart';
-import 'package:temanbicara/app/modules/signup/bindings/signup_binding.dart';
-import 'package:temanbicara/app/modules/signup/views/signup_view.dart';
+import '../modules/article/bindings/article_binding.dart';
+import '../modules/article/views/article_view.dart';
+import '../modules/assesment_1/bindings/assesment_1_binding.dart';
+import '../modules/assesment_1/views/assesment_1_view.dart';
+import '../modules/assesment_2/bindings/assesment_2_binding.dart';
+import '../modules/assesment_2/views/assesment_2_view.dart';
+import '../modules/assesment_3/bindings/assesment_3_binding.dart';
+import '../modules/assesment_3/views/assesment_3_view.dart';
+import '../modules/assesment_4/bindings/assesment_4_binding.dart';
+import '../modules/assesment_4/views/assesment_4_view.dart';
+import '../modules/assesment_5/bindings/assesment_5_binding.dart';
+import '../modules/assesment_5/views/assesment_5_view.dart';
+import '../modules/assesment_6/bindings/assesment_6_binding.dart';
+import '../modules/assesment_6/views/assesment_6_view.dart';
+import '../modules/assesment_7/bindings/assesment_7_binding.dart';
+import '../modules/assesment_7/views/assesment_7_view.dart';
+import '../modules/chatbot/bindings/chatbot_binding.dart';
+import '../modules/chatbot/views/chatbot_view.dart';
+import '../modules/chatbot_room/bindings/chatbot_room_binding.dart';
+import '../modules/chatbot_room/views/chatbot_room_view.dart';
+import '../modules/consult/bindings/consult_binding.dart';
+import '../modules/consult/views/consult_view.dart';
+import '../modules/create_journal/bindings/create_journal_binding.dart';
+import '../modules/create_journal/views/create_journal_view.dart';
+import '../modules/home/bindings/home_binding.dart';
+import '../modules/home/views/home_view.dart';
+import '../modules/journal/bindings/journal_binding.dart';
+import '../modules/journal/views/journal_view.dart';
+import '../modules/login/bindings/login_binding.dart';
+import '../modules/login/views/login_view.dart';
+import '../modules/navigation_bar/bindings/navigation_bar_binding.dart';
+import '../modules/navigation_bar/views/navigation_bar_view.dart';
+import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/views/profile_view.dart';
+import '../modules/signup/bindings/signup_binding.dart';
+import '../modules/signup/views/signup_view.dart';
+import '../modules/splash_screen/bindings/splash_screen_binding.dart';
+import '../modules/splash_screen/views/splash_screen_view.dart';
 
 part 'app_routes.dart';
 
@@ -85,6 +101,46 @@ class AppPages {
       name: _Paths.SIGNUP,
       page: () => SignupView(),
       binding: SignupBinding(),
+    ),
+    GetPage(
+      name: _Paths.SPLASH_SCREEN,
+      page: () => SplashScreenView(),
+      binding: SplashScreenBinding(),
+    ),
+    GetPage(
+      name: _Paths.ASSESMENT_1,
+      page: () => Assesment1View(),
+      binding: Assesment1Binding(),
+    ),
+    GetPage(
+      name: _Paths.ASSESMENT_2,
+      page: () => Assesment2View(),
+      binding: Assesment2Binding(),
+    ),
+    GetPage(
+      name: _Paths.ASSESMENT_3,
+      page: () => Assesment3View(),
+      binding: Assesment3Binding(),
+    ),
+    GetPage(
+      name: _Paths.ASSESMENT_4,
+      page: () => Assesment4View(),
+      binding: Assesment4Binding(),
+    ),
+    GetPage(
+      name: _Paths.ASSESMENT_5,
+      page: () => Assesment5View(),
+      binding: Assesment5Binding(),
+    ),
+    GetPage(
+      name: _Paths.ASSESMENT_6,
+      page: () => Assesment6View(),
+      binding: Assesment6Binding(),
+    ),
+    GetPage(
+      name: _Paths.ASSESMENT_7,
+      page: () => Assesment7View(),
+      binding: Assesment7Binding(),
     ),
   ];
 }

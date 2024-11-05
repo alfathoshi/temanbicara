@@ -10,6 +10,8 @@ import 'package:temanbicara/app/widgets/wide_button.dart';
 import '../controllers/create_journal_controller.dart';
 
 class CreateJournalView extends GetView<CreateJournalController> {
+  const CreateJournalView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

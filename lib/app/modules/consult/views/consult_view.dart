@@ -6,10 +6,11 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/widgets/counselor_card.dart';
 
 import '../../../themes/fonts.dart';
-import '../../../widgets/top_article.dart';
 import '../controllers/consult_controller.dart';
 
 class ConsultView extends GetView<ConsultController> {
+  const ConsultView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +34,7 @@ class ConsultView extends GetView<ConsultController> {
             actions: [
               IconButton(
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.history,
                 ),
               ),
