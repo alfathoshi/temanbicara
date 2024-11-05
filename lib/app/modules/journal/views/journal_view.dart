@@ -10,6 +10,8 @@ import '../../../themes/fonts.dart';
 import '../controllers/journal_controller.dart';
 
 class JournalView extends GetView<JournalController> {
+  const JournalView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -96,7 +98,7 @@ class JournalView extends GetView<JournalController> {
           SliverList.builder(
               itemCount: 5,
               itemBuilder: (context, index) {
-                return JournalCard();
+                return const JournalCard();
               })
         ],
       ),

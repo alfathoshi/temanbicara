@@ -2,6 +2,20 @@ import 'package:get/get.dart';
 
 import '../modules/article/bindings/article_binding.dart';
 import '../modules/article/views/article_view.dart';
+import '../modules/assesment_1/bindings/assesment_1_binding.dart';
+import '../modules/assesment_1/views/assesment_1_view.dart';
+import '../modules/assesment_2/bindings/assesment_2_binding.dart';
+import '../modules/assesment_2/views/assesment_2_view.dart';
+import '../modules/assesment_3/bindings/assesment_3_binding.dart';
+import '../modules/assesment_3/views/assesment_3_view.dart';
+import '../modules/assesment_4/bindings/assesment_4_binding.dart';
+import '../modules/assesment_4/views/assesment_4_view.dart';
+import '../modules/assesment_5/bindings/assesment_5_binding.dart';
+import '../modules/assesment_5/views/assesment_5_view.dart';
+import '../modules/assesment_6/bindings/assesment_6_binding.dart';
+import '../modules/assesment_6/views/assesment_6_view.dart';
+import '../modules/assesment_7/bindings/assesment_7_binding.dart';
+import '../modules/assesment_7/views/assesment_7_view.dart';
 import '../modules/chatbot/bindings/chatbot_binding.dart';
 import '../modules/chatbot/views/chatbot_view.dart';
 import '../modules/chatbot_room/bindings/chatbot_room_binding.dart';
@@ -32,6 +46,8 @@ import '../modules/transaction_payment/bindings/transaction_payment_binding.dart
 import '../modules/transaction_payment/views/transaction_payment_view.dart';
 import '../modules/transaction_success/bindings/transaction_success_binding.dart';
 import '../modules/transaction_success/views/transaction_success_view.dart';
+import '../modules/splash_screen/bindings/splash_screen_binding.dart';
+import '../modules/splash_screen/views/splash_screen_view.dart';
 
 part 'app_routes.dart';
 
@@ -131,6 +147,44 @@ class AppPages {
       name: _Paths.TRANSACTION_INVOICE,
       page: () => const TransactionInvoiceView(),
       binding: TransactionInvoiceBinding(),
+      name: _Paths.SPLASH_SCREEN,
+      page: () => SplashScreenView(),
+      binding: SplashScreenBinding(),
+    ),
+    GetPage(
+      name: _Paths.ASSESMENT_1,
+      page: () => Assesment1View(),
+      binding: Assesment1Binding(),
+    ),
+    GetPage(
+      name: _Paths.ASSESMENT_2,
+      page: () => Assesment2View(),
+      binding: Assesment2Binding(),
+    ),
+    GetPage(
+      name: _Paths.ASSESMENT_3,
+      page: () => Assesment3View(),
+      binding: Assesment3Binding(),
+    ),
+    GetPage(
+      name: _Paths.ASSESMENT_4,
+      page: () => Assesment4View(),
+      binding: Assesment4Binding(),
+    ),
+    GetPage(
+      name: _Paths.ASSESMENT_5,
+      page: () => Assesment5View(),
+      binding: Assesment5Binding(),
+    ),
+    GetPage(
+      name: _Paths.ASSESMENT_6,
+      page: () => Assesment6View(),
+      binding: Assesment6Binding(),
+    ),
+    GetPage(
+      name: _Paths.ASSESMENT_7,
+      page: () => Assesment7View(),
+      binding: Assesment7Binding(),
     ),
   ];
 }

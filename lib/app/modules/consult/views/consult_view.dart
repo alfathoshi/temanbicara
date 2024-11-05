@@ -8,6 +8,8 @@ import '../../../themes/fonts.dart';
 import '../controllers/consult_controller.dart';
 
 class ConsultView extends GetView<ConsultController> {
+  const ConsultView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +33,7 @@ class ConsultView extends GetView<ConsultController> {
             actions: [
               IconButton(
                 onPressed: () {},
-                icon: Icon(
+                icon: const Icon(
                   Icons.history,
                 ),
               ),

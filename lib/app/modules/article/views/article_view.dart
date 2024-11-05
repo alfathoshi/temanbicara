@@ -8,6 +8,8 @@ import 'package:temanbicara/app/widgets/top_article.dart';
 import '../controllers/article_controller.dart';
 
 class ArticleView extends GetView<ArticleController> {
+  const ArticleView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

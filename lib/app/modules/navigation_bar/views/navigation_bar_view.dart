@@ -21,6 +21,8 @@ class NavigationBarView extends GetView<NavigationBarController> {
     ProfileView(),
   ];
 
+  NavigationBarView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
