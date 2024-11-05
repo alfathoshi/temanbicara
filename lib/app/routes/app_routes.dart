@@ -15,6 +15,11 @@ abstract class Routes {
   static const CHATBOT_ROOM = _Paths.CHATBOT_ROOM;
   static const LOGIN = _Paths.LOGIN;
   static const SIGNUP = _Paths.SIGNUP;
+  static const TRANSACTION = _Paths.TRANSACTION;
+  static const TRANSACTION_METHOD = _Paths.TRANSACTION_METHOD;
+  static const TRANSACTION_PAYMENT = _Paths.TRANSACTION_PAYMENT;
+  static const TRANSACTION_SUCCESS = _Paths.TRANSACTION_SUCCESS;
+  static const TRANSACTION_INVOICE = _Paths.TRANSACTION_INVOICE;
   static const SPLASH_SCREEN = _Paths.SPLASH_SCREEN;
   static const ASSESMENT_1 = _Paths.ASSESMENT_1;
   static const ASSESMENT_2 = _Paths.ASSESMENT_2;
@@ -37,6 +42,11 @@ abstract class _Paths {
   static const CHATBOT_ROOM = '/chatbot-room';
   static const LOGIN = '/login';
   static const SIGNUP = '/signup';
+  static const TRANSACTION = '/transaction';
+  static const TRANSACTION_METHOD = '/transaction-method';
+  static const TRANSACTION_PAYMENT = '/transaction-payment';
+  static const TRANSACTION_SUCCESS = '/transaction-success';
+  static const TRANSACTION_INVOICE = '/transaction-invoice';
   static const SPLASH_SCREEN = '/splash-screen';
   static const ASSESMENT_1 = '/assesment-1';
   static const ASSESMENT_2 = '/assesment-2';
