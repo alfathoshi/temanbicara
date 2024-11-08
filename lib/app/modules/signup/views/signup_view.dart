@@ -174,7 +174,10 @@ class SignupView extends GetView<SignupController> {
                       onTap: () => Get.toNamed(Routes.LOGIN),
                       child: Text(
                         'Masuk',
-                        style: GoogleFonts.poppins(color: const Color(0xFF60ABEE)),
+
+                        style:
+                            GoogleFonts.poppins(color: const Color(0xFF60ABEE)),
+
                       ),
                     ),
                   ],

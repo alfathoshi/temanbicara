@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 
 import '../modules/article/bindings/article_binding.dart';
 import '../modules/article/views/article_view.dart';
+
 import '../modules/assesment_1/bindings/assesment_1_binding.dart';
 import '../modules/assesment_1/views/assesment_1_view.dart';
 import '../modules/assesment_2/bindings/assesment_2_binding.dart';
@@ -16,6 +17,7 @@ import '../modules/assesment_6/bindings/assesment_6_binding.dart';
 import '../modules/assesment_6/views/assesment_6_view.dart';
 import '../modules/assesment_7/bindings/assesment_7_binding.dart';
 import '../modules/assesment_7/views/assesment_7_view.dart';
+
 import '../modules/chatbot/bindings/chatbot_binding.dart';
 import '../modules/chatbot/views/chatbot_view.dart';
 import '../modules/chatbot_room/bindings/chatbot_room_binding.dart';
@@ -30,10 +32,26 @@ import '../modules/journal/bindings/journal_binding.dart';
 import '../modules/journal/views/journal_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+
+import '../modules/mood_report/bindings/mood_report_binding.dart';
+import '../modules/mood_report/views/mood_report_view.dart';
+import '../modules/mood_tracker/bindings/mood_tracker_binding.dart';
+import '../modules/mood_tracker/views/mood_tracker_view.dart';
+
 import '../modules/navigation_bar/bindings/navigation_bar_binding.dart';
 import '../modules/navigation_bar/views/navigation_bar_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
+
+import '../modules/report/bindings/report_binding.dart';
+import '../modules/report/views/report_view.dart';
+import '../modules/signup/bindings/signup_binding.dart';
+import '../modules/signup/views/signup_view.dart';
+import '../modules/sleep_quality/bindings/sleep_quality_binding.dart';
+import '../modules/sleep_quality/views/sleep_quality_view.dart';
+import '../modules/stress_level/bindings/stress_level_binding.dart';
+import '../modules/stress_level/views/stress_level_view.dart';
+
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
 import '../modules/transaction/bindings/transaction_binding.dart';
@@ -49,17 +67,18 @@ import '../modules/transaction_success/views/transaction_success_view.dart';
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';
 import '../modules/splash_screen/views/splash_screen_view.dart';
 
+
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.REPORT;
 
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => HomeView(),
+      page: () => const HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
@@ -69,48 +88,73 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ARTICLE,
-      page: () => ArticleView(),
+      page: () => const ArticleView(),
       binding: ArticleBinding(),
     ),
     GetPage(
       name: _Paths.CHATBOT,
-      page: () => ChatbotView(),
+      page: () => const ChatbotView(),
       binding: ChatbotBinding(),
     ),
     GetPage(
       name: _Paths.CONSULT,
-      page: () => ConsultView(),
+      page: () => const ConsultView(),
       binding: ConsultBinding(),
     ),
     GetPage(
       name: _Paths.PROFILE,
-      page: () => ProfileView(),
+      page: () => const ProfileView(),
       binding: ProfileBinding(),
     ),
     GetPage(
       name: _Paths.JOURNAL,
-      page: () => JournalView(),
+      page: () => const JournalView(),
       binding: JournalBinding(),
     ),
     GetPage(
       name: _Paths.CREATE_JOURNAL,
-      page: () => CreateJournalView(),
+      page: () => const CreateJournalView(),
       binding: CreateJournalBinding(),
     ),
     GetPage(
       name: _Paths.CHATBOT_ROOM,
-      page: () => ChatbotRoomView(),
+      page: () => const ChatbotRoomView(),
       binding: ChatbotRoomBinding(),
     ),
     GetPage(
       name: _Paths.LOGIN,
-      page: () => LoginView(),
+      page: () => const LoginView(),
       binding: LoginBinding(),
     ),
     GetPage(
       name: _Paths.SIGNUP,
-      page: () => SignupView(),
+      page: () => const SignupView(),
       binding: SignupBinding(),
+    ),
+    GetPage(
+      name: _Paths.REPORT,
+      page: () => const ReportView(),
+      binding: ReportBinding(),
+    ),
+    GetPage(
+      name: _Paths.MOOD_REPORT,
+      page: () => const MoodReportView(),
+      binding: MoodReportBinding(),
+    ),
+    GetPage(
+      name: _Paths.SLEEP_QUALITY,
+      page: () => const SleepQualityView(),
+      binding: SleepQualityBinding(),
+    ),
+    GetPage(
+      name: _Paths.STRESS_LEVEL,
+      page: () => const StressLevelView(),
+      binding: StressLevelBinding(),
+    ),
+    GetPage(
+      name: _Paths.MOOD_TRACKER,
+      page: () => const MoodTrackerView(),
+      binding: MoodTrackerBinding(),
     ),
     GetPage(
       name: _Paths.TRANSACTION,
@@ -185,6 +229,7 @@ class AppPages {
       name: _Paths.ASSESMENT_7,
       page: () => Assesment7View(),
       binding: Assesment7Binding(),
+
     ),
   ];
 }

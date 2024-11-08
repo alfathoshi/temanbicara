@@ -15,6 +15,13 @@ abstract class Routes {
   static const CHATBOT_ROOM = _Paths.CHATBOT_ROOM;
   static const LOGIN = _Paths.LOGIN;
   static const SIGNUP = _Paths.SIGNUP;
+
+  static const REPORT = _Paths.REPORT;
+  static const MOOD_REPORT = _Paths.MOOD_REPORT;
+  static const SLEEP_QUALITY = _Paths.SLEEP_QUALITY;
+  static const STRESS_LEVEL = _Paths.STRESS_LEVEL;
+  static const MOOD_TRACKER = _Paths.MOOD_TRACKER;
+
   static const TRANSACTION = _Paths.TRANSACTION;
   static const TRANSACTION_METHOD = _Paths.TRANSACTION_METHOD;
   static const TRANSACTION_PAYMENT = _Paths.TRANSACTION_PAYMENT;
@@ -28,6 +35,7 @@ abstract class Routes {
   static const ASSESMENT_5 = _Paths.ASSESMENT_5;
   static const ASSESMENT_6 = _Paths.ASSESMENT_6;
   static const ASSESMENT_7 = _Paths.ASSESMENT_7;
+
 }
 
 abstract class _Paths {
@@ -42,6 +50,13 @@ abstract class _Paths {
   static const CHATBOT_ROOM = '/chatbot-room';
   static const LOGIN = '/login';
   static const SIGNUP = '/signup';
+
+  static const REPORT = '/report';
+  static const MOOD_REPORT = '/mood-report';
+  static const SLEEP_QUALITY = '/sleep-quality';
+  static const STRESS_LEVEL = '/stress-level';
+  static const MOOD_TRACKER = '/mood-tracker';
+
   static const TRANSACTION = '/transaction';
   static const TRANSACTION_METHOD = '/transaction-method';
   static const TRANSACTION_PAYMENT = '/transaction-payment';
@@ -55,4 +70,5 @@ abstract class _Paths {
   static const ASSESMENT_5 = '/assesment-5';
   static const ASSESMENT_6 = '/assesment-6';
   static const ASSESMENT_7 = '/assesment-7';
+
 }
