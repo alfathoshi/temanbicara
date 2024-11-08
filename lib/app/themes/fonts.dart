@@ -84,6 +84,12 @@ TextStyle h6Bold = GoogleFonts.poppins(
   fontSize: 13,
 );
 
+TextStyle h7Bold = GoogleFonts.poppins(
+  fontWeight: FontWeight.w700,
+  color: font,
+  fontSize: 12,
+);
+
 TextStyle h1Medium = GoogleFonts.poppins(
   fontWeight: FontWeight.w500,
   color: font,
@@ -150,7 +156,7 @@ TextStyle h6SemiBold = GoogleFonts.poppins(
 TextStyle h7SemiBold = GoogleFonts.poppins(
   fontWeight: FontWeight.w600,
   color: font,
-  fontSize: 10,
+  fontSize: 12,
 );
 
 TextStyle bodyRegular = GoogleFonts.poppins(
@@ -226,6 +232,11 @@ TextStyle buttonLinkXSBold = GoogleFonts.poppins(
   color: whiteColor,
   fontSize: 12,
 );
+TextStyle favoriteButton = GoogleFonts.poppins(
+  fontWeight: FontWeight.w600,
+  color: font2,
+  fontSize: 12,
+);
 
 TextStyle placeholder = GoogleFonts.poppins(
   fontWeight: FontWeight.w400,
@@ -252,6 +263,21 @@ TextStyle textTitle = GoogleFonts.poppins(
   color: font,
   fontSize: 10,
 );
+TextStyle textFieldStyle = GoogleFonts.poppins(
+  fontWeight: FontWeight.w600,
+  color: font2,
+  fontSize: 13,
+);
+TextStyle textGenderTrue = GoogleFonts.poppins(
+  fontWeight: FontWeight.w600,
+  color: whiteColor,
+  fontSize: 14,
+);
+TextStyle textGenderFalse = GoogleFonts.poppins(
+  fontWeight: FontWeight.w600,
+  color: primaryColor,
+  fontSize: 16,
+);
 
 TextStyle textPlace = GoogleFonts.poppins(
   fontWeight: FontWeight.w400,
@@ -265,8 +291,56 @@ TextStyle trackingButton = GoogleFonts.poppins(
   fontSize: 13,
 );
 
+TextStyle assestmentPoint = GoogleFonts.poppins(
+  fontWeight: FontWeight.w600,
+  color: whiteColor,
+  fontSize: 16,
+);
+
 TextStyle h4SemiBoldPrime = GoogleFonts.poppins(
   fontWeight: FontWeight.w600,
   color: primaryColor,
+  fontSize: 16,
+);
+
+TextStyle TextLogo = GoogleFonts.poppins(
+  fontWeight: FontWeight.bold,
+  color: whiteColor,
+  fontSize: 16,
+);
+
+TextStyle warningGoals = GoogleFonts.poppins(
+  fontWeight: FontWeight.bold,
+  color: doneStatus,
+  fontSize: 14,
+);
+TextStyle sleepQualityTitle = GoogleFonts.poppins(
+  fontWeight: FontWeight.w700,
+  color: primaryColor,
+  fontSize: 15,
+);
+TextStyle sleepQualityTime = GoogleFonts.poppins(
+  fontWeight: FontWeight.w700,
+  color: primaryColor,
+  fontSize: 13,
+);
+TextStyle sleepQualityTitleTap = GoogleFonts.poppins(
+  fontWeight: FontWeight.w700,
+  color: whiteColor,
+  fontSize: 15,
+);
+TextStyle sleepQualityTimeTap = GoogleFonts.poppins(
+  fontWeight: FontWeight.w700,
+  color: whiteColor,
+  fontSize: 13,
+);
+TextStyle ConsultOption = GoogleFonts.poppins(
+  fontWeight: FontWeight.w600,
+  color: primaryColor,
+  fontSize: 16,
+);
+TextStyle ConsultOptionTap = GoogleFonts.poppins(
+  fontWeight: FontWeight.w600,
+  color: whiteColor,
   fontSize: 16,
 );
