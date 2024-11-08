@@ -30,7 +30,7 @@ class NavigationBarView extends GetView<NavigationBarController> {
             children: _pages,
           )),
       bottomNavigationBar: SizedBox(
-        height: 72,
+   
         child: Obx(
           () => BottomNavigationBar(
             currentIndex: controller.selectedindex.value,
