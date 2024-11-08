@@ -196,13 +196,24 @@ class StressIndicator extends StatelessWidget {
         const SizedBox(
           height: 15,
         ),
-        LinearProgressIndicator(
-          borderRadius: const BorderRadius.all(
-            Radius.circular(50),
+        Container(
+          decoration: const BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                  color: Color.fromARGB(255, 213, 213, 213),
+                  blurRadius: 10,
+                  spreadRadius: 0.01,
+                  offset: Offset(0, 1))
+            ],
           ),
-          minHeight: 35,
-          value: value,
-          color: indicatorColor,
+          child: LinearProgressIndicator(
+            borderRadius: const BorderRadius.all(
+              Radius.circular(50),
+            ),
+            minHeight: 35,
+            value: value,
+            color: indicatorColor,
+          ),
         ),
       ],
     );
@@ -225,11 +236,17 @@ class StressItem extends StatelessWidget {
       width: (MediaQuery.sizeOf(context).width - 71) / 2,
       height: 170,
       decoration: const BoxDecoration(
-        color: Color(0xFFE3E9D9),
-        borderRadius: BorderRadius.all(
-          Radius.circular(20),
-        ),
-      ),
+          color: Color(0xFFE3E9D9),
+          borderRadius: BorderRadius.all(
+            Radius.circular(20),
+          ),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey,
+                blurRadius: 10,
+                spreadRadius: 0.1,
+                offset: Offset(2, 3))
+          ]),
       child: Padding(
         padding: const EdgeInsets.all(10),
         child: Column(
