@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../modules/article/bindings/article_binding.dart';
 import '../modules/article/views/article_view.dart';
 
+
 import '../modules/assesment_1/bindings/assesment_1_binding.dart';
 import '../modules/assesment_1/views/assesment_1_view.dart';
 import '../modules/assesment_2/bindings/assesment_2_binding.dart';
@@ -18,6 +19,7 @@ import '../modules/assesment_6/views/assesment_6_view.dart';
 import '../modules/assesment_7/bindings/assesment_7_binding.dart';
 import '../modules/assesment_7/views/assesment_7_view.dart';
 
+
 import '../modules/chatbot/bindings/chatbot_binding.dart';
 import '../modules/chatbot/views/chatbot_view.dart';
 import '../modules/chatbot_room/bindings/chatbot_room_binding.dart';
@@ -26,6 +28,10 @@ import '../modules/consult/bindings/consult_binding.dart';
 import '../modules/consult/views/consult_view.dart';
 import '../modules/create_journal/bindings/create_journal_binding.dart';
 import '../modules/create_journal/views/create_journal_view.dart';
+
+import '../modules/detail_artikel/bindings/detail_artikel_binding.dart';
+import '../modules/detail_artikel/views/detail_artikel_view.dart';
+
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/journal/bindings/journal_binding.dart';
@@ -33,27 +39,30 @@ import '../modules/journal/views/journal_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 
+
 import '../modules/mood_report/bindings/mood_report_binding.dart';
 import '../modules/mood_report/views/mood_report_view.dart';
 import '../modules/mood_tracker/bindings/mood_tracker_binding.dart';
 import '../modules/mood_tracker/views/mood_tracker_view.dart';
+
 
 import '../modules/navigation_bar/bindings/navigation_bar_binding.dart';
 import '../modules/navigation_bar/views/navigation_bar_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 
-import '../modules/report/bindings/report_binding.dart';
-import '../modules/report/views/report_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
+
+
+import '../modules/report/bindings/report_binding.dart';
+import '../modules/report/views/report_view.dart';
 import '../modules/sleep_quality/bindings/sleep_quality_binding.dart';
 import '../modules/sleep_quality/views/sleep_quality_view.dart';
 import '../modules/stress_level/bindings/stress_level_binding.dart';
 import '../modules/stress_level/views/stress_level_view.dart';
 
-import '../modules/signup/bindings/signup_binding.dart';
-import '../modules/signup/views/signup_view.dart';
+
 import '../modules/transaction/bindings/transaction_binding.dart';
 import '../modules/transaction/views/transaction_view.dart';
 import '../modules/transaction_invoice/bindings/transaction_invoice_binding.dart';
@@ -130,6 +139,12 @@ class AppPages {
       name: _Paths.SIGNUP,
       page: () => const SignupView(),
       binding: SignupBinding(),
+    ),
+    GetPage(
+
+      name: _Paths.DETAIL_ARTIKEL,
+      page: () =>DetailArtikelView(),
+      binding: DetailArtikelBinding(),
     ),
     GetPage(
       name: _Paths.REPORT,
@@ -229,7 +244,6 @@ class AppPages {
       name: _Paths.ASSESMENT_7,
       page: () => Assesment7View(),
       binding: Assesment7Binding(),
-
     ),
   ];
 }
