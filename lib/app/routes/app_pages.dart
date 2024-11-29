@@ -9,7 +9,6 @@ import '../modules/article/views/article_view.dart';
 import '../modules/article/bindings/article_binding.dart';
 import '../modules/article/views/article_view.dart';
 
-
 import '../modules/assesment_1/bindings/assesment_1_binding.dart';
 import '../modules/assesment_1/views/assesment_1_view.dart';
 import '../modules/assesment_2/bindings/assesment_2_binding.dart';
@@ -44,12 +43,10 @@ import '../modules/journal/views/journal_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 
-
 import '../modules/mood_report/bindings/mood_report_binding.dart';
 import '../modules/mood_report/views/mood_report_view.dart';
 import '../modules/mood_tracker/bindings/mood_tracker_binding.dart';
 import '../modules/mood_tracker/views/mood_tracker_view.dart';
-
 
 import '../modules/navigation_bar/bindings/navigation_bar_binding.dart';
 import '../modules/navigation_bar/views/navigation_bar_view.dart';
@@ -59,14 +56,12 @@ import '../modules/profile/views/profile_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
 
-
 import '../modules/report/bindings/report_binding.dart';
 import '../modules/report/views/report_view.dart';
 import '../modules/sleep_quality/bindings/sleep_quality_binding.dart';
 import '../modules/sleep_quality/views/sleep_quality_view.dart';
 import '../modules/stress_level/bindings/stress_level_binding.dart';
 import '../modules/stress_level/views/stress_level_view.dart';
-
 
 import '../modules/transaction/bindings/transaction_binding.dart';
 import '../modules/transaction/views/transaction_view.dart';
@@ -80,7 +75,6 @@ import '../modules/transaction_success/bindings/transaction_success_binding.dart
 import '../modules/transaction_success/views/transaction_success_view.dart';
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';
 import '../modules/splash_screen/views/splash_screen_view.dart';
-
 
 part 'app_routes.dart';
 
@@ -157,7 +151,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.DETAIL_ARTIKEL,
-      page: () =>DetailArtikelView(),
+      page: () => DetailArtikelView(),
       binding: DetailArtikelBinding(),
     ),
     GetPage(
@@ -220,6 +214,8 @@ class AppPages {
       name: _Paths.TRANSACTION_INVOICE,
       page: () => const TransactionInvoiceView(),
       binding: TransactionInvoiceBinding(),
+    ),
+    GetPage(
       name: _Paths.SPLASH_SCREEN,
       page: () => SplashScreenView(),
       binding: SplashScreenBinding(),
