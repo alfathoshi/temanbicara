@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:temanbicara/app/modules/article/views/article_view.dart';
 import 'package:temanbicara/app/modules/chatbot/views/chatbot_view.dart';
 import 'package:temanbicara/app/modules/consult/views/consult_view.dart';
 import 'package:temanbicara/app/modules/journal/views/journal_view.dart';
@@ -15,12 +14,14 @@ import '../controllers/navigation_bar_controller.dart';
 
 class NavigationBarView extends GetView<NavigationBarController> {
   final List<Widget> _pages = [
-    HomeView(),
-    JournalView(),
-    ChatbotView(),
-    ConsultView(),
-    ProfileView(),
+    const HomeView(),
+    const JournalView(),
+    const ChatbotView(),
+    const ConsultView(),
+    const ProfileView(),
   ];
+
+  NavigationBarView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,7 @@ class NavigationBarView extends GetView<NavigationBarController> {
             children: _pages,
           )),
       bottomNavigationBar: SizedBox(
-        height: 72,
+   
         child: Obx(
           () => BottomNavigationBar(
             currentIndex: controller.selectedindex.value,
