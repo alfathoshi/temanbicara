@@ -14,6 +14,8 @@ import 'package:temanbicara/app/widgets/top_article.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
+  const HomeView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -348,7 +350,7 @@ class HomeView extends GetView<HomeController> {
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: [
-                            for (int i = 0; i < 4; i++) MyJournal(),
+                            for (int i = 0; i < 4; i++) const MyJournal(),
                           ],
                         ),
                       ),
@@ -391,6 +393,25 @@ class HomeView extends GetView<HomeController> {
                           )
                         ],
                       ),
+
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        children: [
+                          SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                for (int i = 0; i < 4; i++) const TopArticle(),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+
                     ],
                   ),
                 ),

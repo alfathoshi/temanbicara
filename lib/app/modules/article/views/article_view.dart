@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/top_article.dart';
@@ -10,6 +8,8 @@ import 'package:temanbicara/app/widgets/top_article.dart';
 import '../controllers/article_controller.dart';
 
 class ArticleView extends GetView<ArticleController> {
+  const ArticleView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
