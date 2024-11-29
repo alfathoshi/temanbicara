@@ -1,5 +1,11 @@
 import 'package:get/get.dart';
 
+import '../modules/Tracking/bindings/tracking_binding.dart';
+import '../modules/Tracking/views/tracking_view.dart';
+import '../modules/Tracking_2/bindings/tracking_2_binding.dart';
+import '../modules/Tracking_2/views/tracking_2_view.dart';
+import '../modules/article/bindings/article_binding.dart';
+import '../modules/article/views/article_view.dart';
 import '../modules/article/bindings/article_binding.dart';
 import '../modules/article/views/article_view.dart';
 
@@ -18,7 +24,6 @@ import '../modules/assesment_6/bindings/assesment_6_binding.dart';
 import '../modules/assesment_6/views/assesment_6_view.dart';
 import '../modules/assesment_7/bindings/assesment_7_binding.dart';
 import '../modules/assesment_7/views/assesment_7_view.dart';
-
 
 import '../modules/chatbot/bindings/chatbot_binding.dart';
 import '../modules/chatbot/views/chatbot_view.dart';
@@ -141,7 +146,16 @@ class AppPages {
       binding: SignupBinding(),
     ),
     GetPage(
-
+      name: _Paths.TRACKING,
+      page: () => TrackingView(),
+      binding: TrackingBinding(),
+    ),
+    GetPage(
+      name: _Paths.TRACKING_2,
+      page: () => const Tracking2View(),
+      binding: Tracking2Binding(),
+    ),
+    GetPage(
       name: _Paths.DETAIL_ARTIKEL,
       page: () =>DetailArtikelView(),
       binding: DetailArtikelBinding(),
