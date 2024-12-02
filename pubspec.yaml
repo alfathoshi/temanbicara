@@ -10,7 +10,7 @@ dependencies:
   curved_navigation_bar: ^1.0.6
   device_preview: ^1.2.0
   dropdown_search: ^6.0.1
-  flutter:
+flutter:
     sdk: flutter
   get: 4.6.6
   google_fonts: ^6.2.1
