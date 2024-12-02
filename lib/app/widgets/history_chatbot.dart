@@ -1,7 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:iconsax/iconsax.dart';
 import '../themes/colors.dart';
 import '../themes/fonts.dart';
 

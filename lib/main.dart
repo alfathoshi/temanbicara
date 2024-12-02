@@ -18,7 +18,7 @@ void main() {
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
         title: "Application",
-        initialRoute: Routes.NAVIGATION_BAR,
+        initialRoute: Routes.CHAT,
         getPages: AppPages.routes,
       ),
     ),

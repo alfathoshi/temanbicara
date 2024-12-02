@@ -61,7 +61,7 @@ class JournalCard extends StatelessWidget {
                 ],
               ),
             ),
-            Divider(),
+            const Divider(),
             Padding(
               padding: const EdgeInsets.only(left: 8),
               child: Text(
