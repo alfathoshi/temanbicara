@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:temanbicara/app/data/Transaction.dart';
 import 'package:temanbicara/app/modules/transaction_method/controllers/transaction_method_controller.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/widgets/transaction/bankMethodList.dart';
@@ -7,8 +8,8 @@ import 'package:temanbicara/app/widgets/transaction/creditCardMethodList.dart';
 import 'package:temanbicara/app/widgets/transaction/eWalletMethodList.dart';
 
 class ChooseMethod extends StatelessWidget {
-  final int price;
-  const ChooseMethod({super.key, required this.price});
+  final TransactionModel transaction;
+  const ChooseMethod({super.key, required this.transaction});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,8 @@ class ChooseMethod extends StatelessWidget {
               ),
             ),
             SizedBox(height: 22),
-            PaymentMethodIndex(index: controller.selectedIndex, price: price)
+            PaymentMethodIndex(
+                index: controller.selectedIndex, transaction: transaction)
           ],
         );
       },
@@ -50,18 +52,19 @@ class ChooseMethod extends StatelessWidget {
 }
 
 class PaymentMethodIndex extends StatelessWidget {
-  final int index, price;
+  final int index;
+  final TransactionModel transaction;
   const PaymentMethodIndex(
-      {super.key, required this.index, required this.price});
+      {super.key, required this.index, required this.transaction});
 
   @override
   Widget build(BuildContext context) {
     if (index == 0) {
-      return EWalletMethodList(price: price);
+      return EWalletMethodList(transaction: transaction);
     } else if (index == 1) {
-      return BankPaymentMethodList(price: price);
+      return BankPaymentMethodList(transaction: transaction);
     } else {
-      return CreditCardMethodList(price: price);
+      return CreditCardMethodList(transaction: transaction);
     }
   }
 }

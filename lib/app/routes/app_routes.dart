@@ -40,6 +40,7 @@ abstract class Routes {
   static const ASSESMENT_7 = _Paths.ASSESMENT_7;
   static const CHAT = _Paths.CHAT;
   static const ROOM_CHAT = _Paths.ROOM_CHAT;
+  static const CONSULTATION = _Paths.CONSULTATION;
 }
 
 abstract class _Paths {
@@ -57,7 +58,6 @@ abstract class _Paths {
 
   static const TRACKING = '/tracking';
   static const TRACKING_2 = '/tracking-2';
-
 
   static const DETAIL_ARTIKEL = '/detail-artikel';
 
@@ -82,4 +82,5 @@ abstract class _Paths {
   static const ASSESMENT_7 = '/assesment-7';
   static const CHAT = '/chat';
   static const ROOM_CHAT = '/room-chat';
+  static const CONSULTATION = '/consultation';
 }

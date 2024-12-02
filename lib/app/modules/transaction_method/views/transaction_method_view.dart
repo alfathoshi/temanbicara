@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:temanbicara/app/modules/transaction_payment/views/transaction_payment_view.dart';
-import 'package:temanbicara/app/themes/colors.dart';
+import 'package:temanbicara/app/data/Transaction.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/transaction/chooseMethod.dart';
-import 'package:temanbicara/app/widgets/transaction/concultationPrice.dart';
 import 'package:temanbicara/app/widgets/transaction/transactionTimelineView.dart';
 
 import '../controllers/transaction_method_controller.dart';
 
 class TransactionMethodView extends GetView<TransactionMethodController> {
-  final int? price;
-  const TransactionMethodView({this.price, super.key});
+  const TransactionMethodView({super.key});
   @override
   Widget build(BuildContext context) {
+    final TransactionModel transaction = Get.arguments as TransactionModel;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -46,9 +44,7 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
                 children: [
                   Text("Payment Method", style: h5Bold),
                   SizedBox(height: 22),
-                  ChooseMethod(
-                    price: price!,
-                  ),
+                  ChooseMethod(transaction: transaction)
                 ],
               ),
             ),
