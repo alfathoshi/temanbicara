@@ -8,7 +8,7 @@ import 'package:temanbicara/app/widgets/top_article.dart';
 import '../controllers/article_controller.dart';
 
 class ArticleView extends GetView<ArticleController> {
-  const ArticleView({super.key});
+  ArticleView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class ArticleView extends GetView<ArticleController> {
       backgroundColor: whiteColor,
       body: CustomScrollView(slivers: [
         SliverAppBar(
-          pinned:true,
+          pinned: true,
           floating: true,
           toolbarHeight: 85,
           backgroundColor: Colors.white,

@@ -3,7 +3,6 @@ part of 'app_pages.dart';
 
 abstract class Routes {
   Routes._();
-
   static const HOME = _Paths.HOME;
   static const NAVIGATION_BAR = _Paths.NAVIGATION_BAR;
   static const ARTICLE = _Paths.ARTICLE;
@@ -15,7 +14,6 @@ abstract class Routes {
   static const CHATBOT_ROOM = _Paths.CHATBOT_ROOM;
   static const LOGIN = _Paths.LOGIN;
   static const SIGNUP = _Paths.SIGNUP;
-
   static const TRACKING = _Paths.TRACKING;
   static const TRACKING_2 = _Paths.TRACKING_2;
 
@@ -40,6 +38,9 @@ abstract class Routes {
   static const ASSESMENT_5 = _Paths.ASSESMENT_5;
   static const ASSESMENT_6 = _Paths.ASSESMENT_6;
   static const ASSESMENT_7 = _Paths.ASSESMENT_7;
+  static const DETAIL_ARTIKEL = _Paths.DETAIL_ARTIKEL;
+  static const CHAT = _Paths.CHAT;
+  static const ROOM_CHAT = _Paths.ROOM_CHAT;
 }
 
 abstract class _Paths {
@@ -80,5 +81,7 @@ abstract class _Paths {
   static const ASSESMENT_5 = '/assesment-5';
   static const ASSESMENT_6 = '/assesment-6';
   static const ASSESMENT_7 = '/assesment-7';
-
+  static const DETAIL_ARTIKEL = '/detail-artikel';
+  static const CHAT = '/chat';
+  static const ROOM_CHAT = '/room-chat';
 }
