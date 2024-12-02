@@ -8,19 +8,20 @@ import 'app/routes/app_pages.dart';
 
 void main() {
   runApp(
-    DevicePreview(
-      enabled: !kReleaseMode,
-      builder: (context) => GetMaterialApp(
+    // DevicePreview(
+    //   enabled: !kReleaseMode,
+    //   builder: (context) => 
+      GetMaterialApp(
         debugShowCheckedModeBanner: false,
         useInheritedMediaQuery: true,
-        locale: DevicePreview.locale(context),
-        builder: DevicePreview.appBuilder,
+        //locale: DevicePreview.locale(context),
+        // builder: DevicePreview.appBuilder,
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
         title: "Application",
         initialRoute: Routes.SPLASH_SCREEN,
         getPages: AppPages.routes,
       ),
-    ),
+    // ),
   );
 }

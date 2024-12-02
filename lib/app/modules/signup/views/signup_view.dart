@@ -17,6 +17,7 @@ class SignupView extends GetView<SignupController> {
       backgroundColor: whiteColor,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(24),
@@ -133,7 +134,9 @@ class SignupView extends GetView<SignupController> {
                     height: 68,
                   ),
                   Obx(() => ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.toNamed(Routes.ASSESMENT_1);
+                        },
                         style: ElevatedButton.styleFrom(
                             backgroundColor: controller.isButtonActive.value
                                 ? const Color(0xFFc4c4c4)
@@ -174,10 +177,8 @@ class SignupView extends GetView<SignupController> {
                       onTap: () => Get.toNamed(Routes.LOGIN),
                       child: Text(
                         'Masuk',
-
                         style:
                             GoogleFonts.poppins(color: const Color(0xFF60ABEE)),
-
                       ),
                     ),
                   ],
