@@ -10,6 +10,8 @@ import '../../../themes/fonts.dart';
 import '../controllers/chatbot_controller.dart';
 
 class ChatbotView extends GetView<ChatbotController> {
+  const ChatbotView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,7 +91,7 @@ class ChatbotView extends GetView<ChatbotController> {
           SliverList.builder(
               itemCount: 5,
               itemBuilder: (context, index) {
-                return HistoryChatbot();
+                return const HistoryChatbot();
               })
         ],
       ),

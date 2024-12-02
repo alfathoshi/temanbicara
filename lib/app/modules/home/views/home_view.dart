@@ -14,12 +14,15 @@ import 'package:temanbicara/app/widgets/top_article.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
+  const HomeView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: whiteColor,
       body: CustomScrollView(slivers: [
         SliverAppBar(
+          automaticallyImplyLeading: false,
           toolbarHeight: 85,
           backgroundColor: Colors.white,
           shape: const RoundedRectangleBorder(
@@ -348,7 +351,7 @@ class HomeView extends GetView<HomeController> {
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: [
-                            for (int i = 0; i < 4; i++) MyJournal(),
+                            for (int i = 0; i < 4; i++) const MyJournal(),
                           ],
                         ),
                       ),
@@ -399,7 +402,7 @@ class HomeView extends GetView<HomeController> {
                           SingleChildScrollView(
                             child: Column(
                               children: [
-                                for (int i = 0; i < 4; i++) TopArticle(),
+                                for (int i = 0; i < 4; i++) const TopArticle(),
                               ],
                             ),
                           ),
