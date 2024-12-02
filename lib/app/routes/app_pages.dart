@@ -1,5 +1,11 @@
 import 'package:get/get.dart';
 
+import '../modules/Tracking/bindings/tracking_binding.dart';
+import '../modules/Tracking/views/tracking_view.dart';
+import '../modules/Tracking_2/bindings/tracking_2_binding.dart';
+import '../modules/Tracking_2/views/tracking_2_view.dart';
+import '../modules/article/bindings/article_binding.dart';
+import '../modules/article/views/article_view.dart';
 import '../modules/article/bindings/article_binding.dart';
 import '../modules/article/views/article_view.dart';
 import '../modules/assesment_1/bindings/assesment_1_binding.dart';
@@ -42,6 +48,8 @@ import '../modules/navigation_bar/bindings/navigation_bar_binding.dart';
 import '../modules/navigation_bar/views/navigation_bar_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
+import '../modules/signup/bindings/signup_binding.dart';
+import '../modules/signup/views/signup_view.dart';
 import '../modules/report/bindings/report_binding.dart';
 import '../modules/report/views/report_view.dart';
 import '../modules/room_chat/bindings/room_chat_binding.dart';
@@ -66,6 +74,8 @@ import '../modules/transaction_payment/bindings/transaction_payment_binding.dart
 import '../modules/transaction_payment/views/transaction_payment_view.dart';
 import '../modules/transaction_success/bindings/transaction_success_binding.dart';
 import '../modules/transaction_success/views/transaction_success_view.dart';
+import '../modules/splash_screen/bindings/splash_screen_binding.dart';
+import '../modules/splash_screen/views/splash_screen_view.dart';
 
 part 'app_routes.dart';
 
@@ -134,6 +144,21 @@ class AppPages {
       name: _Paths.SIGNUP,
       page: () => const SignupView(),
       binding: SignupBinding(),
+    ),
+    GetPage(
+      name: _Paths.TRACKING,
+      page: () => TrackingView(),
+      binding: TrackingBinding(),
+    ),
+    GetPage(
+      name: _Paths.TRACKING_2,
+      page: () => const Tracking2View(),
+      binding: Tracking2Binding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_ARTIKEL,
+      page: () => DetailArtikelView(),
+      binding: DetailArtikelBinding(),
     ),
     GetPage(
       name: _Paths.REPORT,
