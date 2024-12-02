@@ -23,6 +23,7 @@ class Assesment1View extends GetView<Assesment1Controller> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: whiteColor,
       appBar: AppBar(
         title: Row(
           children: [

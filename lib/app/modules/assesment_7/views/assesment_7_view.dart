@@ -13,6 +13,7 @@ class Assesment7View extends GetView<Assesment7Controller> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: whiteColor,
         appBar: AppBar(
           title: Row(
             children: [

@@ -13,6 +13,7 @@ class Assesment4View extends GetView<Assesment4Controller> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: whiteColor,
       appBar: AppBar(
         title: Row(
           children: [
@@ -132,7 +133,7 @@ class Assesment4View extends GetView<Assesment4Controller> {
                           ],
                           color: controller.isSelected.value == 1
                               ? primaryColor
-                              : whiteColor, 
+                              : whiteColor,
                         ),
                         padding: const EdgeInsets.all(8),
                         child: Center(
@@ -148,9 +149,12 @@ class Assesment4View extends GetView<Assesment4Controller> {
               ],
             ),
             Spacer(),
-            MyButton(get: () {
-              Get.toNamed(Routes.ASSESMENT_5);
-            }, color: primaryColor, text: 'Lanjutkan')
+            MyButton(
+                get: () {
+                  Get.toNamed(Routes.ASSESMENT_5);
+                },
+                color: primaryColor,
+                text: 'Lanjutkan')
           ],
         ),
       ),

@@ -14,6 +14,7 @@ class Assesment2View extends GetView<Assesment2Controller> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: whiteColor,
         appBar: AppBar(
           title: Row(
             children: [
@@ -103,7 +104,12 @@ class Assesment2View extends GetView<Assesment2Controller> {
               ),
               Text('Silahkan pilih goalsmu', style: warningGoals),
               Spacer(),
-              MyButton(get: (){Get.toNamed(Routes.ASSESMENT_3);}, color: primaryColor, text: 'Lanjutkan')
+              MyButton(
+                  get: () {
+                    Get.toNamed(Routes.ASSESMENT_3);
+                  },
+                  color: primaryColor,
+                  text: 'Lanjutkan')
             ],
           ),
         ));
