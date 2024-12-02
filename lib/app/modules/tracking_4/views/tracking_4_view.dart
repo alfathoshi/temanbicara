@@ -11,17 +11,14 @@ class Tracking4View extends GetView<Tracking4Controller> {
   const Tracking4View({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: primaryColor,
-      body: GestureDetector(
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => HomeView(),
-              ));
-        },
-        child: SafeArea(
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomeView()));
+      },
+      child: Scaffold(
+        backgroundColor: primaryColor,
+        body: SafeArea(
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
