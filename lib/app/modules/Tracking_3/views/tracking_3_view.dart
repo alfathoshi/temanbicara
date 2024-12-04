@@ -6,15 +6,13 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 
-import '../controllers/tracking_2_controller.dart';
+import '../controllers/tracking_3_controller.dart';
 
-class Tracking2View extends GetView<Tracking2Controller> {
-  Tracking2View({super.key});
-
+class Tracking3View extends GetView<Tracking3Controller> {
+  const Tracking3View({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: whiteColor,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -52,32 +50,15 @@ class Tracking2View extends GetView<Tracking2Controller> {
                   Obx(
                     () => Column(
                       children: [
-                        if (controller.selectedNumber.value == 1)
-                          Image.asset(
-                            'assets/images/emosi1.png',
-                            scale: 4,
+                        Text(
+                          '${controller.selectedNumber.value}',
+                          style: h1Bold.copyWith(
+                            fontSize: 150,
                           ),
-                        if (controller.selectedNumber.value == 2)
-                          Image.asset(
-                            'assets/images/emosi2.png',
-                            scale: 4,
-                          ),
-                        if (controller.selectedNumber.value == 3)
-                          Image.asset(
-                            'assets/images/emosi3.png',
-                            scale: 4,
-                          ),
-                        if (controller.selectedNumber.value == 4)
-                          Image.asset(
-                            'assets/images/emosi4.png',
-                            scale: 4,
-                          ),
-                        if (controller.selectedNumber.value == 5)
-                          Image.asset(
-                            'assets/images/emosi5.png',
-                            scale: 4,
-                          ),
-                        Obx(() => controller.explanationText()),
+                        ),
+                        SizedBox(
+                          height: 50,
+                        ),
                         Container(
                           height: 75,
                           width: MediaQuery.sizeOf(context).width,
@@ -88,9 +69,8 @@ class Tracking2View extends GetView<Tracking2Controller> {
                           child: Padding(
                             padding: const EdgeInsets.only(left: 8, right: 8),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                for (int i = 1; i <= 5; i++)
+                                for (int i = 0; i <= 5; i++)
                                   GestureDetector(
                                     onTap: () {
                                       controller.selectNumber(i);
@@ -102,7 +82,7 @@ class Tracking2View extends GetView<Tracking2Controller> {
                                       decoration: ShapeDecoration(
                                         color:
                                             controller.selectedNumber.value == i
-                                                ? controller.colorNum
+                                                ? primaryColor
                                                 : Colors.transparent,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
@@ -130,6 +110,7 @@ class Tracking2View extends GetView<Tracking2Controller> {
                         SizedBox(
                           height: 10,
                         ),
+                        Obx(() => controller.explanationText()),
                       ],
                     ),
                   ),
@@ -138,10 +119,10 @@ class Tracking2View extends GetView<Tracking2Controller> {
                   ),
                   MyButton(
                       get: () {
-                        Get.toNamed(Routes.TRACKING_3);
+                        Get.toNamed(Routes.TRACKING_4);
                       },
                       color: primaryColor,
-                      text: 'Lanjutkan'),
+                      text: 'Selesai'),
                 ],
               ),
             ),

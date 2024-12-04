@@ -25,7 +25,7 @@ class KualitasTidur extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       child: Container(
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+          padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
