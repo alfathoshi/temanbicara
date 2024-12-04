@@ -38,9 +38,13 @@ abstract class Routes {
   static const ASSESMENT_5 = _Paths.ASSESMENT_5;
   static const ASSESMENT_6 = _Paths.ASSESMENT_6;
   static const ASSESMENT_7 = _Paths.ASSESMENT_7;
+  static const TRACKING_3 = _Paths.TRACKING_3;
+  static const TRACKING_4 = _Paths.TRACKING_4;
+
   static const CHAT = _Paths.CHAT;
   static const ROOM_CHAT = _Paths.ROOM_CHAT;
   static const CONSULTATION = _Paths.CONSULTATION;
+
 }
 
 abstract class _Paths {
@@ -55,7 +59,6 @@ abstract class _Paths {
   static const CHATBOT_ROOM = '/chatbot-room';
   static const LOGIN = '/login';
   static const SIGNUP = '/signup';
-
   static const TRACKING = '/tracking';
   static const TRACKING_2 = '/tracking-2';
 
@@ -80,7 +83,12 @@ abstract class _Paths {
   static const ASSESMENT_5 = '/assesment-5';
   static const ASSESMENT_6 = '/assesment-6';
   static const ASSESMENT_7 = '/assesment-7';
+
+  static const TRACKING_3 = '/tracking-3';
+  static const TRACKING_4 = '/tracking-4';
+
   static const CHAT = '/chat';
   static const ROOM_CHAT = '/room-chat';
   static const CONSULTATION = '/consultation';
+
 }

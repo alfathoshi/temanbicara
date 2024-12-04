@@ -23,6 +23,7 @@ class HomeView extends GetView<HomeController> {
       backgroundColor: whiteColor,
       body: CustomScrollView(slivers: [
         SliverAppBar(
+          automaticallyImplyLeading: false,
           toolbarHeight: 85,
           backgroundColor: Colors.white,
           shape: const RoundedRectangleBorder(
