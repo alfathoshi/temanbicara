@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:temanbicara/app/data/Invoice.dart';
+import 'package:temanbicara/app/data/Transaction.dart';
 import 'package:temanbicara/app/modules/transaction_invoice/views/transaction_invoice_view.dart';
-import 'package:temanbicara/app/modules/transaction_success/views/transaction_success_view.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/transaction/transactionPriceDetail.dart';
@@ -12,11 +13,11 @@ import 'package:temanbicara/app/widgets/transaction/transactionTimelineView.dart
 import '../controllers/transaction_payment_controller.dart';
 
 class TransactionPaymentView extends GetView<TransactionPaymentController> {
-  final int? price;
   final String? paymentMethod;
-  const TransactionPaymentView({this.price, this.paymentMethod, super.key});
+  const TransactionPaymentView({this.paymentMethod, super.key});
   @override
   Widget build(BuildContext context) {
+    final TransactionModel transaction = Get.arguments as TransactionModel;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -52,11 +53,13 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                   TransactionRemainingTime(),
                   SizedBox(height: 22),
                   TransactionPriceDetail(
-                      invoice: "dummy",
-                      paymentMethod: paymentMethod!,
-                      price: price!,
-                      appTax: 15000,
-                      admTax: 1000),
+                      invoice: InvoiceModel(
+                          transaction: transaction,
+                          invoice: "invoice",
+                          appTax: 15000,
+                          admTax: 1000,
+                          metodePembayaran: paymentMethod!,
+                          hargaTotal: 15000 + 1000 + transaction.harga)),
                   SizedBox(height: 17),
                   Center(
                     child: RichText(
@@ -91,7 +94,16 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold)),
                           onPressed: () {
-                            Get.to(TransactionInvoiceView());
+                            Get.to(
+                              TransactionInvoiceView(),
+                              arguments: InvoiceModel(
+                                  transaction: transaction,
+                                  invoice: "invoice",
+                                  appTax: 15000,
+                                  admTax: 1000,
+                                  metodePembayaran: paymentMethod!,
+                                  hargaTotal: 15000 + 1000 + transaction.harga),
+                            );
                           },
                           style: ButtonStyle(
                             backgroundColor:

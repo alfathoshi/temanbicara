@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:temanbicara/app/data/Invoice.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/transaction/idrFormatter.dart';
 
 class InvoiceData extends StatelessWidget {
-  const InvoiceData({super.key});
+  final InvoiceModel invoice;
+  const InvoiceData({super.key, required this.invoice});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class InvoiceData extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("dummy", style: h5Bold),
+                        Text(invoice.transaction.namaPsikiater, style: h5Bold),
                         SizedBox(height: 2),
                         Text("Psikolog/Psikiater", style: h7RegularShade)
                       ],
@@ -42,7 +44,10 @@ class InvoiceData extends StatelessWidget {
                 SizedBox(height: 22),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text("Invoice", style: h6Bold), Text("dummy")],
+                  children: [
+                    Text("Invoice", style: h6Bold),
+                    Text(invoice.invoice)
+                  ],
                 ),
                 SizedBox(height: 22),
                 Divider(
@@ -53,7 +58,10 @@ class InvoiceData extends StatelessWidget {
                 SizedBox(height: 22),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text("Topic", style: h6Bold), Text("dummy")],
+                  children: [
+                    Text("Topic", style: h6Bold),
+                    Text(invoice.transaction.topik)
+                  ],
                 ),
                 SizedBox(height: 22),
                 Divider(
@@ -66,7 +74,7 @@ class InvoiceData extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Consultation Method", style: h6Bold),
-                    Text("dummy")
+                    Text(invoice.transaction.metode)
                   ],
                 ),
                 SizedBox(height: 22),
@@ -80,7 +88,7 @@ class InvoiceData extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Duration", style: h6Bold),
-                    Text("dummy".toString())
+                    Text(invoice.transaction.durasi.toString())
                   ],
                 ),
                 SizedBox(height: 12),
@@ -88,20 +96,23 @@ class InvoiceData extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Session", style: h6Bold),
-                    Text("dummy".toString())
+                    Text(invoice.transaction.sesi.toString())
                   ],
                 ),
                 SizedBox(height: 12),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text("Schedule", style: h6Bold), Text("dummy")],
+                  children: [
+                    Text("Schedule", style: h6Bold),
+                    Text(invoice.transaction.jadwal)
+                  ],
                 ),
                 SizedBox(height: 12),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Time", style: h6Bold),
-                    Text("dummy".toString())
+                    Text(invoice.transaction.waktu.toString())
                   ],
                 ),
                 SizedBox(height: 22),
@@ -115,7 +126,7 @@ class InvoiceData extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Expired Time", style: h6Bold),
-                    Text("dummy")
+                    Text(invoice.transaction.kadaluarsa)
                   ],
                 ),
                 SizedBox(height: 22),
@@ -129,7 +140,7 @@ class InvoiceData extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Payment Method", style: h6Bold),
-                    Text("dummy".toString())
+                    Text(invoice.metodePembayaran.toString())
                   ],
                 ),
                 SizedBox(height: 12),
@@ -137,7 +148,8 @@ class InvoiceData extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Consultation Price", style: h6Bold),
-                    Text("dummy".toString())
+                    Text(CurrencyFormat.convertToIdr(
+                        invoice.transaction.harga, 2))
                   ],
                 ),
                 SizedBox(height: 12),
@@ -145,7 +157,7 @@ class InvoiceData extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Application Tax.", style: h6Bold),
-                    Text("dummy")
+                    Text(CurrencyFormat.convertToIdr(invoice.appTax, 2))
                   ],
                 ),
                 SizedBox(height: 12),
@@ -153,7 +165,7 @@ class InvoiceData extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Administration Tax.", style: h6Bold),
-                    Text("dummy".toString())
+                    Text(CurrencyFormat.convertToIdr(invoice.admTax, 2))
                   ],
                 ),
                 SizedBox(height: 22),
@@ -167,7 +179,7 @@ class InvoiceData extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Price", style: h6Bold),
-                    Text(CurrencyFormat.convertToIdr(321670, 2),
+                    Text(CurrencyFormat.convertToIdr(invoice.hargaTotal, 2),
                         style: h6Bold.copyWith(color: primaryColor))
                   ],
                 ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:temanbicara/app/data/Transaction.dart';
 import 'package:temanbicara/app/modules/transaction_method/controllers/transaction_method_controller.dart';
 import 'package:temanbicara/app/modules/transaction_payment/views/transaction_payment_view.dart';
 import 'package:temanbicara/app/themes/colors.dart';
@@ -10,8 +11,8 @@ import 'package:temanbicara/app/widgets/transaction/paymentMethodRow.dart';
 List<String> creditCardList = ["Visa", "Mastercard"];
 
 class CreditCardMethodList extends StatelessWidget {
-  final int price;
-  const CreditCardMethodList({super.key, required this.price});
+  final TransactionModel transaction;
+  const CreditCardMethodList({super.key, required this.transaction});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +48,7 @@ class CreditCardMethodList extends StatelessWidget {
           ),
         ),
         SizedBox(height: 22),
-        ConcultationPrice(price: price),
+        ConcultationPrice(price: transaction.harga),
         SizedBox(height: 25),
         Center(
           child: SizedBox(
@@ -59,10 +60,13 @@ class CreditCardMethodList extends StatelessWidget {
                       color: Colors.white,
                       fontSize: 14,
                       fontWeight: FontWeight.bold)),
-              onPressed: () => Get.to(() => TransactionPaymentView(
-                    price: price,
-                    paymentMethod: radioController.methodType,
-                  )),
+              onPressed: () {
+                Get.to(
+                    TransactionPaymentView(
+                      paymentMethod: radioController.methodType,
+                    ),
+                    arguments: transaction);
+              },
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(primaryColor),
               ),

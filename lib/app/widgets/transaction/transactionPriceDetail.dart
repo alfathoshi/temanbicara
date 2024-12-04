@@ -1,26 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:temanbicara/app/data/Invoice.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/transaction/idrFormatter.dart';
 
 class TransactionPriceDetail extends StatelessWidget {
-  final String invoice;
-  final String paymentMethod;
-  final int price;
-  final int appTax;
-  final int admTax;
-  late final int total;
-
-  TransactionPriceDetail({
-    super.key,
-    required this.invoice,
-    required this.paymentMethod,
-    required this.price,
-    required this.appTax,
-    required this.admTax,
-  }) {
-    total = price + appTax + admTax;
-  }
+  final InvoiceModel invoice;
+  TransactionPriceDetail({required this.invoice});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,7 +23,8 @@ class TransactionPriceDetail extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Invoice", style: h7SemiBold),
-                Text(invoice, style: h7SemiBold.copyWith(color: grey2Color))
+                Text(invoice.invoice,
+                    style: h7SemiBold.copyWith(color: grey2Color))
               ],
             ),
             SizedBox(height: 15),
@@ -45,7 +32,7 @@ class TransactionPriceDetail extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("PaymentMethod", style: h7SemiBold),
-                Text(paymentMethod,
+                Text(invoice.metodePembayaran,
                     style: h7SemiBold.copyWith(color: grey2Color))
               ],
             ),
@@ -54,7 +41,7 @@ class TransactionPriceDetail extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Price", style: h7SemiBold),
-                Text(CurrencyFormat.convertToIdr(price, 2),
+                Text(CurrencyFormat.convertToIdr(invoice.transaction.harga, 2),
                     style: h7SemiBold.copyWith(color: grey2Color))
               ],
             ),
@@ -63,7 +50,7 @@ class TransactionPriceDetail extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Application Tax.", style: h7SemiBold),
-                Text(CurrencyFormat.convertToIdr(appTax, 2),
+                Text(CurrencyFormat.convertToIdr(invoice.appTax, 2),
                     style: h7SemiBold.copyWith(color: grey2Color))
               ],
             ),
@@ -72,7 +59,7 @@ class TransactionPriceDetail extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Administration Tax.", style: h7SemiBold),
-                Text(CurrencyFormat.convertToIdr(admTax, 2),
+                Text(CurrencyFormat.convertToIdr(invoice.admTax, 2),
                     style: h7SemiBold.copyWith(color: grey2Color))
               ],
             ),
@@ -88,7 +75,7 @@ class TransactionPriceDetail extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Total", style: h7Bold),
-                Text(CurrencyFormat.convertToIdr(total, 2),
+                Text(CurrencyFormat.convertToIdr(invoice.hargaTotal, 2),
                     style: h6Bold.copyWith(color: primaryColor))
               ],
             ),

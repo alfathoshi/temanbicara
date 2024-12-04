@@ -2,10 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:temanbicara/app/data/Invoice.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/transaction/invoiceData.dart';
-import 'package:temanbicara/app/widgets/transaction/transactionTimeline.dart';
 import 'package:temanbicara/app/widgets/transaction/transactionTimelineView.dart';
 
 import '../controllers/transaction_invoice_controller.dart';
@@ -14,6 +14,7 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
   const TransactionInvoiceView({super.key});
   @override
   Widget build(BuildContext context) {
+    final InvoiceModel invoice = Get.arguments as InvoiceModel;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -51,7 +52,8 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
                     SizedBox(height: 5),
                     Text("Invoice", style: h4Bold),
                     SizedBox(height: 19),
-                    InvoiceData(),
+                    // data invoice disini
+                    InvoiceData(invoice: invoice),
                     SizedBox(height: 15),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

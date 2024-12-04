@@ -43,6 +43,7 @@ abstract class Routes {
 
   static const CHAT = _Paths.CHAT;
   static const ROOM_CHAT = _Paths.ROOM_CHAT;
+  static const CONSULTATION = _Paths.CONSULTATION;
 
 }
 
@@ -88,5 +89,6 @@ abstract class _Paths {
 
   static const CHAT = '/chat';
   static const ROOM_CHAT = '/room-chat';
+  static const CONSULTATION = '/consultation';
 
 }
