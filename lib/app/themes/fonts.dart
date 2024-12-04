@@ -305,8 +305,8 @@ TextStyle h4SemiBoldPrime = GoogleFonts.poppins(
 
 TextStyle TextLogo = GoogleFonts.poppins(
   fontWeight: FontWeight.bold,
-  color: whiteColor,
-  fontSize: 16,
+  color: primaryColor,
+  fontSize: 18,
 );
 
 TextStyle warningGoals = GoogleFonts.poppins(

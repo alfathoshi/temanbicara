@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:temanbicara/app/modules/chat/views/chat_view.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
@@ -63,7 +64,10 @@ class HomeView extends GetView<HomeController> {
           ),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ChatView()));
+              },
               icon: Image.asset(
                 'assets/icons/send.png',
                 scale: 0.9,
@@ -393,26 +397,7 @@ class HomeView extends GetView<HomeController> {
                             ),
                           )
                         ],
-                      ),
-
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      Row(
-                        children: [
-                          SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                for (int i = 0; i < 4; i++) const TopArticle(),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-
+                      )
                     ],
                   ),
                 ),
@@ -428,7 +413,8 @@ class HomeView extends GetView<HomeController> {
                 child: TopArticle(
                   judul: data[index]["judul"],
                   deskripsi: data[index]["deskripsi"],
-                  author: data[index]["author"], image: data[index]["image"],
+                  author: data[index]["author"],
+                  image: data[index]["image"],
                 ),
               );
             })
@@ -436,67 +422,67 @@ class HomeView extends GetView<HomeController> {
     );
   }
 }
- List<Map<String, dynamic>> data = [
-    {
-      "image": "article1",
-      "judul": "What is mental health?",
-      "deskripsi":
-          "Mental health is about how people think, feel, and behave. Mental health care professionals can help people manage conditions such as depression, anxiety, bipolar disorder, addiction, and other disorders that affect their thoughts, feelings, and behaviors,Mental health can affect a person’s day-to-day life, relationships, and physical health. External factors in people’s lives and relationships can also contribute to their mental well-being.Looking after one’s mental health can help a person maintain their ability to enjoy life. This involves balancing their activities, responsibilities, and efforts to achieve psychological resilience.Stress, depression, and anxiety can affect mental health and may disrupt a person’s routine.Although healthcare professionals often use the term “mental health,” doctors recognize that many mental health conditions have physical roots.This article explains what mental health and mental health conditions mean. It also describes the most common types of mental health disorders, including their early signs and how to treat them.",
-      "author": "gina cantik"
-    },
-    {
-      "image": "article1",
-      "judul": "a",
-      "deskripsi": "loremipsum",
-      "author": "gina cantik"
-    },
-    {
-      "image": "article1",
-      "judul": "a",
-      "deskripsi": "loremipsum",
-      "author": "gina cantik"
-    },
-    {
-      "image": "article1",
-      "judul": "a",
-      "deskripsi": "loremipsum",
-      "author": "gina cantik"
-    },
-    {
-      "image": "article1",
-      "judul": "a",
-      "deskripsi": "loremipsum",
-      "author": "gina cantik"
-    },
-    {
-      "image": "article1",
-      "judul": "a",
-      "deskripsi": "loremipsum",
-      "author": "gina cantik"
-    },
-    {
-      "image": "article1",
-      "judul": "a",
-      "deskripsi": "loremipsum",
-      "author": "gina cantik"
-    },
-    {
-      "image": "article1",
-      "judul": "a",
-      "deskripsi": "loremipsum",
-      "author": "gina cantik"
-    },
-    {
-      "image": "article1",
-      "judul": "a",
-      "deskripsi": "loremipsum",
-      "author": "gina cantik"
-    },
-    {
-      "image": "article1",
-      "judul": "a",
-      "deskripsi": "loremipsum",
-      "author": "gina cantik"
-    }
-  ];
 
+List<Map<String, dynamic>> data = [
+  {
+    "image": "article1",
+    "judul": "What is mental health?",
+    "deskripsi":
+        "Mental health is about how people think, feel, and behave. Mental health care professionals can help people manage conditions such as depression, anxiety, bipolar disorder, addiction, and other disorders that affect their thoughts, feelings, and behaviors,Mental health can affect a person’s day-to-day life, relationships, and physical health. External factors in people’s lives and relationships can also contribute to their mental well-being.Looking after one’s mental health can help a person maintain their ability to enjoy life. This involves balancing their activities, responsibilities, and efforts to achieve psychological resilience.Stress, depression, and anxiety can affect mental health and may disrupt a person’s routine.Although healthcare professionals often use the term “mental health,” doctors recognize that many mental health conditions have physical roots.This article explains what mental health and mental health conditions mean. It also describes the most common types of mental health disorders, including their early signs and how to treat them.",
+    "author": "gina cantik"
+  },
+  {
+    "image": "article1",
+    "judul": "a",
+    "deskripsi": "loremipsum",
+    "author": "gina cantik"
+  },
+  {
+    "image": "article1",
+    "judul": "a",
+    "deskripsi": "loremipsum",
+    "author": "gina cantik"
+  },
+  {
+    "image": "article1",
+    "judul": "a",
+    "deskripsi": "loremipsum",
+    "author": "gina cantik"
+  },
+  {
+    "image": "article1",
+    "judul": "a",
+    "deskripsi": "loremipsum",
+    "author": "gina cantik"
+  },
+  {
+    "image": "article1",
+    "judul": "a",
+    "deskripsi": "loremipsum",
+    "author": "gina cantik"
+  },
+  {
+    "image": "article1",
+    "judul": "a",
+    "deskripsi": "loremipsum",
+    "author": "gina cantik"
+  },
+  {
+    "image": "article1",
+    "judul": "a",
+    "deskripsi": "loremipsum",
+    "author": "gina cantik"
+  },
+  {
+    "image": "article1",
+    "judul": "a",
+    "deskripsi": "loremipsum",
+    "author": "gina cantik"
+  },
+  {
+    "image": "article1",
+    "judul": "a",
+    "deskripsi": "loremipsum",
+    "author": "gina cantik"
+  }
+];

@@ -8,7 +8,6 @@ import '../modules/Tracking_3/bindings/tracking_3_binding.dart';
 import '../modules/Tracking_3/views/tracking_3_view.dart';
 import '../modules/article/bindings/article_binding.dart';
 import '../modules/article/views/article_view.dart';
-
 import '../modules/assesment_1/bindings/assesment_1_binding.dart';
 import '../modules/assesment_1/views/assesment_1_view.dart';
 import '../modules/assesment_2/bindings/assesment_2_binding.dart';
@@ -23,7 +22,8 @@ import '../modules/assesment_6/bindings/assesment_6_binding.dart';
 import '../modules/assesment_6/views/assesment_6_view.dart';
 import '../modules/assesment_7/bindings/assesment_7_binding.dart';
 import '../modules/assesment_7/views/assesment_7_view.dart';
-
+import '../modules/chat/bindings/chat_binding.dart';
+import '../modules/chat/views/chat_view.dart';
 import '../modules/chatbot/bindings/chatbot_binding.dart';
 import '../modules/chatbot/views/chatbot_view.dart';
 import '../modules/chatbot_room/bindings/chatbot_room_binding.dart';
@@ -32,36 +32,36 @@ import '../modules/consult/bindings/consult_binding.dart';
 import '../modules/consult/views/consult_view.dart';
 import '../modules/create_journal/bindings/create_journal_binding.dart';
 import '../modules/create_journal/views/create_journal_view.dart';
-
 import '../modules/detail_artikel/bindings/detail_artikel_binding.dart';
 import '../modules/detail_artikel/views/detail_artikel_view.dart';
-
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/journal/bindings/journal_binding.dart';
 import '../modules/journal/views/journal_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
-
 import '../modules/mood_report/bindings/mood_report_binding.dart';
 import '../modules/mood_report/views/mood_report_view.dart';
 import '../modules/mood_tracker/bindings/mood_tracker_binding.dart';
 import '../modules/mood_tracker/views/mood_tracker_view.dart';
-
 import '../modules/navigation_bar/bindings/navigation_bar_binding.dart';
 import '../modules/navigation_bar/views/navigation_bar_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
-
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
-import '../modules/splash_screen/bindings/splash_screen_binding.dart';
-import '../modules/splash_screen/views/splash_screen_view.dart';
+
 import '../modules/tracking_4/bindings/tracking_4_binding.dart';
 import '../modules/tracking_4/views/tracking_4_view.dart';
 
 import '../modules/report/bindings/report_binding.dart';
 import '../modules/report/views/report_view.dart';
+import '../modules/room_chat/bindings/room_chat_binding.dart';
+import '../modules/room_chat/views/room_chat_view.dart';
+import '../modules/signup/bindings/signup_binding.dart';
+import '../modules/signup/bindings/signup_binding.dart';
+import '../modules/signup/views/signup_view.dart';
+import '../modules/signup/views/signup_view.dart';
 import '../modules/sleep_quality/bindings/sleep_quality_binding.dart';
 import '../modules/sleep_quality/views/sleep_quality_view.dart';
 import '../modules/stress_level/bindings/stress_level_binding.dart';
@@ -77,6 +77,9 @@ import '../modules/transaction_payment/bindings/transaction_payment_binding.dart
 import '../modules/transaction_payment/views/transaction_payment_view.dart';
 import '../modules/transaction_success/bindings/transaction_success_binding.dart';
 import '../modules/transaction_success/views/transaction_success_view.dart';
+
+import '../modules/splash_screen/bindings/splash_screen_binding.dart';
+import '../modules/splash_screen/views/splash_screen_view.dart';
 
 part 'app_routes.dart';
 
@@ -100,6 +103,11 @@ class AppPages {
       name: _Paths.ARTICLE,
       page: () => ArticleView(),
       binding: ArticleBinding(),
+    ),
+    GetPage(
+      name: _Paths.DETAIL_ARTIKEL,
+      page: () => DetailArtikelView(),
+      binding: DetailArtikelBinding(),
     ),
     GetPage(
       name: _Paths.CHATBOT,
@@ -266,6 +274,16 @@ class AppPages {
       name: _Paths.TRACKING_4,
       page: () => const Tracking4View(),
       binding: Tracking4Binding(),
+    ),
+    GetPage(
+      name: _Paths.CHAT,
+      page: () =>  ChatView(),
+      binding: ChatBinding(),
+    ),
+    GetPage(
+      name: _Paths.ROOM_CHAT,
+      page: () =>  RoomChatView(),
+      binding: RoomChatBinding(),
     ),
   ];
 }
