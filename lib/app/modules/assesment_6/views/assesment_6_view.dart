@@ -13,6 +13,7 @@ class Assesment6View extends GetView<Assesment6Controller> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: whiteColor,
       appBar: AppBar(
         title: Row(
           children: [
@@ -85,9 +86,12 @@ class Assesment6View extends GetView<Assesment6Controller> {
               ),
             ),
             Spacer(),
-            MyButton(get: () {
-              Get.toNamed(Routes.ASSESMENT_7);
-            }, color: primaryColor, text: 'Lanjutkan')
+            MyButton(
+                get: () {
+                  Get.toNamed(Routes.ASSESMENT_7);
+                },
+                color: primaryColor,
+                text: 'Lanjutkan')
           ],
         ),
       ),
