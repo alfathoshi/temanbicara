@@ -1,12 +1,14 @@
 import 'package:get/get.dart';
 
+import '../data/Transaction.dart';
 import '../modules/Tracking/bindings/tracking_binding.dart';
 import '../modules/Tracking/views/tracking_view.dart';
 import '../modules/Tracking_2/bindings/tracking_2_binding.dart';
 import '../modules/Tracking_2/views/tracking_2_view.dart';
+import '../modules/Tracking_3/bindings/tracking_3_binding.dart';
+import '../modules/Tracking_3/views/tracking_3_view.dart';
 import '../modules/article/bindings/article_binding.dart';
 import '../modules/article/views/article_view.dart';
-import '../modules/article/bindings/article_binding.dart';
 import '../modules/article/views/article_view.dart';
 import '../modules/assesment_1/bindings/assesment_1_binding.dart';
 import '../modules/assesment_1/views/assesment_1_view.dart';
@@ -48,22 +50,26 @@ import '../modules/navigation_bar/bindings/navigation_bar_binding.dart';
 import '../modules/navigation_bar/views/navigation_bar_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
+
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
+
+import '../modules/tracking_4/bindings/tracking_4_binding.dart';
+import '../modules/tracking_4/views/tracking_4_view.dart';
+
 import '../modules/report/bindings/report_binding.dart';
 import '../modules/report/views/report_view.dart';
 import '../modules/room_chat/bindings/room_chat_binding.dart';
 import '../modules/room_chat/views/room_chat_view.dart';
-import '../modules/signup/bindings/signup_binding.dart';
-import '../modules/signup/bindings/signup_binding.dart';
-import '../modules/signup/views/signup_view.dart';
-import '../modules/signup/views/signup_view.dart';
 import '../modules/sleep_quality/bindings/sleep_quality_binding.dart';
 import '../modules/sleep_quality/views/sleep_quality_view.dart';
+
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';
 import '../modules/splash_screen/views/splash_screen_view.dart';
+
 import '../modules/stress_level/bindings/stress_level_binding.dart';
 import '../modules/stress_level/views/stress_level_view.dart';
+
 import '../modules/transaction/bindings/transaction_binding.dart';
 import '../modules/transaction/views/transaction_view.dart';
 import '../modules/transaction_invoice/bindings/transaction_invoice_binding.dart';
@@ -74,15 +80,13 @@ import '../modules/transaction_payment/bindings/transaction_payment_binding.dart
 import '../modules/transaction_payment/views/transaction_payment_view.dart';
 import '../modules/transaction_success/bindings/transaction_success_binding.dart';
 import '../modules/transaction_success/views/transaction_success_view.dart';
-import '../modules/splash_screen/bindings/splash_screen_binding.dart';
-import '../modules/splash_screen/views/splash_screen_view.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.REPORT;
+  static const INITIAL = Routes.SPLASH_SCREEN;
 
   static final routes = [
     GetPage(
@@ -152,7 +156,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.TRACKING_2,
-      page: () => const Tracking2View(),
+      page: () => Tracking2View(),
       binding: Tracking2Binding(),
     ),
     GetPage(
@@ -187,18 +191,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.TRANSACTION,
-      // ini cuman buat tes data aja
-      page: () => const TransactionView(
-        namaPsikiater: "dummy",
-        topik: "dummy",
-        metode: "dummy",
-        durasi: 100,
-        jmlSesi: 1,
-        jadwalSesi: "dummy",
-        waktuSesi: "dummy",
-        kadaluarsa: "dummy",
-        harga: 321671,
-      ),
+      page: () => const TransactionView(),
       binding: TransactionBinding(),
     ),
     GetPage(
@@ -262,13 +255,23 @@ class AppPages {
       binding: Assesment7Binding(),
     ),
     GetPage(
+      name: _Paths.TRACKING_3,
+      page: () => Tracking3View(),
+      binding: Tracking3Binding(),
+    ),
+    GetPage(
+      name: _Paths.TRACKING_4,
+      page: () => const Tracking4View(),
+      binding: Tracking4Binding(),
+    ),
+    GetPage(
       name: _Paths.CHAT,
-      page: () =>  ChatView(),
+      page: () => ChatView(),
       binding: ChatBinding(),
     ),
     GetPage(
       name: _Paths.ROOM_CHAT,
-      page: () =>  RoomChatView(),
+      page: () => RoomChatView(),
       binding: RoomChatBinding(),
     ),
   ];

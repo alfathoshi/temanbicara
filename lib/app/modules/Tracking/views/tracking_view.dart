@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
+import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/kualitas_tidur.dart';
 
@@ -21,6 +23,7 @@ class TrackingView extends GetView<TrackingController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: whiteColor,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -35,8 +38,7 @@ class TrackingView extends GetView<TrackingController> {
                 ),
                 Text(
                   'Tracking',
-                  style: GoogleFonts.poppins(
-                      fontWeight: FontWeight.bold, fontSize: 20),
+                  style: h3Bold,
                 ),
               ],
             ),
@@ -48,10 +50,7 @@ class TrackingView extends GetView<TrackingController> {
               padding: const EdgeInsets.all(20.0),
               child: Text(
                 "Gimana dengan kualitas tidurmu hari ini?",
-                style: GoogleFonts.poppins(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
+                style: h3Bold,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.fade,
                 softWrap: true,
@@ -81,7 +80,12 @@ class TrackingView extends GetView<TrackingController> {
             child: Column(
               children: [
                 Obx(() => controller.warningText()),
-                MyButton(get: () {}, color: primaryColor, text: 'Lanjutkan'),
+                MyButton(
+                    get: () {
+                      Get.toNamed(Routes.TRACKING_2);
+                    },
+                    color: primaryColor,
+                    text: 'Lanjutkan'),
               ],
             ),
           ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:temanbicara/app/modules/transaction_method/views/transaction_method_view.dart';
+import 'package:temanbicara/app/data/Transaction.dart';
+import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/transaction/transactionData.dart';
@@ -10,36 +11,22 @@ import 'package:temanbicara/app/widgets/transaction/transactionTimelineView.dart
 import '../controllers/transaction_controller.dart';
 
 class TransactionView extends GetView<TransactionController> {
-  final String namaPsikiater;
-  final String topik;
-  final String metode;
-  final int durasi;
-  final int jmlSesi;
-  final String jadwalSesi;
-  final String waktuSesi;
-  final String kadaluarsa;
-  final int harga;
-
-  const TransactionView(
-      {required this.namaPsikiater,
-      required this.topik,
-      required this.metode,
-      required this.durasi,
-      required this.jmlSesi,
-      required this.jadwalSesi,
-      required this.waktuSesi,
-      required this.kadaluarsa,
-      required this.harga,
-      super.key});
+  const TransactionView({super.key});
   @override
   Widget build(BuildContext context) {
+    final TransactionModel transaction = Get.arguments as TransactionModel;
+
     return Scaffold(
         appBar: AppBar(
           title: Text(
             'Transaction',
             style: h3Bold,
           ),
-          leading: Icon(Icons.arrow_back_rounded),
+          leading: IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: Icon(Icons.arrow_back_rounded)),
           centerTitle: true,
         ),
         body: SingleChildScrollView(
@@ -60,15 +47,15 @@ class TransactionView extends GetView<TransactionController> {
                       SizedBox(height: 5),
                       Text("Details", style: h4Bold),
                       TransactionData(
-                          namaPsikiater: namaPsikiater,
-                          topik: topik,
-                          metode: metode,
-                          durasi: durasi,
-                          jmlSesi: jmlSesi,
-                          jadwalSesi: jadwalSesi,
-                          waktuSesi: waktuSesi,
-                          kadaluarsa: kadaluarsa,
-                          harga: harga),
+                          namaPsikiater: transaction.namaPsikiater,
+                          topik: transaction.topik,
+                          metode: transaction.metode,
+                          durasi: transaction.durasi,
+                          jmlSesi: transaction.sesi,
+                          jadwalSesi: transaction.jadwal,
+                          waktuSesi: transaction.waktu,
+                          kadaluarsa: transaction.kadaluarsa,
+                          harga: transaction.harga),
                       SizedBox(height: 50),
                       Center(
                         child: SizedBox(
@@ -81,7 +68,8 @@ class TransactionView extends GetView<TransactionController> {
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold)),
                             onPressed: () {
-                              Get.to(() => TransactionMethodView(price: harga));
+                              Get.toNamed(Routes.TRANSACTION_METHOD,
+                                  arguments: transaction);
                             },
                             style: ButtonStyle(
                               backgroundColor:

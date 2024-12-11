@@ -35,7 +35,7 @@ class TrackingController extends GetxController {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
+                const Icon(
                   Icons.warning_amber_rounded,
                   color: Colors.orange,
                 ),
@@ -46,8 +46,8 @@ class TrackingController extends GetxController {
               ],
             ),
           )
-        : Padding(
-            padding: const EdgeInsets.all(30.0),
+        : const Padding(
+            padding: EdgeInsets.all(30.0),
             child: Text(' '),
           );
   }
