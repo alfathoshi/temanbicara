@@ -41,7 +41,7 @@ class Tracking3View extends GetView<Tracking3Controller> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Text(
-                    'Bagaimana mood-mu hari ini?',
+                    'Berapa nilai yang kamu berikan untuk tingkat stress yang ada?',
                     style: h3Bold,
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.fade,
