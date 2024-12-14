@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:temanbicara/app/data/Transaction.dart';
+import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/transaction/chooseMethod.dart';
 import 'package:temanbicara/app/widgets/transaction/transactionTimelineView.dart';
@@ -14,7 +15,9 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
   Widget build(BuildContext context) {
     final TransactionModel transaction = Get.arguments as TransactionModel;
     return Scaffold(
+      backgroundColor: whiteColor,
       appBar: AppBar(
+        backgroundColor: whiteColor,
         title: Text(
           'Transaction',
           style: h3Bold,

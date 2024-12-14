@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:temanbicara/app/data/Invoice.dart';
+import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/transaction/invoiceData.dart';
@@ -16,7 +17,9 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
   Widget build(BuildContext context) {
     final InvoiceModel invoice = Get.arguments as InvoiceModel;
     return Scaffold(
+      backgroundColor: whiteColor,
       appBar: AppBar(
+        backgroundColor: whiteColor,
         title: Text(
           'Transaction',
           style: h3Bold,
@@ -93,10 +96,12 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
                                   color: Colors.white,
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold)),
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.toNamed(Routes.NAVIGATION_BAR);
+                          },
                           style: ButtonStyle(
                             backgroundColor:
-                                MaterialStatePropertyAll<Color>(primaryColor),
+                                WidgetStatePropertyAll<Color>(primaryColor),
                           ),
                         ),
                       ),

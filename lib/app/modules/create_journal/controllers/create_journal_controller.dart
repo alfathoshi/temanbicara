@@ -9,10 +9,8 @@ class CreateJournalController extends GetxController {
 
   void toggleImage(int index) {
     if (activeIndex.value == index) {
-      // If the same image is clicked again, set it to inactive
       activeIndex.value = null;
     } else {
-      // Set the clicked image as active
       activeIndex.value = index;
     }
   }

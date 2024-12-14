@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignupController extends GetxController {
-  //TODO: Implement SignupController
 
   late TextEditingController emailC;
   late TextEditingController passC;
@@ -32,7 +31,6 @@ class SignupController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     emailC = TextEditingController();
     passC = TextEditingController();
     usernameC = TextEditingController();
@@ -42,7 +40,6 @@ class SignupController extends GetxController {
 
   @override
   void onClose() {
-    // TODO: implement onClose
     usernameC.dispose();
     emailC.dispose();
     passC.dispose();

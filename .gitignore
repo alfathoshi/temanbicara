@@ -10,6 +10,9 @@
 .svn/
 migrate_working_dir/
 
+# Ignore API keys and secrets
+app/modules/chatbot_room/api_key.dart
+
 # IntelliJ related
 *.iml
 *.ipr

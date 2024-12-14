@@ -15,6 +15,7 @@ class Assesment7View extends GetView<Assesment7Controller> {
     return Scaffold(
         backgroundColor: whiteColor,
         appBar: AppBar(
+          backgroundColor: whiteColor,
           title: Row(
             children: [
               Image.asset(
@@ -135,7 +136,7 @@ class Assesment7View extends GetView<Assesment7Controller> {
               Spacer(),
               MyButton(
                   get: () {
-                    Get.toNamed(Routes.HOME);
+                    Get.offAllNamed(Routes.NAVIGATION_BAR);
                   },
                   color: primaryColor,
                   text: 'Lanjutkan')
