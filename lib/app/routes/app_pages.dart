@@ -24,6 +24,10 @@ import '../modules/assesment_6/bindings/assesment_6_binding.dart';
 import '../modules/assesment_6/views/assesment_6_view.dart';
 import '../modules/assesment_7/bindings/assesment_7_binding.dart';
 import '../modules/assesment_7/views/assesment_7_view.dart';
+import '../modules/change_language/bindings/change_language_binding.dart';
+import '../modules/change_language/views/change_language_view.dart';
+import '../modules/change_password/bindings/change_password_binding.dart';
+import '../modules/change_password/views/change_password_view.dart';
 import '../modules/chat/bindings/chat_binding.dart';
 import '../modules/chat/views/chat_view.dart';
 import '../modules/chatbot/bindings/chatbot_binding.dart';
@@ -36,6 +40,8 @@ import '../modules/create_journal/bindings/create_journal_binding.dart';
 import '../modules/create_journal/views/create_journal_view.dart';
 import '../modules/detail_artikel/bindings/detail_artikel_binding.dart';
 import '../modules/detail_artikel/views/detail_artikel_view.dart';
+import '../modules/edit_profile/bindings/edit_profile_binding.dart';
+import '../modules/edit_profile/views/edit_profile_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/journal/bindings/journal_binding.dart';
@@ -50,26 +56,20 @@ import '../modules/navigation_bar/bindings/navigation_bar_binding.dart';
 import '../modules/navigation_bar/views/navigation_bar_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
-
-import '../modules/signup/bindings/signup_binding.dart';
-import '../modules/signup/views/signup_view.dart';
-
-import '../modules/tracking_4/bindings/tracking_4_binding.dart';
-import '../modules/tracking_4/views/tracking_4_view.dart';
-
 import '../modules/report/bindings/report_binding.dart';
 import '../modules/report/views/report_view.dart';
 import '../modules/room_chat/bindings/room_chat_binding.dart';
 import '../modules/room_chat/views/room_chat_view.dart';
+import '../modules/signup/bindings/signup_binding.dart';
+import '../modules/signup/views/signup_view.dart';
 import '../modules/sleep_quality/bindings/sleep_quality_binding.dart';
 import '../modules/sleep_quality/views/sleep_quality_view.dart';
-
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';
 import '../modules/splash_screen/views/splash_screen_view.dart';
-
 import '../modules/stress_level/bindings/stress_level_binding.dart';
 import '../modules/stress_level/views/stress_level_view.dart';
-
+import '../modules/tracking_4/bindings/tracking_4_binding.dart';
+import '../modules/tracking_4/views/tracking_4_view.dart';
 import '../modules/transaction/bindings/transaction_binding.dart';
 import '../modules/transaction/views/transaction_view.dart';
 import '../modules/transaction_invoice/bindings/transaction_invoice_binding.dart';
@@ -273,6 +273,21 @@ class AppPages {
       name: _Paths.ROOM_CHAT,
       page: () => RoomChatView(),
       binding: RoomChatBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_PROFILE,
+      page: () => EditProfileView(),
+      binding: EditProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHANGE_PASSWORD,
+      page: () => ChangePasswordView(),
+      binding: ChangePasswordBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHANGE_LANGUAGE,
+      page: () => ChangeLanguageView(),
+      binding: ChangeLanguageBinding(),
     ),
   ];
 }
