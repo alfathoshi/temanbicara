@@ -17,7 +17,9 @@ class TransactionView extends GetView<TransactionController> {
     final TransactionModel transaction = Get.arguments as TransactionModel;
 
     return Scaffold(
+      backgroundColor: whiteColor,
         appBar: AppBar(
+          backgroundColor: whiteColor,
           title: Text(
             'Transaction',
             style: h3Bold,
