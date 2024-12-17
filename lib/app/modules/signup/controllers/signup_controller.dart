@@ -5,15 +5,15 @@ class SignupController extends GetxController {
 
   late TextEditingController emailC;
   late TextEditingController passC;
-  late TextEditingController usernameC;
   late TextEditingController confirmPassC;
+
   var isButtonActive = true.obs;
   var isSecure = true.obs;
   var isSecureC = true.obs;
+  
   void isEmpty() {
     if (passC.text.isNotEmpty &&
         emailC.text.isNotEmpty &&
-        usernameC.text.isNotEmpty &&
         confirmPassC.text.isNotEmpty) {
       isButtonActive(false);
     } else {
@@ -33,14 +33,12 @@ class SignupController extends GetxController {
   void onInit() {
     emailC = TextEditingController();
     passC = TextEditingController();
-    usernameC = TextEditingController();
     confirmPassC = TextEditingController();
     super.onInit();
   }
 
   @override
   void onClose() {
-    usernameC.dispose();
     emailC.dispose();
     passC.dispose();
     confirmPassC.dispose();

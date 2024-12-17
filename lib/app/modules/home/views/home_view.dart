@@ -237,7 +237,9 @@ class HomeView extends GetView<HomeController> {
                                   height: 16,
                                 ),
                                 MyButton(
-                                    get: () => Get.toNamed(Routes.CONSULT),
+                                    get: () => Get.offAllNamed(
+                                        Routes.NAVIGATION_BAR,
+                                        arguments: {"indexPage": 3}),
                                     color: primaryColor,
                                     text: 'Consult Now')
                               ],
@@ -301,7 +303,9 @@ class HomeView extends GetView<HomeController> {
                                   height: 16,
                                 ),
                                 MyButton(
-                                    get: () => Get.toNamed(Routes.CHATBOT),
+                                    get: () => Get.offAllNamed(
+                                        Routes.NAVIGATION_BAR,
+                                        arguments: {"indexPage": 2}),
                                     color: Colors.lightBlue,
                                     text: 'Talk')
                               ],
@@ -339,7 +343,8 @@ class HomeView extends GetView<HomeController> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Get.toNamed(Routes.JOURNAL);
+                               Get.offAllNamed(Routes.NAVIGATION_BAR,
+                                  arguments: {"indexPage": 1});
                             },
                             child: Text(
                               'See More',

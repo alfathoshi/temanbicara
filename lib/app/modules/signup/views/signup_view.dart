@@ -32,51 +32,51 @@ class SignupView extends GetView<SignupController> {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 60,
-                  ),
-                  Center(
-                    child: Text(
-                      'Sign Up',
-                      style: h1Bold,
+      body: Obx(
+        () => Column(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 60,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  TextField(
-                    onChanged: (value) {
-                      controller.isEmpty();
-                    },
-                    controller: controller.emailC,
-                    decoration: InputDecoration(
-                      hintText: 'Email',
-                      hintStyle: const TextStyle(color: Color(0xFFc4c4c4)),
-                      enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide:
-                              const BorderSide(color: Color(0xFFc4c4c4))),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
+                    Center(
+                      child: Text(
+                        'Sign Up',
+                        style: h1Bold,
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Obx(
-                    () => TextField(
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      onChanged: (value) {
+                        controller.isEmpty();
+                      },
+                      controller: controller.emailC,
+                      decoration: InputDecoration(
+                        hintText: 'Email',
+                        hintStyle: const TextStyle(color: Color(0xFFc4c4c4)),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide:
+                                const BorderSide(color: Color(0xFFc4c4c4))),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
                       onChanged: (value) {
                         controller.isEmpty();
                       },
@@ -101,12 +101,10 @@ class SignupView extends GetView<SignupController> {
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Obx(
-                    () => TextField(
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
                       onChanged: (value) {
                         controller.isEmpty();
                       },
@@ -131,12 +129,10 @@ class SignupView extends GetView<SignupController> {
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 68,
-                  ),
-                  Obx(
-                    () => ElevatedButton(
+                    const SizedBox(
+                      height: 68,
+                    ),
+                    ElevatedButton(
                       onPressed: () {
                         Get.toNamed(Routes.ASSESMENT_1);
                       },
@@ -156,41 +152,41 @@ class SignupView extends GetView<SignupController> {
                         style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: Column(
-              children: [
-                const Divider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Sudah punya akun? ',
-                      style: GoogleFonts.poppins(),
-                    ),
-                    GestureDetector(
-                      onTap: () => Get.toNamed(Routes.LOGIN),
-                      child: Text(
-                        'Masuk',
-                        style: GoogleFonts.poppins(
-                          color: const Color(0xFF60ABEE),
-                        ),
-                      ),
+                    const SizedBox(
+                      height: 24,
                     ),
                   ],
-                )
-              ],
+                ),
+              ),
             ),
-          )
-        ],
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: Column(
+                children: [
+                  const Divider(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Sudah punya akun? ',
+                        style: GoogleFonts.poppins(),
+                      ),
+                      GestureDetector(
+                        onTap: () => Get.toNamed(Routes.LOGIN),
+                        child: Text(
+                          'Masuk',
+                          style: GoogleFonts.poppins(
+                            color: const Color(0xFF60ABEE),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -13,6 +13,8 @@ import '../../home/views/home_view.dart';
 import '../controllers/navigation_bar_controller.dart';
 
 class NavigationBarView extends GetView<NavigationBarController> {
+  final indexPage = Get.arguments;
+
   final List<Widget> _pages = [
     const HomeView(),
     const JournalView(),
@@ -31,7 +33,6 @@ class NavigationBarView extends GetView<NavigationBarController> {
             children: _pages,
           )),
       bottomNavigationBar: SizedBox(
-   
         child: Obx(
           () => BottomNavigationBar(
             currentIndex: controller.selectedindex.value,
