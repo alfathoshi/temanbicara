@@ -17,6 +17,7 @@ dependencies:
   flutter_chat_types: ^3.6.2
   flutter_chat_ui: ^1.6.15
   flutter_gemini: ^3.0.0
+  flutter_launcher_icons: ^0.14.2
   flutter_sliding_up_panel: ^2.1.1
   get: 4.6.6
   google_fonts: ^6.2.1
@@ -42,3 +43,11 @@ flutter:
     - "assets/images/"
     - "assets/icons/"
     - "assets/animations/"
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  min_sdk_android: 21 
+  image_path: "assets/images/logo.png"  
+  adaptive_icon_foreground: "assets/images/logo_foreground.png"  
+  adaptive_icon_background: "#ffffff" 
