@@ -18,10 +18,19 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: AppBar(
+        toolbarHeight: 85,
+        backgroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(24),
+              bottomRight: Radius.circular(24),
+            ),
+            side: BorderSide(color: Colors.black12)),
         title: Text(
           'Change Password',
           style: h3Bold,
         ),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -132,9 +141,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
               height: 20,
             ),
             MyButton(
-                get: () {
-                  Get.toNamed(Routes.PROFILE);
-                },
+                get: () => Get.offAllNamed(Routes.NAVIGATION_BAR, arguments: {"indexPage": 4}),
                 color: primaryColor,
                 text: 'Change Password')
           ],

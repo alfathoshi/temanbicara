@@ -25,18 +25,23 @@ class EditProfileView extends GetView<EditProfileController> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            pinned: true,
-            floating: true,
-            title: Center(
-                child: Text(
+            toolbarHeight: 85,
+            backgroundColor: Colors.white,
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(24),
+                  bottomRight: Radius.circular(24),
+                ),
+                side: BorderSide(color: Colors.black12)),
+            title: Text(
               'Edit Profile',
-              style: h4Bold,
-            )),
+              style: h3Bold,
+            ),
+            centerTitle: true,
           ),
           SliverToBoxAdapter(
-            child: Container(
+            child: SizedBox(
               height: MediaQuery.sizeOf(context).height * 0.8,
-              // decoration: BoxDecoration(color: Colors.blue),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                 child: Column(
@@ -221,9 +226,7 @@ class EditProfileView extends GetView<EditProfileController> {
                       ],
                     ),
                     MyButton(
-                      get: () {
-                        Get.toNamed(Routes.PROFILE);
-                      },
+                     get: () => Get.offAllNamed(Routes.NAVIGATION_BAR, arguments: {"indexPage": 4}),
                       color: primaryColor,
                       text: 'Simpan',
                     )

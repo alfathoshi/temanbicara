@@ -19,80 +19,116 @@ class ChangeLanguageView extends GetView<ChangeLanguageController> {
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: AppBar(
+        toolbarHeight: 85,
+        backgroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(24),
+              bottomRight: Radius.circular(24),
+            ),
+            side: BorderSide(color: Colors.black12)),
         title: Text(
           'Change Language',
           style: h3Bold,
         ),
         centerTitle: true,
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              Container(
-                height: 100,
-                width: 350,
-                decoration: BoxDecoration(
-                  color: whiteColor,
-                  borderRadius: BorderRadius.circular(8),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.2),
-                      spreadRadius: 2,
-                      blurRadius: 6,
-                      offset: Offset(0, 3),
-                    ),
-                  ],
+      body: Obx(
+        () => Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              children: [
+                Container(
+                  height: 100,
+                  width: 350,
+                  decoration: BoxDecoration(
+                    color: whiteColor,
+                    borderRadius: BorderRadius.circular(8),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 2,
+                        blurRadius: 6,
+                        offset: const Offset(0, 3),
+                      ),
+                    ],
+                  ),
+                  child: Column(
+                    children: [
+                      Theme(
+                        data: Theme.of(context).copyWith(
+                          radioTheme: RadioThemeData(
+                            fillColor: WidgetStateProperty.resolveWith(
+                              (states) {
+                                if (states.contains(WidgetState.selected)) {
+                                  return Colors.green;
+                                }
+                              },
+                            ),
+                          ),
+                        ),
+                        child: RadioMenuButton<Lang>(
+                          value: Lang.english,
+                          groupValue: controller.selectedLanguage.value,
+                          onChanged: (selectedValue) {
+                            controller.toggleLanguage(selectedValue as Lang);
+                          },
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                'assets/icons/enIcon.png',
+                                scale: 4,
+                              ),
+                              SizedBox(width: 10),
+                              Text(
+                                'English',
+                                style: h4Medium,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Theme(
+                        data: Theme.of(context).copyWith(
+                          radioTheme: RadioThemeData(
+                            fillColor: WidgetStateProperty.resolveWith(
+                              (states) {
+                                if (states.contains(WidgetState.selected)) {
+                                  return Colors.green;
+                                }
+                              },
+                            ),
+                          ),
+                        ),
+                        child: RadioMenuButton(
+                          value: Lang.bahasa,
+                          groupValue: controller.selectedLanguage.value,
+                          onChanged: (selectedValue) {
+                            controller.toggleLanguage(selectedValue!);
+                          },
+                          child: Row(
+                            children: [
+                              Image.asset(
+                                'assets/icons/inIcon.png',
+                                scale: 4,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                'Bahasa Indonesia',
+                                style: h4Medium,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                child: Column(
-                  children: [
-                    RadioMenuButton(
-                        value: 'English',
-                        groupValue: selectedLang,
-                        onChanged: (selectedValue) {
-                          Obx() => selectedLang == selectedValue!;
-                        },
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'assets/icons/enIcon.png',
-                              scale: 4,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              'English',
-                              style: h4Medium,
-                            ),
-                          ],
-                        )),
-                    RadioMenuButton(
-                        value: 'Indonesia',
-                        groupValue: selectedLang,
-                        onChanged: (selectedValue) {
-                          Obx() => selectedLang == selectedValue!;
-                        },
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'assets/icons/inIcon.png',
-                              scale: 4,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              'Bahasa Indonesia',
-                              style: h4Medium,
-                            ),
-                          ],
-                        )),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

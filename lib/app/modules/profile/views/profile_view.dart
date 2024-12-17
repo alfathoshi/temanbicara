@@ -1,11 +1,9 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 
 import '../controllers/profile_controller.dart';
 
@@ -17,7 +15,7 @@ class ProfileView extends GetView<ProfileController> {
     return Scaffold(
       backgroundColor: whiteColor,
       body: Padding(
-        padding: EdgeInsets.fromLTRB(32, 65, 32, 32),
+        padding: const EdgeInsets.fromLTRB(32, 65, 32, 32),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -56,7 +54,7 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 12,
                   ),
                   Text(
@@ -66,7 +64,7 @@ class ProfileView extends GetView<ProfileController> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             Column(
@@ -76,7 +74,7 @@ class ProfileView extends GetView<ProfileController> {
                   'Account Settings',
                   style: h4Regular,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 GestureDetector(
@@ -90,14 +88,14 @@ class ProfileView extends GetView<ProfileController> {
                         'Edit Profile',
                         style: h4SemiBold,
                       ),
-                      Icon(
+                      const Icon(
                         Icons.chevron_right_outlined,
                         size: 32,
                       ),
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 GestureDetector(
@@ -111,14 +109,14 @@ class ProfileView extends GetView<ProfileController> {
                         'Change Password',
                         style: h4SemiBold,
                       ),
-                      Icon(
+                      const Icon(
                         Icons.chevron_right_outlined,
                         size: 32,
                       )
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 GestureDetector(
@@ -132,14 +130,14 @@ class ProfileView extends GetView<ProfileController> {
                         'Change Language',
                         style: h4SemiBold,
                       ),
-                      Icon(
+                      const Icon(
                         Icons.chevron_right_outlined,
                         size: 32,
                       )
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Row(
@@ -149,13 +147,13 @@ class ProfileView extends GetView<ProfileController> {
                       'Consultations History',
                       style: h4SemiBold,
                     ),
-                    Icon(
+                    const Icon(
                       Icons.chevron_right_outlined,
                       size: 32,
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 32,
                 ),
                 Row(
@@ -167,7 +165,7 @@ class ProfileView extends GetView<ProfileController> {
                     ),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Row(
@@ -177,13 +175,13 @@ class ProfileView extends GetView<ProfileController> {
                       'About us',
                       style: h4SemiBold,
                     ),
-                    Icon(
+                    const Icon(
                       Icons.chevron_right_outlined,
                       size: 32,
                     )
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 16,
                 ),
                 Row(
@@ -193,12 +191,24 @@ class ProfileView extends GetView<ProfileController> {
                       'Privacy Policy',
                       style: h4SemiBold,
                     ),
-                    Icon(
+                    const Icon(
                       Icons.chevron_right_outlined,
                       size: 32,
                     )
                   ],
                 ),
+                sby36,
+                GestureDetector(
+                  onTap: () {
+                    Get.offAllNamed(
+                      Routes.LOGIN,
+                    );
+                  },
+                  child: Text(
+                    'Logout',
+                    style: h4SemiBold.copyWith(color: error),
+                  ),
+                )
               ],
             )
           ],
