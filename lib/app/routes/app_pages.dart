@@ -136,7 +136,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CHATBOT_ROOM,
-      page: () => const ChatbotRoomView(),
+      page: () =>  ChatbotRoomView(),
       binding: ChatbotRoomBinding(),
     ),
     GetPage(

@@ -3,9 +3,9 @@ import 'package:get/get.dart';
 enum Lang { bahasa, english }
 
 class ChangeLanguageController extends GetxController {
-  var selectedGender = Lang.bahasa.obs;
-  void toggleGender(Lang lang) {
-    selectedGender.value = lang;
+  var selectedLanguage = Lang.english.obs;
+  void toggleLanguage(Lang lang) {
+    selectedLanguage.value = lang;
   }
 
   @override

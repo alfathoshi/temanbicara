@@ -25,6 +25,7 @@ class Assesment1View extends GetView<Assesment1Controller> {
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: AppBar(
+        backgroundColor: whiteColor,
         title: Row(
           children: [
             Image.asset(

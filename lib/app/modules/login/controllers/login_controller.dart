@@ -1,12 +1,39 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
-  //TODO: Implement LoginController
+  late TextEditingController emailC;
+  late TextEditingController passC;
+  var isButtonActive = true.obs;
+  var isSecure = true.obs;
+  var isSecureC = true.obs;
+  void isEmpty() {
+    if (passC.text.isNotEmpty && emailC.text.isNotEmpty) {
+      isButtonActive(false);
+    } else {
+      isButtonActive(true);
+    }
+  }
 
-  final count = 0.obs;
+  void showPassword() {
+    isSecure.value = !isSecure.value;
+  }
 
+  void showPasswordC() {
+    isSecureC.value = !isSecureC.value;
+  }
 
   @override
-  void onClose() {}
-  void increment() => count.value++;
+  void onInit() {
+    emailC = TextEditingController();
+    passC = TextEditingController();
+    super.onInit();
+  }
+
+  @override
+  void onClose() {
+    emailC.dispose();
+    passC.dispose();
+    super.onClose();
+  }
 }
