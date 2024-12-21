@@ -108,8 +108,8 @@ class LoginView extends GetView<LoginController> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        Get.offAllNamed(Routes.NAVIGATION_BAR,
-                            arguments: {"indexPage": 0});
+                        controller.login(
+                            controller.emailC.text, controller.passC.text);
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: controller.isButtonActive.value
