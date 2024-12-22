@@ -89,7 +89,8 @@ class Assesment1Controller extends GetxController {
       box.write('gender', 'Female');
     }
     box.write('mbti', selectedMBTI.value);
-    box.write('topics', favoriteTopics);
+    String topics = favoriteTopics.join(',');
+    box.write('topics', topics);
     String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate.value);
     box.write('birthdate', formattedDate);
 

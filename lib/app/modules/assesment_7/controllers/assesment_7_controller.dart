@@ -33,7 +33,10 @@ class Assesment7Controller extends GetxController {
     try {
       var response = await http.post(
         Uri.parse('http://localhost:8000/api/v1/do-assessment'),
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ${box.read('token')}',
+        },
         body: json.encode({
           'name': box.read('name'),
           'nickname': box.read('nickname'),
@@ -48,17 +51,7 @@ class Assesment7Controller extends GetxController {
           'stress_level': box.read('stress_level'),
         }),
       );
-      print(box.read('name'));
-      print(box.read('nickname'));
-      print(box.read('gender'));
-      print(box.read('birthdate'));
-      print(box.read('mbti'));
-      print(json.encode(box.read('topics')));
-      print(box.read('goal'));
-      print(box.read('sleep_quality'));
-      print(box.read('have_consulted'));
-      print(box.read('consumed_medicine'));
-      print(box.read('stress_level'));
+      
       var data = json.decode(response.body);
 
       if (response.statusCode == 200 && data['status']) {
@@ -88,6 +81,5 @@ class Assesment7Controller extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    box.getValues();
   }
 }

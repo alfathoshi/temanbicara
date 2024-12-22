@@ -126,8 +126,6 @@ class Assesment1View extends GetView<Assesment1Controller> {
                       selectedGender: controller.selectedGender.value,
                       onSelect: (gender) {
                         controller.toggleGender(gender);
-                        print(controller.selectedDate);
-                        print(controller.selectedGender.toString());
                       }),
                   GenderSelector(
                       gender: Gender.female,

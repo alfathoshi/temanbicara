@@ -10,7 +10,6 @@ class Assesment6Controller extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    box.getValues();
   }
 
   @override

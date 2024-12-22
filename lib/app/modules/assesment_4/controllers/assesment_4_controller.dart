@@ -19,6 +19,5 @@ class Assesment4Controller extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    box.getValues();
   }
 }

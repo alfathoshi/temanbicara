@@ -31,6 +31,5 @@ class Assesment3Controller extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    print(box.getValues());
   }
 }

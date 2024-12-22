@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 
 class LoginController extends GetxController {
+  final box = GetStorage();
   late TextEditingController emailC;
   late TextEditingController passC;
   var isButtonActive = true.obs;
@@ -43,8 +45,9 @@ class LoginController extends GetxController {
       );
 
       var data = json.decode(response.body);
-      print(data);
+
       if (response.statusCode == 200 && data['status']) {
+        box.write('token', data['token']);
         Get.snackbar(
           'Success',
           'Login berhasil',
@@ -52,10 +55,16 @@ class LoginController extends GetxController {
           colorText: Colors.white,
         );
 
-        Get.offAllNamed(
-          Routes.NAVIGATION_BAR,
-          arguments: {"indexPage": 0},
-        );
+        if (data['data']['name'] == null) {
+          Get.toNamed(
+            Routes.ASSESMENT_1,
+          );
+        } else {
+          Get.offAllNamed(
+            Routes.NAVIGATION_BAR,
+            arguments: {"indexPage": 0},
+          );
+        }
       } else {
         Get.snackbar('Error', data['message'],
             backgroundColor: error.withOpacity(0.6), colorText: whiteColor);

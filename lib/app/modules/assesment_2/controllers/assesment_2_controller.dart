@@ -30,6 +30,5 @@ class Assesment2Controller extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    box.getValues();
   }
 }
