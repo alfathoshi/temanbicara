@@ -80,6 +80,26 @@ class SignupView extends GetView<SignupController> {
                       onChanged: (value) {
                         controller.isEmpty();
                       },
+                      controller: controller.phoneC,
+                      decoration: InputDecoration(
+                        hintText: 'Phone Number',
+                        hintStyle: const TextStyle(color: Color(0xFFc4c4c4)),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide:
+                                const BorderSide(color: Color(0xFFc4c4c4))),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    TextField(
+                      onChanged: (value) {
+                        controller.isEmpty();
+                      },
                       obscureText: controller.isSecure.value,
                       controller: controller.passC,
                       decoration: InputDecoration(
@@ -134,7 +154,12 @@ class SignupView extends GetView<SignupController> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        Get.toNamed(Routes.ASSESMENT_1);
+                        controller.register(
+                          controller.emailC.text,
+                          controller.phoneC.text,
+                          controller.passC.text,
+                          controller.confirmPassC.text,
+                        );
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: controller.isButtonActive.value

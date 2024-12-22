@@ -136,7 +136,7 @@ class Assesment7View extends GetView<Assesment7Controller> {
               Spacer(),
               MyButton(
                   get: () {
-                    Get.offAllNamed(Routes.NAVIGATION_BAR);
+                    controller.saveAssesment();
                   },
                   color: primaryColor,
                   text: 'Lanjutkan')

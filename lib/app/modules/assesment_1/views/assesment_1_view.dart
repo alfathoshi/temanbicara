@@ -1,12 +1,10 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:temanbicara/app/routes/app_pages.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/form.dart';
-
 import '../../../widgets/buttons.dart';
 import '../../../widgets/date.dart';
 import '../../../widgets/favorite_button.dart';
@@ -16,10 +14,7 @@ import '../controllers/assesment_1_controller.dart';
 // ignore: must_be_immutable
 class Assesment1View extends GetView<Assesment1Controller> {
   Assesment1View({Key? key}) : super(key: key);
-  String selectedGender = '';
-  String selectedDateOfBirth = '';
-  String selectedMBTI = '';
-  List<String> favoriteTopics = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +64,49 @@ class Assesment1View extends GetView<Assesment1Controller> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            form(),
+            Text(
+              'Nama',
+              style: textDescriptionSemiBold,
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            TextField(
+              controller: controller.nameC,
+              decoration: InputDecoration(
+                hintText: 'Masukan Nama Lengkap',
+                hintStyle: textFieldStyle,
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide(
+                      color: Colors.black26,
+                      width: 2,
+                    )),
+              ),
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Text(
+              'Nama Panggilan',
+              style: textDescriptionSemiBold,
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            TextField(
+              controller: controller.nicknameC,
+              decoration: InputDecoration(
+                hintText: 'Masukan Nama Panggilan',
+                hintStyle: textFieldStyle,
+                enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                    borderSide: BorderSide(
+                      color: Colors.black26,
+                      width: 2,
+                    )),
+              ),
+            ),
             const SizedBox(
               height: 16,
             ),
@@ -292,7 +329,7 @@ class Assesment1View extends GetView<Assesment1Controller> {
             Center(
                 child: MyButton(
                     get: () {
-                      Get.toNamed(Routes.ASSESMENT_2);
+                      controller.saveData();
                     },
                     color: primaryColor,
                     text: 'Lanjutkan'))
