@@ -9,7 +9,7 @@ import 'package:temanbicara/app/themes/spaces.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
-   ProfileView({super.key});
+  ProfileView({super.key});
   final box = GetStorage();
   @override
   Widget build(BuildContext context) {
@@ -65,9 +65,7 @@ class ProfileView extends GetView<ProfileController> {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            sby36,
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -154,9 +152,9 @@ class ProfileView extends GetView<ProfileController> {
                     )
                   ],
                 ),
-                const SizedBox(
-                  height: 32,
-                ),
+                sby24,
+                const Divider(),
+                sby24,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -198,12 +196,15 @@ class ProfileView extends GetView<ProfileController> {
                     )
                   ],
                 ),
-                sby36,
+                sby24,
+                const Divider(),
+                sby24,
                 GestureDetector(
                   onTap: () {
                     Get.offAllNamed(
                       Routes.LOGIN,
                     );
+                    box.erase();
                   },
                   child: Text(
                     'Logout',

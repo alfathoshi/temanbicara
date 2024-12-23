@@ -17,7 +17,7 @@ class NavigationBarView extends GetView<NavigationBarController> {
 
   final List<Widget> _pages = [
     HomeView(),
-    const JournalView(),
+     JournalView(),
     const ChatbotView(),
     const ConsultView(),
      ProfileView(),

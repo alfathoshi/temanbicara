@@ -96,4 +96,10 @@ class Assesment1Controller extends GetxController {
 
     Get.toNamed(Routes.ASSESMENT_2);
   }
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+  }
 }

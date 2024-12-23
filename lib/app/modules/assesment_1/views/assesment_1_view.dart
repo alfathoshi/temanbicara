@@ -12,7 +12,7 @@ import '../../../widgets/gender_selector.dart';
 import '../controllers/assesment_1_controller.dart';
 
 class Assesment1View extends GetView<Assesment1Controller> {
-   const Assesment1View({super.key});
+  const Assesment1View({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +146,7 @@ class Assesment1View extends GetView<Assesment1Controller> {
             const SizedBox(
               height: 8,
             ),
-            date(),
+            DatePicker(),
             const SizedBox(
               height: 16,
             ),
