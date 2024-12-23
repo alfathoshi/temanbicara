@@ -11,15 +11,15 @@ import '../../../widgets/favorite_button.dart';
 import '../../../widgets/gender_selector.dart';
 import '../controllers/assesment_1_controller.dart';
 
-// ignore: must_be_immutable
 class Assesment1View extends GetView<Assesment1Controller> {
-  Assesment1View({Key? key}) : super(key: key);
+   const Assesment1View({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: whiteColor,
         title: Row(
           children: [

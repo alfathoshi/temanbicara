@@ -12,7 +12,7 @@ class LoginController extends GetxController {
   late TextEditingController passC;
   var isButtonActive = true.obs;
   var isSecure = true.obs;
-  var isSecureC = true.obs;
+
   void isEmpty() {
     if (passC.text.isNotEmpty && emailC.text.isNotEmpty) {
       isButtonActive(false);
@@ -23,10 +23,6 @@ class LoginController extends GetxController {
 
   void showPassword() {
     isSecure.value = !isSecure.value;
-  }
-
-  void showPasswordC() {
-    isSecureC.value = !isSecureC.value;
   }
 
   var isLoading = false.obs;

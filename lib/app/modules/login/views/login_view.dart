@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/widgets/auth_textfield.dart';
 
 import '../controllers/login_controller.dart';
 
@@ -58,50 +59,24 @@ class LoginView extends GetView<LoginController> {
                     const SizedBox(
                       height: 16,
                     ),
-                    TextField(
-                      onChanged: (value) {
-                        controller.isEmpty();
-                      },
+                    AuthTextfield(
+                      onChanged: (value) => controller.isEmpty(),
+                      showPassword: () {},
                       controller: controller.emailC,
-                      decoration: InputDecoration(
-                        hintText: 'Email / Username',
-                        hintStyle: const TextStyle(color: Color(0xFFc4c4c4)),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide:
-                                const BorderSide(color: Color(0xFFc4c4c4))),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
+                      obscureText: false,
+                      hintText: 'Email / Username',
+                      passwordField: false,
                     ),
                     const SizedBox(
                       height: 16,
                     ),
-                    TextField(
-                      onChanged: (value) {
-                        controller.isEmpty();
-                      },
-                      obscureText: controller.isSecure.value,
+                    AuthTextfield(
+                      onChanged: (value) => controller.isEmpty(),
+                      showPassword: () => controller.showPassword(),
                       controller: controller.passC,
-                      decoration: InputDecoration(
-                        hintText: 'Password',
-                        hintStyle: const TextStyle(color: Color(0xFFc4c4c4)),
-                        suffixIcon: IconButton(
-                          icon: const Icon(Icons.remove_red_eye),
-                          onPressed: () {
-                            controller.showPassword();
-                          },
-                        ),
-                        suffixIconColor: const Color(0xFFc4c4c4),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide:
-                                const BorderSide(color: Color(0xFFc4c4c4))),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
+                      obscureText: controller.isSecure.value,
+                      hintText: 'Password',
+                      passwordField: true,
                     ),
                     const SizedBox(
                       height: 68,
@@ -122,10 +97,19 @@ class LoginView extends GetView<LoginController> {
                           ),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10))),
-                      child: Text(
-                        'Masuk',
-                        style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
-                      ),
+                      child: controller.isLoading.value == false
+                          ? Text(
+                              'Masuk',
+                              style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.bold),
+                            )
+                          : SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                color: whiteColor,
+                              ),
+                            ),
                     ),
                     const SizedBox(
                       height: 24,
