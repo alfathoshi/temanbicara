@@ -27,7 +27,7 @@ class LoginController extends GetxController {
 
   var isLoading = false.obs;
 
-  Future<void> login(String email, String password) async {
+  Future<void> login() async {
     isLoading.value = true;
 
     try {
@@ -35,8 +35,8 @@ class LoginController extends GetxController {
         Uri.parse('http://localhost:8000/api/v1/login'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
-          'email': email,
-          'password': password,
+          'email': emailC.text,
+          'password': passC.text,
         }),
       );
 

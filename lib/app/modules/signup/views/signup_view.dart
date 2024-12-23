@@ -103,12 +103,7 @@ class SignupView extends GetView<SignupController> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        controller.register(
-                          controller.emailC.text,
-                          controller.phoneC.text,
-                          controller.passC.text,
-                          controller.confirmPassC.text,
-                        );
+                        controller.register();
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: controller.isButtonActive.value

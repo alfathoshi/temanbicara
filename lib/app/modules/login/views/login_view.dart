@@ -83,8 +83,7 @@ class LoginView extends GetView<LoginController> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        controller.login(
-                            controller.emailC.text, controller.passC.text);
+                        controller.login();
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: controller.isButtonActive.value
