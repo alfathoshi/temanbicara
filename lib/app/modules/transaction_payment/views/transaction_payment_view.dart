@@ -19,7 +19,9 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
   Widget build(BuildContext context) {
     final TransactionModel transaction = Get.arguments as TransactionModel;
     return Scaffold(
+      backgroundColor: whiteColor,
       appBar: AppBar(
+        backgroundColor: whiteColor,
         title: Text(
           'Transaction',
           style: h3Bold,
@@ -107,7 +109,7 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                           },
                           style: ButtonStyle(
                             backgroundColor:
-                                MaterialStatePropertyAll<Color>(primaryColor),
+                                WidgetStatePropertyAll<Color>(primaryColor),
                           ),
                         ),
                       ),

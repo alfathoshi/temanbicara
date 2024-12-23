@@ -1,20 +1,73 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:http/http.dart' as http;
+import 'package:temanbicara/app/routes/app_pages.dart';
+import 'package:temanbicara/app/themes/colors.dart';
 
 class SignupController extends GetxController {
-  //TODO: Implement SignupController
-
   late TextEditingController emailC;
+  late TextEditingController phoneC;
   late TextEditingController passC;
-  late TextEditingController usernameC;
   late TextEditingController confirmPassC;
+
+  final box = GetStorage();
+
   var isButtonActive = true.obs;
   var isSecure = true.obs;
   var isSecureC = true.obs;
+  var isLoading = false.obs;
+
+  Future<void> register(
+      String email, String phone, String pass, String confirmPass) async {
+    isLoading.value = true;
+
+    try {
+      if (pass == confirmPass) {
+        var response = await http.post(
+          Uri.parse('http://localhost:8000/api/v1/register'),
+          headers: {'Content-Type': 'application/json'},
+          body: json.encode({
+            'email': email,
+            'phone_number': phone,
+            'password': pass,
+          }),
+        );
+
+        var data = json.decode(response.body);
+
+        if (response.statusCode == 200 && data['status']) {
+          box.write('token', data['token']);
+          Get.snackbar(
+            'Success',
+            'Register berhasil',
+            backgroundColor: primaryColor.withOpacity(0.6),
+            colorText: Colors.white,
+          );
+          Get.offAllNamed(
+            Routes.ASSESMENT_1,
+          );
+        } else {
+          Get.snackbar('Error', data['message'],
+              backgroundColor: error.withOpacity(0.6), colorText: whiteColor);
+        }
+      } else {
+        Get.snackbar('Error', 'Password tidak sesuai',
+            backgroundColor: error.withOpacity(0.6), colorText: whiteColor);
+      }
+    } catch (e) {
+      Get.snackbar('Error', 'Something went wrong: $e');
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
   void isEmpty() {
     if (passC.text.isNotEmpty &&
+        phoneC.text.isNotEmpty &&
         emailC.text.isNotEmpty &&
-        usernameC.text.isNotEmpty &&
         confirmPassC.text.isNotEmpty) {
       isButtonActive(false);
     } else {
@@ -32,19 +85,17 @@ class SignupController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     emailC = TextEditingController();
+    phoneC = TextEditingController();
     passC = TextEditingController();
-    usernameC = TextEditingController();
     confirmPassC = TextEditingController();
     super.onInit();
   }
 
   @override
   void onClose() {
-    // TODO: implement onClose
-    usernameC.dispose();
     emailC.dispose();
+    phoneC.dispose();
     passC.dispose();
     confirmPassC.dispose();
     super.onClose();

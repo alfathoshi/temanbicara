@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/goalsOptions.dart';
 
 import '../../../routes/app_pages.dart';
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
+import '../../assesment_1/controllers/assesment_1_controller.dart';
 import '../controllers/assesment_2_controller.dart';
 
 class Assesment2View extends GetView<Assesment2Controller> {
-  const Assesment2View({Key? key}) : super(key: key);
+   Assesment2View({Key? key}) : super(key: key);
+
+  final box = GetStorage();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: whiteColor,
         appBar: AppBar(
+          backgroundColor: whiteColor,
           title: Row(
             children: [
               Image.asset(
