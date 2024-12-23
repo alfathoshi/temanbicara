@@ -2,6 +2,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
@@ -18,8 +19,11 @@ class EditProfileView extends GetView<EditProfileController> {
   String selectedDateOfBirth = '';
   String selectedCountry = '';
 
+  final box = GetStorage();
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: whiteColor,
       body: CustomScrollView(
@@ -226,7 +230,8 @@ class EditProfileView extends GetView<EditProfileController> {
                       ],
                     ),
                     MyButton(
-                     get: () => Get.offAllNamed(Routes.NAVIGATION_BAR, arguments: {"indexPage": 4}),
+                      get: () => Get.offAllNamed(Routes.NAVIGATION_BAR,
+                          arguments: {"indexPage": 4}),
                       color: primaryColor,
                       text: 'Simpan',
                     )

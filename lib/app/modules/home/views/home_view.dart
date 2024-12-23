@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:temanbicara/app/modules/chat/views/chat_view.dart';
@@ -15,7 +16,9 @@ import 'package:temanbicara/app/widgets/top_article.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({super.key});
+  GetStorage box = GetStorage();
+
+  HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +115,7 @@ class HomeView extends GetView<HomeController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Hello, User',
+                                'Hello, ${box.read('nickname')}',
                                 style: h3SemiBold,
                               ),
                               Text(
@@ -343,7 +346,7 @@ class HomeView extends GetView<HomeController> {
                           ),
                           GestureDetector(
                             onTap: () {
-                               Get.offAllNamed(Routes.NAVIGATION_BAR,
+                              Get.offAllNamed(Routes.NAVIGATION_BAR,
                                   arguments: {"indexPage": 1});
                             },
                             child: Text(

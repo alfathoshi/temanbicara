@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
@@ -8,8 +9,8 @@ import 'package:temanbicara/app/themes/spaces.dart';
 import '../controllers/profile_controller.dart';
 
 class ProfileView extends GetView<ProfileController> {
-  const ProfileView({super.key});
-
+   ProfileView({super.key});
+  final box = GetStorage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +59,7 @@ class ProfileView extends GetView<ProfileController> {
                     height: 12,
                   ),
                   Text(
-                    'Astro',
+                    box.read('nickname'),
                     style: h3Bold,
                   ),
                 ],

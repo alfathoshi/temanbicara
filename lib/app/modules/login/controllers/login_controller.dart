@@ -56,6 +56,12 @@ class LoginController extends GetxController {
             Routes.ASSESMENT_1,
           );
         } else {
+          box.write('email', data['data']['email']);
+          box.write('password', data['data']['password']);
+          box.write('name', data['data']['name']);
+          box.write('nickname', data['data']['nickname']);
+          box.write('gender', data['data']['birthdate']);
+
           Get.offAllNamed(
             Routes.NAVIGATION_BAR,
             arguments: {"indexPage": 0},
