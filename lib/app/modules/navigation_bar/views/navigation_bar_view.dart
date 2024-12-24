@@ -19,7 +19,7 @@ class NavigationBarView extends GetView<NavigationBarController> {
     const HomeView(),
     const JournalView(),
     const ChatbotView(),
-    const ConsultView(),
+    ConsultView(),
     const ProfileView(),
   ];
 
