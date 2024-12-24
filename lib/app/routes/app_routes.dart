@@ -47,6 +47,7 @@ abstract class Routes {
   static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
   static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
   static const CHANGE_LANGUAGE = _Paths.CHANGE_LANGUAGE;
+  static const CONSULT_SCHEDULE = _Paths.CONSULT_SCHEDULE;
 }
 
 abstract class _Paths {
@@ -95,4 +96,5 @@ abstract class _Paths {
   static const EDIT_PROFILE = '/edit-profile';
   static const CHANGE_PASSWORD = '/change-password';
   static const CHANGE_LANGUAGE = '/change-language';
+  static const CONSULT_SCHEDULE = '/consult-schedule';
 }
