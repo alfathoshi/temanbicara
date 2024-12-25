@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:temanbicara/app/themes/colors.dart';
-import 'package:temanbicara/app/themes/fonts.dart';
+
+import '../themes/colors.dart';
+import '../themes/fonts.dart';
 
 class JournalCard extends StatelessWidget {
-  const JournalCard({super.key});
+  final String title;
+  final String body;
+  final String type;
+  final String date;
+
+  const JournalCard({
+    Key? key,
+    required this.title,
+    required this.body,
+    required this.type,
+    required this.date,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +40,14 @@ class JournalCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Title',
+                title,
                 style: h6SemiBold,
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 8),
               child: Text(
-                'Body',
+                body,
                 style: h7Regular,
               ),
             ),
@@ -53,7 +65,7 @@ class JournalCard extends StatelessWidget {
                     ),
                     child: Center(
                       child: Text(
-                        'Type',
+                        type,
                         style: h7SemiBold,
                       ),
                     ),
@@ -65,7 +77,7 @@ class JournalCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(left: 8),
               child: Text(
-                'Date',
+                date,
                 style: h7Regular,
               ),
             )

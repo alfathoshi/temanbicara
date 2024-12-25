@@ -10,97 +10,116 @@ import '../../../themes/fonts.dart';
 import '../controllers/journal_controller.dart';
 
 class JournalView extends GetView<JournalController> {
-  const JournalView({super.key});
+  JournalView({super.key});
+  final JournalController controller = Get.put(JournalController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: whiteColor,
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            toolbarHeight: 85,
-            backgroundColor: Colors.white,
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(24),
-                  bottomRight: Radius.circular(24),
-                ),
-                side: BorderSide(color: Colors.black12)),
-            title: Text(
-              'Journal',
-              style: h3Bold,
-            ),
-            centerTitle: true,
+      appBar: AppBar(
+        toolbarHeight: 85,
+        backgroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(24),
+            bottomRight: Radius.circular(24),
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  GestureDetector(
-                    onTap: () => Get.toNamed(Routes.CREATE_JOURNAL),
-                    child: Container(
-                      width: double.infinity,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: border),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          left: 16,
-                          right: 16,
-                        ),
-                        child: Row(
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: primaryColor,
-                              foregroundColor: whiteColor,
-                              radius: 16,
-                              child: const Icon(
-                                Iconsax.add,
-                                size: 16,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 24,
-                            ),
-                            Text(
-                              'Create Journal',
-                              style: h6SemiBold,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+          side: BorderSide(color: Colors.black12),
+        ),
+        title: Text(
+          'Journal',
+          style: h3Bold,
+        ),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            GestureDetector(
+              onTap: () => Get.toNamed(Routes.CREATE_JOURNAL),
+              child: Container(
+                width: double.infinity,
+                height: 50,
+                decoration: BoxDecoration(
+                  border: Border.all(color: border),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                    right: 16,
                   ),
-                  const SizedBox(
-                    height: 24,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  child: Row(
                     children: [
-                      Text(
-                        'My Journal',
-                        style: h5SemiBold,
+                      CircleAvatar(
+                        backgroundColor: primaryColor,
+                        foregroundColor: whiteColor,
+                        radius: 16,
+                        child: const Icon(
+                          Iconsax.add,
+                          size: 16,
+                        ),
                       ),
-                      Icon(
-                        Icons.calendar_month,
-                        color: primaryColor,
-                      )
+                      const SizedBox(
+                        width: 24,
+                      ),
+                      Text(
+                        'Create Journal',
+                        style: h6SemiBold,
+                      ),
                     ],
-                  )
-                ],
+                  ),
+                ),
               ),
             ),
-          ),
-          SliverList.builder(
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return const JournalCard();
-              })
-        ],
+            const SizedBox(
+              height: 24,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'My Journal',
+                  style: h5SemiBold,
+                ),
+                Icon(
+                  Icons.calendar_month,
+                  color: primaryColor,
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Expanded(
+              child: Obx(() {
+                if (controller.journalList.isEmpty) {
+                  return Center(
+                    child: Text(
+                      'No journals available',
+                      style: h6SemiBold,
+                    ),
+                  );
+                }
+                return ListView.builder(
+                  itemCount: controller.journalList.length,
+                  itemBuilder: (context, index) {
+                    final journal = controller.journalList[index];
+                    return JournalCard(
+                      title: journal['title'],
+                      body: journal['body'],
+                      type: journal['mood_level'],
+                      date: journal['created_at'],
+                    );
+                  },
+                );
+              }),
+            ),
+          ],
+        ),
       ),
     );
   }

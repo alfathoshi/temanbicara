@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/wide_button.dart';
@@ -43,6 +44,7 @@ class CreateJournalView extends GetView<CreateJournalController> {
               height: 16,
             ),
             TextField(
+              controller: controller.titleController,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Iconsax.document),
                 hintText: 'Add Your Story...',
@@ -69,6 +71,7 @@ class CreateJournalView extends GetView<CreateJournalController> {
               height: 200,
               width: double.infinity,
               child: TextField(
+                controller: controller.bodyController,
                 textAlignVertical: TextAlignVertical.top,
                 keyboardType: TextInputType.text,
                 expands: true,
@@ -135,7 +138,7 @@ class CreateJournalView extends GetView<CreateJournalController> {
                 (index) {
                   return GestureDetector(
                     onTap: () {
-                      controller.toggleImage(index);
+                      controller.toggleEmotion(index);
                     },
                     child: Obx(
                       () => Opacity(
@@ -156,7 +159,10 @@ class CreateJournalView extends GetView<CreateJournalController> {
             Expanded(
               child: Center(
                 child: WideButton(
-                  get: null,
+                  get: () {
+                    controller.submitJournal();
+                    Get.back();
+                  },
                   color: primaryColor,
                   text: 'Create Journal',
                 ),

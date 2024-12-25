@@ -127,7 +127,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.JOURNAL,
-      page: () => const JournalView(),
+      page: () => JournalView(),
       binding: JournalBinding(),
     ),
     GetPage(
