@@ -1,5 +1,6 @@
 class TransactionModel {
   final String namaPsikiater;
+  final String expertise;
   final String topik;
   final String metode;
   final int durasi;
@@ -11,12 +12,13 @@ class TransactionModel {
 
   TransactionModel(
       {required this.namaPsikiater,
-      required this.topik,
-      required this.metode,
-      required this.durasi,
-      required this.sesi,
+      required this.expertise,
+      this.topik = "Consultation",
+      this.metode = "Call",
+      this.durasi = 90,
+      this.sesi = 1,
       required this.jadwal,
       required this.waktu,
-      required this.kadaluarsa,
-      required this.harga});
+      this.kadaluarsa = "Timeless",
+      this.harga = 300000});
 }

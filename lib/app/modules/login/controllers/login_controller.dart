@@ -54,6 +54,10 @@ class LoginController extends GetxController {
           backgroundColor: primaryColor.withOpacity(0.6),
           colorText: Colors.white,
         );
+        // Get.offAllNamed(
+        //   Routes.NAVIGATION_BAR,
+        //   arguments: {"indexPage": 0},
+        // );
 
         if (data['data']['name'] == null) {
           Get.toNamed(
