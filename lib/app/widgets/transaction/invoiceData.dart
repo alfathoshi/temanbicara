@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:temanbicara/app/data/Invoice.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
@@ -7,6 +8,11 @@ import 'package:temanbicara/app/widgets/transaction/idrFormatter.dart';
 class InvoiceData extends StatelessWidget {
   final InvoiceModel invoice;
   const InvoiceData({super.key, required this.invoice});
+
+  String getDayName(String date) {
+    DateTime dateTime = DateTime.parse(date);
+    return DateFormat('EEEE').format(dateTime);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,9 +34,25 @@ class InvoiceData extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(invoice.transaction.namaPsikiater, style: h5Bold),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          child: Text(
+                            invoice.transaction.namaPsikiater,
+                            style: h5Bold.copyWith(
+                                overflow: TextOverflow.ellipsis),
+                            maxLines: 2,
+                          ),
+                        ),
                         SizedBox(height: 2),
-                        Text("Psikolog/Psikiater", style: h7RegularShade)
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          child: Text(
+                            invoice.transaction.expertise,
+                            style: h7Regular.copyWith(
+                                overflow: TextOverflow.ellipsis),
+                            maxLines: 2,
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -104,7 +126,8 @@ class InvoiceData extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Schedule", style: h6Bold),
-                    Text(invoice.transaction.jadwal)
+                    Text(
+                        "${getDayName(invoice.transaction.jadwal)}, ${invoice.transaction.jadwal}")
                   ],
                 ),
                 SizedBox(height: 12),

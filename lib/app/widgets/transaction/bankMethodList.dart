@@ -91,16 +91,22 @@ class BankPaymentMethodList extends StatelessWidget {
                       fontSize: 14,
                       fontWeight: FontWeight.bold)),
               onPressed: () {
-                Get.to(
-                    TransactionPaymentView(
-                      paymentMethod: radioController.methodType,
-                    ),
-                    arguments: transaction);
+               if (radioController.methodType.isNotEmpty) {
+                  Get.to(
+                      () => TransactionPaymentView(
+                            paymentMethod: radioController.methodType,
+                          ),
+                      arguments: transaction);
+                } else {
+                  Get.snackbar(
+                    backgroundColor: primaryColor,
+                    colorText: Colors.white,
+                    "Silahkan pilih Metode Pembayaran",
+                    "Please select payment method before proceeding.",
+                    snackPosition: SnackPosition.BOTTOM,
+                  );
+                }
               },
-              // onPressed: () => Get.to(() => TransactionPaymentView(
-              //       price: price,
-              //       paymentMethod: radioController.methodType,
-              //     )),
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all<Color>(primaryColor),
               ),

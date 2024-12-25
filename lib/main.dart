@@ -19,7 +19,7 @@ void main() {
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
         title: "Teman Bicara",
-        initialRoute: Routes.CONSULT,
+        initialRoute: Routes.LOGIN,
         getPages: AppPages.routes,
       ),
     ),

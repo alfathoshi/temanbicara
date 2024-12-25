@@ -17,7 +17,7 @@ class TransactionView extends GetView<TransactionController> {
     final TransactionModel transaction = Get.arguments as TransactionModel;
 
     return Scaffold(
-      backgroundColor: whiteColor,
+        backgroundColor: whiteColor,
         appBar: AppBar(
           backgroundColor: whiteColor,
           title: Text(
@@ -50,6 +50,7 @@ class TransactionView extends GetView<TransactionController> {
                       Text("Details", style: h4Bold),
                       TransactionData(
                           namaPsikiater: transaction.namaPsikiater,
+                          expertise: transaction.expertise,
                           topik: transaction.topik,
                           metode: transaction.metode,
                           durasi: transaction.durasi,
@@ -58,7 +59,7 @@ class TransactionView extends GetView<TransactionController> {
                           waktuSesi: transaction.waktu,
                           kadaluarsa: transaction.kadaluarsa,
                           harga: transaction.harga),
-                      SizedBox(height: 50),
+                      SizedBox(height: 20),
                       Center(
                         child: SizedBox(
                           width: 205,
