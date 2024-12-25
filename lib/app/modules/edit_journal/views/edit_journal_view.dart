@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:temanbicara/app/routes/app_pages.dart';
-import 'package:temanbicara/app/themes/colors.dart';
-import 'package:temanbicara/app/themes/fonts.dart';
-import 'package:temanbicara/app/widgets/wide_button.dart';
 
-import '../controllers/create_journal_controller.dart';
+import '../../../themes/colors.dart';
+import '../../../themes/fonts.dart';
+import '../../../widgets/wide_button.dart';
+import '../controllers/edit_journal_controller.dart';
 
-class CreateJournalView extends GetView<CreateJournalController> {
-  const CreateJournalView({super.key});
-
+class EditJournalView extends GetView<EditJournalController> {
+  const EditJournalView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +23,7 @@ class CreateJournalView extends GetView<CreateJournalController> {
           ),
         ),
         title: Text(
-          'Create Journal',
+          'Edit Journal',
           style: h3Bold,
         ),
         centerTitle: true,
@@ -160,11 +158,17 @@ class CreateJournalView extends GetView<CreateJournalController> {
               child: Center(
                 child: WideButton(
                   get: () {
-                    controller.submitJournal();
-                    Get.back();
+                    controller.updateJournal();
+                    Get.back(result: {
+                      'id': controller.journalId,
+                      'title': controller.titleController.text,
+                      'body': controller.bodyController.text,
+                      'stress_level': controller.sliderValue.value + 1,
+                      'mood_level': controller.selectedEmotion.value,
+                    });
                   },
                   color: primaryColor,
-                  text: 'Create Journal',
+                  text: 'Edit Journal',
                 ),
               ),
             )

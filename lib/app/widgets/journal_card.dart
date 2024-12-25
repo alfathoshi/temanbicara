@@ -1,9 +1,30 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
-import 'package:temanbicara/app/themes/colors.dart';
-import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
+
+import '../themes/colors.dart';
+import '../themes/fonts.dart';
 
 class JournalCard extends StatelessWidget {
-  const JournalCard({super.key});
+  final String title;
+  final String body;
+  final String type;
+  final String date;
+  final Color typeColor;
+  final Function()? getDelete;
+  final Function()? getEdit;
+
+  const JournalCard({
+    Key? key,
+    required this.title,
+    required this.body,
+    required this.type,
+    required this.date,
+    this.getDelete,
+    this.getEdit,
+    required this.typeColor,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,21 +42,21 @@ class JournalCard extends StatelessWidget {
           ),
         ),
         width: double.infinity,
-        height: 130,
+        height: 155,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                'Title',
+                title,
                 style: h6SemiBold,
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(left: 8),
               child: Text(
-                'Body',
+                body,
                 style: h7Regular,
               ),
             ),
@@ -49,12 +70,14 @@ class JournalCard extends StatelessWidget {
                     height: 20,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
-                      color: Colors.yellow,
+                      color: typeColor,
                     ),
                     child: Center(
                       child: Text(
-                        'Type',
-                        style: h7SemiBold,
+                        type,
+                        style: h7SemiBold.copyWith(
+                          color: whiteColor,
+                        ),
                       ),
                     ),
                   ),
@@ -63,10 +86,45 @@ class JournalCard extends StatelessWidget {
             ),
             const Divider(),
             Padding(
-              padding: const EdgeInsets.only(left: 8),
-              child: Text(
-                'Date',
-                style: h7Regular,
+              padding: const EdgeInsets.only(left: 8, right: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    date,
+                    style: h7Regular,
+                  ),
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          getDelete?.call();
+                        },
+                        icon: Icon(
+                          Icons.delete,
+                          size: 24,
+                          color: Colors.red,
+                        ),
+                      ),
+                      sbX12,
+                      TextButton(
+                          style: ButtonStyle(
+                            minimumSize: WidgetStatePropertyAll(Size(8, 8)),
+                            backgroundColor:
+                                WidgetStatePropertyAll(primaryColor),
+                          ),
+                          onPressed: () {
+                            getEdit?.call();
+                          },
+                          child: Text(
+                            'Edit',
+                            style: h7SemiBold.copyWith(
+                              color: whiteColor,
+                            ),
+                          )),
+                    ],
+                  )
+                ],
               ),
             )
           ],
