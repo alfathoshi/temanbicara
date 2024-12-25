@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/transaction/idrFormatter.dart';
 
 class TransactionData extends StatelessWidget {
-  final String namaPsikiater, topik, metode, jadwalSesi, waktuSesi, kadaluarsa;
+  final String namaPsikiater,
+      topik,
+      metode,
+      jadwalSesi,
+      waktuSesi,
+      kadaluarsa,
+      expertise;
   final int durasi, jmlSesi, harga;
   const TransactionData(
       {super.key,
       required this.namaPsikiater,
+      required this.expertise,
       required this.topik,
       required this.metode,
       required this.jadwalSesi,
@@ -18,13 +26,18 @@ class TransactionData extends StatelessWidget {
       required this.jmlSesi,
       required this.harga});
 
+  String getDayName(String date) {
+    DateTime dateTime = DateTime.parse(date);
+    return DateFormat('EEEE').format(dateTime);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         SizedBox(height: 19),
         Container(
-          height: 500,
+          height: 530,
           width: double.infinity,
           decoration: BoxDecoration(
               border: Border.all(color: primaryColor, width: 2),
@@ -40,9 +53,25 @@ class TransactionData extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(namaPsikiater, style: h5Bold),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          child: Text(
+                            namaPsikiater,
+                            style: h5Bold.copyWith(
+                                overflow: TextOverflow.ellipsis),
+                            maxLines: 2,
+                          ),
+                        ),
                         SizedBox(height: 2),
-                        Text("Psikolog/Psikiater", style: h7RegularShade)
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.6,
+                          child: Text(
+                            expertise,
+                            style: h7Regular.copyWith(
+                                overflow: TextOverflow.ellipsis),
+                            maxLines: 2,
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -97,14 +126,17 @@ class TransactionData extends StatelessWidget {
                 SizedBox(height: 12),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text("Schedule", style: h6Bold), Text(jadwalSesi)],
+                  children: [
+                    Text("Schedule", style: h6Bold),
+                    Text("${getDayName(jadwalSesi)}, ${jadwalSesi}")
+                  ],
                 ),
                 SizedBox(height: 12),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Time", style: h6Bold),
-                    Text(durasi.toString())
+                    Text(waktuSesi.toString())
                   ],
                 ),
                 SizedBox(height: 22),
