@@ -9,7 +9,6 @@ import '../modules/Tracking_3/bindings/tracking_3_binding.dart';
 import '../modules/Tracking_3/views/tracking_3_view.dart';
 import '../modules/article/bindings/article_binding.dart';
 import '../modules/article/views/article_view.dart';
-import '../modules/article/views/article_view.dart';
 import '../modules/assesment_1/bindings/assesment_1_binding.dart';
 import '../modules/assesment_1/views/assesment_1_view.dart';
 import '../modules/assesment_2/bindings/assesment_2_binding.dart';
@@ -36,6 +35,8 @@ import '../modules/chatbot_room/bindings/chatbot_room_binding.dart';
 import '../modules/chatbot_room/views/chatbot_room_view.dart';
 import '../modules/consult/bindings/consult_binding.dart';
 import '../modules/consult/views/consult_view.dart';
+import '../modules/consult_schedule/bindings/consult_schedule_binding.dart';
+import '../modules/consult_schedule/views/consult_schedule_view.dart';
 import '../modules/create_journal/bindings/create_journal_binding.dart';
 import '../modules/create_journal/views/create_journal_view.dart';
 import '../modules/detail_artikel/bindings/detail_artikel_binding.dart';
@@ -116,7 +117,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CONSULT,
-      page: () => const ConsultView(),
+      page: () => ConsultView(),
       binding: ConsultBinding(),
     ),
     GetPage(
@@ -288,6 +289,11 @@ class AppPages {
       name: _Paths.CHANGE_LANGUAGE,
       page: () => ChangeLanguageView(),
       binding: ChangeLanguageBinding(),
+    ),
+    GetPage(
+      name: _Paths.CONSULT_SCHEDULE,
+      page: () => const ConsultScheduleView(),
+      binding: ConsultScheduleBinding(),
     ),
   ];
 }

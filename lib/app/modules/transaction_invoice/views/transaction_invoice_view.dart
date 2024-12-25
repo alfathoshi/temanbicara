@@ -37,80 +37,84 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
         ),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 20,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: TransactionTimeLineViewIndex(index: 4),
-            ),
-            Padding(
-                padding: EdgeInsets.symmetric(horizontal: 28),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 5),
-                    Text("Invoice", style: h4Bold),
-                    SizedBox(height: 19),
-                    // data invoice disini
-                    InvoiceData(invoice: invoice),
-                    SizedBox(height: 15),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            SizedBox(width: 10),
-                            Image.asset('assets/images/shareInvoice.png'),
-                            SizedBox(width: 5),
-                            Text(
-                              "Share Video",
-                              style: h6SemiBold.copyWith(color: primaryColor),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Image.asset('assets/images/downloadInvoice.png'),
-                            SizedBox(width: 5),
-                            Text(
-                              "Download Invoice",
-                              style: h6SemiBold.copyWith(color: primaryColor),
-                            ),
-                            SizedBox(width: 10),
-                          ],
-                        )
-                      ],
-                    ),
-                    SizedBox(height: 30),
-                    Center(
-                      child: SizedBox(
-                        width: 205,
-                        height: 42,
-                        child: ElevatedButton(
-                          child: Text('Next',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold)),
-                          onPressed: () {
-                            Get.toNamed(Routes.NAVIGATION_BAR);
-                          },
-                          style: ButtonStyle(
-                            backgroundColor:
-                                WidgetStatePropertyAll<Color>(primaryColor),
+      body: Column(
+        children: [
+          SizedBox(
+            height: 20,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: TransactionTimeLineViewIndex(index: 4),
+          ),
+          Padding(
+              padding: EdgeInsets.symmetric(horizontal: 28),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 5),
+                  Text("Invoice", style: h4Bold),
+                  SizedBox(height: 19),
+                  // data invoice disini
+                  Container(
+                      height: 475,
+                      child: SingleChildScrollView(
+                          child: InvoiceData(invoice: invoice))),
+                  SizedBox(height: 15),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          SizedBox(width: 10),
+                          Image.asset('assets/images/shareInvoice.png'),
+                          SizedBox(width: 5),
+                          Text(
+                            "Share Video",
+                            style: h6SemiBold.copyWith(color: primaryColor),
                           ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Image.asset('assets/images/downloadInvoice.png'),
+                          SizedBox(width: 5),
+                          Text(
+                            "Download Invoice",
+                            style: h6SemiBold.copyWith(color: primaryColor),
+                          ),
+                          SizedBox(width: 10),
+                        ],
+                      )
+                    ],
+                  ),
+                  SizedBox(height: 30),
+                  Center(
+                    child: SizedBox(
+                      width: 205,
+                      height: 42,
+                      child: ElevatedButton(
+                        child: Text('Next',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold)),
+                        onPressed: () {
+                          Get.offAllNamed(
+                            Routes.NAVIGATION_BAR,
+                            arguments: {"indexPage": 0},
+                          );
+                        },
+                        style: ButtonStyle(
+                          backgroundColor:
+                              WidgetStatePropertyAll<Color>(primaryColor),
                         ),
                       ),
                     ),
-                    SizedBox(height: 40),
-                  ],
-                ))
-          ],
-        ),
+                  ),
+                  SizedBox(height: 40),
+                ],
+              ))
+        ],
       ),
     );
   }
