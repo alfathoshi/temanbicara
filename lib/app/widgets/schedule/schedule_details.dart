@@ -37,7 +37,7 @@ class _ScheduleListState extends State<ScheduleList> {
       child: ListView.builder(
         itemCount: widget.schedule.length,
         itemBuilder: (BuildContext context, int index) {
-          List scheduleDay = widget.schedule[index]['scheduleByDate'];
+          List scheduleDay = widget.schedule[index]['schedulesByDate'];
           String date = widget.schedule[index]['date'];
           return Column(
             children: [
