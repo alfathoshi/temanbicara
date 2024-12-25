@@ -92,7 +92,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => const HomeView(),
+      page: () => HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
@@ -122,12 +122,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFILE,
-      page: () => const ProfileView(),
+      page: () =>  ProfileView(),
       binding: ProfileBinding(),
     ),
     GetPage(
       name: _Paths.JOURNAL,
-      page: () => const JournalView(),
+      page: () =>  JournalView(),
       binding: JournalBinding(),
     ),
     GetPage(

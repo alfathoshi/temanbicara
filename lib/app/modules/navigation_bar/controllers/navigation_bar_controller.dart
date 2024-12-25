@@ -12,6 +12,8 @@ class NavigationBarController extends GetxController {
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-    selectedindex.value = args["indexPage"];
+    if (args != null) {
+      selectedindex.value = args["indexPage"];
+    }
   }
 }
