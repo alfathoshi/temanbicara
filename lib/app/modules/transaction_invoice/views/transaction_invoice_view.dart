@@ -15,6 +15,7 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
   const TransactionInvoiceView({super.key});
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.sizeOf(context).height;
     final InvoiceModel invoice = Get.arguments as InvoiceModel;
     return Scaffold(
       backgroundColor: whiteColor,
@@ -56,7 +57,7 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
                   SizedBox(height: 19),
                   // data invoice disini
                   Container(
-                      height: 475,
+                      height: screenHeight * 0.6,
                       child: SingleChildScrollView(
                           child: InvoiceData(invoice: invoice))),
                   SizedBox(height: 15),
