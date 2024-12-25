@@ -12,7 +12,7 @@ class LoginController extends GetxController {
   late TextEditingController passC;
   var isButtonActive = true.obs;
   var isSecure = true.obs;
-  var isSecureC = true.obs;
+
   void isEmpty() {
     if (passC.text.isNotEmpty && emailC.text.isNotEmpty) {
       isButtonActive(false);
@@ -25,13 +25,9 @@ class LoginController extends GetxController {
     isSecure.value = !isSecure.value;
   }
 
-  void showPasswordC() {
-    isSecureC.value = !isSecureC.value;
-  }
-
   var isLoading = false.obs;
 
-  Future<void> login(String email, String password) async {
+  Future<void> login() async {
     isLoading.value = true;
 
     try {
@@ -39,8 +35,8 @@ class LoginController extends GetxController {
         Uri.parse('http://10.0.2.2:8000/api/v1/login'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
-          'email': email,
-          'password': password,
+          'email': emailC.text,
+          'password': passC.text,
         }),
       );
 
@@ -65,6 +61,12 @@ class LoginController extends GetxController {
             Routes.ASSESMENT_1,
           );
         } else {
+          box.write('email', data['data']['email']);
+          box.write('password', data['data']['password']);
+          box.write('name', data['data']['name']);
+          box.write('nickname', data['data']['nickname']);
+          box.write('birthdate', data['data']['birthdate']);
+
           Get.offAllNamed(
             Routes.NAVIGATION_BAR,
             arguments: {"indexPage": 0},

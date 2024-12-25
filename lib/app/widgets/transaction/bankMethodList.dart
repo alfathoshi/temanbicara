@@ -91,7 +91,7 @@ class BankPaymentMethodList extends StatelessWidget {
                       fontSize: 14,
                       fontWeight: FontWeight.bold)),
               onPressed: () {
-               if (radioController.methodType.isNotEmpty) {
+                if (radioController.methodType.isNotEmpty) {
                   Get.to(
                       () => TransactionPaymentView(
                             paymentMethod: radioController.methodType,
@@ -99,11 +99,10 @@ class BankPaymentMethodList extends StatelessWidget {
                       arguments: transaction);
                 } else {
                   Get.snackbar(
-                    backgroundColor: primaryColor,
+                    backgroundColor: primaryColor.withOpacity(0.6),
                     colorText: Colors.white,
                     "Silahkan pilih Metode Pembayaran",
                     "Please select payment method before proceeding.",
-                    snackPosition: SnackPosition.BOTTOM,
                   );
                 }
               },
