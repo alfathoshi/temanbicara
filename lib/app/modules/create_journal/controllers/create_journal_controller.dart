@@ -56,12 +56,11 @@ class CreateJournalController extends GetxController {
       final token = box.read('token');
       print("token  ${token}");
       final response = await http.post(
-        Uri.parse('http://127.0.0.1:8000/api/v1/journal'),
+        Uri.parse('http://10.0.2.2:8000/api/v1/journal'),
         headers: {
           'Authorization': 'Bearer $token',
-          
         },
-        body:{
+        body: {
           'title': data['title'],
           'body': data['body'],
           'stress_level': data['stress_level'].toString(),

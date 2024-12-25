@@ -108,11 +108,40 @@ class JournalView extends GetView<JournalController> {
                   itemCount: controller.journalList.length,
                   itemBuilder: (context, index) {
                     final journal = controller.journalList[index];
+                    int emotionIndex =
+                        controller.emotions.indexOf(journal['mood_level']);
+                    Color emotionColor = controller.emotionColors[emotionIndex];
                     return JournalCard(
                       title: journal['title'],
                       body: journal['body'],
                       type: journal['mood_level'],
                       date: journal['created_at'],
+                      typeColor: emotionColor,
+                      getDelete: () async {
+                        Get.defaultDialog(
+                          backgroundColor: whiteColor,
+                          title: 'Delete Journal',
+                          middleText:
+                              'Are you sure you want to delete this journal?',
+                          textCancel: 'Cancel',
+                          textConfirm: 'Delete',
+                          confirmTextColor: Colors.white,
+                          onConfirm: () async {
+                            await controller
+                                .deleteJournal(journal['journal_id']);
+                            Get.back();
+                          },
+                        );
+                      },
+                      getEdit: () {
+                        Get.toNamed(Routes.EDIT_JOURNAL, arguments: {
+                          'id': journal['journal_id'],
+                          'title': journal['title'],
+                          'body': journal['body'],
+                          'stress_level': journal['stress_level'],
+                          'mood_level': journal['mood_level'],
+                        });
+                      },
                     );
                   },
                 );
