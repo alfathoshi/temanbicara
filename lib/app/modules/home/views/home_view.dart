@@ -138,9 +138,14 @@ class HomeView extends GetView<HomeController> {
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Center(
-                          child: Text(
-                            'Tracking',
-                            style: trackingButton,
+                          child: TextButton(
+                            onPressed: () {
+                              Get.toNamed(Routes.TRACKING);
+                            },
+                            child: Text(
+                              'Tracking',
+                              style: trackingButton,
+                            ),
                           ),
                         ),
                       ),
