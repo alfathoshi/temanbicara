@@ -8,11 +8,15 @@ import 'package:temanbicara/app/themes/fonts.dart';
 import '../controllers/tracking_4_controller.dart';
 
 class Tracking4View extends GetView<Tracking4Controller> {
-  const Tracking4View({super.key});
+  Tracking4View({super.key});
+
+  final Tracking4Controller controller = Get.put(Tracking4Controller());
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
+        await controller.storedTracking();
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => HomeView()));
       },
