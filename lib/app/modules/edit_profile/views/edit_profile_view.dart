@@ -18,21 +18,22 @@ class EditProfileView extends GetView<EditProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: whiteColor,
       appBar: AppBar(
-         toolbarHeight: 85,
-            backgroundColor: Colors.white,
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(24),
-                  bottomRight: Radius.circular(24),
-                ),
-                side: BorderSide(color: Colors.black12)),
-            title: Text(
-              'Edit Profile',
-              style: h3Bold,
+        toolbarHeight: 85,
+        backgroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(24),
+              bottomRight: Radius.circular(24),
             ),
-            centerTitle: true,
+            side: BorderSide(color: Colors.black12)),
+        title: Text(
+          'Edit Profile',
+          style: h3Bold,
+        ),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(24),

@@ -4,12 +4,14 @@ import 'package:get_storage/get_storage.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:temanbicara/app/modules/edit_profile/controllers/datepicker_controller.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 
 enum Gender { none, male, female }
 
 class Assesment1Controller extends GetxController {
+  final DatePickerController dateController = Get.put(DatePickerController());
   TextEditingController nameC = TextEditingController();
   TextEditingController nicknameC = TextEditingController();
 
@@ -20,10 +22,7 @@ class Assesment1Controller extends GetxController {
     selectedGender.value = gender;
   }
 
-  var selectedDate = DateTime.now().obs;
-  void updateDate(DateTime date) {
-    selectedDate.value = DateTime(date.year, date.month, date.day);;
-  }
+ 
 
   var selectedMBTI = ''.obs;
   void setMBTI(String mbti) {
@@ -38,7 +37,6 @@ class Assesment1Controller extends GetxController {
       favoriteTopics.add(topic);
     }
   }
-
 
   var isSportTap = false.obs;
   var isArtTap = false.obs;
@@ -80,21 +78,41 @@ class Assesment1Controller extends GetxController {
     }
   }
 
-  void saveData() {
-    box.write('name', nameC.text);
-    box.write('nickname', nicknameC.text);
-    if (selectedGender == Gender.male) {
-      box.write('gender', 'Male');
-    } else if (selectedGender == Gender.female) {
-      box.write('gender', 'Female');
-    }
-    box.write('mbti', selectedMBTI.value);
-    String topics = favoriteTopics.join(',');
-    box.write('topics', topics);
-    String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate.value);
-    box.write('birthdate', formattedDate);
+  bool isFilled() {
+    return nameC.text.isNotEmpty &&
+        nicknameC.text.isNotEmpty &&
+        selectedGender != Gender.none &&
+        selectedMBTI.value != '' &&
+        favoriteTopics.isNotEmpty &&
+        dateController.selectedDate.value != null;
+  }
 
-    Get.toNamed(Routes.ASSESMENT_2);
+  void saveData() {
+    if (isFilled()) {
+      box.write('name', nameC.text);
+      box.write('nickname', nicknameC.text);
+      if (selectedGender == Gender.male) {
+        box.write('gender', 'Laki-laki');
+      } else if (selectedGender == Gender.female) {
+        box.write('gender', 'Perempuan');
+      }
+      box.write('mbti', selectedMBTI.value);
+      String topics = favoriteTopics.join(',');
+      box.write('topics', topics);
+      String formattedDate =
+          DateFormat('yyyy-MM-dd').format(dateController.selectedDate.value);
+      box.write('birthdate', formattedDate);
+      print(box.read('birthdate'));
+
+      Get.toNamed(Routes.ASSESMENT_2);
+    } else {
+      Get.snackbar(
+        'Error',
+        'Silahkan isi assesment',
+        colorText: whiteColor,
+        backgroundColor: error.withOpacity(0.6),
+      );
+    }
   }
 
   @override

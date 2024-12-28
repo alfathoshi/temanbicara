@@ -112,7 +112,16 @@ class Assesment3View extends GetView<Assesment3Controller> {
               Spacer(),
               MyButton(
                   get: () {
-                    Get.toNamed(Routes.ASSESMENT_4);
+                     if (controller.tappedIndex.value == -1) {
+                      Get.snackbar(
+                        'Error',
+                        'Silahkan isi assesment',
+                        colorText: whiteColor,
+                        backgroundColor: error.withOpacity(0.6),
+                      );
+                    } else {
+                      Get.toNamed(Routes.ASSESMENT_4);
+                    }
                   },
                   color: primaryColor,
                   text: 'Lanjutkan')

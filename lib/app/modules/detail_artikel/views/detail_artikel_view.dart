@@ -12,8 +12,13 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
   final String? deskripsi;
   final String? author;
 
-  DetailArtikelView(
-      {this.image, this.judul, this.deskripsi, this.author, super.key});
+  const DetailArtikelView({
+    this.image,
+    this.judul,
+    this.deskripsi,
+    this.author,
+    super.key,
+  });
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.sizeOf(context).height;
@@ -41,9 +46,11 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(
-                'assets/images/${image}.png',
-                height: 221,
+              Center(
+                child: Image.asset(
+                  'assets/images/${image}.png',
+                  height: 221,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -51,60 +58,55 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              judul!,
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.w800),
-                            ),
-                            Icon(Icons.share)
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Text(author!,
-                                style: TextStyle(
-                                    fontSize: 10, color: Color(0xFF9C9C9C))),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              width: 350,
+                            SizedBox(
+                              width: 300,
                               child: Text(
-                                deskripsi!,
-                                overflow: TextOverflow.fade,
+                                judul!,
                                 softWrap: true,
-                                textAlign: TextAlign.justify,
+                                maxLines: 3,
+                                style: const TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.w800),
                               ),
-                            )
+                            ),
+                            const Icon(Icons.share)
                           ],
+                        ),
+                        Text(
+                          author!,
+                          style: h6SemiBold,
+                        ),
+                        sby24,
+                        Container(
+                          width: 350,
+                          child: Text(
+                            deskripsi!,
+                            overflow: TextOverflow.fade,
+                            softWrap: true,
+                            textAlign: TextAlign.justify,
+                          ),
                         ),
                         sby12,
-                        Container(
-                        
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: List.generate(3, (index) {
-                                return Padding(
-                                    padding:
-                                        EdgeInsets.only(left: 24, right: 24),
-                                    child: TopArticle(
-                                        judul: judul!,
-                                        deskripsi: deskripsi!,
-                                        author: author!,
-                                        image: image!));
-                              }),
-                            ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: List.generate(3, (index) {
+                              return Padding(
+                                  padding: const EdgeInsets.only(right: 24),
+                                  child: TopArticle(
+                                      judul: judul!,
+                                      deskripsi: deskripsi!,
+                                      author: author!,
+                                      image: image!));
+                            }),
                           ),
                         ),
                       ],
                     ),
-                    
                   ],
                 ),
               ),

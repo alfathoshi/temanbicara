@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
@@ -61,7 +62,7 @@ class Assesment7View extends GetView<Assesment7Controller> {
                 textAlign: TextAlign.center,
                 style: h3Bold,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               Obx(
@@ -73,7 +74,7 @@ class Assesment7View extends GetView<Assesment7Controller> {
                         fontSize: 100,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 50,
                     ),
                     Container(
@@ -83,7 +84,7 @@ class Assesment7View extends GetView<Assesment7Controller> {
                         borderRadius: BorderRadius.circular(50),
                         border: Border.all(color: const Color(0xFF7D944D)),
                       ),
-                      padding: EdgeInsets.only(left: 8, right: 8),
+                      padding: const EdgeInsets.only(left: 8, right: 8),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -97,7 +98,7 @@ class Assesment7View extends GetView<Assesment7Controller> {
                                 width: 60,
                                 decoration: ShapeDecoration(
                                   color: controller.selectedNumber.value == i
-                                      ? Color(0xFF7D944D)
+                                      ? const Color(0xFF7D944D)
                                       : Colors.transparent,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(50),
@@ -119,7 +120,7 @@ class Assesment7View extends GetView<Assesment7Controller> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     Text(
@@ -131,13 +132,44 @@ class Assesment7View extends GetView<Assesment7Controller> {
                   ],
                 ),
               ),
-              Spacer(),
-              MyButton(
-                  get: () {
-                    controller.saveAssesment();
+              const Spacer(),
+              Obx(
+                () => ElevatedButton(
+                  onPressed: () {
+                    if (controller.selectedNumber.value == 0) {
+                      Get.snackbar(
+                        'Error',
+                        'Silahkan isi assesment',
+                        colorText: whiteColor,
+                        backgroundColor: error.withOpacity(0.6),
+                      );
+                    } else {
+                      controller.saveAssesment();
+                    }
                   },
-                  color: primaryColor,
-                  text: 'Lanjutkan')
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: primaryColor,
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size(
+                        double.infinity,
+                        44,
+                      ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                  child: controller.isLoading.value == false
+                      ? Text(
+                          'Lanjutkan',
+                          style: h5Bold.copyWith(color: whiteColor),
+                        )
+                      : SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                            color: whiteColor,
+                          ),
+                        ),
+                ),
+              ),
             ],
           ),
         ));

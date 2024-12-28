@@ -28,6 +28,8 @@ class HomeView extends GetView<HomeController> {
       body: CustomScrollView(slivers: [
         SliverAppBar(
           automaticallyImplyLeading: false,
+          floating: true,
+          snap: true,
           toolbarHeight: 85,
           backgroundColor: Colors.white,
           shape: const RoundedRectangleBorder(
@@ -424,28 +426,26 @@ class HomeView extends GetView<HomeController> {
                 future: _controller.fetchData(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
                     return Center(
                       child: Text(snapshot.error.toString()),
                     );
                   } else if (snapshot.hasData) {
                     final List listData = snapshot.data!['data'];
-                    final double containerHeight = listData.length <= 2
-                        ? listData.length *
-                            180.0 
-                        : 530.0; 
+                    final double containerHeight =
+                        listData.length <= 2 ? listData.length * 180.0 : 530.0;
 
                     return Container(
                       constraints: BoxConstraints(
                         maxHeight: containerHeight,
                       ),
                       child: ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: listData.length <= 2 ? listData.length : 3,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
-                            padding: EdgeInsets.only(left: 24, right: 24),
+                            padding: const EdgeInsets.only(left: 24, right: 24),
                             child: TopArticle(
                               judul: listData[index]["title"],
                               deskripsi: listData[index]["content"],
@@ -457,7 +457,7 @@ class HomeView extends GetView<HomeController> {
                       ),
                     );
                   } else {
-                    return Center(child: Text("Tidak Ada Data"));
+                    return const Center(child: Text("Tidak Ada Data"));
                   }
                 },
               ),

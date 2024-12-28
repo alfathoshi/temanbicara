@@ -4,6 +4,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:temanbicara/app/themes/colors.dart';
+
 class CreateJournalController extends GetxController {
   final box = GetStorage();
 
@@ -59,20 +61,25 @@ class CreateJournalController extends GetxController {
         Uri.parse('http://10.0.2.2:8000/api/v1/journal'),
         headers: {
           'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
         },
-        body: {
+        body: json.encode({
           'title': data['title'],
           'body': data['body'],
-          'stress_level': data['stress_level'].toString(),
+          'stress_level': data['stress_level'],
           'mood_level': data['mood_level'],
           'user_id': userId.toString(),
-        },
+        }),
       );
 
       if (response.statusCode == 200) {
         // Success
-        Get.snackbar('Success', 'Journal created successfully',
-            snackPosition: SnackPosition.BOTTOM);
+        Get.snackbar(
+          'Success',
+          'Journal created successfully',
+          backgroundColor: primaryColor.withOpacity(0.6),
+          colorText: whiteColor,
+        );
         // Clear inputs
         titleController.clear();
         bodyController.clear();
@@ -83,13 +90,20 @@ class CreateJournalController extends GetxController {
         var errorData = jsonDecode(response.body);
         print(errorData);
         Get.snackbar(
-            'Error', errorData['message'] ?? 'Failed to create journal',
-            snackPosition: SnackPosition.BOTTOM);
+          'Error',
+          errorData['message'] ?? 'Failed to create journal',
+          backgroundColor: error.withOpacity(0.6),
+          colorText: whiteColor,
+        );
       }
     } catch (e) {
       print(e);
-      Get.snackbar('Error', 'An error occurred: $e',
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Error',
+        'An error occurred: $e',
+        backgroundColor: error.withOpacity(0.6),
+        colorText: whiteColor,
+      );
     }
   }
 }

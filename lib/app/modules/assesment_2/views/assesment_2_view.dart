@@ -12,7 +12,7 @@ import '../../assesment_1/controllers/assesment_1_controller.dart';
 import '../controllers/assesment_2_controller.dart';
 
 class Assesment2View extends GetView<Assesment2Controller> {
-   Assesment2View({Key? key}) : super(key: key);
+  Assesment2View({Key? key}) : super(key: key);
 
   final box = GetStorage();
 
@@ -112,7 +112,16 @@ class Assesment2View extends GetView<Assesment2Controller> {
               Spacer(),
               MyButton(
                   get: () {
-                    Get.toNamed(Routes.ASSESMENT_3);
+                    if (controller.tappedIndex.value == -1) {
+                      Get.snackbar(
+                        'Error',
+                        'Silahkan isi assesment',
+                        colorText: whiteColor,
+                        backgroundColor: error.withOpacity(0.6),
+                      );
+                    } else {
+                      Get.toNamed(Routes.ASSESMENT_3);
+                    }
                   },
                   color: primaryColor,
                   text: 'Lanjutkan')

@@ -119,19 +119,19 @@ class JournalView extends GetView<JournalController> {
                       typeColor: emotionColor,
                       getDelete: () async {
                         Get.defaultDialog(
-                          backgroundColor: whiteColor,
-                          title: 'Delete Journal',
-                          middleText:
-                              'Are you sure you want to delete this journal?',
-                          textCancel: 'Cancel',
-                          textConfirm: 'Delete',
-                          confirmTextColor: Colors.white,
-                          onConfirm: () async {
-                            await controller
-                                .deleteJournal(journal['journal_id']);
-                            Get.back();
-                          },
-                        );
+                            backgroundColor: whiteColor,
+                            title: 'Delete Journal',
+                            middleText:
+                                'Are you sure you want to delete this journal?',
+                            textCancel: 'Cancel',
+                            textConfirm: 'Delete',
+                            confirmTextColor: Colors.white,
+                            onConfirm: () {
+                              controller.deleteJournal(journal['journal_id']);
+                              Get.back();
+                              controller.fetchJournals();
+                            },
+                            onCancel: () => Get.back());
                       },
                       getEdit: () {
                         Get.toNamed(Routes.EDIT_JOURNAL, arguments: {

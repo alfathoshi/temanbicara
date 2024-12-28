@@ -2,6 +2,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:temanbicara/app/modules/edit_profile/controllers/datepicker_controller.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/form.dart';
@@ -12,11 +13,14 @@ import '../../../widgets/gender_selector.dart';
 import '../controllers/assesment_1_controller.dart';
 
 class Assesment1View extends GetView<Assesment1Controller> {
-  const Assesment1View({super.key});
+  Assesment1View({super.key});
+
+  final DatePickerController dateController = Get.put(DatePickerController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: whiteColor,
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -68,43 +72,53 @@ class Assesment1View extends GetView<Assesment1Controller> {
               'Nama',
               style: textDescriptionSemiBold,
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             TextField(
               controller: controller.nameC,
+              cursorColor: black,
               decoration: InputDecoration(
-                hintText: 'Masukan Nama Lengkap',
-                hintStyle: textFieldStyle,
+                hintText: 'Masukkan Nama Lengkap',
+                hintStyle: h5Regular.copyWith(color: grey2Color),
                 enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide(
-                      color: Colors.black26,
-                      width: 2,
-                    )),
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                    color: greyColor,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(color: primaryColor),
+                ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             Text(
               'Nama Panggilan',
               style: textDescriptionSemiBold,
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             TextField(
               controller: controller.nicknameC,
+              cursorColor: black,
               decoration: InputDecoration(
-                hintText: 'Masukan Nama Panggilan',
-                hintStyle: textFieldStyle,
+                hintText: 'Masukkan Nama Panggilan',
+                hintStyle: h5Regular.copyWith(color: grey2Color),
                 enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(16),
-                    borderSide: BorderSide(
-                      color: Colors.black26,
-                      width: 2,
-                    )),
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                    color: greyColor,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(color: primaryColor),
+                ),
               ),
             ),
             const SizedBox(
@@ -119,13 +133,14 @@ class Assesment1View extends GetView<Assesment1Controller> {
             ),
             Obx(
               () => Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   GenderSelector(
                       gender: Gender.male,
                       selectedGender: controller.selectedGender.value,
                       onSelect: (gender) {
                         controller.toggleGender(gender);
+                        print(dateController.selectedDate);
                       }),
                   GenderSelector(
                       gender: Gender.female,
@@ -184,15 +199,25 @@ class Assesment1View extends GetView<Assesment1Controller> {
               ),
               decoratorProps: DropDownDecoratorProps(
                 decoration: InputDecoration(
-                    contentPadding: const EdgeInsets.all(15),
+                    contentPadding: const EdgeInsets.all(16),
                     filled: true,
                     fillColor: Colors.white,
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(8),
                       borderSide: const BorderSide(
                         color: Colors.black26,
                         width: 2,
                       ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(
+                        color: greyColor,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: primaryColor),
                     ),
                     hintText: 'Pilih MBTI',
                     hintStyle: textFieldStyle),
@@ -209,9 +234,10 @@ class Assesment1View extends GetView<Assesment1Controller> {
                   );
                 },
                 constraints: const BoxConstraints(maxHeight: 160),
-                menuProps: const MenuProps(
-                  margin: EdgeInsets.only(top: 12),
-                  shape: RoundedRectangleBorder(
+                menuProps: MenuProps(
+                  backgroundColor: whiteColor,
+                  margin: const EdgeInsets.only(top: 12),
+                  shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(Radius.circular(12))),
                 ),
               ),
@@ -246,40 +272,55 @@ class Assesment1View extends GetView<Assesment1Controller> {
                             ? primaryColor
                             : whiteColor,
                         text: 'Sport',
+                        style: controller.isSportTap.value
+                            ? h7SemiBold.copyWith(color: whiteColor)
+                            : h7SemiBold.copyWith(color: primaryColor),
                       ),
                       FavoriteButton(
-                          get: () {
-                            controller.toggleTopis('Art');
-                          },
-                          colorBorder: controller.isArtTap.value
-                              ? whiteColor
-                              : primaryColor,
-                          colorBackground: controller.isArtTap.value
-                              ? primaryColor
-                              : whiteColor,
-                          text: 'Art'),
+                        get: () {
+                          controller.toggleTopis('Art');
+                        },
+                        colorBorder: controller.isArtTap.value
+                            ? whiteColor
+                            : primaryColor,
+                        colorBackground: controller.isArtTap.value
+                            ? primaryColor
+                            : whiteColor,
+                        text: 'Art',
+                        style: controller.isArtTap.value
+                            ? h7SemiBold.copyWith(color: whiteColor)
+                            : h7SemiBold.copyWith(color: primaryColor),
+                      ),
                       FavoriteButton(
-                          get: () {
-                            controller.toggleTopis('Politics');
-                          },
-                          colorBorder: controller.isPoliticsTap.value
-                              ? whiteColor
-                              : primaryColor,
-                          colorBackground: controller.isPoliticsTap.value
-                              ? primaryColor
-                              : whiteColor,
-                          text: 'Politics'),
+                        get: () {
+                          controller.toggleTopis('Politics');
+                        },
+                        colorBorder: controller.isPoliticsTap.value
+                            ? whiteColor
+                            : primaryColor,
+                        colorBackground: controller.isPoliticsTap.value
+                            ? primaryColor
+                            : whiteColor,
+                        text: 'Politics',
+                        style: controller.isPoliticsTap.value
+                            ? h7SemiBold.copyWith(color: whiteColor)
+                            : h7SemiBold.copyWith(color: primaryColor),
+                      ),
                       FavoriteButton(
-                          get: () {
-                            controller.toggleTopis('Anxiety');
-                          },
-                          colorBorder: controller.isAnxietyTap.value
-                              ? whiteColor
-                              : primaryColor,
-                          colorBackground: controller.isAnxietyTap.value
-                              ? primaryColor
-                              : whiteColor,
-                          text: 'Anxiety'),
+                        get: () {
+                          controller.toggleTopis('Anxiety');
+                        },
+                        colorBorder: controller.isAnxietyTap.value
+                            ? whiteColor
+                            : primaryColor,
+                        colorBackground: controller.isAnxietyTap.value
+                            ? primaryColor
+                            : whiteColor,
+                        text: 'Anxiety',
+                        style: controller.isAnxietyTap.value
+                            ? h7SemiBold.copyWith(color: whiteColor)
+                            : h7SemiBold.copyWith(color: primaryColor),
+                      ),
                     ],
                   ),
                   const SizedBox(
@@ -288,44 +329,56 @@ class Assesment1View extends GetView<Assesment1Controller> {
                   Row(
                     children: [
                       FavoriteButton(
-                          get: () {
-                            controller.toggleTopis('Tech');
-                          },
-                          colorBorder: controller.isTechTap.value
-                              ? whiteColor
-                              : primaryColor,
-                          colorBackground: controller.isTechTap.value
-                              ? primaryColor
-                              : whiteColor,
-                          text: 'Tech'),
+                        get: () {
+                          controller.toggleTopis('Tech');
+                        },
+                        colorBorder: controller.isTechTap.value
+                            ? whiteColor
+                            : primaryColor,
+                        colorBackground: controller.isTechTap.value
+                            ? primaryColor
+                            : whiteColor,
+                        text: 'Tech',
+                        style: controller.isTechTap.value
+                            ? h7SemiBold.copyWith(color: whiteColor)
+                            : h7SemiBold.copyWith(color: primaryColor),
+                      ),
                       FavoriteButton(
-                          get: () {
-                            controller.toggleTopis('Innovation');
-                          },
-                          colorBorder: controller.isInnovationTap.value
-                              ? whiteColor
-                              : primaryColor,
-                          colorBackground: controller.isInnovationTap.value
-                              ? primaryColor
-                              : whiteColor,
-                          text: 'Innovation'),
+                        get: () {
+                          controller.toggleTopis('Innovation');
+                        },
+                        colorBorder: controller.isInnovationTap.value
+                            ? whiteColor
+                            : primaryColor,
+                        colorBackground: controller.isInnovationTap.value
+                            ? primaryColor
+                            : whiteColor,
+                        text: 'Innovation',
+                        style: controller.isInnovationTap.value
+                            ? h7SemiBold.copyWith(color: whiteColor)
+                            : h7SemiBold.copyWith(color: primaryColor),
+                      ),
                       FavoriteButton(
-                          get: () {
-                            controller.toggleTopis('Lainnya');
-                          },
-                          colorBorder: controller.isLainnyaTap.value
-                              ? whiteColor
-                              : primaryColor,
-                          colorBackground: controller.isLainnyaTap.value
-                              ? primaryColor
-                              : whiteColor,
-                          text: 'Lainnya'),
+                        get: () {
+                          controller.toggleTopis('Lainnya');
+                        },
+                        colorBorder: controller.isLainnyaTap.value
+                            ? whiteColor
+                            : primaryColor,
+                        colorBackground: controller.isLainnyaTap.value
+                            ? primaryColor
+                            : whiteColor,
+                        text: 'Lainnya',
+                        style: controller.isLainnyaTap.value
+                            ? h7SemiBold.copyWith(color: whiteColor)
+                            : h7SemiBold.copyWith(color: primaryColor),
+                      ),
                     ],
                   ),
                 ],
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Center(
                 child: MyButton(
                     get: () {
