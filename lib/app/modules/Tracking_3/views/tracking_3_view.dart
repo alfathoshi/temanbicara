@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:temanbicara/app/data/Tracking.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
@@ -9,7 +10,10 @@ import 'package:temanbicara/app/widgets/buttons.dart';
 import '../controllers/tracking_3_controller.dart';
 
 class Tracking3View extends GetView<Tracking3Controller> {
-  const Tracking3View({super.key});
+  Tracking3View({super.key});
+
+  final Tracking3Controller controller = Get.put(Tracking3Controller());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,7 +123,10 @@ class Tracking3View extends GetView<Tracking3Controller> {
                   ),
                   MyButton(
                       get: () {
-                        Get.toNamed(Routes.TRACKING_4);
+                        print(controller.selectedNumber.value);
+                        Get.toNamed(Routes.TRACKING_4,
+                            arguments: TrackingModel(
+                                "", "", controller.selectedNumber.value));
                       },
                       color: primaryColor,
                       text: 'Selesai'),
