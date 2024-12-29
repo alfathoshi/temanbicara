@@ -49,6 +49,7 @@ abstract class Routes {
   static const CHANGE_LANGUAGE = _Paths.CHANGE_LANGUAGE;
   static const CONSULT_SCHEDULE = _Paths.CONSULT_SCHEDULE;
   static const EDIT_JOURNAL = _Paths.EDIT_JOURNAL;
+  static const CHAT_ROOM = _Paths.CHAT_ROOM;
 }
 
 abstract class _Paths {
@@ -99,4 +100,5 @@ abstract class _Paths {
   static const CHANGE_LANGUAGE = '/change-language';
   static const CONSULT_SCHEDULE = '/consult-schedule';
   static const EDIT_JOURNAL = '/edit-journal';
+  static const CHAT_ROOM = '/chat-room';
 }

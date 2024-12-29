@@ -71,8 +71,7 @@ class HomeView extends GetView<HomeController> {
           actions: [
             IconButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ChatView()));
+                Get.toNamed(Routes.CHAT);
               },
               icon: Image.asset(
                 'assets/icons/send.png',

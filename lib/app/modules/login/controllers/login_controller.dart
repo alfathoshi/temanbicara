@@ -63,6 +63,7 @@ class LoginController extends GetxController {
         } else {
           box.write('email', data['data']['email']);
           box.write('password', data['data']['password']);
+          box.write('phone', data['data']['phone_number']);
           box.write('name', data['data']['name']);
           box.write('nickname', data['data']['nickname']);
           box.write('birthdate', data['data']['birthdate']);

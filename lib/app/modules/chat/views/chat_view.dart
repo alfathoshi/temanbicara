@@ -8,8 +8,7 @@ import 'package:temanbicara/app/widgets/chatContainer.dart';
 import '../controllers/chat_controller.dart';
 
 class ChatView extends GetView<ChatController> {
-  ChatView({super.key});
-  final RoomChatController _controller = Get.put(RoomChatController());
+  const ChatView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,54 +27,47 @@ class ChatView extends GetView<ChatController> {
           ),
           centerTitle: true,
         ),
-        SliverList.builder(
-          itemCount: data.length,
-          itemBuilder: (context, index) {
-            return Obx(() {
-              final deskripsi = _controller.dataChat.isEmpty
-                  ? " "
-                  : (index < _controller.dataChat.length
-                      ? _controller.dataChat[_controller.dataChat.length - 1]
-                          ['message']
-                      : " ");
-
-              return InkWell(
-                onTap: () async {
-                  print(_controller.dataChat[_controller.dataChat.length - 1]
-                      ['message']);
-                  print(_controller.dataChat.length);
-                  if (deskripsi == " ") {
-                    await _controller.fetchChatForUser(data[index]["nama"]);
-                  }
-                },
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                  child: Chatcontainer(
-                    nama: data[index]["nama"],
-                    deskripsi: deskripsi,
-                    image: data[index]["image"],
+        SliverToBoxAdapter(
+          child: FutureBuilder(
+            future: controller.fetchData(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(
+                  child: Text(snapshot.error.toString()),
+                );
+              } else if (snapshot.hasData) {
+                final List listData = snapshot.data!['data'];
+                final double containerHeight =
+                    listData.length <= 2 ? listData.length * 180.0 : 530.0;
+                return Container(
+                  constraints: BoxConstraints(
+                    maxHeight: containerHeight,
                   ),
-                ),
-              );
-            });
-          },
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: listData.length <= 2 ? listData.length : 3,
+                    itemBuilder: (BuildContext context, int index) {
+                      var data = listData[index];
+                      return Padding(
+                          padding: const EdgeInsets.only(left: 24, right: 24),
+                          child: Chatcontainer(
+                            id: data['user']['id'],
+                            nama: data['user']['name'],
+                            deskripsi: data['title'],
+                            image: 'assets/images/profile.png',
+                          ));
+                    },
+                  ),
+                );
+              } else {
+                return const Center(child: Text("Tidak Ada Data"));
+              }
+            },
+          ),
         )
       ]),
     );
   }
 }
-
-List<Map<String, dynamic>> data = [
-  {
-    "image": "article1",
-    "nama": "Saskhya Aulia , S.Psi., M.Psi.",
-    "deskripsi": "Yuk berbincang dengan Saskhya Aulia",
-  },
-  {
-    "image": "article1",
-    "nama": "Alex Tomahawk",
-    "deskripsi":
-        "The quick brown fox jumps overthe lazydog, and support tailored to your spec-ific needs.",
-  },
-];
