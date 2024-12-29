@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:temanbicara/app/modules/edit_profile/controllers/datepicker_controller.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
-import '../modules/assesment_1/controllers/assesment_1_controller.dart';
 
-class date extends StatelessWidget {
-  date({super.key});
+class DatePicker extends StatelessWidget {
+  DatePicker({super.key});
 
-  final Assesment1Controller _assesment1controller =
-      Get.put(Assesment1Controller());
-
+  final DatePickerController controller = Get.put(DatePickerController());
   @override
   Widget build(BuildContext context) {
+    if (controller.box.read('birthdate') != null) {
+      controller.selectedDate.value =
+          DateTime.parse(controller.box.read('birthdate'));
+    }
+
     return Obx(
       () => Container(
         width: double.infinity,
@@ -29,15 +32,14 @@ class date extends StatelessWidget {
           onTap: () async {
             final DateTime? pickedDate = await showDatePicker(
               context: context,
-              initialDate: _assesment1controller.selectedDate.value,
+              initialDate: controller.selectedDate.value,
               firstDate: DateTime(1980, 01, 01),
-              lastDate: DateTime(2030, 3, 14),
+              lastDate: DateTime.now(),
               confirmText: "Pilih",
               builder: (BuildContext context, Widget? child) {
                 return Theme(
                   data: ThemeData.light().copyWith(
-                    primaryColor:
-                        primaryColor, 
+                    primaryColor: primaryColor,
                     colorScheme: ColorScheme.light(
                       primary: primaryColor,
                     ),
@@ -48,9 +50,8 @@ class date extends StatelessWidget {
             );
 
             if (pickedDate != null) {
-              if (!isSameDate(
-                  pickedDate, _assesment1controller.selectedDate.value)) {
-                _assesment1controller.updateDate(pickedDate);
+              if (!isSameDate(pickedDate, controller.selectedDate.value)) {
+                controller.updateDate(pickedDate);
               }
             }
           },
@@ -60,11 +61,10 @@ class date extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '${_assesment1controller.selectedDate.value.toLocal()}'
-                      .split(' ')[0],
-                  style: textFieldStyle, 
+                  '${controller.selectedDate.value.toLocal()}'.split(' ')[0],
+                  style: textFieldStyle,
                 ),
-                Icon(Icons.keyboard_arrow_down)
+                const Icon(Icons.keyboard_arrow_down)
               ],
             ),
           ),

@@ -2,21 +2,26 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
 class TrackingController extends GetxController {
   //TODO: Implement TrackingController
-
+  var selectedKualitasTidur = Rxn<String>();
   var activeIndex = Rxn<int>();
 
-  void toggleImage(int index) {
+  final box = GetStorage();
+
+  void toggleImage(int index, String kualitas) {
     if (activeIndex.value == index) {
-      // If the same image is clicked again, set it to inactive
       activeIndex.value = null;
+      selectedKualitasTidur.value = null;
+      box.write('sleep_quality', selectedKualitasTidur.value);
     } else {
-      // Set the clicked image as active
       activeIndex.value = index;
+      selectedKualitasTidur.value = kualitas;
+      box.write('sleep_quality', selectedKualitasTidur.value);
     }
   }
 

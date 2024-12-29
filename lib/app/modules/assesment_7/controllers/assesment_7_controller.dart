@@ -51,7 +51,7 @@ class Assesment7Controller extends GetxController {
           'stress_level': box.read('stress_level'),
         }),
       );
-      
+
       var data = json.decode(response.body);
 
       if (response.statusCode == 200 && data['status']) {

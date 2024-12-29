@@ -24,17 +24,19 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
     Map<String, String> selectedSchedule = {};
 
     return Scaffold(
+      backgroundColor: whiteColor,
       appBar: AppBar(
-        backgroundColor: whiteColor,
+        toolbarHeight: 85,
+        backgroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(24),
+              bottomRight: Radius.circular(24),
+            ),
+            side: BorderSide(color: Colors.black12)),
         title: Text(
-          'Schedule',
+          'Schedules',
           style: h3Bold,
-        ),
-        leading: IconButton(
-          onPressed: () {
-            Get.back();
-          },
-          icon: Icon(Icons.arrow_back_rounded),
         ),
         centerTitle: true,
       ),
@@ -164,11 +166,10 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                                   waktu: selectedSchedule['time']!));
                         } else {
                           Get.snackbar(
-                            backgroundColor: primaryColor,
-                            colorText: Colors.white,
                             "Silahkan pilih jadwal konsultasi",
                             "Please select a date and time before proceeding.",
-                            snackPosition: SnackPosition.BOTTOM,
+                            backgroundColor: primaryColor.withOpacity(0.6),
+                            colorText: Colors.white,
                           );
                         }
                       },

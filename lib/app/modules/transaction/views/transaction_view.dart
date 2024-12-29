@@ -19,16 +19,18 @@ class TransactionView extends GetView<TransactionController> {
     return Scaffold(
         backgroundColor: whiteColor,
         appBar: AppBar(
-          backgroundColor: whiteColor,
+          toolbarHeight: 85,
+          backgroundColor: Colors.white,
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(24),
+                bottomRight: Radius.circular(24),
+              ),
+              side: BorderSide(color: Colors.black12)),
           title: Text(
-            'Transaction',
+            'Trasanctions',
             style: h3Bold,
           ),
-          leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: Icon(Icons.arrow_back_rounded)),
           centerTitle: true,
         ),
         body: SingleChildScrollView(

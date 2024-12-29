@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:temanbicara/app/data/Tracking.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
@@ -10,6 +12,8 @@ import '../controllers/tracking_2_controller.dart';
 
 class Tracking2View extends GetView<Tracking2Controller> {
   Tracking2View({super.key});
+
+  final Tracking2Controller controller = Get.put(Tracking2Controller());
 
   @override
   Widget build(BuildContext context) {
@@ -52,31 +56,16 @@ class Tracking2View extends GetView<Tracking2Controller> {
                   Obx(
                     () => Column(
                       children: [
-                        if (controller.selectedNumber.value == 1)
-                          Image.asset(
-                            'assets/images/emosi1.png',
-                            scale: 4,
-                          ),
-                        if (controller.selectedNumber.value == 2)
-                          Image.asset(
-                            'assets/images/emosi2.png',
-                            scale: 4,
-                          ),
-                        if (controller.selectedNumber.value == 3)
-                          Image.asset(
-                            'assets/images/emosi3.png',
-                            scale: 4,
-                          ),
-                        if (controller.selectedNumber.value == 4)
-                          Image.asset(
-                            'assets/images/emosi4.png',
-                            scale: 4,
-                          ),
-                        if (controller.selectedNumber.value == 5)
-                          Image.asset(
-                            'assets/images/emosi5.png',
-                            scale: 4,
-                          ),
+                        if (controller.selectedNumber.value == 'Depresi')
+                          Image.asset('assets/images/emosi1.png', scale: 4),
+                        if (controller.selectedNumber.value == 'Sedih')
+                          Image.asset('assets/images/emosi2.png', scale: 4),
+                        if (controller.selectedNumber.value == 'Netral')
+                          Image.asset('assets/images/emosi3.png', scale: 4),
+                        if (controller.selectedNumber.value == 'Senang')
+                          Image.asset('assets/images/emosi4.png', scale: 4),
+                        if (controller.selectedNumber.value == 'Bahagia')
+                          Image.asset('assets/images/emosi5.png', scale: 4),
                         Obx(() => controller.explanationText()),
                         Container(
                           height: 75,
@@ -86,44 +75,45 @@ class Tracking2View extends GetView<Tracking2Controller> {
                             border: Border.all(color: primaryColor),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 8, right: 8),
+                            padding: const EdgeInsets.symmetric(horizontal: 8),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                for (int i = 1; i <= 5; i++)
-                                  GestureDetector(
-                                    onTap: () {
-                                      controller.selectNumber(i);
-                                    },
-                                    child: Container(
-                                      height: 60,
-                                      width: MediaQuery.sizeOf(context).width *
-                                          0.158,
-                                      decoration: ShapeDecoration(
-                                        color:
-                                            controller.selectedNumber.value == i
-                                                ? controller.colorNum
-                                                : Colors.transparent,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                        ),
+                              children: List.generate(5, (index) {
+                                int moodIndex = index + 1;
+                                return GestureDetector(
+                                  onTap: () {
+                                    controller.selectNumber(moodIndex);
+                                  },
+                                  child: Container(
+                                    height: 60,
+                                    width: MediaQuery.sizeOf(context).width *
+                                        0.158,
+                                    decoration: ShapeDecoration(
+                                      color: controller.selectedNumber.value ==
+                                              controller.emotions[moodIndex - 1]
+                                          ? controller.colorNumber()
+                                          : Colors.transparent,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(50),
                                       ),
-                                      child: Center(
-                                        child: Text(
-                                          i.toString(),
-                                          textAlign: TextAlign.center,
-                                          style: h2Bold.copyWith(
-                                              color: controller.selectedNumber
-                                                          .value ==
-                                                      i
-                                                  ? whiteColor
-                                                  : black),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        moodIndex.toString(),
+                                        textAlign: TextAlign.center,
+                                        style: h2Bold.copyWith(
+                                          color: controller
+                                                      .selectedNumber.value ==
+                                                  controller
+                                                      .emotions[moodIndex - 1]
+                                              ? whiteColor
+                                              : black,
                                         ),
                                       ),
                                     ),
                                   ),
-                              ],
+                                );
+                              }),
                             ),
                           ),
                         ),
@@ -138,7 +128,10 @@ class Tracking2View extends GetView<Tracking2Controller> {
                   ),
                   MyButton(
                       get: () {
-                        Get.toNamed(Routes.TRACKING_3);
+                        print(controller.selectedNumber.value);
+                        Get.toNamed(Routes.TRACKING_3,
+                            arguments: TrackingModel(
+                                "", controller.selectedNumber.value, 0));
                       },
                       color: primaryColor,
                       text: 'Lanjutkan'),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:temanbicara/app/data/Tracking.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
@@ -18,6 +19,8 @@ class TrackingView extends GetView<TrackingController> {
     {'kualitas': 'Kurang', 'waktu': '4 - 5 jam', 'emosi': 'emosi2'},
     {'kualitas': 'Insomnia', 'waktu': '< 4 jam', 'emosi': 'emosi1'},
   ];
+
+  final TrackingController controller = Get.put(TrackingController());
 
   @override
   Widget build(BuildContext context) {
@@ -59,13 +62,14 @@ class TrackingView extends GetView<TrackingController> {
           SliverList.builder(
             itemCount: dataKualitasTidur.length,
             itemBuilder: (context, index) {
+              final kualitas = dataKualitasTidur[index]['kualitas'];
               return GestureDetector(
                 onTap: () {
-                  controller.toggleImage(index);
+                  controller.toggleImage(index, kualitas);
                 },
                 child: Obx(
                   () => KualitasTidur(
-                    kualitas: dataKualitasTidur[index]['kualitas'],
+                    kualitas: kualitas,
                     waktu: dataKualitasTidur[index]['waktu'],
                     Image: dataKualitasTidur[index]['emosi'],
                     textColor: controller.changeColor(index),
@@ -81,7 +85,10 @@ class TrackingView extends GetView<TrackingController> {
                 Obx(() => controller.warningText()),
                 MyButton(
                     get: () {
-                      Get.toNamed(Routes.TRACKING_2);
+                      print(controller.selectedKualitasTidur.value!);
+                      Get.toNamed(Routes.TRACKING_2,
+                          arguments: TrackingModel(
+                              controller.selectedKualitasTidur.value!, "", 0));
                     },
                     color: primaryColor,
                     text: 'Lanjutkan'),

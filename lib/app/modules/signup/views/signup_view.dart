@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/widgets/auth_textfield.dart';
 import '../controllers/signup_controller.dart';
 
 class SignupView extends GetView<SignupController> {
@@ -56,110 +57,53 @@ class SignupView extends GetView<SignupController> {
                     const SizedBox(
                       height: 16,
                     ),
-                    TextField(
-                      onChanged: (value) {
-                        controller.isEmpty();
-                      },
+                    AuthTextfield(
+                      onChanged: (value) => controller.isEmpty(),
+                      showPassword: () {},
                       controller: controller.emailC,
-                      decoration: InputDecoration(
-                        hintText: 'Email',
-                        hintStyle: const TextStyle(color: Color(0xFFc4c4c4)),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide:
-                                const BorderSide(color: Color(0xFFc4c4c4))),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
+                      obscureText: false,
+                      hintText: 'Email',
+                      passwordField: false,
                     ),
                     const SizedBox(
                       height: 16,
                     ),
-                    TextField(
-                      onChanged: (value) {
-                        controller.isEmpty();
-                      },
+                    AuthTextfield(
+                      onChanged: (value) => controller.isEmpty(),
+                      showPassword: () {},
                       controller: controller.phoneC,
-                      decoration: InputDecoration(
-                        hintText: 'Phone Number',
-                        hintStyle: const TextStyle(color: Color(0xFFc4c4c4)),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide:
-                                const BorderSide(color: Color(0xFFc4c4c4))),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
+                      obscureText: false,
+                      hintText: 'Phone Number',
+                      passwordField: false,
                     ),
                     const SizedBox(
                       height: 16,
                     ),
-                    TextField(
-                      onChanged: (value) {
-                        controller.isEmpty();
-                      },
-                      obscureText: controller.isSecure.value,
+                    AuthTextfield(
+                      onChanged: (value) => controller.isEmpty(),
+                      showPassword: () => controller.showPassword(),
                       controller: controller.passC,
-                      decoration: InputDecoration(
-                        hintText: 'Password',
-                        hintStyle: const TextStyle(color: Color(0xFFc4c4c4)),
-                        suffixIcon: IconButton(
-                          icon: const Icon(Icons.remove_red_eye),
-                          onPressed: () {
-                            controller.showPassword();
-                          },
-                        ),
-                        suffixIconColor: const Color(0xFFc4c4c4),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide:
-                                const BorderSide(color: Color(0xFFc4c4c4))),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
+                      obscureText: controller.isSecure.value,
+                      hintText: 'Password',
+                      passwordField: true,
                     ),
                     const SizedBox(
                       height: 16,
                     ),
-                    TextField(
-                      onChanged: (value) {
-                        controller.isEmpty();
-                      },
-                      obscureText: controller.isSecureC.value,
+                    AuthTextfield(
+                      onChanged: (value) => controller.isEmpty(),
+                      showPassword: () => controller.showPasswordC(),
                       controller: controller.confirmPassC,
-                      decoration: InputDecoration(
-                        hintText: 'Konfirmasi Password',
-                        hintStyle: const TextStyle(color: Color(0xFFc4c4c4)),
-                        suffixIcon: IconButton(
-                          icon: const Icon(Icons.remove_red_eye),
-                          onPressed: () {
-                            controller.showPasswordC();
-                          },
-                        ),
-                        suffixIconColor: const Color(0xFFc4c4c4),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide:
-                                const BorderSide(color: Color(0xFFc4c4c4))),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
+                      obscureText: controller.isSecureC.value,
+                      hintText: 'Password',
+                      passwordField: true,
                     ),
                     const SizedBox(
                       height: 68,
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        controller.register(
-                          controller.emailC.text,
-                          controller.phoneC.text,
-                          controller.passC.text,
-                          controller.confirmPassC.text,
-                        );
+                        controller.register();
                       },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: controller.isButtonActive.value
@@ -172,10 +116,19 @@ class SignupView extends GetView<SignupController> {
                           ),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10))),
-                      child: Text(
-                        'Daftar',
-                        style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
-                      ),
+                      child: controller.isLoading.value == false
+                          ? Text(
+                              'Daftar',
+                              style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.bold),
+                            )
+                          : SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                color: whiteColor,
+                              ),
+                            ),
                     ),
                     const SizedBox(
                       height: 24,

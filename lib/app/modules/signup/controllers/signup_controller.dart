@@ -20,19 +20,18 @@ class SignupController extends GetxController {
   var isSecureC = true.obs;
   var isLoading = false.obs;
 
-  Future<void> register(
-      String email, String phone, String pass, String confirmPass) async {
+  Future<void> register() async {
     isLoading.value = true;
 
     try {
-      if (pass == confirmPass) {
+      if (passC.text == confirmPassC.text) {
         var response = await http.post(
           Uri.parse('http://10.0.2.2:8000/api/v1/register'),
           headers: {'Content-Type': 'application/json'},
           body: json.encode({
-            'email': email,
-            'phone_number': phone,
-            'password': pass,
+            'email': emailC.text,
+            'phone_number': phoneC.text,
+            'password': passC.text,
           }),
         );
 

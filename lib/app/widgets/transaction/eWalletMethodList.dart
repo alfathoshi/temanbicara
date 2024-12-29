@@ -89,11 +89,10 @@ class EWalletMethodList extends StatelessWidget {
                       arguments: transaction);
                 } else {
                   Get.snackbar(
-                    backgroundColor: primaryColor,
+                    backgroundColor: primaryColor.withOpacity(0.6),
                     colorText: Colors.white,
                     "Silahkan pilih Metode Pembayaran",
                     "Please select payment method before proceeding.",
-                    snackPosition: SnackPosition.BOTTOM,
                   );
                 }
               },
