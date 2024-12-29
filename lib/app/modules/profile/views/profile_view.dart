@@ -58,10 +58,10 @@ class ProfileView extends GetView<ProfileController> {
                   const SizedBox(
                     height: 12,
                   ),
-                  Text(
-                    box.read('nickname'),
-                    style: h3Bold,
-                  ),
+                  // Text(
+                  //   box.read('nickname'),
+                  //   style: h3Bold,
+                  // ),
                 ],
               ),
             ),

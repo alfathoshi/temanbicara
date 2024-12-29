@@ -19,7 +19,7 @@ void main() {
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
         title: "Teman Bicara",
-        initialRoute: Routes.SPLASH_SCREEN,
+        initialRoute: Routes.NAVIGATION_BAR,
         getPages: AppPages.routes,
       ),
     ),

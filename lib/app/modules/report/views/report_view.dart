@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:temanbicara/app/modules/mood_report/views/mood_report_view.dart';
-import 'package:temanbicara/app/modules/sleep_quality/views/sleep_quality_view.dart';
-import 'package:temanbicara/app/modules/stress_level/views/stress_level_view.dart';
+import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
 import '../controllers/report_controller.dart';
 
 class ReportView extends GetView<ReportController> {
   const ReportView({super.key});
+
   @override
   Widget build(BuildContext context) {
     TextEditingController dateController = TextEditingController();
@@ -26,7 +25,10 @@ class ReportView extends GetView<ReportController> {
 
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.arrow_back),
+        leading: GestureDetector(
+          onTap: () => Get.back(canPop: true),
+          child: const Icon(Icons.arrow_back),
+        ),
         title: Text(
           'Mental Report',
           style: h2Bold,
@@ -75,29 +77,29 @@ class ReportView extends GetView<ReportController> {
             ),
             ReportCategory(
               onPressed: () {
-                Get.to(() => const SleepQualityView());
+                Get.toNamed(Routes.SLEEP_QUALITY,
+                    arguments: [controller.trackingList, controller.avgSleep]);
               },
               title: "Sleep Quality",
-              description: "Normal (~5h average)",
-              value: 63,
+              description: "Status ${controller.avgSleep.value}",
               image: "assets/images/sleepquality.png",
             ),
             ReportCategory(
               onPressed: () {
-                Get.to(() => const StressLevelView());
+                Get.toNamed(Routes.STRESS_LEVEL,
+                    arguments: [controller.trackingList, controller.avgStress]);
               },
               title: "Stress Level",
-              description: "Level 3",
-              value: 60,
+              description: "Level ${controller.avgStress.value}",
               image: "assets/images/stresslevel.png",
             ),
             ReportCategory(
               onPressed: () {
-                Get.to(() => const MoodReportView());
+                Get.toNamed(Routes.MOOD_REPORT,
+                    arguments: [controller.trackingList, controller.avgMood]);
               },
               title: "Mood Tracker",
-              description: "Level 3 (Normal)",
-              value: 60,
+              description: "Status ${controller.avgMood.value}",
               image: "assets/images/moodtracker.png",
             ),
             const SizedBox(
@@ -121,7 +123,7 @@ class ReportView extends GetView<ReportController> {
                 ),
                 TextButton(
                   onPressed: () {
-                    print("pressed");
+                    Get.toNamed(Routes.CONSULTATION);
                   },
                   child: Text(
                     "Click Here",
@@ -155,13 +157,12 @@ class ReportCategory extends StatelessWidget {
   final Function onPressed;
   final String title;
   final String description;
-  final double value;
+
   const ReportCategory(
       {super.key,
       required this.onPressed,
       required this.title,
       required this.description,
-      required this.value,
       required this.image});
 
   @override
@@ -229,23 +230,6 @@ class ReportCategory extends StatelessWidget {
                         style: h5Regular,
                       ),
                     ],
-                  ),
-                ],
-              ),
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  SizedBox.square(
-                    dimension: 45,
-                    child: CircularProgressIndicator(
-                      value: value,
-                      color: Colors.green,
-                      strokeWidth: 6,
-                    ),
-                  ),
-                  Text(
-                    "$value%",
-                    style: h5Regular,
                   ),
                 ],
               ),

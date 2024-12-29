@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sliding_up_panel/flutter_sliding_up_panel.dart';
 
 import 'package:get/get.dart';
+import 'package:temanbicara/app/modules/report/logo_helper.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/custom_bar_chart.dart';
 
@@ -19,6 +20,9 @@ class SleepQualityView extends GetView<SleepQualityController> {
       {"month": "Dec", "date": "28", "sleep_hours": 5},
       {"month": "Dec", "date": "27", "sleep_hours": 8},
     ];
+
+    List<dynamic> trackingList = Get.arguments[0].value;
+
     SlidingUpPanelController slidingUpController = SlidingUpPanelController();
     return Stack(
       children: [
@@ -57,10 +61,7 @@ class SleepQualityView extends GetView<SleepQualityController> {
                             strokeWidth: 10,
                           ),
                         ),
-                        Text(
-                          "6h Average",
-                          style: h4Bold,
-                        ),
+                        Image.asset(LogoHelper.sleepQuality[Get.arguments[1]]!)
                       ],
                     ),
                   ),
@@ -68,7 +69,7 @@ class SleepQualityView extends GetView<SleepQualityController> {
                     height: 10,
                   ),
                   Text(
-                    "Good",
+                    Get.arguments[1].value,
                     style: h1Bold.copyWith(color: const Color(0xFFFEBE58)),
                   ),
                   Image.asset(
@@ -104,7 +105,7 @@ class SleepQualityView extends GetView<SleepQualityController> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 15),
               child: ListView(
-                physics: const NeverScrollableScrollPhysics(),
+                // physics: const NeverScrollableScrollPhysics(),
                 children: [
                   Center(
                     child: Container(
@@ -124,7 +125,7 @@ class SleepQualityView extends GetView<SleepQualityController> {
                     style: h3Bold,
                   ),
                   Text(
-                    "lebih baik dari 5 hari yang lalu. Perbanyak istirahat! Kamu perlu itu!",
+                    "Istirahat adalah investasi kesehatan. Jangan lupa tidur cukup malam ini!",
                     style: h4Regular,
                   ),
                   const SizedBox(
@@ -137,11 +138,19 @@ class SleepQualityView extends GetView<SleepQualityController> {
                   const SizedBox(
                     height: 20,
                   ),
-                  CustomBarChart(dummyData: dummyData),
+                  CustomBarChart(
+                    dummyData: trackingList,
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
-                  for (int i = 0; i < 5; i++) const SleepHistoryItem(),
+                  for (int i = 0; i < trackingList.length; i++)
+                    SleepHistoryItem(
+                      description: trackingList[i]['sleep_quality'],
+                      date: trackingList[i]['updated_at']
+                          .split('T')[0]
+                          .toString(),
+                    ),
                 ],
               ),
             ),
@@ -153,16 +162,34 @@ class SleepQualityView extends GetView<SleepQualityController> {
 }
 
 class SleepHistoryItem extends StatelessWidget {
-  const SleepHistoryItem({super.key});
+  final String description;
+  final String date;
+  const SleepHistoryItem(
+      {super.key, required this.description, required this.date});
 
   @override
   Widget build(BuildContext context) {
+    List month = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
+
     return Container(
       margin: const EdgeInsets.only(bottom: 15),
       width: MediaQuery.sizeOf(context).width,
       height: 70,
       decoration: BoxDecoration(
-        color: const Color(0xFF9AD567).withOpacity(0.5),
+        color: const Color.fromARGB(255, 253, 214, 151),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
@@ -174,11 +201,11 @@ class SleepHistoryItem extends StatelessWidget {
               width: 50,
               height: 50,
               decoration: BoxDecoration(
-                color: const Color(0xFFBDCF99),
+                color: const Color(0xFFFEBE58),
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: const [
                   BoxShadow(
-                    color: Color(0xFFBDCF99),
+                    color: Color(0xFFFEBE58),
                     spreadRadius: 1,
                     blurRadius: 0.5,
                   ),
@@ -189,11 +216,11 @@ class SleepHistoryItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "Des",
+                    month[int.parse(date.split('-')[1]) - 1],
                     style: h6Medium,
                   ),
                   Text(
-                    "31",
+                    date.split('-')[2],
                     style: h4Bold,
                   ),
                 ],
@@ -203,7 +230,7 @@ class SleepHistoryItem extends StatelessWidget {
               width: 15,
             ),
             Text(
-              "Kamu tidur selama 7.5 jam",
+              "Kualitas tidur kamu \"$description\"",
               style: h4Regular,
             ),
           ],

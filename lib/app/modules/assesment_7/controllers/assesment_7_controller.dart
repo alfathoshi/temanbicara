@@ -32,7 +32,7 @@ class Assesment7Controller extends GetxController {
   Future<void> saveAssesment() async {
     try {
       var response = await http.post(
-        Uri.parse('http://localhost:8000/api/v1/do-assessment'),
+        Uri.parse('http://10.0.2.2:8000/api/v1/do-assessment'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ${box.read('token')}',
@@ -51,7 +51,7 @@ class Assesment7Controller extends GetxController {
           'stress_level': box.read('stress_level'),
         }),
       );
-      
+
       var data = json.decode(response.body);
 
       if (response.statusCode == 200 && data['status']) {
