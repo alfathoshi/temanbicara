@@ -56,68 +56,78 @@ class Assesment3View extends GetView<Assesment3Controller> {
           ],
         ),
         body: Padding(
-          padding: const EdgeInsets.all(32.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                'Apa yang ingin kamu capai?',
-                textAlign: TextAlign.center,
-                style: h3Bold,
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              const SleepQuality(
-                desc: 'Nyenyak',
-                time: '8 - 9 Jam',
-                index: 4,
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-              const SleepQuality(
-                desc: 'Baik',
-                time: '7 - 8 Jam',
-                index: 3,
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-              const SleepQuality(
-                desc: 'Cukup',
-                time: '6 - 7 Jam',
-                index: 2,
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-              const SleepQuality(
-                desc: 'Kurang',
-                time: '5 - 6 Jam',
-                index: 1,
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-              const SleepQuality(
-                desc: 'Insomnia',
-                time: '< 4 Jam',
-                index: 0,
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-              Text('Silahkan pilih salah satu!', style: warningGoals),
-              Spacer(),
-              MyButton(
-                  get: () {
-                    Get.toNamed(Routes.ASSESMENT_4);
-                  },
-                  color: primaryColor,
-                  text: 'Lanjutkan')
-            ],
-          ),
-        ));
+            padding: const EdgeInsets.all(32.0),
+            child: ListView(
+              children: [
+                Container(
+                  height: MediaQuery.sizeOf(context).height -
+                      (AppBar().preferredSize.height +
+                          MediaQuery.of(context).padding.bottom),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Apa yang ingin kamu capai?',
+                        textAlign: TextAlign.center,
+                        style: h3Bold,
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      const SleepQuality(
+                        desc: 'Nyenyak',
+                        time: '8 - 9 Jam',
+                        index: 4,
+                      ),
+                      const SizedBox(
+                        height: 32,
+                      ),
+                      const SleepQuality(
+                        desc: 'Baik',
+                        time: '7 - 8 Jam',
+                        index: 3,
+                      ),
+                      const SizedBox(
+                        height: 32,
+                      ),
+                      const SleepQuality(
+                        desc: 'Cukup',
+                        time: '6 - 7 Jam',
+                        index: 2,
+                      ),
+                      const SizedBox(
+                        height: 32,
+                      ),
+                      const SleepQuality(
+                        desc: 'Kurang',
+                        time: '5 - 6 Jam',
+                        index: 1,
+                      ),
+                      const SizedBox(
+                        height: 32,
+                      ),
+                      const SleepQuality(
+                        desc: 'Insomnia',
+                        time: '< 4 Jam',
+                        index: 0,
+                      ),
+                      const SizedBox(
+                        height: 32,
+                      ),
+                      Text('Silahkan pilih salah satu!', style: warningGoals),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      MyButton(
+                          get: () {
+                            Get.toNamed(Routes.ASSESMENT_4);
+                          },
+                          color: primaryColor,
+                          text: 'Lanjutkan')
+                    ],
+                  ),
+                ),
+              ],
+            )));
   }
 }
