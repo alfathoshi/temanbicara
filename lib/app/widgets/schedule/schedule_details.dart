@@ -4,7 +4,7 @@ import 'package:temanbicara/app/themes/fonts.dart';
 
 class ScheduleList extends StatefulWidget {
   final List schedule;
-  final ValueChanged<Map<String, String>> onSelectionChanged;
+  final ValueChanged<Map<String, dynamic>> onSelectionChanged;
 
   const ScheduleList({
     super.key,
@@ -17,7 +17,7 @@ class ScheduleList extends StatefulWidget {
 }
 
 class _ScheduleListState extends State<ScheduleList> {
-  Map<String, String> _selectedSchedule = {};
+  Map<String, dynamic> _selectedSchedule = {};
 
   String getDayName(String date) {
     DateTime dateTime = DateTime.parse(date);
@@ -33,7 +33,7 @@ class _ScheduleListState extends State<ScheduleList> {
         borderRadius: BorderRadius.circular(20),
         color: Colors.white,
       ),
-      height: 440,
+      height: 400,
       child: ListView.builder(
         itemCount: widget.schedule.length,
         itemBuilder: (BuildContext context, int index) {
@@ -74,6 +74,7 @@ class _ScheduleListState extends State<ScheduleList> {
                         child: ListView.builder(
                           itemCount: scheduleDay.length,
                           itemBuilder: (BuildContext ctx, int idx) {
+                            int id = scheduleDay[idx]['schedule_id'];
                             String timeSlot =
                                 '${scheduleDay[idx]['start_time']} - ${scheduleDay[idx]['end_time']}';
                             bool isSelected =
@@ -89,6 +90,7 @@ class _ScheduleListState extends State<ScheduleList> {
                                     _selectedSchedule = {
                                       'date': date,
                                       'time': timeSlot,
+                                      'id': id,
                                     };
                                   }
                                 });

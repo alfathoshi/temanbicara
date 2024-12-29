@@ -82,7 +82,7 @@ class CounselorCard extends StatelessWidget {
                     Text(
                       'Expertise : ${expertise}',
                       style: TextStyle(
-                          fontSize: 9,
+                          fontSize: 10,
                           fontWeight: FontWeight.w600,
                           overflow: TextOverflow.ellipsis),
                     ),

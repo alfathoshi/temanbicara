@@ -57,7 +57,7 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
                   SizedBox(height: 19),
                   // data invoice disini
                   Container(
-                      height: screenHeight * 0.6,
+                      height: screenHeight * 0.58,
                       child: SingleChildScrollView(
                           child: InvoiceData(invoice: invoice))),
                   SizedBox(height: 15),
@@ -88,7 +88,7 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
                       )
                     ],
                   ),
-                  SizedBox(height: 30),
+                  SizedBox(height: 15),
                   Center(
                     child: SizedBox(
                       width: 205,

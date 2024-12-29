@@ -32,7 +32,7 @@ class LoginController extends GetxController {
 
     try {
       var response = await http.post(
-        Uri.parse('http://10.0.2.2:8000/api/v1/login'),
+        Uri.parse('http://localhost:8000/api/v1/login'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'email': emailC.text,
@@ -51,27 +51,27 @@ class LoginController extends GetxController {
           backgroundColor: primaryColor.withOpacity(0.6),
           colorText: Colors.white,
         );
-        // Get.offAllNamed(
-        //   Routes.NAVIGATION_BAR,
-        //   arguments: {"indexPage": 0},
-        // );
+        Get.offAllNamed(
+          Routes.NAVIGATION_BAR,
+          arguments: {"indexPage": 0},
+        );
 
-        if (data['data']['name'] == null) {
-          Get.toNamed(
-            Routes.ASSESMENT_1,
-          );
-        } else {
-          box.write('email', data['data']['email']);
-          box.write('password', data['data']['password']);
-          box.write('name', data['data']['name']);
-          box.write('nickname', data['data']['nickname']);
-          box.write('birthdate', data['data']['birthdate']);
+        // if (data['data']['name'] == null) {
+        //   Get.toNamed(
+        //     Routes.ASSESMENT_1,
+        //   );
+        // } else {
+        //   box.write('email', data['data']['email']);
+        //   box.write('password', data['data']['password']);
+        //   box.write('name', data['data']['name']);
+        //   box.write('nickname', data['data']['nickname']);
+        //   box.write('birthdate', data['data']['birthdate']);
 
-          Get.offAllNamed(
-            Routes.NAVIGATION_BAR,
-            arguments: {"indexPage": 0},
-          );
-        }
+        //   Get.offAllNamed(
+        //     Routes.NAVIGATION_BAR,
+        //     arguments: {"indexPage": 0},
+        //   );
+        // }
       } else {
         Get.snackbar('Error', data['message'],
             backgroundColor: error.withOpacity(0.6), colorText: whiteColor);

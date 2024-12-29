@@ -21,7 +21,7 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
     final schedules = arguments['schedules'];
     final expertise = arguments['expertise'];
 
-    Map<String, String> selectedSchedule = {};
+    Map<String, dynamic> selectedSchedule = {};
 
     return Scaffold(
       backgroundColor: whiteColor,
@@ -41,6 +41,7 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
+        physics: NeverScrollableScrollPhysics(),
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -146,6 +147,7 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                     selectedSchedule = selected;
                   },
                 ),
+                SizedBox(height: 20),
                 Center(
                   child: SizedBox(
                     width: 205,
@@ -158,12 +160,16 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                       onPressed: () {
                         if (selectedSchedule.isNotEmpty) {
                           print(selectedSchedule['time']);
-                          Get.to(() => TransactionView(),
-                              arguments: TransactionModel(
-                                  namaPsikiater: userName,
-                                  expertise: expertise,
-                                  jadwal: selectedSchedule['date']!,
-                                  waktu: selectedSchedule['time']!));
+                          Get.to(
+                            () => TransactionView(),
+                            arguments: TransactionModel(
+                              namaPsikiater: userName,
+                              expertise: expertise,
+                              jadwal: selectedSchedule['date']!,
+                              waktu: selectedSchedule['time']!,
+                              selectedID: selectedSchedule['id'],
+                            ),
+                          );
                         } else {
                           Get.snackbar(
                             "Silahkan pilih jadwal konsultasi",

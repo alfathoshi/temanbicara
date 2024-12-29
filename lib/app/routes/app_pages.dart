@@ -124,7 +124,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.PROFILE,
-      page: () =>  ProfileView(),
+      page: () => ProfileView(),
       binding: ProfileBinding(),
     ),
     GetPage(
@@ -204,7 +204,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.TRANSACTION_PAYMENT,
-      page: () => const TransactionPaymentView(),
+      page: () => TransactionPaymentView(),
       binding: TransactionPaymentBinding(),
     ),
     GetPage(
