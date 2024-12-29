@@ -41,17 +41,16 @@ class CreateJournalController extends GetxController {
       return;
     }
 
-    final Map<String, dynamic> data = {
-      'title': titleController.text,
-      'body': bodyController.text,
-      'stress_level': sliderValue.value + 1,
-      'mood_level': selectedEmotion.value,
-    };
-    print(data['mood_level'] is String);
+    // final Map<String, dynamic> data = {
+    //   'title': titleController.text,
+    //   'body': bodyController.text,
+    //   'stress_level': sliderValue.value + 1,
+    //   'mood_level': selectedEmotion.value,
+    // };
+    // print(data['mood_level'] is String);
 
     try {
       final userId = box.read('id');
-      print(data['title']);
       print("ppk ${userId}");
       final token = box.read('token');
       print("token  ${token}");
@@ -61,35 +60,41 @@ class CreateJournalController extends GetxController {
           'Authorization': 'Bearer $token',
         },
         body: {
-          'title': data['title'],
-          'body': data['body'],
-          'stress_level': data['stress_level'].toString(),
-          'mood_level': data['mood_level'],
+          'title': titleController.text,
+          'body': bodyController.text,
+          'stress_level': (sliderValue.value + 1).toString(),
+          'mood_level': selectedEmotion.value,
           'user_id': userId.toString(),
         },
       );
 
       if (response.statusCode == 200) {
-        // Success
-        Get.snackbar('Success', 'Journal created successfully',
-            snackPosition: SnackPosition.BOTTOM);
-        // Clear inputs
-        titleController.clear();
-        bodyController.clear();
-        sliderValue.value = 0;
-        selectedEmotion.value = '';
+        final responseData = jsonDecode(response.body);
+        if (responseData['status']) {
+          Get.snackbar(
+            'Success',
+            'Journal created successfully',
+          );
+          titleController.clear();
+          bodyController.clear();
+          sliderValue.value = 0;
+          selectedEmotion.value = '';
+          Get.back();
+        } else {
+          Get.snackbar(
+              'Error', responseData['message'] ?? 'Failed to created journal');
+        }
+        // Get.snackbar('Success', 'Journal created successfully');
       } else {
         print(response.body);
         var errorData = jsonDecode(response.body);
         print(errorData);
         Get.snackbar(
-            'Error', errorData['message'] ?? 'Failed to create journal',
-            snackPosition: SnackPosition.BOTTOM);
+            'Error', errorData['message'] ?? 'Failed to create journal');
       }
     } catch (e) {
       print(e);
-      Get.snackbar('Error', 'An error occurred: $e',
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Error', 'An error occurred: $e');
     }
   }
 }

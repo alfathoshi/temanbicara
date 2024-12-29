@@ -35,6 +35,10 @@ import '../modules/chatbot_room/bindings/chatbot_room_binding.dart';
 import '../modules/chatbot_room/views/chatbot_room_view.dart';
 import '../modules/consult/bindings/consult_binding.dart';
 import '../modules/consult/views/consult_view.dart';
+import '../modules/consult_history/bindings/consult_history_binding.dart';
+import '../modules/consult_history/views/consult_history_view.dart';
+import '../modules/consult_report/bindings/consult_report_binding.dart';
+import '../modules/consult_report/views/consult_report_view.dart';
 import '../modules/consult_schedule/bindings/consult_schedule_binding.dart';
 import '../modules/consult_schedule/views/consult_schedule_view.dart';
 import '../modules/create_journal/bindings/create_journal_binding.dart';
@@ -301,6 +305,16 @@ class AppPages {
       name: _Paths.EDIT_JOURNAL,
       page: () => const EditJournalView(),
       binding: EditJournalBinding(),
+    ),
+    GetPage(
+      name: _Paths.CONSULT_HISTORY,
+      page: () => const ConsultHistoryView(),
+      binding: ConsultHistoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.CONSULT_REPORT,
+      page: () => const ConsultReportView(),
+      binding: ConsultReportBinding(),
     ),
   ];
 }

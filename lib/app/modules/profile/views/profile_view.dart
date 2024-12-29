@@ -140,18 +140,21 @@ class ProfileView extends GetView<ProfileController> {
                 const SizedBox(
                   height: 16,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Consultations History',
-                      style: h4SemiBold,
-                    ),
-                    const Icon(
-                      Icons.chevron_right_outlined,
-                      size: 32,
-                    )
-                  ],
+                GestureDetector(
+                  onTap: () => Get.toNamed(Routes.CONSULT_HISTORY),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Consultations History',
+                        style: h4SemiBold,
+                      ),
+                      const Icon(
+                        Icons.chevron_right_outlined,
+                        size: 32,
+                      )
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 32,
