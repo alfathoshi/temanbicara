@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:temanbicara/app/modules/chat/views/chat_view.dart';
 import 'package:temanbicara/app/modules/report/controllers/report_controller.dart';
@@ -19,8 +20,8 @@ import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<ReportController> {
   GetStorage box = GetStorage();
-
   HomeView({super.key});
+  final HomeController _controller = Get.put(HomeController());
 
   final ReportController reportController = Get.put(ReportController());
 
@@ -140,9 +141,14 @@ class HomeView extends GetView<ReportController> {
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Center(
-                          child: Text(
-                            'Tracking',
-                            style: trackingButton,
+                          child: TextButton(
+                            onPressed: () {
+                              Get.toNamed(Routes.TRACKING);
+                            },
+                            child: Text(
+                              'Tracking',
+                              style: trackingButton,
+                            ),
                           ),
                         ),
                       ),
@@ -411,8 +417,12 @@ class HomeView extends GetView<ReportController> {
                             style: h4SemiBold,
                           ),
                           GestureDetector(
-                            onTap: () {
-                              Get.toNamed(Routes.ARTICLE);
+                            onTap: () async {
+                              final data = await _controller.fetchData();
+                              Get.toNamed(
+                                Routes.ARTICLE,
+                                arguments: data['data'],
+                              );
                             },
                             child: Text(
                               'See More',
@@ -424,88 +434,66 @@ class HomeView extends GetView<ReportController> {
                     ],
                   ),
                 ),
-              )
+              ),
+              FutureBuilder(
+                future: _controller.fetchData(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text(snapshot.error.toString()),
+                    );
+                  } else if (snapshot.hasData) {
+                    final List listData = snapshot.data!['data'];
+                    final double containerHeight = listData.length <= 2
+                        ? listData.length *
+                            180.0 
+                        : 530.0; 
+
+                    return Container(
+                      constraints: BoxConstraints(
+                        maxHeight: containerHeight,
+                      ),
+                      child: ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: listData.length <= 2 ? listData.length : 3,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: EdgeInsets.only(left: 24, right: 24),
+                            child: TopArticle(
+                              judul: listData[index]["title"],
+                              deskripsi: listData[index]["content"],
+                              author: listData[index]["user"]["name"],
+                              image: listData[index]["image"],
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  } else {
+                    return Center(child: Text("Tidak Ada Data"));
+                  }
+                },
+              ),
             ],
           ),
         ),
-        SliverList.builder(
-            itemCount: 3,
-            itemBuilder: (context, index) {
-              return Padding(
-                padding: EdgeInsets.only(left: 24, right: 24),
-                child: TopArticle(
-                  judul: data[index]["judul"],
-                  deskripsi: data[index]["deskripsi"],
-                  author: data[index]["author"],
-                  image: data[index]["image"],
-                ),
-              );
-            })
+
+        // SliverList.builder(
+        //     itemCount: _controller.articleList.length,
+        //     itemBuilder: (context, index) {
+        //       return Padding(
+        //         padding: EdgeInsets.only(left: 24, right: 24),
+        //         child: TopArticle(
+        //           judul: _controller.articleList[index]["title"],
+        //           deskripsi: _controller.articleList[index]["content"],
+        //           author: _controller.articleList[index]["user"]["name"],
+        //           image: _controller.articleList[index]["image"],
+        //         ),
+        //       );
+        //     })
       ]),
     );
   }
 }
-
-List<Map<String, dynamic>> data = [
-  {
-    "image": "article1",
-    "judul": "What is mental health?",
-    "deskripsi":
-        "Mental health is about how people think, feel, and behave. Mental health care professionals can help people manage conditions such as depression, anxiety, bipolar disorder, addiction, and other disorders that affect their thoughts, feelings, and behaviors,Mental health can affect a person’s day-to-day life, relationships, and physical health. External factors in people’s lives and relationships can also contribute to their mental well-being.Looking after one’s mental health can help a person maintain their ability to enjoy life. This involves balancing their activities, responsibilities, and efforts to achieve psychological resilience.Stress, depression, and anxiety can affect mental health and may disrupt a person’s routine.Although healthcare professionals often use the term “mental health,” doctors recognize that many mental health conditions have physical roots.This article explains what mental health and mental health conditions mean. It also describes the most common types of mental health disorders, including their early signs and how to treat them.",
-    "author": "gina cantik"
-  },
-  {
-    "image": "article1",
-    "judul": "a",
-    "deskripsi": "loremipsum",
-    "author": "gina cantik"
-  },
-  {
-    "image": "article1",
-    "judul": "a",
-    "deskripsi": "loremipsum",
-    "author": "gina cantik"
-  },
-  {
-    "image": "article1",
-    "judul": "a",
-    "deskripsi": "loremipsum",
-    "author": "gina cantik"
-  },
-  {
-    "image": "article1",
-    "judul": "a",
-    "deskripsi": "loremipsum",
-    "author": "gina cantik"
-  },
-  {
-    "image": "article1",
-    "judul": "a",
-    "deskripsi": "loremipsum",
-    "author": "gina cantik"
-  },
-  {
-    "image": "article1",
-    "judul": "a",
-    "deskripsi": "loremipsum",
-    "author": "gina cantik"
-  },
-  {
-    "image": "article1",
-    "judul": "a",
-    "deskripsi": "loremipsum",
-    "author": "gina cantik"
-  },
-  {
-    "image": "article1",
-    "judul": "a",
-    "deskripsi": "loremipsum",
-    "author": "gina cantik"
-  },
-  {
-    "image": "article1",
-    "judul": "a",
-    "deskripsi": "loremipsum",
-    "author": "gina cantik"
-  }
-];

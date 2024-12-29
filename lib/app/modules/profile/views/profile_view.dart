@@ -58,10 +58,12 @@ class ProfileView extends GetView<ProfileController> {
                   const SizedBox(
                     height: 12,
                   ),
-                  // Text(
-                  //   box.read('nickname'),
-                  //   style: h3Bold,
-                  // ),
+
+                  Text(
+                    box.read('nickname') ?? "Astro",
+                    style: h3Bold,
+                  ),
+
                 ],
               ),
             ),
@@ -196,9 +198,8 @@ class ProfileView extends GetView<ProfileController> {
                     )
                   ],
                 ),
-                sby24,
+                SizedBox(height: 20),
                 const Divider(),
-                sby24,
                 GestureDetector(
                   onTap: () {
                     Get.offAllNamed(

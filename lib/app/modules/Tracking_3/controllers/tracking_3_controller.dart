@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
@@ -7,9 +8,12 @@ class Tracking3Controller extends GetxController {
   var selectedNumber = 0.obs;
   var activeIndex = Rxn<int>();
 
+  final box = GetStorage();
+
   void selectNumber(int number) {
     selectedNumber.value = number;
     activeIndex.value = selectedNumber.value;
+    box.write('stress_level', selectedNumber.value);
   }
 
   Widget explanationText() {

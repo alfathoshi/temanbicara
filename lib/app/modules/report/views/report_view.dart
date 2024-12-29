@@ -51,7 +51,7 @@ class ReportView extends GetView<ReportController> {
                   style: h4Medium,
                 ),
                 SizedBox(
-                  width: 160,
+                  width: 150,
                   height: 25,
                   child: TextField(
                     controller: dateController,

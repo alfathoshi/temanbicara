@@ -9,7 +9,7 @@ import '../controllers/article_controller.dart';
 
 class ArticleView extends GetView<ArticleController> {
   ArticleView({super.key});
-
+  final List article = Get.arguments;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,83 +46,20 @@ class ArticleView extends GetView<ArticleController> {
           ),
         ),
         SliverList.builder(
-            itemCount: data.length,
+            itemCount: article.length,
             itemBuilder: (context, index) {
+              print('Index bertipe String: ${article}');
               return Padding(
                 padding: EdgeInsets.only(left: 24, right: 24),
                 child: TopArticle(
-                  judul: data[index]["judul"],
-                  deskripsi: data[index]["deskripsi"],
-                  author: data[index]["author"],
-                  image: data[index]["image"],
+                  judul: article[index]["title"],
+                  deskripsi: article[index]["content"],
+                  author: article[index]["user"]["name"],
+                  image: article[index]["image"],
                 ),
               );
             })
       ]),
     );
   }
-
-  List<Map<String, dynamic>> data = [
-    {
-      "image": "article1",
-      "judul": "What is mental health?",
-      "deskripsi":
-          "Mental health is about how people think, feel, and behave. Mental health care professionals can help people manage conditions such as depression, anxiety, bipolar disorder, addiction, and other disorders that affect their thoughts, feelings, and behaviors,Mental health can affect a person’s day-to-day life, relationships, and physical health. External factors in people’s lives and relationships can also contribute to their mental well-being.Looking after one’s mental health can help a person maintain their ability to enjoy life. This involves balancing their activities, responsibilities, and efforts to achieve psychological resilience.Stress, depression, and anxiety can affect mental health and may disrupt a person’s routine.Although healthcare professionals often use the term “mental health,” doctors recognize that many mental health conditions have physical roots.This article explains what mental health and mental health conditions mean. It also describes the most common types of mental health disorders, including their early signs and how to treat them.",
-      "author": "gina cantik"
-    },
-    {
-      "image": "article1",
-      "judul": "a",
-      "deskripsi": "loremipsum",
-      "author": "gina cantik"
-    },
-    {
-      "image": "article1",
-      "judul": "a",
-      "deskripsi": "loremipsum",
-      "author": "gina cantik"
-    },
-    {
-      "image": "article1",
-      "judul": "a",
-      "deskripsi": "loremipsum",
-      "author": "gina cantik"
-    },
-    {
-      "image": "article1",
-      "judul": "a",
-      "deskripsi": "loremipsum",
-      "author": "gina cantik"
-    },
-    {
-      "image": "article1",
-      "judul": "a",
-      "deskripsi": "loremipsum",
-      "author": "gina cantik"
-    },
-    {
-      "image": "article1",
-      "judul": "a",
-      "deskripsi": "loremipsum",
-      "author": "gina cantik"
-    },
-    {
-      "image": "article1",
-      "judul": "a",
-      "deskripsi": "loremipsum",
-      "author": "gina cantik"
-    },
-    {
-      "image": "article1",
-      "judul": "a",
-      "deskripsi": "loremipsum",
-      "author": "gina cantik"
-    },
-    {
-      "image": "article1",
-      "judul": "a",
-      "deskripsi": "loremipsum",
-      "author": "gina cantik"
-    }
-  ];
 }

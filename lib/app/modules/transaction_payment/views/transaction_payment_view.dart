@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/data/Invoice.dart';
 import 'package:temanbicara/app/data/Transaction.dart';
 import 'package:temanbicara/app/modules/transaction_invoice/views/transaction_invoice_view.dart';
@@ -14,9 +15,14 @@ import '../controllers/transaction_payment_controller.dart';
 
 class TransactionPaymentView extends GetView<TransactionPaymentController> {
   final String? paymentMethod;
-  const TransactionPaymentView({this.paymentMethod, super.key});
+  TransactionPaymentView({super.key, this.paymentMethod});
+
+  final TransactionPaymentController controller =
+      Get.put(TransactionPaymentController());
   @override
   Widget build(BuildContext context) {
+    final box = GetStorage();
+    final userID = box.read('id');
     final TransactionModel transaction = Get.arguments as TransactionModel;
     return Scaffold(
       backgroundColor: whiteColor,
@@ -95,16 +101,49 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                                   color: Colors.white,
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold)),
-                          onPressed: () {
+                          onPressed: () async {
+                            print(userID);
+                            Get.dialog(
+                              Obx(() => AlertDialog(
+                                    content: controller.isLoading.value
+                                        ? Row(
+                                            children: [
+                                              CircularProgressIndicator(
+                                                  color: primaryColor),
+                                              SizedBox(width: 20),
+                                              Text(
+                                                "Loading ...",
+                                                style: h4Regular,
+                                              ),
+                                            ],
+                                          )
+                                        : Text(
+                                            "Berhasil membuat jadwal",
+                                            style: h4Regular,
+                                          ),
+                                  )),
+                              barrierDismissible: false,
+                            );
+
+                            await controller.executeTransaction(
+                              transaction.selectedID,
+                              userID,
+                            );
+
+                            if (!controller.isLoading.value) {
+                              Get.back();
+                            }
+
                             Get.to(
                               TransactionInvoiceView(),
                               arguments: InvoiceModel(
-                                  transaction: transaction,
-                                  invoice: "invoice",
-                                  appTax: 15000,
-                                  admTax: 1000,
-                                  metodePembayaran: paymentMethod!,
-                                  hargaTotal: 15000 + 1000 + transaction.harga),
+                                transaction: transaction,
+                                invoice: "invoice",
+                                appTax: 15000,
+                                admTax: 1000,
+                                metodePembayaran: paymentMethod!,
+                                hargaTotal: 15000 + 1000 + transaction.harga,
+                              ),
                             );
                           },
                           style: ButtonStyle(
