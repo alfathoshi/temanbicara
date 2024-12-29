@@ -9,6 +9,7 @@ class MentalMatrix extends StatelessWidget {
   final Icon icon;
   final String title;
   final String detail;
+  final String image;
   const MentalMatrix({
     super.key,
     required this.color,
@@ -16,6 +17,7 @@ class MentalMatrix extends StatelessWidget {
     required this.title,
     required this.icon,
     required this.iconColor,
+    required this.image,
   });
 
   @override
@@ -50,7 +52,11 @@ class MentalMatrix extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
                   border: Border.all(color: Colors.black26),
-                  color: color,
+                  color: iconColor,
+                ),
+                child: Image.asset(
+                  image,
+                  scale: 1.5,
                 ),
               ),
               const SizedBox(
@@ -61,12 +67,21 @@ class MentalMatrix extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(title, style: h6SemiBold,),
-                    Text(detail, style: h6Regular,),
+                    Text(
+                      title,
+                      style: h6SemiBold,
+                    ),
+                    Text(
+                      detail,
+                      style: h6Regular,
+                    ),
                   ],
                 ),
               ),
-              const Icon(Iconsax.activity),
+              const Icon(
+                Icons.chevron_right_rounded,
+                size: 25,
+              ),
             ],
           ),
         ),

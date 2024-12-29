@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:http/http.dart' as http;
+
+
 
 class HomeController extends GetxController {
   final box = GetStorage();
@@ -19,7 +20,5 @@ class HomeController extends GetxController {
       throw Exception('Failed to load article');
     }
   }
-
-  @override
-  void onClose() {}
 }
+

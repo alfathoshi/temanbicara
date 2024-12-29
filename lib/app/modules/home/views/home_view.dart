@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:temanbicara/app/modules/chat/views/chat_view.dart';
+import 'package:temanbicara/app/modules/report/controllers/report_controller.dart';
+import 'package:temanbicara/app/modules/report/views/report_view.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
@@ -16,15 +18,16 @@ import 'package:temanbicara/app/widgets/top_article.dart';
 
 import '../controllers/home_controller.dart';
 
-class HomeView extends GetView<HomeController> {
+class HomeView extends GetView<ReportController> {
   GetStorage box = GetStorage();
   HomeView({super.key});
   final HomeController _controller = Get.put(HomeController());
 
+  final ReportController reportController = Get.put(ReportController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: whiteColor,
       body: CustomScrollView(slivers: [
         SliverAppBar(
           automaticallyImplyLeading: false,
@@ -152,49 +155,61 @@ class HomeView extends GetView<HomeController> {
                       const SizedBox(
                         height: 24,
                       ),
-                      Text(
-                        'Mental Health Matrix',
-                        style: h4SemiBold,
+                      GestureDetector(
+                        onTap: () => Get.toNamed(Routes.REPORT),
+                        child: Text(
+                          'Mental Health Report',
+                          style: h4SemiBold,
+                        ),
                       ),
                       const SizedBox(
                         height: 16,
                       ),
-                      const MentalMatrix(
-                        color: lightGreen,
-                        title: 'Mental Health Matrix',
-                        detail: '84% Healthy',
-                        icon: Icon(Iconsax.math),
-                        iconColor: Colors.green,
+                      Obx(
+                        () => GestureDetector(
+                          onTap: () => Get.toNamed(Routes.REPORT),
+                          child: MentalMatrix(
+                            color: lightPurple,
+                            title: 'Sleep Quality',
+                            detail: "Status ${reportController.avgSleep.value}",
+                            icon: const Icon(Iconsax.math),
+                            iconColor: Colors.purple,
+                            image: "assets/images/sleepquality.png",
+                          ),
+                        ),
                       ),
                       const SizedBox(
                         height: 16,
                       ),
-                      const MentalMatrix(
-                        color: lightPurple,
-                        title: 'Sleep Quality',
-                        detail: '84% Healthy',
-                        icon: Icon(Iconsax.math),
-                        iconColor: Colors.purple,
+                      Obx(
+                        () => GestureDetector(
+                          onTap: () => Get.toNamed(Routes.REPORT),
+                          child: MentalMatrix(
+                            color: lightBlue,
+                            title: 'Stress Level',
+                            detail:
+                                "Level ${reportController.avgStress.value.toString()}",
+                            icon: Icon(Iconsax.math),
+                            iconColor: Colors.lightBlue,
+                            image: "assets/images/stresslevel.png",
+                          ),
+                        ),
                       ),
                       const SizedBox(
                         height: 16,
                       ),
-                      const MentalMatrix(
-                        color: lightBlue,
-                        title: 'Stress Level',
-                        detail: '84% Healthy',
-                        icon: Icon(Iconsax.math),
-                        iconColor: Colors.lightBlue,
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      const MentalMatrix(
-                        color: lightYellow,
-                        title: 'Mood Tracker',
-                        detail: '84% Healthy',
-                        icon: Icon(Iconsax.math),
-                        iconColor: Colors.yellow,
+                      Obx(
+                        () => GestureDetector(
+                          onTap: () => Get.toNamed(Routes.REPORT),
+                          child: MentalMatrix(
+                            color: lightYellow,
+                            title: 'Mood Tracker',
+                            detail: "Status ${reportController.avgMood.value}",
+                            icon: Icon(Iconsax.math),
+                            iconColor: Colors.yellow,
+                            image: "assets/images/moodtracker.png",
+                          ),
+                        ),
                       ),
                     ],
                   ),

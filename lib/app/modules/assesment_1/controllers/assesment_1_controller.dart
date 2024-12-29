@@ -22,7 +22,8 @@ class Assesment1Controller extends GetxController {
 
   var selectedDate = DateTime.now().obs;
   void updateDate(DateTime date) {
-    selectedDate.value = DateTime(date.year, date.month, date.day);;
+    selectedDate.value = DateTime(date.year, date.month, date.day);
+    ;
   }
 
   var selectedMBTI = ''.obs;
@@ -38,7 +39,6 @@ class Assesment1Controller extends GetxController {
       favoriteTopics.add(topic);
     }
   }
-
 
   var isSportTap = false.obs;
   var isArtTap = false.obs;
