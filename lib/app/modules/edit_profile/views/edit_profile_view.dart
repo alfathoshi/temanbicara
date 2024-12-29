@@ -20,19 +20,19 @@ class EditProfileView extends GetView<EditProfileController> {
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: AppBar(
-         toolbarHeight: 85,
-            backgroundColor: Colors.white,
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(24),
-                  bottomRight: Radius.circular(24),
-                ),
-                side: BorderSide(color: Colors.black12)),
-            title: Text(
-              'Edit Profile',
-              style: h3Bold,
+        toolbarHeight: 85,
+        backgroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(24),
+              bottomRight: Radius.circular(24),
             ),
-            centerTitle: true,
+            side: BorderSide(color: Colors.black12)),
+        title: Text(
+          'Edit Profile',
+          style: h3Bold,
+        ),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(24),
@@ -86,7 +86,7 @@ class EditProfileView extends GetView<EditProfileController> {
                     height: 8,
                   ),
                   TextField(
-                    controller: controller.nameController,
+                    //controller: controller.nameController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16),
@@ -108,7 +108,7 @@ class EditProfileView extends GetView<EditProfileController> {
                     height: 8,
                   ),
                   TextField(
-                    controller: controller.emailController,
+                    //controller: controller.emailController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16),
