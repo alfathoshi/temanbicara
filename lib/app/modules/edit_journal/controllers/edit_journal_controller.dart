@@ -19,7 +19,6 @@ class EditJournalController extends GetxController {
     'Bahagia'
   ];
 
-
   var isLoading = false.obs;
 
   void toggleEmotion(int index) {
@@ -32,14 +31,12 @@ class EditJournalController extends GetxController {
 
   Future<void> updateJournal() async {
     if (titleController.text.isEmpty || bodyController.text.isEmpty) {
-      Get.snackbar('Error', 'Title and Body are required',
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Error', 'Title and Body are required');
       return;
     }
 
     if (selectedEmotion.isEmpty) {
-      Get.snackbar('Error', 'Please select your emotion',
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Error', 'Please select your emotion');
       return;
     }
 
@@ -73,20 +70,17 @@ class EditJournalController extends GetxController {
             'Success',
             'Journal updated successfully',
           );
-          Get.back(); // Kembali ke halaman sebelumnya
+          Get.back();
         } else {
           Get.snackbar(
-              'Error', responseData['message'] ?? 'Failed to update journal',
-              snackPosition: SnackPosition.BOTTOM);
+              'Error', responseData['message'] ?? 'Failed to update journal');
         }
       } else {
-        Get.snackbar('Error', 'Failed to update journal.',
-            snackPosition: SnackPosition.BOTTOM);
+        Get.snackbar('Error', 'Failed to update journal.');
       }
     } catch (e) {
       print(e);
-      Get.snackbar('Error', 'An error occurred: $e',
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar('Error', 'An error occurred: $e');
     } finally {
       isLoading.value = false;
     }
