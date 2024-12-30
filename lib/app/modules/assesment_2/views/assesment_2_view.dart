@@ -55,15 +55,14 @@ class Assesment2View extends GetView<Assesment2Controller> {
                   style: assestmentPoint,
                 ),
               ),
-            ),
-          ),
+            ),),
         ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(32.0),
         child: ListView(
           children: [
-            Container(
+            SizedBox(
               height: MediaQuery.sizeOf(context).height -
                   (AppBar().preferredSize.height +
                       MediaQuery.of(context).padding.bottom),
@@ -117,18 +116,28 @@ class Assesment2View extends GetView<Assesment2Controller> {
                   const SizedBox(
                     height: 40,
                   ),
-                  MyButton(
-                      get: () {
-                        Get.toNamed(Routes.ASSESMENT_3);
-                      },
-                      color: primaryColor,
-                      text: 'Lanjutkan')
+                 MyButton(
+                  get: () {
+                    if (controller.tappedIndex.value == -1) {
+                      Get.snackbar(
+                        'Error',
+                        'Silahkan isi assesment',
+                        colorText: whiteColor,
+                        backgroundColor: error.withOpacity(0.6),
+                      );
+                    } else {
+                      Get.toNamed(Routes.ASSESMENT_3);
+                    }
+                  },
+                  color: primaryColor,
+                  text: 'Lanjutkan')
                 ],
               ),
             ),
           ],
         ),
       ),
+    
     );
   }
 }

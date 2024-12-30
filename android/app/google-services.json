@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "795034051389",
+    "project_id": "temanbicara-001",
+    "storage_bucket": "temanbicara-001.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795034051389:android:a17dcfe6282c533acc1b54",
+        "android_client_info": {
+          "package_name": "com.example.temanbicara"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQS7UMZPjpHaQGQhZ1sE9teYEiiYGo_SA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

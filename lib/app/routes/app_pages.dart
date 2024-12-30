@@ -29,6 +29,8 @@ import '../modules/change_password/bindings/change_password_binding.dart';
 import '../modules/change_password/views/change_password_view.dart';
 import '../modules/chat/bindings/chat_binding.dart';
 import '../modules/chat/views/chat_view.dart';
+import '../modules/chat_room/bindings/chat_room_binding.dart';
+import '../modules/chat_room/views/chat_room_view.dart';
 import '../modules/chatbot/bindings/chatbot_binding.dart';
 import '../modules/chatbot/views/chatbot_view.dart';
 import '../modules/chatbot_room/bindings/chatbot_room_binding.dart';
@@ -305,6 +307,11 @@ class AppPages {
       name: _Paths.EDIT_JOURNAL,
       page: () => const EditJournalView(),
       binding: EditJournalBinding(),
+    ),
+    GetPage(
+      name: _Paths.CHAT_ROOM,
+      page: () => const ChatRoomView(),
+      binding: ChatRoomBinding(),
     ),
     GetPage(
       name: _Paths.CONSULT_HISTORY,

@@ -35,9 +35,7 @@ class ReportController extends GetxController {
         } else {
           Get.snackbar('Error', data['message']);
         }
-      } else {
-        Get.snackbar('Error', 'Failed to fetch tracking.');
-      }
+      } 
     } catch (e) {
       Get.snackbar('Error', 'Something went wrong: $e');
     } finally {

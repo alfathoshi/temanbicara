@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
+import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
 import '../controllers/report_controller.dart';
@@ -24,14 +25,20 @@ class ReportView extends GetView<ReportController> {
     }
 
     return Scaffold(
+      backgroundColor: whiteColor,
       appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () => Get.back(canPop: true),
-          child: const Icon(Icons.arrow_back),
+        toolbarHeight: 85,
+        backgroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(24),
+            bottomRight: Radius.circular(24),
+          ),
+          side: BorderSide(color: Colors.black12),
         ),
         title: Text(
           'Mental Report',
-          style: h2Bold,
+          style: h3Bold,
         ),
         centerTitle: true,
       ),
@@ -39,7 +46,6 @@ class ReportView extends GetView<ReportController> {
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
         child: ListView(
           children: [
-            const Divider(),
             const SizedBox(
               height: 20,
             ),

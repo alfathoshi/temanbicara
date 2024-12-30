@@ -1,26 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:temanbicara/app/modules/chat/controllers/chat_controller.dart';
 import 'package:temanbicara/app/modules/detail_artikel/views/detail_artikel_view.dart';
 import 'package:temanbicara/app/modules/room_chat/views/room_chat_view.dart';
+import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
 class Chatcontainer extends StatelessWidget {
+  final int id;
   final String? image;
   final String? nama;
   final String? deskripsi;
 
-  const Chatcontainer(
-      {super.key,
-    this.nama,
-    this.deskripsi,this.image});
+  const Chatcontainer({
+    super.key,
+    required this.nama,
+    required this.deskripsi,
+    required this.image,
+    required this.id,
+  });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-       Navigator.push(context, MaterialPageRoute(builder: (context)=> RoomChatView(nama: nama,image: image,)));
+        Get.toNamed(Routes.CHAT_ROOM, arguments: {
+          'name': nama,
+          'counselor_id': id
+        });
       },
       child: Container(
         width: 393,
@@ -28,8 +37,8 @@ class Chatcontainer extends StatelessWidget {
         decoration: BoxDecoration(
           color: whiteColor,
           border: Border(
-            bottom: BorderSide(width: 1.5, color: Colors.grey.withOpacity(0.4))
-          ),
+              bottom:
+                  BorderSide(width: 1.5, color: Colors.grey.withOpacity(0.4))),
         ),
         child: Row(
           children: [
@@ -54,20 +63,22 @@ class Chatcontainer extends StatelessWidget {
                     style: h6Bold,
                   ),
                   Container(
-                   width: 210,
+                    width: 210,
                     child: Text(
                       deskripsi!,
-                      style: h7Regular.copyWith(color: Colors.grey.withOpacity(0.9)),
-                      
+                      style: h7Regular.copyWith(
+                          color: Colors.grey.withOpacity(0.9)),
                       softWrap: true,
                       overflow: TextOverflow.fade,
-                      
                     ),
                   ),
                 ],
               ),
             ),
-            Text("08.30",style: h7Regular.copyWith(color: Colors.grey.withOpacity(0.9)),)
+            Text(
+              "08.30",
+              style: h7Regular.copyWith(color: Colors.grey.withOpacity(0.9)),
+            )
           ],
         ),
       ),

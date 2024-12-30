@@ -43,6 +43,16 @@ class LoginController extends GetxController {
       var data = json.decode(response.body);
 
       if (response.statusCode == 200 && data['status']) {
+        if (data['data']['role'] != 'General') {
+          Get.snackbar(
+            'Gagal',
+            'Akun tidak terdaftar',
+            backgroundColor: error.withOpacity(0.6),
+            colorText: Colors.white,
+          );
+          return;
+        }
+
         box.write('token', data['token']);
         box.write('id', data['data']['id']);
         Get.snackbar(
@@ -51,27 +61,24 @@ class LoginController extends GetxController {
           backgroundColor: primaryColor.withOpacity(0.6),
           colorText: Colors.white,
         );
-        Get.offAllNamed(
-          Routes.NAVIGATION_BAR,
-          arguments: {"indexPage": 0},
-        );
 
-        // if (data['data']['name'] == null) {
-        //   Get.toNamed(
-        //     Routes.ASSESMENT_1,
-        //   );
-        // } else {
-        //   box.write('email', data['data']['email']);
-        //   box.write('password', data['data']['password']);
-        //   box.write('name', data['data']['name']);
-        //   box.write('nickname', data['data']['nickname']);
-        //   box.write('birthdate', data['data']['birthdate']);
+        if (data['data']['name'] == null) {
+          Get.toNamed(
+            Routes.ASSESMENT_1,
+          );
+        } else {
+          box.write('email', data['data']['email']);
+          box.write('password', data['data']['password']);
+          box.write('phone', data['data']['phone_number']);
+          box.write('name', data['data']['name']);
+          box.write('nickname', data['data']['nickname']);
+          box.write('birthdate', data['data']['birthdate']);
 
-        //   Get.offAllNamed(
-        //     Routes.NAVIGATION_BAR,
-        //     arguments: {"indexPage": 0},
-        //   );
-        // }
+          Get.offAllNamed(
+            Routes.NAVIGATION_BAR,
+            arguments: {"indexPage": 0},
+          );
+        }
       } else {
         Get.snackbar('Error', data['message'],
             backgroundColor: error.withOpacity(0.6), colorText: whiteColor);

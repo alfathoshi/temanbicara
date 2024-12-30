@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:temanbicara/app/modules/detail_artikel/views/detail_artikel_view.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 
 class TopArticle extends StatelessWidget {
   final String? image;
@@ -11,24 +12,25 @@ class TopArticle extends StatelessWidget {
   final String? deskripsi;
   final String? author;
   const TopArticle(
-      {super.key,
-    this.judul,
-    this.deskripsi,
-    this.author,this.image});
+      {super.key, this.judul, this.deskripsi, this.author, this.image});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) =>DetailArtikelView(image: image,judul: judul,deskripsi: deskripsi,author: author,)),
+        Get.to(
+          DetailArtikelView(
+            image: image,
+            judul: judul,
+            deskripsi: deskripsi,
+            author: author,
+          ),
         );
       },
       child: Padding(
         padding: const EdgeInsets.only(bottom: 12),
         child: Container(
-          width: 326,
+          width: 400,
           height: 149,
           decoration: BoxDecoration(
             color: whiteColor,
@@ -71,12 +73,18 @@ class TopArticle extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      judul!,
-                      style: h6Bold,
+                    SizedBox(
+                      width: 200,
+                      child: Text(
+                        judul!,
+                        style: h6Bold,
+                        softWrap: true,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
-                    Container(
-                     width: 150,
+                    SizedBox(
+                      width: 150,
                       child: Text(
                         deskripsi!,
                         style: h7Regular,
@@ -84,6 +92,7 @@ class TopArticle extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
+                    sby8,
                     Text(
                       author!,
                       style: h6Medium,
