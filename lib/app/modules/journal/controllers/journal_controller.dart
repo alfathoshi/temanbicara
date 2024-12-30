@@ -24,6 +24,7 @@ class JournalController extends GetxController {
     Colors.orange,
     Colors.redAccent,
   ];
+
   Future<void> fetchJournals() async {
     isLoading.value = true;
     try {
@@ -91,7 +92,7 @@ class JournalController extends GetxController {
 
   @override
   void onInit() {
-    fetchJournals();
     super.onInit();
+    fetchJournals();
   }
 }
