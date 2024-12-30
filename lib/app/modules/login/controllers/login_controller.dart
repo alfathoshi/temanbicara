@@ -45,6 +45,9 @@ class LoginController extends GetxController {
       if (response.statusCode == 200 && data['status']) {
         box.write('token', data['token']);
         box.write('id', data['data']['id']);
+        box.write('email', data['data']['email']);
+        box.write('name', data['data']['name']);
+        print(data);
         Get.snackbar(
           'Success',
           'Login berhasil',

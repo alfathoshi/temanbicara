@@ -446,10 +446,8 @@ class HomeView extends GetView<ReportController> {
                     );
                   } else if (snapshot.hasData) {
                     final List listData = snapshot.data!['data'];
-                    final double containerHeight = listData.length <= 2
-                        ? listData.length *
-                            180.0 
-                        : 530.0; 
+                    final double containerHeight =
+                        listData.length <= 2 ? listData.length * 180.0 : 530.0;
 
                     return Container(
                       constraints: BoxConstraints(
