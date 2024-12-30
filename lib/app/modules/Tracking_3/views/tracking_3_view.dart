@@ -120,15 +120,18 @@ class Tracking3View extends GetView<Tracking3Controller> {
                     const SizedBox(
                       height: 20,
                     ),
-                    MyButton(
-                        get: () {
-                          print(controller.selectedNumber.value);
-                          Get.toNamed(Routes.TRACKING_4,
-                              arguments: TrackingModel(
-                                  "", "", controller.selectedNumber.value));
-                        },
-                        color: primaryColor,
-                        text: 'Selesai'),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: MyButton(
+                          get: () {
+                            print(controller.selectedNumber.value);
+                            Get.toNamed(Routes.TRACKING_4,
+                                arguments: TrackingModel(
+                                    "", "", controller.selectedNumber.value));
+                          },
+                          color: primaryColor,
+                          text: 'Selesai'),
+                    ),
                   ],
                 ),
               ),

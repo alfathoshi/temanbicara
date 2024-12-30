@@ -28,7 +28,6 @@ class JournalController extends GetxController {
     isLoading.value = true;
     try {
       final userId = box.read('id');
-      final journalId = box.write('journal_id', 'journal_id');
 
       final token = box.read('token');
 
@@ -38,6 +37,7 @@ class JournalController extends GetxController {
           'userId': userId.toString(),
         }),
         headers: {
+          'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
         },
       );
@@ -50,8 +50,6 @@ class JournalController extends GetxController {
         } else {
           Get.snackbar('Error', data['message']);
         }
-      } else {
-        Get.snackbar('Error', 'Failed to fetch journals.');
       }
     } catch (e) {
       Get.snackbar('Error', 'Something went wrong: $e');

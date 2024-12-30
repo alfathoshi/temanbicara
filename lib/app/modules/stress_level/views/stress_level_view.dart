@@ -5,6 +5,7 @@ import 'package:flutter_sliding_up_panel/sliding_up_panel_widget.dart';
 
 import 'package:get/get.dart';
 import 'package:temanbicara/app/modules/report/logo_helper.dart';
+import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
 import '../controllers/stress_level_controller.dart';
@@ -20,7 +21,9 @@ class StressLevelView extends GetView<StressLevelController> {
     return Stack(
       children: [
         Scaffold(
+          backgroundColor: whiteColor,
           appBar: AppBar(
+            backgroundColor: whiteColor,
             title: Text(
               'Stress Level',
               style: h2Bold,

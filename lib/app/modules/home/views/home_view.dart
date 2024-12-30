@@ -28,6 +28,7 @@ class HomeView extends GetView<ReportController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: whiteColor,
       body: CustomScrollView(slivers: [
         SliverAppBar(
           automaticallyImplyLeading: false,

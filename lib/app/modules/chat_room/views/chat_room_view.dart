@@ -42,15 +42,15 @@ class ChatRoomView extends GetView<ChatRoomController> {
             ),
             sbX12,
             Text(
-              'Astro',
+              controller.args['name'],
               style: h4Bold,
             )
           ],
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: controller.chatService
-            .getMessages(controller.user.id, controller.otherUser.id), // Stream data dari Firebase
+        stream: controller.chatService.getMessages(controller.user.id,
+            controller.otherUser.id), // Stream data dari Firebase
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -59,10 +59,6 @@ class ChatRoomView extends GetView<ChatRoomController> {
 
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
-          }
-
-          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return const Center(child: Text('No messages yet'));
           }
 
           List<types.TextMessage> newMessages = snapshot.data!.docs.map((doc) {
@@ -132,6 +128,7 @@ class ChatRoomView extends GetView<ChatRoomController> {
                       onPressed: () {
                         controller.handleSendPressed(controller.messageC.text);
                         controller.messageC.text = '';
+                        print(controller.args['counselor_id']);
                       },
                     ),
                   ],

@@ -125,15 +125,18 @@ class Tracking2View extends GetView<Tracking2Controller> {
                     SizedBox(
                       height: 20,
                     ),
-                    MyButton(
-                        get: () {
-                          print(controller.selectedNumber.value);
-                          Get.toNamed(Routes.TRACKING_3,
-                              arguments: TrackingModel(
-                                  "", controller.selectedNumber.value, 0));
-                        },
-                        color: primaryColor,
-                        text: 'Lanjutkan'),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: MyButton(
+                          get: () {
+                            print(controller.selectedNumber.value);
+                            Get.toNamed(Routes.TRACKING_3,
+                                arguments: TrackingModel(
+                                    "", controller.selectedNumber.value, 0));
+                          },
+                          color: primaryColor,
+                          text: 'Lanjutkan'),
+                    ),
                   ],
                 ),
               ),

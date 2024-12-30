@@ -32,14 +32,18 @@ class CreateJournalController extends GetxController {
 
   Future<void> submitJournal() async {
     if (titleController.text.isEmpty || bodyController.text.isEmpty) {
-      Get.snackbar('Error', 'Title and Body are required',
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Error',
+        'Title and Body are required',
+      );
       return;
     }
 
     if (selectedEmotion.isEmpty) {
-      Get.snackbar('Error', 'Please select your emotion',
-          snackPosition: SnackPosition.BOTTOM);
+      Get.snackbar(
+        'Error',
+        'Please select your emotion',
+      );
       return;
     }
 
@@ -54,22 +58,20 @@ class CreateJournalController extends GetxController {
     try {
       final userId = box.read('id');
       print("ppk ${userId}");
-      final token = box.read('token');
+      final token = box.read('token').toString();
       print("token  ${token}");
       final response = await http.post(
         Uri.parse('http://10.0.2.2:8000/api/v1/journal'),
         headers: {
           'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json',
         },
         body: {
           'title': titleController.text,
           'body': bodyController.text,
-          'stress_level': (sliderValue.value + 1).toString(),
-          'mood_level': selectedEmotion.value,
-          'user_id': userId.toString(),
-        });
-      
+          'stress_level': (sliderValue.value + 1).toInt(),
+          'mood_level': selectedEmotion.toString(),
+        },
+      );
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);

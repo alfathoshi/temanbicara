@@ -53,9 +53,9 @@ class ChatView extends GetView<ChatController> {
                       return Padding(
                           padding: const EdgeInsets.only(left: 24, right: 24),
                           child: Chatcontainer(
-                            id: data['user']['id'],
-                            nama: data['user']['name'],
-                            deskripsi: data['title'],
+                            id: data['counselor_id'],
+                            nama: data['counselor_name'],
+                            deskripsi: data['description'],
                             image: 'assets/images/profile.png',
                           ));
                     },

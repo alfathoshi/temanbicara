@@ -80,15 +80,18 @@ class TrackingView extends GetView<TrackingController> {
             child: Column(
               children: [
                 Obx(() => controller.warningText()),
-                MyButton(
-                    get: () {
-                      print(controller.selectedKualitasTidur.value!);
-                      Get.toNamed(Routes.TRACKING_2,
-                          arguments: TrackingModel(
-                              controller.selectedKualitasTidur.value!, "", 0));
-                    },
-                    color: primaryColor,
-                    text: 'Lanjutkan'),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: MyButton(
+                      get: () {
+                        print(controller.selectedKualitasTidur.value!);
+                        Get.toNamed(Routes.TRACKING_2,
+                            arguments: TrackingModel(
+                                controller.selectedKualitasTidur.value!, "", 0));
+                      },
+                      color: primaryColor,
+                      text: 'Lanjutkan'),
+                ),
               ],
             ),
           ),

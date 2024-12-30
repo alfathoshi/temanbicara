@@ -176,9 +176,12 @@ class ProfileView extends GetView<ProfileController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'About us',
-                      style: h4SemiBold,
+                    GestureDetector(
+                      onTap: ()=>print(box.read('token')),
+                      child: Text(
+                        'About us',
+                        style: h4SemiBold,
+                      ),
                     ),
                     const Icon(
                       Icons.chevron_right_outlined,

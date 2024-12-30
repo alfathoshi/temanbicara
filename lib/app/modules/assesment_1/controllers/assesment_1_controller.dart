@@ -12,6 +12,7 @@ enum Gender { none, male, female }
 
 class Assesment1Controller extends GetxController {
   final DatePickerController dateController = Get.put(DatePickerController());
+  
   TextEditingController nameC = TextEditingController();
   TextEditingController nicknameC = TextEditingController();
 
