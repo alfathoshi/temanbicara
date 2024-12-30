@@ -29,9 +29,9 @@ class JournalController extends GetxController {
     try {
       final userId = box.read('id');
       final journalId = box.write('journal_id', 'journal_id');
-      print("ppk ${userId}");
+
       final token = box.read('token');
-      print("token  ${token}");
+
       var response = await http.get(
         Uri.parse('http://10.0.2.2:8000/api/v1/journal/$userId')
             .replace(queryParameters: {

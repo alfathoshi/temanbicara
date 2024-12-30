@@ -35,7 +35,6 @@ class TransactionData extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        SizedBox(height: 19),
         Container(
           height: 530,
           width: double.infinity,

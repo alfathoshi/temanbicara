@@ -59,10 +59,12 @@ class ProfileView extends GetView<ProfileController> {
                   const SizedBox(
                     height: 12,
                   ),
+
                   Text(
-                    box.read('nickname'),
+                    box.read('nickname') ?? "Astro",
                     style: h3Bold,
                   ),
+
                 ],
               ),
             ),
@@ -140,18 +142,21 @@ class ProfileView extends GetView<ProfileController> {
                 const SizedBox(
                   height: 16,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Consultations History',
-                      style: h4SemiBold,
-                    ),
-                    const Icon(
-                      Icons.chevron_right_outlined,
-                      size: 32,
-                    )
-                  ],
+                GestureDetector(
+                  onTap: () => Get.toNamed(Routes.CONSULT_HISTORY),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Consultations History',
+                        style: h4SemiBold,
+                      ),
+                      const Icon(
+                        Icons.chevron_right_outlined,
+                        size: 32,
+                      )
+                    ],
+                  ),
                 ),
                 sby24,
                 const Divider(),
@@ -197,9 +202,8 @@ class ProfileView extends GetView<ProfileController> {
                     )
                   ],
                 ),
-                sby24,
+                SizedBox(height: 20),
                 const Divider(),
-                sby24,
                 GestureDetector(
                   onTap: () {
                     Get.offAllNamed(

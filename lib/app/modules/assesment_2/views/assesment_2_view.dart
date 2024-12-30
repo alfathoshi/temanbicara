@@ -8,7 +8,6 @@ import 'package:temanbicara/app/widgets/goalsOptions.dart';
 import '../../../routes/app_pages.dart';
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
-import '../../assesment_1/controllers/assesment_1_controller.dart';
 import '../controllers/assesment_2_controller.dart';
 
 class Assesment2View extends GetView<Assesment2Controller> {
@@ -19,98 +18,105 @@ class Assesment2View extends GetView<Assesment2Controller> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: whiteColor,
+      appBar: AppBar(
         backgroundColor: whiteColor,
-        appBar: AppBar(
-          backgroundColor: whiteColor,
-          title: Row(
-            children: [
-              Image.asset(
-                'assets/images/logo.png',
-                scale: 4,
-              ),
-              const SizedBox(
-                width: 16,
-              ),
-              const Text(
-                'Assesment',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                width: 80,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: primaryColor,
-                  borderRadius: BorderRadius.circular(24),
-                ),
-                child: Center(
-                  child: Text(
-                    '2 of 7',
-                    style: assestmentPoint,
-                  ),
-                ),
+        title: Row(
+          children: [
+            Image.asset(
+              'assets/images/logo.png',
+              scale: 4,
+            ),
+            const SizedBox(
+              width: 16,
+            ),
+            const Text(
+              'Assesment',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ],
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(32.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                'Apa yang ingin kamu capai?',
-                textAlign: TextAlign.center,
-                style: h3Bold,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              width: 80,
+              height: 40,
+              decoration: BoxDecoration(
+                color: primaryColor,
+                borderRadius: BorderRadius.circular(24),
               ),
-              const SizedBox(
-                height: 40,
+              child: Center(
+                child: Text(
+                  '2 of 7',
+                  style: assestmentPoint,
+                ),
               ),
-              const Goalsoptions(
-                option: 'Aku Ingin mengurangi stress',
-                index: 0,
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-              const Goalsoptions(
-                option: 'Aku Ingin punya seorang teman',
-                index: 1,
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-              const Goalsoptions(
-                option: 'Aku Ingin berinteraksi dengan AI',
-                index: 2,
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-              const Goalsoptions(
-                option: 'Aku Ingin bertemu orang baru',
-                index: 3,
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-              const Goalsoptions(
-                option: 'Hanya iseng mencoba',
-                index: 4,
-              ),
-              const SizedBox(
-                height: 32,
-              ),
-              Text('Silahkan pilih goalsmu', style: warningGoals),
-              Spacer(),
-              MyButton(
+            ),),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(32.0),
+        child: ListView(
+          children: [
+            SizedBox(
+              height: MediaQuery.sizeOf(context).height -
+                  (AppBar().preferredSize.height +
+                      MediaQuery.of(context).padding.bottom),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Apa yang ingin kamu capai?',
+                    textAlign: TextAlign.center,
+                    style: h3Bold,
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  const Goalsoptions(
+                    option: 'Aku Ingin mengurangi stress',
+                    index: 0,
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  const Goalsoptions(
+                    option: 'Aku Ingin punya seorang teman',
+                    index: 1,
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  const Goalsoptions(
+                    option: 'Aku Ingin berinteraksi dengan AI',
+                    index: 2,
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  const Goalsoptions(
+                    option: 'Aku Ingin bertemu orang baru',
+                    index: 3,
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  const Goalsoptions(
+                    option: 'Hanya iseng mencoba',
+                    index: 4,
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  Text('Silahkan pilih goalsmu', style: warningGoals),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                 MyButton(
                   get: () {
                     if (controller.tappedIndex.value == -1) {
                       Get.snackbar(
@@ -125,8 +131,13 @@ class Assesment2View extends GetView<Assesment2Controller> {
                   },
                   color: primaryColor,
                   text: 'Lanjutkan')
-            ],
-          ),
-        ));
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    
+    );
   }
 }

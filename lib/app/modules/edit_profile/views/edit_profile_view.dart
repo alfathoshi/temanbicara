@@ -87,7 +87,7 @@ class EditProfileView extends GetView<EditProfileController> {
                     height: 8,
                   ),
                   TextField(
-                    controller: controller.nameController,
+                    //controller: controller.nameController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16),
@@ -109,7 +109,7 @@ class EditProfileView extends GetView<EditProfileController> {
                     height: 8,
                   ),
                   TextField(
-                    controller: controller.emailController,
+                    //controller: controller.emailController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(16),

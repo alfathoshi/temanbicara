@@ -1,15 +1,21 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_sliding_up_panel/sliding_up_panel_widget.dart';
 
 import 'package:get/get.dart';
+import 'package:temanbicara/app/modules/report/logo_helper.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
 import '../controllers/stress_level_controller.dart';
 
 class StressLevelView extends GetView<StressLevelController> {
   const StressLevelView({super.key});
+
   @override
   Widget build(BuildContext context) {
+    Random rng = Random();
+    int stressLevel = Get.arguments[1].value;
     SlidingUpPanelController slidingUpController = SlidingUpPanelController();
     return Stack(
       children: [
@@ -34,19 +40,32 @@ class StressLevelView extends GetView<StressLevelController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    "3",
-                    style: h1Bold.copyWith(
-                      fontSize: 80,
-                      color: const Color(0xFF7A914B),
+                  SizedBox(
+                    height: 147,
+                    width: 153,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        const SizedBox.square(
+                          dimension: 120,
+                          child: CircularProgressIndicator(
+                            value: 30,
+                            color: Color(0xFFF9C200),
+                            strokeWidth: 10,
+                          ),
+                        ),
+                        Image.asset(LogoHelper.stressLevel[6 - stressLevel]!)
+                      ],
                     ),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
                   Text(
-                    "Good",
-                    style: h1Bold.copyWith(color: const Color(0xFF7A914B)),
+                    "Level ${stressLevel.toString()}",
+                    style: h1Bold.copyWith(
+                      color: const Color(0xFF7A914B),
+                    ),
                   ),
                   Image.asset(
                     "assets/images/stresslv3.png",
@@ -81,7 +100,7 @@ class StressLevelView extends GetView<StressLevelController> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 15),
               child: ListView(
-                physics: const NeverScrollableScrollPhysics(),
+                // physics: const NeverScrollableScrollPhysics(),
                 children: [
                   Center(
                     child: Container(
@@ -101,21 +120,36 @@ class StressLevelView extends GetView<StressLevelController> {
                     style: h3Bold,
                   ),
                   const SizedBox(
+                    height: 5,
+                  ),
+                  Text(
+                    stressLevel <= 3
+                        ? "Kamu hebat banget! Jangan biarkan hal kecil merusak semangatmu hari ini."
+                        : "Kadang, yang kamu butuhkan hanya istirahat sejenak untuk melihat segalanya lebih jelas. Kamu pasti bisa mengatasinya",
+                    style: h4Regular,
+                  ),
+                  const SizedBox(
                     height: 15,
+                  ),
+                  Text(
+                    "Bukan apa yang terjadi padamu yang membuatmu stres, tetapi cara kamu memandangnya.",
+                    style: h4Regular.copyWith(fontStyle: FontStyle.italic),
+                  ),
+                  Text(
+                    "-Epictetus",
+                    style: h4Bold,
+                  ),
+                  const SizedBox(
+                    height: 20,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       StressItem(
-                        title1: "Stressor",
-                        title2: "Loneliness",
-                        widget: Image.asset("assets/images/lonely.png"),
-                      ),
-                      StressItem(
                         title1: "Level",
                         title2: "Medium",
                         widget: Text(
-                          "3/5",
+                          "$stressLevel/5",
                           style: h1Bold.copyWith(
                             color: const Color(0xFF7A914B),
                           ),
@@ -133,33 +167,33 @@ class StressLevelView extends GetView<StressLevelController> {
                   const SizedBox(
                     height: 15,
                   ),
-                  const StressIndicator(
+                  StressIndicator(
                     title: "Loneliness",
-                    value: 0.5,
+                    value: rng.nextInt(100) / 100,
                     indicatorColor: Colors.red,
                   ),
                   const SizedBox(
                     height: 15,
                   ),
-                  const StressIndicator(
+                  StressIndicator(
                     title: "Work",
-                    value: 0.4,
+                    value: rng.nextInt(100) / 100,
                     indicatorColor: Colors.blue,
                   ),
                   const SizedBox(
                     height: 15,
                   ),
-                  const StressIndicator(
+                  StressIndicator(
                     title: "Family",
-                    value: 0.1,
+                    value: rng.nextInt(100) / 100,
                     indicatorColor: Colors.green,
                   ),
                   const SizedBox(
                     height: 15,
                   ),
-                  const StressIndicator(
+                  StressIndicator(
                     title: "Work",
-                    value: 0.9,
+                    value: rng.nextInt(100) / 100,
                     indicatorColor: Colors.purple,
                   ),
                 ],
