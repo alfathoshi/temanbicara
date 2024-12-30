@@ -53,15 +53,18 @@ class EditProfileController extends GetxController {
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
         print(responseData);
-        box.write('name', responseData['data']);
+        box.write('name', responseData['name']);
+        box.write('email', responseData['email']);
+        box.write('birthdate', responseData['birthdate']);
+
         if (responseData['status']) {
           Get.back();
         } else {
           Get.snackbar(
-              'Error', responseData['message'] ?? 'Failed to update PROFILE');
+              'Error', responseData['message'] ?? 'Failed to update profile');
         }
       } else {
-        Get.snackbar('Error', 'Failed to update PROFILE.');
+        Get.snackbar('Error', 'Failed to update profile.');
       }
     } catch (e) {
       print(e);
