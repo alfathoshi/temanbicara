@@ -84,7 +84,6 @@ class CreateJournalController extends GetxController {
           Get.snackbar(
               'Error', responseData['message'] ?? 'Failed to created journal');
         }
-        // Get.snackbar('Success', 'Journal created successfully');
       } else {
         print(response.body);
         var errorData = jsonDecode(response.body);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:temanbicara/app/routes/app_pages.dart';
 
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
@@ -46,9 +47,10 @@ class ConsultHistoryView extends GetView<ConsultHistoryController> {
                         //     'expertise': listData[index]['expertise'],
                         //   },
                         // );
+                        Get.toNamed(Routes.CONSULT_REPORT);
                       },
                       child: CounselorCard(
-                          username: listData[index]['user_name'],
+                          username: listData[index]['name'],
                           expertise: listData[index]['expertise'],
                           schedule: listData[index]['schedules']),
                     );

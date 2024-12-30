@@ -25,78 +25,122 @@ class ConsultReportView extends GetView<ConsultReportController> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Container(
-                  height: 130,
-                  width: 100,
-                  child: Image.asset('assets/images/Hafid.jpg'),
-                ),
-                sbX12,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Nama'),
-                    Text('Date'),
-                    Text('Time'),
-                    Text('Problem'),
-                  ],
-                ),
-              ],
-            ),
-            sby36,
-            Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Color.fromRGBO(0, 0, 0, 0.1),
-                    blurRadius: 6,
-                    spreadRadius: -1,
-                    offset: Offset(
-                      0,
-                      4,
-                    ),
+        child: FutureBuilder<Map<String, dynamic>>(
+        future: controller.fetchData(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Error: ${snapshot.error}'),
+            );
+          } else if (snapshot.hasData) {
+            final List consultations = snapshot.data!['data'];
+
+            if (consultations.isEmpty) {
+              return Center(child: Text("No consultations found."));
+            }
+
+            return ListView.builder(
+              padding: const EdgeInsets.all(16.0),
+              itemCount: consultations.length,
+              itemBuilder: (context, index) {
+                final consultation = consultations[index];
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            height: 130,
+                            width: 100,
+                            child: Image.asset('assets/images/Hafid.jpg'),
+                          ),
+                          sbX12,
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                consultation['general_user_name'] ?? '-',
+                                style: h4Bold,
+                              ),
+                              Text(
+                                consultation['date'] ?? '-',
+                                style: h6Medium,
+                              ),
+                              Text(
+                                '${consultation['start_time']} - ${consultation['end_time']}',
+                                style: h6Medium,
+                              ),
+                              Text(
+                                consultation['problem'] ?? '-',
+                                style: h5Medium,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      sby36,
+                      Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          color: Colors.white,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Color.fromRGBO(0, 0, 0, 0.1),
+                              blurRadius: 6,
+                              spreadRadius: -1,
+                              offset: Offset(0, 4),
+                            ),
+                            BoxShadow(
+                              color: Color.fromRGBO(0, 0, 0, 0.06),
+                              blurRadius: 4,
+                              spreadRadius: -1,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Consultation result:',
+                                style: h4Bold,
+                              ),
+                              Divider(),
+                              SizedBox(height: 5),
+                              Text('Description', style: h5Medium),
+                              Text(
+                                consultation['description'] ?? '-',
+                                style: h6Medium,
+                              ),
+                              Divider(),
+                              Text('Summary', style: h5Medium),
+                              Text(
+                                consultation['summary'] ?? '-',
+                                style: h6Medium,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  BoxShadow(
-                    color: Color.fromRGBO(0, 0, 0, 0.06),
-                    blurRadius: 4,
-                    spreadRadius: -1,
-                    offset: Offset(
-                      0,
-                      2,
-                    ),
-                  ),
-                ],
-              ),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 10.0, horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Consultation result :',
-                      style: h4Bold,
-                    ),
-                    Divider(),
-                    SizedBox(height: 5),
-                    Text('Description', style: h5Medium),
-                    Text('Description', style: h6Medium),
-                    Divider(),
-                    Text('Summary', style: h5Medium),
-                    Text('Summary', style: h6Medium),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+                );
+              },
+            );
+          } else {
+            return Center(child: Text("Failed to load consultations."));
+          }
+        },
       ),
+      )
     );
   }
 }
