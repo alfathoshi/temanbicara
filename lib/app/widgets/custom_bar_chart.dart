@@ -2,19 +2,26 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class CustomBarChart extends StatelessWidget {
+  final List<dynamic> dummyData;
+
   const CustomBarChart({
     super.key,
     required this.dummyData,
   });
 
-  final List dummyData;
-
   @override
   Widget build(BuildContext context) {
+    Map<String, int> sleepValue = {
+      "Insomnia": 1,
+      "Kurang": 2,
+      "Cukup": 3,
+      "Baik": 4,
+      "Nyenyak": 5
+    };
+
     return Container(
       width: MediaQuery.sizeOf(context).width,
       height: 150,
-      decoration: BoxDecoration(),
       child: BarChart(
         BarChartData(
           barTouchData: BarTouchData(
@@ -30,33 +37,33 @@ class CustomBarChart extends StatelessWidget {
             drawVerticalLine: false,
             horizontalInterval: 2,
           ),
-          titlesData: FlTitlesData(
-            topTitles: const AxisTitles(
+          titlesData: const FlTitlesData(
+            topTitles: AxisTitles(
               sideTitles: SideTitles(showTitles: false),
             ),
-            rightTitles: const AxisTitles(
+            rightTitles: AxisTitles(
               sideTitles: SideTitles(showTitles: false),
             ),
-            bottomTitles: const AxisTitles(
+            bottomTitles: AxisTitles(
               sideTitles: SideTitles(showTitles: true, reservedSize: 24),
             ),
             leftTitles: AxisTitles(
               sideTitles: SideTitles(
                 showTitles: true,
                 reservedSize: 45,
-                interval: findMax(dummyData).toDouble() / 4,
+                interval: 1,
               ),
             ),
           ),
-          maxY: findMax(dummyData).toDouble(),
+          maxY: 5,
           minY: 0,
           barGroups: dummyData
               .map(
                 (data) => BarChartGroupData(
-                  x: int.parse(data['date']),
+                  x: int.parse(data['created_at'].split("T")[0].split("-")[2]),
                   barRods: [
                     BarChartRodData(
-                      toY: data['sleep_hours'].toDouble(),
+                      toY: sleepValue[data['sleep_quality']]!.toDouble(),
                       color: const Color(0xFFFEBE58),
                       width: 23,
                       borderRadius: BorderRadius.circular(10),
