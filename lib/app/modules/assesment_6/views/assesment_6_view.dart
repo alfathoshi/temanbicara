@@ -55,47 +55,55 @@ class Assesment6View extends GetView<Assesment6Controller> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(32.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              'Apakah kamu punya gejala kesehatan mental setelah konsultasi?',
-              textAlign: TextAlign.center,
-              style: h3Bold,
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            Image.asset(
-              'assets/images/gejala.png',
-              scale: 2,
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Tuliskan Gejalamu disini...',
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(32),
-                  borderSide: BorderSide(
-                    color: Colors.black26,
-                    width: 2,
-                  ),
+          padding: const EdgeInsets.all(32.0),
+          child: ListView(
+            children: [
+              Container(
+                height: MediaQuery.sizeOf(context).height -
+                    (AppBar().preferredSize.height +
+                        MediaQuery.of(context).padding.top * 4),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Apakah kamu punya gejala kesehatan mental setelah konsultasi?',
+                      textAlign: TextAlign.center,
+                      style: h3Bold,
+                    ),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    Image.asset(
+                      'assets/images/gejala.png',
+                      scale: 2,
+                    ),
+                    const SizedBox(
+                      height: 50,
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: 'Tuliskan Gejalamu disini...',
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(32),
+                          borderSide: BorderSide(
+                            color: Colors.black26,
+                            width: 2,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Spacer(),
+                    MyButton(
+                        get: () {
+                          Get.toNamed(Routes.ASSESMENT_7);
+                        },
+                        color: primaryColor,
+                        text: 'Lanjutkan')
+                  ],
                 ),
               ),
-            ),
-            Spacer(),
-            MyButton(
-                get: () {
-                  Get.toNamed(Routes.ASSESMENT_7);
-                },
-                color: primaryColor,
-                text: 'Lanjutkan')
-          ],
-        ),
-      ),
+            ],
+          )),
     );
   }
 }
