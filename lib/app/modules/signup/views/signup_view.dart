@@ -150,7 +150,7 @@ class SignupView extends GetView<SignupController> {
                         style: GoogleFonts.poppins(),
                       ),
                       GestureDetector(
-                        onTap: () => Get.toNamed(Routes.LOGIN),
+                        onTap: () => Get.offAllNamed(Routes.LOGIN),
                         child: Text(
                           'Masuk',
                           style: GoogleFonts.poppins(

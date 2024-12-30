@@ -45,20 +45,25 @@ class ArticleView extends GetView<ArticleController> {
             ),
           ),
         ),
-        SliverList.builder(
-            itemCount: article.length,
-            itemBuilder: (context, index) {
-              print('Index bertipe String: ${article}');
-              return Padding(
-                padding: EdgeInsets.only(left: 24, right: 24),
-                child: TopArticle(
-                  judul: article[index]["title"],
-                  deskripsi: article[index]["content"],
-                  author: article[index]["user"]["name"],
-                  image: article[index]["image"],
-                ),
-              );
-            })
+        article.isEmpty
+            ? SliverToBoxAdapter(
+                child: Center(
+                child: Text('Tidak ada artikel', style: h6Regular,),
+              ))
+            : SliverList.builder(
+                itemCount: article.length,
+                itemBuilder: (context, index) {
+                  print('Index bertipe String: ${article}');
+                  return Padding(
+                    padding: EdgeInsets.only(left: 24, right: 24),
+                    child: TopArticle(
+                      judul: article[index]["title"],
+                      deskripsi: article[index]["content"],
+                      author: article[index]["user"]["name"],
+                      image: article[index]["image"],
+                    ),
+                  );
+                })
       ]),
     );
   }

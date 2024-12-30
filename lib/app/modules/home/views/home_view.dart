@@ -434,7 +434,16 @@ class HomeView extends GetView<HomeController> {
                     final List listData = snapshot.data!['data'];
                     final double containerHeight =
                         listData.length <= 2 ? listData.length * 180.0 : 530.0;
-
+                    if (listData.isEmpty){
+                      return Container(
+                      constraints: const BoxConstraints(
+                        maxHeight: 100,
+                      ),
+                      child: const Center(
+                        child: Text("Tidak Ada Data"),
+                      ),
+                    );
+                    }
                     return Container(
                       constraints: BoxConstraints(
                         maxHeight: containerHeight,
@@ -456,7 +465,14 @@ class HomeView extends GetView<HomeController> {
                       ),
                     );
                   } else {
-                    return const Center(child: Text("Tidak Ada Data"));
+                    return Container(
+                      constraints: const BoxConstraints(
+                        maxHeight: 180,
+                      ),
+                      child: const Center(
+                        child: Text("Tidak Ada Data"),
+                      ),
+                    );
                   }
                 },
               ),

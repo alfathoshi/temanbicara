@@ -71,14 +71,14 @@ class ConsultView extends GetView<ConsultController> {
                               Get.toNamed(
                                 Routes.CONSULT_SCHEDULE,
                                 arguments: {
-                                  'user_name': listData[index]['user_name'],
+                                  'user_name': listData[index]['name'],
                                   'schedules': listData[index]['schedules'],
                                   'expertise': listData[index]['expertise'],
                                 },
                               );
                             },
                             child: CounselorCard(
-                                username: listData[index]['user_name'],
+                                username: listData[index]['name'],
                                 expertise: listData[index]['expertise'],
                                 schedule: listData[index]['schedules']),
                           );

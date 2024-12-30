@@ -92,9 +92,9 @@ class Assesment1Controller extends GetxController {
       box.write('name', nameC.text);
       box.write('nickname', nicknameC.text);
       if (selectedGender == Gender.male) {
-        box.write('gender', 'Laki-laki');
+        box.write('gender', 'male');
       } else if (selectedGender == Gender.female) {
-        box.write('gender', 'Perempuan');
+        box.write('gender', 'female');
       }
       box.write('mbti', selectedMBTI.value);
       String topics = favoriteTopics.join(',');
