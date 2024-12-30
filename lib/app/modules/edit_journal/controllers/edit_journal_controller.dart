@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:temanbicara/app/themes/colors.dart';
+
+import '../../journal/controllers/journal_controller.dart';
 
 class EditJournalController extends GetxController {
   final box = GetStorage();
   final TextEditingController titleController = TextEditingController();
   final TextEditingController bodyController = TextEditingController();
+  final fetchController = Get.find<JournalController>();
   late int journalId;
   var sliderValue = 0.0.obs;
   var selectedEmotion = ''.obs;
@@ -66,11 +70,11 @@ class EditJournalController extends GetxController {
         print(responseData);
 
         if (responseData['status']) {
-          Get.snackbar(
-            'Success',
-            'Journal updated successfully',
-          );
           Get.back();
+          fetchController.fetchJournals();
+          Get.snackbar('Success', 'Journal updated successfully',
+              backgroundColor: primaryColor.withOpacity(0.6),
+              colorText: Colors.white);
         } else {
           Get.snackbar(
               'Error', responseData['message'] ?? 'Failed to update journal');
