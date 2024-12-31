@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +15,9 @@ import 'package:temanbicara/app/widgets/date.dart';
 import '../controllers/edit_profile_controller.dart';
 
 class EditProfileView extends GetView<EditProfileController> {
-  const EditProfileView({super.key});
+  EditProfileView({super.key});
+
+  final EditProfileController _controller = Get.put(EditProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -203,8 +207,11 @@ class EditProfileView extends GetView<EditProfileController> {
               width: double.infinity,
               height: 54,
               child: ElevatedButton(
-                onPressed: () => Get.offAllNamed(Routes.NAVIGATION_BAR,
-                    arguments: {"indexPage": 4}),
+                onPressed: () {
+                  _controller.editProfile();
+                  Get.offAllNamed(Routes.NAVIGATION_BAR,
+                      arguments: {"indexPage": 4});
+                },
                 style: ButtonStyle(
                   backgroundColor: WidgetStatePropertyAll(primaryColor),
                   foregroundColor: WidgetStatePropertyAll(whiteColor),

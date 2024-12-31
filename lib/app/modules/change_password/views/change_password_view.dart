@@ -10,9 +10,10 @@ import '../controllers/change_password_controller.dart';
 
 class ChangePasswordView extends GetView<ChangePasswordController> {
   ChangePasswordView({super.key});
-  final TextEditingController oldPassController = TextEditingController();
-  final TextEditingController newPassController = TextEditingController();
-  final TextEditingController confirmPassController = TextEditingController();
+
+  final ChangePasswordController _controller =
+      Get.put(ChangePasswordController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +66,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                         height: 8,
                       ),
                       TextField(
-                        controller: oldPassController,
+                        controller: controller.oldPassController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(16),
@@ -99,7 +100,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                         height: 8,
                       ),
                       TextField(
-                        controller: newPassController,
+                        controller: controller.newPassController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(16),
@@ -121,7 +122,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                         height: 8,
                       ),
                       TextField(
-                        controller: confirmPassController,
+                        controller: controller.confirmPassController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(16),
@@ -141,7 +142,11 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
               height: 20,
             ),
             MyButton(
-                get: () => Get.offAllNamed(Routes.NAVIGATION_BAR, arguments: {"indexPage": 4}),
+                get: () {
+                  _controller.changePassword();
+                  Get.offAllNamed(Routes.NAVIGATION_BAR,
+                      arguments: {"indexPage": 4});
+                },
                 color: primaryColor,
                 text: 'Change Password')
           ],
