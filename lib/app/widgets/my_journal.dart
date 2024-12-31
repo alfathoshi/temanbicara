@@ -4,7 +4,16 @@ import 'package:temanbicara/app/themes/fonts.dart';
 import '../themes/colors.dart';
 
 class MyJournal extends StatelessWidget {
-  const MyJournal({super.key});
+  const MyJournal(
+      {super.key,
+      required this.type,
+      required this.title,
+      required this.date,
+      required this.colors});
+  final String type;
+  final String title;
+  final String date;
+  final Color colors;
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +38,11 @@ class MyJournal extends StatelessWidget {
                 height: 21,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
-                  color: Colors.yellow,
+                  color: colors,
                 ),
                 child: Center(
                   child: Text(
-                    "Type",
+                    type,
                     style: h7SemiBold,
                   ),
                 ),
@@ -42,13 +51,13 @@ class MyJournal extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 12, bottom: 8),
                 child: SizedBox(
                   child: Text(
-                    "Title",
+                    title,
                     style: h4SemiBold,
                   ),
                 ),
               ),
               Text(
-                "Tanggal",
+                date,
                 style: h7Regular,
               )
             ],

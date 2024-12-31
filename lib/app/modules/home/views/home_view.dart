@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -16,6 +18,7 @@ import 'package:temanbicara/app/widgets/mental_matrix.dart';
 import 'package:temanbicara/app/widgets/my_journal.dart';
 import 'package:temanbicara/app/widgets/top_article.dart';
 
+import '../../journal/controllers/journal_controller.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<ReportController> {
@@ -24,6 +27,7 @@ class HomeView extends GetView<ReportController> {
   final HomeController _controller = Get.put(HomeController());
 
   final ReportController reportController = Get.put(ReportController());
+  final fetchJournalController = Get.find<JournalController>();
 
   @override
   Widget build(BuildContext context) {
@@ -386,7 +390,32 @@ class HomeView extends GetView<ReportController> {
                         scrollDirection: Axis.horizontal,
                         child: Row(
                           children: [
-                            for (int i = 0; i < 4; i++) const MyJournal(),
+                            Obx(() {
+                              if (fetchJournalController.isLoading.value) {
+                                return CircularProgressIndicator();
+                              }
+                              if (fetchJournalController.journalList.isEmpty) {
+                                return Text('No journals found.');
+                              }
+                              List journals =
+                                  fetchJournalController.journalList;
+                              int maxItems =
+                                  journals.length < 5 ? journals.length : 5;
+
+                              return Row(
+                                children: [
+                                  for (int i = 0; i < maxItems; i++)
+                                    MyJournal(
+                                      type: journals[i]['mood_level'] ??
+                                          'Unknown',
+                                      colors:
+                                          journals[i]['color'] ?? Colors.grey,
+                                      title: journals[i]['title'] ?? 'No Title',
+                                      date: journals[i]['date'] ?? 'No Date',
+                                    ),
+                                ],
+                              );
+                            }),
                           ],
                         ),
                       ),
@@ -450,15 +479,15 @@ class HomeView extends GetView<ReportController> {
                     final List listData = snapshot.data!['data'];
                     final double containerHeight =
                         listData.length <= 2 ? listData.length * 180.0 : 530.0;
-                    if (listData.isEmpty){
+                    if (listData.isEmpty) {
                       return Container(
-                      constraints: const BoxConstraints(
-                        maxHeight: 100,
-                      ),
-                      child: const Center(
-                        child: Text("Tidak Ada Data"),
-                      ),
-                    );
+                        constraints: const BoxConstraints(
+                          maxHeight: 100,
+                        ),
+                        child: const Center(
+                          child: Text("Tidak Ada Data"),
+                        ),
+                      );
                     }
                     return Container(
                       constraints: BoxConstraints(
