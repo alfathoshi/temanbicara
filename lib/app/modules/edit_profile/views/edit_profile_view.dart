@@ -22,6 +22,7 @@ class EditProfileView extends GetView<EditProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: whiteColor,
       appBar: AppBar(
         toolbarHeight: 85,

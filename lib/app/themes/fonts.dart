@@ -311,8 +311,8 @@ TextStyle TextLogo = GoogleFonts.poppins(
 
 TextStyle warningGoals = GoogleFonts.poppins(
   fontWeight: FontWeight.bold,
-  color: doneStatus,
-  fontSize: 14,
+  color: warning,
+  fontSize: 10,
 );
 TextStyle sleepQualityTitle = GoogleFonts.poppins(
   fontWeight: FontWeight.w700,

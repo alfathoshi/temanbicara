@@ -45,15 +45,20 @@ class CreateJournalView extends GetView<CreateJournalController> {
             ),
             TextField(
               controller: controller.titleController,
+              cursorColor: black,
               decoration: InputDecoration(
                 prefixIcon: const Icon(Iconsax.document),
-                hintText: 'Add Your Story...',
-                hintStyle: h7RegularShade,
+                hintText: 'Add your stroy...',
+                hintStyle: h5Regular.copyWith(color: grey2Color),
                 enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: border)),
-                border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
+                  borderSide: const BorderSide(
+                    color: greyColor,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(color: primaryColor),
                 ),
               ),
             ),
@@ -76,14 +81,19 @@ class CreateJournalView extends GetView<CreateJournalController> {
                 keyboardType: TextInputType.text,
                 expands: true,
                 maxLines: null,
+                cursorColor: black,
                 decoration: InputDecoration(
-                  hintText: 'Add Your Story...',
-                  hintStyle: h7RegularShade,
+                  hintText: 'Write your day here...',
+                  hintStyle: h5Regular.copyWith(color: grey2Color),
                   enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: BorderSide(color: border)),
-                  border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
+                    borderSide: const BorderSide(
+                      color: greyColor,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide(color: primaryColor),
                   ),
                 ),
               ),
@@ -161,7 +171,8 @@ class CreateJournalView extends GetView<CreateJournalController> {
                 child: WideButton(
                   get: () {
                     controller.submitJournal();
-                    Get.back();
+                    Get.offAllNamed(Routes.NAVIGATION_BAR,
+                        arguments: {"indexPage": 1});
                   },
                   color: primaryColor,
                   text: 'Create Journal',

@@ -80,19 +80,19 @@ class ChatbotView extends GetView<ChatbotController> {
                   const SizedBox(
                     height: 16,
                   ),
-                  Text(
-                    'History Chat',
-                    style: h5SemiBold,
-                  )
+                  // Text(
+                  //   'History Chat',
+                  //   style: h5SemiBold,
+                  // )
                 ],
               ),
             ),
           ),
-          SliverList.builder(
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return const HistoryChatbot();
-              })
+          // SliverList.builder(
+          //     itemCount: 5,
+          //     itemBuilder: (context, index) {
+          //       return const HistoryChatbot();
+          //     })
         ],
       ),
     );

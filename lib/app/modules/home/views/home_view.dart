@@ -28,9 +28,12 @@ class HomeView extends GetView<ReportController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: whiteColor,
       body: CustomScrollView(slivers: [
         SliverAppBar(
           automaticallyImplyLeading: false,
+          floating: true,
+          snap: true,
           toolbarHeight: 85,
           backgroundColor: Colors.white,
           shape: const RoundedRectangleBorder(
@@ -72,8 +75,7 @@ class HomeView extends GetView<ReportController> {
           actions: [
             IconButton(
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ChatView()));
+                Get.toNamed(Routes.CHAT);
               },
               icon: Image.asset(
                 'assets/icons/send.png',
@@ -439,7 +441,7 @@ class HomeView extends GetView<ReportController> {
                 future: _controller.fetchData(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   } else if (snapshot.hasError) {
                     return Center(
                       child: Text(snapshot.error.toString()),
@@ -448,17 +450,26 @@ class HomeView extends GetView<ReportController> {
                     final List listData = snapshot.data!['data'];
                     final double containerHeight =
                         listData.length <= 2 ? listData.length * 180.0 : 530.0;
-
+                    if (listData.isEmpty){
+                      return Container(
+                      constraints: const BoxConstraints(
+                        maxHeight: 100,
+                      ),
+                      child: const Center(
+                        child: Text("Tidak Ada Data"),
+                      ),
+                    );
+                    }
                     return Container(
                       constraints: BoxConstraints(
                         maxHeight: containerHeight,
                       ),
                       child: ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: listData.length <= 2 ? listData.length : 3,
                         itemBuilder: (BuildContext context, int index) {
                           return Padding(
-                            padding: EdgeInsets.only(left: 24, right: 24),
+                            padding: const EdgeInsets.only(left: 24, right: 24),
                             child: TopArticle(
                               judul: listData[index]["title"],
                               deskripsi: listData[index]["content"],
@@ -470,7 +481,14 @@ class HomeView extends GetView<ReportController> {
                       ),
                     );
                   } else {
-                    return Center(child: Text("Tidak Ada Data"));
+                    return Container(
+                      constraints: const BoxConstraints(
+                        maxHeight: 180,
+                      ),
+                      child: const Center(
+                        child: Text("Tidak Ada Data"),
+                      ),
+                    );
                   }
                 },
               ),

@@ -13,166 +13,159 @@ class SignupView extends GetView<SignupController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: whiteColor,
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(24),
-              bottomRight: Radius.circular(24),
-            ),
-            side: BorderSide(color: Colors.black12),
+      backgroundColor: whiteColor,
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(24),
+            bottomRight: Radius.circular(24),
           ),
-          toolbarHeight: 85,
-          backgroundColor: primaryColor,
-          title: Image.asset(
-            'assets/images/logo.png',
-            color: whiteColor,
-            scale: 4,
-          ),
-          centerTitle: true,
+          side: BorderSide(color: Colors.black12),
         ),
-        body: ListView(
+        toolbarHeight: 85,
+        backgroundColor: primaryColor,
+        title: Image.asset(
+          'assets/images/logo.png',
+          color: whiteColor,
+          scale: 4,
+        ),
+        centerTitle: true,
+      ),
+      body: Obx(
+        () => Column(
           children: [
-            Obx(
-              () => Container(
-                height: MediaQuery.sizeOf(context).height,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: 60,
-                            ),
-                            Center(
-                              child: Text(
-                                'Sign Up',
-                                style: h1Bold,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            AuthTextfield(
-                              onChanged: (value) => controller.isEmpty(),
-                              showPassword: () {},
-                              controller: controller.emailC,
-                              obscureText: false,
-                              hintText: 'Email',
-                              passwordField: false,
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            AuthTextfield(
-                              onChanged: (value) => controller.isEmpty(),
-                              showPassword: () {},
-                              controller: controller.phoneC,
-                              obscureText: false,
-                              hintText: 'Phone Number',
-                              passwordField: false,
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            AuthTextfield(
-                              onChanged: (value) => controller.isEmpty(),
-                              showPassword: () => controller.showPassword(),
-                              controller: controller.passC,
-                              obscureText: controller.isSecure.value,
-                              hintText: 'Password',
-                              passwordField: true,
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            AuthTextfield(
-                              onChanged: (value) => controller.isEmpty(),
-                              showPassword: () => controller.showPasswordC(),
-                              controller: controller.confirmPassC,
-                              obscureText: controller.isSecureC.value,
-                              hintText: 'Password',
-                              passwordField: true,
-                            ),
-                            const SizedBox(
-                              height: 68,
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                controller.register();
-                              },
-                              style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      controller.isButtonActive.value
-                                          ? const Color(0xFFc4c4c4)
-                                          : primaryColor,
-                                  foregroundColor: Colors.white,
-                                  minimumSize: const Size(
-                                    double.infinity,
-                                    44,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10))),
-                              child: controller.isLoading.value == false
-                                  ? Text(
-                                      'Daftar',
-                                      style: GoogleFonts.poppins(
-                                          fontWeight: FontWeight.bold),
-                                    )
-                                  : SizedBox(
-                                      height: 20,
-                                      width: 20,
-                                      child: CircularProgressIndicator(
-                                        color: whiteColor,
-                                      ),
-                                    ),
-                            ),
-                            const SizedBox(
-                              height: 24,
-                            ),
-                          ],
-                        ),
+                    const SizedBox(
+                      height: 60,
+                    ),
+                    Center(
+                      child: Text(
+                        'Sign Up',
+                        style: h1Bold,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      child: Column(
-                        children: [
-                          const Divider(),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Sudah punya akun? ',
-                                style: GoogleFonts.poppins(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    AuthTextfield(
+                      onChanged: (value) => controller.isEmpty(),
+                      showPassword: () {},
+                      controller: controller.emailC,
+                      obscureText: false,
+                      hintText: 'Email',
+                      passwordField: false,
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    AuthTextfield(
+                      onChanged: (value) => controller.isEmpty(),
+                      showPassword: () {},
+                      controller: controller.phoneC,
+                      obscureText: false,
+                      hintText: 'Phone Number',
+                      passwordField: false,
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    AuthTextfield(
+                      onChanged: (value) => controller.isEmpty(),
+                      showPassword: () => controller.showPassword(),
+                      controller: controller.passC,
+                      obscureText: controller.isSecure.value,
+                      hintText: 'Password',
+                      passwordField: true,
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    AuthTextfield(
+                      onChanged: (value) => controller.isEmpty(),
+                      showPassword: () => controller.showPasswordC(),
+                      controller: controller.confirmPassC,
+                      obscureText: controller.isSecureC.value,
+                      hintText: 'Password',
+                      passwordField: true,
+                    ),
+                    const SizedBox(
+                      height: 68,
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        controller.register();
+                      },
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: controller.isButtonActive.value
+                              ? const Color(0xFFc4c4c4)
+                              : primaryColor,
+                          foregroundColor: Colors.white,
+                          minimumSize: const Size(
+                            double.infinity,
+                            44,
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                      child: controller.isLoading.value == false
+                          ? Text(
+                              'Daftar',
+                              style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.bold),
+                            )
+                          : SizedBox(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                color: whiteColor,
                               ),
-                              GestureDetector(
-                                onTap: () => Get.toNamed(Routes.LOGIN),
-                                child: Text(
-                                  'Masuk',
-                                  style: GoogleFonts.poppins(
-                                    color: const Color(0xFF60ABEE),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    )
+                            ),
+                    ),
+                    const SizedBox(
+                      height: 24,
+                    ),
                   ],
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              child: Column(
+                children: [
+                  const Divider(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Sudah punya akun? ',
+                        style: GoogleFonts.poppins(),
+                      ),
+                      GestureDetector(
+                        onTap: () => Get.toNamed(Routes.LOGIN),
+                        child: Text(
+                          'Masuk',
+                          style: GoogleFonts.poppins(
+                            color: const Color(0xFF60ABEE),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            )
           ],
-        ));
+        ),
+      ),
+    );
   }
 }

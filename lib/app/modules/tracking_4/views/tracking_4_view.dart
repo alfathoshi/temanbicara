@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:temanbicara/app/modules/home/views/home_view.dart';
+import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
@@ -17,8 +18,7 @@ class Tracking4View extends GetView<Tracking4Controller> {
     return GestureDetector(
       onTap: () async {
         await controller.storedTracking();
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomeView()));
+        Get.offAllNamed(Routes.NAVIGATION_BAR, arguments: {'indexPage': 0});
       },
       child: Scaffold(
         backgroundColor: primaryColor,

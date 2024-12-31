@@ -5,6 +5,7 @@ class FavoriteButton extends StatelessWidget {
   final Function()? get;
   final Color colorBorder;
   final Color colorBackground;
+  final TextStyle style;
   final String text;
   const FavoriteButton({
     super.key,
@@ -12,6 +13,7 @@ class FavoriteButton extends StatelessWidget {
     required this.colorBorder,
     required this.text,
     required this.colorBackground,
+    required this.style,
   });
 
   @override
@@ -36,7 +38,7 @@ class FavoriteButton extends StatelessWidget {
             child: Center(
               child: Text(
                 text,
-                style: favoriteButton,
+                style: style,
               ),
             ),
           ),

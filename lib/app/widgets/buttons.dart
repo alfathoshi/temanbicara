@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
 class MyButton extends StatelessWidget {
@@ -14,24 +16,22 @@ class MyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        get?.call();
-      },
-      child: Container(
-        height: 36,
-        width: 162,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: color,
-        ),
-        child: Center(
-          child: Text(
-            text,
-            style: buttonLinkXSBold,
-          ),
-        ),
-      ),
-    );
+    return ElevatedButton(
+        onPressed: () {
+          get?.call();
+        },
+        style: ElevatedButton.styleFrom(
+            backgroundColor: primaryColor,
+            foregroundColor: Colors.white,
+            minimumSize: const Size(
+              double.infinity,
+              44,
+            ),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10))),
+        child: Text(
+          'Lanjutkan',
+          style: h5Bold.copyWith(color: whiteColor),
+        ));
   }
 }

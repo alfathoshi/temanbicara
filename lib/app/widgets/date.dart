@@ -26,7 +26,7 @@ class DatePicker extends StatelessWidget {
             color: Colors.black26,
             width: 2,
           ),
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(8),
         ),
         child: GestureDetector(
           onTap: () async {

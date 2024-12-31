@@ -14,6 +14,7 @@ class ProfileView extends GetView<ProfileController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: whiteColor,
       body: Padding(
         padding: const EdgeInsets.fromLTRB(32, 65, 32, 32),
@@ -175,9 +176,12 @@ class ProfileView extends GetView<ProfileController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      'About us',
-                      style: h4SemiBold,
+                    GestureDetector(
+                      onTap: ()=>print(box.read('token')),
+                      child: Text(
+                        'About us',
+                        style: h4SemiBold,
+                      ),
                     ),
                     const Icon(
                       Icons.chevron_right_outlined,

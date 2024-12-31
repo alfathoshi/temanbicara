@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 
 import '../../../routes/app_pages.dart';
 import '../../../themes/colors.dart';
@@ -13,6 +14,7 @@ class Assesment6View extends GetView<Assesment6Controller> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: whiteColor,
       appBar: AppBar(
         backgroundColor: whiteColor,
@@ -55,55 +57,74 @@ class Assesment6View extends GetView<Assesment6Controller> {
         ],
       ),
       body: Padding(
-          padding: const EdgeInsets.all(32.0),
-          child: ListView(
-            children: [
-              Container(
-                height: MediaQuery.sizeOf(context).height -
-                    (AppBar().preferredSize.height +
-                        MediaQuery.of(context).padding.top * 4),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Apakah kamu punya gejala kesehatan mental setelah konsultasi?',
-                      textAlign: TextAlign.center,
-                      style: h3Bold,
-                    ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    Image.asset(
-                      'assets/images/gejala.png',
-                      scale: 2,
-                    ),
-                    const SizedBox(
-                      height: 50,
-                    ),
-                    TextField(
+        padding: const EdgeInsets.all(32.0),
+        child: ListView(
+          children: [
+            Container(
+              height: MediaQuery.sizeOf(context).height -
+                  (AppBar().preferredSize.height +
+                      MediaQuery.of(context).padding.top * 4),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Apakah kamu punya gejala kesehatan mental setelah konsultasi?',
+                    textAlign: TextAlign.center,
+                    style: h3Bold,
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Image.asset(
+                    'assets/images/gejala.png',
+                    scale: 2,
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  TextField(
+                      cursorColor: black,
                       decoration: InputDecoration(
-                        labelText: 'Tuliskan Gejalamu disini...',
+                        hintText: 'Tuliskan gejalamu disini...',
+                        hintStyle: h5Regular.copyWith(color: grey2Color),
                         enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(32),
-                          borderSide: BorderSide(
-                            color: Colors.black26,
-                            width: 2,
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: const BorderSide(
+                            color: greyColor,
                           ),
                         ),
-                      ),
-                    ),
-                    Spacer(),
-                    MyButton(
-                        get: () {
-                          Get.toNamed(Routes.ASSESMENT_7);
-                        },
-                        color: primaryColor,
-                        text: 'Lanjutkan')
-                  ],
-                ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(color: primaryColor),
+                        ),
+                      )),
+                  Spacer(),
+                  MyButton(
+                      get: () {
+                        Get.toNamed(Routes.ASSESMENT_7);
+                      },
+                      color: primaryColor,
+                      text: 'Lanjutkan')
+                ],
               ),
-            ],
-          )),
+            ),
+            sby8,
+            Center(
+              child: Text(
+                'Kalau gak ada, skip aja!',
+                style: warningGoals,
+              ),
+            ),
+            const Spacer(),
+            MyButton(
+                get: () {
+                  Get.toNamed(Routes.ASSESMENT_7);
+                },
+                color: primaryColor,
+                text: 'Lanjutkan')
+          ],
+        ),
+      ),
     );
   }
 }

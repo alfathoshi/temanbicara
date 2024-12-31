@@ -39,6 +39,9 @@ class SignupController extends GetxController {
 
         if (response.statusCode == 200 && data['status']) {
           box.write('token', data['token']);
+          box.write('id', data['data']['id']);
+          box.write('email', data['data']['email']);
+          box.write('password', data['data']['password']);
           Get.snackbar(
             'Success',
             'Register berhasil',

@@ -3,6 +3,7 @@ import 'package:flutter_sliding_up_panel/sliding_up_panel_widget.dart';
 
 import 'package:get/get.dart';
 import 'package:temanbicara/app/modules/report/logo_helper.dart';
+import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/custom_bar_chart.dart';
 
@@ -25,16 +26,20 @@ class MoodReportView extends GetView<MoodReportController> {
     return Stack(
       children: [
         Scaffold(
+          backgroundColor: whiteColor,
           appBar: AppBar(
+            toolbarHeight: 85,
+            backgroundColor: Colors.white,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(24),
+                bottomRight: Radius.circular(24),
+              ),
+              side: BorderSide(color: Colors.black12),
+            ),
             title: Text(
               'Mood',
-              style: h2Bold,
-            ),
-            leading: GestureDetector(
-              onTap: () {
-                Get.back();
-              },
-              child: const Icon(Icons.arrow_back),
+              style: h3Bold,
             ),
             centerTitle: true,
           ),

@@ -152,7 +152,16 @@ class Assesment5View extends GetView<Assesment5Controller> {
             Spacer(),
             MyButton(
                 get: () {
-                  Get.toNamed(Routes.ASSESMENT_6);
+                   if (controller.isSelected.value == -1) {
+                      Get.snackbar(
+                        'Error',
+                        'Silahkan isi assesment',
+                        colorText: whiteColor,
+                        backgroundColor: error.withOpacity(0.6),
+                      );
+                    } else {
+                      Get.toNamed(Routes.ASSESMENT_6);
+                    }
                 },
                 color: primaryColor,
                 text: 'Lanjutkan')

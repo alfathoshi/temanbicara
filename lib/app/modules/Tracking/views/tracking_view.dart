@@ -29,23 +29,20 @@ class TrackingView extends GetView<TrackingController> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            title: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 15),
-                  child: Image.asset(
-                    'assets/images/logo.png',
-                    scale: 6,
-                  ),
-                ),
-                Text(
-                  'Tracking',
-                  style: h3Bold,
-                ),
-              ],
+            toolbarHeight: 85,
+            backgroundColor: Colors.white,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(24),
+                bottomRight: Radius.circular(24),
+              ),
+              side: BorderSide(color: Colors.black12),
+            ),
+            title: Text(
+              'Tracking',
+              style: h3Bold,
             ),
             centerTitle: true,
-            floating: true,
           ),
           SliverToBoxAdapter(
             child: Padding(
@@ -83,15 +80,18 @@ class TrackingView extends GetView<TrackingController> {
             child: Column(
               children: [
                 Obx(() => controller.warningText()),
-                MyButton(
-                    get: () {
-                      print(controller.selectedKualitasTidur.value!);
-                      Get.toNamed(Routes.TRACKING_2,
-                          arguments: TrackingModel(
-                              controller.selectedKualitasTidur.value!, "", 0));
-                    },
-                    color: primaryColor,
-                    text: 'Lanjutkan'),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                  child: MyButton(
+                      get: () {
+                        print(controller.selectedKualitasTidur.value!);
+                        Get.toNamed(Routes.TRACKING_2,
+                            arguments: TrackingModel(
+                                controller.selectedKualitasTidur.value!, "", 0));
+                      },
+                      color: primaryColor,
+                      text: 'Lanjutkan'),
+                ),
               ],
             ),
           ),
