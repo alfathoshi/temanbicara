@@ -85,10 +85,10 @@ class JournalView extends GetView<JournalController> {
                   'My Journal',
                   style: h5SemiBold,
                 ),
-                Icon(
-                  Icons.calendar_month,
-                  color: primaryColor,
-                ),
+                // Icon(
+                //   Icons.calendar_month,
+                //   color: primaryColor,
+                // ),
               ],
             ),
             const SizedBox(

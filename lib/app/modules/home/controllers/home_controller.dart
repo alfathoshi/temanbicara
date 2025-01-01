@@ -11,7 +11,7 @@ class HomeController extends GetxController {
   var isLoading = false.obs;
   var journalList = [].obs;
 
-  final fetchJournalController = Get.find<JournalController>();
+  final JournalController fetchJournalController = Get.put(JournalController());
 
   Future<void> fetchDataJornal() async {
     fetchJournalController.fetchJournals();

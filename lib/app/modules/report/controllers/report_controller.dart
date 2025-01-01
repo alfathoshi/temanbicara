@@ -6,8 +6,8 @@ import 'package:http/http.dart' as http;
 
 class ReportController extends GetxController {
   var trackingList = [].obs;
-  var avgMood = "".obs;
-  var avgSleep = "".obs;
+  var avgMood = "Tidak ada data".obs;
+  var avgSleep = "Tidak ada data".obs;
   var avgStress = 0.obs;
   var isFetching = false.obs;
   final box = GetStorage();
@@ -35,7 +35,7 @@ class ReportController extends GetxController {
         } else {
           Get.snackbar('Error', data['message']);
         }
-      } 
+      }
     } catch (e) {
       Get.snackbar('Error', 'Something went wrong: $e');
     } finally {

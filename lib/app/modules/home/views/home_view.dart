@@ -27,7 +27,7 @@ class HomeView extends GetView<ReportController> {
   final HomeController _controller = Get.put(HomeController());
 
   final ReportController reportController = Get.put(ReportController());
-  final fetchJournalController = Get.find<JournalController>();
+  final JournalController fetchJournalController = Get.put(JournalController());
 
   @override
   Widget build(BuildContext context) {
@@ -386,38 +386,72 @@ class HomeView extends GetView<ReportController> {
                       const SizedBox(
                         height: 16,
                       ),
-                      SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            Obx(() {
-                              if (fetchJournalController.isLoading.value) {
-                                return CircularProgressIndicator();
-                              }
-                              if (fetchJournalController.journalList.isEmpty) {
-                                return Text('No journals found.');
-                              }
-                              List journals =
-                                  fetchJournalController.journalList;
-                              int maxItems =
-                                  journals.length < 5 ? journals.length : 5;
-
-                              return Row(
-                                children: [
-                                  for (int i = 0; i < maxItems; i++)
-                                    MyJournal(
-                                      type: journals[i]['mood_level'] ??
-                                          'Unknown',
-                                      colors:
-                                          journals[i]['color'] ?? Colors.grey,
-                                      title: journals[i]['title'] ?? 'No Title',
-                                      date: journals[i]['date'] ?? 'No Date',
-                                    ),
-                                ],
+                      FutureBuilder(
+                        future: _controller.fetchData(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          } else if (snapshot.hasError) {
+                            return Center(
+                              child: Text(snapshot.error.toString()),
+                            );
+                          } else if (snapshot.hasData) {
+                            final List listData = snapshot.data!['data'];
+                            final double containerHeight = 150;
+                            if (listData.isEmpty) {
+                              return Container(
+                                constraints: const BoxConstraints(
+                                  maxHeight: 100,
+                                ),
+                                child: const Center(
+                                  child: Text("Tidak Ada Data"),
+                                ),
                               );
-                            }),
-                          ],
-                        ),
+                            }
+                            return Container(
+                              constraints: BoxConstraints(
+                                maxHeight: containerHeight,
+                              ),
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount:
+                                    listData.length <= 2 ? listData.length : 3,
+                                itemBuilder: (BuildContext context, int i) {
+                                  List journals =
+                                      fetchJournalController.journalList;
+                                  int maxItems =
+                                      journals.length < 5 ? journals.length : 5;
+                                  int emotionIndex = fetchJournalController
+                                      .emotions
+                                      .indexOf(journals[i]['mood_level']);
+                                  Color emotionColor = fetchJournalController
+                                      .emotionColors[emotionIndex];
+                                  DateTime date =
+                                      DateTime.parse(journals[i]['created_at']);
+                                  return MyJournal(
+                                    type:
+                                        journals[i]['mood_level'] ?? 'Unknown',
+                                    colors: emotionColor,
+                                    title: journals[i]['title'] ?? 'No Title',
+                                    date: fetchJournalController.formatDate(date),
+                                  );
+                                },
+                              ),
+                            );
+                          } else {
+                            return Container(
+                              constraints: const BoxConstraints(
+                                maxHeight: 180,
+                              ),
+                              child: const Center(
+                                child: Text("Tidak Ada Data"),
+                              ),
+                            );
+                          }
+                        },
                       ),
                     ],
                   ),

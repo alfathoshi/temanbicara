@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class JournalController extends GetxController {
   final box = GetStorage();
@@ -16,6 +17,10 @@ class JournalController extends GetxController {
     'Senang',
     'Bahagia'
   ];
+
+  String formatDate(DateTime dateTime) {
+    return DateFormat('yyyy-MM-dd HH:mm').format(dateTime);
+  }
 
   final List<Color> emotionColors = [
     Colors.purpleAccent,
@@ -33,7 +38,7 @@ class JournalController extends GetxController {
       final token = box.read('token');
 
       var response = await http.get(
-        Uri.parse('http://10.0.2.2:8000/api/v1/journal/$userId')
+        Uri.parse('http://10.0.2.2:8000/api/v1/journal')
             .replace(queryParameters: {
           'userId': userId.toString(),
         }),
@@ -48,8 +53,10 @@ class JournalController extends GetxController {
         print(data);
         if (data['status']) {
           journalList.value = data['data'];
+          return data;
         } else {
           Get.snackbar('Error', data['message']);
+          return data;
         }
       }
     } catch (e) {

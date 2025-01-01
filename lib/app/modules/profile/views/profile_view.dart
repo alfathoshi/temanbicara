@@ -16,6 +16,22 @@ class ProfileView extends GetView<ProfileController> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: whiteColor,
+      appBar: AppBar(
+        toolbarHeight: 85,
+        backgroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(24),
+            bottomRight: Radius.circular(24),
+          ),
+          side: BorderSide(color: Colors.black12),
+        ),
+        title: Text(
+          'Profile',
+          style: h3Bold,
+        ),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(32, 65, 32, 32),
         child: Column(
@@ -121,27 +137,27 @@ class ProfileView extends GetView<ProfileController> {
                 const SizedBox(
                   height: 16,
                 ),
-                GestureDetector(
-                  onTap: () {
-                    Get.toNamed(Routes.CHANGE_LANGUAGE);
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Change Language',
-                        style: h4SemiBold,
-                      ),
-                      const Icon(
-                        Icons.chevron_right_outlined,
-                        size: 32,
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
+                // GestureDetector(
+                //   onTap: () {
+                //     Get.toNamed(Routes.CHANGE_LANGUAGE);
+                //   },
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       Text(
+                //         'Change Language',
+                //         style: h4SemiBold,
+                //       ),
+                //       const Icon(
+                //         Icons.chevron_right_outlined,
+                //         size: 32,
+                //       )
+                //     ],
+                //   ),
+                // ),
+                // const SizedBox(
+                //   height: 16,
+                // ),
                 GestureDetector(
                   onTap: () => Get.toNamed(Routes.CONSULT_HISTORY),
                   child: Row(
@@ -161,52 +177,52 @@ class ProfileView extends GetView<ProfileController> {
                 sby24,
                 const Divider(),
                 sby24,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'More',
-                      style: h4Regular,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: ()=>print(box.read('token')),
-                      child: Text(
-                        'About us',
-                        style: h4SemiBold,
-                      ),
-                    ),
-                    const Icon(
-                      Icons.chevron_right_outlined,
-                      size: 32,
-                    )
-                  ],
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Privacy Policy',
-                      style: h4SemiBold,
-                    ),
-                    const Icon(
-                      Icons.chevron_right_outlined,
-                      size: 32,
-                    )
-                  ],
-                ),
-                SizedBox(height: 20),
-                const Divider(),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Text(
+                //       'More',
+                //       style: h4Regular,
+                //     ),
+                //   ],
+                // ),
+                // const SizedBox(
+                //   height: 16,
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     GestureDetector(
+                //       onTap: ()=>print(box.read('token')),
+                //       child: Text(
+                //         'About us',
+                //         style: h4SemiBold,
+                //       ),
+                //     ),
+                //     const Icon(
+                //       Icons.chevron_right_outlined,
+                //       size: 32,
+                //     )
+                //   ],
+                // ),
+                // const SizedBox(
+                //   height: 16,
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Text(
+                //       'Privacy Policy',
+                //       style: h4SemiBold,
+                //     ),
+                //     const Icon(
+                //       Icons.chevron_right_outlined,
+                //       size: 32,
+                //     )
+                //   ],
+                // ),
+                // SizedBox(height: 20),
+                // const Divider(),
                 GestureDetector(
                   onTap: () {
                     Get.offAllNamed(
