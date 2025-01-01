@@ -12,18 +12,6 @@ class ReportView extends GetView<ReportController> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController dateController = TextEditingController();
-
-    Future<void> selectDate() async {
-      DateTime? date = await showDatePicker(
-        context: context,
-        firstDate: DateTime(2000),
-        lastDate: DateTime(2100),
-      );
-
-      if (date != null) {}
-    }
-
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: AppBar(
@@ -56,26 +44,6 @@ class ReportView extends GetView<ReportController> {
                   "Mental Health Tracker",
                   style: h4Medium,
                 ),
-                SizedBox(
-                  width: 150,
-                  height: 25,
-                  child: TextField(
-                    controller: dateController,
-                    onTap: () {
-                      selectDate();
-                    },
-                    readOnly: true,
-                    style: h5Regular,
-                    decoration: const InputDecoration(
-                      hintText: "12 Desember 2024",
-                      border: InputBorder.none,
-                      prefixIcon: Icon(
-                        Icons.calendar_month,
-                        size: 20,
-                      ),
-                    ),
-                  ),
-                ),
               ],
             ),
             const SizedBox(
@@ -83,8 +51,17 @@ class ReportView extends GetView<ReportController> {
             ),
             ReportCategory(
               onPressed: () {
-                Get.toNamed(Routes.SLEEP_QUALITY,
-                    arguments: [controller.trackingList, controller.avgSleep]);
+                controller.trackingList.isEmpty
+                    ? Get.snackbar(
+                        "Tidak dapat mengakses halaman",
+                        "Data tracking anda masih kosong. Silahkan melakukan tracking",
+                        backgroundColor: error.withOpacity(0.6),
+                        colorText: Colors.white,
+                      )
+                    : Get.toNamed(Routes.SLEEP_QUALITY, arguments: [
+                        controller.trackingList,
+                        controller.avgSleep
+                      ]);
               },
               title: "Sleep Quality",
               description: "Status ${controller.avgSleep.value}",
@@ -92,8 +69,17 @@ class ReportView extends GetView<ReportController> {
             ),
             ReportCategory(
               onPressed: () {
-                Get.toNamed(Routes.STRESS_LEVEL,
-                    arguments: [controller.trackingList, controller.avgStress]);
+                controller.trackingList.isEmpty
+                    ? Get.snackbar(
+                        "Tidak dapat mengakses halaman",
+                        "Data tracking anda masih kosong. Silahkan melakukan tracking",
+                        backgroundColor: error.withOpacity(0.6),
+                        colorText: Colors.white,
+                      )
+                    : Get.toNamed(Routes.STRESS_LEVEL, arguments: [
+                        controller.trackingList,
+                        controller.avgStress
+                      ]);
               },
               title: "Stress Level",
               description: "Level ${controller.avgStress.value}",
@@ -101,8 +87,17 @@ class ReportView extends GetView<ReportController> {
             ),
             ReportCategory(
               onPressed: () {
-                Get.toNamed(Routes.MOOD_REPORT,
-                    arguments: [controller.trackingList, controller.avgMood]);
+                controller.trackingList.isEmpty
+                    ? Get.snackbar(
+                        "Tidak dapat mengakses halaman",
+                        "Data tracking anda masih kosong. Silahkan melakukan tracking",
+                        backgroundColor: error.withOpacity(0.6),
+                        colorText: Colors.white,
+                      )
+                    : Get.toNamed(Routes.MOOD_REPORT, arguments: [
+                        controller.trackingList,
+                        controller.avgMood
+                      ]);
               },
               title: "Mood Tracker",
               description: "Status ${controller.avgMood.value}",

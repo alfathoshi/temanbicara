@@ -25,6 +25,7 @@ class SleepQualityView extends GetView<SleepQualityController> {
     List<dynamic> trackingList = Get.arguments[0].value;
 
     SlidingUpPanelController slidingUpController = SlidingUpPanelController();
+
     return Stack(
       children: [
         Scaffold(
@@ -66,7 +67,7 @@ class SleepQualityView extends GetView<SleepQualityController> {
                             strokeWidth: 10,
                           ),
                         ),
-                        Image.asset(LogoHelper.sleepQuality[Get.arguments[1]]!)
+                        Image.asset(LogoHelper.sleepQuality[Get.arguments[1]]!),
                       ],
                     ),
                   ),
