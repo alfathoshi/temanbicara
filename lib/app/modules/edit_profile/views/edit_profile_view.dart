@@ -92,13 +92,19 @@ class EditProfileView extends GetView<EditProfileController> {
                   ),
                   TextField(
                     controller: controller.nameController,
+                    cursorColor: black,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
+                      hintText: 'Masukkan Nama Lengkap',
+                      hintStyle: h5Regular.copyWith(color: grey2Color),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
                         borderSide: const BorderSide(
-                          color: Colors.black26,
-                          width: 2,
+                          color: greyColor,
                         ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: primaryColor),
                       ),
                     ),
                   ),
@@ -114,13 +120,19 @@ class EditProfileView extends GetView<EditProfileController> {
                   ),
                   TextField(
                     controller: controller.emailController,
+                    cursorColor: black,
                     decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
+                      hintText: 'Masukkan Nama Lengkap',
+                      hintStyle: h5Regular.copyWith(color: grey2Color),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
                         borderSide: const BorderSide(
-                          color: Colors.black26,
-                          width: 2,
+                          color: greyColor,
                         ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: primaryColor),
                       ),
                     ),
                   ),

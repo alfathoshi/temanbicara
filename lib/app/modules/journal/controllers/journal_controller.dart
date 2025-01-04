@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:temanbicara/app/themes/colors.dart';
 
 class JournalController extends GetxController {
   final box = GetStorage();
@@ -53,14 +54,22 @@ class JournalController extends GetxController {
         print(data);
         if (data['status']) {
           journalList.value = data['data'];
-          return data;
         } else {
-          Get.snackbar('Error', data['message']);
-          return data;
+          Get.snackbar(
+            'Error',
+            data['message'],
+            colorText: whiteColor,
+            backgroundColor: error.withOpacity(0.6),
+          );
         }
       }
     } catch (e) {
-      Get.snackbar('Error', 'Something went wrong: $e');
+      Get.snackbar(
+        'Error',
+        'Something went wrong: $e',
+        colorText: whiteColor,
+        backgroundColor: error.withOpacity(0.6),
+      );
     } finally {
       isLoading.value = false;
     }
@@ -82,18 +91,38 @@ class JournalController extends GetxController {
         var data = json.decode(response.body);
         print(data);
         if (data['status']) {
-          Get.snackbar('Success', 'Journal deleted successfully');
+          Get.snackbar(
+            'Success',
+            'Journal deleted successfully',
+            colorText: whiteColor,
+            backgroundColor: primaryColor.withOpacity(0.6),
+          );
           journalList
               .removeWhere((journal) => journal['journal_id'] == journalId);
         } else {
-          Get.snackbar('Error', data['message']);
+          Get.snackbar(
+            'Error',
+            data['message'],
+            colorText: whiteColor,
+            backgroundColor: error.withOpacity(0.6),
+          );
         }
       } else {
         print(response.body);
-        Get.snackbar('Error', 'Failed to delete journal.');
+        Get.snackbar(
+          'Error',
+          'Failed to delete journal.',
+          colorText: whiteColor,
+          backgroundColor: error.withOpacity(0.6),
+        );
       }
     } catch (e) {
-      Get.snackbar('Error', 'Something went wrong: $e');
+      Get.snackbar(
+        'Error',
+        'Something went wrong: $e',
+        colorText: whiteColor,
+        backgroundColor: error.withOpacity(0.6),
+      );
     }
   }
 

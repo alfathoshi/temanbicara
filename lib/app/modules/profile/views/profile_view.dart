@@ -67,7 +67,9 @@ class ProfileView extends GetView<ProfileController> {
                             size: 16,
                             color: whiteColor,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            print(box.read('token'));
+                          },
                         ),
                       ),
                     ],
@@ -75,12 +77,10 @@ class ProfileView extends GetView<ProfileController> {
                   const SizedBox(
                     height: 12,
                   ),
-
                   Text(
                     box.read('nickname') ?? "Astro",
                     style: h3Bold,
                   ),
-
                 ],
               ),
             ),

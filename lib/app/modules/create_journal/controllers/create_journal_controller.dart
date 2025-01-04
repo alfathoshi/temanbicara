@@ -8,7 +8,6 @@ import 'package:temanbicara/app/themes/colors.dart';
 
 import '../../journal/controllers/journal_controller.dart';
 
-
 class CreateJournalController extends GetxController {
   final box = GetStorage();
 
@@ -36,7 +35,6 @@ class CreateJournalController extends GetxController {
 
   Future<void> submitJournal() async {
     if (titleController.text.isEmpty || bodyController.text.isEmpty) {
-
       Get.snackbar('Error', 'Title and Body are required',
           backgroundColor: Colors.red.withOpacity(0.6),
           colorText: Colors.white);

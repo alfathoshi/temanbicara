@@ -15,7 +15,15 @@ class ConsultHistoryView extends GetView<ConsultHistoryController> {
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: AppBar(
-        backgroundColor: whiteColor,
+       toolbarHeight: 85,
+        backgroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(24),
+            bottomRight: Radius.circular(24),
+          ),
+          side: BorderSide(color: Colors.black12),
+        ),
         title: Text(
           'Consultation History',
           style: h3Bold,

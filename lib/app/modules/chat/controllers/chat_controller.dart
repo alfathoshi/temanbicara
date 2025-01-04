@@ -8,7 +8,6 @@ class ChatController extends GetxController {
   final listChat = [].obs;
   GetStorage box = GetStorage();
 
-
   Future<Map<String, dynamic>> fetchData() async {
     final response = await http.get(
       Uri.parse(

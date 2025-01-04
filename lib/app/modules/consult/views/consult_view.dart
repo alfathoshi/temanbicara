@@ -34,60 +34,43 @@ class ConsultView extends GetView<ConsultController> {
         ),
         centerTitle: true,
       ),
-      body: FutureBuilder(
-          future: controller.fetchData(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text(snapshot.error.toString()),
-              );
-            } else if (snapshot.hasData) {
-              final List listData = snapshot.data!['data'];
-              return Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: listData.isEmpty
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Center(
-                            child: Image.asset("assets/images/therapist_1.png",
-                                scale: 1.5),
-                          ),
-                          sby12,
-                          Text(
-                            "No Data Available",
-                            style: h5Bold.copyWith(color: primaryColor),
-                          )
-                        ],
-                      )
-                    : ListView.builder(
-                        padding: const EdgeInsets.all(8),
-                        itemCount: listData.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return GestureDetector(
-                            onTap: () {
-                              Get.toNamed(
-                                Routes.CONSULT_SCHEDULE,
-                                arguments: {
-                                  'user_name': listData[index]['name'],
-                                  'schedules': listData[index]['schedules'],
-                                  'expertise': listData[index]['expertise'],
-                                },
-                              );
-                            },
-                            child: CounselorCard(
-                                username: listData[index]['name'],
-                                expertise: listData[index]['expertise'],
-                                schedule: listData[index]['schedules']),
-                          );
-                        }),
-              );
-            } else {
-              return Center(child: Text("Tidak Ada Data"));
-            }
-          }),
+      body: RefreshIndicator(
+    onRefresh: controller.fetchData,
+    child: Obx(() {
+      if (controller.isLoading.value) {
+        return Center(child: CircularProgressIndicator());
+      } else if (controller.schedules.isEmpty) {
+        return Center(
+          child: Text("No Data Available"),
+        );
+      } else {
+        final List listData = controller.schedules['data'];
+        return ListView.builder(
+          padding: const EdgeInsets.all(8),
+          itemCount: listData.length,
+          itemBuilder: (BuildContext context, int index) {
+            return GestureDetector(
+              onTap: () {
+                Get.toNamed(
+                  Routes.CONSULT_SCHEDULE,
+                  arguments: {
+                    'user_name': listData[index]['name'],
+                    'schedules': listData[index]['schedules'],
+                    'expertise': listData[index]['expertise'],
+                  },
+                );
+              },
+              child: CounselorCard(
+                username: listData[index]['name'],
+                expertise: listData[index]['expertise'],
+                schedule: listData[index]['schedules'],
+              ),
+            );
+          },
+        );
+      }
+    }),
+  ),
     );
   }
 }
