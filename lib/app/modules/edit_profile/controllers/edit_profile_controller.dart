@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:temanbicara/app/modules/edit_profile/controllers/datepicker_controller.dart';
 import 'package:http/http.dart' as http;
+import 'package:temanbicara/app/themes/colors.dart';
 
 class EditProfileController extends GetxController {
   final box = GetStorage();
@@ -26,8 +27,6 @@ class EditProfileController extends GetxController {
   }
 
   Future<void> editProfile() async {
-    print(nameController.text);
-    print('asdas ${box.read('name')}');
     isLoading.value = true;
     String formattedDate =
         DateFormat('yyyy-MM-dd').format(dateController.selectedDate.value);
@@ -46,29 +45,48 @@ class EditProfileController extends GetxController {
           'name': nameController.text,
           'email': emailController.text,
           'birthdate': formattedDate,
-          'user_id': userId.toString(),
         }),
       );
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
         print(responseData);
-        box.write('name', responseData['name']);
-        box.write('email', responseData['email']);
-        box.write('birthdate', responseData['birthdate']);
+
+        box.write('name', responseData['data']['name']);
+        box.write('email', responseData['data']['email']);
+        box.write('birthdate', responseData['data']['birthdate']);
 
         if (responseData['status']) {
-          Get.back();
+          Get.snackbar(
+            'Success',
+            'Profile updated',
+            backgroundColor: primaryColor.withOpacity(0.6),
+            colorText: whiteColor,
+          );
         } else {
           Get.snackbar(
-              'Error', responseData['message'] ?? 'Failed to update profile');
+            'Error',
+            responseData['message'] ?? 'Failed to update profile',
+            backgroundColor: error.withOpacity(0.6),
+            colorText: whiteColor,
+          );
         }
       } else {
-        Get.snackbar('Error', 'Failed to update profile.');
+        Get.snackbar(
+          'Error',
+          'Failed to update profile.',
+          backgroundColor: error.withOpacity(0.6),
+          colorText: whiteColor,
+        );
       }
     } catch (e) {
       print(e);
-      Get.snackbar('Error', 'An error occurred: $e');
+      Get.snackbar(
+        'Error',
+        'An error occurred: $e',
+        backgroundColor: error.withOpacity(0.6),
+        colorText: whiteColor,
+      );
     } finally {
       isLoading.value = false;
     }
