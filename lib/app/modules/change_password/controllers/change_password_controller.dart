@@ -31,7 +31,6 @@ class ChangePasswordController extends GetxController {
           'old_password': oldPassController.text,
           'new_password': newPassController.text,
           'confirm_password': confirmPassController.text,
-          'user_id': userId.toString(),
         }),
       );
 
@@ -40,23 +39,39 @@ class ChangePasswordController extends GetxController {
         box.write('new_password', responseData['new_password']);
 
         if (responseData['status']) {
-          Get.back();
+
           Get.snackbar(
             'Success',
-            'password berhasil di ubah',
+            'Password has changed successfully',
             backgroundColor: primaryColor.withOpacity(0.6),
-            colorText: Colors.white,
+            colorText: whiteColor,
+
+         
           );
         } else {
-          Get.snackbar('Error',
-              responseData['message'] ?? 'Failed to update password 1');
+          Get.snackbar(
+            'Error',
+            responseData['message'] ?? 'Failed to update password 1',
+            backgroundColor: error.withOpacity(0.6),
+            colorText: whiteColor,
+          );
         }
       } else {
-        Get.snackbar('Error', 'Failed to update password.');
+        Get.snackbar(
+          'Error',
+          'Failed to update password.',
+          backgroundColor: error.withOpacity(0.6),
+          colorText: whiteColor,
+        );
       }
     } catch (e) {
       print(e);
-      Get.snackbar('Error', 'An error occurred: $e');
+      Get.snackbar(
+        'Error',
+        'An error occurred: $e',
+        backgroundColor: error.withOpacity(0.6),
+        colorText: whiteColor,
+      );
     } finally {
       isLoading.value = false;
     }

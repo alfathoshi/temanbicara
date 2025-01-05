@@ -28,6 +28,7 @@ class ReportController extends GetxController {
         var data = json.decode(response.body);
 
         if (data['status']) {
+          print(data['data']);
           trackingList.value = data['data'];
           avgMood.value = data['average_mood'];
           avgSleep.value = data['average_sleep_quality'];

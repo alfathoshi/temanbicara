@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
@@ -24,9 +25,14 @@ class ReportView extends GetView<ReportController> {
           ),
           side: BorderSide(color: Colors.black12),
         ),
-        title: Text(
-          'Mental Report',
-          style: h3Bold,
+        title: GestureDetector(
+          onTap: () {
+            print(controller.trackingList);
+          },
+          child: Text(
+            'Mental Report',
+            style: h3Bold,
+          ),
         ),
         centerTitle: true,
       ),
@@ -124,7 +130,8 @@ class ReportView extends GetView<ReportController> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Get.toNamed(Routes.CONSULTATION);
+                    // Get.toNamed(Routes.CONSULTATION);
+                    print(controller.trackingList);
                   },
                   child: Text(
                     "Click Here",

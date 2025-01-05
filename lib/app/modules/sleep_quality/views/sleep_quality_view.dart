@@ -76,7 +76,8 @@ class SleepQualityView extends GetView<SleepQualityController> {
                   ),
                   Text(
                     Get.arguments[1].value,
-                    style: h1Bold.copyWith(color: const Color(0xFFFEBE58)),
+                    style: h1Bold.copyWith(
+                        color: LogoHelper.colorByLevel(Get.arguments[1].value)),
                   ),
                   Image.asset(
                     "assets/images/happy_bg.png",
@@ -145,6 +146,7 @@ class SleepQualityView extends GetView<SleepQualityController> {
                     height: 20,
                   ),
                   CustomBarChart(
+                    color: LogoHelper.colorByLevel(Get.arguments[1].value),
                     dummyData: trackingList,
                   ),
                   const SizedBox(
@@ -156,6 +158,8 @@ class SleepQualityView extends GetView<SleepQualityController> {
                       date: trackingList[i]['updated_at']
                           .split('T')[0]
                           .toString(),
+                      color: LogoHelper.colorByLevel(
+                          trackingList[i]['sleep_quality']),
                     ),
                 ],
               ),
@@ -170,8 +174,12 @@ class SleepQualityView extends GetView<SleepQualityController> {
 class SleepHistoryItem extends StatelessWidget {
   final String description;
   final String date;
+  final Color color;
   const SleepHistoryItem(
-      {super.key, required this.description, required this.date});
+      {super.key,
+      required this.description,
+      required this.date,
+      required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -195,7 +203,7 @@ class SleepHistoryItem extends StatelessWidget {
       width: MediaQuery.sizeOf(context).width,
       height: 70,
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 253, 214, 151),
+        color: color.withOpacity(0.4),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
@@ -207,11 +215,11 @@ class SleepHistoryItem extends StatelessWidget {
               width: 50,
               height: 50,
               decoration: BoxDecoration(
-                color: const Color(0xFFFEBE58),
+                color: color.withOpacity(0.8),
                 borderRadius: BorderRadius.circular(10),
-                boxShadow: const [
+                boxShadow: [
                   BoxShadow(
-                    color: Color(0xFFFEBE58),
+                    color: color.withOpacity(0.5),
                     spreadRadius: 1,
                     blurRadius: 0.5,
                   ),
@@ -223,7 +231,7 @@ class SleepHistoryItem extends StatelessWidget {
                 children: [
                   Text(
                     month[int.parse(date.split('-')[1]) - 1],
-                    style: h6Medium,
+                    style: h6Bold,
                   ),
                   Text(
                     date.split('-')[2],

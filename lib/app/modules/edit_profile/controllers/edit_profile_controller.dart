@@ -27,10 +27,7 @@ class EditProfileController extends GetxController {
   }
 
   Future<void> editProfile() async {
-    print(nameController.text);
-    print(emailController.text);
-    print(dateController.selectedDate.value);
-    print('asdas ${box.read('name')}');
+
     isLoading.value = true;
     String formattedDate =
         DateFormat('yyyy-MM-dd').format(dateController.selectedDate.value);
@@ -50,7 +47,6 @@ class EditProfileController extends GetxController {
           'name': nameController.text,
           'email': emailController.text,
           'birthdate': formattedDate,
-          'user_id': userId.toString(),
         }),
       );
 
@@ -60,28 +56,44 @@ class EditProfileController extends GetxController {
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
         print(responseData);
+
         box.write('name', responseData['data']['name']);
         box.write('email', responseData['data']['email']);
         box.write('birthdate', responseData['data']['birthdate']);
 
         if (responseData['status']) {
-          Get.back();
+
           Get.snackbar(
             'Success',
-            'Profile berhasil di ubah',
+            'Profile updated',
             backgroundColor: primaryColor.withOpacity(0.6),
-            colorText: Colors.white,
+            colorText: whiteColor,
+
           );
         } else {
           Get.snackbar(
-              'Error', responseData['message'] ?? 'Failed to update profile');
+            'Error',
+            responseData['message'] ?? 'Failed to update profile',
+            backgroundColor: error.withOpacity(0.6),
+            colorText: whiteColor,
+          );
         }
       } else {
-        Get.snackbar('Error', 'Failed to update profile.');
+        Get.snackbar(
+          'Error',
+          'Failed to update profile.',
+          backgroundColor: error.withOpacity(0.6),
+          colorText: whiteColor,
+        );
       }
     } catch (e) {
       print(e);
-      Get.snackbar('Error', 'An error occurred: $e');
+      Get.snackbar(
+        'Error',
+        'An error occurred: $e',
+        backgroundColor: error.withOpacity(0.6),
+        colorText: whiteColor,
+      );
     } finally {
       isLoading.value = false;
     }
