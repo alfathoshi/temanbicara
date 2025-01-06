@@ -68,7 +68,7 @@ class ProfileView extends GetView<ProfileController> {
                             color: whiteColor,
                           ),
                           onPressed: () {
-                            print(box.read('token'));
+                            Get.toNamed(Routes.EDIT_PROFILE);
                           },
                         ),
                       ),

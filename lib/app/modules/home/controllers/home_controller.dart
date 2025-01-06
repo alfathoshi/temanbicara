@@ -16,7 +16,7 @@ class HomeController extends GetxController {
     try {
       isLoading.value = true;
       final response =
-          await http.get(Uri.parse('http://10.0.2.2:8000/api/v1/article'));
+          await http.get(Uri.parse('http://10.60.0.64:8000/api/v1/article'));
       if (response.statusCode == 200) {
         articles.value = json.decode(response.body);
         print(articles);

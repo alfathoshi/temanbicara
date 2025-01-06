@@ -8,7 +8,7 @@ class ConsultReportController extends GetxController {
   Future<Map<String, dynamic>> fetchData() async {
     final token = box.read('token');
     final response = await http.get(
-        Uri.parse('http://10.0.2.2:8000/api/v1/consultation-user'),
+        Uri.parse('http://10.60.0.64:8000/api/v1/consultation-user'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
