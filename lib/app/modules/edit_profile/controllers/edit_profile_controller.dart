@@ -27,6 +27,7 @@ class EditProfileController extends GetxController {
   }
 
   Future<void> editProfile() async {
+
     isLoading.value = true;
     String formattedDate =
         DateFormat('yyyy-MM-dd').format(dateController.selectedDate.value);
@@ -34,6 +35,7 @@ class EditProfileController extends GetxController {
     try {
       final userId = box.read('id');
       final token = box.read('token');
+      print(token);
 
       final response = await http.put(
         Uri.parse('http://10.0.2.2:8000/api/v1/edit-profile'),
@@ -48,6 +50,9 @@ class EditProfileController extends GetxController {
         }),
       );
 
+      print('Response status: ${response.statusCode}');
+      print('Response body: ${response.body}');
+
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
         print(responseData);
@@ -57,11 +62,13 @@ class EditProfileController extends GetxController {
         box.write('birthdate', responseData['data']['birthdate']);
 
         if (responseData['status']) {
+
           Get.snackbar(
             'Success',
             'Profile updated',
             backgroundColor: primaryColor.withOpacity(0.6),
             colorText: whiteColor,
+
           );
         } else {
           Get.snackbar(
