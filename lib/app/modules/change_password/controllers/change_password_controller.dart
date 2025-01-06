@@ -22,7 +22,7 @@ class ChangePasswordController extends GetxController {
       final token = box.read('token');
 
       final response = await http.patch(
-        Uri.parse('http://10.60.0.64:8000/api/v1/change-password'),
+        Uri.parse('http://10.0.2.2:8000/api/v1/change-password'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',

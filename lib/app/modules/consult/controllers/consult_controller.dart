@@ -9,7 +9,7 @@ class ConsultController extends GetxController {
     try {
       isLoading.value = true;
       final response = await http
-          .get(Uri.parse('http://10.60.0.64:8000/api/v1/available-schedule'));
+          .get(Uri.parse('http://10.0.2.2:8000/api/v1/available-schedule'));
       if (response.statusCode == 200) {
         schedules.value = json.decode(response.body);
       } else {
