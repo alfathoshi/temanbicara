@@ -61,7 +61,7 @@ class TopArticle extends StatelessWidget {
                             Border.all(color: Colors.black.withOpacity(0.1)),
                         borderRadius: BorderRadius.circular(15)),
                     child: Image.asset(
-                      'assets/images/${image}.png',
+                      'assets/images/${image}',
                       scale: 4,
                     ),
                   ),

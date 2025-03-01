@@ -5,6 +5,7 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
+import '../../../themes/spaces.dart';
 import '../../../widgets/wide_button.dart';
 import '../controllers/edit_journal_controller.dart';
 
@@ -38,9 +39,7 @@ class EditJournalView extends GetView<EditJournalController> {
               'Journal Title',
               style: h6SemiBold,
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            sby16,
             TextField(
               controller: controller.titleController,
               decoration: InputDecoration(
@@ -55,16 +54,12 @@ class EditJournalView extends GetView<EditJournalController> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            sby16,
             Text(
               'Write Your Entry',
               style: h6SemiBold,
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            sby16,
             SizedBox(
               height: 200,
               width: double.infinity,
@@ -86,9 +81,7 @@ class EditJournalView extends GetView<EditJournalController> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            sby16,
             Text(
               'Stress Level',
               style: h6SemiBold,
@@ -119,16 +112,12 @@ class EditJournalView extends GetView<EditJournalController> {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            sby16,
             Text(
               'Select Your Emotions',
               style: h6SemiBold,
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            sby16,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: List.generate(
@@ -151,9 +140,7 @@ class EditJournalView extends GetView<EditJournalController> {
                 },
               ),
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            sby16,
             Expanded(
               child: Center(
                 child: WideButton(
