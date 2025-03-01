@@ -48,7 +48,7 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
             children: [
               Center(
                 child: Image.asset(
-                  'assets/images/${image}.png',
+                  'assets/images/${image}',
                   height: 221,
                 ),
               ),

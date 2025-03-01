@@ -74,9 +74,7 @@ class ProfileView extends GetView<ProfileController> {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 12,
-                  ),
+                  sby12,
                   Text(
                     box.read('nickname') ?? "Astro",
                     style: h3Bold,
@@ -92,9 +90,7 @@ class ProfileView extends GetView<ProfileController> {
                   'Account Settings',
                   style: h4Regular,
                 ),
-                const SizedBox(
-                  height: 16,
-                ),
+                sby16,
                 GestureDetector(
                   onTap: () {
                     Get.toNamed(Routes.EDIT_PROFILE);
@@ -113,9 +109,7 @@ class ProfileView extends GetView<ProfileController> {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 16,
-                ),
+                sby16,
                 GestureDetector(
                   onTap: () {
                     Get.toNamed(Routes.CHANGE_PASSWORD);
@@ -134,30 +128,7 @@ class ProfileView extends GetView<ProfileController> {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 16,
-                ),
-                // GestureDetector(
-                //   onTap: () {
-                //     Get.toNamed(Routes.CHANGE_LANGUAGE);
-                //   },
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       Text(
-                //         'Change Language',
-                //         style: h4SemiBold,
-                //       ),
-                //       const Icon(
-                //         Icons.chevron_right_outlined,
-                //         size: 32,
-                //       )
-                //     ],
-                //   ),
-                // ),
-                // const SizedBox(
-                //   height: 16,
-                // ),
+                sby16,
                 GestureDetector(
                   onTap: () => Get.toNamed(Routes.CONSULT_HISTORY),
                   child: Row(
@@ -177,52 +148,6 @@ class ProfileView extends GetView<ProfileController> {
                 sby24,
                 const Divider(),
                 sby24,
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     Text(
-                //       'More',
-                //       style: h4Regular,
-                //     ),
-                //   ],
-                // ),
-                // const SizedBox(
-                //   height: 16,
-                // ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     GestureDetector(
-                //       onTap: ()=>print(box.read('token')),
-                //       child: Text(
-                //         'About us',
-                //         style: h4SemiBold,
-                //       ),
-                //     ),
-                //     const Icon(
-                //       Icons.chevron_right_outlined,
-                //       size: 32,
-                //     )
-                //   ],
-                // ),
-                // const SizedBox(
-                //   height: 16,
-                // ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     Text(
-                //       'Privacy Policy',
-                //       style: h4SemiBold,
-                //     ),
-                //     const Icon(
-                //       Icons.chevron_right_outlined,
-                //       size: 32,
-                //     )
-                //   ],
-                // ),
-                // SizedBox(height: 20),
-                // const Divider(),
                 GestureDetector(
                   onTap: () {
                     Get.offAllNamed(
