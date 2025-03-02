@@ -39,14 +39,11 @@ class ChangePasswordController extends GetxController {
         box.write('new_password', responseData['new_password']);
 
         if (responseData['status']) {
-
           Get.snackbar(
             'Success',
             'Password has changed successfully',
             backgroundColor: primaryColor.withOpacity(0.6),
             colorText: whiteColor,
-
-         
           );
         } else {
           Get.snackbar(

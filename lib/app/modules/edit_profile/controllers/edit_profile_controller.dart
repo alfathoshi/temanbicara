@@ -27,7 +27,6 @@ class EditProfileController extends GetxController {
   }
 
   Future<void> editProfile() async {
-
     isLoading.value = true;
     String formattedDate =
         DateFormat('yyyy-MM-dd').format(dateController.selectedDate.value);
@@ -62,13 +61,11 @@ class EditProfileController extends GetxController {
         box.write('birthdate', responseData['data']['birthdate']);
 
         if (responseData['status']) {
-
           Get.snackbar(
             'Success',
             'Profile updated',
             backgroundColor: primaryColor.withOpacity(0.6),
             colorText: whiteColor,
-
           );
         } else {
           Get.snackbar(
