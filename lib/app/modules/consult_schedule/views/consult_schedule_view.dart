@@ -7,6 +7,7 @@ import 'package:temanbicara/app/data/Transaction.dart';
 import 'package:temanbicara/app/modules/transaction/views/transaction_view.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/schedule/schedule_details.dart';
 
 import '../controllers/consult_schedule_controller.dart';
@@ -48,7 +49,7 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 22),
+                sby24,
                 Container(
                   height: 127,
                   width: double.infinity,
@@ -80,7 +81,7 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                                     overflow: TextOverflow.ellipsis),
                                 maxLines: 2,
                               ),
-                              SizedBox(height: 10),
+                              sby8,
                               Expanded(
                                 child: Container(
                                   width: double.infinity,
@@ -119,7 +120,7 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                                           'Expertise :',
                                           style: h7Bold,
                                         ),
-                                        SizedBox(height: 5),
+                                        sby5,
                                         Text(expertise,
                                             style:
                                                 h6Medium.copyWith(fontSize: 10))
@@ -135,19 +136,19 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                     ],
                   ),
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Text(
                   "Schedule",
                   style: h3Bold,
                 ),
-                SizedBox(height: 20),
+                sby24,
                 ScheduleList(
                   schedule: schedules,
                   onSelectionChanged: (selected) {
                     selectedSchedule = selected;
                   },
                 ),
-                SizedBox(height: 20),
+                sby24,
                 Center(
                   child: SizedBox(
                     width: 205,

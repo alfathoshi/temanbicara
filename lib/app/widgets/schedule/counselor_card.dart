@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 
 class CounselorCard extends StatelessWidget {
   final String username;
@@ -78,7 +79,7 @@ class CounselorCard extends StatelessWidget {
                       style: h6Bold.copyWith(overflow: TextOverflow.ellipsis),
                       maxLines: 2,
                     ),
-                    SizedBox(height: 10),
+                    sby12,
                     Text(
                       'Expertise : ${expertise}',
                       style: TextStyle(

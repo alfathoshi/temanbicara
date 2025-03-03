@@ -7,6 +7,7 @@ import 'package:temanbicara/app/data/Transaction.dart';
 import 'package:temanbicara/app/modules/transaction_invoice/views/transaction_invoice_view.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/transaction/transactionPriceDetail.dart';
 import 'package:temanbicara/app/widgets/transaction/transactionRemainingTime.dart';
 import 'package:temanbicara/app/widgets/transaction/transactionTimelineView.dart';
@@ -48,18 +49,18 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 20),
+            sby24,
             TransactionTimeLineViewIndex(index: 3),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 28),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 5),
+                  sby5,
                   Text("Payment", style: h5Bold),
-                  SizedBox(height: 22),
+                  sby24,
                   TransactionRemainingTime(),
-                  SizedBox(height: 22),
+                  sby24,
                   TransactionPriceDetail(
                       invoice: InvoiceModel(
                           transaction: transaction,
@@ -68,7 +69,7 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                           admTax: 1000,
                           metodePembayaran: paymentMethod!,
                           hargaTotal: 15000 + 1000 + transaction.harga)),
-                  SizedBox(height: 17),
+                  sby24,
                   Center(
                     child: RichText(
                       textAlign: TextAlign.center,
@@ -88,7 +89,7 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 45),
+                  sby48,
                   Padding(
                     padding: const EdgeInsets.only(bottom: 45),
                     child: Center(
@@ -110,7 +111,7 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                                             children: [
                                               CircularProgressIndicator(
                                                   color: primaryColor),
-                                              SizedBox(width: 20),
+                                              sbX24,
                                               Text(
                                                 "Loading ...",
                                                 style: h4Regular,

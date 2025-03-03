@@ -4,6 +4,7 @@ import 'package:temanbicara/app/data/Transaction.dart';
 import 'package:temanbicara/app/modules/transaction_method/controllers/transaction_method_controller.dart';
 import 'package:temanbicara/app/modules/transaction_payment/views/transaction_payment_view.dart';
 import 'package:temanbicara/app/themes/colors.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/transaction/concultationPrice.dart';
 import 'package:temanbicara/app/widgets/transaction/paymentMethodRow.dart';
 
@@ -77,9 +78,9 @@ class BankPaymentMethodList extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 22),
+        sby24,
         ConcultationPrice(price: transaction.harga),
-        SizedBox(height: 25),
+        sby24,
         Center(
           child: SizedBox(
             width: 205,

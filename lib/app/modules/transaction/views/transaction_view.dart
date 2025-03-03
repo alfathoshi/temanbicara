@@ -5,6 +5,7 @@ import 'package:temanbicara/app/data/Transaction.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/transaction/transactionData.dart';
 import 'package:temanbicara/app/widgets/transaction/transactionTimelineView.dart';
 
@@ -36,9 +37,7 @@ class TransactionView extends GetView<TransactionController> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
-                height: 20,
-              ),
+              sby24,
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: TransactionTimeLineViewIndex(index: 1),
@@ -48,7 +47,7 @@ class TransactionView extends GetView<TransactionController> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: 5),
+                      sby5,
                       Text("Details", style: h4Bold),
                       TransactionData(
                           namaPsikiater: transaction.namaPsikiater,
@@ -61,7 +60,7 @@ class TransactionView extends GetView<TransactionController> {
                           waktuSesi: transaction.waktu,
                           kadaluarsa: transaction.kadaluarsa,
                           harga: transaction.harga),
-                      SizedBox(height: 20),
+                      sby24,
                       Center(
                         child: SizedBox(
                           width: 205,
