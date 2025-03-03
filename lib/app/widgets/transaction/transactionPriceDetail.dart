@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:temanbicara/app/data/Invoice.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/transaction/idrFormatter.dart';
 
 class TransactionPriceDetail extends StatelessWidget {
@@ -27,7 +28,7 @@ class TransactionPriceDetail extends StatelessWidget {
                     style: h7SemiBold.copyWith(color: grey2Color))
               ],
             ),
-            SizedBox(height: 15),
+            sby16,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -36,7 +37,7 @@ class TransactionPriceDetail extends StatelessWidget {
                     style: h7SemiBold.copyWith(color: grey2Color))
               ],
             ),
-            SizedBox(height: 15),
+            sby16,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -45,7 +46,7 @@ class TransactionPriceDetail extends StatelessWidget {
                     style: h7SemiBold.copyWith(color: grey2Color))
               ],
             ),
-            SizedBox(height: 15),
+            sby16,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -54,7 +55,7 @@ class TransactionPriceDetail extends StatelessWidget {
                     style: h7SemiBold.copyWith(color: grey2Color))
               ],
             ),
-            SizedBox(height: 15),
+            sby16,
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

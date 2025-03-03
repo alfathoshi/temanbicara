@@ -1,5 +1,8 @@
 import 'package:flutter/widgets.dart';
 
+SizedBox sby5 = const SizedBox(
+  height: 5,
+);
 SizedBox sby8 = const SizedBox(
   height: 8,
 );
@@ -17,6 +20,9 @@ SizedBox sby36 = const SizedBox(
 );
 SizedBox sby48 = const SizedBox(
   height: 48,
+);
+SizedBox sbx5 = const SizedBox(
+  width: 5,
 );
 SizedBox sbx8 = const SizedBox(
   width: 8,
