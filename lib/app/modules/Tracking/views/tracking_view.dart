@@ -7,6 +7,7 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/kualitas_tidur.dart';
+import 'package:temanbicara/app/widgets/sleep_quality.dart';
 
 import '../controllers/tracking_controller.dart';
 
@@ -72,10 +73,97 @@ class TrackingView extends GetView<TrackingController> {
                     textColor: controller.changeColor(index),
                     BackgroundColor: controller.changeBackgroundColor(index),
                   ),
+                  // () => SleepQuality(
+                  //     index: index,
+                  //     desc: kualitas,
+                  //     time: dataKualitasTidur[index]['waktu']),
                 ),
               );
             },
           ),
+          // SliverToBoxAdapter(
+          //   child: ListView(
+          //     children: [
+          //       Container(
+          //         height: MediaQuery.sizeOf(context).height -
+          //             (AppBar().preferredSize.height +
+          //                 MediaQuery.of(context).padding.bottom),
+          //         child: Column(
+          //           mainAxisAlignment: MainAxisAlignment.start,
+          //           children: [
+          //             Text(
+          //               'Apa yang ingin kamu capai?',
+          //               textAlign: TextAlign.center,
+          //               style: h3Bold,
+          //             ),
+          //             const SizedBox(
+          //               height: 40,
+          //             ),
+          //             const SleepQuality(
+          //               desc: 'Nyenyak',
+          //               time: '8 - 9 Jam',
+          //               index: 4,
+          //             ),
+          //             const SizedBox(
+          //               height: 32,
+          //             ),
+          //             const SleepQuality(
+          //               desc: 'Baik',
+          //               time: '7 - 8 Jam',
+          //               index: 3,
+          //             ),
+          //             const SizedBox(
+          //               height: 32,
+          //             ),
+          //             const SleepQuality(
+          //               desc: 'Cukup',
+          //               time: '6 - 7 Jam',
+          //               index: 2,
+          //             ),
+          //             const SizedBox(
+          //               height: 32,
+          //             ),
+          //             const SleepQuality(
+          //               desc: 'Kurang',
+          //               time: '5 - 6 Jam',
+          //               index: 1,
+          //             ),
+          //             const SizedBox(
+          //               height: 32,
+          //             ),
+          //             const SleepQuality(
+          //               desc: 'Insomnia',
+          //               time: '< 4 Jam',
+          //               index: 0,
+          //             ),
+          //             const SizedBox(
+          //               height: 32,
+          //             ),
+          //             Text('Silahkan pilih salah satu!', style: warningGoals),
+          //             const SizedBox(
+          //               height: 40,
+          //             ),
+          //             MyButton(
+          //                 get: () {
+          //                   if (controller.activeIndex.value == -1) {
+          //                     Get.snackbar(
+          //                       'Error',
+          //                       'Silahkan isi assesment',
+          //                       colorText: whiteColor,
+          //                       backgroundColor: error.withOpacity(0.6),
+          //                     );
+          //                   } else {
+          //                     Get.toNamed(Routes.ASSESMENT_4);
+          //                   }
+          //                 },
+          //                 color: primaryColor,
+          //                 text: 'Lanjutkan')
+          //           ],
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
           SliverToBoxAdapter(
             child: Column(
               children: [
@@ -87,7 +175,9 @@ class TrackingView extends GetView<TrackingController> {
                         print(controller.selectedKualitasTidur.value!);
                         Get.toNamed(Routes.TRACKING_2,
                             arguments: TrackingModel(
-                                controller.selectedKualitasTidur.value!, "", 0));
+                                controller.selectedKualitasTidur.value!,
+                                "",
+                                0));
                       },
                       color: primaryColor,
                       text: 'Lanjutkan'),

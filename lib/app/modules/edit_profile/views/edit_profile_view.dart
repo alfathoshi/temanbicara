@@ -26,7 +26,7 @@ class EditProfileView extends GetView<EditProfileController> {
       backgroundColor: whiteColor,
       appBar: AppBar(
         toolbarHeight: 85,
-        backgroundColor: Colors.white,
+        backgroundColor: whiteColor,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(24),
@@ -87,9 +87,7 @@ class EditProfileView extends GetView<EditProfileController> {
                     'Nama',
                     style: textDescriptionSemiBold,
                   ),
-                  const SizedBox(
-                    height: 8,
-                  ),
+                  sby8,
                   TextField(
                     controller: controller.nameController,
                     decoration: InputDecoration(
@@ -109,9 +107,7 @@ class EditProfileView extends GetView<EditProfileController> {
                     'Email',
                     style: textDescriptionSemiBold,
                   ),
-                  const SizedBox(
-                    height: 8,
-                  ),
+                  sby8,
                   TextField(
                     controller: controller.emailController,
                     decoration: InputDecoration(
@@ -132,9 +128,7 @@ class EditProfileView extends GetView<EditProfileController> {
                     'Tanggal Lahir',
                     style: textDescriptionSemiBold,
                   ),
-                  const SizedBox(
-                    height: 8,
-                  ),
+                  sby8,
                   DatePicker(),
                   const SizedBox(
                     height: 16,
@@ -143,9 +137,7 @@ class EditProfileView extends GetView<EditProfileController> {
                   //   'Negara',
                   //   style: textDescriptionSemiBold,
                   // ),
-                  const SizedBox(
-                    height: 8,
-                  ),
+                  sby8,
                   // DropdownSearch<String>(
                   //   items: (filter, infiniteScrollProps) => [
                   //     'Indonesia',

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
@@ -20,7 +21,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
       backgroundColor: whiteColor,
       appBar: AppBar(
         toolbarHeight: 85,
-        backgroundColor: Colors.white,
+        backgroundColor: whiteColor,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(24),
@@ -62,9 +63,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                         'Old Password',
                         style: textDescriptionSemiBold,
                       ),
-                      SizedBox(
-                        height: 8,
-                      ),
+                      sby8,
                       TextField(
                         controller: controller.oldPassController,
                         decoration: InputDecoration(
@@ -96,9 +95,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                         'New Password',
                         style: textDescriptionSemiBold,
                       ),
-                      SizedBox(
-                        height: 8,
-                      ),
+                      sby8,
                       TextField(
                         controller: controller.newPassController,
                         decoration: InputDecoration(
@@ -111,16 +108,12 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 16,
-                      ),
+                      sby12,
                       Text(
                         'Confirm Password',
                         style: textDescriptionSemiBold,
                       ),
-                      SizedBox(
-                        height: 8,
-                      ),
+                      sby8,
                       TextField(
                         controller: controller.confirmPassController,
                         decoration: InputDecoration(
@@ -138,9 +131,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 20,
-            ),
+            sby24,
             MyButton(
                 get: () {
                   _controller.changePassword();
