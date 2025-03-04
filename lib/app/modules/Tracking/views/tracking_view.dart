@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:temanbicara/app/data/Tracking.dart';
+import 'package:temanbicara/app/modules/Tracking/controllers/tracking_controller.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
@@ -9,7 +10,8 @@ import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/kualitas_tidur.dart';
 import 'package:temanbicara/app/widgets/sleep_quality.dart';
 
-import '../controllers/tracking_controller.dart';
+// import '../controllers/tracking_controller.dart';
+import '../../assesment_3/controllers/assesment_3_controller.dart';
 
 class TrackingView extends GetView<TrackingController> {
   TrackingView({super.key});
@@ -21,172 +23,113 @@ class TrackingView extends GetView<TrackingController> {
     {'kualitas': 'Insomnia', 'waktu': '< 4 jam', 'emosi': 'emosi1'},
   ];
 
-  final TrackingController controller = Get.put(TrackingController());
+  // final TrackingController controller = Get.put(TrackingController());
 
   @override
   Widget build(BuildContext context) {
+    final Assesment3Controller controller = Get.find();
     return Scaffold(
-      backgroundColor: whiteColor,
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            toolbarHeight: 85,
-            backgroundColor: Colors.white,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(24),
-                bottomRight: Radius.circular(24),
-              ),
-              side: BorderSide(color: Colors.black12),
+        backgroundColor: whiteColor,
+        appBar: AppBar(
+          toolbarHeight: 85,
+          backgroundColor: Colors.white,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(24),
+              bottomRight: Radius.circular(24),
             ),
-            title: Text(
-              'Tracking',
-              style: h3Bold,
-            ),
-            centerTitle: true,
+            side: BorderSide(color: Colors.black12),
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                "Gimana dengan kualitas tidurmu hari ini?",
-                style: h3Bold,
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.fade,
-                softWrap: true,
-              ),
-            ),
+          title: Text(
+            'Tracking',
+            style: h3Bold,
           ),
-          SliverList.builder(
-            itemCount: dataKualitasTidur.length,
-            itemBuilder: (context, index) {
-              final kualitas = dataKualitasTidur[index]['kualitas'];
-              return GestureDetector(
-                onTap: () {
-                  controller.toggleImage(index, kualitas);
-                },
-                child: Obx(
-                  () => KualitasTidur(
-                    kualitas: kualitas,
-                    waktu: dataKualitasTidur[index]['waktu'],
-                    Image: dataKualitasTidur[index]['emosi'],
-                    textColor: controller.changeColor(index),
-                    BackgroundColor: controller.changeBackgroundColor(index),
-                  ),
-                  // () => SleepQuality(
-                  //     index: index,
-                  //     desc: kualitas,
-                  //     time: dataKualitasTidur[index]['waktu']),
-                ),
-              );
-            },
-          ),
-          // SliverToBoxAdapter(
-          //   child: ListView(
-          //     children: [
-          //       Container(
-          //         height: MediaQuery.sizeOf(context).height -
-          //             (AppBar().preferredSize.height +
-          //                 MediaQuery.of(context).padding.bottom),
-          //         child: Column(
-          //           mainAxisAlignment: MainAxisAlignment.start,
-          //           children: [
-          //             Text(
-          //               'Apa yang ingin kamu capai?',
-          //               textAlign: TextAlign.center,
-          //               style: h3Bold,
-          //             ),
-          //             const SizedBox(
-          //               height: 40,
-          //             ),
-          //             const SleepQuality(
-          //               desc: 'Nyenyak',
-          //               time: '8 - 9 Jam',
-          //               index: 4,
-          //             ),
-          //             const SizedBox(
-          //               height: 32,
-          //             ),
-          //             const SleepQuality(
-          //               desc: 'Baik',
-          //               time: '7 - 8 Jam',
-          //               index: 3,
-          //             ),
-          //             const SizedBox(
-          //               height: 32,
-          //             ),
-          //             const SleepQuality(
-          //               desc: 'Cukup',
-          //               time: '6 - 7 Jam',
-          //               index: 2,
-          //             ),
-          //             const SizedBox(
-          //               height: 32,
-          //             ),
-          //             const SleepQuality(
-          //               desc: 'Kurang',
-          //               time: '5 - 6 Jam',
-          //               index: 1,
-          //             ),
-          //             const SizedBox(
-          //               height: 32,
-          //             ),
-          //             const SleepQuality(
-          //               desc: 'Insomnia',
-          //               time: '< 4 Jam',
-          //               index: 0,
-          //             ),
-          //             const SizedBox(
-          //               height: 32,
-          //             ),
-          //             Text('Silahkan pilih salah satu!', style: warningGoals),
-          //             const SizedBox(
-          //               height: 40,
-          //             ),
-          //             MyButton(
-          //                 get: () {
-          //                   if (controller.activeIndex.value == -1) {
-          //                     Get.snackbar(
-          //                       'Error',
-          //                       'Silahkan isi assesment',
-          //                       colorText: whiteColor,
-          //                       backgroundColor: error.withOpacity(0.6),
-          //                     );
-          //                   } else {
-          //                     Get.toNamed(Routes.ASSESMENT_4);
-          //                   }
-          //                 },
-          //                 color: primaryColor,
-          //                 text: 'Lanjutkan')
-          //           ],
-          //         ),
-          //       ),
-          //     ],
-          //   ),
-          // ),
-          SliverToBoxAdapter(
-            child: Column(
+          centerTitle: true,
+        ),
+        body: Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: ListView(
               children: [
-                Obx(() => controller.warningText()),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: MyButton(
-                      get: () {
-                        print(controller.selectedKualitasTidur.value!);
-                        Get.toNamed(Routes.TRACKING_2,
-                            arguments: TrackingModel(
-                                controller.selectedKualitasTidur.value!,
-                                "",
-                                0));
-                      },
-                      color: primaryColor,
-                      text: 'Lanjutkan'),
+                Container(
+                  height: MediaQuery.sizeOf(context).height -
+                      (AppBar().preferredSize.height +
+                          MediaQuery.of(context).padding.bottom),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Apa yang ingin kamu capai?',
+                          textAlign: TextAlign.center,
+                          style: h3Bold,
+                        ),
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        const SleepQuality(
+                          desc: 'Nyenyak',
+                          time: '8 - 9 Jam',
+                          index: 4,
+                        ),
+                        const SizedBox(
+                          height: 32,
+                        ),
+                        const SleepQuality(
+                          desc: 'Baik',
+                          time: '7 - 8 Jam',
+                          index: 3,
+                        ),
+                        const SizedBox(
+                          height: 32,
+                        ),
+                        const SleepQuality(
+                          desc: 'Cukup',
+                          time: '6 - 7 Jam',
+                          index: 2,
+                        ),
+                        const SizedBox(
+                          height: 32,
+                        ),
+                        const SleepQuality(
+                          desc: 'Kurang',
+                          time: '5 - 6 Jam',
+                          index: 1,
+                        ),
+                        const SizedBox(
+                          height: 32,
+                        ),
+                        const SleepQuality(
+                          desc: 'Insomnia',
+                          time: '< 4 Jam',
+                          index: 0,
+                        ),
+                        const SizedBox(
+                          height: 32,
+                        ),
+                        Text('Silahkan pilih salah satu!', style: warningGoals),
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        MyButton(
+                            get: () {
+                              if (controller.tappedIndex.value == -1) {
+                                Get.snackbar(
+                                  'Error',
+                                  'Silahkan isi Tracking',
+                                  colorText: whiteColor,
+                                  backgroundColor: error.withOpacity(0.6),
+                                );
+                              } else {
+                                Get.toNamed(Routes.ASSESMENT_4);
+                              }
+                            },
+                            color: primaryColor,
+                            text: 'Lanjutkan')
+                      ],
+                    ),
+                  ),
                 ),
               ],
-            ),
-          ),
-        ],
-      ),
-    );
+            )));
   }
 }

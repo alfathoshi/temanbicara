@@ -128,8 +128,8 @@ class Tracking3View extends GetView<Tracking3Controller> {
                           get: () {
                             if (controller.selectedNumber.value == 0) {
                               Get.snackbar(
-                                'Peringatan',
-                                'Silakan pilih angka lain sebelum melanjutkan!',
+                                'Error',
+                                'Silakan isi Tracking',
                                 colorText: whiteColor,
                                 backgroundColor: Colors.red.withOpacity(0.7),
                               );
