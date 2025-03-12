@@ -18,7 +18,7 @@ class Tracking4Controller extends GetxController {
       print("token  ${token}");
 
       var response = await http.post(
-        Uri.parse('http://10.0.2.2:8000/api/v1/do-tracking'),
+        Uri.parse('http://103.161.185.183:8000/api/v1/do-tracking'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',

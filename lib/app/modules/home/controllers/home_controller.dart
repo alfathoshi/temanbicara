@@ -13,10 +13,16 @@ class HomeController extends GetxController {
   var articles = {}.obs;
 
   Future<void> fetchData() async {
+    final token = box.read('token');
     try {
       isLoading.value = true;
-      final response =
-          await http.get(Uri.parse('http://10.0.2.2:8000/api/v1/article'));
+      final response = await http.get(
+        Uri.parse('http://103.161.185.183:8000/api/v1/article'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
       if (response.statusCode == 200) {
         articles.value = json.decode(response.body);
         print(articles);

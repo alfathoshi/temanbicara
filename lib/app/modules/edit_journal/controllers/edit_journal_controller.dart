@@ -51,7 +51,7 @@ class EditJournalController extends GetxController {
       final token = box.read('token');
 
       final response = await http.put(
-        Uri.parse('http://10.0.2.2:8000/api/v1/journal/$journalId'),
+        Uri.parse('http://103.161.185.183:8000/api/v1/journal/$journalId'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',

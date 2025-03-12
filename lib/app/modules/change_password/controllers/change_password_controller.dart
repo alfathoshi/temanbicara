@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:temanbicara/app/themes/colors.dart';
 
 class ChangePasswordController extends GetxController {
   final box = GetStorage();
@@ -22,7 +21,7 @@ class ChangePasswordController extends GetxController {
       final token = box.read('token');
 
       final response = await http.patch(
-        Uri.parse('http://10.0.2.2:8000/api/v1/change-password'),
+        Uri.parse('http://103.161.185.183:8000/api/v1/change-password'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
@@ -31,6 +30,7 @@ class ChangePasswordController extends GetxController {
           'old_password': oldPassController.text,
           'new_password': newPassController.text,
           'confirm_password': confirmPassController.text,
+          'user_id': userId.toString(),
         }),
       );
 
@@ -39,39 +39,17 @@ class ChangePasswordController extends GetxController {
         box.write('new_password', responseData['new_password']);
 
         if (responseData['status']) {
-
-          Get.snackbar(
-            'Success',
-            'Password has changed successfully',
-            backgroundColor: primaryColor.withOpacity(0.6),
-            colorText: whiteColor,
-
-         
-          );
+          Get.back();
         } else {
-          Get.snackbar(
-            'Error',
-            responseData['message'] ?? 'Failed to update password 1',
-            backgroundColor: error.withOpacity(0.6),
-            colorText: whiteColor,
-          );
+          Get.snackbar('Error',
+              responseData['message'] ?? 'Failed to update password 1');
         }
       } else {
-        Get.snackbar(
-          'Error',
-          'Failed to update password.',
-          backgroundColor: error.withOpacity(0.6),
-          colorText: whiteColor,
-        );
+        Get.snackbar('Error', 'Failed to update password.');
       }
     } catch (e) {
       print(e);
-      Get.snackbar(
-        'Error',
-        'An error occurred: $e',
-        backgroundColor: error.withOpacity(0.6),
-        colorText: whiteColor,
-      );
+      Get.snackbar('Error', 'An error occurred: $e');
     } finally {
       isLoading.value = false;
     }

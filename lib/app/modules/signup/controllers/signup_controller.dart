@@ -26,7 +26,7 @@ class SignupController extends GetxController {
     try {
       if (passC.text == confirmPassC.text) {
         var response = await http.post(
-          Uri.parse('http://10.0.2.2:8000/api/v1/register'),
+          Uri.parse('http://103.161.185.183:8000/api/v1/register'),
           headers: {'Content-Type': 'application/json'},
           body: json.encode({
             'email': emailC.text,
