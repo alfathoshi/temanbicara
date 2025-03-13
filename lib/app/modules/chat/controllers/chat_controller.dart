@@ -11,9 +11,12 @@ class ChatController extends GetxController {
   Future<Map<String, dynamic>> fetchData() async {
     final response = await http.get(
       Uri.parse(
-        'http://103.161.185.183:8000/api/v1/consultation-user',
+        'http://www.temanbicara.web.id/api/v1/consultation-user',
       ),
-      headers: {'Authorization': 'Bearer ${box.read('token')}'},
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${box.read('token')}',
+      },
     );
     if (response.statusCode == 200) {
       var data = json.decode(response.body);

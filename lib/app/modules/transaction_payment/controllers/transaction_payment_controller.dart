@@ -10,7 +10,7 @@ class TransactionPaymentController extends GetxController {
 
   Future<void> updateScheduleStatus(int scheduleId) async {
     final url =
-        Uri.parse('http://103.161.185.183:8000/api/v1/schedule/$scheduleId');
+        Uri.parse('http://www.temanbicara.web.id/api/v1/schedule/$scheduleId');
     try {
       final response = await http.put(url);
       if (response.statusCode == 200) {
@@ -35,7 +35,7 @@ class TransactionPaymentController extends GetxController {
     required int scheduleId,
     required int patientId,
   }) async {
-    final url = Uri.parse('http://103.161.185.183:8000/api/v1/consultation');
+    final url = Uri.parse('http://www.temanbicara.web.id/api/v1/consultation');
     final Map<String, dynamic> body = {
       'description': '-',
       'problem': '-',

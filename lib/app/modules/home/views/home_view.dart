@@ -35,8 +35,8 @@ class HomeView extends GetView<ReportController> {
       body: RefreshIndicator(
         onRefresh: () async {
           await Future.wait([
-            _controller.fetchData(), 
-            journalController.fetchJournals(), 
+            _controller.fetchData(),
+            journalController.fetchJournals(),
           ]);
         },
         child: CustomScrollView(slivers: [
@@ -155,7 +155,8 @@ class HomeView extends GetView<ReportController> {
                           child: Center(
                             child: TextButton(
                               onPressed: () {
-                                Get.toNamed(Routes.TRACKING);
+                                //Get.toNamed(Routes.TRACKING);
+                                print(box.read('token'));
                               },
                               child: Text(
                                 'Tracking',
