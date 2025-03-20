@@ -39,7 +39,7 @@ class JournalController extends GetxController {
       final token = box.read('token');
 
       var response = await http.get(
-        Uri.parse('http://www.temanbicara.web.id/api/v1/journal')
+        Uri.parse('https://www.temanbicara.web.id/api/v1/journal')
             .replace(queryParameters: {
           'userId': userId.toString(),
         }),
@@ -80,7 +80,7 @@ class JournalController extends GetxController {
       print("Token: $token");
 
       var response = await http.delete(
-        Uri.parse('http://www.temanbicara.web.id/api/v1/journal/$journalId'),
+        Uri.parse('https://www.temanbicara.web.id/api/v1/journal/$journalId'),
         headers: {
           'Authorization': 'Bearer $token',
         },

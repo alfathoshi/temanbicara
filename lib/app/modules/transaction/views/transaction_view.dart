@@ -43,47 +43,50 @@ class TransactionView extends GetView<TransactionController> {
                 child: TransactionTimeLineViewIndex(index: 1),
               ),
               Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 28),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      sby5,
-                      Text("Details", style: h4Bold),
-                      TransactionData(
-                          namaPsikiater: transaction.namaPsikiater,
-                          expertise: transaction.expertise,
-                          topik: transaction.topik,
-                          metode: transaction.metode,
-                          durasi: transaction.durasi,
-                          jmlSesi: transaction.sesi,
-                          jadwalSesi: transaction.jadwal,
-                          waktuSesi: transaction.waktu,
-                          kadaluarsa: transaction.kadaluarsa,
-                          harga: transaction.harga),
-                      sby24,
-                      Center(
-                        child: SizedBox(
-                          width: 205,
-                          height: 42,
-                          child: ElevatedButton(
-                            child: Text('Next',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold)),
-                            onPressed: () {
-                              Get.toNamed(Routes.TRANSACTION_METHOD,
-                                  arguments: transaction);
-                            },
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStatePropertyAll<Color>(primaryColor),
-                            ),
+                padding: EdgeInsets.symmetric(horizontal: 28),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    sby5,
+                    Text("Details", style: h4Bold),
+                    sby8,
+                    TransactionData(
+                        namaPsikiater: transaction.namaPsikiater,
+                        expertise: transaction.expertise,
+                        topik: transaction.topik,
+                        metode: transaction.metode,
+                        durasi: transaction.durasi,
+                        jmlSesi: transaction.sesi,
+                        jadwalSesi: transaction.jadwal,
+                        waktuSesi: transaction.waktu,
+                        kadaluarsa: transaction.kadaluarsa,
+                        harga: transaction.harga),
+                    sby24,
+                    Center(
+                      child: SizedBox(
+                        width: 205,
+                        height: 42,
+                        child: ElevatedButton(
+                          child: Text('Next',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold)),
+                          onPressed: () {
+                            Get.toNamed(Routes.TRANSACTION_METHOD,
+                                arguments: transaction);
+                          },
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStatePropertyAll<Color>(primaryColor),
                           ),
                         ),
                       ),
-                    ],
-                  )),
+                    ),
+                    sby36,
+                  ],
+                ),
+              ),
             ],
           ),
         ));

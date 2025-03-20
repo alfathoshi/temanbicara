@@ -97,11 +97,17 @@ class ScheduleList extends StatelessWidget {
                       SizedBox(
                         height: (scheduleDay.length * 47),
                         child: ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
                           itemCount: scheduleDay.length,
                           itemBuilder: (BuildContext ctx, int idx) {
                             int id = scheduleDay[idx]['schedule_id'];
-                            String timeSlot =
-                                '${scheduleDay[idx]['start_time']} - ${scheduleDay[idx]['end_time']}';
+                            String startTime = DateFormat('HH:mm').format(
+                                DateFormat('HH:mm:ss')
+                                    .parse(scheduleDay[idx]['start_time']));
+                            String endTime = DateFormat('HH:mm').format(
+                                DateFormat('HH:mm:ss')
+                                    .parse(scheduleDay[idx]['end_time']));
+                            String timeSlot = '$startTime - $endTime';
 
                             return GetX<ScheduleController>(
                               builder: (ctrl) => GestureDetector(

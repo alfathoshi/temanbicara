@@ -20,8 +20,8 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
     final arguments = Get.arguments;
     final userName = arguments['user_name'];
     final schedules = arguments['schedules'];
-    final expertise = arguments['expertise'];
-
+    final expertiseList = arguments['expertise'];
+    final expertise = (expertiseList as List).join(", ");
     Map<String, dynamic> selectedSchedule = {};
 
     return Scaffold(

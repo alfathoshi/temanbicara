@@ -13,6 +13,7 @@ import 'package:temanbicara/app/modules/report/views/report_view.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/mental_matrix.dart';
 import 'package:temanbicara/app/widgets/my_journal.dart';
@@ -155,7 +156,7 @@ class HomeView extends GetView<ReportController> {
                           child: Center(
                             child: TextButton(
                               onPressed: () {
-                                //Get.toNamed(Routes.TRACKING);
+                                Get.toNamed(Routes.TRACKING);
                                 print(box.read('token'));
                               },
                               child: Text(
@@ -451,7 +452,7 @@ class HomeView extends GetView<ReportController> {
                     )),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(32, 21, 32, 32),
+                    padding: const EdgeInsets.fromLTRB(32, 21, 32, 15),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -514,6 +515,7 @@ class HomeView extends GetView<ReportController> {
                     );
                   }
                 }),
+                sby24
               ],
             ),
           ),
