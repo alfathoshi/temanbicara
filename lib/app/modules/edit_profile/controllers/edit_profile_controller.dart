@@ -6,7 +6,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:temanbicara/app/modules/edit_profile/controllers/datepicker_controller.dart';
 import 'package:http/http.dart' as http;
-import 'package:temanbicara/app/themes/colors.dart';
 
 class EditProfileController extends GetxController {
   final box = GetStorage();
@@ -28,8 +27,6 @@ class EditProfileController extends GetxController {
 
   Future<void> editProfile() async {
     print(nameController.text);
-    print(emailController.text);
-    print(dateController.selectedDate.value);
     print('asdas ${box.read('name')}');
     isLoading.value = true;
     String formattedDate =
@@ -38,10 +35,9 @@ class EditProfileController extends GetxController {
     try {
       final userId = box.read('id');
       final token = box.read('token');
-      print(token);
 
       final response = await http.put(
-        Uri.parse('http://10.0.2.2:8000/api/v1/edit-profile'),
+        Uri.parse('https://www.temanbicara.web.id/api/v1/edit-profile'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
@@ -54,24 +50,15 @@ class EditProfileController extends GetxController {
         }),
       );
 
-      print('Response status: ${response.statusCode}');
-      print('Response body: ${response.body}');
-
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
         print(responseData);
-        box.write('name', responseData['data']['name']);
-        box.write('email', responseData['data']['email']);
-        box.write('birthdate', responseData['data']['birthdate']);
+        box.write('name', responseData['name']);
+        box.write('email', responseData['email']);
+        box.write('birthdate', responseData['birthdate']);
 
         if (responseData['status']) {
           Get.back();
-          Get.snackbar(
-            'Success',
-            'Profile berhasil di ubah',
-            backgroundColor: primaryColor.withOpacity(0.6),
-            colorText: Colors.white,
-          );
         } else {
           Get.snackbar(
               'Error', responseData['message'] ?? 'Failed to update profile');

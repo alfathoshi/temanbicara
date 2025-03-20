@@ -51,10 +51,8 @@ class ChatbotRoomView extends GetView<ChatbotRoomController> {
             return Container(
               margin: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                border: Border.all(
-                    color: primaryColor,
-                    width: 1),
-                shape: BoxShape.circle, 
+                border: Border.all(color: primaryColor, width: 1),
+                shape: BoxShape.circle,
               ),
               child: CircleAvatar(
                 backgroundColor: Colors.transparent,

@@ -30,7 +30,7 @@ class MyButton extends StatelessWidget {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10))),
         child: Text(
-          'Lanjutkan',
+          text,
           style: h5Bold.copyWith(color: whiteColor),
         ));
   }

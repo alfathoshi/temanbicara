@@ -17,6 +17,7 @@ class StressLevelView extends GetView<StressLevelController> {
   Widget build(BuildContext context) {
     Random rng = Random();
     int stressLevel = Get.arguments[1].value;
+    print(stressLevel);
     SlidingUpPanelController slidingUpController = SlidingUpPanelController();
     return Stack(
       children: [
@@ -67,7 +68,8 @@ class StressLevelView extends GetView<StressLevelController> {
                   Text(
                     "Level ${stressLevel.toString()}",
                     style: h1Bold.copyWith(
-                      color: const Color(0xFF7A914B),
+                      color: LogoHelper.colorByLevel(
+                          Get.arguments[1].value.toString()),
                     ),
                   ),
                   Image.asset(

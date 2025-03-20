@@ -8,12 +8,12 @@ class ConsultReportController extends GetxController {
   Future<Map<String, dynamic>> fetchData() async {
     final token = box.read('token');
     final response = await http.get(
-        Uri.parse('http://10.0.2.2:8000/api/v1/consultation-user'),
+        Uri.parse('https://www.temanbicara.web.id/api/v1/consultation-user'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
         });
-        print(response.body);
+    print(response.body);
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {

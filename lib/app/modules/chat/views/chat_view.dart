@@ -32,13 +32,22 @@ class ChatView extends GetView<ChatController> {
             future: controller.fetchData(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
+                return const Align(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
                 return Center(
                   child: Text(snapshot.error.toString()),
                 );
               } else if (snapshot.hasData) {
-                final List listData = snapshot.data!['data'];
+                final List rawData = snapshot.data!['data'];
+                final List<Map<String, dynamic>> listData =
+                    rawData.fold([], (List<Map<String, dynamic>> acc, item) {
+                  if (acc.indexWhere((element) =>
+                          element['counselor_id'] == item['counselor_id']) ==
+                      -1) {
+                    acc.add(item);
+                  }
+                  return acc;
+                });
                 final double containerHeight =
                     listData.length <= 2 ? listData.length * 180.0 : 530.0;
                 return Container(
@@ -56,7 +65,7 @@ class ChatView extends GetView<ChatController> {
                             id: data['counselor_id'],
                             nama: data['counselor_name'],
                             deskripsi: data['description'],
-                            image: 'assets/images/profile.png',
+                            image: 'profile', time: data['start_time'],
                           ));
                     },
                   ),

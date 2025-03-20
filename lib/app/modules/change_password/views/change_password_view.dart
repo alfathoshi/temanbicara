@@ -18,6 +18,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: whiteColor,
       appBar: AppBar(
         toolbarHeight: 85,
@@ -66,13 +67,19 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                       sby8,
                       TextField(
                         controller: controller.oldPassController,
+                        cursorColor: black,
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(
-                              color: Colors.black26,
-                              width: 2,
+                          hintText: 'Masukkan Password Lama',
+                          hintStyle: h5Regular.copyWith(color: grey2Color),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                              color: greyColor,
                             ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(color: primaryColor),
                           ),
                         ),
                       ),
@@ -98,13 +105,19 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                       sby8,
                       TextField(
                         controller: controller.newPassController,
+                        cursorColor: black,
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(
-                              color: Colors.black26,
-                              width: 2,
+                          hintText: 'Masukkan Password Baru',
+                          hintStyle: h5Regular.copyWith(color: grey2Color),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                              color: greyColor,
                             ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(color: primaryColor),
                           ),
                         ),
                       ),
@@ -116,13 +129,19 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                       sby8,
                       TextField(
                         controller: controller.confirmPassController,
+                        cursorColor: black,
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: BorderSide(
-                              color: Colors.black26,
-                              width: 2,
+                          hintText: 'Konfirmasi Password',
+                          hintStyle: h5Regular.copyWith(color: grey2Color),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                              color: greyColor,
                             ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(color: primaryColor),
                           ),
                         ),
                       ),
@@ -139,7 +158,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                       arguments: {"indexPage": 4});
                 },
                 color: primaryColor,
-                text: 'Change Password')
+                text: 'Simpan')
           ],
         ),
       ),

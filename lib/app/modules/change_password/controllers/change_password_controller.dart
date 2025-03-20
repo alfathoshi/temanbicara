@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:temanbicara/app/themes/colors.dart';
 
 class ChangePasswordController extends GetxController {
   final box = GetStorage();
@@ -22,7 +21,7 @@ class ChangePasswordController extends GetxController {
       final token = box.read('token');
 
       final response = await http.patch(
-        Uri.parse('http://10.0.2.2:8000/api/v1/change-password'),
+        Uri.parse('https://www.temanbicara.web.id/api/v1/change-password'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
@@ -41,12 +40,6 @@ class ChangePasswordController extends GetxController {
 
         if (responseData['status']) {
           Get.back();
-          Get.snackbar(
-            'Success',
-            'password berhasil di ubah',
-            backgroundColor: primaryColor.withOpacity(0.6),
-            colorText: Colors.white,
-          );
         } else {
           Get.snackbar('Error',
               responseData['message'] ?? 'Failed to update password 1');

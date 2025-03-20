@@ -2,11 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:temanbicara/app/modules/consult_schedule/views/consult_schedule_view.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
-import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/schedule/counselor_card.dart';
 import '../controllers/consult_controller.dart';
 
@@ -17,6 +15,8 @@ class ConsultView extends GetView<ConsultController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.fetchData();
+
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: AppBar(
@@ -34,60 +34,49 @@ class ConsultView extends GetView<ConsultController> {
         ),
         centerTitle: true,
       ),
-      body: FutureBuilder(
-          future: controller.fetchData(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              return Center(
-                child: Text(snapshot.error.toString()),
-              );
-            } else if (snapshot.hasData) {
-              final List listData = snapshot.data!['data'];
-              return Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: listData.isEmpty
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Center(
-                            child: Image.asset("assets/images/therapist_1.png",
-                                scale: 1.5),
-                          ),
-                          sby12,
-                          Text(
-                            "No Data Available",
-                            style: h5Bold.copyWith(color: primaryColor),
-                          )
-                        ],
-                      )
-                    : ListView.builder(
-                        padding: const EdgeInsets.all(8),
-                        itemCount: listData.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return GestureDetector(
-                            onTap: () {
-                              Get.toNamed(
-                                Routes.CONSULT_SCHEDULE,
-                                arguments: {
-                                  'user_name': listData[index]['name'],
-                                  'schedules': listData[index]['schedules'],
-                                  'expertise': listData[index]['expertise'],
-                                },
-                              );
-                            },
-                            child: CounselorCard(
-                                username: listData[index]['name'],
-                                expertise: listData[index]['expertise'],
-                                schedule: listData[index]['schedules']),
-                          );
-                        }),
-              );
-            } else {
-              return Center(child: Text("Tidak Ada Data"));
+      body: RefreshIndicator(
+        onRefresh: controller.fetchData,
+        child: Obx(() {
+          if (controller.isLoading.value) {
+            return Center(child: CircularProgressIndicator());
+          } else if (controller.schedules.isEmpty) {
+            return Center(child: Text("No Data Available"));
+          } else {
+            final List filteredData = controller.schedules['data']
+                .where(
+                    (counselor) => (counselor['schedules'] as List).isNotEmpty)
+                .toList();
+
+            if (filteredData.isEmpty) {
+              return Center(child: Text("No Available Schedules"));
             }
-          }),
+
+            return ListView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: filteredData.length,
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  onTap: () {
+                    Get.toNamed(
+                      Routes.CONSULT_SCHEDULE,
+                      arguments: {
+                        'user_name': filteredData[index]['name'],
+                        'schedules': filteredData[index]['schedules'],
+                        'expertise': filteredData[index]['expertise'],
+                      },
+                    );
+                  },
+                  child: CounselorCard(
+                    username: filteredData[index]['name'],
+                    expertise: filteredData[index]['expertise'].join(", "),
+                    schedule: filteredData[index]['schedules'],
+                  ),
+                );
+              },
+            );
+          }
+        }),
+      ),
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:temanbicara/app/data/Transaction.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/transaction/chooseMethod.dart';
 import 'package:temanbicara/app/widgets/transaction/transactionTimelineView.dart';
 
@@ -38,7 +39,7 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 20),
+            sby24,
             TransactionTimeLineViewIndex(index: 2),
             Padding(
               padding: const EdgeInsets.only(bottom: 28.0, right: 28, left: 28),
@@ -46,7 +47,7 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text("Payment Method", style: h5Bold),
-                  SizedBox(height: 22),
+                  sby24,
                   ChooseMethod(transaction: transaction)
                 ],
               ),

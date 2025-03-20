@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:temanbicara/app/data/Invoice.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/transaction/idrFormatter.dart';
 
 class InvoiceData extends StatelessWidget {
@@ -30,7 +31,7 @@ class InvoiceData extends StatelessWidget {
                 Row(
                   children: [
                     CircleAvatar(radius: 20),
-                    SizedBox(width: 10),
+                    sbX12,
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -57,13 +58,13 @@ class InvoiceData extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 12),
+                sby12,
                 Divider(
                   height: 1,
                   thickness: 1.5,
                   color: grey4Color,
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -71,13 +72,13 @@ class InvoiceData extends StatelessWidget {
                     Text(invoice.invoice)
                   ],
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Divider(
                   height: 1,
                   thickness: 1.5,
                   color: grey4Color,
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -85,13 +86,13 @@ class InvoiceData extends StatelessWidget {
                     Text(invoice.transaction.topik)
                   ],
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Divider(
                   height: 1,
                   thickness: 1.5,
                   color: grey4Color,
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -99,13 +100,13 @@ class InvoiceData extends StatelessWidget {
                     Text(invoice.transaction.metode)
                   ],
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Divider(
                   height: 1,
                   thickness: 1.5,
                   color: grey4Color,
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -113,7 +114,7 @@ class InvoiceData extends StatelessWidget {
                     Text(invoice.transaction.durasi.toString())
                   ],
                 ),
-                SizedBox(height: 12),
+                sby12,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -121,7 +122,7 @@ class InvoiceData extends StatelessWidget {
                     Text(invoice.transaction.sesi.toString())
                   ],
                 ),
-                SizedBox(height: 12),
+                sby12,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -130,7 +131,7 @@ class InvoiceData extends StatelessWidget {
                         "${getDayName(invoice.transaction.jadwal)}, ${invoice.transaction.jadwal}")
                   ],
                 ),
-                SizedBox(height: 12),
+                sby12,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -138,13 +139,13 @@ class InvoiceData extends StatelessWidget {
                     Text(invoice.transaction.waktu.toString())
                   ],
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Divider(
                   height: 1,
                   thickness: 1.5,
                   color: grey4Color,
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -152,13 +153,13 @@ class InvoiceData extends StatelessWidget {
                     Text(invoice.transaction.kadaluarsa)
                   ],
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Divider(
                   height: 1,
                   thickness: 1.5,
                   color: grey4Color,
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -166,7 +167,7 @@ class InvoiceData extends StatelessWidget {
                     Text(invoice.metodePembayaran.toString())
                   ],
                 ),
-                SizedBox(height: 12),
+                sby12,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -175,7 +176,7 @@ class InvoiceData extends StatelessWidget {
                         invoice.transaction.harga, 2))
                   ],
                 ),
-                SizedBox(height: 12),
+                sby12,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -183,7 +184,7 @@ class InvoiceData extends StatelessWidget {
                     Text(CurrencyFormat.convertToIdr(invoice.appTax, 2))
                   ],
                 ),
-                SizedBox(height: 12),
+                sby12,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -191,13 +192,13 @@ class InvoiceData extends StatelessWidget {
                     Text(CurrencyFormat.convertToIdr(invoice.admTax, 2))
                   ],
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Divider(
                   height: 1,
                   thickness: 1.5,
                   color: grey4Color,
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

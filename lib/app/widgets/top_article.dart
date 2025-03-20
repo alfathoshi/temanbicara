@@ -11,8 +11,13 @@ class TopArticle extends StatelessWidget {
   final String? judul;
   final String? deskripsi;
   final String? author;
-  const TopArticle(
-      {super.key, this.judul, this.deskripsi, this.author, this.image});
+  const TopArticle({
+    super.key,
+    this.judul,
+    this.deskripsi,
+    this.author,
+    this.image,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,76 +35,57 @@ class TopArticle extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(bottom: 12),
         child: Container(
-          width: 400,
           height: 149,
           decoration: BoxDecoration(
             color: whiteColor,
-            border: Border.all(
-              color: border,
-            ),
-            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: Colors.black.withOpacity(0.1)),
+            borderRadius: BorderRadius.circular(15),
           ),
           child: Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(
-                  left: 12,
-                  right: 12,
-                ),
+                padding: const EdgeInsets.only(left: 12, right: 12),
                 child: Container(
                   width: 120,
                   decoration: BoxDecoration(
-                    color: whiteColor,
-                    border: Border.all(
-                      color: Colors.transparent,
-                    ),
                     borderRadius: BorderRadius.circular(15),
+                    border: Border.all(color: Colors.black.withOpacity(0.1)),
                   ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                        border:
-                            Border.all(color: Colors.black.withOpacity(0.1)),
-                        borderRadius: BorderRadius.circular(15)),
-                    child: Image.asset(
-                      'assets/images/${image}.png',
-                      scale: 4,
-                    ),
+                  child: Image.asset(
+                    'assets/images/${image}.png',
+                    scale: 4,
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 13, 17, 12),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 200,
-                      child: Text(
-                        judul!,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 13, 17, 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        judul ?? "No Title",
                         style: h6Bold,
-                        softWrap: true,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                    SizedBox(
-                      width: 150,
-                      child: Text(
-                        deskripsi!,
+                      sby5,
+                      Text(
+                        deskripsi ?? "No Description",
                         style: h7Regular,
-                        softWrap: true,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                    sby8,
-                    Text(
-                      author!,
-                      style: h6Medium,
-                    ),
-                  ],
+                      sby8,
+                      Text(
+                        author ?? "Unknown Author",
+                        style: h6Medium,
+                      ),
+                    ],
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ),

@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 class CustomBarChart extends StatelessWidget {
   final List<dynamic> dummyData;
+  final Color color;
 
   const CustomBarChart({
     super.key,
     required this.dummyData,
+    required this.color,
   });
 
   @override
@@ -64,7 +66,7 @@ class CustomBarChart extends StatelessWidget {
                   barRods: [
                     BarChartRodData(
                       toY: sleepValue[data['sleep_quality']]!.toDouble(),
-                      color: const Color(0xFFFEBE58),
+                      color: color,
                       width: 23,
                       borderRadius: BorderRadius.circular(10),
                     )

@@ -8,7 +8,6 @@ import 'package:temanbicara/app/themes/colors.dart';
 
 import '../../journal/controllers/journal_controller.dart';
 
-
 class CreateJournalController extends GetxController {
   final box = GetStorage();
 
@@ -36,7 +35,6 @@ class CreateJournalController extends GetxController {
 
   Future<void> submitJournal() async {
     if (titleController.text.isEmpty || bodyController.text.isEmpty) {
-
       Get.snackbar('Error', 'Title and Body are required',
           backgroundColor: Colors.red.withOpacity(0.6),
           colorText: Colors.white);
@@ -56,7 +54,7 @@ class CreateJournalController extends GetxController {
       final token = box.read('token');
 
       final response = await http.post(
-        Uri.parse('http://10.0.2.2:8000/api/v1/journal'),
+        Uri.parse('https://www.temanbicara.web.id/api/v1/journal'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',

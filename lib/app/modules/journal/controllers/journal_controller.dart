@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
+import 'package:temanbicara/app/themes/colors.dart';
 
 class JournalController extends GetxController {
   final box = GetStorage();
@@ -38,7 +39,7 @@ class JournalController extends GetxController {
       final token = box.read('token');
 
       var response = await http.get(
-        Uri.parse('http://10.0.2.2:8000/api/v1/journal')
+        Uri.parse('https://www.temanbicara.web.id/api/v1/journal')
             .replace(queryParameters: {
           'userId': userId.toString(),
         }),
@@ -50,17 +51,24 @@ class JournalController extends GetxController {
 
       if (response.statusCode == 200) {
         var data = json.decode(response.body);
-        print(data);
         if (data['status']) {
           journalList.value = data['data'];
-          return data;
         } else {
-          Get.snackbar('Error', data['message']);
-          return data;
+          Get.snackbar(
+            'Error',
+            data['message'],
+            colorText: whiteColor,
+            backgroundColor: error.withOpacity(0.6),
+          );
         }
       }
     } catch (e) {
-      Get.snackbar('Error', 'Something went wrong: $e');
+      Get.snackbar(
+        'Error',
+        'Something went wrong: $e',
+        colorText: whiteColor,
+        backgroundColor: error.withOpacity(0.6),
+      );
     } finally {
       isLoading.value = false;
     }
@@ -72,7 +80,7 @@ class JournalController extends GetxController {
       print("Token: $token");
 
       var response = await http.delete(
-        Uri.parse('http://10.0.2.2:8000/api/v1/journal/$journalId'),
+        Uri.parse('https://www.temanbicara.web.id/api/v1/journal/$journalId'),
         headers: {
           'Authorization': 'Bearer $token',
         },
@@ -82,18 +90,38 @@ class JournalController extends GetxController {
         var data = json.decode(response.body);
         print(data);
         if (data['status']) {
-          Get.snackbar('Success', 'Journal deleted successfully');
+          Get.snackbar(
+            'Success',
+            'Journal deleted successfully',
+            colorText: whiteColor,
+            backgroundColor: primaryColor.withOpacity(0.6),
+          );
           journalList
               .removeWhere((journal) => journal['journal_id'] == journalId);
         } else {
-          Get.snackbar('Error', data['message']);
+          Get.snackbar(
+            'Error',
+            data['message'],
+            colorText: whiteColor,
+            backgroundColor: error.withOpacity(0.6),
+          );
         }
       } else {
         print(response.body);
-        Get.snackbar('Error', 'Failed to delete journal.');
+        Get.snackbar(
+          'Error',
+          'Failed to delete journal.',
+          colorText: whiteColor,
+          backgroundColor: error.withOpacity(0.6),
+        );
       }
     } catch (e) {
-      Get.snackbar('Error', 'Something went wrong: $e');
+      Get.snackbar(
+        'Error',
+        'Something went wrong: $e',
+        colorText: whiteColor,
+        backgroundColor: error.withOpacity(0.6),
+      );
     }
   }
 
