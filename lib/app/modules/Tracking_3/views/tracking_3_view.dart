@@ -23,7 +23,7 @@ class Tracking3View extends GetView<Tracking3Controller> {
         slivers: [
           SliverAppBar(
             toolbarHeight: 85,
-            backgroundColor: Colors.white,
+            backgroundColor: whiteColor,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(24),
@@ -75,18 +75,20 @@ class Tracking3View extends GetView<Tracking3Controller> {
                               padding: const EdgeInsets.only(left: 8, right: 8),
                               child: Row(
                                 children: [
-                                  for (int i = 0; i <= 5; i++)
+                                  for (int i = 1; i <= 5; i++)
                                     GestureDetector(
                                       onTap: () {
                                         controller.selectNumber(i);
                                       },
                                       child: Container(
                                         height: 60,
-                                        width: MediaQuery.sizeOf(context).width *
-                                            0.152,
+                                        width:
+                                            MediaQuery.sizeOf(context).width *
+                                                0.183,
                                         decoration: ShapeDecoration(
                                           color:
-                                              controller.selectedNumber.value == i
+                                              controller.selectedNumber.value ==
+                                                      i
                                                   ? primaryColor
                                                   : Colors.transparent,
                                           shape: RoundedRectangleBorder(
@@ -124,10 +126,18 @@ class Tracking3View extends GetView<Tracking3Controller> {
                       padding: const EdgeInsets.symmetric(horizontal: 24),
                       child: MyButton(
                           get: () {
-                            print(controller.selectedNumber.value);
-                            Get.toNamed(Routes.TRACKING_4,
-                                arguments: TrackingModel(
-                                    "", "", controller.selectedNumber.value));
+                            if (controller.selectedNumber.value == 0) {
+                              Get.snackbar(
+                                'Error',
+                                'Silakan isi Tracking',
+                                colorText: whiteColor,
+                                backgroundColor: Colors.red.withOpacity(0.7),
+                              );
+                            } else {
+                              Get.toNamed(Routes.TRACKING_4,
+                                  arguments: TrackingModel(
+                                      "", "", controller.selectedNumber.value));
+                            }
                           },
                           color: primaryColor,
                           text: 'Selesai'),
