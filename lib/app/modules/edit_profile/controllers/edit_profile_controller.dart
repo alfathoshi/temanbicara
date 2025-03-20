@@ -37,7 +37,7 @@ class EditProfileController extends GetxController {
       final token = box.read('token');
 
       final response = await http.put(
-        Uri.parse('http://www.temanbicara.web.id/api/v1/edit-profile'),
+        Uri.parse('https://www.temanbicara.web.id/api/v1/edit-profile'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',

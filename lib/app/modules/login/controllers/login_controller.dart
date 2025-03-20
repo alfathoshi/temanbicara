@@ -32,7 +32,7 @@ class LoginController extends GetxController {
 
     try {
       var response = await http.post(
-        Uri.parse('http://www.temanbicara.web.id/api/v1/login'),
+        Uri.parse('https://www.temanbicara.web.id/api/v1/login'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'email': emailC.text,

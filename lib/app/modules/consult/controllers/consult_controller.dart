@@ -5,11 +5,12 @@ import 'package:http/http.dart' as http;
 class ConsultController extends GetxController {
   var schedules = {}.obs;
   var isLoading = false.obs;
+
   Future<void> fetchData() async {
     try {
       isLoading.value = true;
-      final response = await http.get(
-          Uri.parse('http://www.temanbicara.web.id/api/v1/available-schedule'));
+      final response = await http.get(Uri.parse(
+          'https://www.temanbicara.web.id/api/v1/available-schedule'));
       if (response.statusCode == 200) {
         schedules.value = json.decode(response.body);
       } else {
@@ -24,8 +25,13 @@ class ConsultController extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
+    fetchData();
+  }
+
+  @override
+  void onReady() {
+    super.onReady();
     fetchData();
   }
 }

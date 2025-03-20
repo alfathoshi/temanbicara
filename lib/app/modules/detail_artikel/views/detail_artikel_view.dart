@@ -19,101 +19,96 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
     this.author,
     super.key,
   });
+
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.sizeOf(context).height;
     return Scaffold(
       backgroundColor: whiteColor,
-      body: CustomScrollView(slivers: [
-        SliverAppBar(
-          pinned: true,
-          floating: true,
-          toolbarHeight: 85,
-          backgroundColor: Colors.white,
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(24),
-                bottomRight: Radius.circular(24),
-              ),
-              side: BorderSide(color: Colors.black12)),
-          title: Text(
-            'Article',
-            style: h3Bold,
+      appBar: AppBar(
+        toolbarHeight: 85,
+        backgroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(24),
+            bottomRight: Radius.circular(24),
           ),
-          centerTitle: true,
+          side: BorderSide(color: Colors.black12),
         ),
-        SliverToBoxAdapter(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+        title: Text(
+          'Article',
+          style: h3Bold,
+        ),
+        centerTitle: true,
+      ),
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.all(20),
+          children: [
+            if (image != null && image!.isNotEmpty)
               Center(
                 child: Image.asset(
-                  'assets/images/${image}',
+                  'assets/images/$image.png',
                   height: 221,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) =>
+                      const Icon(Icons.image_not_supported, size: 100),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            SizedBox(
-                              width: 300,
-                              child: Text(
-                                judul!,
-                                softWrap: true,
-                                maxLines: 3,
-                                style: const TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.w800),
-                              ),
-                            ),
-                            const Icon(Icons.share)
-                          ],
-                        ),
-                        Text(
-                          author!,
-                          style: h6SemiBold,
-                        ),
-                        sby24,
-                        Container(
-                          width: 350,
-                          child: Text(
-                            deskripsi!,
-                            overflow: TextOverflow.fade,
-                            softWrap: true,
-                            textAlign: TextAlign.justify,
-                          ),
-                        ),
-                        sby12,
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: List.generate(3, (index) {
-                              return Padding(
-                                  padding: const EdgeInsets.only(right: 24),
-                                  child: TopArticle(
-                                      judul: judul!,
-                                      deskripsi: deskripsi!,
-                                      author: author!,
-                                      image: image!));
-                            }),
-                          ),
-                        ),
-                      ],
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: 300,
+                  child: Text(
+                    judul ?? "No Title",
+                    softWrap: true,
+                    maxLines: 3,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800,
                     ),
-                  ],
+                  ),
                 ),
+                const Icon(Icons.share),
+              ],
+            ),
+            Text(
+              author ?? "Unknown Author",
+              style: h6SemiBold,
+            ),
+            sby24,
+            SizedBox(
+              width: double.infinity,
+              child: Text(
+                deskripsi ?? "No Description Available",
+                overflow: TextOverflow.fade,
+                softWrap: true,
+                textAlign: TextAlign.justify,
               ),
-            ],
-          ),
+            ),
+            sby12,
+            SizedBox(
+              height: 160,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 3,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 24),
+                    child: TopArticle(
+                      judul: judul ?? "No Title",
+                      deskripsi: deskripsi ?? "No Description",
+                      author: author ?? "Unknown Author",
+                      image: image ?? "default_image",
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
-      ]),
+      ),
     );
   }
 }

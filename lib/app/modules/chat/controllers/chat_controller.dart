@@ -11,7 +11,7 @@ class ChatController extends GetxController {
   Future<Map<String, dynamic>> fetchData() async {
     final response = await http.get(
       Uri.parse(
-        'http://www.temanbicara.web.id/api/v1/consultation-user',
+        'https://www.temanbicara.web.id/api/v1/consultation-user',
       ),
       headers: {
         'Content-Type': 'application/json',

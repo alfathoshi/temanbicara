@@ -17,7 +17,7 @@ class HomeController extends GetxController {
     try {
       isLoading.value = true;
       final response = await http.get(
-        Uri.parse('http://www.temanbicara.web.id/api/v1/article'),
+        Uri.parse('https://www.temanbicara.web.id/api/v1/article'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',

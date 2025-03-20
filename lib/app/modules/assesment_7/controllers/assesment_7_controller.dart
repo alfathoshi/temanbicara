@@ -35,7 +35,7 @@ class Assesment7Controller extends GetxController {
     isLoading.value = true;
     try {
       var response = await http.post(
-        Uri.parse('http://www.temanbicara.web.id/api/v1/do-assessment'),
+        Uri.parse('https://www.temanbicara.web.id/api/v1/do-assessment'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ${box.read('token')}',

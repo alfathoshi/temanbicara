@@ -18,7 +18,7 @@ class ReportController extends GetxController {
       final token = box.read('token');
 
       var response = await http.get(
-        Uri.parse('http://www.temanbicara.web.id/api/v1/tracking'),
+        Uri.parse('https://www.temanbicara.web.id/api/v1/tracking'),
         headers: {
           'Authorization': 'Bearer $token',
         },
@@ -48,7 +48,7 @@ class ReportController extends GetxController {
       final token = box.read('token');
 
       var response = await http.get(
-        Uri.parse('http://www.temanbicara.web.id/api/v1/tracking'),
+        Uri.parse('https://www.temanbicara.web.id/api/v1/tracking'),
         headers: {
           'Authorization': 'Bearer $token',
         },

@@ -49,7 +49,7 @@ class TransactionData extends StatelessWidget {
                 Row(
                   children: [
                     CircleAvatar(radius: 20),
-                    sby12,
+                    sbX12,
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
