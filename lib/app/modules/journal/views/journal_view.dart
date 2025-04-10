@@ -11,8 +11,7 @@ import '../../../themes/fonts.dart';
 import '../controllers/journal_controller.dart';
 
 class JournalView extends GetView<JournalController> {
-  JournalView({super.key});
-  final JournalController controller = Get.put(JournalController());
+  const JournalView({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -6,6 +6,7 @@ import 'package:temanbicara/app/data/Invoice.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/transaction/invoiceData.dart';
 import 'package:temanbicara/app/widgets/transaction/transactionTimelineView.dart';
 
@@ -40,9 +41,7 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
       ),
       body: Column(
         children: [
-          SizedBox(
-            height: 20,
-          ),
+          sby24,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: TransactionTimeLineViewIndex(index: 4),
@@ -52,23 +51,23 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 5),
+                  sby5,
                   Text("Invoice", style: h4Bold),
-                  SizedBox(height: 19),
+                  sby24,
                   // data invoice disini
                   Container(
                       height: screenHeight * 0.58,
                       child: SingleChildScrollView(
                           child: InvoiceData(invoice: invoice))),
-                  SizedBox(height: 15),
+                  sby16,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
                         children: [
-                          SizedBox(width: 10),
+                          sbx5,
                           Image.asset('assets/images/shareInvoice.png'),
-                          SizedBox(width: 5),
+                          sbx5,
                           Text(
                             "Share Video",
                             style: h6SemiBold.copyWith(color: primaryColor),
@@ -78,17 +77,17 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
                       Row(
                         children: [
                           Image.asset('assets/images/downloadInvoice.png'),
-                          SizedBox(width: 5),
+                          sbx5,
                           Text(
                             "Download Invoice",
                             style: h6SemiBold.copyWith(color: primaryColor),
                           ),
-                          SizedBox(width: 10),
+                          sbX12,
                         ],
                       )
                     ],
                   ),
-                  SizedBox(height: 15),
+                  sby16,
                   Center(
                     child: SizedBox(
                       width: 205,
@@ -112,7 +111,7 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 40),
+                  sby36,
                 ],
               ))
         ],

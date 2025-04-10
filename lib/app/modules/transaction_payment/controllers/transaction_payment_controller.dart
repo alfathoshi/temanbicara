@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:temanbicara/app/themes/colors.dart';
 
@@ -9,7 +10,8 @@ class TransactionPaymentController extends GetxController {
   var isLoading = false.obs;
 
   Future<void> updateScheduleStatus(int scheduleId) async {
-    final url = Uri.parse('http://10.0.2.2:8000/api/v1/schedule/$scheduleId');
+    final url =
+        Uri.parse('https://www.temanbicara.web.id/api/v1/schedule/$scheduleId');
     try {
       final response = await http.put(url);
       if (response.statusCode == 200) {
@@ -34,14 +36,18 @@ class TransactionPaymentController extends GetxController {
     required int scheduleId,
     required int patientId,
   }) async {
-    final url = Uri.parse('http://10.0.2.2:8000/api/v1/consultation');
+    final url = Uri.parse('https://www.temanbicara.web.id/api/v1/consultation');
+    final box = GetStorage();
+    final token = box.read('token');
     final Map<String, dynamic> body = {
-      'description': '-',
-      'problem': '-',
-      'summary': '-',
+      'description': "-",
+      'problem': "-",
+      'summary': "-",
       'schedule_id': scheduleId,
-      'patient_id': patientId,
+      'patient_id' : patientId
     };
+    print('Sending request to: $url');
+    print('Request body: ${jsonEncode(body)}');
 
     try {
       final response = await http.post(
@@ -49,6 +55,7 @@ class TransactionPaymentController extends GetxController {
         body: jsonEncode(body),
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
         },
       );
 
@@ -73,8 +80,8 @@ class TransactionPaymentController extends GetxController {
   Future<void> executeTransaction(int scheduleId, int patientId) async {
     isLoading.value = true;
     try {
-      await updateScheduleStatus(scheduleId);
       await createConsultation(scheduleId: scheduleId, patientId: patientId);
+      await updateScheduleStatus(scheduleId);
     } finally {
       isLoading.value = false;
     }

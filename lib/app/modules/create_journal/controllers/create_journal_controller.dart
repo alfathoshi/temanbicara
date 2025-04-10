@@ -54,7 +54,7 @@ class CreateJournalController extends GetxController {
       final token = box.read('token');
 
       final response = await http.post(
-        Uri.parse('http://10.0.2.2:8000/api/v1/journal'),
+        Uri.parse('https://www.temanbicara.web.id/api/v1/journal'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',

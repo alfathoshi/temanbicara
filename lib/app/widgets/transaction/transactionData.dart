@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/transaction/idrFormatter.dart';
 
 class TransactionData extends StatelessWidget {
@@ -48,7 +49,7 @@ class TransactionData extends StatelessWidget {
                 Row(
                   children: [
                     CircleAvatar(radius: 20),
-                    SizedBox(width: 10),
+                    sbX12,
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -75,24 +76,24 @@ class TransactionData extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 12),
+                sby12,
                 Divider(
                   height: 1,
                   thickness: 1.5,
                   color: grey4Color,
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [Text("Topik", style: h6Bold), Text(topik)],
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Divider(
                   height: 1,
                   thickness: 1.5,
                   color: grey4Color,
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -100,13 +101,13 @@ class TransactionData extends StatelessWidget {
                     Text(metode)
                   ],
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Divider(
                   height: 1,
                   thickness: 1.5,
                   color: grey4Color,
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -114,7 +115,7 @@ class TransactionData extends StatelessWidget {
                     Text(durasi.toString())
                   ],
                 ),
-                SizedBox(height: 12),
+                sby12,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -122,7 +123,7 @@ class TransactionData extends StatelessWidget {
                     Text(jmlSesi.toString())
                   ],
                 ),
-                SizedBox(height: 12),
+                sby12,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -130,7 +131,7 @@ class TransactionData extends StatelessWidget {
                     Text("${getDayName(jadwalSesi)}, ${jadwalSesi}")
                   ],
                 ),
-                SizedBox(height: 12),
+                sby12,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -138,13 +139,13 @@ class TransactionData extends StatelessWidget {
                     Text(waktuSesi.toString())
                   ],
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Divider(
                   height: 1,
                   thickness: 1.5,
                   color: grey4Color,
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -152,13 +153,13 @@ class TransactionData extends StatelessWidget {
                     Text(kadaluarsa)
                   ],
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Divider(
                   height: 1,
                   thickness: 1.5,
                   color: grey4Color,
                 ),
-                SizedBox(height: 22),
+                sby24,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

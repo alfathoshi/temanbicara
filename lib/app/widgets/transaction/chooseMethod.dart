@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:temanbicara/app/data/Transaction.dart';
 import 'package:temanbicara/app/modules/transaction_method/controllers/transaction_method_controller.dart';
 import 'package:temanbicara/app/themes/colors.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/transaction/bankMethodList.dart';
 import 'package:temanbicara/app/widgets/transaction/creditCardMethodList.dart';
 import 'package:temanbicara/app/widgets/transaction/eWalletMethodList.dart';
@@ -41,7 +42,7 @@ class ChooseMethod extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 22),
+            sby24,
             PaymentMethodIndex(
                 index: controller.selectedIndex, transaction: transaction)
           ],

@@ -26,7 +26,7 @@ class EditProfileView extends GetView<EditProfileController> {
       backgroundColor: whiteColor,
       appBar: AppBar(
         toolbarHeight: 85,
-        backgroundColor: Colors.white,
+        backgroundColor: whiteColor,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(24),
@@ -87,9 +87,7 @@ class EditProfileView extends GetView<EditProfileController> {
                     'Nama',
                     style: textDescriptionSemiBold,
                   ),
-                  const SizedBox(
-                    height: 8,
-                  ),
+                  sby8,
                   TextField(
                     controller: controller.nameController,
                     cursorColor: black,
@@ -108,16 +106,12 @@ class EditProfileView extends GetView<EditProfileController> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 16,
-                  ),
+                  sby16,
                   Text(
                     'Email',
                     style: textDescriptionSemiBold,
                   ),
-                  const SizedBox(
-                    height: 8,
-                  ),
+                  sby8,
                   TextField(
                     controller: controller.emailController,
                     cursorColor: black,
@@ -136,28 +130,21 @@ class EditProfileView extends GetView<EditProfileController> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-
+                  sby16,
                   Text(
                     'Tanggal Lahir',
                     style: textDescriptionSemiBold,
                   ),
-                  const SizedBox(
-                    height: 8,
-                  ),
+                  sby8,
                   DatePicker(),
-                  const SizedBox(
-                    height: 16,
-                  ),
+                  //const SizedBox(
+                  //  height: 16,
+                  // ),
                   // Text(
                   //   'Negara',
                   //   style: textDescriptionSemiBold,
                   // ),
-                  const SizedBox(
-                    height: 8,
-                  ),
+                  // sby8,
                   // DropdownSearch<String>(
                   //   items: (filter, infiniteScrollProps) => [
                   //     'Indonesia',
@@ -212,6 +199,7 @@ class EditProfileView extends GetView<EditProfileController> {
                   //   },
                   //   selectedItem: controller.selectedCountry.value,
                   // ),
+                  sby16,
                 ],
               ),
             ),
