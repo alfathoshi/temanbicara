@@ -23,6 +23,8 @@ import '../modules/assesment_6/bindings/assesment_6_binding.dart';
 import '../modules/assesment_6/views/assesment_6_view.dart';
 import '../modules/assesment_7/bindings/assesment_7_binding.dart';
 import '../modules/assesment_7/views/assesment_7_view.dart';
+import '../modules/booking_history/bindings/booking_history_binding.dart';
+import '../modules/booking_history/views/booking_history_view.dart';
 import '../modules/change_language/bindings/change_language_binding.dart';
 import '../modules/change_language/views/change_language_view.dart';
 import '../modules/change_password/bindings/change_password_binding.dart';
@@ -322,6 +324,11 @@ class AppPages {
       name: _Paths.CONSULT_REPORT,
       page: () => const ConsultReportView(),
       binding: ConsultReportBinding(),
+    ),
+    GetPage(
+      name: _Paths.BOOKING_HISTORY,
+      page: () => const BookingHistoryView(),
+      binding: BookingHistoryBinding(),
     ),
   ];
 }

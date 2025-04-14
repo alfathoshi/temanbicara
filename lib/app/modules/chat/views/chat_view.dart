@@ -65,7 +65,8 @@ class ChatView extends GetView<ChatController> {
                             id: data['counselor_id'],
                             nama: data['counselor_name'],
                             deskripsi: data['description'],
-                            image: 'profile', time: data['start_time'],
+                            image: 'profile',
+                            time: data['start_time'],
                           ));
                     },
                   ),

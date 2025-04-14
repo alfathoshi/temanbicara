@@ -4,8 +4,10 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:temanbicara/app/data/Transaction.dart';
 import 'package:temanbicara/app/modules/transaction_method/controllers/transaction_method_controller.dart';
 import 'package:temanbicara/app/modules/transaction_payment/views/transaction_payment_view.dart';
+import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
+import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/transaction/concultationPrice.dart';
 import 'package:temanbicara/app/widgets/transaction/paymentMethodRow.dart';
 
@@ -31,7 +33,11 @@ class EWalletMethodList extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 PaymentMethodRow(
-                    label: "Gopay", value: EWalletList[0], logo: "gopayLogo"),
+                  label: "Gopay",
+                  value: EWalletList[0],
+                  logo: "gopayLogo",
+                  isAvailable: false,
+                ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 15),
                   child: Divider(
@@ -41,9 +47,11 @@ class EWalletMethodList extends StatelessWidget {
                   ),
                 ),
                 PaymentMethodRow(
-                    label: "ShopeePay",
-                    value: EWalletList[1],
-                    logo: "shopeePayLogo"),
+                  label: "ShopeePay",
+                  value: EWalletList[1],
+                  logo: "shopeePayLogo",
+                  isAvailable: false,
+                ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 15),
                   child: Divider(
@@ -53,7 +61,11 @@ class EWalletMethodList extends StatelessWidget {
                   ),
                 ),
                 PaymentMethodRow(
-                    label: "OVO", value: EWalletList[2], logo: "ovoLogo"),
+                  label: "OVO",
+                  value: EWalletList[2],
+                  logo: "ovoLogo",
+                  isAvailable: false,
+                ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 15),
                   child: Divider(
@@ -63,45 +75,49 @@ class EWalletMethodList extends StatelessWidget {
                   ),
                 ),
                 PaymentMethodRow(
-                    label: "Dana", value: EWalletList[3], logo: "danaLogo"),
+                  label: "Dana",
+                  value: EWalletList[3],
+                  logo: "danaLogo",
+                  isAvailable: false,
+                ),
               ],
             ),
           ),
         ),
         sby24,
         ConcultationPrice(price: transaction.harga),
-        sby24,
-        Center(
-          child: SizedBox(
-            width: 205,
-            height: 42,
-            child: ElevatedButton(
-              child: Text('Next',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold)),
-              onPressed: () {
-                if (radioController.methodType.isNotEmpty) {
-                  Get.to(
-                      () => TransactionPaymentView(
-                            paymentMethod: radioController.methodType,
-                          ),
-                      arguments: transaction);
-                } else {
-                  Get.snackbar(
-                    backgroundColor: primaryColor.withOpacity(0.6),
-                    colorText: Colors.white,
-                    "Silahkan pilih Metode Pembayaran",
-                    "Please select payment method before proceeding.",
-                  );
-                }
-              },
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(primaryColor),
-              ),
-            ),
-          ),
+        sby36,
+        MyButton(
+          get: () async {
+            if (radioController.methodType.isNotEmpty) {
+              Get.dialog(
+                Center(
+                  child: CircularProgressIndicator(
+                    color: primaryColor,
+                  ),
+                ),
+                barrierDismissible: false,
+              );
+
+              await Future.delayed(Duration(seconds: 2));
+
+              Get.back();
+              Get.to(
+                  () => TransactionPaymentView(
+                        paymentMethod: radioController.methodType,
+                      ),
+                  arguments: transaction);
+            } else {
+              Get.snackbar(
+                backgroundColor: error.withOpacity(0.6),
+                colorText: Colors.white,
+                "Silahkan pilih Metode Pembayaran",
+                "Please select payment method before proceeding.",
+              );
+            }
+          },
+          color: primaryColor,
+          text: "Next",
         ),
       ],
     );

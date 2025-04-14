@@ -24,78 +24,84 @@ class TrackingView extends GetView<TrackingController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: whiteColor,
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            toolbarHeight: 85,
-            backgroundColor: Colors.white,
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(24),
-                bottomRight: Radius.circular(24),
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        backgroundColor: whiteColor,
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              automaticallyImplyLeading: false,
+              toolbarHeight: 85,
+              backgroundColor: Colors.white,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(24),
+                  bottomRight: Radius.circular(24),
+                ),
+                side: BorderSide(color: Colors.black12),
               ),
-              side: BorderSide(color: Colors.black12),
-            ),
-            title: Text(
-              'Tracking',
-              style: h3Bold,
-            ),
-            centerTitle: true,
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Text(
-                "Gimana dengan kualitas tidurmu hari ini?",
+              title: Text(
+                'Tracking',
                 style: h3Bold,
-                textAlign: TextAlign.center,
-                overflow: TextOverflow.fade,
-                softWrap: true,
+              ),
+              centerTitle: true,
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Text(
+                  "Gimana dengan kualitas tidurmu hari ini?",
+                  style: h3Bold,
+                  textAlign: TextAlign.center,
+                  overflow: TextOverflow.fade,
+                  softWrap: true,
+                ),
               ),
             ),
-          ),
-          SliverList.builder(
-            itemCount: dataKualitasTidur.length,
-            itemBuilder: (context, index) {
-              final kualitas = dataKualitasTidur[index]['kualitas'];
-              return GestureDetector(
-                onTap: () {
-                  controller.toggleImage(index, kualitas);
-                },
-                child: Obx(
-                  () => KualitasTidur(
-                    kualitas: kualitas,
-                    waktu: dataKualitasTidur[index]['waktu'],
-                    Image: dataKualitasTidur[index]['emosi'],
-                    textColor: controller.changeColor(index),
-                    BackgroundColor: controller.changeBackgroundColor(index),
+            SliverList.builder(
+              itemCount: dataKualitasTidur.length,
+              itemBuilder: (context, index) {
+                final kualitas = dataKualitasTidur[index]['kualitas'];
+                return GestureDetector(
+                  onTap: () {
+                    controller.toggleImage(index, kualitas);
+                  },
+                  child: Obx(
+                    () => KualitasTidur(
+                      kualitas: kualitas,
+                      waktu: dataKualitasTidur[index]['waktu'],
+                      Image: dataKualitasTidur[index]['emosi'],
+                      textColor: controller.changeColor(index),
+                      BackgroundColor: controller.changeBackgroundColor(index),
+                    ),
                   ),
-                ),
-              );
-            },
-          ),
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                Obx(() => controller.warningText()),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: MyButton(
-                      get: () {
-                        print(controller.selectedKualitasTidur.value!);
-                        Get.toNamed(Routes.TRACKING_2,
-                            arguments: TrackingModel(
-                                controller.selectedKualitasTidur.value!, "", 0));
-                      },
-                      color: primaryColor,
-                      text: 'Lanjutkan'),
-                ),
-              ],
+                );
+              },
             ),
-          ),
-        ],
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  Obx(() => controller.warningText()),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: MyButton(
+                        get: () {
+                          print(controller.selectedKualitasTidur.value!);
+                          Get.toNamed(Routes.TRACKING_2,
+                              arguments: TrackingModel(
+                                  controller.selectedKualitasTidur.value!,
+                                  "",
+                                  0));
+                        },
+                        color: primaryColor,
+                        text: 'Lanjutkan'),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

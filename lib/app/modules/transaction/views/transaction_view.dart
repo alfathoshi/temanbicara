@@ -6,6 +6,7 @@ import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
+import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/transaction/transactionData.dart';
 import 'package:temanbicara/app/widgets/transaction/transactionTimelineView.dart';
 
@@ -29,7 +30,7 @@ class TransactionView extends GetView<TransactionController> {
               ),
               side: BorderSide(color: Colors.black12)),
           title: Text(
-            'Trasanctions',
+            'Trasactions',
             style: h3Bold,
           ),
           centerTitle: true,
@@ -38,9 +39,11 @@ class TransactionView extends GetView<TransactionController> {
           child: Column(
             children: [
               sby24,
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: TransactionTimeLineViewIndex(index: 1),
+              Container(
+                height: 60,
+                child: Expanded(
+                  child: TransactionTimeLineViewIndex(index: 1),
+                ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 28),
@@ -61,28 +64,14 @@ class TransactionView extends GetView<TransactionController> {
                         waktuSesi: transaction.waktu,
                         kadaluarsa: transaction.kadaluarsa,
                         harga: transaction.harga),
-                    sby24,
-                    Center(
-                      child: SizedBox(
-                        width: 205,
-                        height: 42,
-                        child: ElevatedButton(
-                          child: Text('Next',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold)),
-                          onPressed: () {
-                            Get.toNamed(Routes.TRANSACTION_METHOD,
-                                arguments: transaction);
-                          },
-                          style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStatePropertyAll<Color>(primaryColor),
-                          ),
-                        ),
-                      ),
-                    ),
+                    sby36,
+                    MyButton(
+                        get: () {
+                          Get.toNamed(Routes.TRANSACTION_METHOD,
+                              arguments: transaction);
+                        },
+                        color: primaryColor,
+                        text: "Next"),
                     sby36,
                   ],
                 ),
