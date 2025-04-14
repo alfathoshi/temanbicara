@@ -91,6 +91,8 @@ import '../modules/transaction_payment/bindings/transaction_payment_binding.dart
 import '../modules/transaction_payment/views/transaction_payment_view.dart';
 import '../modules/transaction_success/bindings/transaction_success_binding.dart';
 import '../modules/transaction_success/views/transaction_success_view.dart';
+import '../modules/verifyOtp/bindings/verify_otp_binding.dart';
+import '../modules/verifyOtp/views/verify_otp_view.dart';
 
 part 'app_routes.dart';
 
@@ -329,6 +331,11 @@ class AppPages {
       name: _Paths.SEND_OTP,
       page: () => const SendOtpView(),
       binding: SendOtpBinding(),
+    ),
+    GetPage(
+      name: _Paths.VERIFY_OTP,
+      page: () => const VerifyOtpView(),
+      binding: VerifyOtpBinding(),
     ),
   ];
 }
