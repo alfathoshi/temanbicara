@@ -79,7 +79,25 @@ class LoginView extends GetView<LoginController> {
                       passwordField: true,
                     ),
                     const SizedBox(
-                      height: 68,
+                      height: 12,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed(Routes.SEND_OTP);
+                      },
+                      child: SizedBox(
+                        width: MediaQuery.sizeOf(context).width,
+                        child: Text(
+                          "Lupa kata sandi?",
+                          textAlign: TextAlign.right,
+                          style: GoogleFonts.poppins().copyWith(
+                            color: const Color(0xFF60ABEE),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 36,
                     ),
                     ElevatedButton(
                       onPressed: () {

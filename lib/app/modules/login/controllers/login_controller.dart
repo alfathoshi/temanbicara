@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:temanbicara/app/config/config.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 
@@ -32,7 +33,7 @@ class LoginController extends GetxController {
 
     try {
       var response = await http.post(
-        Uri.parse('https://www.temanbicara.web.id/api/v1/login'),
+        Uri.parse("${Config.apiEndPoint}/login"),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'email': emailC.text,

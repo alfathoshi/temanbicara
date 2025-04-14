@@ -52,6 +52,7 @@ abstract class Routes {
   static const CHAT_ROOM = _Paths.CHAT_ROOM;
   static const CONSULT_HISTORY = _Paths.CONSULT_HISTORY;
   static const CONSULT_REPORT = _Paths.CONSULT_REPORT;
+  static const SEND_OTP = _Paths.SEND_OTP;
 }
 
 abstract class _Paths {
@@ -105,4 +106,5 @@ abstract class _Paths {
   static const CHAT_ROOM = '/chat-room';
   static const CONSULT_HISTORY = '/consult-history';
   static const CONSULT_REPORT = '/consult-report';
+  static const SEND_OTP = '/send-otp';
 }

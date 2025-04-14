@@ -69,6 +69,8 @@ import '../modules/report/bindings/report_binding.dart';
 import '../modules/report/views/report_view.dart';
 import '../modules/room_chat/bindings/room_chat_binding.dart';
 import '../modules/room_chat/views/room_chat_view.dart';
+import '../modules/sendOtp/bindings/send_otp_binding.dart';
+import '../modules/sendOtp/views/send_otp_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
 import '../modules/sleep_quality/bindings/sleep_quality_binding.dart';
@@ -322,6 +324,11 @@ class AppPages {
       name: _Paths.CONSULT_REPORT,
       page: () => const ConsultReportView(),
       binding: ConsultReportBinding(),
+    ),
+    GetPage(
+      name: _Paths.SEND_OTP,
+      page: () => const SendOtpView(),
+      binding: SendOtpBinding(),
     ),
   ];
 }
