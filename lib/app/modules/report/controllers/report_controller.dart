@@ -59,7 +59,8 @@ class ReportController extends GetxController {
 
         if (data['status']) {
           return data;
-        } else {
+        } 
+        else {
           Get.snackbar('Error', data['message']);
         }
       } else {

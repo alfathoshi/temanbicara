@@ -99,7 +99,7 @@ class Assesment1Controller extends GetxController {
       }
       box.write('mbti', selectedMBTI.value);
       String topics = favoriteTopics.join(',');
-      box.write('topics', topics);
+      box.write('topic', topics);
       String formattedDate =
           DateFormat('yyyy-MM-dd').format(dateController.selectedDate.value);
       box.write('birthdate', formattedDate);

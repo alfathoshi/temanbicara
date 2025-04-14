@@ -468,7 +468,7 @@ class HomeView extends GetView<ReportController> {
                                 final data = await _controller.articles;
                                 Get.toNamed(
                                   Routes.ARTICLE,
-                                  arguments: data['data'],
+                                  arguments: data['data'] ?? [],
                                 );
                               },
                               child: Text(
@@ -490,7 +490,7 @@ class HomeView extends GetView<ReportController> {
                       child: Text("No Data Available"),
                     );
                   } else {
-                    final List articles = _controller.articles['data'];
+                    final List articles = _controller.articles['data'] ?? [];
                     final double containerHeight =
                         articles.length <= 2 ? articles.length * 180.0 : 530.0;
                     return Container(

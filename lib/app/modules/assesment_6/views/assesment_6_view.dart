@@ -115,13 +115,7 @@ class Assesment6View extends GetView<Assesment6Controller> {
                 style: warningGoals,
               ),
             ),
-            const Spacer(),
-            MyButton(
-                get: () {
-                  Get.toNamed(Routes.ASSESMENT_7);
-                },
-                color: primaryColor,
-                text: 'Lanjutkan')
+     
           ],
         ),
       ),

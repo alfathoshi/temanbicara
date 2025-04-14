@@ -46,7 +46,7 @@ class Assesment7Controller extends GetxController {
           'gender': box.read('gender'),
           'birthdate': box.read('birthdate'),
           'mbti': box.read('mbti'),
-          'topics': json.encode(box.read('topics')),
+          'topic': json.encode(box.read('topic')),
           'goal': box.read('goal'),
           'sleep_quality': box.read('sleep_quality'),
           'have_consulted': box.read('have_consulted'),

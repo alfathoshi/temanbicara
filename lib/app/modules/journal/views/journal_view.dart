@@ -11,7 +11,8 @@ import '../../../themes/fonts.dart';
 import '../controllers/journal_controller.dart';
 
 class JournalView extends GetView<JournalController> {
-  const JournalView({super.key});
+  JournalView({super.key});
+  final JournalController controller = Get.put(JournalController());
 
   @override
   Widget build(BuildContext context) {
@@ -123,6 +124,7 @@ class JournalView extends GetView<JournalController> {
                         type: journal['mood_level'],
                         date: controller.formatDate(date),
                         typeColor: emotionColor,
+                        image: journal['image_url'] ?? '',
                         getDelete: () async {
                           Get.defaultDialog(
                               backgroundColor: whiteColor,

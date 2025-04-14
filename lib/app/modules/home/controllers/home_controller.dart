@@ -25,9 +25,10 @@ class HomeController extends GetxController {
       );
       if (response.statusCode == 200) {
         articles.value = json.decode(response.body);
-      } else {
-        throw Exception('Failed to load schedule');
-      }
+      } 
+      // else {
+      //   throw Exception('Failed to load schedule');
+      // }
     } catch (e) {
       Get.snackbar('Error', e.toString());
     } finally {

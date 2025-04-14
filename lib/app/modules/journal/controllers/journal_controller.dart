@@ -53,13 +53,6 @@ class JournalController extends GetxController {
         var data = json.decode(response.body);
         if (data['status']) {
           journalList.value = data['data'];
-        } else {
-          Get.snackbar(
-            'Error',
-            data['message'],
-            colorText: whiteColor,
-            backgroundColor: error.withOpacity(0.6),
-          );
         }
       }
     } catch (e) {
