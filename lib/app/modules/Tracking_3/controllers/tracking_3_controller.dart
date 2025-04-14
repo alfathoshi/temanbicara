@@ -17,24 +17,38 @@ class Tracking3Controller extends GetxController {
   }
 
   Widget explanationText() {
-    if (activeIndex.value == 0 || activeIndex.value == null) {
-      return Text('Syukurlah! Ayo tetap menjaga kesehatanmu',
-          style: h6Bold.copyWith(color: Color(0xffB0B0AF)));
-    } else if (activeIndex.value == 1) {
+    // if (activeIndex.value == 0 || activeIndex.value == null) {
+    //   return Padding(
+    //     padding: const EdgeInsets.all(30.0),
+    //     child: Row(
+    //       mainAxisAlignment: MainAxisAlignment.center,
+    //       children: [
+    //         const Icon(
+    //           Icons.warning_amber_rounded,
+    //           color: Colors.orange,
+    //         ),
+    //         Text(
+    //           'Silahkan pilih salah satu',
+    //           style: h5Bold.copyWith(color: Colors.orange),
+    //         )
+    //       ],
+    //     ),
+    //   ); } else
+    if (activeIndex.value == 1) {
       return Text('Apakah ada hal yang mengganggu pikiranmu?',
-          style: h6Bold.copyWith(color: Color(0xffB0B0AF)));
+          style: h6Bold.copyWith(color: greyColor));
     } else if (activeIndex.value == 2) {
       return Text('Coba cari suasana baru',
-          style: h6Bold.copyWith(color: Color(0xffB0B0AF)));
+          style: h6Bold.copyWith(color: greyColor));
     } else if (activeIndex.value == 3) {
       return Text('Kamu sepertinya cukup stress',
-          style: h6Bold.copyWith(color: Color(0xffB0B0AF)));
+          style: h6Bold.copyWith(color: greyColor));
     } else if (activeIndex.value == 4) {
       return Text('Kamu bisa berbagi kereshanmu disini',
-          style: h6Bold.copyWith(color: Color(0xffB0B0AF)));
+          style: h6Bold.copyWith(color: greyColor));
     } else if (activeIndex.value == 5) {
       return Text('Apakah kamu perlu bantuan ahli?',
-          style: h6Bold.copyWith(color: Color(0xffB0B0AF)));
+          style: h6Bold.copyWith(color: greyColor));
     }
     return Text('');
   }

@@ -23,7 +23,7 @@ class Tracking2View extends GetView<Tracking2Controller> {
         slivers: [
           SliverAppBar(
             toolbarHeight: 85,
-            backgroundColor: Colors.white,
+            backgroundColor: whiteColor,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(24),
@@ -74,9 +74,11 @@ class Tracking2View extends GetView<Tracking2Controller> {
                               border: Border.all(color: primaryColor),
                             ),
                             child: Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 children: List.generate(5, (index) {
                                   int moodIndex = index + 1;
                                   return GestureDetector(
@@ -88,12 +90,15 @@ class Tracking2View extends GetView<Tracking2Controller> {
                                       width: MediaQuery.sizeOf(context).width *
                                           0.158,
                                       decoration: ShapeDecoration(
-                                        color: controller.selectedNumber.value ==
-                                                controller.emotions[moodIndex - 1]
-                                            ? controller.colorNumber()
-                                            : Colors.transparent,
+                                        color:
+                                            controller.selectedNumber.value ==
+                                                    controller
+                                                        .emotions[moodIndex - 1]
+                                                ? controller.colorNumber()
+                                                : Colors.transparent,
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(50),
+                                          borderRadius:
+                                              BorderRadius.circular(50),
                                         ),
                                       ),
                                       child: Center(

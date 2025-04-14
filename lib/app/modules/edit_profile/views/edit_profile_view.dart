@@ -26,7 +26,7 @@ class EditProfileView extends GetView<EditProfileController> {
       backgroundColor: whiteColor,
       appBar: AppBar(
         toolbarHeight: 85,
-        backgroundColor: Colors.white,
+        backgroundColor: whiteColor,
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(24),
@@ -87,9 +87,7 @@ class EditProfileView extends GetView<EditProfileController> {
                     'Nama',
                     style: textDescriptionSemiBold,
                   ),
-                  const SizedBox(
-                    height: 8,
-                  ),
+                  sby8,
                   TextField(
                     controller: controller.nameController,
                     cursorColor: black,
@@ -139,6 +137,68 @@ class EditProfileView extends GetView<EditProfileController> {
                   ),
                   sby8,
                   DatePicker(),
+                  //const SizedBox(
+                  //  height: 16,
+                  // ),
+                  // Text(
+                  //   'Negara',
+                  //   style: textDescriptionSemiBold,
+                  // ),
+                  // sby8,
+                  // DropdownSearch<String>(
+                  //   items: (filter, infiniteScrollProps) => [
+                  //     'Indonesia',
+                  //     'Singapore',
+                  //     'Malaysia',
+                  //     'Jepang',
+                  //     'Korea'
+                  //   ],
+                  //   suffixProps: const DropdownSuffixProps(
+                  //     dropdownButtonProps: DropdownButtonProps(
+                  //       iconClosed: Icon(Icons.keyboard_arrow_down),
+                  //       iconOpened: Icon(Icons.keyboard_arrow_up),
+                  //     ),
+                  //   ),
+                  //   decoratorProps: DropDownDecoratorProps(
+                  //     decoration: InputDecoration(
+                  //         contentPadding: const EdgeInsets.all(15),
+                  //         filled: true,
+                  //         fillColor: Colors.white,
+                  //         border: OutlineInputBorder(
+                  //           borderRadius: BorderRadius.circular(16),
+                  //           borderSide: const BorderSide(
+                  //             color: Colors.black26,
+                  //             width: 2,
+                  //           ),
+                  //         ),
+                  //         hintText: 'pilih negara',
+                  //         hintStyle: textFieldStyle),
+                  //   ),
+                  //   popupProps: PopupProps.menu(
+                  //     itemBuilder:
+                  //         (context, item, isDisabled, isSelected) {
+                  //       return Padding(
+                  //         padding: const EdgeInsets.all(15),
+                  //         child: Text(
+                  //           item,
+                  //           style: textFieldStyle,
+                  //           textAlign: TextAlign.center,
+                  //         ),
+                  //       );
+                  //     },
+                  //     constraints: const BoxConstraints(maxHeight: 160),
+                  //     menuProps: const MenuProps(
+                  //       margin: EdgeInsets.only(top: 12),
+                  //       shape: RoundedRectangleBorder(
+                  //           borderRadius:
+                  //               BorderRadius.all(Radius.circular(12))),
+                  //     ),
+                  //   ),
+                  //   onChanged: (country) {
+                  //     controller.setCountry(country ?? '');
+                  //   },
+                  //   selectedItem: controller.selectedCountry.value,
+                  // ),
                   sby16,
                 ],
               ),

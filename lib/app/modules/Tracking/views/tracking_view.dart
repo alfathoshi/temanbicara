@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:temanbicara/app/data/Tracking.dart';
+import 'package:temanbicara/app/modules/Tracking/controllers/tracking_controller.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/kualitas_tidur.dart';
+import 'package:temanbicara/app/widgets/sleep_quality.dart';
 
-import '../controllers/tracking_controller.dart';
+// import '../controllers/tracking_controller.dart';
+import '../../assesment_3/controllers/assesment_3_controller.dart';
 
 class TrackingView extends GetView<TrackingController> {
   TrackingView({super.key});
@@ -20,7 +23,7 @@ class TrackingView extends GetView<TrackingController> {
     {'kualitas': 'Insomnia', 'waktu': '< 4 jam', 'emosi': 'emosi1'},
   ];
 
-  final TrackingController controller = Get.put(TrackingController());
+  // final TrackingController controller = Get.put(TrackingController());
 
   @override
   Widget build(BuildContext context) {
