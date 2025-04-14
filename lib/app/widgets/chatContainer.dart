@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:temanbicara/app/modules/chat/controllers/chat_controller.dart';
 import 'package:temanbicara/app/modules/detail_artikel/views/detail_artikel_view.dart';
 import 'package:temanbicara/app/modules/room_chat/views/room_chat_view.dart';
@@ -26,6 +27,8 @@ class Chatcontainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String parsedTime =
+        DateFormat('HH:mm').format(DateFormat('HH:mm:ss').parse(time));
     return InkWell(
       onTap: () {
         Get.toNamed(Routes.CHAT_ROOM,
@@ -66,7 +69,6 @@ class Chatcontainer extends StatelessWidget {
                     style: h6Bold,
                   ),
                   Container(
-                    width: 210,
                     child: Text(
                       deskripsi!,
                       style: h7Regular.copyWith(
@@ -78,9 +80,13 @@ class Chatcontainer extends StatelessWidget {
                 ],
               ),
             ),
-            Text(
-              time,
-              style: h7Regular.copyWith(color: Colors.grey.withOpacity(0.9)),
+            Spacer(),
+            Padding(
+              padding: const EdgeInsets.only(right: 15),
+              child: Text(
+                parsedTime,
+                style: h7Regular.copyWith(color: Colors.grey.withOpacity(0.9)),
+              ),
             )
           ],
         ),

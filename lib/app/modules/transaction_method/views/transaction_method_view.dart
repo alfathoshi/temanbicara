@@ -18,21 +18,17 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: AppBar(
-        backgroundColor: whiteColor,
+        toolbarHeight: 85,
+        backgroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(24),
+              bottomRight: Radius.circular(24),
+            ),
+            side: BorderSide(color: Colors.black12)),
         title: Text(
-          'Transaction',
+          'Trasanctions',
           style: h3Bold,
-        ),
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.arrow_back_rounded),
-              onPressed: () {
-                Get.back();
-              },
-              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-            );
-          },
         ),
         centerTitle: true,
       ),
@@ -40,7 +36,12 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
         child: Column(
           children: [
             sby24,
-            TransactionTimeLineViewIndex(index: 2),
+            Container(
+              height: 60,
+              child: Expanded(
+                child: TransactionTimeLineViewIndex(index: 2),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(bottom: 28.0, right: 28, left: 28),
               child: Column(

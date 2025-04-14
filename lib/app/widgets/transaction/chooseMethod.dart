@@ -15,7 +15,6 @@ class ChooseMethod extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.sizeOf(context).width;
-    //final ToggleButtonController controller = Get.put(ToggleButtonController());
     return GetBuilder<ToggleButtonController>(
       init: ToggleButtonController(),
       builder: (controller) {

@@ -281,7 +281,7 @@ class HomeView extends GetView<ReportController> {
                                           Routes.NAVIGATION_BAR,
                                           arguments: {"indexPage": 3}),
                                       color: primaryColor,
-                                      text: 'Consult Now')
+                                      text: 'Consult')
                                 ],
                               ),
                             )

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -16,38 +18,23 @@ class ProfileView extends GetView<ProfileController> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: whiteColor,
-      appBar: AppBar(
-        toolbarHeight: 85,
-        backgroundColor: Colors.white,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(24),
-            bottomRight: Radius.circular(24),
-          ),
-          side: BorderSide(color: Colors.black12),
-        ),
-        title: Text(
-          'Profile',
-          style: h3Bold,
-        ),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(32, 65, 32, 32),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(32, 65, 32, 32),
+            child: Center(
               child: Column(
                 children: [
+                  sby12,
                   Stack(
                     alignment: Alignment.bottomRight,
                     children: [
                       CircleAvatar(
-                        radius: 60,
+                        radius: 80,
                         backgroundColor: border,
                         child: CircleAvatar(
-                          radius: 58,
+                          radius: 78,
                           backgroundColor: whiteColor,
                           child: Image.asset(
                             'assets/images/profile.png',
@@ -55,8 +42,8 @@ class ProfileView extends GetView<ProfileController> {
                         ),
                       ),
                       Container(
-                        width: 30,
-                        height: 30,
+                        width: 40,
+                        height: 40,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: primaryColor,
@@ -82,88 +69,166 @@ class ProfileView extends GetView<ProfileController> {
                 ],
               ),
             ),
-            sby36,
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Account Settings',
-                  style: h4Regular,
-                ),
-                sby16,
-                GestureDetector(
-                  onTap: () {
-                    Get.toNamed(Routes.EDIT_PROFILE);
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Edit Profile',
-                        style: h4SemiBold,
-                      ),
-                      const Icon(
-                        Icons.chevron_right_outlined,
-                        size: 32,
-                      ),
-                    ],
+          ),
+          sby24,
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color: whiteColor,
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromRGBO(99, 99, 99, 0.2),
+                    blurRadius: 8,
+                    spreadRadius: 0,
                   ),
-                ),
-                sby16,
-                GestureDetector(
-                  onTap: () {
-                    Get.toNamed(Routes.CHANGE_PASSWORD);
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Change Password',
-                        style: h4SemiBold,
+                ],
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(31, 36, 31, 24),
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              'Account Settings',
+                              style: h3Regular.copyWith(
+                                  color: grey2Color, fontSize: 18),
+                            ),
+                          ),
+                          sby16,
+                          GestureDetector(
+                            onTap: () {
+                              Get.toNamed(Routes.EDIT_PROFILE);
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Edit Profile',
+                                  style: h4SemiBold,
+                                ),
+                                const Icon(
+                                  Icons.chevron_right_outlined,
+                                  size: 32,
+                                ),
+                              ],
+                            ),
+                          ),
+                          sby24,
+                          GestureDetector(
+                            onTap: () {
+                              Get.toNamed(Routes.CHANGE_PASSWORD);
+                            },
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Change Password',
+                                  style: h4SemiBold,
+                                ),
+                                const Icon(
+                                  Icons.chevron_right_outlined,
+                                  size: 32,
+                                )
+                              ],
+                            ),
+                          ),
+                          sby24,
+                          GestureDetector(
+                            onTap: () => Get.toNamed(Routes.CONSULT_HISTORY),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Consultations History',
+                                  style: h4SemiBold,
+                                ),
+                                const Icon(
+                                  Icons.chevron_right_outlined,
+                                  size: 32,
+                                )
+                              ],
+                            ),
+                          ),
+                          sby24,
+                          GestureDetector(
+                            onTap: () => Get.toNamed(Routes.BOOKING_HISTORY),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Booking History',
+                                  style: h4SemiBold,
+                                ),
+                                const Icon(
+                                  Icons.chevron_right_outlined,
+                                  size: 32,
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                      const Icon(
-                        Icons.chevron_right_outlined,
-                        size: 32,
-                      )
-                    ],
-                  ),
-                ),
-                sby16,
-                GestureDetector(
-                  onTap: () => Get.toNamed(Routes.CONSULT_HISTORY),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Consultations History',
-                        style: h4SemiBold,
+                    ),
+                    const Divider(),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(31, 24, 31, 24),
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.offAllNamed(
+                            Routes.LOGIN,
+                          );
+                          box.erase();
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: Text(
+                                'More',
+                                style: h3Regular.copyWith(
+                                    color: grey2Color, fontSize: 18),
+                              ),
+                            ),
+                            sby16,
+                            GestureDetector(
+                              onTap: () => Get.toNamed(Routes.BOOKING_HISTORY),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'About Us',
+                                    style: h4SemiBold,
+                                  ),
+                                  const Icon(
+                                    Icons.chevron_right_outlined,
+                                    size: 32,
+                                  )
+                                ],
+                              ),
+                            ),
+                            sby24,
+                            Text(
+                              'Logout',
+                              style: h4SemiBold.copyWith(color: error),
+                            ),
+                          ],
+                        ),
                       ),
-                      const Icon(
-                        Icons.chevron_right_outlined,
-                        size: 32,
-                      )
-                    ],
-                  ),
+                    )
+                  ],
                 ),
-                sby24,
-                const Divider(),
-                sby24,
-                GestureDetector(
-                  onTap: () {
-                    Get.offAllNamed(
-                      Routes.LOGIN,
-                    );
-                    box.erase();
-                  },
-                  child: Text(
-                    'Logout',
-                    style: h4SemiBold.copyWith(color: error),
-                  ),
-                )
-              ],
-            )
-          ],
-        ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

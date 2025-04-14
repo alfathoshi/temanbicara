@@ -53,24 +53,18 @@ class TransactionData extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.6,
-                          child: Text(
-                            namaPsikiater,
-                            style: h5Bold.copyWith(
-                                overflow: TextOverflow.ellipsis),
-                            maxLines: 2,
-                          ),
+                        Text(
+                          namaPsikiater,
+                          style:
+                              h5Bold.copyWith(overflow: TextOverflow.ellipsis),
+                          maxLines: 2,
                         ),
                         SizedBox(height: 2),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.6,
-                          child: Text(
-                            expertise,
-                            style: h7Regular.copyWith(
-                                overflow: TextOverflow.ellipsis),
-                            maxLines: 2,
-                          ),
+                        Text(
+                          expertise,
+                          style: h7Regular.copyWith(
+                              overflow: TextOverflow.ellipsis),
+                          maxLines: 2,
                         ),
                       ],
                     ),
