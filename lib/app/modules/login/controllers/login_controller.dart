@@ -9,8 +9,8 @@ import 'package:temanbicara/app/themes/colors.dart';
 
 class LoginController extends GetxController {
   final box = GetStorage();
-  late TextEditingController emailC;
-  late TextEditingController passC;
+  late TextEditingController emailC = TextEditingController();
+  late TextEditingController passC = TextEditingController();
   var isButtonActive = true.obs;
   var isSecure = true.obs;
 
@@ -96,15 +96,13 @@ class LoginController extends GetxController {
 
   @override
   void onInit() {
-    emailC = TextEditingController();
-    passC = TextEditingController();
     super.onInit();
   }
 
   @override
   void onClose() {
-    emailC.dispose();
-    passC.dispose();
+    // emailC.dispose();
+    // passC.dispose();
     super.onClose();
   }
 }
