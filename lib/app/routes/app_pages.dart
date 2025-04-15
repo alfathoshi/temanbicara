@@ -53,6 +53,8 @@ import '../modules/edit_journal/bindings/edit_journal_binding.dart';
 import '../modules/edit_journal/views/edit_journal_view.dart';
 import '../modules/edit_profile/bindings/edit_profile_binding.dart';
 import '../modules/edit_profile/views/edit_profile_view.dart';
+import '../modules/forgotPassword/bindings/forgot_password_binding.dart';
+import '../modules/forgotPassword/views/forgot_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/journal/bindings/journal_binding.dart';
@@ -71,6 +73,8 @@ import '../modules/report/bindings/report_binding.dart';
 import '../modules/report/views/report_view.dart';
 import '../modules/room_chat/bindings/room_chat_binding.dart';
 import '../modules/room_chat/views/room_chat_view.dart';
+import '../modules/sendOtp/bindings/send_otp_binding.dart';
+import '../modules/sendOtp/views/send_otp_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
 import '../modules/sleep_quality/bindings/sleep_quality_binding.dart';
@@ -91,6 +95,8 @@ import '../modules/transaction_payment/bindings/transaction_payment_binding.dart
 import '../modules/transaction_payment/views/transaction_payment_view.dart';
 import '../modules/transaction_success/bindings/transaction_success_binding.dart';
 import '../modules/transaction_success/views/transaction_success_view.dart';
+import '../modules/verifyOtp/bindings/verify_otp_binding.dart';
+import '../modules/verifyOtp/views/verify_otp_view.dart';
 
 part 'app_routes.dart';
 
@@ -324,6 +330,21 @@ class AppPages {
       name: _Paths.CONSULT_REPORT,
       page: () => const ConsultReportView(),
       binding: ConsultReportBinding(),
+    ),
+    GetPage(
+      name: _Paths.SEND_OTP,
+      page: () => const SendOtpView(),
+      binding: SendOtpBinding(),
+    ),
+    GetPage(
+      name: _Paths.VERIFY_OTP,
+      page: () => const VerifyOtpView(),
+      binding: VerifyOtpBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORGOT_PASSWORD,
+      page: () => const ForgotPasswordView(),
+      binding: ForgotPasswordBinding(),
     ),
     GetPage(
       name: _Paths.BOOKING_HISTORY,

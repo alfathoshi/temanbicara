@@ -1,0 +1,123 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_chat_ui/flutter_chat_ui.dart';
+
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:temanbicara/app/routes/app_pages.dart';
+import 'package:temanbicara/app/themes/colors.dart';
+import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
+
+import '../controllers/send_otp_controller.dart';
+
+class SendOtpView extends GetView<SendOtpController> {
+  const SendOtpView({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: Text(
+          'Send OTP',
+          style: h3Bold,
+        ),
+        centerTitle: true,
+      ),
+      body: SizedBox(
+        width: MediaQuery.sizeOf(context).width,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: 48,
+              ),
+              Image.asset('assets/images/sendotp.png'),
+              const SizedBox(
+                height: 16,
+              ),
+              Text(
+                'OTP Verification',
+                style: GoogleFonts.poppins().copyWith(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                  color: const Color(0xFF5B5B5B),
+                ),
+              ),
+              Text(
+                'We will send you one-time password to your email',
+                style: GoogleFonts.poppins().copyWith(
+                  fontSize: 14,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 32,
+              ),
+              Text(
+                'Enter your email',
+                style: GoogleFonts.poppins().copyWith(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+              ),
+              sby8,
+              TextField(
+                onChanged: (value) {
+                  if (value.isEmpty) controller.isButtonActive.value = true;
+                  if (value.isNotEmpty) controller.isButtonActive.value = false;
+                },
+                controller: controller.emailController,
+                decoration: InputDecoration(
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: primaryColor),
+                  ),
+                  border: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                      color: Color(0xFF544C4C),
+                      width: 0.1,
+                    ),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                ),
+              ),
+              sby32,
+              Obx(
+                () => ElevatedButton(
+                  onPressed: () async {
+                    await controller.sendOtp();
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: controller.isButtonActive.value
+                          ? const Color(0xFFc4c4c4)
+                          : primaryColor,
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size(
+                        double.infinity,
+                        44,
+                      ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                  child: controller.isLoading.value == false
+                      ? Text(
+                          'Send OTP',
+                          style:
+                              GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                        )
+                      : SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                            color: whiteColor,
+                          ),
+                        ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
