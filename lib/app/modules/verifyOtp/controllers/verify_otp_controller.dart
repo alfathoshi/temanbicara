@@ -31,6 +31,21 @@ class VerifyOtpController extends GetxController {
     return text;
   }
 
+  Future<void> sendOtp() async {
+    try {
+      var response = await http.post(
+        Uri.parse("${Config.apiEndPoint}/password/otp"),
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'email': Get.arguments['email'],
+        }),
+      );
+      print(response.body);
+    } catch (err) {
+      rethrow;
+    }
+  }
+
   Future<void> verifyOtp() async {
     try {
       var response = await http.post(

@@ -86,18 +86,7 @@ class SendOtpView extends GetView<SendOtpController> {
               Obx(
                 () => ElevatedButton(
                   onPressed: () async {
-                    controller.isLoading.value = true;
-                    if (!controller.isButtonActive.value) {
-                      Map<String, dynamic>? data = await controller.sendOtp();
-                      Get.toNamed(
-                        Routes.VERIFY_OTP,
-                        arguments: {
-                          "email": controller.emailController.text,
-                          "user_id": data!['user_id']
-                        },
-                      );
-                    }
-                    controller.isLoading.value = false;
+                    await controller.sendOtp();
                   },
                   style: ElevatedButton.styleFrom(
                       backgroundColor: controller.isButtonActive.value

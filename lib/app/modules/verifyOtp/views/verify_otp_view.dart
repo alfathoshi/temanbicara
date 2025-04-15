@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -14,6 +15,7 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
           'Verify OTP',
@@ -57,8 +59,7 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: List.generate(6, (index) {
                     return Obx(
-                      () => buildOtpField(index, controller.controllers,
-                          controller.focusNodes, context, controller),
+                      () => buildOtpField(index, controller, context),
                     );
                   }),
                 ),
@@ -77,11 +78,27 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                 ),
               ),
               sby32,
-              Text(
-                'Didn\'t receive the OTP email? Resend OTP!',
-                style: GoogleFonts.poppins().copyWith(
-                  fontSize: 14,
-                  color: const Color(0xFF7E954E),
+              Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: 'Didn\'t receive the OTP email? ',
+                      style: GoogleFonts.poppins().copyWith(
+                        fontSize: 14,
+                        color: const Color(0xFF7E954E),
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'Resend OTP!',
+                      style: GoogleFonts.poppins().copyWith(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14,
+                        color: const Color(0xFF7E954E),
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () => controller.sendOtp(),
+                    ),
+                  ],
                 ),
               ),
               sby32,
@@ -129,31 +146,29 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
   }
 }
 
-Widget buildOtpField(
-    int index, var controllers, var focusNodes, var context, var controller) {
+Widget buildOtpField(int index, var controller, var context) {
   return SizedBox(
     width: 50,
     height: 50,
     child: TextField(
       enabled: index == controller.focusedIndex.value,
-      controller: controllers[index],
-      focusNode: focusNodes[index],
+      controller: controller.controllers[index],
+      focusNode: controller.focusNodes[index],
       keyboardType: TextInputType.number,
       textAlign: TextAlign.center,
       maxLength: 1,
       onChanged: (value) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          focusNodes[controller.focusedIndex.value].requestFocus();
+          controller.focusNodes[controller.focusedIndex.value].requestFocus();
         });
-        print(controller.focusedIndex.value);
 
         if (value.isNotEmpty && index < 5) {
           controller.focusedIndex.value = index + 1;
-          FocusScope.of(context).requestFocus(focusNodes[index + 1]);
+          FocusScope.of(context).requestFocus(controller.focusNodes[index + 1]);
         } else if (value.isEmpty && index > 0) {
           controller.isButtonActive.value = true;
           controller.focusedIndex.value = index - 1;
-          FocusScope.of(context).requestFocus(focusNodes[index - 1]);
+          FocusScope.of(context).requestFocus(controller.focusNodes[index - 1]);
         }
 
         if (index == 5) controller.isButtonActive.value = false;

@@ -12,6 +12,8 @@ class ForgotPasswordController extends GetxController {
   RxBool isCorrect = true.obs;
   RxBool isLoading = false.obs;
   RxBool isButtonActive = false.obs;
+  RxBool isNewPassObscure = true.obs;
+  RxBool isConfPassObscure = true.obs;
 
   Future<void> changePassword() async {
     try {

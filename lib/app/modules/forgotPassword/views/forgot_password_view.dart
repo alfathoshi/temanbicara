@@ -43,59 +43,87 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                     ),
                   ],
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'New Password',
-                        style: textDescriptionSemiBold,
-                      ),
-                      sby8,
-                      TextField(
-                        controller: controller.newPasswordController,
-                        cursorColor: black,
-                        decoration: InputDecoration(
-                          hintText: 'Masukkan Password Baru',
-                          hintStyle: h5Regular.copyWith(color: grey2Color),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(
-                              color: greyColor,
+                child: Obx(
+                  () => Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'New Password',
+                          style: textDescriptionSemiBold,
+                        ),
+                        sby8,
+                        TextField(
+                          obscureText: controller.isNewPassObscure.value,
+                          controller: controller.newPasswordController,
+                          cursorColor: black,
+                          decoration: InputDecoration(
+                            suffixIcon: GestureDetector(
+                              onTapUp: (_) {
+                                controller.isNewPassObscure.value = true;
+                              },
+                              onTapDown: (_) {
+                                controller.isNewPassObscure.value = false;
+                              },
+                              child: const Icon(
+                                Icons.remove_red_eye_outlined,
+                                size: 20,
+                              ),
+                            ),
+                            hintText: 'Masukkan Password Baru',
+                            hintStyle: h5Regular.copyWith(color: grey2Color),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(
+                                color: greyColor,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: primaryColor),
                             ),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: primaryColor),
-                          ),
                         ),
-                      ),
-                      sby12,
-                      Text(
-                        'Confirm Password',
-                        style: textDescriptionSemiBold,
-                      ),
-                      sby8,
-                      TextField(
-                        controller: controller.confirmPasswordController,
-                        cursorColor: black,
-                        decoration: InputDecoration(
-                          hintText: 'Konfirmasi Password',
-                          hintStyle: h5Regular.copyWith(color: grey2Color),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(
-                              color: greyColor,
+                        sby12,
+                        Text(
+                          'Confirm Password',
+                          style: textDescriptionSemiBold,
+                        ),
+                        sby8,
+                        TextField(
+                          obscureText: controller.isConfPassObscure.value,
+                          controller: controller.confirmPasswordController,
+                          cursorColor: black,
+                          decoration: InputDecoration(
+                            suffixIcon: GestureDetector(
+                              onTapUp: (_) {
+                                controller.isConfPassObscure.value = true;
+                              },
+                              onTapDown: (_) {
+                                controller.isConfPassObscure.value = false;
+                              },
+                              child: const Icon(
+                                Icons.remove_red_eye_outlined,
+                                size: 20,
+                              ),
+                            ),
+                            hintText: 'Konfirmasi Password',
+                            hintStyle: h5Regular.copyWith(color: grey2Color),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(
+                                color: greyColor,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: primaryColor),
                             ),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: primaryColor),
-                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -119,7 +147,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                         borderRadius: BorderRadius.circular(10))),
                 child: controller.isLoading.value == false
                     ? Text(
-                        'Send OTP',
+                        'Confirm',
                         style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
                       )
                     : SizedBox(
