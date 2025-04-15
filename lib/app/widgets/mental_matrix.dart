@@ -40,7 +40,7 @@ class MentalMatrix extends StatelessWidget {
           ),
         ),
         height: 83,
-        width: 323,
+        width: MediaQuery.sizeOf(context).width,
         child: Padding(
           padding: const EdgeInsets.only(left: 28.0, right: 28),
           child: Row(

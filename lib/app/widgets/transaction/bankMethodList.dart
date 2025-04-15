@@ -5,10 +5,11 @@ import 'package:temanbicara/app/modules/transaction_method/controllers/transacti
 import 'package:temanbicara/app/modules/transaction_payment/views/transaction_payment_view.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
+import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/transaction/concultationPrice.dart';
 import 'package:temanbicara/app/widgets/transaction/paymentMethodRow.dart';
 
-List<String> bankTransferList = ["BCA", "Mandiri", "BNI", "BRI", "BSI", "NOBU"];
+List<String> bankTransferList = ["BCA", "BNI", "BRI", "CIMB"];
 
 class BankPaymentMethodList extends StatelessWidget {
   final TransactionModel transaction;
@@ -41,9 +42,7 @@ class BankPaymentMethodList extends StatelessWidget {
                   ),
                 ),
                 PaymentMethodRow(
-                    label: "Mandiri",
-                    value: bankTransferList[1],
-                    logo: "mandiriLogo"),
+                    label: "BNI", value: bankTransferList[1], logo: "bniLogo"),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 15),
                   child: Divider(
@@ -53,7 +52,7 @@ class BankPaymentMethodList extends StatelessWidget {
                   ),
                 ),
                 PaymentMethodRow(
-                    label: "BNI", value: bankTransferList[2], logo: "bniLogo"),
+                    label: "BRI", value: bankTransferList[2], logo: "briLogo"),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 15),
                   child: Divider(
@@ -63,55 +62,47 @@ class BankPaymentMethodList extends StatelessWidget {
                   ),
                 ),
                 PaymentMethodRow(
-                    label: "BRI", value: bankTransferList[3], logo: "briLogo"),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 15),
-                  child: Divider(
-                    height: 1,
-                    thickness: 1.5,
-                    color: grey4Color,
-                  ),
-                ),
-                PaymentMethodRow(
-                    label: "BSI", value: bankTransferList[4], logo: "bsiLogo"),
+                    label: "CIMB",
+                    value: bankTransferList[3],
+                    logo: "cimbLogo"),
               ],
             ),
           ),
         ),
         sby24,
         ConcultationPrice(price: transaction.harga),
-        sby24,
-        Center(
-          child: SizedBox(
-            width: 205,
-            height: 42,
-            child: ElevatedButton(
-              child: Text('Next',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold)),
-              onPressed: () {
-                if (radioController.methodType.isNotEmpty) {
-                  Get.to(
-                      () => TransactionPaymentView(
-                            paymentMethod: radioController.methodType,
-                          ),
-                      arguments: transaction);
-                } else {
-                  Get.snackbar(
-                    backgroundColor: primaryColor.withOpacity(0.6),
-                    colorText: Colors.white,
-                    "Silahkan pilih Metode Pembayaran",
-                    "Please select payment method before proceeding.",
-                  );
-                }
-              },
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all<Color>(primaryColor),
-              ),
-            ),
-          ),
+        sby36,
+        MyButton(
+          get: () async {
+            if (radioController.methodType.isNotEmpty) {
+              Get.dialog(
+                Center(
+                  child: CircularProgressIndicator(
+                    color: primaryColor,
+                  ),
+                ),
+                barrierDismissible: false,
+              );
+
+              await Future.delayed(Duration(seconds: 2));
+
+              Get.back();
+              Get.to(
+                  () => TransactionPaymentView(
+                        paymentMethod: radioController.methodType,
+                      ),
+                  arguments: transaction);
+            } else {
+              Get.snackbar(
+                backgroundColor: error.withOpacity(0.6),
+                colorText: Colors.white,
+                "Silahkan pilih Metode Pembayaran",
+                "Please select payment method before proceeding.",
+              );
+            }
+          },
+          color: primaryColor,
+          text: "Next",
         ),
       ],
     );

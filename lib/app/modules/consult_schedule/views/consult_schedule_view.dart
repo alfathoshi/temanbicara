@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:temanbicara/app/data/Transaction.dart';
 import 'package:temanbicara/app/modules/transaction/views/transaction_view.dart';
+import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
+import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/schedule/schedule_details.dart';
 
 import '../controllers/consult_schedule_controller.dart';
@@ -149,44 +151,81 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                   },
                 ),
                 sby24,
-                Center(
-                  child: SizedBox(
-                    width: 205,
-                    height: 42,
-                    child: ElevatedButton(
-                      child: Text(
-                        'Booking Now',
-                        style: h5Bold.copyWith(color: Colors.white),
-                      ),
-                      onPressed: () {
-                        if (selectedSchedule.isNotEmpty) {
-                          print(selectedSchedule['time']);
-                          Get.to(
-                            () => TransactionView(),
-                            arguments: TransactionModel(
-                              namaPsikiater: userName,
-                              expertise: expertise,
-                              jadwal: selectedSchedule['date']!,
-                              waktu: selectedSchedule['time']!,
-                              selectedID: selectedSchedule['id'],
+                MyButton(
+                    get: () async {
+                      if (selectedSchedule.isNotEmpty) {
+                        print(selectedSchedule['time']);
+                        Get.dialog(
+                          Center(
+                            child: CircularProgressIndicator(
+                              color: primaryColor,
                             ),
-                          );
-                        } else {
-                          Get.snackbar(
-                            "Silahkan pilih jadwal konsultasi",
-                            "Please select a date and time before proceeding.",
-                            backgroundColor: primaryColor.withOpacity(0.6),
-                            colorText: Colors.white,
-                          );
-                        }
-                      },
-                      style: ButtonStyle(
-                        backgroundColor:
-                            WidgetStatePropertyAll<Color>(primaryColor),
-                      ),
-                    ),
-                  ),
-                ),
+                          ),
+                          barrierDismissible: false,
+                        );
+
+                        await Future.delayed(Duration(seconds: 2));
+
+                        Get.back();
+                        Get.to(
+                          () => TransactionView(),
+                          arguments: TransactionModel(
+                            namaPsikiater: userName,
+                            expertise: expertise,
+                            jadwal: selectedSchedule['date']!,
+                            waktu: selectedSchedule['time']!,
+                            selectedID: selectedSchedule['id'],
+                          ),
+                        );
+                      } else {
+                        Get.snackbar(
+                          "Silahkan pilih jadwal konsultasi",
+                          "Please select a date and time before proceeding.",
+                          backgroundColor: error.withOpacity(0.6),
+                          colorText: Colors.white,
+                        );
+                      }
+                    },
+                    color: primaryColor,
+                    text: "Booking Now"),
+                // Center(
+                //   child: SizedBox(
+                //     width: 205,
+                //     height: 42,
+                //     child: ElevatedButton(
+                //       child: Text(
+                //         'Booking Now',
+                //         style: h5Bold.copyWith(color: Colors.white),
+                //       ),
+                //       onPressed: () {
+                //         if (selectedSchedule.isNotEmpty) {
+                //           print(selectedSchedule['time']);
+                //           Get.to(
+                //             () => TransactionView(),
+                //             arguments: TransactionModel(
+                //               namaPsikiater: userName,
+                //               expertise: expertise,
+                //               jadwal: selectedSchedule['date']!,
+                //               waktu: selectedSchedule['time']!,
+                //               selectedID: selectedSchedule['id'],
+                //             ),
+                //           );
+                //         } else {
+                //           Get.snackbar(
+                //             "Silahkan pilih jadwal konsultasi",
+                //             "Please select a date and time before proceeding.",
+                //             backgroundColor: error.withOpacity(0.6),
+                //             colorText: Colors.white,
+                //           );
+                //         }
+                //       },
+                //       style: ButtonStyle(
+                //         backgroundColor:
+                //             WidgetStatePropertyAll<Color>(primaryColor),
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),

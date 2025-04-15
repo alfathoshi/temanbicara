@@ -44,7 +44,7 @@ class TransactionPaymentController extends GetxController {
       'problem': "-",
       'summary': "-",
       'schedule_id': scheduleId,
-      'patient_id' : patientId
+      'patient_id': patientId
     };
     print('Sending request to: $url');
     print('Request body: ${jsonEncode(body)}');

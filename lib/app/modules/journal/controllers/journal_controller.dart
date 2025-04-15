@@ -41,7 +41,7 @@ class JournalController extends GetxController {
       var response = await http.get(
         Uri.parse('https://www.temanbicara.web.id/api/v1/journal')
             .replace(queryParameters: {
-          'userId': userId.toString(),
+          'id': userId.toString(),
         }),
         headers: {
           'Content-Type': 'application/json',

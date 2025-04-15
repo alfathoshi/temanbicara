@@ -9,19 +9,24 @@ class TransactionTimeLineViewIndex extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (index == 1)
-      return TransactionTimeLineView(
-          items: TransactionTimelineItems.page1Items);
-    else if (index == 2) {
-      return TransactionTimeLineView(
-          items: TransactionTimelineItems.page2Items);
-    } else if (index == 3) {
-      return TransactionTimeLineView(
-          items: TransactionTimelineItems.page3Items);
-    } else {
-      return TransactionTimeLineView(
-          items: TransactionTimelineItems.page4Items);
+    List<TransactionTimeline> items;
+
+    switch (index) {
+      case 1:
+        items = TransactionTimelineItems.getPage1Items(context);
+        break;
+      case 2:
+        items = TransactionTimelineItems.getPage2Items(context);
+        break;
+      case 3:
+        items = TransactionTimelineItems.getPage3Items(context);
+        break;
+      default:
+        items = TransactionTimelineItems.getPage4Items(context);
+        break;
     }
+
+    return TransactionTimeLineView(items: items);
   }
 }
 
@@ -32,7 +37,7 @@ class TransactionTimeLineView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
+      width: MediaQuery.sizeOf(context).width,
       height: 50,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -53,127 +58,135 @@ class TransactionTimeLineView extends StatelessWidget {
 }
 
 class TransactionTimelineItems {
-  static List<TransactionTimeline> page1Items = [
-    TransactionTimeline(
-        isFirst: true,
-        isLast: false,
-        isPast: false,
-        text: "Details",
-        lineLength: 60,
-        isCurrent: true),
-    TransactionTimeline(
-        isFirst: false,
-        isLast: false,
-        isPast: false,
-        text: "Method",
-        lineLength: 120,
-        isCurrent: false),
-    TransactionTimeline(
-        isFirst: false,
-        isLast: false,
-        isPast: false,
-        text: "Payment",
-        lineLength: 120,
-        isCurrent: false),
-    TransactionTimeline(
-        isFirst: false,
-        isLast: false,
-        isPast: false,
-        text: "Success",
-        lineLength: 60,
-        isCurrent: false),
-  ];
+  static List<TransactionTimeline> getPage1Items(BuildContext context) {
+    return [
+      TransactionTimeline(
+          isFirst: true,
+          isLast: false,
+          isPast: false,
+          text: "Details",
+          lineLength: MediaQuery.of(context).size.width / 4,
+          isCurrent: true),
+      TransactionTimeline(
+          isFirst: false,
+          isLast: false,
+          isPast: false,
+          text: "Method",
+          lineLength: MediaQuery.of(context).size.width / 4,
+          isCurrent: false),
+      TransactionTimeline(
+          isFirst: false,
+          isLast: false,
+          isPast: false,
+          text: "Payment",
+          lineLength: MediaQuery.of(context).size.width / 4,
+          isCurrent: false),
+      TransactionTimeline(
+          isFirst: false,
+          isLast: false,
+          isPast: false,
+          text: "Success",
+          lineLength: MediaQuery.of(context).size.width / 4,
+          isCurrent: false),
+    ];
+  }
 
-  static List<TransactionTimeline> page2Items = [
-    TransactionTimeline(
-        isFirst: true,
-        isLast: false,
-        isPast: true,
-        text: "Details",
-        lineLength: 60,
-        isCurrent: false),
-    TransactionTimeline(
-        isFirst: false,
-        isLast: false,
-        isPast: false,
-        text: "Method",
-        lineLength: 120,
-        isCurrent: true),
-    TransactionTimeline(
-        isFirst: false,
-        isLast: false,
-        isPast: false,
-        text: "Payment",
-        lineLength: 120,
-        isCurrent: false),
-    TransactionTimeline(
-        isFirst: false,
-        isLast: false,
-        isPast: false,
-        text: "Success",
-        lineLength: 60,
-        isCurrent: false),
-  ];
+  static List<TransactionTimeline> getPage2Items(BuildContext context) {
+    return [
+      TransactionTimeline(
+          isFirst: true,
+          isLast: false,
+          isPast: true,
+          text: "Details",
+          lineLength: MediaQuery.of(context).size.width / 4,
+          isCurrent: false),
+      TransactionTimeline(
+          isFirst: false,
+          isLast: false,
+          isPast: false,
+          text: "Method",
+          lineLength: MediaQuery.of(context).size.width / 4,
+          isCurrent: true),
+      TransactionTimeline(
+          isFirst: false,
+          isLast: false,
+          isPast: false,
+          text: "Payment",
+          lineLength: MediaQuery.of(context).size.width / 4,
+          isCurrent: false),
+      TransactionTimeline(
+          isFirst: false,
+          isLast: false,
+          isPast: false,
+          text: "Success",
+          lineLength: MediaQuery.of(context).size.width / 4,
+          isCurrent: false),
+    ];
+  }
 
-  static List<TransactionTimeline> page3Items = [
-    TransactionTimeline(
-        isFirst: true,
-        isLast: false,
-        isPast: true,
-        text: "Details",
-        lineLength: 60,
-        isCurrent: false),
-    TransactionTimeline(
-        isFirst: false,
-        isLast: false,
-        isPast: true,
-        text: "Method",
-        lineLength: 120,
-        isCurrent: false),
-    TransactionTimeline(
-        isFirst: false,
-        isLast: false,
-        isPast: false,
-        text: "Payment",
-        lineLength: 120,
-        isCurrent: true),
-    TransactionTimeline(
-        isFirst: false,
-        isLast: false,
-        isPast: false,
-        text: "Success",
-        lineLength: 60,
-        isCurrent: false),
-  ];
+  static List<TransactionTimeline> getPage3Items(BuildContext context) {
+    return [
+      TransactionTimeline(
+          isFirst: true,
+          isLast: false,
+          isPast: true,
+          text: "Details",
+          lineLength: MediaQuery.of(context).size.width / 4,
+          isCurrent: false),
+      TransactionTimeline(
+          isFirst: false,
+          isLast: false,
+          isPast: true,
+          text: "Method",
+          lineLength: MediaQuery.of(context).size.width / 4,
+          isCurrent: false),
+      TransactionTimeline(
+          isFirst: false,
+          isLast: false,
+          isPast: false,
+          text: "Payment",
+          lineLength: MediaQuery.of(context).size.width / 4,
+          isCurrent: true),
+      TransactionTimeline(
+          isFirst: false,
+          isLast: false,
+          isPast: false,
+          text: "Success",
+          lineLength: MediaQuery.of(context).size.width / 4,
+          isCurrent: false),
+    ];
+  }
 
-  static List<TransactionTimeline> page4Items = [
-    TransactionTimeline(
-        isFirst: true,
-        isLast: false,
-        isPast: true,
-        text: "Details",
-        lineLength: 60,
-        isCurrent: false),
-    TransactionTimeline(
-        isFirst: false,
-        isLast: false,
-        isPast: true,
-        text: "Method",
-        lineLength: 120,
-        isCurrent: false),
-    TransactionTimeline(
-        isFirst: false,
-        isLast: false,
-        isPast: true,
-        text: "Payment",
-        lineLength: 120,
-        isCurrent: false),
-    TransactionTimeline(
-        isFirst: false,
-        isLast: false,
-        isPast: true,
-        text: "Success",
-        lineLength: 60,
-        isCurrent: false),
-  ];
+  static List<TransactionTimeline> getPage4Items(BuildContext context) {
+    return [
+      TransactionTimeline(
+          isFirst: true,
+          isLast: false,
+          isPast: true,
+          text: "Details",
+          lineLength: MediaQuery.of(context).size.width / 4,
+          isCurrent: false),
+      TransactionTimeline(
+          isFirst: false,
+          isLast: false,
+          isPast: true,
+          text: "Method",
+          lineLength: MediaQuery.of(context).size.width / 4,
+          isCurrent: false),
+      TransactionTimeline(
+          isFirst: false,
+          isLast: false,
+          isPast: true,
+          text: "Payment",
+          lineLength: MediaQuery.of(context).size.width / 4,
+          isCurrent: false),
+      TransactionTimeline(
+          isFirst: false,
+          isLast: false,
+          isPast: true,
+          text: "Success",
+          lineLength: MediaQuery.of(context).size.width / 4,
+          isCurrent: false),
+    ];
+  }
 }

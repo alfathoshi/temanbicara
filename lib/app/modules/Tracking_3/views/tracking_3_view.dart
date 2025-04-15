@@ -58,7 +58,7 @@ class Tracking3View extends GetView<Tracking3Controller> {
                           Text(
                             '${controller.selectedNumber.value}',
                             style: h1Bold.copyWith(
-                              fontSize: 150,
+                              fontSize: 140,
                             ),
                           ),
                           const SizedBox(
@@ -84,7 +84,7 @@ class Tracking3View extends GetView<Tracking3Controller> {
                                         height: 60,
                                         width:
                                             MediaQuery.sizeOf(context).width *
-                                                0.183,
+                                                0.15,
                                         decoration: ShapeDecoration(
                                           color:
                                               controller.selectedNumber.value ==
