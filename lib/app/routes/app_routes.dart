@@ -54,6 +54,7 @@ abstract class Routes {
   static const CONSULT_REPORT = _Paths.CONSULT_REPORT;
   static const SEND_OTP = _Paths.SEND_OTP;
   static const VERIFY_OTP = _Paths.VERIFY_OTP;
+  static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
 }
 
 abstract class _Paths {
@@ -109,4 +110,5 @@ abstract class _Paths {
   static const CONSULT_REPORT = '/consult-report';
   static const SEND_OTP = '/send-otp';
   static const VERIFY_OTP = '/verify-otp';
+  static const FORGOT_PASSWORD = '/forgot-password';
 }

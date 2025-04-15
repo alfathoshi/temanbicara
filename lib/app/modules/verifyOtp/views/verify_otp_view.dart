@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
+import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 
 import '../controllers/verify_otp_controller.dart';
@@ -16,10 +17,7 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
       appBar: AppBar(
         title: Text(
           'Verify OTP',
-          style: GoogleFonts.poppins().copyWith(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
+          style: h3Bold,
         ),
         centerTitle: true,
       ),
@@ -46,7 +44,7 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                 ),
               ),
               Text(
-                'Enter the OTP that sent to ${Get.arguments['email']}',
+                'Enter the OTP that sent to ${controller.email}',
                 style: GoogleFonts.poppins().copyWith(
                   fontSize: 14,
                 ),
@@ -66,12 +64,16 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                 ),
               ),
               sby16,
-              Text(
-                'Incorrect OTP, try again',
-                style: GoogleFonts.poppins().copyWith(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                  color: const Color(0xFFFF8B7B),
+              Obx(
+                () => Text(
+                  'Incorrect OTP, try again',
+                  style: GoogleFonts.poppins().copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    color: controller.isCorrect.value
+                        ? Colors.white
+                        : const Color(0xFFFF8B7B),
+                  ),
                 ),
               ),
               sby32,
@@ -83,33 +85,41 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                 ),
               ),
               sby32,
-              ElevatedButton(
-                onPressed: () {
-                  // Get.toNamed(Routes.VERIFY_OTP);
-                },
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: controller.isButtonActive.value
-                        ? const Color(0xFFc4c4c4)
-                        : primaryColor,
-                    foregroundColor: Colors.white,
-                    minimumSize: const Size(
-                      double.infinity,
-                      44,
-                    ),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10))),
-                child: controller.isLoading.value == false
-                    ? Text(
-                        'Verify',
-                        style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
-                      )
-                    : SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(
-                          color: whiteColor,
-                        ),
+              Obx(
+                () => ElevatedButton(
+                  onPressed: () async {
+                    controller.isLoading.value = true;
+                    if (!controller.isButtonActive.value) {
+                      // Get.toNamed(Routes.FORGOT_PASSWORD);
+                      await controller.verifyOtp();
+                    }
+                    controller.isLoading.value = false;
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: controller.isButtonActive.value
+                          ? const Color(0xFFc4c4c4)
+                          : primaryColor,
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size(
+                        double.infinity,
+                        44,
                       ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                  child: controller.isLoading.value == false
+                      ? Text(
+                          'Verify',
+                          style:
+                              GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                        )
+                      : SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                            color: whiteColor,
+                          ),
+                        ),
+                ),
               ),
             ],
           ),
@@ -136,17 +146,17 @@ Widget buildOtpField(
           focusNodes[controller.focusedIndex.value].requestFocus();
         });
         print(controller.focusedIndex.value);
-        //This condition ensures that the current TextField is not the last one in the sequence.
-        //The check index < 5 prevents trying to move focus to a non-existent next field.
+
         if (value.isNotEmpty && index < 5) {
           controller.focusedIndex.value = index + 1;
           FocusScope.of(context).requestFocus(focusNodes[index + 1]);
-        }
-        //managing focus in an OTP input field where the user may need to move backward when correcting an entry
-        else if (value.isEmpty && index > 0) {
+        } else if (value.isEmpty && index > 0) {
+          controller.isButtonActive.value = true;
           controller.focusedIndex.value = index - 1;
           FocusScope.of(context).requestFocus(focusNodes[index - 1]);
         }
+
+        if (index == 5) controller.isButtonActive.value = false;
       },
       decoration:
           const InputDecoration(counterText: '', border: OutlineInputBorder()),

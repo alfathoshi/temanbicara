@@ -51,6 +51,8 @@ import '../modules/edit_journal/bindings/edit_journal_binding.dart';
 import '../modules/edit_journal/views/edit_journal_view.dart';
 import '../modules/edit_profile/bindings/edit_profile_binding.dart';
 import '../modules/edit_profile/views/edit_profile_view.dart';
+import '../modules/forgotPassword/bindings/forgot_password_binding.dart';
+import '../modules/forgotPassword/views/forgot_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/journal/bindings/journal_binding.dart';
@@ -336,6 +338,11 @@ class AppPages {
       name: _Paths.VERIFY_OTP,
       page: () => const VerifyOtpView(),
       binding: VerifyOtpBinding(),
+    ),
+    GetPage(
+      name: _Paths.FORGOT_PASSWORD,
+      page: () => const ForgotPasswordView(),
+      binding: ForgotPasswordBinding(),
     ),
   ];
 }

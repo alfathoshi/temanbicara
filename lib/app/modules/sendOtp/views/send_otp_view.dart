@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
+import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 
 import '../controllers/send_otp_controller.dart';
@@ -14,13 +15,11 @@ class SendOtpView extends GetView<SendOtpController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
           'Send OTP',
-          style: GoogleFonts.poppins().copyWith(
-            fontWeight: FontWeight.bold,
-            fontSize: 20,
-          ),
+          style: h3Bold,
         ),
         centerTitle: true,
       ),
@@ -65,6 +64,10 @@ class SendOtpView extends GetView<SendOtpController> {
               ),
               sby8,
               TextField(
+                onChanged: (value) {
+                  if (value.isEmpty) controller.isButtonActive.value = true;
+                  if (value.isNotEmpty) controller.isButtonActive.value = false;
+                },
                 controller: controller.emailController,
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
@@ -80,36 +83,47 @@ class SendOtpView extends GetView<SendOtpController> {
                 ),
               ),
               sby32,
-              ElevatedButton(
-                onPressed: () {
-                  Get.toNamed(
-                    Routes.VERIFY_OTP,
-                    arguments: {"email": controller.emailController.text},
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: controller.isButtonActive.value
-                        ? const Color(0xFFc4c4c4)
-                        : primaryColor,
-                    foregroundColor: Colors.white,
-                    minimumSize: const Size(
-                      double.infinity,
-                      44,
-                    ),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10))),
-                child: controller.isLoading.value == false
-                    ? Text(
-                        'Send OTP',
-                        style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
-                      )
-                    : SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(
-                          color: whiteColor,
-                        ),
+              Obx(
+                () => ElevatedButton(
+                  onPressed: () async {
+                    controller.isLoading.value = true;
+                    if (!controller.isButtonActive.value) {
+                      Map<String, dynamic>? data = await controller.sendOtp();
+                      Get.toNamed(
+                        Routes.VERIFY_OTP,
+                        arguments: {
+                          "email": controller.emailController.text,
+                          "user_id": data!['user_id']
+                        },
+                      );
+                    }
+                    controller.isLoading.value = false;
+                  },
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: controller.isButtonActive.value
+                          ? const Color(0xFFc4c4c4)
+                          : primaryColor,
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size(
+                        double.infinity,
+                        44,
                       ),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                  child: controller.isLoading.value == false
+                      ? Text(
+                          'Send OTP',
+                          style:
+                              GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                        )
+                      : SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                            color: whiteColor,
+                          ),
+                        ),
+                ),
               ),
             ],
           ),
