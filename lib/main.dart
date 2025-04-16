@@ -30,7 +30,7 @@ void main() async {
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: "Teman Bicara",
-      initialRoute: Routes.SPLASH_SCREEN,
+      initialRoute: Routes.NEW_TRACKING,
       getPages: AppPages.routes,
     ),
   );

@@ -53,6 +53,7 @@ abstract class Routes {
   static const CONSULT_HISTORY = _Paths.CONSULT_HISTORY;
   static const CONSULT_REPORT = _Paths.CONSULT_REPORT;
   static const BOOKING_HISTORY = _Paths.BOOKING_HISTORY;
+  static const NEW_TRACKING = _Paths.NEW_TRACKING;
 }
 
 abstract class _Paths {
@@ -107,4 +108,5 @@ abstract class _Paths {
   static const CONSULT_HISTORY = '/consult-history';
   static const CONSULT_REPORT = '/consult-report';
   static const BOOKING_HISTORY = '/booking-history';
+  static const NEW_TRACKING = '/new-tracking';
 }

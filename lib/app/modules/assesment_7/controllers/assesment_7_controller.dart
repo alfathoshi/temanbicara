@@ -7,6 +7,8 @@ import 'package:http/http.dart' as http;
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 
+import '../../../config/config.dart';
+
 class Assesment7Controller extends GetxController {
   final box = GetStorage();
   var selectedNumber = 0.obs;
@@ -35,7 +37,7 @@ class Assesment7Controller extends GetxController {
     isLoading.value = true;
     try {
       var response = await http.post(
-        Uri.parse('https://www.temanbicara.web.id/api/v1/do-assessment'),
+        Uri.parse("${Config.apiEndPoint}/do-assessment"),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ${box.read('token')}',
