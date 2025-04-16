@@ -7,6 +7,8 @@ import 'package:http/http.dart' as http;
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 
+import '../../../config/config.dart';
+
 class SignupController extends GetxController {
   late TextEditingController emailC;
   late TextEditingController phoneC;
@@ -26,7 +28,7 @@ class SignupController extends GetxController {
     try {
       if (passC.text == confirmPassC.text) {
         var response = await http.post(
-          Uri.parse('https://www.temanbicara.web.id/api/v1/register'),
+          Uri.parse('${Config.apiEndPoint}/register'),
           headers: {'Content-Type': 'application/json'},
           body: json.encode({
             'email': emailC.text,

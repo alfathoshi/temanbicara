@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../config/config.dart';
+
 class ReportController extends GetxController {
   var trackingList = [].obs;
   var avgMood = "Tidak ada data".obs;
@@ -18,7 +20,7 @@ class ReportController extends GetxController {
       final token = box.read('token');
 
       var response = await http.get(
-        Uri.parse('https://www.temanbicara.web.id/api/v1/tracking'),
+        Uri.parse('${Config.apiEndPoint}/tracking'),
         headers: {
           'Authorization': 'Bearer $token',
         },
@@ -48,7 +50,7 @@ class ReportController extends GetxController {
       final token = box.read('token');
 
       var response = await http.get(
-        Uri.parse('https://www.temanbicara.web.id/api/v1/tracking'),
+        Uri.parse('${Config.apiEndPoint}/tracking'),
         headers: {
           'Authorization': 'Bearer $token',
         },
@@ -59,8 +61,7 @@ class ReportController extends GetxController {
 
         if (data['status']) {
           return data;
-        } 
-        else {
+        } else {
           Get.snackbar('Error', data['message']);
         }
       } else {

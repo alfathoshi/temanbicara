@@ -10,6 +10,7 @@ import 'dart:convert';
 
 import 'package:temanbicara/app/themes/colors.dart';
 
+import '../../../config/config.dart';
 import '../../journal/controllers/journal_controller.dart';
 
 class CreateJournalController extends GetxController {
@@ -73,7 +74,7 @@ class CreateJournalController extends GetxController {
       final userId = box.read('id');
       final token = box.read('token');
 
-      var uri = Uri.parse('https://www.temanbicara.web.id/api/v1/journal');
+      var uri = Uri.parse('${Config.apiEndPoint}/journal');
       var request = http.MultipartRequest('POST', uri);
 
       request.headers['Authorization'] = 'Bearer $token';

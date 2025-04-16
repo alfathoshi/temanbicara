@@ -7,6 +7,8 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 
+import '../../../config/config.dart';
+
 class JournalController extends GetxController {
   final box = GetStorage();
   var isLoading = false.obs;
@@ -39,7 +41,7 @@ class JournalController extends GetxController {
       final token = box.read('token');
 
       var response = await http.get(
-        Uri.parse('https://www.temanbicara.web.id/api/v1/journal')
+        Uri.parse('${Config.apiEndPoint}/journal')
             .replace(queryParameters: {
           'id': userId.toString(),
         }),
@@ -73,7 +75,7 @@ class JournalController extends GetxController {
       print("Token: $token");
 
       var response = await http.delete(
-        Uri.parse('https://www.temanbicara.web.id/api/v1/journal/$journalId'),
+        Uri.parse('${Config.apiEndPoint}/journal/$journalId'),
         headers: {
           'Authorization': 'Bearer $token',
         },

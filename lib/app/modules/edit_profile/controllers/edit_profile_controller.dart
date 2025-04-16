@@ -7,6 +7,8 @@ import 'package:intl/intl.dart';
 import 'package:temanbicara/app/modules/edit_profile/controllers/datepicker_controller.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../config/config.dart';
+
 class EditProfileController extends GetxController {
   final box = GetStorage();
   final TextEditingController nameController = TextEditingController();
@@ -37,7 +39,7 @@ class EditProfileController extends GetxController {
       final token = box.read('token');
 
       final response = await http.put(
-        Uri.parse('https://www.temanbicara.web.id/api/v1/edit-profile'),
+        Uri.parse('${Config.apiEndPoint}/edit-profile'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
