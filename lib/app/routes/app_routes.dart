@@ -52,6 +52,11 @@ abstract class Routes {
   static const CHAT_ROOM = _Paths.CHAT_ROOM;
   static const CONSULT_HISTORY = _Paths.CONSULT_HISTORY;
   static const CONSULT_REPORT = _Paths.CONSULT_REPORT;
+
+  static const SEND_OTP = _Paths.SEND_OTP;
+  static const VERIFY_OTP = _Paths.VERIFY_OTP;
+  static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
+
   static const BOOKING_HISTORY = _Paths.BOOKING_HISTORY;
   static const NEW_TRACKING = _Paths.NEW_TRACKING;
 }
@@ -107,6 +112,9 @@ abstract class _Paths {
   static const CHAT_ROOM = '/chat-room';
   static const CONSULT_HISTORY = '/consult-history';
   static const CONSULT_REPORT = '/consult-report';
+  static const SEND_OTP = '/send-otp';
+  static const VERIFY_OTP = '/verify-otp';
+  static const FORGOT_PASSWORD = '/forgot-password';
   static const BOOKING_HISTORY = '/booking-history';
   static const NEW_TRACKING = '/new-tracking';
 }

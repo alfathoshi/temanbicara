@@ -30,7 +30,7 @@ class AuthTextfield extends StatelessWidget {
         hintStyle: const TextStyle(color: greyColor),
         suffixIcon: passwordField == true
             ? IconButton(
-                icon: const Icon(Icons.remove_red_eye),
+                icon: const Icon(Icons.remove_red_eye_outlined),
                 onPressed: showPassword,
               )
             : null,
