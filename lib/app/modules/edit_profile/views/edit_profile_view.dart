@@ -1,15 +1,9 @@
-import 'dart:collection';
-
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
-import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/date.dart';
 
 import '../controllers/edit_profile_controller.dart';
@@ -57,22 +51,6 @@ class EditProfileView extends GetView<EditProfileController> {
                       child: Image.asset(
                         'assets/images/profile.png',
                       ),
-                    ),
-                  ),
-                  Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: primaryColor,
-                    ),
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.camera_alt,
-                        size: 16,
-                        color: whiteColor,
-                      ),
-                      onPressed: () {},
                     ),
                   ),
                 ],
@@ -207,8 +185,8 @@ class EditProfileView extends GetView<EditProfileController> {
               width: double.infinity,
               height: 54,
               child: ElevatedButton(
-                onPressed: () {
-                  _controller.editProfile();
+                onPressed: () async {
+                  await _controller.editProfile();
                   Get.offAllNamed(Routes.NAVIGATION_BAR,
                       arguments: {"indexPage": 4});
                 },

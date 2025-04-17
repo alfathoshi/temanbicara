@@ -132,7 +132,7 @@ class HomeView extends GetView<ReportController> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Hello, ${box.read('nickname')}',
+                                  'Hello, ${box.read('name')}',
                                   style: h3SemiBold,
                                 ),
                                 Text(
