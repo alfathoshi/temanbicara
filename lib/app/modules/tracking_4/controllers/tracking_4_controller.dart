@@ -7,6 +7,8 @@ import 'package:http/http.dart' as http;
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 
+import '../../../config/config.dart';
+
 class Tracking4Controller extends GetxController {
   final box = GetStorage();
 
@@ -18,7 +20,7 @@ class Tracking4Controller extends GetxController {
       print("token  ${token}");
 
       var response = await http.post(
-        Uri.parse('https://www.temanbicara.web.id/api/v1/do-tracking'),
+        Uri.parse('${Config.apiEndPoint}/do-tracking'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',

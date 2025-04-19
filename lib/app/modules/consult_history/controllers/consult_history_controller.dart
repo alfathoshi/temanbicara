@@ -3,13 +3,15 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
 
+import '../../../config/config.dart';
+
 class ConsultHistoryController extends GetxController {
   final box = GetStorage();
 
   Future<Map<String, dynamic>> fetchData() async {
     final token = box.read('token');
     final response = await http.get(
-        Uri.parse('https://www.temanbicara.web.id/api/v1/available-schedule'),
+        Uri.parse('${Config.apiEndPoint}/available-schedule'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',

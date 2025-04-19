@@ -155,7 +155,7 @@ class Assesment7View extends GetView<Assesment7Controller> {
                         44,
                       ),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10))),
+                          borderRadius: BorderRadius.circular(20))),
                   child: controller.isLoading.value == false
                       ? Text(
                           'Lanjutkan',

@@ -6,12 +6,13 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:temanbicara/app/themes/colors.dart';
 
+import '../../../config/config.dart';
+
 class TransactionPaymentController extends GetxController {
   var isLoading = false.obs;
 
   Future<void> updateScheduleStatus(int scheduleId) async {
-    final url =
-        Uri.parse('https://www.temanbicara.web.id/api/v1/schedule/$scheduleId');
+    final url = Uri.parse('${Config.apiEndPoint}/schedule/$scheduleId');
     try {
       final response = await http.put(url);
       if (response.statusCode == 200) {
@@ -36,7 +37,7 @@ class TransactionPaymentController extends GetxController {
     required int scheduleId,
     required int patientId,
   }) async {
-    final url = Uri.parse('https://www.temanbicara.web.id/api/v1/consultation');
+    final url = Uri.parse('${Config.apiEndPoint}/consultation');
     final box = GetStorage();
     final token = box.read('token');
     final Map<String, dynamic> body = {
