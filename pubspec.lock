@@ -321,7 +321,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.21.1"
-<<<<<<< HEAD
   firebase_messaging:
     dependency: "direct main"
     description:
@@ -346,8 +345,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.9.5"
-=======
->>>>>>> 548e389f82ee0ab0f2baf032eff94c14f2fa870a
   fixnum:
     dependency: transitive
     description:
