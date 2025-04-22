@@ -183,13 +183,13 @@ class HomeView extends GetView<ReportController> {
                           () => GestureDetector(
                             onTap: () => Get.toNamed(Routes.REPORT),
                             child: MentalMatrix(
-                              color: lightPurple,
+                              color: lightGreen,
                               title: 'Sleep Quality',
                               detail:
                                   "Status ${reportController.avgSleep.value}",
                               icon: const Icon(Iconsax.math),
-                              iconColor: Colors.purple,
-                              image: "assets/images/sleepquality.png",
+                              iconColor: primaryColor,
+                              image: "assets/images/limiter.png",
                             ),
                           ),
                         ),
