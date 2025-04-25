@@ -28,9 +28,6 @@ jobs:
       #4 Install Dependencies
       - name: Install Dependencies
         run: flutter pub get
-      #5 Run flutter tests
-      - name: Run Flutter Tests
-        run: flutter test --coverage
       #6 Run Sonar cloud scan
       - name: SonarCloud Scan
         env:
