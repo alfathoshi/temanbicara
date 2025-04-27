@@ -15,7 +15,7 @@ class ConsultHistoryView extends GetView<ConsultHistoryController> {
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: AppBar(
-       toolbarHeight: 85,
+        toolbarHeight: 85,
         backgroundColor: Colors.white,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -40,7 +40,7 @@ class ConsultHistoryView extends GetView<ConsultHistoryController> {
                 child: Text(snapshot.error.toString()),
               );
             } else if (snapshot.hasData) {
-              final List listData = snapshot.data!['data'];
+              final List listData = snapshot.data!['data'] ?? [];
               return ListView.builder(
                   padding: const EdgeInsets.all(8),
                   itemCount: listData.length,
@@ -58,9 +58,14 @@ class ConsultHistoryView extends GetView<ConsultHistoryController> {
                         Get.toNamed(Routes.CONSULT_REPORT);
                       },
                       child: CounselorCard(
-                          username: listData[index]['name'],
-                          expertise: listData[index]['expertise'],
-                          schedule: listData[index]['schedules']),
+                        username: listData[index]['name'],
+                        expertise:
+                            (listData[index]['expertise'] as List).join(', '),
+                        schedule:
+                            (listData[index]['schedules'] as List).isNotEmpty
+                                ? listData[index]['schedules'][0]['date']
+                                : 'No schedule',
+                      ),
                     );
                   });
             } else {
