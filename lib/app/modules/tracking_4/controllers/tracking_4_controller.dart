@@ -15,9 +15,7 @@ class Tracking4Controller extends GetxController {
   Future<void> storedTracking() async {
     try {
       final userId = box.read('id');
-      print("ppk ${userId}");
       final token = box.read('token');
-      print("token  ${token}");
 
       var response = await http.post(
         Uri.parse('${Config.apiEndPoint}/do-tracking'),
@@ -54,23 +52,7 @@ class Tracking4Controller extends GetxController {
             colorText: Colors.white);
       }
     } catch (e) {
-      Get.snackbar('Error', 'Something went wrong: $e');
       print(e);
     }
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
   }
 }

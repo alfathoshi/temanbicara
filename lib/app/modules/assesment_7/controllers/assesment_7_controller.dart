@@ -77,7 +77,6 @@ class Assesment7Controller extends GetxController {
             colorText: Colors.white);
       }
     } catch (e) {
-      Get.snackbar('Error', 'Something went wrong: $e');
       print(e);
     } finally {
       isLoading.value = false;
