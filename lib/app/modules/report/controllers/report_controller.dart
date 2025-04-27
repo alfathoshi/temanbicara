@@ -56,7 +56,7 @@ class ReportController extends GetxController {
           DateTime today = DateTime.now();
 
           var todayTracking = trackingList.firstWhereOrNull((item) {
-            DateTime createdDate = DateTime.parse(item['created_at']);
+            DateTime createdDate = DateTime.parse(item['created_at']).toLocal();
             return createdDate.year == today.year &&
                 createdDate.month == today.month &&
                 createdDate.day == today.day;
@@ -93,7 +93,7 @@ class ReportController extends GetxController {
     int score = 100 - (stressLevel * 10);
     if (score < 0) score = 0;
     if (score > 100) score = 100;
-    return 24;
+    return 20;
   }
 
   Future<void> fetchTracking() async {
