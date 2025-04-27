@@ -23,10 +23,10 @@ class CreateJournalController extends GetxController {
 
   Future<void> pickImage() async {
     var status = await Permission.photos.request();
-    if (!status.isGranted) {
-      Get.snackbar('Permission Denied', 'Gallery access is required');
-      return;
-    }
+    // if (!status.isGranted) {
+    //   Get.snackbar('Permission Denied', 'Gallery access is required');
+    //   return;
+    // }
 
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
