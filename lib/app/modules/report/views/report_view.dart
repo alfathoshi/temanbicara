@@ -69,9 +69,31 @@ class ReportView extends GetView<ReportController> {
                         controller.avgSleep
                       ]);
               },
+              title: "Mental Health Matrix",
+              description: "Status ${controller.avgSleep.value}",
+              image: "assets/images/limiter.png",
+              matrixValue: '80',
+              color: lightGreen,
+            ),
+            ReportCategory(
+              onPressed: () {
+                controller.trackingList.isEmpty
+                    ? Get.snackbar(
+                        "Tidak dapat mengakses halaman",
+                        "Data tracking anda masih kosong. Silahkan melakukan tracking",
+                        backgroundColor: error.withOpacity(0.6),
+                        colorText: Colors.white,
+                      )
+                    : Get.toNamed(Routes.SLEEP_QUALITY, arguments: [
+                        controller.trackingList,
+                        controller.avgSleep
+                      ]);
+              },
               title: "Sleep Quality",
               description: "Status ${controller.avgSleep.value}",
               image: "assets/images/sleepquality.png",
+              matrixValue: '80',
+              color: lightGreen,
             ),
             ReportCategory(
               onPressed: () {
@@ -82,14 +104,16 @@ class ReportView extends GetView<ReportController> {
                         backgroundColor: error.withOpacity(0.6),
                         colorText: Colors.white,
                       )
-                    : Get.toNamed(Routes.STRESS_LEVEL, arguments: [
+                    : Get.toNamed(Routes.SLEEP_QUALITY, arguments: [
                         controller.trackingList,
-                        controller.avgStress
+                        controller.avgSleep
                       ]);
               },
               title: "Stress Level",
-              description: "Level ${controller.avgStress.value}",
-              image: "assets/images/stresslevel.png",
+              description: "Status ${controller.avgSleep.value}",
+              image: "assets/images/strees.png",
+              matrixValue: '80',
+              color: lightGreen,
             ),
             ReportCategory(
               onPressed: () {
@@ -100,14 +124,56 @@ class ReportView extends GetView<ReportController> {
                         backgroundColor: error.withOpacity(0.6),
                         colorText: Colors.white,
                       )
-                    : Get.toNamed(Routes.MOOD_REPORT, arguments: [
+                    : Get.toNamed(Routes.SLEEP_QUALITY, arguments: [
                         controller.trackingList,
-                        controller.avgMood
+                        controller.avgSleep
                       ]);
               },
               title: "Mood Tracker",
-              description: "Status ${controller.avgMood.value}",
-              image: "assets/images/moodtracker.png",
+              description: "Status ${controller.avgSleep.value}",
+              image: "assets/images/sleepquality.png",
+              matrixValue: '80',
+              color: lightGreen,
+            ),
+            ReportCategory(
+              onPressed: () {
+                controller.trackingList.isEmpty
+                    ? Get.snackbar(
+                        "Tidak dapat mengakses halaman",
+                        "Data tracking anda masih kosong. Silahkan melakukan tracking",
+                        backgroundColor: error.withOpacity(0.6),
+                        colorText: Colors.white,
+                      )
+                    : Get.toNamed(Routes.SLEEP_QUALITY, arguments: [
+                        controller.trackingList,
+                        controller.avgSleep
+                      ]);
+              },
+              title: "Sleep Quality",
+              description: "Status ${controller.avgSleep.value}",
+              image: "assets/images/moodSmile.png",
+              matrixValue: '80',
+              color: lightGreen,
+            ),
+            ReportCategory(
+              onPressed: () {
+                controller.trackingList.isEmpty
+                    ? Get.snackbar(
+                        "Tidak dapat mengakses halaman",
+                        "Data tracking anda masih kosong. Silahkan melakukan tracking",
+                        backgroundColor: error.withOpacity(0.6),
+                        colorText: Colors.white,
+                      )
+                    : Get.toNamed(Routes.SLEEP_QUALITY, arguments: [
+                        controller.trackingList,
+                        controller.avgSleep
+                      ]);
+              },
+              title: "Sleep Quality",
+              description: "Desc ${controller.avgSleep.value}",
+              image: "assets/images/sleepquality.png",
+              matrixValue: '80',
+              color: lightGreen,
             ),
             const SizedBox(
               height: 20,
@@ -165,13 +231,17 @@ class ReportCategory extends StatelessWidget {
   final Function onPressed;
   final String title;
   final String description;
+  final String matrixValue;
+  final Color color;
 
   const ReportCategory(
       {super.key,
       required this.onPressed,
       required this.title,
       required this.description,
-      required this.image});
+      required this.image,
+      required this.matrixValue,
+      required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +250,7 @@ class ReportCategory extends StatelessWidget {
       width: MediaQuery.sizeOf(context).width,
       height: 83,
       decoration: BoxDecoration(
-        color: const Color(0xFFBDCF99).withOpacity(0.2),
+        color: color,
         borderRadius: BorderRadius.circular(30),
         boxShadow: [
           BoxShadow(
@@ -231,7 +301,7 @@ class ReportCategory extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: h5Bold,
+                        style: h6Bold,
                       ),
                       Text(
                         description,
@@ -241,7 +311,21 @@ class ReportCategory extends StatelessWidget {
                   ),
                 ],
               ),
-              Container()
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/lingkaranMatrix.png',
+                    scale: 2,
+                  ),
+                  Text(
+                    matrixValue,
+                    style: h5Medium.copyWith(
+                      color: primaryColor,
+                    ),
+                  )
+                ],
+              )
             ],
           ),
         ),
