@@ -181,15 +181,15 @@ class HomeView extends GetView<ReportController> {
                         ),
                         Obx(
                           () => GestureDetector(
-                            onTap: () => Get.toNamed(Routes.REPORT),
+                            onTap: () => Get.toNamed(Routes.NEW_TRACKING),
                             child: MentalMatrix(
-                              color: lightPurple,
+                              color: lightGreen,
                               title: 'Sleep Quality',
                               detail:
                                   "Status ${reportController.avgSleep.value}",
                               icon: const Icon(Iconsax.math),
-                              iconColor: Colors.purple,
-                              image: "assets/images/sleepquality.png",
+                              iconColor: primaryColor,
+                              image: "assets/images/limiter.png",
                             ),
                           ),
                         ),
@@ -417,16 +417,11 @@ class HomeView extends GetView<ReportController> {
                                 itemBuilder: (BuildContext context, int i) {
                                   List journals = journalController.journalList;
                                   final journal = journals[i];
-
-                                  int emotionIndex = journalController.emotions
-                                      .indexOf(journal['mood_level']);
-                                  Color emotionColor = journalController
-                                      .emotionColors[emotionIndex];
                                   DateTime date =
                                       DateTime.parse(journals[i]['created_at']);
                                   return MyJournal(
-                                    type: journal['mood_level'] ?? 'Unknown',
-                                    colors: emotionColor,
+                                    type: 'Journal',
+                                    colors: primaryColor,
                                     title: journal['title'] ?? 'No Title',
                                     date: journalController.formatDate(date),
                                   );
@@ -507,7 +502,7 @@ class HomeView extends GetView<ReportController> {
                               judul: articles[index]["title"],
                               deskripsi: articles[index]["content"],
                               author: articles[index]["user"]["name"],
-                              image: articles[index]["image"],
+                              image: articles[index]["image"] ?? 'logo',
                             ),
                           );
                         },

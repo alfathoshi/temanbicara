@@ -67,6 +67,7 @@ class MentalMatrix extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Text("Your Mental Matrix", style: h7Regular,),
                     Text(
                       title,
                       style: h6SemiBold,

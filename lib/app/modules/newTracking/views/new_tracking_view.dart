@@ -403,7 +403,7 @@ class NewTrackingView extends GetView<NewTrackingController> {
               ),
               MyButton(
                   get: () {
-                    Get.offAllNamed(Routes.HOME);
+                    Get.offAllNamed(Routes.NAVIGATION_BAR);
                   },
                   color: primaryColor,
                   text: "Record")

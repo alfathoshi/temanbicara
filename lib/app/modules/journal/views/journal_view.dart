@@ -113,17 +113,11 @@ class JournalView extends GetView<JournalController> {
                     itemCount: controller.journalList.length,
                     itemBuilder: (context, index) {
                       final journal = controller.journalList[index];
-                      // int emotionIndex =
-                      //     controller.emotions.indexOf(journal['mood_level']);
-                      // Color emotionColor =
-                      //     controller.emotionColors[emotionIndex];
                       DateTime date = DateTime.parse(journal['created_at']);
                       return JournalCard(
                         title: journal['title'],
                         body: journal['body'],
-                        type: journal['title'] ?? '',
                         date: controller.formatDate(date),
-                        typeColor: whiteColor,
                         image: journal['image_url'] ?? '',
                         getDelete: () async {
                           Get.defaultDialog(
