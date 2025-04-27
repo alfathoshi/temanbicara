@@ -1,11 +1,15 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:temanbicara/app/data/consultPending.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
+import 'package:temanbicara/app/widgets/consult/order_details.dart';
+import 'package:temanbicara/app/widgets/transaction/idrFormatter.dart';
 
 class ConsultPendingCard extends StatelessWidget {
   final ConsultPending consultPending;
@@ -66,7 +70,7 @@ class ConsultPendingCard extends StatelessWidget {
                         style: h6Bold,
                       ),
                       Text(
-                        consultPending.waktu,
+                        consultPending.tanggal + " " + consultPending.waktu,
                         style: h6Bold,
                       ),
                     ],
@@ -131,16 +135,25 @@ class ConsultPendingCard extends StatelessWidget {
                         style: h6SemiBold.copyWith(color: grey2Color),
                       ),
                       Text(
-                        consultPending.totalHarga,
+                        CurrencyFormat.convertToIdr(
+                          int.parse(consultPending.totalHarga) + 15000 + 1000,
+                          2,
+                        ),
                         style: h6Bold,
                       ),
                     ],
                   ),
                   sby16,
                   MyButtonCustom(
-                    get: () {},
+                    get: () {
+                      Get.to(
+                        OrderDetails(
+                          consultPending: consultPending,
+                        ),
+                      );
+                    },
                     foreColor: whiteColor,
-                    backColor: Color(0xFFFC7070),
+                    backColor: primaryColor,
                     height: 40,
                     text: "Complete Payment",
                   ),

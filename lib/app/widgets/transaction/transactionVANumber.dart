@@ -7,9 +7,9 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 
-class Transactionvanumber extends StatelessWidget {
+class TransactionVaNumberBorder extends StatelessWidget {
   final String vaNumber;
-  const Transactionvanumber({
+  const TransactionVaNumberBorder({
     super.key,
     required this.vaNumber,
   });
@@ -58,6 +58,52 @@ class Transactionvanumber extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class TransactionVaNumber extends StatelessWidget {
+  final String vaNumber;
+  const TransactionVaNumber({
+    super.key,
+    required this.vaNumber,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () async {
+        await Clipboard.setData(ClipboardData(text: vaNumber));
+        Get.snackbar(
+          backgroundColor: primaryColor.withOpacity(0.6),
+          colorText: Colors.white,
+          "Copied!",
+          "VA Number copied to clipboard",
+        );
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "VA Number",
+            style: h7Bold.copyWith(color: grey2Color),
+          ),
+          sby8,
+          Row(
+            children: [
+              Text(
+                vaNumber,
+                style: h7SemiBold.copyWith(fontStyle: FontStyle.italic),
+              ),
+              sbX12,
+              Icon(
+                Icons.copy_all_rounded,
+                size: 15,
+              ),
+            ],
+          )
+        ],
       ),
     );
   }

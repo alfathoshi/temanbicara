@@ -11,44 +11,27 @@ import '../../../config/config.dart';
 class TransactionPaymentController extends GetxController {
   var isLoading = false.obs;
 
-  Future<void> updateScheduleStatus(int scheduleId) async {
-    final url = Uri.parse('${Config.apiEndPoint}/schedule/$scheduleId');
-    try {
-      final response = await http.put(url);
-      if (response.statusCode == 200) {
-        Get.snackbar(
-          'Success',
-          'Schedule booked successfully',
-          backgroundColor: primaryColor.withOpacity(0.6),
-          colorText: Colors.white,
-        );
-      } else {
-        Get.snackbar(
-          'Error',
-          'Failed to update schedule. Status code: ${response.statusCode}',
-        );
-      }
-    } catch (error) {
-      Get.snackbar('Error', 'Error updating schedule status: $error');
-    }
-  }
-
   Future<void> createConsultation({
     required int scheduleId,
     required int patientId,
+    required int amount,
+    required String bank,
+    String description = "-",
+    String problem = "-",
+    String summary = "-",
   }) async {
     final url = Uri.parse('${Config.apiEndPoint}/consultation');
     final box = GetStorage();
     final token = box.read('token');
+
     final Map<String, dynamic> body = {
-      'description': "-",
-      'problem': "-",
-      'summary': "-",
+      'description': description,
+      'problem': problem,
+      'summary': summary,
       'schedule_id': scheduleId,
-      'patient_id': patientId
+      'amount': amount,
+      'bank': bank,
     };
-    print('Sending request to: $url');
-    print('Request body: ${jsonEncode(body)}');
 
     try {
       final response = await http.post(
@@ -68,23 +51,29 @@ class TransactionPaymentController extends GetxController {
           colorText: Colors.white,
         );
       } else {
+        // Parse error message from response if possible
+        Map<String, dynamic> responseBody = {};
+        try {
+          responseBody = json.decode(response.body);
+        } catch (_) {}
+
+        String errorMessage = responseBody['message'] ??
+            'Failed to create consultation. Status code: ${response.statusCode}';
+
         Get.snackbar(
           'Error',
-          'Failed to create consultation. Status code: ${response.statusCode}',
+          errorMessage,
+          backgroundColor: Colors.red.withOpacity(0.6),
+          colorText: Colors.white,
         );
       }
     } catch (error) {
-      Get.snackbar('Error', 'Error creating consultation: $error');
-    }
-  }
-
-  Future<void> executeTransaction(int scheduleId, int patientId) async {
-    isLoading.value = true;
-    try {
-      await createConsultation(scheduleId: scheduleId, patientId: patientId);
-      await updateScheduleStatus(scheduleId);
-    } finally {
-      isLoading.value = false;
+      Get.snackbar(
+        'Error',
+        'Error creating consultation: $error',
+        backgroundColor: Colors.red.withOpacity(0.6),
+        colorText: Colors.white,
+      );
     }
   }
 }
