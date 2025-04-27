@@ -131,68 +131,6 @@ class CreateJournalView extends GetView<CreateJournalController> {
               const SizedBox(
                 height: 16,
               ),
-              Text(
-                'Stress Level',
-                style: h6SemiBold,
-              ),
-              Obx(
-                () => Column(
-                  children: [
-                    Slider(
-                      value: controller.sliderValue.value,
-                      divisions: 4,
-                      min: 0,
-                      max: 4,
-                      onChanged: (value) {
-                        controller.sliderValue.value = value;
-                      },
-                      activeColor: primaryColor,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        for (int i = 1; i <= 5; i++)
-                          Text(
-                            i.toString(),
-                            style: h6SemiBold,
-                          ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Text(
-                'Select Your Emotions',
-                style: h6SemiBold,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: List.generate(
-                  5,
-                  (index) {
-                    return GestureDetector(
-                      onTap: () {
-                        controller.toggleEmotion(index);
-                      },
-                      child: Obx(
-                        () => Opacity(
-                          opacity: controller.getOpacity(index),
-                          child: Image.asset(
-                            'assets/images/emosi${index + 1}.png',
-                            scale: 10,
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
               const SizedBox(
                 height: 32,
               ),

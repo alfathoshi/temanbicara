@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:temanbicara/app/config/config.dart';
+import 'package:get_storage/get_storage.dart';
 
 class ConsultController extends GetxController {
   var schedules = {}.obs;
@@ -11,6 +12,9 @@ class ConsultController extends GetxController {
 
   Future<void> fetchData() async {
     try {
+      // final userId = box.read('id');
+      final token = box.read('token');
+
       isLoading.value = true;
       final response = await http.get(
         Uri.parse('${Config.apiEndPoint}/available-schedule'),

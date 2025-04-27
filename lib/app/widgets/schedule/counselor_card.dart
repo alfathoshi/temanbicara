@@ -8,7 +8,7 @@ import 'package:temanbicara/app/themes/spaces.dart';
 class CounselorCard extends StatelessWidget {
   final String username;
   final String expertise;
-  final List schedule;
+  final String schedule;
   const CounselorCard(
       {super.key,
       required this.username,

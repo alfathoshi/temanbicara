@@ -1,7 +1,13 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:temanbicara/app/routes/app_pages.dart';
+import 'package:http/http.dart' as http;
+import 'package:temanbicara/app/themes/colors.dart';
+import '../../../config/config.dart';
 
 class NewTrackingController extends GetxController {
   var sliderValue = 0.0.obs;
@@ -9,6 +15,7 @@ class NewTrackingController extends GetxController {
   var selectedSleep = ''.obs;
   var selectedScreen = ''.obs;
   var selectedActivity = ''.obs;
+  final box = GetStorage();
 
   final List<String> emotions = [
     'Depresi',
@@ -168,5 +175,47 @@ class NewTrackingController extends GetxController {
             1,
             0,
           ]);
+  }
+
+  Future<void> storeTracking() async {
+    try {
+      final userId = box.read('id');
+      final token = box.read('token');
+
+      var response = await http.post(
+        Uri.parse('${Config.apiEndPoint}/do-tracking'),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({
+          'bed_time': selectedSleep.value,
+          'mood_level': selectedEmotion.value,
+          'stress_level': sliderValue.value.toInt(),
+          'screen_time': selectedScreen.value,
+          'activity': selectedActivity.value,
+        }),
+      );
+
+      print('Response Status Code: ${response.statusCode}');
+      print('Response Body: ${response.body}');
+      var data = json.decode(response.body);
+
+      if (response.statusCode == 200 && data['status']) {
+        Get.snackbar(
+          'Success',
+          'Tracking berhasil disimpan!',
+          backgroundColor: primaryColor,
+          colorText: Colors.white,
+        );
+        Get.offAllNamed('/navigation-bar');
+      } else {
+        Get.snackbar('Error', data['message'] ?? 'Gagal menyimpan tracking',
+            backgroundColor: Colors.red.withOpacity(0.6),
+            colorText: Colors.white);
+      }
+    } catch (e) {
+      print('Error storeTracking: $e');
+    }
   }
 }

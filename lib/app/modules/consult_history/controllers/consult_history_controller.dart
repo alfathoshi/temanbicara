@@ -10,14 +10,12 @@ class ConsultHistoryController extends GetxController {
 
   Future<Map<String, dynamic>> fetchData() async {
     final token = box.read('token');
-    final response = await http.get(
-        Uri.parse('${Config.apiEndPoint}/available-schedule'),
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json',
-        });
+    final response = await http
+        .get(Uri.parse('${Config.apiEndPoint}/available-schedule'), headers: {
+      'Authorization': 'Bearer $token',
+      'Content-Type': 'application/json',
+    });
     if (response.statusCode == 200) {
-      print(response.body);
       return json.decode(response.body);
     } else {
       throw Exception('Failed to load history');

@@ -9,9 +9,7 @@ import '../themes/fonts.dart';
 class JournalCard extends StatelessWidget {
   final String title;
   final String body;
-  final String type;
   final String date;
-  final Color typeColor;
   final String image;
   final Function()? getDelete;
   final Function()? getEdit;
@@ -20,11 +18,9 @@ class JournalCard extends StatelessWidget {
     Key? key,
     required this.title,
     required this.body,
-    required this.type,
     required this.date,
     this.getDelete,
     this.getEdit,
-    required this.typeColor,
     required this.image,
   }) : super(key: key);
 
@@ -44,7 +40,6 @@ class JournalCard extends StatelessWidget {
           ),
         ),
         width: double.infinity,
-        
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -81,30 +76,6 @@ class JournalCard extends StatelessWidget {
                 style: h7Regular,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
-                    width: 70,
-                    height: 20,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: typeColor,
-                    ),
-                    child: Center(
-                      child: Text(
-                        type,
-                        style: h7SemiBold.copyWith(
-                          color: whiteColor,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
             const Divider(),
             Padding(
               padding: const EdgeInsets.only(left: 8, right: 8),
@@ -128,21 +99,6 @@ class JournalCard extends StatelessWidget {
                         ),
                       ),
                       sbX12,
-                      TextButton(
-                          style: ButtonStyle(
-                            minimumSize: WidgetStatePropertyAll(Size(8, 8)),
-                            backgroundColor:
-                                WidgetStatePropertyAll(primaryColor),
-                          ),
-                          onPressed: () {
-                            getEdit?.call();
-                          },
-                          child: Text(
-                            'Edit',
-                            style: h7SemiBold.copyWith(
-                              color: whiteColor,
-                            ),
-                          )),
                     ],
                   )
                 ],

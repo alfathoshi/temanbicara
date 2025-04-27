@@ -68,8 +68,12 @@ class ConsultView extends GetView<ConsultController> {
                   },
                   child: CounselorCard(
                     username: filteredData[index]['name'],
-                    expertise: filteredData[index]['expertise'].join(", "),
-                    schedule: filteredData[index]['schedules'],
+                    expertise:
+                        (filteredData[index]['expertise'] as List).join(', '),
+                    schedule:
+                        (filteredData[index]['schedules'] as List).isNotEmpty
+                            ? filteredData[index]['schedules'][0]['date']
+                            : 'No schedule',
                   ),
                 );
               },

@@ -19,25 +19,7 @@ class CreateJournalController extends GetxController {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController bodyController = TextEditingController();
   final fetchController = Get.find<JournalController>();
-
-  var sliderValue = 0.0.obs;
-  var selectedEmotion = ''.obs;
   var pickedImage = Rx<File?>(null);
-  final List<String> emotions = [
-    'Depresi',
-    'Sedih',
-    'Netral',
-    'Senang',
-    'Bahagia'
-  ];
-
-  void toggleEmotion(int index) {
-    selectedEmotion.value = emotions[index];
-  }
-
-  double getOpacity(int index) {
-    return selectedEmotion.value == emotions[index] ? 1.0 : 0.5;
-  }
 
   Future<void> pickImage() async {
     var status = await Permission.photos.request();
@@ -63,13 +45,6 @@ class CreateJournalController extends GetxController {
       return;
     }
 
-    if (selectedEmotion.isEmpty) {
-      Get.snackbar('Error', 'Please select your emotion',
-          backgroundColor: Colors.red.withOpacity(0.6),
-          colorText: Colors.white);
-      return;
-    }
-
     try {
       final userId = box.read('id');
       final token = box.read('token');
@@ -81,11 +56,7 @@ class CreateJournalController extends GetxController {
 
       request.fields['title'] = titleController.text;
       request.fields['body'] = bodyController.text;
-      request.fields['stress_level'] =
-          (sliderValue.value + 1).toInt().toString();
-      request.fields['mood_level'] = selectedEmotion.value;
-
-      // Kalau ada image
+      
       if (pickedImage.value != null) {
         request.files.add(await http.MultipartFile.fromPath(
           'image',
@@ -98,8 +69,7 @@ class CreateJournalController extends GetxController {
       if (response.statusCode == 200) {
         titleController.clear();
         bodyController.clear();
-        sliderValue.value = 0;
-        selectedEmotion.value = '';
+
         pickedImage.value = null;
         fetchController.fetchJournals();
         Get.back();
