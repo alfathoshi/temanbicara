@@ -38,6 +38,7 @@ class HomeView extends GetView<ReportController> {
           await Future.wait([
             _controller.fetchData(),
             journalController.fetchJournals(),
+            reportController.checkTracking()
           ]);
         },
         child: CustomScrollView(slivers: [
@@ -179,51 +180,33 @@ class HomeView extends GetView<ReportController> {
                         const SizedBox(
                           height: 16,
                         ),
+                        const SizedBox(
+                          height: 16,
+                        ),
                         Obx(
                           () => GestureDetector(
-                            onTap: () => Get.toNamed(Routes.NEW_TRACKING),
+                            onTap: () {
+                              if (controller.isTrackingFilled.value) {
+                                Get.toNamed(Routes.REPORT);
+                              } else {
+                                Get.toNamed(Routes.NEW_TRACKING);
+                              }
+                            },
                             child: MentalMatrix(
                               color: lightGreen,
-                              title: 'Sleep Quality',
-                              detail:
-                                  "Status ${reportController.avgSleep.value}",
-                              icon: const Icon(Iconsax.math),
                               iconColor: primaryColor,
-                              image: "assets/images/limiter.png",
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        Obx(
-                          () => GestureDetector(
-                            onTap: () => Get.toNamed(Routes.REPORT),
-                            child: MentalMatrix(
-                              color: lightBlue,
-                              title: 'Stress Level',
-                              detail:
-                                  "Level ${reportController.avgStress.value.toString()}",
-                              icon: Icon(Iconsax.math),
-                              iconColor: Colors.lightBlue,
-                              image: "assets/images/stresslevel.png",
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        Obx(
-                          () => GestureDetector(
-                            onTap: () => Get.toNamed(Routes.REPORT),
-                            child: MentalMatrix(
-                              color: lightYellow,
-                              title: 'Mood Tracker',
-                              detail:
-                                  "Status ${reportController.avgMood.value}",
-                              icon: Icon(Iconsax.math),
-                              iconColor: Colors.yellow,
-                              image: "assets/images/moodtracker.png",
+                              icon: Icon(Icons.edit),
+                              image: 'assets/images/limiter.png',
+                              title: controller.title.value.isNotEmpty
+                                  ? controller.title.value
+                                  : '',
+                              detail: controller.detail.value.isNotEmpty
+                                  ? controller.detail.value
+                                  : 'Complete your tracking to see your mental matrix.',
+                              matrixValue: controller.isTrackingFilled.value
+                                  ? controller.matrixValue.value
+                                  : '',
+                              isFilled: controller.isTrackingFilled.value,
                             ),
                           ),
                         ),
@@ -401,7 +384,7 @@ class HomeView extends GetView<ReportController> {
                             return Center(child: CircularProgressIndicator());
                           } else if (journalController.journalList.isEmpty) {
                             return Center(
-                              child: Text("No Data Available"),
+                              child: Text("No Journal Available"),
                             );
                           } else {
                             return Container(

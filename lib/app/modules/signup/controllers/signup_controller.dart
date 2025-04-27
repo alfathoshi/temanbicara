@@ -62,7 +62,7 @@ class SignupController extends GetxController {
             backgroundColor: error.withOpacity(0.6), colorText: whiteColor);
       }
     } catch (e) {
-      Get.snackbar('Error', 'Something went wrong: $e');
+      print(e);
     } finally {
       isLoading.value = false;
     }

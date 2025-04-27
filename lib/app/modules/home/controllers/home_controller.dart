@@ -26,7 +26,7 @@ class HomeController extends GetxController {
       );
       if (response.statusCode == 200) {
         articles.value = json.decode(response.body);
-      } 
+      }
       // else {
       //   throw Exception('Failed to load schedule');
       // }

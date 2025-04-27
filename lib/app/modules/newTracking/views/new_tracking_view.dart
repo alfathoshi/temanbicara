@@ -83,7 +83,7 @@ class NewTrackingView extends GetView<NewTrackingController> {
                                           'assets/images/emosi${index + 1}.png',
                                           scale: 10),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 8,
                                     ),
                                     ColorFiltered(
@@ -110,7 +110,7 @@ class NewTrackingView extends GetView<NewTrackingController> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               Container(
@@ -172,7 +172,7 @@ class NewTrackingView extends GetView<NewTrackingController> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               Container(
@@ -223,7 +223,7 @@ class NewTrackingView extends GetView<NewTrackingController> {
                                           'assets/images/sleep${index + 1}.png',
                                           scale: 2),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 8,
                                     ),
                                     ColorFiltered(
@@ -250,7 +250,7 @@ class NewTrackingView extends GetView<NewTrackingController> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               Container(
@@ -302,7 +302,7 @@ class NewTrackingView extends GetView<NewTrackingController> {
                                         scale: 2,
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 8,
                                     ),
                                     Text('${controller.ScreenTime[index]}',
@@ -324,7 +324,7 @@ class NewTrackingView extends GetView<NewTrackingController> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               Container(
@@ -376,7 +376,7 @@ class NewTrackingView extends GetView<NewTrackingController> {
                                         scale: 2,
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 8,
                                     ),
                                     Text('${controller.Activity[index]}',
@@ -398,12 +398,12 @@ class NewTrackingView extends GetView<NewTrackingController> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               MyButton(
                   get: () {
-                    Get.offAllNamed(Routes.NAVIGATION_BAR);
+                    controller.storeTracking();
                   },
                   color: primaryColor,
                   text: "Record")

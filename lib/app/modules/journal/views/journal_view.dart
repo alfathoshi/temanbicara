@@ -135,15 +135,6 @@ class JournalView extends GetView<JournalController> {
                               },
                               onCancel: () => Get.back());
                         },
-                        getEdit: () {
-                          Get.toNamed(Routes.EDIT_JOURNAL, arguments: {
-                            'id': journal['journal_id'],
-                            'title': journal['title'],
-                            'body': journal['body'],
-                            'stress_level': journal['stress_level'],
-                            'mood_level': journal['mood_level'],
-                          });
-                        },
                       );
                     },
                   );

@@ -241,6 +241,7 @@ class ReportCategory extends StatelessWidget {
                   ),
                 ],
               ),
+              Container()
             ],
           ),
         ),

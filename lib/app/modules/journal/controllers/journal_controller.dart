@@ -41,8 +41,7 @@ class JournalController extends GetxController {
       final token = box.read('token');
 
       var response = await http.get(
-        Uri.parse('${Config.apiEndPoint}/journal')
-            .replace(queryParameters: {
+        Uri.parse('${Config.apiEndPoint}/journal').replace(queryParameters: {
           'id': userId.toString(),
         }),
         headers: {
@@ -58,12 +57,7 @@ class JournalController extends GetxController {
         }
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        colorText: whiteColor,
-        backgroundColor: error.withOpacity(0.6),
-      );
+      print(e);
     } finally {
       isLoading.value = false;
     }
@@ -111,12 +105,7 @@ class JournalController extends GetxController {
         );
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        colorText: whiteColor,
-        backgroundColor: error.withOpacity(0.6),
-      );
+      print(e);
     }
   }
 

@@ -99,21 +99,6 @@ class JournalCard extends StatelessWidget {
                         ),
                       ),
                       sbX12,
-                      TextButton(
-                          style: ButtonStyle(
-                            minimumSize: WidgetStatePropertyAll(Size(8, 8)),
-                            backgroundColor:
-                                WidgetStatePropertyAll(primaryColor),
-                          ),
-                          onPressed: () {
-                            getEdit?.call();
-                          },
-                          child: Text(
-                            'Edit',
-                            style: h7SemiBold.copyWith(
-                              color: whiteColor,
-                            ),
-                          )),
                     ],
                   )
                 ],
