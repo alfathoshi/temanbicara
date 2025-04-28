@@ -344,3 +344,9 @@ TextStyle ConsultOptionTap = GoogleFonts.poppins(
   color: whiteColor,
   fontSize: 16,
 );
+
+TextStyle TrackingText = GoogleFonts.poppins(
+  fontWeight: FontWeight.w600,
+  color: black,
+  fontSize: 10,
+);

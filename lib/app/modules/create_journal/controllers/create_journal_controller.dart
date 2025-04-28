@@ -1,11 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'dart:convert';
 
 import 'package:temanbicara/app/themes/colors.dart';
 
+import '../../../config/config.dart';
 import '../../journal/controllers/journal_controller.dart';
 
 class CreateJournalController extends GetxController {
@@ -14,23 +19,22 @@ class CreateJournalController extends GetxController {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController bodyController = TextEditingController();
   final fetchController = Get.find<JournalController>();
+  var pickedImage = Rx<File?>(null);
 
-  var sliderValue = 0.0.obs;
-  var selectedEmotion = ''.obs;
-  final List<String> emotions = [
-    'Depresi',
-    'Sedih',
-    'Netral',
-    'Senang',
-    'Bahagia'
-  ];
+  Future<void> pickImage() async {
+    var status = await Permission.photos.request();
+    // if (!status.isGranted) {
+    //   Get.snackbar('Permission Denied', 'Gallery access is required');
+    //   return;
+    // }
 
-  void toggleEmotion(int index) {
-    selectedEmotion.value = emotions[index];
-  }
-
-  double getOpacity(int index) {
-    return selectedEmotion.value == emotions[index] ? 1.0 : 0.5;
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      pickedImage.value = File(pickedFile.path);
+    } else {
+      Get.snackbar('Cancelled', 'No image selected');
+    }
   }
 
   Future<void> submitJournal() async {
@@ -41,55 +45,41 @@ class CreateJournalController extends GetxController {
       return;
     }
 
-    if (selectedEmotion.isEmpty) {
-      Get.snackbar('Error', 'Please select your emotion',
-          backgroundColor: Colors.red.withOpacity(0.6),
-          colorText: Colors.white);
-      return;
-    }
-
     try {
       final userId = box.read('id');
-
       final token = box.read('token');
 
-      final response = await http.post(
-        Uri.parse('https://www.temanbicara.web.id/api/v1/journal'),
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json',
-        },
-        body: jsonEncode({
-          'title': titleController.text,
-          'body': bodyController.text,
-          'stress_level': sliderValue.value + 1,
-          'mood_level': selectedEmotion.value,
-          'user_id': userId,
-        }),
-      );
+      var uri = Uri.parse('${Config.apiEndPoint}/journal');
+      var request = http.MultipartRequest('POST', uri);
+
+      request.headers['Authorization'] = 'Bearer $token';
+
+      request.fields['title'] = titleController.text;
+      request.fields['body'] = bodyController.text;
+      
+      if (pickedImage.value != null) {
+        request.files.add(await http.MultipartFile.fromPath(
+          'image',
+          pickedImage.value!.path,
+        ));
+      }
+
+      var response = await request.send();
 
       if (response.statusCode == 200) {
-        final responseData = jsonDecode(response.body);
-        if (responseData['status']) {
-          titleController.clear();
-          bodyController.clear();
-          sliderValue.value = 0;
-          selectedEmotion.value = '';
-          Get.back();
-          fetchController.fetchJournals();
-          Get.snackbar('Success', 'Journal created successfully',
-              backgroundColor: primaryColor.withOpacity(0.6),
-              colorText: Colors.white);
-        } else {
-          Get.snackbar(
-              'Error', responseData['message'] ?? 'Failed to created journal');
-        }
+        titleController.clear();
+        bodyController.clear();
+
+        pickedImage.value = null;
+        fetchController.fetchJournals();
+        Get.back();
+        Get.snackbar('Success', 'Journal created successfully',
+            backgroundColor: primaryColor.withOpacity(0.6),
+            colorText: Colors.white);
       } else {
-        print(response.body);
-        var errorData = jsonDecode(response.body);
-        print(errorData);
-        Get.snackbar(
-            'Error', errorData['message'] ?? 'Failed to create journal');
+        var body = await response.stream.bytesToString();
+        print(body);
+        Get.snackbar('Error', 'Failed to create journal');
       }
     } catch (e) {
       print(e);

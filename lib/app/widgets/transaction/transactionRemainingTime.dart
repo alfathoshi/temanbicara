@@ -38,7 +38,7 @@ class TransactionRemainingTime extends StatelessWidget {
                     Duration(
                       days: 0,
                       hours: 0,
-                      minutes: 0,
+                      minutes: 10,
                       seconds: 10,
                     ),
                   ),

@@ -133,7 +133,7 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                       },
                     ),
                     sby24,
-                    Transactionvanumber(
+                    TransactionVaNumberBorder(
                       vaNumber: '09128120371937',
                     ),
                     sby12,
@@ -193,9 +193,11 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                                 ),
                                 barrierDismissible: false,
                               );
-                              await controller.executeTransaction(
-                                transaction.selectedID,
-                                userID,
+                              await controller.createConsultation(
+                                scheduleId: transaction.selectedID,
+                                patientId: userID,
+                                amount: transaction.harga,
+                                bank: paymentMethod!,
                               );
 
                               if (!controller.isLoading.value) {

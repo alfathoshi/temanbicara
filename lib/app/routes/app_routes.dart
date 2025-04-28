@@ -58,7 +58,7 @@ abstract class Routes {
   static const FORGOT_PASSWORD = _Paths.FORGOT_PASSWORD;
 
   static const BOOKING_HISTORY = _Paths.BOOKING_HISTORY;
-
+  static const NEW_TRACKING = _Paths.NEW_TRACKING;
 }
 
 abstract class _Paths {
@@ -116,4 +116,5 @@ abstract class _Paths {
   static const VERIFY_OTP = '/verify-otp';
   static const FORGOT_PASSWORD = '/forgot-password';
   static const BOOKING_HISTORY = '/booking-history';
+  static const NEW_TRACKING = '/new-tracking';
 }

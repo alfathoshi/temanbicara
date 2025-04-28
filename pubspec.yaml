@@ -36,6 +36,8 @@ dependencies:
   syncfusion_flutter_datepicker: ^27.1.53
   table_calendar: ^3.1.2
   timeline_tile: ^2.0.0
+  firebase_messaging: ^15.1.5
+  flutter_local_notifications: ^18.0.1
   uuid: ^4.5.1
 
 dev_dependencies:

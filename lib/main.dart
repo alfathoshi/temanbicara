@@ -6,6 +6,8 @@ import 'app/routes/app_pages.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 void main() async {
   Gemini.init(apiKey: googleAPI);
   WidgetsFlutterBinding.ensureInitialized();

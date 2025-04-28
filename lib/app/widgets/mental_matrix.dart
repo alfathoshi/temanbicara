@@ -10,14 +10,19 @@ class MentalMatrix extends StatelessWidget {
   final String title;
   final String detail;
   final String image;
+  final String matrixValue;
+  final bool isFilled;
+
   const MentalMatrix({
     super.key,
     required this.color,
-    required this.detail,
-    required this.title,
-    required this.icon,
     required this.iconColor,
+    required this.icon,
+    required this.title,
+    required this.detail,
     required this.image,
+    required this.matrixValue,
+    required this.isFilled,
   });
 
   @override
@@ -28,7 +33,7 @@ class MentalMatrix extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: border,
-              offset: const Offset(0, 1),
+              offset: Offset(0, 1),
               blurRadius: 2,
             ),
           ],
@@ -42,7 +47,7 @@ class MentalMatrix extends StatelessWidget {
         height: 83,
         width: MediaQuery.sizeOf(context).width,
         child: Padding(
-          padding: const EdgeInsets.only(left: 28.0, right: 28),
+          padding: const EdgeInsets.symmetric(horizontal: 18.0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -51,7 +56,6 @@ class MentalMatrix extends StatelessWidget {
                 height: 53,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(18),
-                  border: Border.all(color: Colors.black26),
                   color: iconColor,
                 ),
                 child: Image.asset(
@@ -59,29 +63,60 @@ class MentalMatrix extends StatelessWidget {
                   scale: 1.5,
                 ),
               ),
-              const SizedBox(
-                width: 16,
-              ),
+              const SizedBox(width: 16),
               Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      title,
-                      style: h6SemiBold,
+                  child: isFilled
+                      ? Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Your Mental Matrix",
+                              style: h7Regular,
+                            ),
+                            Text(
+                              title,
+                              style: h6SemiBold,
+                            ),
+                            Text(
+                              detail,
+                              style: h7Regular,
+                            ),
+                          ],
+                        )
+                      : Text(
+                          'Isi kondisi kesehatan \nmentalmu hari ini',
+                          style:
+                              h7Regular.copyWith(fontWeight: FontWeight.w600),
+                        )),
+              isFilled
+                  ? Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Image.asset(
+                          'assets/images/lingkaranMatrix.png',
+                          scale: 2,
+                        ),
+                        Text(
+                          matrixValue,
+                          style: h5Medium.copyWith(
+                            color: primaryColor,
+                          ),
+                        )
+                      ],
+                    )
+                  : Container(
+                      width: 53,
+                      height: 53,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(18),
+                        color: iconColor,
+                      ),
+                      child: Image.asset(
+                        'assets/images/pencil.png',
+                        scale: 2,
+                      ),
                     ),
-                    Text(
-                      detail,
-                      style: h6Regular,
-                    ),
-                  ],
-                ),
-              ),
-              const Icon(
-                Icons.chevron_right_rounded,
-                size: 25,
-              ),
             ],
           ),
         ),

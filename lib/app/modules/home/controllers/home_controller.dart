@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:temanbicara/app/modules/profile/controllers/profile_controller.dart';
 
+import '../../../config/config.dart';
 import '../../journal/controllers/journal_controller.dart';
 
 class HomeController extends GetxController {
@@ -19,7 +20,7 @@ class HomeController extends GetxController {
     try {
       isLoading.value = true;
       final response = await http.get(
-        Uri.parse('https://www.temanbicara.web.id/api/v1/article'),
+        Uri.parse('${Config.apiEndPoint}/article'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -27,9 +28,10 @@ class HomeController extends GetxController {
       );
       if (response.statusCode == 200) {
         articles.value = json.decode(response.body);
-      } else {
-        throw Exception('Failed to load schedule');
       }
+      // else {
+      //   throw Exception('Failed to load schedule');
+      // }
     } catch (e) {
       Get.snackbar('Error', e.toString());
     } finally {

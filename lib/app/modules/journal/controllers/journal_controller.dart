@@ -7,29 +7,31 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 
+import '../../../config/config.dart';
+
 class JournalController extends GetxController {
   final box = GetStorage();
   var isLoading = false.obs;
   var journalList = [].obs;
-  final List<String> emotions = [
-    'Depresi',
-    'Sedih',
-    'Netral',
-    'Senang',
-    'Bahagia'
-  ];
+  // final List<String> emotions = [
+  //   'Depresi',
+  //   'Sedih',
+  //   'Netral',
+  //   'Senang',
+  //   'Bahagia'
+  // ];
 
   String formatDate(DateTime dateTime) {
     return DateFormat('yyyy-MM-dd HH:mm').format(dateTime);
   }
 
-  final List<Color> emotionColors = [
-    Colors.purpleAccent,
-    Colors.lightGreen,
-    Colors.yellow,
-    Colors.orange,
-    Colors.redAccent,
-  ];
+  // final List<Color> emotionColors = [
+  //   Colors.purpleAccent,
+  //   Colors.lightGreen,
+  //   Colors.yellow,
+  //   Colors.orange,
+  //   Colors.redAccent,
+  // ];
 
   Future<void> fetchJournals() async {
     isLoading.value = true;
@@ -39,8 +41,7 @@ class JournalController extends GetxController {
       final token = box.read('token');
 
       var response = await http.get(
-        Uri.parse('https://www.temanbicara.web.id/api/v1/journal')
-            .replace(queryParameters: {
+        Uri.parse('${Config.apiEndPoint}/journal').replace(queryParameters: {
           'id': userId.toString(),
         }),
         headers: {
@@ -53,22 +54,10 @@ class JournalController extends GetxController {
         var data = json.decode(response.body);
         if (data['status']) {
           journalList.value = data['data'];
-        } else {
-          Get.snackbar(
-            'Error',
-            data['message'],
-            colorText: whiteColor,
-            backgroundColor: error.withOpacity(0.6),
-          );
         }
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        colorText: whiteColor,
-        backgroundColor: error.withOpacity(0.6),
-      );
+      print(e);
     } finally {
       isLoading.value = false;
     }
@@ -80,7 +69,7 @@ class JournalController extends GetxController {
       print("Token: $token");
 
       var response = await http.delete(
-        Uri.parse('https://www.temanbicara.web.id/api/v1/journal/$journalId'),
+        Uri.parse('${Config.apiEndPoint}/journal/$journalId'),
         headers: {
           'Authorization': 'Bearer $token',
         },
@@ -116,12 +105,7 @@ class JournalController extends GetxController {
         );
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        colorText: whiteColor,
-        backgroundColor: error.withOpacity(0.6),
-      );
+      print(e);
     }
   }
 

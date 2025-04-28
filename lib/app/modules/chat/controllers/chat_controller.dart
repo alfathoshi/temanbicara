@@ -4,6 +4,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 
+import '../../../config/config.dart';
+
 class ChatController extends GetxController {
   final listChat = [].obs;
   GetStorage box = GetStorage();
@@ -11,7 +13,7 @@ class ChatController extends GetxController {
   Future<Map<String, dynamic>> fetchData() async {
     final response = await http.get(
       Uri.parse(
-        'https://www.temanbicara.web.id/api/v1/consultation-user',
+        "${Config.apiEndPoint}/consultation-user",
       ),
       headers: {
         'Content-Type': 'application/json',

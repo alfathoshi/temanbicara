@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../config/config.dart';
+
 class ChangePasswordController extends GetxController {
   final box = GetStorage();
   final TextEditingController oldPassController = TextEditingController();
@@ -21,7 +23,7 @@ class ChangePasswordController extends GetxController {
       final token = box.read('token');
 
       final response = await http.patch(
-        Uri.parse('https://www.temanbicara.web.id/api/v1/change-password'),
+        Uri.parse('${Config.apiEndPoint}/change-password'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',

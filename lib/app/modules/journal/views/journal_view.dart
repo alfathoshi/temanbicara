@@ -11,7 +11,8 @@ import '../../../themes/fonts.dart';
 import '../controllers/journal_controller.dart';
 
 class JournalView extends GetView<JournalController> {
-  const JournalView({super.key});
+  JournalView({super.key});
+  final JournalController controller = Get.put(JournalController());
 
   @override
   Widget build(BuildContext context) {
@@ -112,17 +113,12 @@ class JournalView extends GetView<JournalController> {
                     itemCount: controller.journalList.length,
                     itemBuilder: (context, index) {
                       final journal = controller.journalList[index];
-                      int emotionIndex =
-                          controller.emotions.indexOf(journal['mood_level']);
-                      Color emotionColor =
-                          controller.emotionColors[emotionIndex];
                       DateTime date = DateTime.parse(journal['created_at']);
                       return JournalCard(
                         title: journal['title'],
                         body: journal['body'],
-                        type: journal['mood_level'],
                         date: controller.formatDate(date),
-                        typeColor: emotionColor,
+                        image: journal['image_url'] ?? '',
                         getDelete: () async {
                           Get.defaultDialog(
                               backgroundColor: whiteColor,
@@ -138,15 +134,6 @@ class JournalView extends GetView<JournalController> {
                                 controller.fetchJournals();
                               },
                               onCancel: () => Get.back());
-                        },
-                        getEdit: () {
-                          Get.toNamed(Routes.EDIT_JOURNAL, arguments: {
-                            'id': journal['journal_id'],
-                            'title': journal['title'],
-                            'body': journal['body'],
-                            'stress_level': journal['stress_level'],
-                            'mood_level': journal['mood_level'],
-                          });
                         },
                       );
                     },

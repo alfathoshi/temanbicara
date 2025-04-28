@@ -67,6 +67,8 @@ import '../modules/mood_tracker/bindings/mood_tracker_binding.dart';
 import '../modules/mood_tracker/views/mood_tracker_view.dart';
 import '../modules/navigation_bar/bindings/navigation_bar_binding.dart';
 import '../modules/navigation_bar/views/navigation_bar_view.dart';
+import '../modules/newTracking/bindings/new_tracking_binding.dart';
+import '../modules/newTracking/views/new_tracking_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/report/bindings/report_binding.dart';
@@ -350,6 +352,11 @@ class AppPages {
       name: _Paths.BOOKING_HISTORY,
       page: () => const BookingHistoryView(),
       binding: BookingHistoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.NEW_TRACKING,
+      page: () => const NewTrackingView(),
+      binding: NewTrackingBinding(),
     ),
   ];
 }

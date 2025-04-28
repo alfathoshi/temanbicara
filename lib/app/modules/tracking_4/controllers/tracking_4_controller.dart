@@ -7,18 +7,18 @@ import 'package:http/http.dart' as http;
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 
+import '../../../config/config.dart';
+
 class Tracking4Controller extends GetxController {
   final box = GetStorage();
 
   Future<void> storedTracking() async {
     try {
       final userId = box.read('id');
-      print("ppk ${userId}");
       final token = box.read('token');
-      print("token  ${token}");
 
       var response = await http.post(
-        Uri.parse('https://www.temanbicara.web.id/api/v1/do-tracking'),
+        Uri.parse('${Config.apiEndPoint}/do-tracking'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
@@ -52,23 +52,7 @@ class Tracking4Controller extends GetxController {
             colorText: Colors.white);
       }
     } catch (e) {
-      Get.snackbar('Error', 'Something went wrong: $e');
       print(e);
     }
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
   }
 }

@@ -51,13 +51,14 @@ class ScheduleList extends StatelessWidget {
     final controller =
         Get.put(ScheduleController(onSelectionChanged: onSelectionChanged));
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
 
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Colors.white,
       ),
-      height: 350,
+      height: screenHeight * 0.48,
       child: ListView.builder(
         itemCount: schedule.length,
         itemBuilder: (BuildContext context, int index) {
@@ -116,7 +117,7 @@ class ScheduleList extends StatelessWidget {
                                 },
                                 child: Container(
                                   margin: EdgeInsets.only(
-                                      right: screenWidth / 2.2, bottom: 10),
+                                      right: screenWidth / 2.1, bottom: 10),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(50),
                                     border: Border.all(

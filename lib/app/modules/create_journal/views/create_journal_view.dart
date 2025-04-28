@@ -15,7 +15,7 @@ class CreateJournalView extends GetView<CreateJournalController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         toolbarHeight: 85,
         backgroundColor: whiteColor,
@@ -31,59 +31,25 @@ class CreateJournalView extends GetView<CreateJournalController> {
         centerTitle: true,
       ),
       backgroundColor: whiteColor,
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Journal Title',
-              style: h6SemiBold,
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            TextField(
-              controller: controller.titleController,
-              cursorColor: black,
-              decoration: InputDecoration(
-                prefixIcon: const Icon(Iconsax.document),
-                hintText: 'Add your stroy...',
-                hintStyle: h5Regular.copyWith(color: grey2Color),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                    color: greyColor,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(color: primaryColor),
-                ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Journal Title',
+                style: h6SemiBold,
               ),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Text(
-              'Write Your Entry',
-              style: h6SemiBold,
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            SizedBox(
-              height: 200,
-              width: double.infinity,
-              child: TextField(
-                controller: controller.bodyController,
-                textAlignVertical: TextAlignVertical.top,
-                keyboardType: TextInputType.text,
-                expands: true,
-                maxLines: null,
+              const SizedBox(
+                height: 16,
+              ),
+              TextField(
+                controller: controller.titleController,
                 cursorColor: black,
                 decoration: InputDecoration(
-                  hintText: 'Write your day here...',
+                  prefixIcon: const Icon(Iconsax.document),
+                  hintText: 'Add your stroy...',
                   hintStyle: h5Regular.copyWith(color: grey2Color),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -97,77 +63,78 @@ class CreateJournalView extends GetView<CreateJournalController> {
                   ),
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Text(
-              'Stress Level',
-              style: h6SemiBold,
-            ),
-            Obx(
-              () => Column(
-                children: [
-                  Slider(
-                    value: controller.sliderValue.value,
-                    divisions: 4,
-                    min: 0,
-                    max: 4,
-                    onChanged: (value) {
-                      controller.sliderValue.value = value;
-                    },
-                    activeColor: primaryColor,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      for (int i = 1; i <= 5; i++)
-                        Text(
-                          i.toString(),
-                          style: h6SemiBold,
-                        ),
-                    ],
-                  )
-                ],
+              const SizedBox(
+                height: 16,
               ),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Text(
-              'Select Your Emotions',
-              style: h6SemiBold,
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: List.generate(
-                5,
-                (index) {
-                  return GestureDetector(
-                    onTap: () {
-                      controller.toggleEmotion(index);
-                    },
-                    child: Obx(
-                      () => Opacity(
-                        opacity: controller.getOpacity(index),
-                        child: Image.asset(
-                          'assets/images/emosi${index + 1}.png',
-                          scale: 10,
-                        ),
+              Text(
+                'Write Your Entry',
+                style: h6SemiBold,
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              SizedBox(
+                height: 200,
+                width: double.infinity,
+                child: TextField(
+                  controller: controller.bodyController,
+                  textAlignVertical: TextAlignVertical.top,
+                  keyboardType: TextInputType.text,
+                  expands: true,
+                  maxLines: null,
+                  cursorColor: black,
+                  decoration: InputDecoration(
+                    hintText: 'Write your day here...',
+                    hintStyle: h5Regular.copyWith(color: grey2Color),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: const BorderSide(
+                        color: greyColor,
                       ),
                     ),
-                  );
-                },
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: primaryColor),
+                    ),
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Expanded(
-              child: Center(
+              const SizedBox(
+                height: 16,
+              ),
+              Text(
+                'Upload Image',
+                style: h6SemiBold,
+              ),
+              const SizedBox(height: 8),
+              Obx(() {
+                return GestureDetector(
+                  onTap: () {
+                    controller.pickImage();
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 150,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: greyColor),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: controller.pickedImage.value != null
+                        ? Image.file(controller.pickedImage.value!,
+                            fit: BoxFit.cover)
+                        : Center(
+                            child: Icon(Icons.add_a_photo,
+                                size: 40, color: grey2Color)),
+                  ),
+                );
+              }),
+              const SizedBox(
+                height: 16,
+              ),
+              const SizedBox(
+                height: 32,
+              ),
+              Center(
                 child: WideButton(
                   get: () {
                     controller.submitJournal();
@@ -177,9 +144,9 @@ class CreateJournalView extends GetView<CreateJournalController> {
                   color: primaryColor,
                   text: 'Create Journal',
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
