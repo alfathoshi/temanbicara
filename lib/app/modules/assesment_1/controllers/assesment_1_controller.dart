@@ -12,7 +12,7 @@ enum Gender { none, male, female }
 
 class Assesment1Controller extends GetxController {
   final DatePickerController dateController = Get.put(DatePickerController());
-  
+
   TextEditingController nameC = TextEditingController();
   TextEditingController nicknameC = TextEditingController();
 
@@ -22,8 +22,6 @@ class Assesment1Controller extends GetxController {
   void toggleGender(Gender gender) {
     selectedGender.value = gender;
   }
-
- 
 
   var selectedMBTI = ''.obs;
   void setMBTI(String mbti) {
@@ -99,11 +97,14 @@ class Assesment1Controller extends GetxController {
       }
       box.write('mbti', selectedMBTI.value);
       String topics = favoriteTopics.join(',');
-      box.write('topic', topics);
+
+      box.write('topics', topics);
+
       String formattedDate =
           DateFormat('yyyy-MM-dd').format(dateController.selectedDate.value);
       box.write('birthdate', formattedDate);
-      print(box.read('birthdate'));
+
+      print(box.read('topics'));
 
       Get.toNamed(Routes.ASSESMENT_2);
     } else {

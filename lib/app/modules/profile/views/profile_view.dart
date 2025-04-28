@@ -1,8 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
@@ -13,8 +17,10 @@ import '../controllers/profile_controller.dart';
 class ProfileView extends GetView<ProfileController> {
   ProfileView({super.key});
   final box = GetStorage();
+
   @override
   Widget build(BuildContext context) {
+    Get.put(ProfileController());
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: whiteColor,
@@ -50,12 +56,13 @@ class ProfileView extends GetView<ProfileController> {
                         ),
                         child: IconButton(
                           icon: Icon(
-                            Icons.edit,
+                            Icons.camera_alt,
                             size: 16,
                             color: whiteColor,
                           ),
-                          onPressed: () {
-                            Get.toNamed(Routes.EDIT_PROFILE);
+                          onPressed: () async {
+                            await controller.pickImage();
+                            await controller.changeImage();
                           },
                         ),
                       ),
@@ -63,7 +70,7 @@ class ProfileView extends GetView<ProfileController> {
                   ),
                   sby12,
                   Text(
-                    box.read('nickname') ?? "Astro",
+                    box.read('name') ?? "Astro",
                     style: h3Bold,
                   ),
                 ],
@@ -103,6 +110,8 @@ class ProfileView extends GetView<ProfileController> {
                           sby16,
                           GestureDetector(
                             onTap: () {
+                              var box = GetStorage();
+                              print(box.read('email'));
                               Get.toNamed(Routes.EDIT_PROFILE);
                             },
                             child: Row(

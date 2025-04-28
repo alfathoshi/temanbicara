@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:temanbicara/app/modules/profile/controllers/profile_controller.dart';
 
 import '../../../config/config.dart';
 import '../../journal/controllers/journal_controller.dart';
@@ -12,6 +13,7 @@ class HomeController extends GetxController {
   var isLoading = false.obs;
   var journals = {}.obs;
   var articles = {}.obs;
+  RxString name = ''.obs;
 
   Future<void> fetchData() async {
     final token = box.read('token');
@@ -38,9 +40,8 @@ class HomeController extends GetxController {
   }
 
   @override
-  void onInit() {
-    // TODO: implement onInit
+  void onInit() async {
+    await ProfileController().fetchData();
     super.onInit();
-    fetchData();
   }
 }

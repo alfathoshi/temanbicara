@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
+import 'package:temanbicara/app/config/config.dart';
 import 'package:temanbicara/app/modules/edit_profile/controllers/datepicker_controller.dart';
 import 'package:http/http.dart' as http;
 
@@ -28,8 +29,6 @@ class EditProfileController extends GetxController {
   }
 
   Future<void> editProfile() async {
-    print(nameController.text);
-    print('asdas ${box.read('name')}');
     isLoading.value = true;
     String formattedDate =
         DateFormat('yyyy-MM-dd').format(dateController.selectedDate.value);
@@ -38,8 +37,8 @@ class EditProfileController extends GetxController {
       final userId = box.read('id');
       final token = box.read('token');
 
-      final response = await http.put(
-        Uri.parse('${Config.apiEndPoint}/edit-profile'),
+      final response = await http.post(
+        Uri.parse('${Config.apiEndPoint}/profile'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
@@ -48,16 +47,14 @@ class EditProfileController extends GetxController {
           'name': nameController.text,
           'email': emailController.text,
           'birthdate': formattedDate,
-          'user_id': userId.toString(),
         }),
       );
+      final responseData = jsonDecode(response.body);
 
       if (response.statusCode == 200) {
-        final responseData = jsonDecode(response.body);
-        print(responseData);
-        box.write('name', responseData['name']);
-        box.write('email', responseData['email']);
-        box.write('birthdate', responseData['birthdate']);
+        box.write('name', responseData['data']['name']);
+        box.write('email', responseData['data']['email']);
+        box.write('birthdate', responseData['data']['birthdate']);
 
         if (responseData['status']) {
           Get.back();
