@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/data/message.dart';
 import 'package:temanbicara/app/services/fcm_services.dart';
@@ -31,10 +32,9 @@ class ChatService {
         .doc(chatRoomID)
         .collection('messages')
         .add(newMessage.toMap());
-    final tokenSnap = await firestore.collection('fcmTokens').doc(receiverID).get();
+    final tokenSnap =
+        await firestore.collection('fcmTokens').doc(receiverID).get();
     final receiverToken = tokenSnap.data()?['token'];
-
-    // 3. Kirim notifikasi
     if (receiverToken != null) {
       await FCMService.sendPushMessage(
         targetToken: receiverToken,
@@ -54,10 +54,10 @@ class ChatService {
     String chatRoomID = ids.join('_');
 
     return firestore
-       .collection('chat_rooms')
-       .doc(chatRoomID)
-       .collection('messages')
-       .orderBy('timestamp', descending: true)
-       .snapshots();
+        .collection('chat_rooms')
+        .doc(chatRoomID)
+        .collection('messages')
+        .orderBy('timestamp', descending: true)
+        .snapshots();
   }
 }

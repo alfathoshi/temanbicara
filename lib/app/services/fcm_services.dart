@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:googleapis_auth/auth_io.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/services.dart' show rootBundle;
 
 class FCMService {
   static const _scopes = ['https://www.googleapis.com/auth/firebase.messaging'];
@@ -12,7 +13,7 @@ class FCMService {
     required String body,
   }) async {
     final serviceAccountJson =
-        File('assets/service-account.json').readAsStringSync();
+        await rootBundle.loadString('assets/firebase/service-account.json');
     final serviceAccount =
         ServiceAccountCredentials.fromJson(serviceAccountJson);
     final projectId = jsonDecode(serviceAccountJson)['project_id'];
@@ -28,18 +29,16 @@ class FCMService {
       body: jsonEncode({
         'message': {
           'token': targetToken,
-          'notification': {
+          'data': {
             'title': title,
             'body': body,
-          },
-          'data': {
             'click_action': 'FLUTTER_NOTIFICATION_CLICK',
           },
         },
       }),
     );
-
     print('FCM response: ${response.statusCode}');
+    print('Target $targetToken');
     print('FCM body: ${response.body}');
   }
 }

@@ -1,31 +1,70 @@
+import 'dart:io';
+
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:temanbicara/app/routes/app_pages.dart';
-import 'package:temanbicara/main.dart';
 
-class NotificationAPI {
-  final _firebaseMessaging = FirebaseMessaging.instance;
+class NotificationService {
+  static final FlutterLocalNotificationsPlugin _localNotif =
+      FlutterLocalNotificationsPlugin();
 
-  Future<void> initNotifications() async {
-    await _firebaseMessaging.requestPermission();
+  static Future<void> init() async {
+    const AndroidInitializationSettings androidInit =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
 
-    final token = await _firebaseMessaging.getToken();
+    const InitializationSettings initSettings =
+        InitializationSettings(android: androidInit);
 
-    print("token:  $token");
+    await _localNotif.initialize(initSettings);
 
-    initPushedNotifications();
+    // Buat channel notifikasi untuk Android
+    const AndroidNotificationChannel channel = AndroidNotificationChannel(
+      'chat_channel', // ID channel
+      'Chat Notification', // Nama channel
+      description: 'Channel untuk notifikasi pesan', // Deskripsi channel
+      importance: Importance.high, // Menentukan tingkat kepentingan
+    );
+
+    // Buat channel jika belum ada
+    await _localNotif
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(channel);
   }
 
-  void handleMessage(RemoteMessage? message) {
-    if (message == null) return;
+  static Future<void> showNotification(RemoteMessage message) async {
+    const String replyKey = 'key_reply';
 
-    Get.toNamed(Routes.HOME);
-  }
+    // Konfigurasi input untuk tombol reply
+    const AndroidNotificationActionInput replyInput =
+        AndroidNotificationActionInput(
+          allowFreeFormInput: true
+        );
 
-  Future initPushedNotifications() async {
-    FirebaseMessaging.instance.getInitialMessage().then(handleMessage);
+    // Konfigurasi AndroidNotificationAction dengan input
+    const AndroidNotificationAction action = AndroidNotificationAction(
+      'reply_action',
+      'Reply',
+      inputs: [replyInput],
+    );
 
-    FirebaseMessaging.onMessageOpenedApp.listen(handleMessage);
+     AndroidNotificationDetails androidDetails =
+        const AndroidNotificationDetails(
+      'chat_channel',
+      'Chat Notification',
+      channelDescription: 'Channel buat notif pesan',
+      importance: Importance.max,
+      priority: Priority.high,
+      actions: [action],
+    );
+
+     NotificationDetails notifDetails =
+        NotificationDetails(android: androidDetails);
+
+    await _localNotif.show(
+      message.notification.hashCode,
+      message.notification?.title ?? 'New Message',
+      message.notification?.body ?? '',
+      notifDetails,
+    );
   }
 }
