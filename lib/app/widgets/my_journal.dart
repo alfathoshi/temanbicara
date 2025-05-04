@@ -43,7 +43,7 @@ class MyJournal extends StatelessWidget {
                 child: Center(
                   child: Text(
                     type,
-                    style: h7SemiBold,
+                    style: h7SemiBold.copyWith(color: whiteColor),
                   ),
                 ),
               ),
