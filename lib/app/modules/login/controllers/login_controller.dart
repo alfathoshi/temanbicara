@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -6,6 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:temanbicara/app/config/config.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class LoginController extends GetxController {
   final box = GetStorage();
@@ -58,7 +60,8 @@ class LoginController extends GetxController {
         box.write('id', data['data']['id']);
         box.write('email', data['data']['email']);
         box.write('name', data['data']['name']);
-        print(data);
+        final currentUserID = data['data']['id'].toString();
+        await saveFcmToken(currentUserID);
         Get.snackbar(
           'Success',
           'Login berhasil',
@@ -91,6 +94,18 @@ class LoginController extends GetxController {
       print(e);
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  Future<void> saveFcmToken(String userId) async {
+    String? fcmToken = await FirebaseMessaging.instance.getToken();
+    if (fcmToken != null) {
+      DocumentReference docRef =
+          FirebaseFirestore.instance.collection('fcmTokens').doc(userId);
+
+      await docRef.set({
+        'tokens': FieldValue.arrayUnion([fcmToken])
+      }, SetOptions(merge: true));
     }
   }
 

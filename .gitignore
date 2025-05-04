@@ -12,6 +12,7 @@ migrate_working_dir/
 
 # Ignore API keys and secrets
 lib/app/modules/chatbot_room/api_key.dart
+assets/firebase/service-account.json
 
 # IntelliJ related
 *.iml

@@ -1,31 +1,65 @@
+import 'dart:io';
+
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:temanbicara/app/routes/app_pages.dart';
-import 'package:temanbicara/main.dart';
 
-class NotificationAPI {
-  final _firebaseMessaging = FirebaseMessaging.instance;
+class NotificationService {
+  static final FlutterLocalNotificationsPlugin _localNotif =
+      FlutterLocalNotificationsPlugin();
 
-  Future<void> initNotifications() async {
-    await _firebaseMessaging.requestPermission();
+  static Future<void> init() async {
+    const AndroidInitializationSettings androidInit =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
 
-    final token = await _firebaseMessaging.getToken();
+    const InitializationSettings initSettings =
+        InitializationSettings(android: androidInit);
 
-    print("token:  $token");
+    await _localNotif.initialize(initSettings);
 
-    initPushedNotifications();
+    const AndroidNotificationChannel channel = AndroidNotificationChannel(
+      'chat_channel',
+      'Chat Notification',
+      description: 'Channel untuk notifikasi pesan',
+      importance: Importance.high,
+    );
+
+    await _localNotif
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(channel);
+
+    if (Platform.isAndroid) {
+      final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+          FlutterLocalNotificationsPlugin();
+
+      final bool? granted = await flutterLocalNotificationsPlugin
+          .resolvePlatformSpecificImplementation<
+              AndroidFlutterLocalNotificationsPlugin>()
+          ?.requestNotificationsPermission();
+
+      print('Notification permission granted: $granted');
+    }
   }
 
-  void handleMessage(RemoteMessage? message) {
-    if (message == null) return;
+  static Future<void> showNotification(RemoteMessage message) async {
+    AndroidNotificationDetails androidDetails =
+        const AndroidNotificationDetails(
+      'chat_channel',
+      'Chat Notification',
+      channelDescription: 'Channel buat notif pesan',
+      importance: Importance.max,
+      priority: Priority.high,
+      ticker: 'ticker',
+    );
 
-    Get.toNamed(Routes.HOME);
-  }
+    NotificationDetails notifDetails =
+        NotificationDetails(android: androidDetails);
 
-  Future initPushedNotifications() async {
-    FirebaseMessaging.instance.getInitialMessage().then(handleMessage);
-
-    FirebaseMessaging.onMessageOpenedApp.listen(handleMessage);
+    await _localNotif.show(
+      message.notification.hashCode,
+      message.data['title'] ?? 'New Message',
+      message.data['body'] ?? '',
+      notifDetails,
+    );
   }
 }
