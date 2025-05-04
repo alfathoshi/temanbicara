@@ -145,29 +145,6 @@ class HomeView extends GetView<ReportController> {
                           ],
                         ),
                         const SizedBox(
-                          height: 16,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 45,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: primaryColor, width: 1),
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          child: Center(
-                            child: TextButton(
-                              onPressed: () {
-                                Get.toNamed(Routes.TRACKING);
-                                print(box.read('token'));
-                              },
-                              child: Text(
-                                'Tracking',
-                                style: trackingButton,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
                           height: 24,
                         ),
                         GestureDetector(
@@ -176,9 +153,6 @@ class HomeView extends GetView<ReportController> {
                             'Mental Health Report',
                             style: h4SemiBold,
                           ),
-                        ),
-                        const SizedBox(
-                          height: 16,
                         ),
                         const SizedBox(
                           height: 16,
@@ -326,9 +300,8 @@ class HomeView extends GetView<ReportController> {
                                     height: 16,
                                   ),
                                   MyButton(
-                                      get: () => Get.offAllNamed(
-                                          Routes.NAVIGATION_BAR,
-                                          arguments: {"indexPage": 2}),
+                                      get: () =>
+                                          Get.toNamed(Routes.CHATBOT_ROOM),
                                       color: Colors.lightBlue,
                                       text: 'Talk')
                                 ],
