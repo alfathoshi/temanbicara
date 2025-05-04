@@ -100,10 +100,12 @@ class LoginController extends GetxController {
   Future<void> saveFcmToken(String userId) async {
     String? fcmToken = await FirebaseMessaging.instance.getToken();
     if (fcmToken != null) {
-      await FirebaseFirestore.instance
-          .collection('fcmTokens')
-          .doc(userId)
-          .set({'token': fcmToken});
+      DocumentReference docRef =
+          FirebaseFirestore.instance.collection('fcmTokens').doc(userId);
+
+      await docRef.set({
+        'tokens': FieldValue.arrayUnion([fcmToken])
+      }, SetOptions(merge: true));
     }
   }
 
