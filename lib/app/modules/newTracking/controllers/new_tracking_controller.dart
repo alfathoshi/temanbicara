@@ -197,8 +197,6 @@ class NewTrackingController extends GetxController {
         }),
       );
 
-      print('Response Status Code: ${response.statusCode}');
-      print('Response Body: ${response.body}');
       var data = json.decode(response.body);
 
       if (response.statusCode == 200 && data['status']) {
