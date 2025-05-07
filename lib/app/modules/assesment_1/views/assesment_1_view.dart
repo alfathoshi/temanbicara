@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:temanbicara/app/modules/edit_profile/controllers/datepicker_controller.dart';
 import 'package:temanbicara/app/themes/colors.dart';
@@ -21,24 +22,27 @@ class Assesment1View extends GetView<Assesment1Controller> {
       backgroundColor: whiteColor,
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(87 + MediaQuery.of(context).padding.top),
-        child: Container(
-          padding: EdgeInsets.fromLTRB(
-              24, MediaQuery.of(context).padding.top + 24, 24, 24),
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.1),
-                blurRadius: 25,
-                offset: const Offset(0, 1),
-                spreadRadius: 1,
-              ),
-            ],
-            color: whiteColor,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Image.asset(
-            'assets/images/logo.png',
-            scale: 4,
+        child: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.dark,
+          child: Container(
+            padding: EdgeInsets.fromLTRB(
+                24, MediaQuery.of(context).padding.top + 24, 24, 24),
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 25,
+                  offset: const Offset(0, 1),
+                  spreadRadius: 1,
+                ),
+              ],
+              color: whiteColor,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Image.asset(
+              'assets/images/logo.png',
+              scale: 4,
+            ),
           ),
         ),
       ),
@@ -79,7 +83,7 @@ class Assesment1View extends GetView<Assesment1Controller> {
                 ),
               ),
             ),
-            sby16,
+            sby24,
             Text(
               'Nama Panggilan',
               style: textDescriptionSemiBold,
@@ -103,33 +107,12 @@ class Assesment1View extends GetView<Assesment1Controller> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            sby24,
             Text(
               'Nomor Handphone',
               style: textDescriptionSemiBold,
             ),
             sby8,
-            // TextField(
-            //   controller: controller.phoneC,
-            //   cursorColor: black,
-            //   keyboardType: TextInputType.phone,
-            //   decoration: InputDecoration(
-            //     hintText: 'Masukkan Nomor Handphone',
-            //     hintStyle: h5Regular.copyWith(color: grey2Color),
-            //     enabledBorder: OutlineInputBorder(
-            //       borderRadius: BorderRadius.circular(10),
-            //       borderSide: const BorderSide(
-            //         color: greyColor,
-            //       ),
-            //     ),
-            //     focusedBorder: OutlineInputBorder(
-            //       borderRadius: BorderRadius.circular(10),
-            //       borderSide: BorderSide(color: primaryColor),
-            //     ),
-            //   ),
-            // ),
             Stack(alignment: Alignment.centerLeft, children: [
               TextField(
                 keyboardType: TextInputType.phone,
@@ -174,7 +157,7 @@ class Assesment1View extends GetView<Assesment1Controller> {
                 ),
               )
             ]),
-            sby16,
+            sby24,
             Text(
               'Gender',
               style: textDescriptionSemiBold,
@@ -199,14 +182,14 @@ class Assesment1View extends GetView<Assesment1Controller> {
                 ],
               ),
             ),
-            sby16,
+            sby24,
             Text(
               'Tanggal Lahir',
               style: textDescriptionSemiBold,
             ),
             sby8,
             DatePicker(),
-            sby16,
+            sby24,
             const Spacer(),
             Obx(
               () => ElevatedButton(
