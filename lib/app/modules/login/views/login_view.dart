@@ -66,6 +66,7 @@ class LoginView extends GetView<LoginController> {
                       obscureText: false,
                       hintText: 'Email / Username',
                       passwordField: false,
+                      type: TextInputType.emailAddress,
                     ),
                     const SizedBox(
                       height: 16,
@@ -77,6 +78,7 @@ class LoginView extends GetView<LoginController> {
                       obscureText: controller.isSecure.value,
                       hintText: 'Password',
                       passwordField: true,
+                      type: TextInputType.text,
                     ),
                     const SizedBox(
                       height: 12,

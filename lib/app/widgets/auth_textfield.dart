@@ -8,15 +8,18 @@ class AuthTextfield extends StatelessWidget {
   final bool obscureText;
   final bool passwordField;
   final String hintText;
+  final TextInputType type;
 
-  const AuthTextfield(
-      {super.key,
-      required this.onChanged,
-      required this.showPassword,
-      required this.controller,
-      required this.obscureText,
-      required this.hintText,
-      required this.passwordField});
+  const AuthTextfield({
+    super.key,
+    required this.onChanged,
+    required this.showPassword,
+    required this.controller,
+    required this.obscureText,
+    required this.hintText,
+    required this.passwordField,
+    required this.type,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +28,7 @@ class AuthTextfield extends StatelessWidget {
       cursorColor: black,
       obscureText: obscureText,
       controller: controller,
+      keyboardType: type,
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: const TextStyle(color: greyColor),
