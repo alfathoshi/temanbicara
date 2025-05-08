@@ -232,9 +232,9 @@ class NewTrackingView extends GetView<NewTrackingController> {
                                       child: Text(
                                           '${controller.sleepQuality[index]}',
                                           style: TrackingText.copyWith(
-                                            color: controller.selectedEmotion
-                                                        .value ==
-                                                    controller.emotions[index]
+                                            color: controller
+                                                        .selectedSleep.value ==
+                                                    controller.sleepQuality[index]
                                                 ? Colors.black
                                                 : Colors.grey,
                                           )),
@@ -308,8 +308,8 @@ class NewTrackingView extends GetView<NewTrackingController> {
                                     Text('${controller.ScreenTime[index]}',
                                         style: TrackingText.copyWith(
                                           color: controller
-                                                      .selectedEmotion.value ==
-                                                  controller.emotions[index]
+                                                      .selectedScreen.value ==
+                                                  controller.ScreenTime[index]
                                               ? Colors.black
                                               : Colors.grey,
                                         ))
@@ -382,8 +382,8 @@ class NewTrackingView extends GetView<NewTrackingController> {
                                     Text('${controller.Activity[index]}',
                                         style: TrackingText.copyWith(
                                           color: controller
-                                                      .selectedEmotion.value ==
-                                                  controller.emotions[index]
+                                                      .selectedActivity.value ==
+                                                  controller.Activity[index]
                                               ? Colors.black
                                               : Colors.grey,
                                         ))

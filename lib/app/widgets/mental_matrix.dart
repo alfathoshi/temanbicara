@@ -5,7 +5,7 @@ import 'package:temanbicara/app/themes/fonts.dart';
 
 class MentalMatrix extends StatelessWidget {
   final Color color;
-  final Color iconColor;
+
   final Icon icon;
   final String title;
   final String detail;
@@ -16,7 +16,6 @@ class MentalMatrix extends StatelessWidget {
   const MentalMatrix({
     super.key,
     required this.color,
-    required this.iconColor,
     required this.icon,
     required this.title,
     required this.detail,
@@ -51,44 +50,36 @@ class MentalMatrix extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                width: 53,
-                height: 53,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18),
-                  color: iconColor,
-                ),
-                child: Image.asset(
-                  image,
-                  scale: 1.5,
-                ),
+              Image.asset(
+                image,
+                scale: 2.5,
               ),
               const SizedBox(width: 16),
               Expanded(
-                  child: isFilled
-                      ? Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Your Mental Matrix",
-                              style: h7Regular,
-                            ),
-                            Text(
-                              title,
-                              style: h6SemiBold,
-                            ),
-                            Text(
-                              detail,
-                              style: h7Regular,
-                            ),
-                          ],
-                        )
-                      : Text(
-                          'Isi kondisi kesehatan \nmentalmu hari ini',
-                          style:
-                              h7Regular.copyWith(fontWeight: FontWeight.w600),
-                        )),
+                child: isFilled
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Your Mental Matrix",
+                            style: h7Regular,
+                          ),
+                          Text(
+                            title,
+                            style: h6SemiBold,
+                          ),
+                          Text(
+                            detail,
+                            style: h7Regular,
+                          ),
+                        ],
+                      )
+                    : Text(
+                        'Isi kondisi kesehatan \nmentalmu hari ini',
+                        style: h7Regular.copyWith(fontWeight: FontWeight.w600),
+                      ),
+              ),
               isFilled
                   ? Stack(
                       alignment: Alignment.center,
@@ -110,7 +101,7 @@ class MentalMatrix extends StatelessWidget {
                       height: 53,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(18),
-                        color: iconColor,
+                        color: primaryColor,
                       ),
                       child: Image.asset(
                         'assets/images/pencil.png',

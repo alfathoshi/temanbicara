@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:intl/intl.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
@@ -25,201 +26,171 @@ class ReportView extends GetView<ReportController> {
           ),
           side: BorderSide(color: Colors.black12),
         ),
-        title: GestureDetector(
-          onTap: () {
-            print(controller.trackingList);
-          },
-          child: Text(
-            'Mental Report',
-            style: h3Bold,
-          ),
+        title: Text(
+          'Mental Report',
+          style: h3Bold,
         ),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
-        child: ListView(
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "Mental Health Tracker",
-                  style: h4Medium,
+      body: RefreshIndicator(
+        onRefresh: () async {
+          controller.getMatrix();
+        },
+        child: Container(
+          child: ListView(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: border,
+                      offset: Offset(0, 1),
+                      blurRadius: 2,
+                    ),
+                  ],
+                  color: whiteColor,
+                  borderRadius: BorderRadius.circular(30),
+                  border: Border.all(
+                    color: Colors.transparent,
+                    width: 2,
+                  ),
                 ),
-              ],
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            ReportCategory(
-              onPressed: () {
-                controller.trackingList.isEmpty
-                    ? Get.snackbar(
-                        "Tidak dapat mengakses halaman",
-                        "Data tracking anda masih kosong. Silahkan melakukan tracking",
-                        backgroundColor: error.withOpacity(0.6),
-                        colorText: Colors.white,
-                      )
-                    : Get.toNamed(Routes.SLEEP_QUALITY, arguments: [
-                        controller.trackingList,
-                        controller.avgSleep
-                      ]);
-              },
-              title: "Mental Health Matrix",
-              description: "Status ${controller.avgSleep.value}",
-              image: "assets/images/limiter.png",
-              matrixValue: '80',
-              color: lightGreen,
-            ),
-            ReportCategory(
-              onPressed: () {
-                controller.trackingList.isEmpty
-                    ? Get.snackbar(
-                        "Tidak dapat mengakses halaman",
-                        "Data tracking anda masih kosong. Silahkan melakukan tracking",
-                        backgroundColor: error.withOpacity(0.6),
-                        colorText: Colors.white,
-                      )
-                    : Get.toNamed(Routes.SLEEP_QUALITY, arguments: [
-                        controller.trackingList,
-                        controller.avgSleep
-                      ]);
-              },
-              title: "Sleep Quality",
-              description: "Status ${controller.avgSleep.value}",
-              image: "assets/images/sleepquality.png",
-              matrixValue: '80',
-              color: lightGreen,
-            ),
-            ReportCategory(
-              onPressed: () {
-                controller.trackingList.isEmpty
-                    ? Get.snackbar(
-                        "Tidak dapat mengakses halaman",
-                        "Data tracking anda masih kosong. Silahkan melakukan tracking",
-                        backgroundColor: error.withOpacity(0.6),
-                        colorText: Colors.white,
-                      )
-                    : Get.toNamed(Routes.SLEEP_QUALITY, arguments: [
-                        controller.trackingList,
-                        controller.avgSleep
-                      ]);
-              },
-              title: "Stress Level",
-              description: "Status ${controller.avgSleep.value}",
-              image: "assets/images/strees.png",
-              matrixValue: '80',
-              color: lightGreen,
-            ),
-            ReportCategory(
-              onPressed: () {
-                controller.trackingList.isEmpty
-                    ? Get.snackbar(
-                        "Tidak dapat mengakses halaman",
-                        "Data tracking anda masih kosong. Silahkan melakukan tracking",
-                        backgroundColor: error.withOpacity(0.6),
-                        colorText: Colors.white,
-                      )
-                    : Get.toNamed(Routes.SLEEP_QUALITY, arguments: [
-                        controller.trackingList,
-                        controller.avgSleep
-                      ]);
-              },
-              title: "Mood Tracker",
-              description: "Status ${controller.avgSleep.value}",
-              image: "assets/images/sleepquality.png",
-              matrixValue: '80',
-              color: lightGreen,
-            ),
-            ReportCategory(
-              onPressed: () {
-                controller.trackingList.isEmpty
-                    ? Get.snackbar(
-                        "Tidak dapat mengakses halaman",
-                        "Data tracking anda masih kosong. Silahkan melakukan tracking",
-                        backgroundColor: error.withOpacity(0.6),
-                        colorText: Colors.white,
-                      )
-                    : Get.toNamed(Routes.SLEEP_QUALITY, arguments: [
-                        controller.trackingList,
-                        controller.avgSleep
-                      ]);
-              },
-              title: "Sleep Quality",
-              description: "Status ${controller.avgSleep.value}",
-              image: "assets/images/moodSmile.png",
-              matrixValue: '80',
-              color: lightGreen,
-            ),
-            ReportCategory(
-              onPressed: () {
-                controller.trackingList.isEmpty
-                    ? Get.snackbar(
-                        "Tidak dapat mengakses halaman",
-                        "Data tracking anda masih kosong. Silahkan melakukan tracking",
-                        backgroundColor: error.withOpacity(0.6),
-                        colorText: Colors.white,
-                      )
-                    : Get.toNamed(Routes.SLEEP_QUALITY, arguments: [
-                        controller.trackingList,
-                        controller.avgSleep
-                      ]);
-              },
-              title: "Sleep Quality",
-              description: "Desc ${controller.avgSleep.value}",
-              image: "assets/images/sleepquality.png",
-              matrixValue: '80',
-              color: lightGreen,
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Center(
-              child: Text(
-                "Need an Expert?",
-                style: h5Bold,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "Mental Health Tracker",
+                            style: h6Medium,
+                          ),
+                          Row(
+                            children: [
+                              Icon(Icons.calendar_month_outlined),
+                              Text(
+                                DateFormat('dd MMM yyyy')
+                                    .format(DateTime.now()),
+                                style: h5Regular,
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      ReportCategory(
+                        onPressed: () {
+                          // Get.snackbar(
+                          //       "Tidak dapat mengakses halaman",
+                          //       "Data tracking anda masih kosong. Silahkan melakukan tracking",
+                          //       backgroundColor: error.withOpacity(0.6),
+                          //       colorText: Colors.white,
+                          //     ) ??
+                          Get.toNamed(Routes.MENTAL_MATRIX);
+                        },
+                        title: "Mental Health Matrix",
+                        description: controller.title.value,
+                        image: "assets/images/limiter.png",
+                        matrixValue: controller.matrixValue.value,
+                        color: lightGreen,
+                      ),
+                    ],
+                  ),
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Image.asset("assets/images/therapist_1.png"),
-            Column(
-              children: [
-                Text(
-                  "Nearest mental health services:  ",
-                  style: h5Regular,
-                ),
-                TextButton(
-                  onPressed: () {
-                    // Get.toNamed(Routes.CONSULTATION);
-                    print(controller.trackingList);
-                  },
-                  child: Text(
-                    "Click Here",
-                    style: h5Regular.copyWith(color: Colors.blue),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: border,
+                      offset: Offset(0, 1),
+                      blurRadius: 2,
+                    ),
+                  ],
+                  color: whiteColor,
+                  borderRadius: BorderRadius.circular(30),
+                  border: Border.all(
+                    color: Colors.transparent,
+                    width: 2,
                   ),
                 ),
-                Text(
-                  "Ministry of Health Mental Health Hotline",
-                  style: h5Regular,
-                ),
-                TextButton(
-                  onPressed: () {
-                    print("pressed");
-                  },
-                  child: Text(
-                    "021-500-454",
-                    style: h5Regular.copyWith(color: Colors.blue),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Mood Statistics",
+                        style: h4SemiBold,
+                      ),
+                      Text(
+                        "How you’ve been feeling lately",
+                        style: h6Regular,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            )
-          ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Center(
+                child: Text(
+                  "Need an Expert?",
+                  style: h5Bold,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Image.asset("assets/images/therapist_1.png"),
+              Column(
+                children: [
+                  Text(
+                    "Nearest mental health services:  ",
+                    style: h5Regular,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // Get.toNamed(Routes.CONSULTATION);
+                      print(controller.trackingList);
+                    },
+                    child: Text(
+                      "Click Here",
+                      style: h5Regular.copyWith(color: Colors.blue),
+                    ),
+                  ),
+                  Text(
+                    "Ministry of Health Mental Health Hotline",
+                    style: h5Regular,
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      print("pressed");
+                    },
+                    child: Text(
+                      "021-500-454",
+                      style: h5Regular.copyWith(color: Colors.blue),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -262,7 +233,7 @@ class ReportCategory extends StatelessWidget {
         ],
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 28),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: GestureDetector(
           onTap: () {
             onPressed();
@@ -272,28 +243,12 @@ class ReportCategory extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Container(
-                    width: 53,
-                    height: 53,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFBDCF99),
-                      borderRadius: BorderRadius.circular(18),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Color(0xFFBDCF99),
-                          spreadRadius: 1,
-                          blurRadius: 0.5,
-                          offset: Offset(0, 3),
-                        ),
-                      ],
-                    ),
-                    child: Image.asset(
-                      image,
-                      scale: 1.5,
-                    ),
+                  Image.asset(
+                    image,
+                    scale: 2.5,
                   ),
                   const SizedBox(
-                    width: 25,
+                    width: 12,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

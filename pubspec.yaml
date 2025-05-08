@@ -14,7 +14,7 @@ dependencies:
   dropdown_search: ^6.0.1
   firebase_core: ^3.9.0
   firebase_messaging: ^15.1.5
-  fl_chart: ^0.69.0
+  fl_chart: ^0.71.0
   flutter:
     sdk: flutter
   flutter_chat_types: ^3.6.2

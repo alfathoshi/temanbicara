@@ -18,11 +18,11 @@ class NewTrackingController extends GetxController {
   final box = GetStorage();
 
   final List<String> emotions = [
-    'Depresi',
-    'Sedih',
-    'Netral',
-    'Senang',
-    'Bahagia'
+    'Depressed',
+    'Sad',
+    'Neutral',
+    'Happy',
+    'Cheerful'
   ];
 
   final List<String> sleepQuality = [

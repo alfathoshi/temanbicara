@@ -1,10 +1,13 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../config/config.dart';
+import '../../../data/ReportModel.dart';
+import '../../../themes/colors.dart';
 
 class ReportController extends GetxController {
   var trackingList = [].obs;
@@ -17,6 +20,8 @@ class ReportController extends GetxController {
   var title = ''.obs;
   var detail = ''.obs;
   var matrixValue = ''.obs;
+  var report = Rxn<ReportModel>();
+  var isLoading = false.obs;
 
   Map<String, String> getMentalMatrixDescription(int score) {
     if (score >= 1 && score <= 20) {
@@ -34,6 +39,41 @@ class ReportController extends GetxController {
       };
     } else {
       return {'title': 'Unknown', 'detail': 'No valid data.'};
+    }
+  }
+
+  Future<void> getMatrix() async {
+    try {
+      isLoading.value = true;
+      final userId = box.read('id');
+      final token = box.read('token');
+
+      var response = await http.post(
+        Uri.parse('${Config.apiEndPoint}/report'),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({
+          'date_request': "2025-05-08",
+        }),
+      );
+
+      var data = json.decode(response.body);
+
+      if (response.statusCode == 200 &&
+          data['status'] == true &&
+          data['data'] != null) {
+        report.value = ReportModel.fromJson(data['data'][0]);
+      } else {
+        Get.snackbar('Error', data['message'] ?? 'Gagal Menyiapkan Report',
+            backgroundColor: Colors.red.withOpacity(0.6),
+            colorText: whiteColor);
+      }
+    } catch (e) {
+      print('Error getReport: $e');
+    } finally {
+      isLoading.value = false;
     }
   }
 
@@ -63,21 +103,17 @@ class ReportController extends GetxController {
           });
 
           if (todayTracking != null) {
-            int score = calculateScore(todayTracking);
+            int score = report.value!.matrix;
             final desc = getMentalMatrixDescription(score);
 
-            isTrackingFilled.value = true;
             title.value = '${score} - ${desc['title']}';
             detail.value = desc['detail']!;
             matrixValue.value = score.toString();
+            isTrackingFilled.value = true;
           } else {
             isTrackingFilled.value = false;
           }
-        } else {
-          isTrackingFilled.value = false;
         }
-      } else {
-        isTrackingFilled.value = false;
       }
     } catch (e) {
       print('Error: $e');
@@ -97,8 +133,8 @@ class ReportController extends GetxController {
   }
 
   Future<void> fetchTracking() async {
-    isFetching.value = true;
     try {
+      isFetching.value = true;
       final token = box.read('token');
 
       var response = await http.get(
@@ -157,8 +193,10 @@ class ReportController extends GetxController {
 
   @override
   void onInit() {
-    fetchTracking();
-    checkTracking();
     super.onInit();
+    print('onInit dipanggil');
+    // fetchTracking();
+    checkTracking();
+    getMatrix();
   }
 }

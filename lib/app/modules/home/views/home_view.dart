@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:temanbicara/app/modules/chat/views/chat_view.dart';
+import 'package:temanbicara/app/modules/mental_matrix/controllers/mental_matrix_controller.dart';
 import 'package:temanbicara/app/modules/report/controllers/report_controller.dart';
 import 'package:temanbicara/app/modules/report/views/report_view.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
@@ -168,7 +169,6 @@ class HomeView extends GetView<ReportController> {
                             },
                             child: MentalMatrix(
                               color: lightGreen,
-                              iconColor: primaryColor,
                               icon: Icon(Icons.edit),
                               image: 'assets/images/limiter.png',
                               title: controller.title.value.isNotEmpty
