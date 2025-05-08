@@ -7,6 +7,7 @@ import 'package:temanbicara/app/modules/profile/controllers/profile_controller.d
 
 import '../../../config/config.dart';
 import '../../journal/controllers/journal_controller.dart';
+import '../../report/controllers/report_controller.dart';
 
 class HomeController extends GetxController {
   final box = GetStorage();
@@ -39,9 +40,13 @@ class HomeController extends GetxController {
     }
   }
 
+  final ReportController reportController = Get.put(ReportController());
+
   @override
   void onInit() async {
     await ProfileController().fetchData();
+    print("object");
+    reportController.checkTracking();
     super.onInit();
   }
 }

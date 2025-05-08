@@ -59,6 +59,7 @@ abstract class Routes {
 
   static const BOOKING_HISTORY = _Paths.BOOKING_HISTORY;
   static const NEW_TRACKING = _Paths.NEW_TRACKING;
+  static const MENTAL_MATRIX = _Paths.MENTAL_MATRIX;
 }
 
 abstract class _Paths {
@@ -117,4 +118,5 @@ abstract class _Paths {
   static const FORGOT_PASSWORD = '/forgot-password';
   static const BOOKING_HISTORY = '/booking-history';
   static const NEW_TRACKING = '/new-tracking';
+  static const MENTAL_MATRIX = '/mental-matrix';
 }

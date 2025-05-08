@@ -61,6 +61,8 @@ import '../modules/journal/bindings/journal_binding.dart';
 import '../modules/journal/views/journal_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
+import '../modules/mental_matrix/bindings/mental_matrix_binding.dart';
+import '../modules/mental_matrix/views/mental_matrix_view.dart';
 import '../modules/mood_report/bindings/mood_report_binding.dart';
 import '../modules/mood_report/views/mood_report_view.dart';
 import '../modules/mood_tracker/bindings/mood_tracker_binding.dart';
@@ -357,6 +359,11 @@ class AppPages {
       name: _Paths.NEW_TRACKING,
       page: () => const NewTrackingView(),
       binding: NewTrackingBinding(),
+    ),
+    GetPage(
+      name: _Paths.MENTAL_MATRIX,
+      page: () => MentalMatrixView(),
+      binding: MentalMatrixBinding(),
     ),
   ];
 }

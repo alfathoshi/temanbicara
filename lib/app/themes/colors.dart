@@ -26,4 +26,6 @@ const Color placeHolderIcon = Color(0xffBDBDBD);
 const Color lightGreen = Color(0xffF2F5EB);
 const Color lightBlue = Color(0xffC5E4FB);
 const Color lightYellow = Color(0xffFCF7C8);
-const Color lightPurple = Color(0xffEFEBFF);
+const Color lightPurple = Color(0xffC2B1FF);
+const Color lightPink = Color(0xffD38DCB);
+const Color orange = Color(0xffED7E1C);
