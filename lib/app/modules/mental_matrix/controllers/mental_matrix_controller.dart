@@ -16,6 +16,37 @@ class MentalMatrixController extends GetxController {
   var detail = ''.obs;
   var matrixValue = ''.obs;
   var isTrackingFilled = false.obs;
+  final List<String> emotions = [
+    'Depressed',
+    'Sad',
+    'Neutral',
+    'Happy',
+    'Cheerful'
+  ];
+
+  final List<String> sleepQuality = [
+    '> 8 Hours',
+    '7-8 Hours',
+    '6 Hours',
+    '4-5 Hours',
+    '< 4 Hours'
+  ];
+
+  final List<String> Activity = [
+    '< 2k \nSteps',
+    '2k-5k \nSteps',
+    '5k-7.5k \nSteps',
+    '7.5k-10k \nSteps',
+    '> 10k \nSteps'
+  ];
+
+  final List<String> ScreenTime = [
+    '< 1 Hours',
+    '1-3 Hours',
+    '3-5 Hours',
+    '5-8 Hours',
+    '> 8 Hours'
+  ];
 
   Future<void> getReport() async {
     try {
@@ -51,6 +82,19 @@ class MentalMatrixController extends GetxController {
     } finally {
       isLoading.value = false;
     }
+  }
+
+  String getIndexedImage({
+    required String? value,
+    required List<String> referenceList,
+    required String prefix,
+  }) {
+    if (value == null) return '${prefix}1.png';
+    final index = referenceList.indexOf(value.trim());
+    if (index != -1) {
+      return '$prefix${index + 1}.png';
+    }
+    return '${prefix}1.png';
   }
 
   @override
