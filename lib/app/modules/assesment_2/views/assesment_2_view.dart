@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/goalsOptions.dart';
 
@@ -19,125 +21,79 @@ class Assesment2View extends GetView<Assesment2Controller> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: whiteColor,
-      appBar: AppBar(
-        backgroundColor: whiteColor,
-        title: Row(
-          children: [
-            Image.asset(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(87),
+        child: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.dark,
+          child: Container(
+            padding: EdgeInsets.fromLTRB(
+                24, MediaQuery.of(context).padding.top + 24, 24, 24),
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 25,
+                  offset: const Offset(0, 1),
+                  spreadRadius: 1,
+                ),
+              ],
+              color: whiteColor,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Image.asset(
               'assets/images/logo.png',
               scale: 4,
             ),
-            const SizedBox(
-              width: 16,
-            ),
-            const Text(
-              'Assesment',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
+          ),
         ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              width: 80,
-              height: 40,
-              decoration: BoxDecoration(
-                color: primaryColor,
-                borderRadius: BorderRadius.circular(24),
-              ),
-              child: Center(
-                child: Text(
-                  '2 of 7',
-                  style: assestmentPoint,
+      ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(minHeight: constraints.maxHeight),
+              child: IntrinsicHeight(
+                child: Padding(
+                  padding: const EdgeInsets.all(24.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Hey there, glad you’re here',
+                        style: h3Bold,
+                      ),
+                      sby16,
+                      Text(
+                        'This is your personal check-in space. Log your thoughts, moods, or habits daily to build a better understanding of yourself',
+                        style: h5Medium,
+                      ),
+                      sby32,
+                      Image.asset('assets/images/meditation.png'),
+                      Expanded(
+                          child:
+                              SizedBox()), // ini bakal dorong konten terakhir ke bawah
+                      Center(
+                        child: Text(
+                          ' Ready to start your journey?',
+                          style: h6Bold,
+                        ),
+                      ),
+                      sby12,
+                      MyButton(
+                        get: () {
+                          Get.toNamed(Routes.NEW_TRACKING);
+                        },
+                        color: primaryColor,
+                        text: 'Tracking',
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(32.0),
-        child: ListView(
-          children: [
-            SizedBox(
-              height: MediaQuery.sizeOf(context).height -
-                  (AppBar().preferredSize.height +
-                      MediaQuery.of(context).padding.bottom),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    'Apa yang ingin kamu capai?',
-                    textAlign: TextAlign.center,
-                    style: h3Bold,
-                  ),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  const Goalsoptions(
-                    option: 'Aku Ingin mengurangi stress',
-                    index: 0,
-                  ),
-                  const SizedBox(
-                    height: 32,
-                  ),
-                  const Goalsoptions(
-                    option: 'Aku Ingin punya seorang teman',
-                    index: 1,
-                  ),
-                  const SizedBox(
-                    height: 32,
-                  ),
-                  const Goalsoptions(
-                    option: 'Aku Ingin berinteraksi dengan AI',
-                    index: 2,
-                  ),
-                  const SizedBox(
-                    height: 32,
-                  ),
-                  const Goalsoptions(
-                    option: 'Aku Ingin bertemu orang baru',
-                    index: 3,
-                  ),
-                  const SizedBox(
-                    height: 32,
-                  ),
-                  const Goalsoptions(
-                    option: 'Hanya iseng mencoba',
-                    index: 4,
-                  ),
-                  const SizedBox(
-                    height: 32,
-                  ),
-                  Text('Silahkan pilih goalsmu', style: warningGoals),
-                  const SizedBox(
-                    height: 40,
-                  ),
-                 MyButton(
-                  get: () {
-                    if (controller.tappedIndex.value == -1) {
-                      Get.snackbar(
-                        'Error',
-                        'Silahkan isi assesment',
-                        colorText: whiteColor,
-                        backgroundColor: error.withOpacity(0.6),
-                      );
-                    } else {
-                      Get.toNamed(Routes.ASSESMENT_3);
-                    }
-                  },
-                  color: primaryColor,
-                  text: 'Lanjutkan')
-                ],
-              ),
             ),
-          ],
-        ),
+          );
+        },
       ),
-    
     );
   }
 }

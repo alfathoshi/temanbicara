@@ -80,11 +80,7 @@ class Assesment1Controller extends GetxController {
             backgroundColor: primaryColor.withOpacity(0.6),
             colorText: Colors.white,
           );
-
-          Get.offAllNamed(
-            Routes.NAVIGATION_BAR,
-            arguments: {"indexPage": 0},
-          );
+          Get.toNamed(Routes.ASSESMENT_2);
         } else {
           Get.snackbar('Error', data['message'],
               backgroundColor: Colors.red.withOpacity(0.6),

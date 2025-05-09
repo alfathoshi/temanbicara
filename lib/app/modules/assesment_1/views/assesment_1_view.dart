@@ -21,7 +21,7 @@ class Assesment1View extends GetView<Assesment1Controller> {
       resizeToAvoidBottomInset: false,
       backgroundColor: whiteColor,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(87 + MediaQuery.of(context).padding.top),
+        preferredSize: const Size.fromHeight(87),
         child: AnnotatedRegion<SystemUiOverlayStyle>(
           value: SystemUiOverlayStyle.dark,
           child: Container(
@@ -46,181 +46,158 @@ class Assesment1View extends GetView<Assesment1Controller> {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(32),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Lets get to know you better!',
-              style: h2Bold,
-            ),
-            Text(
-              'Fill in your personal info to start the journey',
-              style: h4Regular,
-            ),
-            sby32,
-            Text(
-              'Nama',
-              style: textDescriptionSemiBold,
-            ),
-            sby8,
-            TextField(
-              controller: controller.nameC,
-              cursorColor: black,
-              decoration: InputDecoration(
-                hintText: 'Masukkan Nama Lengkap',
-                hintStyle: h5Regular.copyWith(color: grey2Color),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                    color: greyColor,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(color: primaryColor),
-                ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                minHeight: constraints.maxHeight,
               ),
-            ),
-            sby24,
-            Text(
-              'Nama Panggilan',
-              style: textDescriptionSemiBold,
-            ),
-            sby8,
-            TextField(
-              controller: controller.nicknameC,
-              cursorColor: black,
-              decoration: InputDecoration(
-                hintText: 'Masukkan Nama Panggilan',
-                hintStyle: h5Regular.copyWith(color: grey2Color),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                    color: greyColor,
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide(color: primaryColor),
-                ),
-              ),
-            ),
-            sby24,
-            Text(
-              'Nomor Handphone',
-              style: textDescriptionSemiBold,
-            ),
-            sby8,
-            Stack(alignment: Alignment.centerLeft, children: [
-              TextField(
-                keyboardType: TextInputType.phone,
-                cursorColor: black,
-                controller: controller.phoneC,
-                decoration: InputDecoration(
-                  prefix: const SizedBox(
-                    width: 70,
-                  ),
-                  hintText: 'Phone',
-                  hintStyle: const TextStyle(color: greyColor),
-                  suffixIconColor: const Color(0xFFc4c4c4),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: const BorderSide(
-                      color: greyColor,
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: primaryColor),
-                  ),
-                ),
-              ),
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  bottomLeft: Radius.circular(10),
-                ),
-                child: Container(
-                  width: 70,
-                  height: 50,
-                  color: primaryColor,
-                  child: Center(
-                    child: Text(
-                      '+62',
-                      style: h5Bold.copyWith(
-                        color: whiteColor,
-                      ),
-                    ),
-                  ),
-                ),
-              )
-            ]),
-            sby24,
-            Text(
-              'Gender',
-              style: textDescriptionSemiBold,
-            ),
-            sby8,
-            Obx(
-              () => Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  GenderSelector(
-                      gender: Gender.male,
-                      selectedGender: controller.selectedGender.value,
-                      onSelect: (gender) {
-                        controller.toggleGender(gender);
-                      }),
-                  GenderSelector(
-                      gender: Gender.female,
-                      selectedGender: controller.selectedGender.value,
-                      onSelect: (gender) {
-                        controller.toggleGender(gender);
-                      })
-                ],
-              ),
-            ),
-            sby24,
-            Text(
-              'Tanggal Lahir',
-              style: textDescriptionSemiBold,
-            ),
-            sby8,
-            DatePicker(),
-            sby24,
-            const Spacer(),
-            Obx(
-              () => ElevatedButton(
-                onPressed: () {
-                  controller.saveAssesment();
-                },
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: primaryColor,
-                    foregroundColor: Colors.white,
-                    minimumSize: const Size(
-                      double.infinity,
-                      44,
-                    ),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20))),
-                child: controller.isLoading.value == false
-                    ? Text(
-                        'Lanjutkan',
-                        style: h5Bold.copyWith(color: whiteColor),
-                      )
-                    : SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(
-                          color: whiteColor,
+              child: IntrinsicHeight(
+                child: Padding(
+                  padding: const EdgeInsets.all(32),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Let’s get to know you better!', style: h3Bold),
+                      Text('Fill in your personal info to start the journey',
+                          style: h5Regular),
+                      sby32,
+                      Text('Nama', style: textDescriptionSemiBold),
+                      sby8,
+                      TextField(
+                        controller: controller.nameC,
+                        cursorColor: black,
+                        decoration: InputDecoration(
+                          hintText: 'Masukkan Nama Lengkap',
+                          hintStyle: h5Regular.copyWith(color: grey2Color),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(color: greyColor),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(color: primaryColor),
+                          ),
                         ),
                       ),
+                      sby24,
+                      Text('Nama Panggilan', style: textDescriptionSemiBold),
+                      sby8,
+                      TextField(
+                        controller: controller.nicknameC,
+                        cursorColor: black,
+                        decoration: InputDecoration(
+                          hintText: 'Masukkan Nama Panggilan',
+                          hintStyle: h5Regular.copyWith(color: grey2Color),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(color: greyColor),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(color: primaryColor),
+                          ),
+                        ),
+                      ),
+                      sby24,
+                      Text('Nomor Handphone', style: textDescriptionSemiBold),
+                      sby8,
+                      Stack(
+                        alignment: Alignment.centerLeft,
+                        children: [
+                          TextField(
+                            keyboardType: TextInputType.phone,
+                            cursorColor: black,
+                            controller: controller.phoneC,
+                            decoration: InputDecoration(
+                              prefix: const SizedBox(width: 50),
+                              hintText: 'Phone',
+                              hintStyle: h5Regular.copyWith(color: greyColor),
+                              suffixIconColor: const Color(0xFFc4c4c4),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(color: greyColor),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: BorderSide(color: primaryColor),
+                              ),
+                            ),
+                          ),
+                          ClipRRect(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              bottomLeft: Radius.circular(10),
+                            ),
+                            child: Container(
+                              width: 55,
+                              height: 55,
+                              color: primaryColor,
+                              child: Center(
+                                child: Text('+62',
+                                    style: h5Bold.copyWith(color: whiteColor)),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      sby24,
+                      Text('Gender', style: textDescriptionSemiBold),
+                      sby8,
+                      Obx(
+                        () => Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            GenderSelector(
+                              gender: Gender.male,
+                              selectedGender: controller.selectedGender.value,
+                              onSelect: (gender) =>
+                                  controller.toggleGender(gender),
+                            ),
+                            GenderSelector(
+                              gender: Gender.female,
+                              selectedGender: controller.selectedGender.value,
+                              onSelect: (gender) =>
+                                  controller.toggleGender(gender),
+                            )
+                          ],
+                        ),
+                      ),
+                      sby24,
+                      Text('Tanggal Lahir', style: textDescriptionSemiBold),
+                      sby8,
+                      DatePicker(),
+                      sby24,
+                      const Expanded(child: SizedBox()),
+                      Obx(() => ElevatedButton(
+                            onPressed: () {
+                              controller.saveAssesment();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: primaryColor,
+                              foregroundColor: Colors.white,
+                              minimumSize: const Size(double.infinity, 44),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)),
+                            ),
+                            child: controller.isLoading.value == false
+                                ? Text('Lanjutkan',
+                                    style: h5Bold.copyWith(color: whiteColor))
+                                : SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: CircularProgressIndicator(
+                                        color: whiteColor),
+                                  ),
+                          )),
+                    ],
+                  ),
+                ),
               ),
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
