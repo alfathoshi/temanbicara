@@ -4,7 +4,6 @@ import 'package:temanbicara/app/modules/edit_profile/controllers/datepicker_cont
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
-
 class DatePicker extends StatelessWidget {
   DatePicker({super.key});
 
@@ -23,7 +22,7 @@ class DatePicker extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           border: Border.all(
-            color: Colors.black26,
+            color: border,
             width: 2,
           ),
           borderRadius: BorderRadius.circular(8),

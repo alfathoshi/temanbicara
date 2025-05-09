@@ -32,7 +32,7 @@ class SignupController extends GetxController {
           headers: {'Content-Type': 'application/json'},
           body: json.encode({
             'email': emailC.text,
-            'phone_number': phoneC.text,
+            'phone_number': '+62',
             'password': passC.text,
           }),
         );
@@ -70,7 +70,6 @@ class SignupController extends GetxController {
 
   void isEmpty() {
     if (passC.text.isNotEmpty &&
-        phoneC.text.isNotEmpty &&
         emailC.text.isNotEmpty &&
         confirmPassC.text.isNotEmpty) {
       isButtonActive(false);

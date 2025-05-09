@@ -113,7 +113,7 @@ TextStyle h4Medium = GoogleFonts.poppins(
 TextStyle h5Medium = GoogleFonts.poppins(
   fontWeight: FontWeight.w500,
   color: font,
-  fontSize: 15,
+  fontSize: 12,
 );
 
 TextStyle h6Medium = GoogleFonts.poppins(
@@ -264,8 +264,8 @@ TextStyle textTitle = GoogleFonts.poppins(
   fontSize: 10,
 );
 TextStyle textFieldStyle = GoogleFonts.poppins(
-  fontWeight: FontWeight.w600,
-  color: font2,
+  fontWeight: FontWeight.w400,
+  color: greyColor,
   fontSize: 13,
 );
 TextStyle textGenderTrue = GoogleFonts.poppins(

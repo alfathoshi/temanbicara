@@ -34,19 +34,19 @@ class ChatService {
         .add(newMessage.toMap());
     final tokenSnap =
     await firestore.collection('fcmTokens').doc(receiverID).get();
-final List<dynamic>? receiverTokens = tokenSnap.data()?['tokens'];
+    final List<dynamic>? receiverTokens = tokenSnap.data()?['tokens'];
 
-if (receiverTokens != null && receiverTokens.isNotEmpty) {
-  for (var token in receiverTokens) {
-    await FCMService.sendPushMessage(
-      targetToken: token,
-      title: currentUsername,
-      body: message,
-    );
-  }
-} else {
-  print('FCM tokens gak ditemukan atau kosong');
-}
+    if (receiverTokens != null && receiverTokens.isNotEmpty) {
+      for (var token in receiverTokens) {
+        await FCMService.sendPushMessage(
+          targetToken: token,
+          title: currentUsername,
+          body: message,
+        );
+      }
+    } else {
+      print('FCM tokens tidak ditemukan atau kosong');
+    }
   }
 
   Stream<QuerySnapshot> getMessages(String userID, otherUserID) {

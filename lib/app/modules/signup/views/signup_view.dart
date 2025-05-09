@@ -64,17 +64,7 @@ class SignupView extends GetView<SignupController> {
                       obscureText: false,
                       hintText: 'Email',
                       passwordField: false,
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    AuthTextfield(
-                      onChanged: (value) => controller.isEmpty(),
-                      showPassword: () {},
-                      controller: controller.phoneC,
-                      obscureText: false,
-                      hintText: 'Phone Number',
-                      passwordField: false,
+                      type: TextInputType.emailAddress,
                     ),
                     const SizedBox(
                       height: 16,
@@ -86,6 +76,7 @@ class SignupView extends GetView<SignupController> {
                       obscureText: controller.isSecure.value,
                       hintText: 'Password',
                       passwordField: true,
+                      type: TextInputType.text,
                     ),
                     const SizedBox(
                       height: 16,
@@ -97,6 +88,7 @@ class SignupView extends GetView<SignupController> {
                       obscureText: controller.isSecureC.value,
                       hintText: 'Password',
                       passwordField: true,
+                      type: TextInputType.text,
                     ),
                     const SizedBox(
                       height: 68,
