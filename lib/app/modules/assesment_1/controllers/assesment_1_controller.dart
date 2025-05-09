@@ -46,6 +46,7 @@ class Assesment1Controller extends GetxController {
     if (isFilled()) {
       box.write('name', nameC.text);
       box.write('nickname', nicknameC.text);
+      box.write('phone', phoneC.text);
       if (selectedGender == Gender.male) {
         box.write('gender', 'male');
       } else if (selectedGender == Gender.female) {
@@ -67,13 +68,7 @@ class Assesment1Controller extends GetxController {
             'nickname': box.read('nickname'),
             'gender': box.read('gender'),
             'birthdate': box.read('birthdate'),
-            'mbti': '',
-            'topic': '',
-            'goal': '',
-            'sleep_quality': '',
-            'have_consulted': '',
-            'consumed_medicine': '',
-            'stress_level': '',
+            'phone_number': box.read('phone'),
           }),
         );
 
@@ -111,5 +106,4 @@ class Assesment1Controller extends GetxController {
       );
     }
   }
-
 }
