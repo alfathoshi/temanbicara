@@ -8,6 +8,7 @@ import 'package:temanbicara/app/widgets/journal_card.dart';
 
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
+import '../../../widgets/date.dart';
 import '../controllers/journal_controller.dart';
 
 class JournalView extends GetView<JournalController> {
@@ -90,10 +91,36 @@ class JournalView extends GetView<JournalController> {
                     'My Journal',
                     style: h5SemiBold,
                   ),
-                  // Icon(
-                  //   Icons.calendar_month,
-                  //   color: primaryColor,
-                  // ),
+                  GestureDetector(
+                      onTap: () async {
+                        final DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: controller.selectedDate.value,
+                          firstDate: DateTime(2000, 01, 01),
+                          lastDate: DateTime.now(),
+                          confirmText: "Pilih",
+                          builder: (BuildContext context, Widget? child) {
+                            return Theme(
+                              data: ThemeData.light().copyWith(
+                                primaryColor: primaryColor,
+                                colorScheme: ColorScheme.light(
+                                  primary: primaryColor,
+                                ),
+                              ),
+                              child: child!,
+                            );
+                          },
+                        );
+
+                        if (pickedDate != null) {
+                          if (!isSameDate(
+                              pickedDate, controller.selectedDate.value)) {
+                            controller.updateDate(pickedDate);
+                            controller.fetchJournals();
+                          }
+                        }
+                      },
+                      child: const Icon(Icons.calendar_month_outlined)),
                 ],
               ),
               const SizedBox(

@@ -33,21 +33,31 @@ class JournalController extends GetxController {
   //   Colors.redAccent,
   // ];
 
+  var selectedDate = DateTime.now().obs;
+  void updateDate(DateTime date) {
+    selectedDate.value = DateTime(date.year, date.month, date.day);
+  }
+
   Future<void> fetchJournals() async {
     isLoading.value = true;
     try {
       final userId = box.read('id');
 
       final token = box.read('token');
-
-      var response = await http.get(
-        Uri.parse('${Config.apiEndPoint}/journal').replace(queryParameters: {
+      print(selectedDate.value);
+      var response = await http.post(
+        Uri.parse('${Config.apiEndPoint}/journal/get')
+            .replace(queryParameters: {
           'id': userId.toString(),
         }),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
         },
+        body: json.encode({
+          'date_request':
+              '${DateFormat('yyyy-MM-dd').format(selectedDate.value)}'
+        }),
       );
 
       if (response.statusCode == 200) {
