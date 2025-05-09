@@ -78,7 +78,7 @@ class ProfileController extends GetxController {
       return;
     } catch (err) {
       print(err);
-      rethrow;
+      // rethrow;
     }
   }
 

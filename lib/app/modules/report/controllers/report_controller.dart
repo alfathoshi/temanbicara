@@ -55,7 +55,7 @@ class ReportController extends GetxController {
           'Content-Type': 'application/json',
         },
         body: json.encode({
-          'date_request': "2025-05-08",
+          'date_request': "2025-05-09",
         }),
       );
 
@@ -66,9 +66,7 @@ class ReportController extends GetxController {
           data['data'] != null) {
         report.value = ReportModel.fromJson(data['data'][0]);
       } else {
-        Get.snackbar('Error', data['message'] ?? 'Gagal Menyiapkan Report',
-            backgroundColor: Colors.red.withOpacity(0.6),
-            colorText: whiteColor);
+        print("error ${data['message']}");
       }
     } catch (e) {
       print('Error getReport: $e');
@@ -194,7 +192,6 @@ class ReportController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    print('onInit dipanggil');
     // fetchTracking();
     checkTracking();
     getMatrix();

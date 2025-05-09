@@ -40,13 +40,11 @@ class HomeController extends GetxController {
     }
   }
 
-  final ReportController reportController = Get.put(ReportController());
-
   @override
   void onInit() async {
     await ProfileController().fetchData();
-    print("object");
-    reportController.checkTracking();
+    ReportController().checkTracking();
+    JournalController().fetchJournals();
     super.onInit();
   }
 }
