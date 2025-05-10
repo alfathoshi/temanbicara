@@ -41,8 +41,17 @@ class TransactionTimeline extends StatelessWidget {
           indicator: _buildIndicator(),
           color: isPast || isCurrent ? primaryColor : Colors.grey,
         ),
-        endChild: Center(
-          child: Text(text, style: h7Regular.copyWith(fontSize: 9)),
+        endChild: SizedBox(
+          width: lineLength,
+          child: Center(
+            child: Text(
+              text,
+              style: h7Regular.copyWith(fontSize: 9),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              textAlign: TextAlign.center,
+            ),
+          ),
         ),
         hasIndicator: true,
       ),
@@ -51,7 +60,12 @@ class TransactionTimeline extends StatelessWidget {
 
   Widget _buildIndicator() {
     if (isPast) {
-      return Container(child: Image.asset("assets/icons/checkIcon.png"));
+      return Image.asset(
+        "assets/icons/checkIcon.png",
+        width: 20,
+        height: 20,
+        fit: BoxFit.contain,
+      );
     } else if (isCurrent) {
       return LottieBuilder.asset(
         "assets/animations/onPageTransaction.json",

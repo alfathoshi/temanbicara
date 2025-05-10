@@ -4,9 +4,13 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
 class TransactionMethodController extends GetxController {
-  //TODO: Implement TransactionMethodController
+  var selectedMethod = ''.obs;
 
-  final count = 0.obs;
+  void setMethod(String method) {
+    selectedMethod.value = method;
+    print(selectedMethod.value);
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -21,8 +25,6 @@ class TransactionMethodController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }
 
 class RadioButtonController extends GetxController {

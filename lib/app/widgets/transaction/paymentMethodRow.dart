@@ -10,6 +10,7 @@ class PaymentMethodRow extends StatelessWidget {
   final String value;
   final String logo;
   final bool isAvailable;
+  final VoidCallback? onTap;
 
   const PaymentMethodRow({
     super.key,
@@ -17,16 +18,22 @@ class PaymentMethodRow extends StatelessWidget {
     required this.value,
     required this.logo,
     this.isAvailable = true,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<RadioButtonController>(builder: (RadioButtonController) {
+    final controller = Get.find<TransactionMethodController>();
+
+    return Obx(() {
       return Stack(
         children: [
           InkWell(
             onTap: isAvailable
-                ? () => RadioButtonController.setMethodType(value)
+                ? () {
+                    controller.setMethod(value);
+                    if (onTap != null) onTap!();
+                  }
                 : null,
             child: Row(
               children: [
@@ -37,19 +44,22 @@ class PaymentMethodRow extends StatelessWidget {
                 ),
                 sbX12,
                 Opacity(
+                  opacity: isAvailable ? 1 : 0,
                   child: Image.asset(
                     "assets/images/$logo.png",
                     scale: 2,
                   ),
-                  opacity: isAvailable ? 1 : 0,
                 ),
                 Spacer(),
                 Radio<String>(
                   value: value,
-                  groupValue: RadioButtonController.methodType,
+                  groupValue: controller.selectedMethod.value,
                   onChanged: isAvailable
-                      ? (String? value) =>
-                          RadioButtonController.setMethodType(value!)
+                      ? (String? val) {
+                          controller.setMethod(val!);
+                          print("Radio changed to $val");
+                          if (onTap != null) onTap!();
+                        }
                       : null,
                   activeColor: primaryColor,
                 ),

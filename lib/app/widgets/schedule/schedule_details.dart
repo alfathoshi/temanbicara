@@ -68,14 +68,15 @@ class ScheduleList extends StatelessWidget {
           children: [
             Center(
               child: Image.asset(
-                "assets/images/noDate.png",
+                "assets/images/noDate2.png",
+                scale: 2.5,
               ),
             ),
-            sby12,
+            sby16,
             Center(
               child: Text(
                 "No schedule available for this date",
-                style: h5SemiBold,
+                style: h5SemiBold.copyWith(color: error),
               ),
             ),
           ],

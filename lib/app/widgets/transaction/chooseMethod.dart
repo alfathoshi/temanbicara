@@ -10,11 +10,19 @@ import 'package:temanbicara/app/widgets/transaction/eWalletMethodList.dart';
 
 class ChooseMethod extends StatelessWidget {
   final TransactionModel transaction;
-  const ChooseMethod({super.key, required this.transaction});
+  final Function(String methodType) onMethodSelected;
+
+  const ChooseMethod({
+    super.key,
+    required this.transaction,
+    required this.onMethodSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.sizeOf(context).width;
+    final radioController = Get.put(RadioButtonController());
+    final methodController = Get.find<TransactionMethodController>();
     return GetBuilder<ToggleButtonController>(
       init: ToggleButtonController(),
       builder: (controller) {
@@ -43,7 +51,10 @@ class ChooseMethod extends StatelessWidget {
             ),
             sby24,
             PaymentMethodIndex(
-                index: controller.selectedIndex, transaction: transaction)
+              index: controller.selectedIndex,
+              transaction: transaction,
+              onMethodSelected: onMethodSelected,
+            ),
           ],
         );
       },
@@ -54,17 +65,33 @@ class ChooseMethod extends StatelessWidget {
 class PaymentMethodIndex extends StatelessWidget {
   final int index;
   final TransactionModel transaction;
-  const PaymentMethodIndex(
-      {super.key, required this.index, required this.transaction});
+  final Function(String methodType) onMethodSelected;
+
+  const PaymentMethodIndex({
+    super.key,
+    required this.index,
+    required this.transaction,
+    required this.onMethodSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
-    if (index == 0) {
-      return EWalletMethodList(transaction: transaction);
-    } else if (index == 1) {
-      return BankPaymentMethodList(transaction: transaction);
-    } else {
-      return CreditCardMethodList(transaction: transaction);
+    switch (index) {
+      case 0:
+        return EWalletMethodList(
+          transaction: transaction,
+          onMethodSelected: onMethodSelected,
+        );
+      case 1:
+        return BankPaymentMethodList(
+          transaction: transaction,
+          onMethodSelected: onMethodSelected,
+        );
+      default:
+        return CreditCardMethodList(
+          transaction: transaction,
+          onMethodSelected: onMethodSelected,
+        );
     }
   }
 }

@@ -83,7 +83,7 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                       "Select Date",
                       style: h3Bold,
                     ),
-                    sby16,
+                    sby24,
                     SelectDate(
                       onDateSelected: (date) {
                         selectedDate = date;
@@ -95,7 +95,7 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                       "Schedules",
                       style: h3Bold,
                     ),
-                    sby16,
+                    sby24,
                     ScheduleList(
                       schedule: schedules,
                       selectedDate: consultController.selectedDate,
@@ -103,38 +103,41 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                     sby36,
                     MyButton(
                       get: () async {
-                        if (selectedSchedule.isNotEmpty) {
-                          print(selectedSchedule['time']);
-                          Get.dialog(
-                            Center(
-                              child: CircularProgressIndicator(
-                                color: primaryColor,
-                              ),
-                            ),
-                            barrierDismissible: false,
-                          );
+                        final selected =
+                            consultController.selectedSchedule.value;
 
-                          await Future.delayed(Duration(seconds: 2));
-
-                          Get.back();
-                          Get.to(
-                            () => TransactionView(),
-                            arguments: TransactionModel(
-                              namaPsikiater: userName,
-                              expertise: expertise,
-                              jadwal: selectedSchedule['date']!,
-                              waktu: selectedSchedule['time']!,
-                              selectedID: selectedSchedule['id'],
-                            ),
-                          );
-                        } else {
+                        if (selected.isEmpty ||
+                            selected['date'] == null ||
+                            selected['time'] == null) {
                           Get.snackbar(
                             "Silahkan pilih jadwal konsultasi",
                             "Please select a date and time before proceeding.",
                             backgroundColor: error.withOpacity(0.6),
                             colorText: Colors.white,
                           );
+                          return;
                         }
+
+                        Get.dialog(
+                          Center(
+                              child: CircularProgressIndicator(
+                                  color: primaryColor)),
+                          barrierDismissible: false,
+                        );
+
+                        await Future.delayed(Duration(seconds: 2));
+                        Get.back();
+
+                        Get.to(
+                          () => TransactionView(),
+                          arguments: TransactionModel(
+                            namaPsikiater: userName,
+                            expertise: expertise,
+                            jadwal: selected['date'],
+                            waktu: selected['time'],
+                            selectedID: selected['id'],
+                          ),
+                        );
                       },
                       color: primaryColor,
                       text: "Booking Now",
