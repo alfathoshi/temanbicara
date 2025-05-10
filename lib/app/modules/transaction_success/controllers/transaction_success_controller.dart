@@ -1,23 +1,24 @@
+import 'dart:async';
 import 'package:get/get.dart';
 
 class TransactionSuccessController extends GetxController {
-  //TODO: Implement TransactionSuccessController
+  final countdown = 5.obs;
+  late Timer _timer;
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
+  void startCountdown() {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (countdown.value <= 1) {
+        timer.cancel();
+        countdown.value = 0;
+      } else {
+        countdown.value--;
+      }
+    });
   }
 
   @override
   void onClose() {
+    _timer.cancel();
     super.onClose();
   }
-
-  void increment() => count.value++;
 }

@@ -120,8 +120,10 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
 
                         Get.dialog(
                           Center(
-                              child: CircularProgressIndicator(
-                                  color: primaryColor)),
+                            child: CircularProgressIndicator(
+                              color: primaryColor,
+                            ),
+                          ),
                           barrierDismissible: false,
                         );
 

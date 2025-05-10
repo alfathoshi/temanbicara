@@ -43,10 +43,16 @@ class TransactionVaNumberBorder extends StatelessWidget {
                     style: h7Bold,
                   ),
                   Spacer(),
-                  Text(
-                    vaNumber,
-                    style: h7SemiBold.copyWith(
-                        fontStyle: FontStyle.italic, color: grey2Color),
+                  Flexible(
+                    child: Text(
+                      vaNumber,
+                      style: h7SemiBold.copyWith(
+                        fontStyle: FontStyle.italic,
+                        color: grey2Color,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
                   ),
                   sbX12,
                   Icon(
@@ -54,7 +60,7 @@ class TransactionVaNumberBorder extends StatelessWidget {
                     size: 15,
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ),

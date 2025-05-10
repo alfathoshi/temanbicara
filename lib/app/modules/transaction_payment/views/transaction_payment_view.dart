@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/data/Invoice.dart';
 import 'package:temanbicara/app/data/Transaction.dart';
-import 'package:temanbicara/app/modules/transaction_invoice/views/transaction_invoice_view.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
@@ -22,27 +21,33 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
 
   final TransactionPaymentController controller =
       Get.put(TransactionPaymentController());
+
   @override
   Widget build(BuildContext context) {
     final box = GetStorage();
     final userID = box.read('id');
-    final TransactionModel transaction = Get.arguments as TransactionModel;
+    final data = Get.arguments as Map;
+    final TransactionModel transaction = data["transaction"];
+    final consultationData = data["data"];
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.startAutoCheck(consultationData['transaction_id']);
+    });
+
     return PopScope(
       canPop: false,
+      onPopInvoked: (didPop) {
+        if (didPop) {
+          controller.stopAutoCheck();
+        }
+      },
       child: Scaffold(
         backgroundColor: whiteColor,
         appBar: AppBar(
           toolbarHeight: 85,
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.white,
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(24),
-                bottomRight: Radius.circular(24),
-              ),
-              side: BorderSide(color: Colors.black12)),
+          backgroundColor: whiteColor,
           title: Text(
-            'Trasactions',
+            'Transaction',
             style: h3Bold,
           ),
           centerTitle: true,
@@ -134,15 +139,19 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                     ),
                     sby24,
                     TransactionVaNumberBorder(
-                      vaNumber: '09128120371937',
+                      vaNumber: consultationData['va_number'],
                     ),
                     sby12,
                     TransactionPriceDetail(
-                        invoice: InvoiceModel(
-                            transaction: transaction,
-                            invoice: "invoice",
-                            metodePembayaran: paymentMethod!,
-                            hargaTotal: 15000 + 1000 + transaction.harga)),
+                      invoice: InvoiceModel(
+                        transaction: transaction,
+                        invoice: "invoice",
+                        metodePembayaran: paymentMethod!,
+                        hargaTotal: transaction.appTax +
+                            transaction.admTax +
+                            transaction.harga,
+                      ),
+                    ),
                     sby24,
                     Center(
                       child: RichText(
@@ -165,55 +174,48 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                     ),
                     sby48,
                     Padding(
-                        padding: const EdgeInsets.only(bottom: 45),
-                        child: MyButton(
-                            get: () async {
-                              Get.dialog(
-                                Obx(
-                                  () => AlertDialog(
-                                    content: controller.isLoading.value
-                                        ? Row(
-                                            children: [
-                                              CircularProgressIndicator(
-                                                  color: primaryColor),
-                                              sbX24,
-                                              Text(
-                                                "Loading ...",
-                                                style: h4Regular,
-                                              ),
-                                            ],
-                                          )
-                                        : Text(
-                                            "Berhasil membuat jadwal",
-                                            style: h4Regular,
-                                          ),
-                                  ),
-                                ),
-                                barrierDismissible: false,
-                              );
-                              await controller.createConsultation(
-                                scheduleId: transaction.selectedID,
-                                patientId: userID,
-                                amount: transaction.harga,
-                                bank: paymentMethod!,
-                              );
+                      padding: const EdgeInsets.only(bottom: 45),
+                      child: MyButton(
+                        get: () async {
+                          final uuid = consultationData['transaction_id'];
+                          final isSuccess =
+                              await controller.checkPaymentStatus(uuid);
 
-                              if (!controller.isLoading.value) {
-                                Get.back();
-                              }
+                          if (isSuccess) {
+                            Get.dialog(
+                              Center(
+                                  child: CircularProgressIndicator(
+                                      color: primaryColor)),
+                              barrierDismissible: false,
+                            );
 
-                              Get.to(
-                                TransactionInvoiceView(),
-                                arguments: InvoiceModel(
+                            await Future.delayed(Duration(seconds: 2));
+                            Get.back();
+
+                            Get.offAllNamed(
+                              Routes.TRANSACTION_SUCCESS,
+                              arguments: {
+                                'consultationData': consultationData,
+                                'transaction': transaction,
+                                'invoice': InvoiceModel(
                                   transaction: transaction,
-                                  invoice: "invoice",
-                                  metodePembayaran: paymentMethod!,
-                                  hargaTotal: 15000 + 1000 + transaction.harga,
+                                  invoice: "dummy",
+                                  metodePembayaran: "Bank Transfer",
+                                  hargaTotal: transaction.admTax +
+                                      transaction.appTax +
+                                      transaction.harga,
                                 ),
-                              );
-                            },
-                            color: primaryColor,
-                            text: "Check Payment Status")),
+                              },
+                            );
+                          } else {
+                            Get.snackbar(
+                                "Not Paid", "Transaction belum dibayar.");
+                          }
+                        },
+                        color: primaryColor,
+                        text: "Check Payment Status",
+                      ),
+                    ),
                   ],
                 ),
               ),

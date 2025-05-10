@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/data/Transaction.dart';
 import 'package:temanbicara/app/modules/transaction_payment/views/transaction_payment_view.dart';
 import 'package:temanbicara/app/themes/colors.dart';
@@ -16,6 +17,8 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
   const TransactionMethodView({super.key});
   @override
   Widget build(BuildContext context) {
+    final box = GetStorage();
+    final userID = box.read('id');
     final controller = Get.put(TransactionMethodController());
     final TransactionModel transaction = Get.arguments as TransactionModel;
 
@@ -24,8 +27,10 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
       appBar: AppBar(
         toolbarHeight: 85,
         backgroundColor: whiteColor,
-        shape: UnderlineInputBorder(borderSide: BorderSide(color: border)),
-        title: Text('Transaction', style: h3Bold),
+        title: Text(
+          'Transaction',
+          style: h3Bold,
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -49,23 +54,41 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
                   ),
                   MyButton(
                     get: () async {
-                      Get.dialog(
-                        Center(
-                            child:
-                                CircularProgressIndicator(color: primaryColor)),
+                      showDialog(
+                        context: Get.context!,
                         barrierDismissible: false,
+                        builder: (_) => Center(
+                          child: CircularProgressIndicator(color: primaryColor),
+                        ),
                       );
 
-                      await Future.delayed(Duration(seconds: 2));
-                      Get.back();
+                      final consultationFuture = controller.createConsultation(
+                        scheduleId: transaction.selectedID,
+                        patientId: userID,
+                        amount: transaction.harga,
+                        bank:
+                            controller.selectedMethod.toString().toLowerCase(),
+                      );
+
+                      await Future.wait([
+                        consultationFuture,
+                        Future.delayed(Duration(seconds: 2)),
+                      ]);
+
+                      Navigator.of(Get.context!).pop();
+
+                      final data = controller.consultationResult;
                       Get.to(
                         () => TransactionPaymentView(
                             paymentMethod: "Bank Transfer"),
-                        arguments: transaction,
+                        arguments: {
+                          "transaction": transaction,
+                          "data": data,
+                        },
                       );
                     },
                     color: primaryColor,
-                    text: "Book Schedule",
+                    text: 'Book Schedule',
                   ),
                 ],
               ),

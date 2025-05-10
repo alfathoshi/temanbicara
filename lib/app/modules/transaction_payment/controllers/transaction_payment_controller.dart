@@ -1,79 +1,59 @@
+import 'dart:async';
 import 'dart:convert';
-
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:temanbicara/app/themes/colors.dart';
 
 import '../../../config/config.dart';
 
 class TransactionPaymentController extends GetxController {
-  var isLoading = false.obs;
+  final box = GetStorage();
+  Timer? _statusChecker;
 
-  Future<void> createConsultation({
-    required int scheduleId,
-    required int patientId,
-    required int amount,
-    required String bank,
-    String description = "-",
-    String problem = "-",
-    String summary = "-",
-  }) async {
-    final url = Uri.parse('${Config.apiEndPoint}/consultation');
-    final box = GetStorage();
-    final token = box.read('token');
+  void startAutoCheck(String uuid) {
+    _statusChecker?.cancel();
 
-    final Map<String, dynamic> body = {
-      'description': description,
-      'problem': problem,
-      'summary': summary,
-      'schedule_id': scheduleId,
-      'amount': amount,
-      'bank': bank,
-    };
+    _statusChecker = Timer.periodic(Duration(seconds: 5), (timer) async {
+      final success = await checkPaymentStatus(uuid);
+      if (success) {
+        timer.cancel();
+      }
+    });
+  }
 
+  void stopAutoCheck() {
+    _statusChecker?.cancel();
+  }
+
+  Future<bool> checkPaymentStatus(String uuid) async {
     try {
-      final response = await http.post(
-        url,
-        body: jsonEncode(body),
+      final token = box.read('token');
+      final response = await http.get(
+        Uri.parse('${Config.apiEndPoint}/payment/$uuid'),
         headers: {
-          'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
         },
       );
 
-      if (response.statusCode == 201) {
-        Get.snackbar(
-          'Success',
-          'Consultation created successfully.',
-          backgroundColor: primaryColor.withOpacity(0.6),
-          colorText: Colors.white,
-        );
-      } else {
-        // Parse error message from response if possible
-        Map<String, dynamic> responseBody = {};
-        try {
-          responseBody = json.decode(response.body);
-        } catch (_) {}
+      if (response.statusCode == 200) {
+        final jsonResponse = json.decode(response.body);
+        final status = jsonResponse['transaction_status'];
 
-        String errorMessage = responseBody['message'] ??
-            'Failed to create consultation. Status code: ${response.statusCode}';
-
-        Get.snackbar(
-          'Error',
-          errorMessage,
-          backgroundColor: Colors.red.withOpacity(0.6),
-          colorText: Colors.white,
-        );
+        if (status == 'settlement') {
+          return true;
+        } else {
+          print("Status: $status");
+        }
       }
-    } catch (error) {
-      Get.snackbar(
-        'Error',
-        'Error creating consultation: $error',
-        backgroundColor: Colors.red.withOpacity(0.6),
-        colorText: Colors.white,
-      );
+    } catch (e) {
+      print("Error checking payment status: $e");
     }
+    return false;
+  }
+
+  @override
+  void onClose() {
+    stopAutoCheck();
+    super.onClose();
   }
 }
