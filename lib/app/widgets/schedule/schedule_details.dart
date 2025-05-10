@@ -1,6 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:get/get.dart';
+import 'package:temanbicara/app/modules/consult_schedule/controllers/consult_schedule_controller.dart';
+import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 
@@ -38,124 +42,109 @@ class ScheduleController extends GetxController {
 
 class ScheduleList extends StatelessWidget {
   final List schedule;
-  final ValueChanged<Map<String, dynamic>> onSelectionChanged;
+  final Rx<DateTime> selectedDate;
 
   const ScheduleList({
     Key? key,
     required this.schedule,
-    required this.onSelectionChanged,
+    required this.selectedDate,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final controller =
-        Get.put(ScheduleController(onSelectionChanged: onSelectionChanged));
-    double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height;
+    final controller = Get.find<ConsultScheduleController>();
 
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Colors.white,
-      ),
-      height: screenHeight * 0.48,
-      child: ListView.builder(
-        itemCount: schedule.length,
-        itemBuilder: (BuildContext context, int index) {
-          List scheduleDay = schedule[index]['schedulesByDate'];
-          String date = schedule[index]['date'];
-          return Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color.fromRGBO(9, 30, 66, 0.25),
-                      blurRadius: 8,
-                      spreadRadius: -2,
-                      offset: Offset(0, 4),
-                    ),
-                    BoxShadow(
-                      color: Color.fromRGBO(9, 30, 66, 0.08),
-                      blurRadius: 0,
-                      spreadRadius: 1,
-                      offset: Offset(0, 0),
-                    ),
-                  ],
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("${controller.getDayName(date)}, ${date}",
-                          style: h3Bold),
-                      sby16,
-                      Text("Available Time : ", style: h4Bold),
-                      sby12,
-                      SizedBox(
-                        height: (scheduleDay.length * 47),
-                        child: ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: scheduleDay.length,
-                          itemBuilder: (BuildContext ctx, int idx) {
-                            int id = scheduleDay[idx]['schedule_id'];
-                            String startTime = DateFormat('HH:mm').format(
-                                DateFormat('HH:mm:ss')
-                                    .parse(scheduleDay[idx]['start_time']));
-                            String endTime = DateFormat('HH:mm').format(
-                                DateFormat('HH:mm:ss')
-                                    .parse(scheduleDay[idx]['end_time']));
-                            String timeSlot = '$startTime - $endTime';
+    return Obx(() {
+      final selectedDateStr =
+          DateFormat('yyyy-MM-dd').format(selectedDate.value);
 
-                            return GetX<ScheduleController>(
-                              builder: (ctrl) => GestureDetector(
-                                onTap: () {
-                                  ctrl.toggleSelection(date, timeSlot, id);
-                                },
-                                child: Container(
-                                  margin: EdgeInsets.only(
-                                      right: screenWidth / 2.1, bottom: 10),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    border: Border.all(
-                                      color: Color(0xFF7D944D),
-                                      width: 1.5,
-                                    ),
-                                    color: ctrl.isSelected(date, timeSlot)
-                                        ? Color(0xFF7D944D)
-                                        : Colors.transparent,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 8, horizontal: 15),
-                                    child: Text(
-                                      timeSlot,
-                                      style: h7Bold.copyWith(
-                                        fontSize: 12,
-                                        color: ctrl.isSelected(date, timeSlot)
-                                            ? Colors.white
-                                            : Colors.black,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+      final daySchedule = schedule.firstWhere(
+        (e) => e['date'] == selectedDateStr,
+        orElse: () => null,
+      );
+
+      if (daySchedule == null) {
+        return Column(
+          children: [
+            Center(
+              child: Image.asset(
+                "assets/images/noDate.png",
               ),
-              sby24,
-            ],
-          );
-        },
-      ),
-    );
+            ),
+            sby12,
+            Center(
+              child: Text(
+                "No schedule available for this date",
+                style: h5SemiBold,
+              ),
+            ),
+          ],
+        );
+      }
+
+      List scheduleDay = daySchedule['schedulesByDate'];
+
+      return Align(
+        alignment: Alignment.topLeft,
+        child: GridView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: scheduleDay.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 30,
+              mainAxisSpacing: 10,
+              childAspectRatio: 3.3,
+            ),
+            itemBuilder: (ctx, idx) {
+              int id = scheduleDay[idx]['schedule_id'];
+              String startTime = DateFormat('HH:mm').format(
+                DateFormat('HH:mm:ss').parse(scheduleDay[idx]['start_time']),
+              );
+              String endTime = DateFormat('HH:mm').format(
+                DateFormat('HH:mm:ss').parse(scheduleDay[idx]['end_time']),
+              );
+              String timeSlot = '$startTime - $endTime';
+              String selectedDateStr =
+                  DateFormat('yyyy-MM-dd').format(selectedDate.value);
+
+              return Obx(() {
+                final isSelected = controller.selectedSchedule.value['date'] ==
+                        selectedDateStr &&
+                    controller.selectedSchedule.value['time'] == timeSlot;
+
+                return GestureDetector(
+                  onTap: () {
+                    controller.updateSelectedSchedule({
+                      'date': selectedDateStr,
+                      'time': timeSlot,
+                      'id': id,
+                    });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      border: Border.all(
+                        color:
+                            isSelected ? primaryColor : const Color(0xFFE2E8F0),
+                        width: 1.5,
+                      ),
+                      color: isSelected ? primaryColor : Colors.transparent,
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      timeSlot,
+                      style: h7Bold.copyWith(
+                        fontSize: 16,
+                        color:
+                            isSelected ? Colors.white : const Color(0xFF1E293B),
+                      ),
+                    ),
+                  ),
+                );
+              });
+            }),
+      );
+    });
   }
 }

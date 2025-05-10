@@ -141,8 +141,6 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                         invoice: InvoiceModel(
                             transaction: transaction,
                             invoice: "invoice",
-                            appTax: 15000,
-                            admTax: 1000,
                             metodePembayaran: paymentMethod!,
                             hargaTotal: 15000 + 1000 + transaction.harga)),
                     sby24,
@@ -209,8 +207,6 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                                 arguments: InvoiceModel(
                                   transaction: transaction,
                                   invoice: "invoice",
-                                  appTax: 15000,
-                                  admTax: 1000,
                                   metodePembayaran: paymentMethod!,
                                   hargaTotal: 15000 + 1000 + transaction.harga,
                                 ),

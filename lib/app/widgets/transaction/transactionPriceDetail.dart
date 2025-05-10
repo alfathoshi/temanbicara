@@ -51,7 +51,7 @@ class TransactionPriceDetail extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Application Tax.", style: h7SemiBold),
-                Text(CurrencyFormat.convertToIdr(invoice.appTax, 2),
+                Text(CurrencyFormat.convertToIdr(invoice.transaction.appTax, 2),
                     style: h7SemiBold.copyWith(color: grey2Color))
               ],
             ),
@@ -60,7 +60,7 @@ class TransactionPriceDetail extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Administration Tax.", style: h7SemiBold),
-                Text(CurrencyFormat.convertToIdr(invoice.admTax, 2),
+                Text(CurrencyFormat.convertToIdr(invoice.transaction.admTax, 2),
                     style: h7SemiBold.copyWith(color: grey2Color))
               ],
             ),

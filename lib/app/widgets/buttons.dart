@@ -17,22 +17,25 @@ class MyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: () {
-          get?.call();
-        },
-        style: ElevatedButton.styleFrom(
-            backgroundColor: primaryColor,
-            foregroundColor: Colors.white,
-            minimumSize: const Size(
-              double.infinity,
-              44,
-            ),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20))),
-        child: Text(
-          text,
-          style: h5Bold.copyWith(color: whiteColor),
-        ));
+      onPressed: () {
+        get?.call();
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: primaryColor,
+        foregroundColor: Colors.white,
+        minimumSize: const Size(
+          double.infinity,
+          56,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+      ),
+      child: Text(
+        text,
+        style: h4Bold.copyWith(color: whiteColor),
+      ),
+    );
   }
 }
 
@@ -65,7 +68,7 @@ class MyButtonCustom extends StatelessWidget {
           height,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(8),
         ),
         elevation: 0,
       ),
@@ -106,7 +109,7 @@ class MyButtonOutlinedCustom extends StatelessWidget {
           height,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(8),
           side: BorderSide(color: foreColor, width: 1),
         ),
         elevation: 0,

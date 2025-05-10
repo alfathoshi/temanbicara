@@ -10,6 +10,8 @@ class TransactionModel {
   final String kadaluarsa;
   final int harga;
   final int selectedID;
+  final int appTax;
+  final int admTax;
 
   TransactionModel(
       {required this.namaPsikiater,
@@ -22,5 +24,7 @@ class TransactionModel {
       required this.waktu,
       this.kadaluarsa = "Timeless",
       this.harga = 300000,
+      this.appTax = 1000,
+      this.admTax = 1000,
       required this.selectedID});
 }

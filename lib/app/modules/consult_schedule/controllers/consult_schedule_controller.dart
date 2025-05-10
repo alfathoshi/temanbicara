@@ -1,9 +1,21 @@
 import 'package:get/get.dart';
 
 class ConsultScheduleController extends GetxController {
-  //TODO: Implement ConsultScheduleController
+  final selectedDate = DateTime.now().obs;
+  final selectedSchedule = Rx<Map<String, dynamic>>({});
 
-  final count = 0.obs;
+  void updateSelectedDate(DateTime date) {
+    selectedDate.value = date;
+    print(selectedDate.value);
+  }
+
+  void updateSelectedSchedule(Map<String, dynamic> schedule) {
+    selectedSchedule.value = schedule;
+    print(selectedSchedule.value);
+  }
+
+  DateTime get currentDate => selectedDate.value;
+
   @override
   void onInit() {
     super.onInit();
@@ -18,6 +30,4 @@ class ConsultScheduleController extends GetxController {
   void onClose() {
     super.onClose();
   }
-
-  void increment() => count.value++;
 }
