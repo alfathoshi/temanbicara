@@ -68,7 +68,7 @@ class ScheduleList extends StatelessWidget {
           children: [
             Center(
               child: Image.asset(
-                "assets/images/noDate2.png",
+                "assets/images/noDate3.png",
                 scale: 2.5,
               ),
             ),

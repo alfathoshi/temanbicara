@@ -28,7 +28,7 @@ class MyButton extends StatelessWidget {
           56,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(20),
         ),
       ),
       child: Text(
@@ -43,8 +43,11 @@ class MyButtonCustom extends StatelessWidget {
   final Function()? get;
   final Color foreColor;
   final Color backColor;
+  final double width;
   final double height;
   final String text;
+  final dynamic icon;
+  final TextStyle style;
   const MyButtonCustom({
     super.key,
     required this.get,
@@ -52,6 +55,9 @@ class MyButtonCustom extends StatelessWidget {
     required this.backColor,
     required this.text,
     required this.height,
+    required this.width,
+    this.icon,
+    required this.style,
   });
 
   @override
@@ -63,18 +69,24 @@ class MyButtonCustom extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: backColor,
         foregroundColor: foreColor,
-        minimumSize: Size(
-          double.infinity,
-          height,
-        ),
+        fixedSize: Size(width, height),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(20),
         ),
         elevation: 0,
       ),
-      child: Text(
-        text,
-        style: h5Bold.copyWith(color: whiteColor),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            text,
+            style: style,
+          ),
+          if (icon != null) ...[
+            const Spacer(),
+            icon!,
+          ],
+        ],
       ),
     );
   }
@@ -85,7 +97,10 @@ class MyButtonOutlinedCustom extends StatelessWidget {
   final Color foreColor;
   final Color backColor;
   final double height;
+  final double width;
   final String text;
+  final Icon? icon;
+  final TextStyle style;
   const MyButtonOutlinedCustom({
     super.key,
     required this.get,
@@ -93,6 +108,9 @@ class MyButtonOutlinedCustom extends StatelessWidget {
     required this.backColor,
     required this.text,
     required this.height,
+    required this.width,
+    this.icon,
+    required this.style,
   });
 
   @override
@@ -104,19 +122,25 @@ class MyButtonOutlinedCustom extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: backColor,
         foregroundColor: foreColor,
-        minimumSize: Size(
-          double.infinity,
-          height,
-        ),
+        fixedSize: Size(width, height),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(20),
           side: BorderSide(color: foreColor, width: 1),
         ),
         elevation: 0,
       ),
-      child: Text(
-        text,
-        style: h5Bold.copyWith(color: foreColor),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            text,
+            style: style,
+          ),
+          if (icon != null) ...[
+            const Spacer(),
+            icon!,
+          ],
+        ],
       ),
     );
   }

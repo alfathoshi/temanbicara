@@ -88,7 +88,6 @@ class BookingHistoryController extends GetxController {
             );
           }).toList();
         } else {
-          //print('API status false or data empty');
           pendingList.clear();
         }
       } else {

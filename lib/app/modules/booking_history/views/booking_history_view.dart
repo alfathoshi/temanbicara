@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/consult/consult_complete_card.dart';
 import 'package:temanbicara/app/widgets/consult/consult_pending_card.dart';
 
@@ -64,7 +65,7 @@ class BookingHistoryView extends GetView<BookingHistoryController> {
     return Padding(
       padding: EdgeInsets.only(left: 20, right: 20, top: 30),
       child: controller.pendingList.isEmpty
-          ? _buildEmptyState('No pending consultations')
+          ? _buildEmptyState('No Pending Consultations')
           : ListView.builder(
               physics: AlwaysScrollableScrollPhysics(),
               itemCount: controller.pendingList.length,
@@ -84,7 +85,7 @@ class BookingHistoryView extends GetView<BookingHistoryController> {
     return Padding(
       padding: EdgeInsets.only(left: 20, right: 20, top: 30),
       child: controller.completedList.isEmpty
-          ? _buildEmptyState('No completed consultations')
+          ? _buildEmptyState('No Completed Consultations')
           : ListView.builder(
               physics: AlwaysScrollableScrollPhysics(),
               itemCount: controller.completedList.length,
@@ -105,20 +106,9 @@ class BookingHistoryView extends GetView<BookingHistoryController> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            Icons.calendar_today_outlined,
-            size: 64,
-            color: grey2Color,
-          ),
-          SizedBox(height: 16),
-          Text(
-            message,
-            style: TextStyle(
-              fontSize: 16,
-              color: grey2Color,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
+          Image.asset("assets/images/noBooking.png"),
+          sby24,
+          Text(message, style: h4Bold),
           SizedBox(height: 24),
           ElevatedButton(
             onPressed: () => controller.fetchData(),
@@ -137,6 +127,7 @@ class BookingHistoryView extends GetView<BookingHistoryController> {
               ),
             ),
           ),
+          sby36,
         ],
       ),
     );
