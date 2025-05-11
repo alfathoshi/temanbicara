@@ -18,11 +18,11 @@ class ScheduleView extends GetView<ScheduleController> {
           style: h3Bold,
         ),
         centerTitle: true,
-        leading: Icon(
+        leading: const Icon(
           Icons.arrow_back,
         ),
       ),
-      body: Center(
+      body: const Center(
         child: Text(
           'ScheduleView is working',
           style: TextStyle(fontSize: 20),

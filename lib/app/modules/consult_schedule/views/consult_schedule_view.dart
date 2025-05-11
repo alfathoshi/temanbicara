@@ -67,13 +67,13 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                   children: [
                     sby24,
                     Text(
-                      '${userName}',
+                      '$userName',
                       style: h2Bold.copyWith(overflow: TextOverflow.ellipsis),
                       maxLines: 2,
                     ),
                     sby8,
                     Text(
-                      '${expertise}',
+                      expertise,
                       style: h3Bold.copyWith(
                         overflow: TextOverflow.ellipsis,
                         color: Color(0xFF7D8A95),

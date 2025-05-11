@@ -17,7 +17,8 @@ class TransactionRemainingTime extends StatelessWidget {
           border: Border.all(color: error),
           borderRadius: BorderRadius.circular(20)),
       child: Padding(
-        padding: EdgeInsets.only(left: 25, right: 33, bottom: 20, top: 20),
+        padding:
+            const EdgeInsets.only(left: 25, right: 33, bottom: 20, top: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -35,7 +36,7 @@ class TransactionRemainingTime extends StatelessWidget {
                   colonsTextStyle: TextStyle(color: error),
                   format: CountDownTimerFormat.minutesSeconds,
                   endTime: DateTime.now().add(
-                    Duration(
+                    const Duration(
                       days: 0,
                       hours: 0,
                       minutes: 10,

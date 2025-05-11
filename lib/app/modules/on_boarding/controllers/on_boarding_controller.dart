@@ -97,7 +97,7 @@ class OnBoardingController extends GetxController {
 
   Future<void> setCurrentImage(String newImage) async {
     currentImage.value = '';
-    await Future.delayed(Duration(milliseconds: 30));
+    await Future.delayed(const Duration(milliseconds: 30));
     currentImage.value = newImage;
   }
 
@@ -116,12 +116,12 @@ class OnBoardingController extends GetxController {
       isTextVisible[i].value = false;
     }
 
-    await Future.delayed(Duration(milliseconds: 400));
+    await Future.delayed(const Duration(milliseconds: 400));
     prevDesc.assignAll(desc);
 
     for (int i = 0; i < 3; i++) {
       isTextVisible[i].value = true;
-      await Future.delayed(Duration(milliseconds: 150));
+      await Future.delayed(const Duration(milliseconds: 150));
     }
   }
 
@@ -132,7 +132,7 @@ class OnBoardingController extends GetxController {
   void animateImage() async {
     imageScale.value = 0.8;
     imageOpacity.value = 0.0;
-    await Future.delayed(Duration(milliseconds: 200));
+    await Future.delayed(const Duration(milliseconds: 200));
     imageScale.value = 1.0;
     imageOpacity.value = 1.0;
   }

@@ -64,6 +64,7 @@ class ChangeLanguageView extends GetView<ChangeLanguageController> {
                                 if (states.contains(WidgetState.selected)) {
                                   return Colors.green;
                                 }
+                                return null;
                               },
                             ),
                           ),
@@ -80,7 +81,7 @@ class ChangeLanguageView extends GetView<ChangeLanguageController> {
                                 'assets/icons/enIcon.png',
                                 scale: 4,
                               ),
-                              SizedBox(width: 10),
+                              const SizedBox(width: 10),
                               Text(
                                 'English',
                                 style: h4Medium,
@@ -97,6 +98,7 @@ class ChangeLanguageView extends GetView<ChangeLanguageController> {
                                 if (states.contains(WidgetState.selected)) {
                                   return Colors.green;
                                 }
+                                return null;
                               },
                             ),
                           ),

@@ -89,8 +89,7 @@ class NewTrackingView extends GetView<NewTrackingController> {
                                     ColorFiltered(
                                       colorFilter:
                                           controller.getColorEmotion(index),
-                                      child: Text(
-                                          '${controller.emotions[index]}',
+                                      child: Text(controller.emotions[index],
                                           style: TrackingText.copyWith(
                                             color: controller.selectedEmotion
                                                         .value ==
@@ -229,15 +228,16 @@ class NewTrackingView extends GetView<NewTrackingController> {
                                     ColorFiltered(
                                       colorFilter:
                                           controller.getColorSleep(index),
-                                      child: Text(
-                                          '${controller.sleepQuality[index]}',
-                                          style: TrackingText.copyWith(
-                                            color: controller
-                                                        .selectedSleep.value ==
-                                                    controller.sleepQuality[index]
-                                                ? Colors.black
-                                                : Colors.grey,
-                                          )),
+                                      child:
+                                          Text(controller.sleepQuality[index],
+                                              style: TrackingText.copyWith(
+                                                color: controller.selectedSleep
+                                                            .value ==
+                                                        controller
+                                                            .sleepQuality[index]
+                                                    ? Colors.black
+                                                    : Colors.grey,
+                                              )),
                                     )
                                   ],
                                 ),
@@ -305,7 +305,7 @@ class NewTrackingView extends GetView<NewTrackingController> {
                                     const SizedBox(
                                       height: 8,
                                     ),
-                                    Text('${controller.ScreenTime[index]}',
+                                    Text(controller.ScreenTime[index],
                                         style: TrackingText.copyWith(
                                           color: controller
                                                       .selectedScreen.value ==
@@ -379,7 +379,7 @@ class NewTrackingView extends GetView<NewTrackingController> {
                                     const SizedBox(
                                       height: 8,
                                     ),
-                                    Text('${controller.Activity[index]}',
+                                    Text(controller.Activity[index],
                                         style: TrackingText.copyWith(
                                           color: controller
                                                       .selectedActivity.value ==

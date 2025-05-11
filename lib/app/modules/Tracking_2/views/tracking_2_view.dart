@@ -13,6 +13,7 @@ import '../controllers/tracking_2_controller.dart';
 class Tracking2View extends GetView<Tracking2Controller> {
   Tracking2View({super.key});
 
+  @override
   final Tracking2Controller controller = Get.put(Tracking2Controller());
 
   @override
@@ -121,13 +122,13 @@ class Tracking2View extends GetView<Tracking2Controller> {
                               ),
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Padding(

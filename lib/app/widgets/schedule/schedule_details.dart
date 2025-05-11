@@ -45,10 +45,10 @@ class ScheduleList extends StatelessWidget {
   final Rx<DateTime> selectedDate;
 
   const ScheduleList({
-    Key? key,
+    super.key,
     required this.schedule,
     required this.selectedDate,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

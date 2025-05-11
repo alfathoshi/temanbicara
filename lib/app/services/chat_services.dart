@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/data/message.dart';
 import 'package:temanbicara/app/services/fcm_services.dart';
@@ -33,7 +32,7 @@ class ChatService {
         .collection('messages')
         .add(newMessage.toMap());
     final tokenSnap =
-    await firestore.collection('fcmTokens').doc(receiverID).get();
+        await firestore.collection('fcmTokens').doc(receiverID).get();
     final List<dynamic>? receiverTokens = tokenSnap.data()?['tokens'];
 
     if (receiverTokens != null && receiverTokens.isNotEmpty) {

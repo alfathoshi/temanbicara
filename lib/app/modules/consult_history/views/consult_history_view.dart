@@ -34,7 +34,7 @@ class ConsultHistoryView extends GetView<ConsultHistoryController> {
           future: controller.fetchData(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               return Center(
                 child: Text(snapshot.error.toString()),
@@ -69,7 +69,7 @@ class ConsultHistoryView extends GetView<ConsultHistoryController> {
                     );
                   });
             } else {
-              return Center(child: Text("Tidak Ada Data"));
+              return const Center(child: Text("Tidak Ada Data"));
             }
           }),
     );

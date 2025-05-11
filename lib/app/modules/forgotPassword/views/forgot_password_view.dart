@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
-import 'package:temanbicara/app/widgets/buttons.dart';
 
 import '../controllers/forgot_password_controller.dart';
 
@@ -18,6 +16,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
       resizeToAvoidBottomInset: false,
       backgroundColor: whiteColor,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: Text(
           'Change Password',
           style: h3Bold,

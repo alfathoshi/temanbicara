@@ -1,7 +1,5 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:googleapis_auth/auth_io.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart' show rootBundle;
 
 class FCMService {

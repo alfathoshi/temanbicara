@@ -13,7 +13,7 @@ class TransactionPaymentController extends GetxController {
   void startAutoCheck(String uuid) {
     _statusChecker?.cancel();
 
-    _statusChecker = Timer.periodic(Duration(seconds: 5), (timer) async {
+    _statusChecker = Timer.periodic(const Duration(seconds: 5), (timer) async {
       final success = await checkPaymentStatus(uuid);
       if (success) {
         timer.cancel();

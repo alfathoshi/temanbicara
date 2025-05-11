@@ -7,7 +7,7 @@ import 'package:temanbicara/app/widgets/transaction/idrFormatter.dart';
 
 class TransactionPriceDetail extends StatelessWidget {
   final InvoiceModel invoice;
-  TransactionPriceDetail({required this.invoice});
+  const TransactionPriceDetail({super.key, required this.invoice});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,7 +16,8 @@ class TransactionPriceDetail extends StatelessWidget {
           border: Border.all(color: primaryColor),
           borderRadius: BorderRadius.circular(20)),
       child: Padding(
-        padding: EdgeInsets.only(left: 25, right: 33, bottom: 25, top: 25),
+        padding:
+            const EdgeInsets.only(left: 25, right: 33, bottom: 25, top: 25),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -64,7 +65,7 @@ class TransactionPriceDetail extends StatelessWidget {
                     style: h7SemiBold.copyWith(color: grey2Color))
               ],
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.symmetric(vertical: 15),
               child: Divider(
                 height: 1,

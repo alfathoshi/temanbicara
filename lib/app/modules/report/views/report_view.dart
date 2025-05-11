@@ -41,6 +41,7 @@ class ReportView extends GetView<ReportController> {
         onRefresh: () async {
           controller.getMatrix();
           controller.fetchStatistik();
+          controller.checkTracking();
         },
         child: Container(
           child: ListView(
@@ -50,7 +51,7 @@ class ReportView extends GetView<ReportController> {
                   boxShadow: [
                     BoxShadow(
                       color: border,
-                      offset: Offset(0, 1),
+                      offset: const Offset(0, 1),
                       blurRadius: 2,
                     ),
                   ],
@@ -72,9 +73,11 @@ class ReportView extends GetView<ReportController> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            "Mental Health Tracker",
-                            style: h6Medium,
+                          Expanded(
+                            child: Text(
+                              "Mental Health Tracker",
+                              style: h6Medium,
+                            ),
                           ),
                           Row(
                             children: [
@@ -101,12 +104,12 @@ class ReportView extends GetView<ReportController> {
                                     },
                                   );
 
-                                  if (pickedDate != null) {
-                                    if (!isSameDate(pickedDate,
-                                        controller.selectedDate.value)) {
-                                      controller.updateDate(pickedDate);
-                                      controller.getMatrix();
-                                    }
+                                  if (pickedDate != null &&
+                                      !isSameDate(pickedDate,
+                                          controller.selectedDate.value)) {
+                                    controller.updateDate(pickedDate);
+                                    controller.getMatrix();
+                                    controller.checkTracking();
                                   }
                                 },
                                 child:
@@ -119,69 +122,16 @@ class ReportView extends GetView<ReportController> {
                       const SizedBox(
                         height: 20,
                       ),
-                      ReportCategory(
-                        onPressed: () {
-                          Get.toNamed(Routes.MENTAL_MATRIX);
-                        },
-                        title: "Mental Health Matrix",
-                        description: controller.title.value,
-                        image: "assets/images/limiter.png",
-                        matrixValue: controller.matrixValue.value,
-                        color: lightGreen,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              sby24,
-              Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: border,
-                      offset: Offset(0, 1),
-                      blurRadius: 2,
-                    ),
-                  ],
-                  color: whiteColor,
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(
-                    color: Colors.transparent,
-                    width: 2,
-                  ),
-                ),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Mood Statistics",
-                        style: h4SemiBold,
-                      ),
-                      Text(
-                        "How you’ve been feeling lately",
-                        style: h6Regular,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Center(
-                        child: Image.asset(
-                          "assets/images/${MentalMatrixController().getIndexedImage(
-                            value: controller.avgMood.value,
-                            referenceList: controller.emotions,
-                            prefix: 'emosi',
-                          )}",
-                          scale: 3,
-                        ),
-                      ),
-                      sby8,
-                      Center(
-                        child: Text(
-                          controller.avgMood.value,
-                          style: h3Regular,
+                      Obx(
+                        () => ReportCategory(
+                          onPressed: () {
+                            Get.toNamed(Routes.MENTAL_MATRIX);
+                          },
+                          title: "Mental Health Matrix",
+                          description: controller.title.value,
+                          image: "assets/images/limiter.png",
+                          matrixValue: controller.matrixValue.value,
+                          color: lightGreen,
                         ),
                       ),
                     ],
@@ -195,11 +145,185 @@ class ReportView extends GetView<ReportController> {
                 // print("Data List Length: ${dataList.length}");
 
                 if (controller.isFetching.value) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
 
                 if (dataList.isEmpty) {
-                  return Text("No sleep data found");
+                  return const Text("No mood data found");
+                }
+
+                final List<PieChartSectionData> sections = [];
+                final Map<String, int> moodCounts = {
+                  for (var quality in controller.emotions) quality: 0,
+                };
+
+                for (final item in dataList) {
+                  final category = item['mood_level'].toString().trim();
+                  // print("Bed time value: $bedTime");
+                  // print("Category value: $category");
+                  // print("controller value: ${controller.sleepQuality}");
+                  if (moodCounts.containsKey(category)) {
+                    moodCounts[category] = moodCounts[category]! + 1;
+                  }
+                }
+
+                final total = moodCounts.values.reduce((a, b) => a + b);
+                for (int i = 0; i < controller.emotions.length; i++) {
+                  final category = controller.emotions[i];
+                  final count = moodCounts[category]!;
+                  final double value = total > 0 ? (count / total) * 100 : 0;
+                  // print("Sleep Counts: $sleepCounts");
+                  // print("Total: $total");
+                  sections.add(
+                    PieChartSectionData(
+                      color: controller.chartColors[i],
+                      value: value,
+                      title: '',
+                      radius: 50,
+                    ),
+                  );
+                }
+
+                final avgText = controller.avgMood.value;
+                // print("avg text: ${avgText}");
+                return Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: border,
+                        offset: const Offset(0, 1),
+                        blurRadius: 2,
+                      ),
+                    ],
+                    color: whiteColor,
+                    borderRadius: BorderRadius.circular(30),
+                    border: Border.all(
+                      color: Colors.transparent,
+                      width: 2,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 25, vertical: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Mood Statistik",
+                          style: h4SemiBold,
+                        ),
+                        Text(
+                          "Your sleep trends and quality",
+                          style: h6Regular,
+                        ),
+                        AspectRatio(
+                          aspectRatio: 1.2,
+                          child: Stack(
+                            children: [
+                              PieChart(
+                                PieChartData(
+                                  pieTouchData: PieTouchData(
+                                    touchCallback:
+                                        (FlTouchEvent event, pieTouchResponse) {
+                                      if (!event.isInterestedForInteractions ||
+                                          pieTouchResponse == null ||
+                                          pieTouchResponse.touchedSection ==
+                                              null) {
+                                        controller.touchedIndexMood.value = -1;
+                                        return;
+                                      }
+                                      controller.touchedIndexMood.value =
+                                          pieTouchResponse.touchedSection!
+                                              .touchedSectionIndex;
+                                    },
+                                  ),
+                                  sections: List.generate(
+                                      controller.emotions.length, (i) {
+                                    final category = controller.emotions[i];
+                                    final count = moodCounts[category]!;
+                                    final value =
+                                        total > 0 ? (count / total) * 100 : 0;
+                                    final isTouched =
+                                        controller.touchedIndexMood.value == i;
+
+                                    return PieChartSectionData(
+                                      color: controller.chartColors[i],
+                                      value: value.toDouble(),
+                                      title: isTouched
+                                          ? '${value.toStringAsFixed(1)}%'
+                                          : '',
+                                      radius: isTouched ? 55 : 50,
+                                      titleStyle: h6SemiBold,
+                                    );
+                                  }),
+                                  centerSpaceRadius: 50,
+                                  sectionsSpace: 2,
+                                  borderData: FlBorderData(show: false),
+                                ),
+                              ),
+                              Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      "assets/images/${MentalMatrixController().getIndexedImage(
+                                        value: controller.avgMood.value,
+                                        referenceList: controller.emotions,
+                                        prefix: 'emosi',
+                                      )}",
+                                      scale: 15,
+                                    ),
+                                    sby8,
+                                    Text(avgText.toString(), style: h7SemiBold),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Center(
+                          child: Wrap(
+                            alignment: WrapAlignment.center,
+                            spacing: 12,
+                            runSpacing: 8,
+                            children: List.generate(controller.emotions.length,
+                                (index) {
+                              return Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    width: 12,
+                                    height: 12,
+                                    decoration: BoxDecoration(
+                                      color: controller.chartColors[index],
+                                      shape: BoxShape.circle,
+                                    ),
+                                  ),
+                                  sbx5,
+                                  Text(controller.emotions[index],
+                                      style: h6Regular),
+                                ],
+                              );
+                            }),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }),
+              sby24,
+              Obx(() {
+                final dataList = controller.trackingList['tracking_data'] ?? [];
+
+                // print("Data List Length: ${dataList.length}");
+
+                if (controller.isFetching.value) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+
+                if (dataList.isEmpty) {
+                  return const Text("No sleep data found");
                 }
 
                 final List<PieChartSectionData> sections = [];
@@ -241,7 +365,7 @@ class ReportView extends GetView<ReportController> {
                     boxShadow: [
                       BoxShadow(
                         color: border,
-                        offset: Offset(0, 1),
+                        offset: const Offset(0, 1),
                         blurRadius: 2,
                       ),
                     ],
@@ -272,9 +396,42 @@ class ReportView extends GetView<ReportController> {
                             children: [
                               PieChart(
                                 PieChartData(
-                                  sections: sections,
+                                  pieTouchData: PieTouchData(
+                                    touchCallback:
+                                        (FlTouchEvent event, pieTouchResponse) {
+                                      if (!event.isInterestedForInteractions ||
+                                          pieTouchResponse == null ||
+                                          pieTouchResponse.touchedSection ==
+                                              null) {
+                                        controller.touchedIndexSleep.value = -1;
+                                        return;
+                                      }
+                                      controller.touchedIndexSleep.value =
+                                          pieTouchResponse.touchedSection!
+                                              .touchedSectionIndex;
+                                    },
+                                  ),
+                                  sections: List.generate(
+                                      controller.sleepQuality.length, (i) {
+                                    final category = controller.sleepQuality[i];
+                                    final count = sleepCounts[category]!;
+                                    final value =
+                                        total > 0 ? (count / total) * 100 : 0;
+                                    final isTouched =
+                                        controller.touchedIndexSleep.value == i;
+
+                                    return PieChartSectionData(
+                                      color: controller.chartColors[i],
+                                      value: value.toDouble(),
+                                      title: isTouched
+                                          ? '${value.toStringAsFixed(1)}%'
+                                          : '',
+                                      radius: isTouched ? 55 : 50,
+                                      titleStyle: h6SemiBold,
+                                    );
+                                  }),
                                   centerSpaceRadius: 50,
-                                  sectionsSpace: 1,
+                                  sectionsSpace: 2,
                                   borderData: FlBorderData(show: false),
                                 ),
                               ),
@@ -283,7 +440,7 @@ class ReportView extends GetView<ReportController> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(avgText.toString(), style: h5SemiBold),
-                                    Text("average",
+                                    const Text("average",
                                         style: TextStyle(
                                             fontSize: 14, color: Colors.grey)),
                                   ],
@@ -291,7 +448,33 @@ class ReportView extends GetView<ReportController> {
                               )
                             ],
                           ),
-                        )
+                        ),
+                        Center(
+                          child: Wrap(
+                            alignment: WrapAlignment.center,
+                            spacing: 12,
+                            runSpacing: 8,
+                            children: List.generate(
+                                controller.sleepQuality.length, (index) {
+                              return Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    width: 12,
+                                    height: 12,
+                                    decoration: BoxDecoration(
+                                      color: controller.chartColors[index],
+                                      shape: BoxShape.circle,
+                                    ),
+                                  ),
+                                  sbx5,
+                                  Text(controller.sleepQuality[index],
+                                      style: h6Regular),
+                                ],
+                              );
+                            }),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -304,11 +487,11 @@ class ReportView extends GetView<ReportController> {
                 // print("Data List Length: ${dataList.length}");
 
                 if (controller.isFetching.value) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
 
                 if (dataList.isEmpty) {
-                  return Text("No stress data found");
+                  return const Text("No stress data found");
                 }
 
                 return Container(
@@ -316,7 +499,7 @@ class ReportView extends GetView<ReportController> {
                     boxShadow: [
                       BoxShadow(
                         color: border,
-                        offset: Offset(0, 1),
+                        offset: const Offset(0, 1),
                         blurRadius: 2,
                       ),
                     ],
@@ -348,8 +531,7 @@ class ReportView extends GetView<ReportController> {
                             axes: <RadialAxis>[
                               RadialAxis(
                                 minimum: 0,
-                                maximum:
-                                    5, // max stress level (ubah sesuai kebutuhan)
+                                maximum: 5,
                                 showLabels: false,
                                 showTicks: false,
                                 axisLineStyle: AxisLineStyle(
@@ -365,7 +547,7 @@ class ReportView extends GetView<ReportController> {
                                     cornerStyle: CornerStyle.bothCurve,
                                     width: 0.2,
                                     sizeUnit: GaugeSizeUnit.factor,
-                                    color: Colors.green.shade700,
+                                    color: primaryColor,
                                   )
                                 ],
                                 annotations: <GaugeAnnotation>[
@@ -376,7 +558,7 @@ class ReportView extends GetView<ReportController> {
                                         Text(
                                             controller.avgStress.value
                                                 .toString(),
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 fontSize: 24,
                                                 fontWeight: FontWeight.bold)),
                                       ],
@@ -401,11 +583,11 @@ class ReportView extends GetView<ReportController> {
                 // print("Data List Length: ${dataList.length}");
 
                 if (controller.isFetching.value) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
 
                 if (dataList.isEmpty) {
-                  return Text("No Activity data found");
+                  return const Text("No Activity data found");
                 }
 
                 final List<PieChartSectionData> sections = [];
@@ -447,7 +629,7 @@ class ReportView extends GetView<ReportController> {
                     boxShadow: [
                       BoxShadow(
                         color: border,
-                        offset: Offset(0, 1),
+                        offset: const Offset(0, 1),
                         blurRadius: 2,
                       ),
                     ],
@@ -478,9 +660,44 @@ class ReportView extends GetView<ReportController> {
                             children: [
                               PieChart(
                                 PieChartData(
-                                  sections: sections,
+                                  pieTouchData: PieTouchData(
+                                    touchCallback:
+                                        (FlTouchEvent event, pieTouchResponse) {
+                                      if (!event.isInterestedForInteractions ||
+                                          pieTouchResponse == null ||
+                                          pieTouchResponse.touchedSection ==
+                                              null) {
+                                        controller.touchedIndexActivity.value =
+                                            -1;
+                                        return;
+                                      }
+                                      controller.touchedIndexActivity.value =
+                                          pieTouchResponse.touchedSection!
+                                              .touchedSectionIndex;
+                                    },
+                                  ),
+                                  sections: List.generate(
+                                      controller.Activity.length, (i) {
+                                    final category = controller.Activity[i];
+                                    final count = activityCounts[category]!;
+                                    final value =
+                                        total > 0 ? (count / total) * 100 : 0;
+                                    final isTouched =
+                                        controller.touchedIndexActivity.value ==
+                                            i;
+
+                                    return PieChartSectionData(
+                                      color: controller.chartColors[i],
+                                      value: value.toDouble(),
+                                      title: isTouched
+                                          ? '${value.toStringAsFixed(1)}%'
+                                          : '',
+                                      radius: isTouched ? 55 : 50,
+                                      titleStyle: h6SemiBold,
+                                    );
+                                  }),
                                   centerSpaceRadius: 50,
-                                  sectionsSpace: 1,
+                                  sectionsSpace: 2,
                                   borderData: FlBorderData(show: false),
                                 ),
                               ),
@@ -489,7 +706,7 @@ class ReportView extends GetView<ReportController> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(avgText.toString(), style: h5SemiBold),
-                                    Text("average",
+                                    const Text("average",
                                         style: TextStyle(
                                             fontSize: 14, color: Colors.grey)),
                                   ],
@@ -497,7 +714,33 @@ class ReportView extends GetView<ReportController> {
                               )
                             ],
                           ),
-                        )
+                        ),
+                        Center(
+                          child: Wrap(
+                            alignment: WrapAlignment.center,
+                            spacing: 12,
+                            runSpacing: 8,
+                            children: List.generate(controller.Activity.length,
+                                (index) {
+                              return Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    width: 12,
+                                    height: 12,
+                                    decoration: BoxDecoration(
+                                      color: controller.chartColors[index],
+                                      shape: BoxShape.circle,
+                                    ),
+                                  ),
+                                  sbx5,
+                                  Text(controller.Activity[index],
+                                      style: h6Regular),
+                                ],
+                              );
+                            }),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -510,11 +753,11 @@ class ReportView extends GetView<ReportController> {
                 // print("Data List Length: ${dataList.length}");
 
                 if (controller.isFetching.value) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
 
                 if (dataList.isEmpty) {
-                  return Text("No Screen data found");
+                  return const Text("No Screen data found");
                 }
 
                 final List<PieChartSectionData> sections = [];
@@ -543,7 +786,7 @@ class ReportView extends GetView<ReportController> {
                     PieChartSectionData(
                       color: controller.chartColors[i],
                       value: value,
-                      title: '',
+                      title: value > 0 ? '${value.toStringAsFixed(1)}%' : '',
                       radius: 50,
                     ),
                   );
@@ -556,7 +799,7 @@ class ReportView extends GetView<ReportController> {
                     boxShadow: [
                       BoxShadow(
                         color: border,
-                        offset: Offset(0, 1),
+                        offset: const Offset(0, 1),
                         blurRadius: 2,
                       ),
                     ],
@@ -587,9 +830,44 @@ class ReportView extends GetView<ReportController> {
                             children: [
                               PieChart(
                                 PieChartData(
-                                  sections: sections,
+                                  pieTouchData: PieTouchData(
+                                    touchCallback:
+                                        (FlTouchEvent event, pieTouchResponse) {
+                                      if (!event.isInterestedForInteractions ||
+                                          pieTouchResponse == null ||
+                                          pieTouchResponse.touchedSection ==
+                                              null) {
+                                        controller.touchedIndexScreen.value =
+                                            -1;
+                                        return;
+                                      }
+                                      controller.touchedIndexScreen.value =
+                                          pieTouchResponse.touchedSection!
+                                              .touchedSectionIndex;
+                                    },
+                                  ),
+                                  sections: List.generate(
+                                      controller.ScreenTime.length, (i) {
+                                    final category = controller.ScreenTime[i];
+                                    final count = screenCounts[category]!;
+                                    final value =
+                                        total > 0 ? (count / total) * 100 : 0;
+                                    final isTouched =
+                                        controller.touchedIndexScreen.value ==
+                                            i;
+
+                                    return PieChartSectionData(
+                                      color: controller.chartColors[i],
+                                      value: value.toDouble(),
+                                      title: isTouched
+                                          ? '${value.toStringAsFixed(1)}%'
+                                          : '',
+                                      radius: isTouched ? 55 : 50,
+                                      titleStyle: h6SemiBold,
+                                    );
+                                  }),
                                   centerSpaceRadius: 50,
-                                  sectionsSpace: 1,
+                                  sectionsSpace: 2,
                                   borderData: FlBorderData(show: false),
                                 ),
                               ),
@@ -599,14 +877,40 @@ class ReportView extends GetView<ReportController> {
                                   children: [
                                     Text(avgText.toString(), style: h5SemiBold),
                                     Text("average",
-                                        style: TextStyle(
-                                            fontSize: 14, color: Colors.grey)),
+                                        style: h6Regular.copyWith(
+                                            color: greyColor)),
                                   ],
                                 ),
                               )
                             ],
                           ),
-                        )
+                        ),
+                        Center(
+                          child: Wrap(
+                            alignment: WrapAlignment.center,
+                            spacing: 12,
+                            runSpacing: 8,
+                            children: List.generate(
+                                controller.ScreenTime.length, (index) {
+                              return Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Container(
+                                    width: 12,
+                                    height: 12,
+                                    decoration: BoxDecoration(
+                                      color: controller.chartColors[index],
+                                      shape: BoxShape.circle,
+                                    ),
+                                  ),
+                                  sbx5,
+                                  Text(controller.ScreenTime[index],
+                                      style: h6Regular),
+                                ],
+                              );
+                            }),
+                          ),
+                        ),
                       ],
                     ),
                   ),

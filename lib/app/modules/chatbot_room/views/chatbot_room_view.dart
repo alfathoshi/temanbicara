@@ -10,7 +10,7 @@ import '../../../themes/colors.dart';
 import '../controllers/chatbot_room_controller.dart';
 
 class ChatbotRoomView extends GetView<ChatbotRoomController> {
-  ChatbotRoomView({super.key});
+  const ChatbotRoomView({super.key});
 
   @override
   Widget build(BuildContext context) {

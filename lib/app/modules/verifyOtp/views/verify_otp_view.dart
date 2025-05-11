@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
@@ -15,10 +14,12 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: whiteColor,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        backgroundColor: whiteColor,
         title: Text(
-          'Verify OTP',
+          'Verifikasi OTP',
           style: h3Bold,
         ),
         centerTitle: true,
@@ -46,7 +47,7 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                 ),
               ),
               Text(
-                'Enter the OTP that sent to ${controller.email}',
+                'Masukkan OTP yang dikirim ke email ${controller.email}',
                 style: GoogleFonts.poppins().copyWith(
                   fontSize: 14,
                 ),
@@ -67,7 +68,7 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
               sby16,
               Obx(
                 () => Text(
-                  'Incorrect OTP, try again',
+                  'OTP tidak valid, coba lagi',
                   style: GoogleFonts.poppins().copyWith(
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
@@ -82,14 +83,14 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: 'Didn\'t receive the OTP email? ',
+                      text: 'Tidak mendapat email OTP? ',
                       style: GoogleFonts.poppins().copyWith(
                         fontSize: 14,
                         color: const Color(0xFF7E954E),
                       ),
                     ),
                     TextSpan(
-                      text: 'Resend OTP!',
+                      text: 'Kirim ulang OTP!',
                       style: GoogleFonts.poppins().copyWith(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
@@ -147,10 +148,13 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
 }
 
 Widget buildOtpField(int index, var controller, var context) {
+  var inputSize = (MediaQuery.sizeOf(context).width - 92) / 6;
+
   return SizedBox(
-    width: 50,
-    height: 50,
+    width: inputSize,
+    height: inputSize,
     child: TextField(
+      style: TextStyle(fontSize: inputSize / 4, fontWeight: FontWeight.bold),
       enabled: index == controller.focusedIndex.value,
       controller: controller.controllers[index],
       focusNode: controller.focusNodes[index],

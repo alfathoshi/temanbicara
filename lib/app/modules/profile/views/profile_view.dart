@@ -1,12 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
@@ -33,40 +29,41 @@ class ProfileView extends GetView<ProfileController> {
               child: Column(
                 children: [
                   sby12,
-                  Stack(
-                    alignment: Alignment.bottomRight,
-                    children: [
-                      CircleAvatar(
-                        radius: 80,
-                        backgroundColor: border,
-                        child: CircleAvatar(
-                          radius: 78,
-                          backgroundColor: whiteColor,
-                          child: Image.asset(
-                            'assets/images/profile.png',
+                  Obx(
+                    () => Stack(
+                      alignment: Alignment.bottomRight,
+                      children: [
+                        CircleAvatar(
+                          radius: 80,
+                          backgroundColor: border,
+                          child: CircleAvatar(
+                            radius: 78,
+                            backgroundColor: whiteColor,
+                            backgroundImage:
+                                NetworkImage(controller.profileUrl.value),
                           ),
                         ),
-                      ),
-                      Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: primaryColor,
-                        ),
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.camera_alt,
-                            size: 16,
-                            color: whiteColor,
+                        Container(
+                          width: 40,
+                          height: 40,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: primaryColor,
                           ),
-                          onPressed: () async {
-                            await controller.pickImage();
-                            await controller.changeImage();
-                          },
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.camera_alt,
+                              size: 16,
+                              color: whiteColor,
+                            ),
+                            onPressed: () async {
+                              await controller.pickImage();
+                              await controller.changeImage();
+                            },
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   sby12,
                   Text(

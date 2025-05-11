@@ -44,9 +44,9 @@ class SelectDate extends StatelessWidget {
             if (states.contains(WidgetState.selected)) {
               return BorderSide(color: primaryColor);
             } else if (states.contains(WidgetState.disabled)) {
-              return BorderSide(color: grey4Color);
+              return const BorderSide(color: grey4Color);
             }
-            return BorderSide(color: grey4Color);
+            return const BorderSide(color: grey4Color);
           }),
           dayBackgroundColor: WidgetStateProperty.resolveWith((states) {
             if (states.contains(WidgetState.selected)) {
@@ -60,9 +60,9 @@ class SelectDate extends StatelessWidget {
             if (states.contains(WidgetState.selected)) {
               return BorderSide(color: primaryColor);
             } else if (states.contains(WidgetState.disabled)) {
-              return BorderSide(color: grey4Color);
+              return const BorderSide(color: grey4Color);
             }
-            return BorderSide(color: grey4Color);
+            return const BorderSide(color: grey4Color);
           }),
           currentDayBackgroundColor: WidgetStateProperty.resolveWith((states) {
             if (states.contains(WidgetState.selected)) {

@@ -40,7 +40,7 @@ class OnBoardingView extends GetView<OnBoardingController> {
                   ),
                   sby36,
                   Center(
-                    child: Container(
+                    child: SizedBox(
                       height: 300,
                       child: Image.asset(
                         "assets/images/boarding1.png",
@@ -109,7 +109,7 @@ class OnBoardingView extends GetView<OnBoardingController> {
                     Obx(() {
                       if (controller.currentPage.value ==
                           controller.pages.length - 1) {
-                        return SizedBox(width: 10);
+                        return const SizedBox(width: 10);
                       }
 
                       return MyButtonOutlinedCustom(
@@ -137,10 +137,10 @@ class OnBoardingView extends GetView<OnBoardingController> {
 
                       return AnimatedOpacity(
                         opacity: visible ? 1.0 : 0.0,
-                        duration: Duration(milliseconds: 400),
+                        duration: const Duration(milliseconds: 400),
                         curve: Curves.easeInOut,
                         child: AnimatedContainer(
-                          duration: Duration(milliseconds: 500),
+                          duration: const Duration(milliseconds: 500),
                           curve: Curves.easeInOut,
                           transform: Matrix4.translationValues(
                               visible ? 0 : -30, 0, 0),
@@ -159,7 +159,7 @@ class OnBoardingView extends GetView<OnBoardingController> {
                 sby48,
                 // IMAGE
                 Center(
-                  child: Container(
+                  child: SizedBox(
                     height: 300,
                     child: Obx(() {
                       final img = controller.currentImage.value;

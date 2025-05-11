@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:temanbicara/app/modules/chatbot/views/chatbot_view.dart';
 import 'package:temanbicara/app/modules/consult/views/consult_view.dart';
 import 'package:temanbicara/app/modules/journal/views/journal_view.dart';
 import 'package:temanbicara/app/modules/profile/views/profile_view.dart';

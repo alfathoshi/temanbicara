@@ -5,7 +5,6 @@ import 'package:temanbicara/app/modules/edit_profile/controllers/datepicker_cont
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
-import '../../../widgets/buttons.dart';
 import '../../../widgets/date.dart';
 import '../../../widgets/gender_selector.dart';
 import '../controllers/assesment_1_controller.dart';

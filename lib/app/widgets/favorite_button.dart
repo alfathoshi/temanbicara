@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:temanbicara/app/themes/fonts.dart';
 
 class FavoriteButton extends StatelessWidget {
   final Function()? get;
