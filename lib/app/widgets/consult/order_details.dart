@@ -101,7 +101,7 @@ class OrderDetails extends StatelessWidget {
                         ),
                         sby5,
                         Text(
-                          consultPending.tanggal + " " + consultPending.waktu,
+                          "${consultPending.tanggal} ${consultPending.waktu}",
                           style: h7SemiBold,
                         ),
                       ],

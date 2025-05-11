@@ -41,7 +41,7 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
           child: Column(
             children: [
               sby24,
-              Container(
+              SizedBox(
                 height: 60,
                 child: Expanded(
                   child: TransactionTimeLineViewIndex(index: 4),

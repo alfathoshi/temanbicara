@@ -15,7 +15,7 @@ class form extends StatelessWidget {
           'Nama',
           style: textDescriptionSemiBold,
         ),
-        SizedBox(
+        const SizedBox(
           height: 8,
         ),
         TextField(
@@ -25,20 +25,20 @@ class form extends StatelessWidget {
             hintStyle: textFieldStyle,
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: Colors.black26,
                   width: 2,
                 )),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 16,
         ),
         Text(
           'Nama Panggilan',
           style: textDescriptionSemiBold,
         ),
-        SizedBox(
+        const SizedBox(
           height: 8,
         ),
         TextField(
@@ -48,7 +48,7 @@ class form extends StatelessWidget {
             hintStyle: textFieldStyle,
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
-                borderSide: BorderSide(
+                borderSide: const BorderSide(
                   color: Colors.black26,
                   width: 2,
                 )),

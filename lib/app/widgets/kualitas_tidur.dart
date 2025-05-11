@@ -24,6 +24,20 @@ class KualitasTidur extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+              style: BorderStyle.solid, color: const Color(0xFF7D944D)),
+          borderRadius: BorderRadius.circular(50),
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xFF000000).withOpacity(0.25),
+              blurRadius: 5,
+              spreadRadius: 1,
+              offset: const Offset(1, 1),
+            )
+          ],
+          color: BackgroundColor,
+        ),
         child: Padding(
           padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
           child: Row(
@@ -54,20 +68,6 @@ class KualitasTidur extends StatelessWidget {
               )
             ],
           ),
-        ),
-        decoration: BoxDecoration(
-          border:
-              Border.all(style: BorderStyle.solid, color: Color(0xFF7D944D)),
-          borderRadius: BorderRadius.circular(50),
-          boxShadow: [
-            BoxShadow(
-              color: Color(0xFF000000).withOpacity(0.25),
-              blurRadius: 5,
-              spreadRadius: 1,
-              offset: Offset(1, 1),
-            )
-          ],
-          color: BackgroundColor,
         ),
       ),
     );

@@ -55,7 +55,7 @@ class ConsultPendingCard extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
+                      SizedBox(
                         width: screenWidth - 240,
                         child: Text(
                           consultPending.nama,
@@ -70,7 +70,7 @@ class ConsultPendingCard extends StatelessWidget {
                         style: h6Bold,
                       ),
                       Text(
-                        consultPending.tanggal + " " + consultPending.waktu,
+                        "${consultPending.tanggal} ${consultPending.waktu}",
                         style: h6Bold,
                       ),
                     ],

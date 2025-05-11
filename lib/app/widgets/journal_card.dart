@@ -15,14 +15,14 @@ class JournalCard extends StatelessWidget {
   final Function()? getEdit;
 
   const JournalCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.body,
     required this.date,
     this.getDelete,
     this.getEdit,
     required this.image,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

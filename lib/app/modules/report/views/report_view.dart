@@ -51,7 +51,7 @@ class ReportView extends GetView<ReportController> {
                   boxShadow: [
                     BoxShadow(
                       color: border,
-                      offset: Offset(0, 1),
+                      offset: const Offset(0, 1),
                       blurRadius: 2,
                     ),
                   ],
@@ -145,11 +145,11 @@ class ReportView extends GetView<ReportController> {
                 // print("Data List Length: ${dataList.length}");
 
                 if (controller.isFetching.value) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
 
                 if (dataList.isEmpty) {
-                  return Text("No mood data found");
+                  return const Text("No mood data found");
                 }
 
                 final List<PieChartSectionData> sections = [];
@@ -191,7 +191,7 @@ class ReportView extends GetView<ReportController> {
                     boxShadow: [
                       BoxShadow(
                         color: border,
-                        offset: Offset(0, 1),
+                        offset: const Offset(0, 1),
                         blurRadius: 2,
                       ),
                     ],
@@ -319,11 +319,11 @@ class ReportView extends GetView<ReportController> {
                 // print("Data List Length: ${dataList.length}");
 
                 if (controller.isFetching.value) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
 
                 if (dataList.isEmpty) {
-                  return Text("No sleep data found");
+                  return const Text("No sleep data found");
                 }
 
                 final List<PieChartSectionData> sections = [];
@@ -365,7 +365,7 @@ class ReportView extends GetView<ReportController> {
                     boxShadow: [
                       BoxShadow(
                         color: border,
-                        offset: Offset(0, 1),
+                        offset: const Offset(0, 1),
                         blurRadius: 2,
                       ),
                     ],
@@ -440,7 +440,7 @@ class ReportView extends GetView<ReportController> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(avgText.toString(), style: h5SemiBold),
-                                    Text("average",
+                                    const Text("average",
                                         style: TextStyle(
                                             fontSize: 14, color: Colors.grey)),
                                   ],
@@ -487,11 +487,11 @@ class ReportView extends GetView<ReportController> {
                 // print("Data List Length: ${dataList.length}");
 
                 if (controller.isFetching.value) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
 
                 if (dataList.isEmpty) {
-                  return Text("No stress data found");
+                  return const Text("No stress data found");
                 }
 
                 return Container(
@@ -499,7 +499,7 @@ class ReportView extends GetView<ReportController> {
                     boxShadow: [
                       BoxShadow(
                         color: border,
-                        offset: Offset(0, 1),
+                        offset: const Offset(0, 1),
                         blurRadius: 2,
                       ),
                     ],
@@ -558,7 +558,7 @@ class ReportView extends GetView<ReportController> {
                                         Text(
                                             controller.avgStress.value
                                                 .toString(),
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 fontSize: 24,
                                                 fontWeight: FontWeight.bold)),
                                       ],
@@ -583,11 +583,11 @@ class ReportView extends GetView<ReportController> {
                 // print("Data List Length: ${dataList.length}");
 
                 if (controller.isFetching.value) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
 
                 if (dataList.isEmpty) {
-                  return Text("No Activity data found");
+                  return const Text("No Activity data found");
                 }
 
                 final List<PieChartSectionData> sections = [];
@@ -629,7 +629,7 @@ class ReportView extends GetView<ReportController> {
                     boxShadow: [
                       BoxShadow(
                         color: border,
-                        offset: Offset(0, 1),
+                        offset: const Offset(0, 1),
                         blurRadius: 2,
                       ),
                     ],
@@ -706,7 +706,7 @@ class ReportView extends GetView<ReportController> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(avgText.toString(), style: h5SemiBold),
-                                    Text("average",
+                                    const Text("average",
                                         style: TextStyle(
                                             fontSize: 14, color: Colors.grey)),
                                   ],
@@ -753,11 +753,11 @@ class ReportView extends GetView<ReportController> {
                 // print("Data List Length: ${dataList.length}");
 
                 if (controller.isFetching.value) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 }
 
                 if (dataList.isEmpty) {
-                  return Text("No Screen data found");
+                  return const Text("No Screen data found");
                 }
 
                 final List<PieChartSectionData> sections = [];
@@ -799,7 +799,7 @@ class ReportView extends GetView<ReportController> {
                     boxShadow: [
                       BoxShadow(
                         color: border,
-                        offset: Offset(0, 1),
+                        offset: const Offset(0, 1),
                         blurRadius: 2,
                       ),
                     ],

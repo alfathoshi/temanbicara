@@ -25,12 +25,12 @@ class InvoiceData extends StatelessWidget {
               border: Border.all(color: primaryColor, width: 2),
               borderRadius: BorderRadius.circular(20)),
           child: Padding(
-            padding: EdgeInsets.all(21),
+            padding: const EdgeInsets.all(21),
             child: Column(
               children: [
                 Row(
                   children: [
-                    CircleAvatar(radius: 20),
+                    const CircleAvatar(radius: 20),
                     sbX12,
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +41,7 @@ class InvoiceData extends StatelessWidget {
                               h5Bold.copyWith(overflow: TextOverflow.ellipsis),
                           maxLines: 2,
                         ),
-                        SizedBox(height: 2),
+                        const SizedBox(height: 2),
                         Text(
                           invoice.transaction.expertise,
                           style: h7Regular.copyWith(
@@ -53,7 +53,7 @@ class InvoiceData extends StatelessWidget {
                   ],
                 ),
                 sby12,
-                Divider(
+                const Divider(
                   height: 1,
                   thickness: 1.5,
                   color: grey4Color,
@@ -67,7 +67,7 @@ class InvoiceData extends StatelessWidget {
                   ],
                 ),
                 sby24,
-                Divider(
+                const Divider(
                   height: 1,
                   thickness: 1.5,
                   color: grey4Color,
@@ -81,7 +81,7 @@ class InvoiceData extends StatelessWidget {
                   ],
                 ),
                 sby24,
-                Divider(
+                const Divider(
                   height: 1,
                   thickness: 1.5,
                   color: grey4Color,
@@ -95,7 +95,7 @@ class InvoiceData extends StatelessWidget {
                   ],
                 ),
                 sby24,
-                Divider(
+                const Divider(
                   height: 1,
                   thickness: 1.5,
                   color: grey4Color,
@@ -134,7 +134,7 @@ class InvoiceData extends StatelessWidget {
                   ],
                 ),
                 sby24,
-                Divider(
+                const Divider(
                   height: 1,
                   thickness: 1.5,
                   color: grey4Color,
@@ -148,7 +148,7 @@ class InvoiceData extends StatelessWidget {
                   ],
                 ),
                 sby24,
-                Divider(
+                const Divider(
                   height: 1,
                   thickness: 1.5,
                   color: grey4Color,
@@ -189,7 +189,7 @@ class InvoiceData extends StatelessWidget {
                   ],
                 ),
                 sby24,
-                Divider(
+                const Divider(
                   height: 1,
                   thickness: 1.5,
                   color: grey4Color,

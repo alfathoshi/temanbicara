@@ -21,7 +21,7 @@ class ForgotPasswordController extends GetxController {
       if (confirmPasswordController.text != newPasswordController.text) {
         isLoading.value = false;
         Get.snackbar(
-            "Error Occured", "New and confirm password can\'t be different");
+            "Error Occured", "New and confirm password can't be different");
         return;
       }
 
@@ -58,20 +58,6 @@ class ForgotPasswordController extends GetxController {
   }
 
   final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
 
   void increment() => count.value++;
 }

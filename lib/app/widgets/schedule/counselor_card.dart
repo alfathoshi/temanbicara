@@ -75,13 +75,13 @@ class CounselorCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      '${username}',
+                      username,
                       style: h6Bold.copyWith(overflow: TextOverflow.ellipsis),
                       maxLines: 2,
                     ),
                     sby12,
                     Text(
-                      'Expertise : ${expertise}',
+                      'Expertise : $expertise',
                       style: TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.w600,

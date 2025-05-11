@@ -60,7 +60,7 @@ class Assesment6View extends GetView<Assesment6Controller> {
         padding: const EdgeInsets.all(32.0),
         child: ListView(
           children: [
-            Container(
+            SizedBox(
               height: MediaQuery.sizeOf(context).height -
                   (AppBar().preferredSize.height +
                       MediaQuery.of(context).padding.top * 4),
@@ -98,7 +98,7 @@ class Assesment6View extends GetView<Assesment6Controller> {
                           borderSide: BorderSide(color: primaryColor),
                         ),
                       )),
-                  Spacer(),
+                  const Spacer(),
                   MyButton(
                       get: () {
                         Get.toNamed(Routes.ASSESMENT_7);
@@ -115,7 +115,6 @@ class Assesment6View extends GetView<Assesment6Controller> {
                 style: warningGoals,
               ),
             ),
-     
           ],
         ),
       ),

@@ -108,8 +108,7 @@ class ReportController extends GetxController {
           'Content-Type': 'application/json',
         },
         body: json.encode({
-          'date_request':
-              '${DateFormat('yyyy-MM-dd').format(selectedDate.value)}'
+          'date_request': DateFormat('yyyy-MM-dd').format(selectedDate.value)
         }),
       );
 
@@ -160,7 +159,7 @@ class ReportController extends GetxController {
             int score = report.value!.matrix;
             final desc = getMentalMatrixDescription(score);
 
-            title.value = '${score} - ${desc['title']}';
+            title.value = '$score - ${desc['title']}';
             detail.value = desc['detail']!;
             matrixValue.value = score.toString();
             isTrackingFilled.value = true;

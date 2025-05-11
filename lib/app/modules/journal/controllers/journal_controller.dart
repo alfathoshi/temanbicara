@@ -55,8 +55,7 @@ class JournalController extends GetxController {
           'Authorization': 'Bearer $token',
         },
         body: json.encode({
-          'date_request':
-              '${DateFormat('yyyy-MM-dd').format(selectedDate.value)}'
+          'date_request': DateFormat('yyyy-MM-dd').format(selectedDate.value)
         }),
       );
 

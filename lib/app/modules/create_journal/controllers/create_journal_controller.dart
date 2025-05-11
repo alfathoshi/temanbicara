@@ -6,7 +6,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'dart:convert';
 
 import 'package:temanbicara/app/themes/colors.dart';
 
@@ -56,7 +55,7 @@ class CreateJournalController extends GetxController {
 
       request.fields['title'] = titleController.text;
       request.fields['body'] = bodyController.text;
-      
+
       if (pickedImage.value != null) {
         request.files.add(await http.MultipartFile.fromPath(
           'image',

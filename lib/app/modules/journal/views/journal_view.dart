@@ -13,6 +13,7 @@ import '../controllers/journal_controller.dart';
 
 class JournalView extends GetView<JournalController> {
   JournalView({super.key});
+  @override
   final JournalController controller = Get.put(JournalController());
 
   @override

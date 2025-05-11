@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:temanbicara/app/widgets/buttons.dart';
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
 import '../controllers/assesment_7_controller.dart';

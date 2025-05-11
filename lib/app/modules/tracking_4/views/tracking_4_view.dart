@@ -11,6 +11,7 @@ import '../controllers/tracking_4_controller.dart';
 class Tracking4View extends GetView<Tracking4Controller> {
   Tracking4View({super.key});
 
+  @override
   final Tracking4Controller controller = Get.put(Tracking4Controller());
 
   @override

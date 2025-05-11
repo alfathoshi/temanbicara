@@ -11,6 +11,7 @@ import '../controllers/consult_controller.dart';
 class ConsultView extends GetView<ConsultController> {
   ConsultView({Key? key}) : super(key: key);
 
+  @override
   final ConsultController controller = Get.put(ConsultController());
 
   @override

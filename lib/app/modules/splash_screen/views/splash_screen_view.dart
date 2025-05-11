@@ -30,7 +30,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
               'assets/images/logo.png',
               scale: 2,
             ),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
             Text(

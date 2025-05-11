@@ -51,111 +51,156 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                       color: Colors.grey.withOpacity(0.2),
                       spreadRadius: 2,
                       blurRadius: 6,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Old Password',
-                        style: textDescriptionSemiBold,
-                      ),
-                      sby8,
-                      TextField(
-                        controller: controller.oldPassController,
-                        cursorColor: black,
-                        decoration: InputDecoration(
-                          hintText: 'Masukkan Password Lama',
-                          hintStyle: h5Regular.copyWith(color: grey2Color),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(
-                              color: greyColor,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: primaryColor),
-                          ),
+                child: Obx(
+                  () => Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Password saat ini',
+                          style: textDescriptionSemiBold,
                         ),
-                      ),
-                      Row(
-                        mainAxisAlignment:
-                            MainAxisAlignment.end, // Menempatkan di kanan
-                        children: [
-                          TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              'Forgot Password?',
-                              style: h6Medium.copyWith(
-                                color: primaryColor,
+                        sby8,
+                        TextField(
+                          obscureText: controller.isOldPassObscure.value,
+                          controller: controller.oldPassController,
+                          cursorColor: black,
+                          decoration: InputDecoration(
+                            suffixIcon: GestureDetector(
+                              onTapUp: (_) {
+                                controller.isOldPassObscure.value = true;
+                              },
+                              onTapDown: (_) {
+                                controller.isOldPassObscure.value = false;
+                              },
+                              child: const Icon(
+                                Icons.remove_red_eye_outlined,
+                                size: 20,
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Text(
-                        'New Password',
-                        style: textDescriptionSemiBold,
-                      ),
-                      sby8,
-                      TextField(
-                        controller: controller.newPassController,
-                        cursorColor: black,
-                        decoration: InputDecoration(
-                          hintText: 'Masukkan Password Baru',
-                          hintStyle: h5Regular.copyWith(color: grey2Color),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(
-                              color: greyColor,
+                            hintText: 'Masukkan Password',
+                            hintStyle: h5Regular.copyWith(color: grey2Color),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(
+                                color: greyColor,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: primaryColor),
                             ),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: primaryColor),
-                          ),
                         ),
-                      ),
-                      sby12,
-                      Text(
-                        'Confirm Password',
-                        style: textDescriptionSemiBold,
-                      ),
-                      sby8,
-                      TextField(
-                        controller: controller.confirmPassController,
-                        cursorColor: black,
-                        decoration: InputDecoration(
-                          hintText: 'Konfirmasi Password',
-                          hintStyle: h5Regular.copyWith(color: grey2Color),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: const BorderSide(
-                              color: greyColor,
+                        Row(
+                          mainAxisAlignment:
+                              MainAxisAlignment.end, // Menempatkan di kanan
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                Get.toNamed(Routes.SEND_OTP);
+                              },
+                              child: Text(
+                                'Lupa Password?',
+                                style: h6Medium.copyWith(
+                                  color: primaryColor,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          'Password baru',
+                          style: textDescriptionSemiBold,
+                        ),
+                        sby8,
+                        TextField(
+                          obscureText: controller.isNewPassObscure.value,
+                          controller: controller.newPassController,
+                          cursorColor: black,
+                          decoration: InputDecoration(
+                            suffixIcon: GestureDetector(
+                              onTapUp: (_) {
+                                controller.isNewPassObscure.value = true;
+                              },
+                              onTapDown: (_) {
+                                controller.isNewPassObscure.value = false;
+                              },
+                              child: const Icon(
+                                Icons.remove_red_eye_outlined,
+                                size: 20,
+                              ),
+                            ),
+                            hintText: 'Masukkan password baru',
+                            hintStyle: h5Regular.copyWith(color: grey2Color),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(
+                                color: greyColor,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: primaryColor),
                             ),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: primaryColor),
+                        ),
+                        sby12,
+                        Text(
+                          'Konfirmasi password baru',
+                          style: textDescriptionSemiBold,
+                        ),
+                        sby8,
+                        TextField(
+                          obscureText: controller.isConfPassObscure.value,
+                          controller: controller.confirmPassController,
+                          cursorColor: black,
+                          decoration: InputDecoration(
+                            suffixIcon: GestureDetector(
+                              onTapUp: (_) {
+                                controller.isConfPassObscure.value = true;
+                              },
+                              onTapDown: (_) {
+                                controller.isConfPassObscure.value = false;
+                              },
+                              child: const Icon(
+                                Icons.remove_red_eye_outlined,
+                                size: 20,
+                              ),
+                            ),
+                            hintText: 'Masukkan ulang password',
+                            hintStyle: h5Regular.copyWith(color: grey2Color),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(
+                                color: greyColor,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: primaryColor),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
             sby24,
             MyButton(
-                get: () {
-                  _controller.changePassword();
-                  Get.offAllNamed(Routes.NAVIGATION_BAR,
-                      arguments: {"indexPage": 4});
+                get: () async {
+                  bool isSuccess = await _controller.changePassword();
+                  if (isSuccess) {
+                    Get.offAllNamed(Routes.NAVIGATION_BAR,
+                        arguments: {"indexPage": 4});
+                  }
                 },
                 color: primaryColor,
                 text: 'Simpan')

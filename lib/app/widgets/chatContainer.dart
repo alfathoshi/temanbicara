@@ -53,7 +53,7 @@ class Chatcontainer extends StatelessWidget {
               child: CircleAvatar(
                 radius: 30,
                 child: Image.asset(
-                  'assets/images/${image}.png',
+                  'assets/images/$image.png',
                   scale: 2,
                 ),
               ),
@@ -80,7 +80,7 @@ class Chatcontainer extends StatelessWidget {
                 ],
               ),
             ),
-            Spacer(),
+            const Spacer(),
             Padding(
               padding: const EdgeInsets.only(right: 15),
               child: Text(

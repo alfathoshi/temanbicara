@@ -28,7 +28,7 @@ class ChooseMethod extends StatelessWidget {
       builder: (controller) {
         return Column(
           children: [
-            Container(
+            SizedBox(
               width: screenWidth - 56,
               child: Padding(
                 padding: const EdgeInsets.all(1.0),

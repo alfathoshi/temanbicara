@@ -50,21 +50,6 @@ class Tracking3Controller extends GetxController {
       return Text('Apakah kamu perlu bantuan ahli?',
           style: h6Bold.copyWith(color: greyColor));
     }
-    return Text('');
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
+    return const Text('');
   }
 }

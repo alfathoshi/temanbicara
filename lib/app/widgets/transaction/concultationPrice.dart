@@ -15,7 +15,8 @@ class ConcultationPrice extends StatelessWidget {
           border: Border.all(color: primaryColor),
           borderRadius: BorderRadius.circular(20)),
       child: Padding(
-        padding: EdgeInsets.only(left: 25, right: 33, bottom: 20, top: 20),
+        padding:
+            const EdgeInsets.only(left: 25, right: 33, bottom: 20, top: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

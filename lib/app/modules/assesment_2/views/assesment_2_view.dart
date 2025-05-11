@@ -69,7 +69,7 @@ class Assesment2View extends GetView<Assesment2Controller> {
                       ),
                       sby32,
                       Image.asset('assets/images/meditation.png'),
-                      Expanded(
+                      const Expanded(
                           child:
                               SizedBox()), // ini bakal dorong konten terakhir ke bawah
                       Center(
