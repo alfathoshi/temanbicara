@@ -72,7 +72,10 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                reportController.selectedDate.value.toString(),
+                                controller
+                                    .formatDate(
+                                        reportController.selectedDate.value)
+                                    .toString(),
                                 style: h5Regular,
                               ),
                               Text(
