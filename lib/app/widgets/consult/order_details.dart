@@ -62,56 +62,6 @@ class OrderDetails extends StatelessWidget {
                     bottom: BorderSide(
                       color: grey4Color,
                       width: 1.0,
-                ),
-              ),
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(20, 26, 20, 20),
-                child: Row(
-                  children: [
-                    Container(
-                      width: 68,
-                      height: 85,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: Colors.black,
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: Image.asset(
-                          'assets/images/Hafid.jpg',
-                          scale: 1.5,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                    ),
-                    sbX12,
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          consultPending.nama,
-                          style: h4Bold,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
-                        ),
-                        sby12,
-                        // Text(
-                        //   "dummy",
-                        //   style: h7Regular.copyWith(
-                        //     color: grey2Color,
-                        //   ),
-                        // ),
-                        sby5,
-                        Text(
-                          consultPending.durasi,
-                          style: h7SemiBold,
-                        ),
-                        sby5,
-                        Text(
-                          "${consultPending.tanggal} ${consultPending.waktu}",
-                          style: h7SemiBold,
-                        ),
-                      ],
                     ),
                   ),
                 ),
