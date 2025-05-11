@@ -2,17 +2,20 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:get_storage/get_storage.dart';
+import 'package:temanbicara/app/config/config.dart';
+import 'package:temanbicara/app/data/Invoice.dart';
+import 'package:temanbicara/app/data/Transaction.dart';
 import 'package:temanbicara/app/data/consultComplete.dart';
 import 'package:temanbicara/app/data/consultPending.dart';
-import 'package:temanbicara/app/config/config.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:temanbicara/app/data/consultResponse.dart';
+import 'package:temanbicara/app/routes/app_pages.dart';
+import 'package:temanbicara/app/themes/colors.dart';
 
 class BookingHistoryController extends GetxController {
-  var pendingList = <ConsultPending>[].obs;
-  var completedList = <ConsultComplete>[].obs;
-  var isLoading = false.obs;
-
+  final pendingList = <ConsultPending>[].obs;
+  final completedList = <ConsultComplete>[].obs;
+  final isLoading = false.obs;
   final box = GetStorage();
 
   @override
@@ -22,83 +25,76 @@ class BookingHistoryController extends GetxController {
   }
 
   Future<void> fetchData() async {
-    isLoading.value = true;
-    await fetchPending();
-    await fetchCompleted();
-    isLoading.value = false;
+    isLoading(true);
+    await Future.wait([fetchHistory("Pending"), fetchHistory("Success")]);
+    isLoading(false);
   }
 
-  Future<void> fetchPending() async {
+  Future<void> checkPaymentStatus(String uuid) async {
+    final token = box.read('token');
+
     try {
-      final response = await http.post(
-        Uri.parse('${Config.apiEndPoint}/bookingHistory'),
+      final response = await http.get(
+        Uri.parse('${Config.apiEndPoint}/payment/$uuid'),
         headers: {
-          'Authorization': 'Bearer ${box.read('token')}',
-          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
         },
-        body: jsonEncode({
-          "payment_status": "Pending",
-        }),
       );
 
-      if (response.statusCode == 201) {
-        final data = jsonDecode(response.body);
-        if (data['status'] == true && data['data'] != null) {
-          List pendingData = data['data'];
-          pendingList.value = pendingData.map((item) {
-            final schedule = item['schedule'];
-            final payment = item['payment'];
-            final amount = payment['amount'];
-            final paymentMethod = payment['payment_method'];
-            final expiredDate = payment['expired_date'];
-            final nama = schedule['user'];
-            final bank = payment['bank'];
-            final createdAt = payment['created_at'];
-            final patientId = item['patient_id'];
-            final scheduleId = item['schedule_id'];
-            final paymentId = item['payment_id'];
+      if (response.statusCode == 200) {
+        final status = json.decode(response.body)['transaction_status'];
+        if (status == 'settlement') {
+          final matched = pendingList.firstWhereOrNull(
+            (e) => e.transactionId == uuid,
+          );
 
-            String expiredTime = '';
-            String formattedExpiredDate = '';
-            if (expiredDate.isNotEmpty) {
-              List<String> parts = expiredDate.split(' ');
-              if (parts.length == 2) {
-                final datePart = parts[0];
-                final timePart = parts[1];
-
-                final parsedDate = DateTime.parse(datePart);
-                formattedExpiredDate =
-                    "${parsedDate.day} ${_monthName(parsedDate.month)}";
-                expiredTime = timePart.substring(0, 5);
-              }
-            }
-            return ConsultPending(
-              nama: nama['name'],
-              bank: payment['bank'],
-              durasi: _calculateDuration(
-                  schedule['start_time'], schedule['end_time']),
-              tanggal: schedule['available_date'] != null
-                  ? _formatFullDate(schedule['available_date'])
-                  : '-',
-              waktu: _formatTime(schedule['start_time']),
-              tanggalTenggat: formattedExpiredDate,
-              waktuTenggat: expiredTime,
-              metodePembayaran: paymentMethod + " - " + bank,
-              totalHarga: amount.toString(),
+          if (matched != null) {
+            final transaction = TransactionModel(
+              namaPsikiater: matched.nama,
+              expertise: "Counselor Expertise",
+              jadwal: matched.availableDateRaw!,
+              waktu: matched.waktu,
+              selectedID: matched.scheduleId,
             );
-          }).toList();
-        } else {
-          pendingList.clear();
+
+            final invoice = InvoiceModel(
+              transaction: transaction,
+              invoice: "INV-${matched.paymentId}",
+              metodePembayaran: matched.metodePembayaran,
+              hargaTotal: int.parse(matched.totalHarga) + 15000 + 1000,
+            );
+
+            final consultationData = ConsultationResponse(
+              bank: matched.bank,
+              vaNumber: matched.vaNumber,
+              paymentMethod: matched.metodePembayaran,
+              transactionId: matched.transactionId,
+              expiredDate: matched.expiredDate,
+              amount: int.parse(matched.totalHarga),
+            );
+
+            Get.snackbar(
+              'Success',
+              'Your payment has been confirmed!',
+              backgroundColor: primaryColor.withOpacity(0.6),
+              colorText: Colors.white,
+              snackPosition: SnackPosition.TOP,
+            );
+
+            Get.offAllNamed(Routes.TRANSACTION_SUCCESS, arguments: {
+              'consultationData': consultationData,
+              'transaction': transaction,
+              'invoice': invoice,
+            });
+          }
         }
-      } else {
-        //print('Failed to fetch pending, status: ${response.statusCode}');
       }
     } catch (e) {
-      //Get.snackbar('Error', e.toString());
+      print('Error checking payment status: $e');
     }
   }
 
-  Future<void> fetchCompleted() async {
+  Future<void> fetchHistory(String status) async {
     try {
       final response = await http.post(
         Uri.parse('${Config.apiEndPoint}/bookingHistory'),
@@ -106,23 +102,18 @@ class BookingHistoryController extends GetxController {
           'Authorization': 'Bearer ${box.read('token')}',
           'Content-Type': 'application/json',
         },
-        body: jsonEncode({
-          "payment_status": "Completed",
-        }),
+        body: jsonEncode({"payment_status": status}),
       );
-      if (response.statusCode == 200) {
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
         final data = jsonDecode(response.body);
         if (data['status'] == true) {
-          completedList.value = (data['data'] as List).map((item) {
-            final schedule = item['schedule'];
-            return ConsultComplete(
-              nama: "Counselor Name", // <- nanti kalau ada nama, ganti ya
-              durasi: "${schedule['start_time']} - ${schedule['end_time']}",
-              expertise: "Counselor Expertise", // <-- dummy dulu
-              tanggal: schedule['available_date'].substring(0, 10),
-              waktu: schedule['start_time'],
-            );
-          }).toList();
+          final list = data['data'] as List;
+          if (status == "Pending") {
+            pendingList.value = list.map(_mapPending).toList();
+          } else {
+            completedList.value = list.map(_mapCompleted).toList();
+          }
         }
       }
     } catch (e) {
@@ -130,38 +121,73 @@ class BookingHistoryController extends GetxController {
     }
   }
 
-  
-  
-  String _calculateDuration(String? startTime, String? endTime) {
-    if (startTime == null || endTime == null) return '-';
+  ConsultPending _mapPending(dynamic item) {
+    final schedule = item['schedule'];
+    final payment = item['payment'];
+    final expired = _parseExpiredDate(payment['expired_date']);
 
-    final start = TimeOfDay(
-      hour: int.parse(startTime.split(':')[0]),
-      minute: int.parse(startTime.split(':')[1]),
+    return ConsultPending(
+      nama: schedule['user']['name'],
+      bank: payment['bank'],
+      durasi: _calculateDuration(schedule['start_time'], schedule['end_time']),
+      tanggal: _formatFullDate(schedule['available_date']),
+      waktu: _formatTime(schedule['start_time']),
+      tanggalTenggat: expired['date']!,
+      waktuTenggat: expired['time']!,
+      metodePembayaran: "${payment['payment_method']} - ${payment['bank']}",
+      totalHarga: payment['amount'].toString(),
+      vaNumber: (payment['va_number'] ?? '').toString(),
+      transactionId: (payment['transaction_id'] ?? '').toString(),
+      expiredDate: payment['expired_date'] ?? '',
+      availableDateRaw: schedule['available_date'] ?? '',
     );
-    final end = TimeOfDay(
-      hour: int.parse(endTime.split(':')[0]),
-      minute: int.parse(endTime.split(':')[1]),
-    );
-
-    final startMinutes = start.hour * 60 + start.minute;
-    final endMinutes = end.hour * 60 + end.minute;
-    final diff = endMinutes - startMinutes;
-
-    return "$diff menit";
   }
 
-  String _formatTime(String? time) {
-    if (time == null || time.isEmpty) return '-';
-    final parts = time.split(':');
-    if (parts.length >= 2) {
-      return "${parts[0]}:${parts[1]}";
-    }
-    return time;
+  ConsultComplete _mapCompleted(dynamic item) {
+    final schedule = item['schedule'];
+    final payment = item['payment'];
+    final user = schedule['user'];
+    return ConsultComplete(
+      nama: user['name'],
+      durasi: "${schedule['start_time']} - ${schedule['end_time']}",
+      expertise: "Counselor Expertise",
+      tanggal: schedule['available_date'].substring(0, 10),
+      waktu: schedule['start_time'],
+    );
+  }
+
+  Map<String, String> _parseExpiredDate(String expiredDate) {
+    if (expiredDate.isEmpty) return {"date": "-", "time": "-"};
+    final parts = expiredDate.split(' ');
+    if (parts.length != 2) return {"date": "-", "time": "-"};
+    final parsedDate = DateTime.parse(parts[0]);
+    return {
+      "date": "${parsedDate.day} ${_monthName(parsedDate.month)}",
+      "time": parts[1].substring(0, 5)
+    };
+  }
+
+  String _calculateDuration(String? start, String? end) {
+    if (start == null || end == null) return '-';
+    final s = TimeOfDay(
+        hour: int.parse(start.split(':')[0]),
+        minute: int.parse(start.split(':')[1]));
+    final e = TimeOfDay(
+        hour: int.parse(end.split(':')[0]),
+        minute: int.parse(end.split(':')[1]));
+    return "${(e.hour * 60 + e.minute) - (s.hour * 60 + s.minute)} menit";
+  }
+
+  String _formatTime(String? time) =>
+      (time?.split(':').take(2).join(':')) ?? '-';
+
+  String _formatFullDate(String date) {
+    final parsed = DateTime.parse(date);
+    return "${parsed.day} ${_monthName(parsed.month)} ${parsed.year}";
   }
 
   String _monthName(int month) {
-    const monthNames = [
+    const names = [
       '',
       'Januari',
       'Februari',
@@ -174,13 +200,8 @@ class BookingHistoryController extends GetxController {
       'September',
       'Oktober',
       'November',
-      'Desember',
+      'Desember'
     ];
-    return monthNames[month];
-  }
-
-  String _formatFullDate(String dateStr) {
-    final parsedDate = DateTime.parse(dateStr);
-    return "${parsedDate.day} ${_monthName(parsedDate.month)} ${parsedDate.year}";
+    return names[month];
   }
 }

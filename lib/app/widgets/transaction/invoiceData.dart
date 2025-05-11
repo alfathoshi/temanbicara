@@ -10,9 +10,14 @@ class InvoiceData extends StatelessWidget {
   final InvoiceModel invoice;
   const InvoiceData({super.key, required this.invoice});
 
-  String getDayName(String date) {
-    DateTime dateTime = DateTime.parse(date);
-    return DateFormat('EEEE').format(dateTime);
+  // String getDayName(String date) {
+  //   DateTime dateTime = DateTime.parse(date);
+  //   return DateFormat('EEEE').format(dateTime);
+  // }
+
+  String formatScheduleDate(String isoDate) {
+    final dt = DateTime.parse(isoDate);
+    return DateFormat('EEEE, yyyy-MM-dd').format(dt);
   }
 
   @override
@@ -121,8 +126,7 @@ class InvoiceData extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Schedule", style: h6Bold),
-                    Text(
-                        "${getDayName(invoice.transaction.jadwal)}, ${invoice.transaction.jadwal}")
+                    Text("${formatScheduleDate(invoice.transaction.jadwal)}")
                   ],
                 ),
                 sby12,

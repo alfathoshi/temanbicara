@@ -12,6 +12,10 @@ class ConsultPending {
   final int patientId;
   final int scheduleId;
   final int paymentId;
+  final String vaNumber;
+  final String transactionId;
+  final String expiredDate;
+  final String? availableDateRaw;
 
   ConsultPending({
     required this.nama,
@@ -22,6 +26,10 @@ class ConsultPending {
     required this.waktuTenggat,
     required this.metodePembayaran,
     required this.totalHarga,
+    required this.vaNumber,
+    required this.transactionId,
+    required this.expiredDate,
+    this.availableDateRaw,
     this.bank = '',
     this.createdAt = '',
     this.patientId = 0,

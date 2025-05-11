@@ -39,8 +39,7 @@ dependencies:
   pdf: ^3.11.3
   permission_handler: ^12.0.0+1
   smooth_page_indicator: ^1.2.1
-  syncfusion_flutter_datepicker: ^27.1.53
-  syncfusion_flutter_gauges: ^27.2.5
+  syncfusion_flutter_gauges: ^29.1.38
   table_calendar: ^3.1.2
   timeline_tile: ^2.0.0
   uuid: ^4.5.1

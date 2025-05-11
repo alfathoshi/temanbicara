@@ -177,6 +177,22 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 45),
                       child: MyButton(
+                        get: () {
+                          Get.offAllNamed(
+                            Routes.NAVIGATION_BAR,
+                            arguments: {
+                              'indexPage': 0,
+                            },
+                          );
+                        },
+                        color: primaryColor,
+                        text: "Home",
+                      ),
+                    ),
+                    sby48,
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 45),
+                      child: MyButton(
                         get: () async {
                           final uuid = consultationData['transaction_id'];
                           final isSuccess =

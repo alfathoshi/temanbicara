@@ -24,7 +24,7 @@ class TransactionModel {
       required this.waktu,
       this.kadaluarsa = "Timeless",
       this.harga = 300000,
-      this.appTax = 1000,
+      this.appTax = 15000,
       this.admTax = 1000,
       required this.selectedID});
 }
