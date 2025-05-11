@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:temanbicara/app/config/config.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
+import 'package:temanbicara/app/themes/colors.dart';
 
 class SendOtpController extends GetxController {
   //TODO: Implement SendOtpController
@@ -23,7 +24,10 @@ class SendOtpController extends GetxController {
     try {
       if (!validateEmail(emailController.text)) {
         isLoading.value = false;
-        Get.snackbar("Invalid Email", "Please enter a valid email");
+        Get.snackbar(
+            'Error', "Email tidak valid, tolong isikan email yang valid",
+            backgroundColor: error.withOpacity(0.6), colorText: whiteColor);
+
         return;
       }
 
@@ -56,20 +60,6 @@ class SendOtpController extends GetxController {
   }
 
   final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
 
   void increment() => count.value++;
 }

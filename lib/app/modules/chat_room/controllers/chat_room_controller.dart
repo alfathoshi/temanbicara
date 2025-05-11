@@ -31,14 +31,4 @@ class ChatRoomController extends GetxController {
       firstName: args['name'],
     );
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
 }

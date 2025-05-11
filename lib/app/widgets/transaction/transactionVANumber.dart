@@ -32,7 +32,8 @@ class TransactionVaNumberBorder extends StatelessWidget {
             border: Border.all(color: primaryColor),
             borderRadius: BorderRadius.circular(20)),
         child: Padding(
-          padding: EdgeInsets.only(left: 25, right: 33, bottom: 20, top: 20),
+          padding:
+              const EdgeInsets.only(left: 25, right: 33, bottom: 20, top: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -42,7 +43,7 @@ class TransactionVaNumberBorder extends StatelessWidget {
                     "VA Number",
                     style: h7Bold,
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Flexible(
                     child: Text(
                       vaNumber,
@@ -55,7 +56,7 @@ class TransactionVaNumberBorder extends StatelessWidget {
                     ),
                   ),
                   sbX12,
-                  Icon(
+                  const Icon(
                     Icons.copy_all_rounded,
                     size: 15,
                   ),
@@ -103,7 +104,7 @@ class TransactionVaNumber extends StatelessWidget {
                 style: h7SemiBold.copyWith(fontStyle: FontStyle.italic),
               ),
               sbX12,
-              Icon(
+              const Icon(
                 Icons.copy_all_rounded,
                 size: 15,
               ),

@@ -9,9 +9,9 @@ class RoomChatView extends GetView<RoomChatController> {
   final String? nama;
   final String? image;
   RoomChatView({this.nama, this.image, super.key});
-  TextEditingController _chatController = TextEditingController();
+  final TextEditingController _chatController = TextEditingController();
+  @override
   final RoomChatController controller = Get.put(RoomChatController());
-
 
   void _sendMessage() {
     final messageText = _chatController.text.trim();
@@ -26,65 +26,65 @@ class RoomChatView extends GetView<RoomChatController> {
     _chatController.clear();
 
     // Simulasi pesan balasan dari pengguna lain
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 5), () {
       controller.dataChat.add({
         'isMine': false,
         'message': messageText,
       });
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-            toolbarHeight: 85, // Tinggi AppBar
+        toolbarHeight: 85, // Tinggi AppBar
 
-              backgroundColor: Colors.white,
-              shape: const RoundedRectangleBorder(
-                side: BorderSide(color: Colors.black12),
+        backgroundColor: Colors.white,
+        shape: const RoundedRectangleBorder(
+          side: BorderSide(color: Colors.black12),
+        ),
+        title: Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: CircleAvatar(
+                radius: 30,
+                backgroundImage: image != null
+                    ? AssetImage('assets/images/$image.png')
+                    : const AssetImage('assets/images/default.png'),
               ),
-              title: Row(
+            ),
+            SizedBox(
+              width: 150,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: CircleAvatar(
-                      radius: 30,
-                      backgroundImage: image != null
-                          ? AssetImage('assets/images/${image}.png')
-                          : AssetImage('assets/images/default.png'),
-                    ),
+                  Text(
+                    nama ?? "Unknown",
+                    style: h3Bold,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  SizedBox(
-                    width: 150,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          nama ?? "Unknown",
-                          style: h3Bold,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 5,
-                              backgroundColor: Colors.green,
-                            ),
-                            const SizedBox(width: 5),
-                            Text(
-                              "online",
-                              style: h7Regular,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                  Row(
+                    children: [
+                      const CircleAvatar(
+                        radius: 5,
+                        backgroundColor: Colors.green,
+                      ),
+                      const SizedBox(width: 5),
+                      Text(
+                        "online",
+                        style: h7Regular,
+                      ),
+                    ],
                   ),
                 ],
               ),
-          
+            ),
+          ],
+        ),
       ),
-   body: Column(
+      body: Column(
         children: [
           // Menampilkan pesan menggunakan GetX
           Expanded(
@@ -93,10 +93,8 @@ class RoomChatView extends GetView<RoomChatController> {
                 padding: const EdgeInsets.all(8.0),
                 itemCount: controller.dataChat.length, // Jumlah pesan
                 itemBuilder: (context, index) {
-
                   final userLogin = controller.dataChat[index]['isMine'];
                   return Align(
-
                     alignment: !userLogin
                         ? Alignment.centerLeft
                         : Alignment.centerRight,
@@ -106,7 +104,7 @@ class RoomChatView extends GetView<RoomChatController> {
                       decoration: BoxDecoration(
                         color: !userLogin
                             ? Colors.grey[300]
-                            : Color(0xFFC8DF98),
+                            : const Color(0xFFC8DF98),
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
@@ -121,8 +119,7 @@ class RoomChatView extends GetView<RoomChatController> {
           ),
           Container(
             height: 60, // Tinggi TextField
-            padding:
-                const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             decoration: const BoxDecoration(
               color: Colors.white,
               border: Border(
@@ -150,8 +147,8 @@ class RoomChatView extends GetView<RoomChatController> {
                 IconButton(
                   icon: const Icon(Icons.send),
                   onPressed: () {
-                     print(controller.dataChat);
-                      _sendMessage();
+                    print(controller.dataChat);
+                    _sendMessage();
                   },
                 ),
               ],

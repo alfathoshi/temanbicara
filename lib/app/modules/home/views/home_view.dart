@@ -416,7 +416,7 @@ class HomeView extends GetView<ReportController> {
                             ),
                             GestureDetector(
                               onTap: () async {
-                                final data = await _controller.articles;
+                                final data = _controller.articles;
                                 Get.toNamed(
                                   Routes.ARTICLE,
                                   arguments: data['data'] ?? [],

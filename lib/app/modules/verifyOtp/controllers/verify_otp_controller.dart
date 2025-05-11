@@ -91,16 +91,6 @@ class VerifyOtpController extends GetxController {
   }
 
   @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  @override
   void dispose() {
     for (var controller in controllers) {
       controller.dispose();

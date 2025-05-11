@@ -52,7 +52,7 @@ class TopArticle extends StatelessWidget {
                     border: Border.all(color: Colors.black.withOpacity(0.1)),
                   ),
                   child: Image.asset(
-                    'assets/images/${image}.png',
+                    'assets/images/$image.png',
                     scale: 4,
                   ),
                 ),

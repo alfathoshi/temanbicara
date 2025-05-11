@@ -50,7 +50,7 @@ class PaymentMethodRow extends StatelessWidget {
                     scale: 2,
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Radio<String>(
                   value: value,
                   groupValue: controller.selectedMethod.value,

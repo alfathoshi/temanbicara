@@ -15,14 +15,13 @@ class TransactionTimeline extends StatelessWidget {
   final bool isCurrent;
 
   const TransactionTimeline(
-      {Key? key,
+      {super.key,
       required this.isFirst,
       required this.isLast,
       required this.isPast,
       required this.text,
       required this.lineLength,
-      required this.isCurrent})
-      : super(key: key);
+      required this.isCurrent});
 
   @override
   Widget build(BuildContext context) {

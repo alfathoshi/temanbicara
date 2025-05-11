@@ -80,7 +80,7 @@ class LoginController extends GetxController {
           box.write('name', data['data']['name']);
           box.write('nickname', data['data']['nickname']);
           box.write('birthdate', data['data']['birthdate']);
-
+          box.write('profile_image', data['data']['profile_url']);
           Get.offAllNamed(
             Routes.NAVIGATION_BAR,
             arguments: {"indexPage": 0},
@@ -107,11 +107,6 @@ class LoginController extends GetxController {
         'tokens': FieldValue.arrayUnion([fcmToken])
       }, SetOptions(merge: true));
     }
-  }
-
-  @override
-  void onInit() {
-    super.onInit();
   }
 
   @override

@@ -38,7 +38,7 @@ class BankPaymentMethodList extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           child: Padding(
-            padding: EdgeInsets.all(25),
+            padding: const EdgeInsets.all(25),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: bankTransferList.map((bank) {
@@ -59,8 +59,8 @@ class BankPaymentMethodList extends StatelessWidget {
                       ),
                     ),
                     if (bank != bankTransferList.last)
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 15),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 15),
                         child: Divider(
                           height: 1,
                           thickness: 1.5,

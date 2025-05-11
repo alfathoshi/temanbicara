@@ -33,14 +33,14 @@ class TransactionView extends GetView<TransactionController> {
           child: Column(
             children: [
               sby24,
-              Container(
+              SizedBox(
                 height: 60,
-                child: Expanded(
+                child: const Expanded(
                   child: TransactionTimeLineViewIndex(index: 1),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 28),
+                padding: const EdgeInsets.symmetric(horizontal: 28),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

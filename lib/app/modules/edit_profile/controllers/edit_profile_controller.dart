@@ -15,6 +15,7 @@ class EditProfileController extends GetxController {
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final DatePickerController dateController = Get.put(DatePickerController());
+  String profileUrl = GetStorage().read('profile_image');
 
   var isLoading = false.obs;
 
@@ -79,20 +80,5 @@ class EditProfileController extends GetxController {
     super.onInit();
     nameController.text = box.read('name');
     emailController.text = box.read('email');
-    DateTime tanggal = DateTime.parse(box.read('birthdate'));
-    print('asdas ${box.read('name')}');
-    // print(dateController.selectedDate.value);
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

@@ -32,7 +32,7 @@ class MentalMatrix extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: border,
-              offset: Offset(0, 1),
+              offset: const Offset(0, 1),
               blurRadius: 2,
             ),
           ],

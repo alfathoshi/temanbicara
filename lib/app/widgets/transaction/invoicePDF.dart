@@ -41,7 +41,7 @@ class CreatePDF {
     pdf.addPage(
       pw.Page(
         pageFormat: PdfPageFormat.a4,
-        margin: pw.EdgeInsets.all(32),
+        margin: const pw.EdgeInsets.all(32),
         build: (pw.Context context) {
           return pw.Column(
             crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -58,7 +58,7 @@ class CreatePDF {
                               fontSize: 40, fontWeight: pw.FontWeight.bold)),
                       pw.SizedBox(height: 4),
                       pw.Text("Order ID #dummy",
-                          style: pw.TextStyle(
+                          style: const pw.TextStyle(
                               color: PdfColor(0.49019607843137253,
                                   0.5803921568627451, 0.30196078431372547),
                               fontSize: 12)),
@@ -77,7 +77,7 @@ class CreatePDF {
 
               // INFORMASI PEMESAN
               pw.Container(
-                padding: pw.EdgeInsets.all(8),
+                padding: const pw.EdgeInsets.all(8),
                 decoration: pw.BoxDecoration(
                   border: pw.Border.all(color: PdfColors.grey300),
                   borderRadius: pw.BorderRadius.circular(6),
@@ -107,11 +107,11 @@ class CreatePDF {
               pw.Table(
                 border: pw.TableBorder.all(color: PdfColors.grey300),
                 columnWidths: {
-                  0: pw.FractionColumnWidth(0.07),
-                  1: pw.FractionColumnWidth(0.22),
-                  2: pw.FractionColumnWidth(0.35),
-                  3: pw.FractionColumnWidth(0.10),
-                  4: pw.FractionColumnWidth(0.15),
+                  0: const pw.FractionColumnWidth(0.07),
+                  1: const pw.FractionColumnWidth(0.22),
+                  2: const pw.FractionColumnWidth(0.35),
+                  3: const pw.FractionColumnWidth(0.10),
+                  4: const pw.FractionColumnWidth(0.15),
                 },
                 children: [
                   _tableRow(["No.", "Produk", "Deskripsi", "Jumlah", "Total"],
@@ -186,8 +186,8 @@ class CreatePDF {
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
         pw.Text(title,
-            style: pw.TextStyle(fontSize: 10, color: PdfColors.grey600)),
-        pw.Text(value, style: pw.TextStyle(fontSize: 12)),
+            style: const pw.TextStyle(fontSize: 10, color: PdfColors.grey600)),
+        pw.Text(value, style: const pw.TextStyle(fontSize: 12)),
       ],
     );
   }
@@ -239,7 +239,7 @@ class CreatePDF {
         children: [
           pw.Container(
             width: 100, // lebar tetap untuk label
-            child: pw.Text('$label',
+            child: pw.Text(label,
                 style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
           ),
           pw.Text(': $value'),

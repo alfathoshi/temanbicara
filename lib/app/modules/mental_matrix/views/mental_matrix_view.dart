@@ -35,7 +35,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
         body: SingleChildScrollView(child: Obx(() {
           final report = reportController.report.value;
           if (report == null) {
-            return Center(child: const CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
 
           return Column(
@@ -45,7 +45,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                   boxShadow: [
                     BoxShadow(
                       color: border,
-                      offset: Offset(0, 1),
+                      offset: const Offset(0, 1),
                       blurRadius: 2,
                     )
                   ],
@@ -84,7 +84,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                               ),
                             ],
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Stack(
                             alignment: Alignment.center,
                             children: [
@@ -103,7 +103,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                         ],
                       ),
                       sby16,
-                      Divider(),
+                      const Divider(),
                       sby16,
                       Container(
                         decoration: BoxDecoration(
@@ -166,7 +166,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                             BoxShadow(
                                 color: border,
                                 blurRadius: 2,
-                                offset: Offset(0, 2))
+                                offset: const Offset(0, 2))
                           ],
                           color: lightYellow,
                           borderRadius: BorderRadius.circular(16),
@@ -212,7 +212,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                                       ],
                                     ),
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   Image.asset(
                                     "assets/images/${controller.getIndexedImage(
                                       value: reportController
@@ -240,7 +240,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                             BoxShadow(
                                 color: border,
                                 blurRadius: 2,
-                                offset: Offset(0, 2))
+                                offset: const Offset(0, 2))
                           ],
                           color: lightPurple.withOpacity(0.45),
                           borderRadius: BorderRadius.circular(16),
@@ -284,7 +284,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                                       ],
                                     ),
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   Image.asset(
                                     "assets/images/${controller.getIndexedImage(
                                       value: reportController
@@ -312,7 +312,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                             BoxShadow(
                                 color: border,
                                 blurRadius: 2,
-                                offset: Offset(0, 2))
+                                offset: const Offset(0, 2))
                           ],
                           color: lightBlue,
                           borderRadius: BorderRadius.circular(16),
@@ -354,7 +354,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                                       ],
                                     ),
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   Text(
                                     reportController
                                             .report.value?.stressTracking
@@ -380,7 +380,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                             BoxShadow(
                                 color: border,
                                 blurRadius: 2,
-                                offset: Offset(0, 2))
+                                offset: const Offset(0, 2))
                           ],
                           color: lightPink.withOpacity(0.25),
                           borderRadius: BorderRadius.circular(16),
@@ -424,7 +424,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                                       ],
                                     ),
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   Image.asset(
                                     "assets/images/${controller.getIndexedImage(
                                       value: reportController
@@ -452,7 +452,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                             BoxShadow(
                                 color: border,
                                 blurRadius: 2,
-                                offset: Offset(0, 2))
+                                offset: const Offset(0, 2))
                           ],
                           color: orange.withOpacity(0.25),
                           borderRadius: BorderRadius.circular(16),
@@ -497,7 +497,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                                       ],
                                     ),
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   Image.asset(
                                     "assets/images/${controller.getIndexedImage(
                                       value: reportController
@@ -528,7 +528,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                   boxShadow: [
                     BoxShadow(
                       color: border,
-                      offset: Offset(0, 1),
+                      offset: const Offset(0, 1),
                       blurRadius: 2,
                     )
                   ],
@@ -559,7 +559,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                       ),
                       sby24,
                       Text("Short Term", style: h3SemiBold),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       ...report.shortTerm.map(
                         (item) => Padding(
                           padding: const EdgeInsets.only(bottom: 8),
@@ -573,9 +573,9 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 16),
+                      const SizedBox(height: 16),
                       Text("Long Term", style: h3SemiBold),
-                      SizedBox(height: 8),
+                      const SizedBox(height: 8),
                       ...report.longTerm.map(
                         (item) => Padding(
                           padding: const EdgeInsets.only(bottom: 8),
@@ -599,7 +599,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                   boxShadow: [
                     BoxShadow(
                       color: border,
-                      offset: Offset(0, 1),
+                      offset: const Offset(0, 1),
                       blurRadius: 2,
                     )
                   ],

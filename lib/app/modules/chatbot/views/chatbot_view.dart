@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
-import 'package:temanbicara/app/widgets/history_chatbot.dart';
 
 import '../../../themes/fonts.dart';
 import '../controllers/chatbot_controller.dart';

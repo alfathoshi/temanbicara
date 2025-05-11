@@ -19,6 +19,7 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
   final String? paymentMethod;
   TransactionPaymentView({super.key, this.paymentMethod});
 
+  @override
   final TransactionPaymentController controller =
       Get.put(TransactionPaymentController());
 
@@ -56,9 +57,9 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
           child: Column(
             children: [
               sby24,
-              TransactionTimeLineViewIndex(index: 3),
+              const TransactionTimeLineViewIndex(index: 3),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 28),
+                padding: const EdgeInsets.symmetric(horizontal: 28),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -76,7 +77,7 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                           barrierDismissible: false,
                         );
 
-                        await Future.delayed(Duration(seconds: 2));
+                        await Future.delayed(const Duration(seconds: 2));
 
                         Get.back();
                         Get.dialog(
@@ -85,7 +86,7 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            contentPadding: EdgeInsets.all(20),
+                            contentPadding: const EdgeInsets.all(20),
                             content: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -93,13 +94,13 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                                   'assets/images/transaksi-gagal.png',
                                   height: 200,
                                 ),
-                                SizedBox(height: 20),
+                                const SizedBox(height: 20),
                                 Text(
                                   "Time's Up!",
                                   style: h4Bold.copyWith(color: Colors.red),
                                   textAlign: TextAlign.center,
                                 ),
-                                SizedBox(height: 10),
+                                const SizedBox(height: 10),
                                 Text(
                                   "Your transaction time has expired. \n You will be redirected.",
                                   style: h7Bold,
@@ -113,11 +114,6 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                                   width: 205,
                                   height: 42,
                                   child: ElevatedButton(
-                                    child: Text('OK',
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold)),
                                     onPressed: () {
                                       Get.offAllNamed(Routes.NAVIGATION_BAR,
                                           arguments: {'indexPage': 0});
@@ -127,6 +123,11 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                                           MaterialStatePropertyAll<Color>(
                                               primaryColor),
                                     ),
+                                    child: Text('OK',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold)),
                                   ),
                                 ),
                               ),
@@ -164,7 +165,7 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                             TextSpan(
                                 text: 'Terms and Condition',
                                 style: h7Regular.copyWith(color: Colors.blue)),
-                            TextSpan(text: ' of'),
+                            const TextSpan(text: ' of'),
                             TextSpan(
                                 text: ' Teman Bicara',
                                 style: h7Regular.copyWith(color: primaryColor))
@@ -189,7 +190,7 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                               barrierDismissible: false,
                             );
 
-                            await Future.delayed(Duration(seconds: 2));
+                            await Future.delayed(const Duration(seconds: 2));
                             Get.back();
 
                             Get.offAllNamed(

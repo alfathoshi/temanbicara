@@ -13,6 +13,7 @@ import '../controllers/tracking_3_controller.dart';
 class Tracking3View extends GetView<Tracking3Controller> {
   Tracking3View({super.key});
 
+  @override
   final Tracking3Controller controller = Get.put(Tracking3Controller());
 
   @override

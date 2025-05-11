@@ -8,10 +8,8 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/kualitas_tidur.dart';
-import 'package:temanbicara/app/widgets/sleep_quality.dart';
 
 // import '../controllers/tracking_controller.dart';
-import '../../assesment_3/controllers/assesment_3_controller.dart';
 
 class TrackingView extends GetView<TrackingController> {
   TrackingView({super.key});

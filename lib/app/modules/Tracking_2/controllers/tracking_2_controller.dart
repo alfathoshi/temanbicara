@@ -6,7 +6,7 @@ import 'package:temanbicara/app/themes/fonts.dart';
 
 class Tracking2Controller extends GetxController {
   var selectedNumber = ''.obs;
-  Color colorNum = Color(0xffC360B7);
+  Color colorNum = const Color(0xffC360B7);
   final box = GetStorage();
   final List<String> emotions = [
     'Depresi',
@@ -39,8 +39,8 @@ class Tracking2Controller extends GetxController {
 
   Widget explanationText() {
     if (selectedNumber.value == '') {
-      return Padding(
-        padding: const EdgeInsets.all(20.0),
+      return const Padding(
+        padding: EdgeInsets.all(20.0),
         child: Text(''),
       );
     } else {
@@ -55,15 +55,5 @@ class Tracking2Controller extends GetxController {
   void onInit() {
     super.onInit();
     selectedNumber.value = emotions[0];
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
   }
 }

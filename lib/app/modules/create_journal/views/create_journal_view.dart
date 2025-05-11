@@ -122,7 +122,7 @@ class CreateJournalView extends GetView<CreateJournalController> {
                     child: controller.pickedImage.value != null
                         ? Image.file(controller.pickedImage.value!,
                             fit: BoxFit.cover)
-                        : Center(
+                        : const Center(
                             child: Icon(Icons.add_a_photo,
                                 size: 40, color: grey2Color)),
                   ),

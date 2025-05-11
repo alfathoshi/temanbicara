@@ -129,7 +129,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.DETAIL_ARTIKEL,
-      page: () => DetailArtikelView(),
+      page: () => const DetailArtikelView(),
       binding: DetailArtikelBinding(),
     ),
     GetPage(
@@ -184,7 +184,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.DETAIL_ARTIKEL,
-      page: () => DetailArtikelView(),
+      page: () => const DetailArtikelView(),
       binding: DetailArtikelBinding(),
     ),
     GetPage(
@@ -254,27 +254,27 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ASSESMENT_3,
-      page: () => Assesment3View(),
+      page: () => const Assesment3View(),
       binding: Assesment3Binding(),
     ),
     GetPage(
       name: _Paths.ASSESMENT_4,
-      page: () => Assesment4View(),
+      page: () => const Assesment4View(),
       binding: Assesment4Binding(),
     ),
     GetPage(
       name: _Paths.ASSESMENT_5,
-      page: () => Assesment5View(),
+      page: () => const Assesment5View(),
       binding: Assesment5Binding(),
     ),
     GetPage(
       name: _Paths.ASSESMENT_6,
-      page: () => Assesment6View(),
+      page: () => const Assesment6View(),
       binding: Assesment6Binding(),
     ),
     GetPage(
       name: _Paths.ASSESMENT_7,
-      page: () => Assesment7View(),
+      page: () => const Assesment7View(),
       binding: Assesment7Binding(),
     ),
     GetPage(
@@ -289,7 +289,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CHAT,
-      page: () => ChatView(),
+      page: () => const ChatView(),
       binding: ChatBinding(),
     ),
     GetPage(

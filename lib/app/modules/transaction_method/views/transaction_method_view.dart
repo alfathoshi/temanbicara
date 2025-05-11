@@ -37,7 +37,8 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
         child: Column(
           children: [
             sby24,
-            SizedBox(height: 60, child: TransactionTimeLineViewIndex(index: 2)),
+            const SizedBox(
+                height: 60, child: TransactionTimeLineViewIndex(index: 2)),
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 28.0, vertical: 28),
@@ -72,7 +73,7 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
 
                       await Future.wait([
                         consultationFuture,
-                        Future.delayed(Duration(seconds: 2)),
+                        Future.delayed(const Duration(seconds: 2)),
                       ]);
 
                       Navigator.of(Get.context!).pop();

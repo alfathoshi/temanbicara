@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
@@ -12,6 +11,8 @@ class ProfileController extends GetxController {
   final count = 0.obs;
   File? storedImage;
   RxString name = ''.obs;
+  var box = GetStorage();
+  RxString profileUrl = "".obs;
 
   Future pickImage() async {
     try {
@@ -47,10 +48,12 @@ class ProfileController extends GetxController {
 
       final response = await request.send();
       final res = await http.Response.fromStream(response);
-      print(res.statusCode);
+      if (json.decode(res.body)['status']) {
+        Get.snackbar('Success', 'Foto profile berhasil diupdate');
+      }
+      fetchData();
       return;
     } catch (err) {
-      print(err);
       rethrow;
     }
   }
@@ -67,14 +70,15 @@ class ProfileController extends GetxController {
 
       var data = json.decode(response.body);
 
-      var box = GetStorage();
       box.write('email', data['data']['email']);
       box.write('password', data['data']['password']);
       box.write('phone', data['data']['phone_number']);
       box.write('name', data['data']['name']);
       box.write('nickname', data['data']['nickname']);
       box.write('birthdate', data['data']['birthdate']);
+      box.write('profile_image', data['data']['profile_url']);
       name.value = data['data']['name'];
+      profileUrl.value = data['data']['profile_url'];
       return;
     } catch (err) {
       print(err);

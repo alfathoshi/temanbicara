@@ -61,7 +61,7 @@ class ConsultReportView extends GetView<ConsultReportController> {
                         children: [
                           Row(
                             children: [
-                              Container(
+                              SizedBox(
                                 height: 130,
                                 width: 100,
                                 child: Image.asset('assets/images/Hafid.jpg'),
@@ -70,7 +70,7 @@ class ConsultReportView extends GetView<ConsultReportController> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Container(
+                                  SizedBox(
                                     width: 200,
                                     child: Text(
                                       consultation['general_user_name'] ?? '-',

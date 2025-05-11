@@ -4,18 +4,17 @@ import 'package:temanbicara/app/themes/fonts.dart';
 
 import '../modules/assesment_1/controllers/assesment_1_controller.dart';
 
-
 class GenderSelector extends StatelessWidget {
   final Gender gender;
   final Gender selectedGender;
   final Function(Gender) onSelect;
 
   const GenderSelector({
-    Key? key,
+    super.key,
     required this.gender,
     required this.selectedGender,
     required this.onSelect,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +40,7 @@ class GenderSelector extends StatelessWidget {
               scale: 2,
               color: isSelected ? whiteColor : null,
             ),
-            SizedBox(width: 8),
+            const SizedBox(width: 8),
             Text(
               gender == Gender.male ? 'Pria' : 'Wanita',
               style: isSelected ? textGenderTrue : textGenderFalse,

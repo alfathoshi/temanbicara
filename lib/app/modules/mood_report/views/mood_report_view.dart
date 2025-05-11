@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:temanbicara/app/modules/report/logo_helper.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
-import 'package:temanbicara/app/widgets/custom_bar_chart.dart';
 
 import '../controllers/mood_report_controller.dart';
 

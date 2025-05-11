@@ -21,7 +21,7 @@ class CustomBarChart extends StatelessWidget {
       "Nyenyak": 5
     };
 
-    return Container(
+    return SizedBox(
       width: MediaQuery.sizeOf(context).width,
       height: 150,
       child: BarChart(

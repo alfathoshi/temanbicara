@@ -149,19 +149,19 @@ class Assesment4View extends GetView<Assesment4Controller> {
                 ),
               ],
             ),
-            Spacer(),
+            const Spacer(),
             MyButton(
                 get: () {
-                   if (controller.isSelected.value == -1) {
-                      Get.snackbar(
-                        'Error',
-                        'Silahkan isi assesment',
-                        colorText: whiteColor,
-                        backgroundColor: error.withOpacity(0.6),
-                      );
-                    } else {
-                      Get.toNamed(Routes.ASSESMENT_5);
-                    }
+                  if (controller.isSelected.value == -1) {
+                    Get.snackbar(
+                      'Error',
+                      'Silahkan isi assesment',
+                      colorText: whiteColor,
+                      backgroundColor: error.withOpacity(0.6),
+                    );
+                  } else {
+                    Get.toNamed(Routes.ASSESMENT_5);
+                  }
                 },
                 color: primaryColor,
                 text: 'Lanjutkan')

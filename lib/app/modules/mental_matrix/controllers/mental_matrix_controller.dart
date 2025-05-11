@@ -1,13 +1,7 @@
 import 'package:get_storage/get_storage.dart';
-import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:temanbicara/app/modules/report/controllers/report_controller.dart';
-import 'dart:convert';
-import '../../../config/config.dart';
 import '../../../data/ReportModel.dart';
-import 'package:get/get.dart';
-import '../../../themes/colors.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MentalMatrixController extends GetxController {
