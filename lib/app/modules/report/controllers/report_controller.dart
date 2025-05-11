@@ -26,6 +26,10 @@ class ReportController extends GetxController {
   var matrixValue = ''.obs;
   var report = Rxn<ReportModel>();
   var isLoading = false.obs;
+  var touchedIndexScreen = (-1).obs;
+  var touchedIndexSleep = (-1).obs;
+  var touchedIndexActivity = (-1).obs;
+  var touchedIndexMood = (-1).obs;
 
   final List<String> emotions = [
     'Depressed',
@@ -83,11 +87,11 @@ class ReportController extends GetxController {
   }
 
   final List<Color> chartColors = [
-    greenChart,
-    blueChart,
-    yellowChart,
-    orangeChart,
     purpleChart,
+    orangeChart,
+    yellowChart,
+    blueChart,
+    greenChart,
   ];
 
   Future<void> getMatrix() async {
@@ -96,6 +100,7 @@ class ReportController extends GetxController {
       final userId = box.read('id');
       final token = box.read('token');
 
+      print(selectedDate);
       var response = await http.post(
         Uri.parse('${Config.apiEndPoint}/report'),
         headers: {
@@ -115,7 +120,9 @@ class ReportController extends GetxController {
           data['data'] != null) {
         report.value = ReportModel.fromJson(data['data'][0]);
       } else {
-        print("error ${data['message']}");
+        Get.snackbar('Failed', 'Report data not found',
+            backgroundColor: error.withOpacity(0.6), colorText: Colors.white);
+        print(data['message']);
       }
     } catch (e) {
       print('Error getReport: $e');
@@ -198,6 +205,7 @@ class ReportController extends GetxController {
         }
       } else {
         Get.snackbar('Error', 'Gagal mengambil data statistik');
+        print(response.body);
       }
     } catch (e) {
       print('Error fetchStatistik: $e');
