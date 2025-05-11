@@ -41,6 +41,7 @@ class ReportView extends GetView<ReportController> {
         onRefresh: () async {
           controller.getMatrix();
           controller.fetchStatistik();
+          controller.checkTracking();
         },
         child: Container(
           child: ListView(
@@ -72,9 +73,11 @@ class ReportView extends GetView<ReportController> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            "Mental Health Tracker",
-                            style: h6Medium,
+                          Expanded(
+                            child: Text(
+                              "Mental Health Tracker",
+                              style: h6Medium,
+                            ),
                           ),
                           Row(
                             children: [
@@ -101,12 +104,12 @@ class ReportView extends GetView<ReportController> {
                                     },
                                   );
 
-                                  if (pickedDate != null) {
-                                    if (!isSameDate(pickedDate,
-                                        controller.selectedDate.value)) {
-                                      controller.updateDate(pickedDate);
-                                      controller.getMatrix();
-                                    }
+                                  if (pickedDate != null &&
+                                      !isSameDate(pickedDate,
+                                          controller.selectedDate.value)) {
+                                    controller.updateDate(pickedDate);
+                                    controller.getMatrix();
+                                    controller.checkTracking();
                                   }
                                 },
                                 child:
@@ -119,15 +122,17 @@ class ReportView extends GetView<ReportController> {
                       const SizedBox(
                         height: 20,
                       ),
-                      ReportCategory(
-                        onPressed: () {
-                          Get.toNamed(Routes.MENTAL_MATRIX);
-                        },
-                        title: "Mental Health Matrix",
-                        description: controller.title.value,
-                        image: "assets/images/limiter.png",
-                        matrixValue: controller.matrixValue.value,
-                        color: lightGreen,
+                      Obx(
+                        () => ReportCategory(
+                          onPressed: () {
+                            Get.toNamed(Routes.MENTAL_MATRIX);
+                          },
+                          title: "Mental Health Matrix",
+                          description: controller.title.value,
+                          image: "assets/images/limiter.png",
+                          matrixValue: controller.matrixValue.value,
+                          color: lightGreen,
+                        ),
                       ),
                     ],
                   ),
