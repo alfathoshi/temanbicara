@@ -26,27 +26,27 @@ class NewTrackingController extends GetxController {
   ];
 
   final List<String> sleepQuality = [
-    '> 8 Hours',
-    '7-8 Hours',
-    '6 Hours',
-    '4-5 Hours',
-    '< 4 Hours'
+    '> 7 hours',
+    '5-6 hours',
+    '4-5 hours',
+    '3-4 hours',
+    '< 3 hours'
   ];
 
   final List<String> Activity = [
-    '< 2k \nSteps',
-    '2k-5k \nSteps',
-    '5k-7.5k \nSteps',
-    '7.5k-10k \nSteps',
-    '> 10k \nSteps'
+    '< 500 steps',
+    '500-1k steps',
+    '1k-3k steps',
+    '3k-5k steps',
+    '> 6k steps'
   ];
 
   final List<String> ScreenTime = [
-    '< 1 Hours',
-    '1-3 Hours',
-    '3-5 Hours',
-    '5-8 Hours',
-    '> 8 Hours'
+    '< 1 hours',
+    '1-2 hours',
+    '2-3 hours',
+    '3-4 hours',
+    '> 5 hours'
   ];
 
   void toggleEmotion(int index) {
