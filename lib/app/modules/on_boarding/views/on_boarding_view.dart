@@ -31,15 +31,17 @@ class OnBoardingView extends GetView<OnBoardingController> {
                 children: [
                   Image.asset(
                     "assets/images/boardingLogo.png",
-                    height: 160,
                   ),
                   sby32,
-                  Text("Welcome to", style: h2Bold),
-                  Text("Teman Bicara",
-                      style: h2Bold.copyWith(color: primaryColor)),
+                  Text("Welcome to", style: h3Bold),
+                  Text(
+                    "Teman Bicara",
+                    style: h2Bold.copyWith(color: primaryColor),
+                  ),
+                  sby36,
                   Center(
                     child: Container(
-                      height: 400,
+                      height: 300,
                       child: Image.asset(
                         "assets/images/boarding1.png",
                         height: 160,
@@ -59,7 +61,7 @@ class OnBoardingView extends GetView<OnBoardingController> {
                     backColor: primaryColor,
                     foreColor: whiteColor,
                   ),
-                  sby24,
+                  sby12,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -100,14 +102,14 @@ class OnBoardingView extends GetView<OnBoardingController> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(title[0], style: h2Bold),
-                        Text(title[1], style: h2Bold),
+                        Text(title[0], style: h3Bold),
+                        Text(title[1], style: h3Bold),
                       ],
                     ),
                     Obx(() {
                       if (controller.currentPage.value ==
                           controller.pages.length - 1) {
-                        return SizedBox(width: 86);
+                        return SizedBox(width: 10);
                       }
 
                       return MyButtonOutlinedCustom(
@@ -116,14 +118,13 @@ class OnBoardingView extends GetView<OnBoardingController> {
                         backColor: whiteColor,
                         text: "lewati",
                         height: 45,
-                        width: 86,
+                        width: 100,
                         style: h5SemiBold.copyWith(color: primaryColor),
                       );
                     }),
                   ],
                 ),
                 sby24,
-
                 // DESCRIPTION
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -147,7 +148,7 @@ class OnBoardingView extends GetView<OnBoardingController> {
                             padding: const EdgeInsets.only(bottom: 4),
                             child: Text(
                               text,
-                              style: h5SemiBold,
+                              style: h6SemiBold,
                             ),
                           ),
                         ),
@@ -159,7 +160,7 @@ class OnBoardingView extends GetView<OnBoardingController> {
                 // IMAGE
                 Center(
                   child: Container(
-                    height: 400,
+                    height: 300,
                     child: Obx(() {
                       final img = controller.currentImage.value;
                       return AnimatedSwitcher(
@@ -185,7 +186,6 @@ class OnBoardingView extends GetView<OnBoardingController> {
                     }),
                   ),
                 ),
-
                 sby48,
                 Center(
                   child: AnimatedSmoothIndicator(

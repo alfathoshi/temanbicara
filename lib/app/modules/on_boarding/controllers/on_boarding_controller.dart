@@ -26,11 +26,11 @@ class OnBoardingController extends GetxController {
       "image": "assets/images/boarding3.png",
     },
     {
-      "title": ["Track", "Your Mental Health"],
+      "title": ["Track", "Mental Health"],
       "description": [
         "Visualize your emotional patterns with graphs ",
-        "and daily logs. Understand yourself and take steps",
-        "toward healing."
+        "and daily logs. Understand yourself ",
+        "and take steps toward healing."
       ],
       "image": "assets/images/boarding4.png",
     },
@@ -65,12 +65,6 @@ class OnBoardingController extends GetxController {
 
   bool get isLastPage => currentPage.value == pages.length - 1;
 
-  void setCurrentImage(String newImage) async {
-    currentImage.value = '';
-    await Future.delayed(Duration(milliseconds: 30));
-    currentImage.value = newImage;
-  }
-
   void nextPage() {
     if (!isLastPage) {
       currentPage.value++;
@@ -80,11 +74,16 @@ class OnBoardingController extends GetxController {
       animateImage();
     } else {
       Get.offAllNamed(Routes.NAVIGATION_BAR, arguments: {"indexPage": 0});
+      // Get.offAllNamed(Routes.SIGN_UP);
     }
   }
 
-  void skipToEnd() {
+  void skipToEnd() async {
     currentPage.value = pages.length - 1;
+
+    final newImage = pages[currentPage.value]["image"] as String;
+    await setCurrentImage(newImage);
+
     animateDescription();
     animateImage();
   }
@@ -94,6 +93,12 @@ class OnBoardingController extends GetxController {
     super.onInit();
     animateDescription();
     animateImage();
+  }
+
+  Future<void> setCurrentImage(String newImage) async {
+    currentImage.value = '';
+    await Future.delayed(Duration(milliseconds: 30));
+    currentImage.value = newImage;
   }
 
   // Desc
