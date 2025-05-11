@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:temanbicara/app/data/Transaction.dart';
 import 'package:temanbicara/app/modules/transaction/views/transaction_view.dart';
 import 'package:temanbicara/app/themes/colors.dart';
@@ -26,6 +27,11 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
     DateTime selectedDate = DateTime.now();
     Map<String, dynamic> selectedSchedule = {};
     final consultController = Get.put(ConsultScheduleController());
+
+    bool hasScheduleForSelectedDate(DateTime date) {
+      final dateStr = DateFormat('yyyy-MM-dd').format(date);
+      return schedules.any((element) => element['date'] == dateStr);
+    }
 
     return Scaffold(
       backgroundColor: whiteColor,
@@ -101,49 +107,54 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                       selectedDate: consultController.selectedDate,
                     ),
                     sby36,
-                    MyButton(
-                      get: () async {
-                        final selected =
-                            consultController.selectedSchedule.value;
+                    Obx(() {
+                      final date = consultController.selectedDate.value;
+                      final hasSchedule = hasScheduleForSelectedDate(date);
 
-                        if (selected.isEmpty ||
-                            selected['date'] == null ||
-                            selected['time'] == null) {
-                          Get.snackbar(
-                            "Silahkan pilih jadwal konsultasi",
-                            "Please select a date and time before proceeding.",
-                            backgroundColor: error.withOpacity(0.6),
-                            colorText: Colors.white,
-                          );
-                          return;
-                        }
+                      return hasSchedule
+                          ? MyButton(
+                              get: () async {
+                                final selected =
+                                    consultController.selectedSchedule.value;
 
-                        Get.dialog(
-                          Center(
-                            child: CircularProgressIndicator(
+                                if (selected.isEmpty ||
+                                    selected['date'] == null ||
+                                    selected['time'] == null) {
+                                  Get.snackbar(
+                                    "Silahkan pilih jadwal konsultasi",
+                                    "Please select a date and time before proceeding.",
+                                    backgroundColor: error.withOpacity(0.6),
+                                    colorText: Colors.white,
+                                  );
+                                  return;
+                                }
+
+                                Get.dialog(
+                                  Center(
+                                      child: CircularProgressIndicator(
+                                          color: primaryColor)),
+                                  barrierDismissible: false,
+                                );
+
+                                await Future.delayed(Duration(seconds: 2));
+                                Get.back();
+
+                                Get.to(
+                                  () => TransactionView(),
+                                  arguments: TransactionModel(
+                                    namaPsikiater: userName,
+                                    expertise: expertise,
+                                    jadwal: selected['date'],
+                                    waktu: selected['time'],
+                                    selectedID: selected['id'],
+                                  ),
+                                );
+                              },
                               color: primaryColor,
-                            ),
-                          ),
-                          barrierDismissible: false,
-                        );
-
-                        await Future.delayed(Duration(seconds: 2));
-                        Get.back();
-
-                        Get.to(
-                          () => TransactionView(),
-                          arguments: TransactionModel(
-                            namaPsikiater: userName,
-                            expertise: expertise,
-                            jadwal: selected['date'],
-                            waktu: selected['time'],
-                            selectedID: selected['id'],
-                          ),
-                        );
-                      },
-                      color: primaryColor,
-                      text: "Booking Now",
-                    ),
+                              text: "Booking Now",
+                            )
+                          : SizedBox.shrink();
+                    }),
                     sby36,
                   ],
                 ),

@@ -54,6 +54,16 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
                   ),
                   MyButton(
                     get: () async {
+                      if (controller.selectedMethod.value.isEmpty) {
+                        Get.snackbar(
+                          "Payment Method Not Selected",
+                          "Please select a payment method before proceeding.",
+                          backgroundColor: Colors.red.withOpacity(0.6),
+                          colorText: Colors.white,
+                        );
+                        return;
+                      }
+
                       showDialog(
                         context: Get.context!,
                         barrierDismissible: false,
@@ -66,8 +76,7 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
                         scheduleId: transaction.selectedID,
                         patientId: userID,
                         amount: transaction.harga,
-                        bank:
-                            controller.selectedMethod.toString().toLowerCase(),
+                        bank: controller.selectedMethod.value.toLowerCase(),
                       );
 
                       await Future.wait([
@@ -77,7 +86,18 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
 
                       Navigator.of(Get.context!).pop();
 
+                      if (controller.consultationResult == null) {
+                        Get.snackbar(
+                          "Booking Failed",
+                          "Unable to process your consultation. Please try again.",
+                          backgroundColor: Colors.red.withOpacity(0.6),
+                          colorText: Colors.white,
+                        );
+                        return;
+                      }
+
                       final data = controller.consultationResult;
+
                       Get.to(
                         () => TransactionPaymentView(
                             paymentMethod: "Bank Transfer"),

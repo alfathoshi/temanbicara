@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:temanbicara/app/themes/colors.dart';
@@ -7,7 +5,6 @@ import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/consult/consult_complete_card.dart';
 import 'package:temanbicara/app/widgets/consult/consult_pending_card.dart';
-
 import '../controllers/booking_history_controller.dart';
 
 class BookingHistoryView extends GetView<BookingHistoryController> {
@@ -22,37 +19,28 @@ class BookingHistoryView extends GetView<BookingHistoryController> {
         appBar: AppBar(
           toolbarHeight: 85,
           backgroundColor: whiteColor,
-          title: Text(
-            'Booking History',
-            style: h3Bold,
-          ),
+          title: Text('Booking History', style: h3Bold),
           centerTitle: true,
           bottom: TabBar(
             labelColor: primaryColor,
             unselectedLabelColor: grey2Color,
             labelStyle: h4SemiBold,
-            unselectedLabelStyle: h4SemiBold,
             indicatorColor: primaryColor,
             indicatorWeight: 3,
-            indicatorSize: TabBarIndicatorSize.tab,
-            tabs: [
-              Tab(text: 'Pending'),
-              Tab(text: 'Completed'),
-            ],
+            tabs: const [Tab(text: 'Pending'), Tab(text: 'Completed')],
           ),
         ),
         body: RefreshIndicator(
           color: primaryColor,
-          onRefresh: () => controller.fetchData(),
+          onRefresh: controller.fetchData,
           child: Obx(() {
             if (controller.isLoading.value) {
-              return Center(
-                  child: CircularProgressIndicator(color: primaryColor));
+              return const Center(child: CircularProgressIndicator());
             }
             return TabBarView(
               children: [
-                _buildPendingTab(),
-                _buildCompletedTab(),
+                _buildList(controller.pendingList, true),
+                _buildList(controller.completedList, false)
               ],
             );
           }),
@@ -61,43 +49,24 @@ class BookingHistoryView extends GetView<BookingHistoryController> {
     );
   }
 
-  Widget _buildPendingTab() {
-    return Padding(
-      padding: EdgeInsets.only(left: 20, right: 20, top: 30),
-      child: controller.pendingList.isEmpty
-          ? _buildEmptyState('No Pending Consultations')
-          : ListView.builder(
-              physics: AlwaysScrollableScrollPhysics(),
-              itemCount: controller.pendingList.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: EdgeInsets.only(bottom: 16),
-                  child: ConsultPendingCard(
-                    consultPending: controller.pendingList[index],
-                  ),
-                );
-              },
-            ),
-    );
-  }
+  Widget _buildList(RxList list, bool isPending) {
+    if (list.isEmpty)
+      return _buildEmptyState(isPending
+          ? "No Pending Consultations"
+          : "No Completed Consultations");
 
-  Widget _buildCompletedTab() {
     return Padding(
-      padding: EdgeInsets.only(left: 20, right: 20, top: 30),
-      child: controller.completedList.isEmpty
-          ? _buildEmptyState('No Completed Consultations')
-          : ListView.builder(
-              physics: AlwaysScrollableScrollPhysics(),
-              itemCount: controller.completedList.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: EdgeInsets.only(bottom: 16),
-                  child: ConsultCompleteCard(
-                    consultComplete: controller.completedList[index],
-                  ),
-                );
-              },
-            ),
+      padding: const EdgeInsets.only(left: 20, right: 20, top: 30),
+      child: ListView.builder(
+        physics: const AlwaysScrollableScrollPhysics(),
+        itemCount: list.length,
+        itemBuilder: (_, i) => Padding(
+          padding: const EdgeInsets.only(bottom: 16),
+          child: isPending
+              ? ConsultPendingCard(consultPending: list[i])
+              : ConsultCompleteCard(consultComplete: list[i]),
+        ),
+      ),
     );
   }
 
@@ -109,23 +78,18 @@ class BookingHistoryView extends GetView<BookingHistoryController> {
           Image.asset("assets/images/noBooking.png"),
           sby24,
           Text(message, style: h4Bold),
-          SizedBox(height: 24),
+          const SizedBox(height: 24),
           ElevatedButton(
-            onPressed: () => controller.fetchData(),
+            onPressed: controller.fetchData,
             style: ElevatedButton.styleFrom(
               backgroundColor: primaryColor,
               foregroundColor: whiteColor,
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
+                  borderRadius: BorderRadius.circular(8)),
             ),
-            child: Text(
-              'Refresh',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            child: const Text('Refresh',
+                style: TextStyle(fontWeight: FontWeight.bold)),
           ),
           sby36,
         ],

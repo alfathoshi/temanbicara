@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:temanbicara/app/data/Invoice.dart';
 import 'package:temanbicara/app/data/Transaction.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
@@ -24,6 +25,7 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
     final InvoiceModel invoice = data['invoice'];
     final TransactionModel transaction = data['transaction'];
     final consultationData = data['consultationData'];
+
     return PopScope(
       canPop: false,
       child: Scaffold(

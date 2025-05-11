@@ -75,7 +75,7 @@ class SelectDate extends StatelessWidget {
         ),
         child: EasyDateTimeLinePicker(
           firstDate: DateTime.now(),
-          lastDate: DateTime(2025, 5, 15),
+          lastDate: DateTime.now().add(Duration(days: 7)),
           focusedDate: controller.selectedDate.value,
           onDateChange: (date) {
             controller.updateDate(date);

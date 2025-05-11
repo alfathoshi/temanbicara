@@ -146,6 +146,8 @@ class ConsultPendingCard extends StatelessWidget {
                   sby16,
                   MyButtonCustom(
                     get: () {
+                      print("VA Number: ${consultPending.vaNumber}");
+
                       Get.to(
                         OrderDetails(
                           consultPending: consultPending,
@@ -157,7 +159,7 @@ class ConsultPendingCard extends StatelessWidget {
                     height: 40,
                     text: "Complete Payment",
                     width: double.infinity,
-                    style: h5Bold,
+                    style: h5Bold.copyWith(color: whiteColor),
                   ),
                   sby8,
                   MyButtonOutlinedCustom(
@@ -167,7 +169,7 @@ class ConsultPendingCard extends StatelessWidget {
                     height: 40,
                     text: "Cancel Consultation",
                     width: double.infinity,
-                    style: h5Bold,
+                    style: h5Bold.copyWith(color: error),
                   ),
                 ],
               ),
