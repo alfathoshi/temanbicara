@@ -1,5 +1,7 @@
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
+import 'package:temanbicara/app/modules/report/controllers/report_controller.dart';
 import 'dart:convert';
 import '../../../config/config.dart';
 import '../../../data/ReportModel.dart';
@@ -25,64 +27,67 @@ class MentalMatrixController extends GetxController {
   ];
 
   final List<String> sleepQuality = [
-    '> 8 Hours',
-    '7-8 Hours',
-    '6 Hours',
-    '4-5 Hours',
-    '< 4 Hours'
+    '> 7 hours',
+    '5-6 hours',
+    '4-5 hours',
+    '3-4 hours',
+    '< 3 hours'
   ];
 
   final List<String> Activity = [
-    '< 2k \nSteps',
-    '2k-5k \nSteps',
-    '5k-7.5k \nSteps',
-    '7.5k-10k \nSteps',
-    '> 10k \nSteps'
+    '< 500 steps',
+    '500-1k steps',
+    '1k-3k steps',
+    '3k-5k steps',
+    '> 6k steps'
   ];
 
   final List<String> ScreenTime = [
-    '< 1 Hours',
-    '1-3 Hours',
-    '3-5 Hours',
-    '5-8 Hours',
-    '> 8 Hours'
+    '< 1 hours',
+    '1-2 hours',
+    '2-3 hours',
+    '3-4 hours',
+    '> 5 hours'
   ];
 
-  Future<void> getReport() async {
-    try {
-      isLoading.value = true;
-      final userId = box.read('id');
-      final token = box.read('token');
-
-      var response = await http.post(
-        Uri.parse('${Config.apiEndPoint}/report'),
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json',
-        },
-        body: json.encode({
-          'date_request': "2025-05-08",
-        }),
-      );
-
-      var data = json.decode(response.body);
-      // print('response body: ${response.body}');
-
-      if (response.statusCode == 200 &&
-          data['status'] == true &&
-          data['data'] != null) {
-        report.value = ReportModel.fromJson(data['data'][0]);
-      } else {
-        Get.snackbar('Error', data['message'] ?? 'Gagal Menyiapkan Report',
-            backgroundColor: Colors.red.withOpacity(0.6),
-            colorText: whiteColor);
-      }
-    } catch (e) {
-      print('Error getReport: $e');
-    } finally {
-      isLoading.value = false;
-    }
+  String formatDate(DateTime dateTime) {
+    return DateFormat('dd MMM yyyy').format(dateTime);
   }
+  // Future<void> getReport() async {
+  //   try {
+  //     isLoading.value = true;
+  //     final userId = box.read('id');
+  //     final token = box.read('token');
+
+  //     var response = await http.post(
+  //       Uri.parse('${Config.apiEndPoint}/report'),
+  //       headers: {
+  //         'Authorization': 'Bearer $token',
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: json.encode({
+  //         'date_request': "2025-05-08",
+  //       }),
+  //     );
+
+  //     var data = json.decode(response.body);
+  //     // print('response body: ${response.body}');
+
+  //     if (response.statusCode == 200 &&
+  //         data['status'] == true &&
+  //         data['data'] != null) {
+  //       report.value = ReportModel.fromJson(data['data'][0]);
+  //     } else {
+  //       Get.snackbar('Error', data['message'] ?? 'Gagal Menyiapkan Report',
+  //           backgroundColor: Colors.red.withOpacity(0.6),
+  //           colorText: whiteColor);
+  //     }
+  //   } catch (e) {
+  //     print('Error getReport: $e');
+  //   } finally {
+  //     isLoading.value = false;
+  //   }
+  // }
 
   String getIndexedImage({
     required String? value,
@@ -92,6 +97,7 @@ class MentalMatrixController extends GetxController {
     if (value == null) return '${prefix}1.png';
     final index = referenceList.indexOf(value.trim());
     if (index != -1) {
+      print(prefix);
       return '$prefix${index + 1}.png';
     }
     return '${prefix}1.png';
@@ -100,6 +106,7 @@ class MentalMatrixController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getReport();
+    // getReport();
+    ReportController().getMatrix();
   }
 }

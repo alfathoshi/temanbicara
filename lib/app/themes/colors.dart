@@ -29,3 +29,9 @@ const Color lightYellow = Color(0xffFCF7C8);
 const Color lightPurple = Color(0xffC2B1FF);
 const Color lightPink = Color(0xffD38DCB);
 const Color orange = Color(0xffED7E1C);
+
+const Color purpleChart = Color(0xffD38DCB);
+const Color yellowChart = Color(0xffF7CF29);
+const Color blueChart = Color(0xff7DC9C0);
+const Color orangeChart = Color(0xffFEB94C);
+const Color greenChart = Color(0xffA7DA79);

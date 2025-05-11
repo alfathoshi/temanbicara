@@ -33,7 +33,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
           centerTitle: true,
         ),
         body: SingleChildScrollView(child: Obx(() {
-          final report = controller.report.value;
+          final report = reportController.report.value;
           if (report == null) {
             return Center(child: const CircularProgressIndicator());
           }
@@ -72,8 +72,10 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                DateFormat("dd MMM yyyy")
-                                    .format(DateTime.now()),
+                                controller
+                                    .formatDate(
+                                        reportController.selectedDate.value)
+                                    .toString(),
                                 style: h5Regular,
                               ),
                               Text(
@@ -117,7 +119,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                         ),
                       ),
                       sby16,
-                      Text(controller.report.value!.assessment),
+                      Text(reportController.report.value!.assessment),
                       sby8,
                     ],
                   ),
@@ -202,7 +204,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                                           style: h4SemiBold,
                                         ),
                                         Text(
-                                          controller
+                                          reportController
                                                   .report.value?.moodTracking ??
                                               'Loading...',
                                           style: h5Regular,
@@ -213,8 +215,8 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                                   Spacer(),
                                   Image.asset(
                                     "assets/images/${controller.getIndexedImage(
-                                      value:
-                                          controller.report.value?.moodTracking,
+                                      value: reportController
+                                          .report.value?.moodTracking,
                                       referenceList: controller.emotions,
                                       prefix: 'emosi',
                                     )}",
@@ -224,7 +226,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                               ),
                               sby16,
                               Text(
-                                controller.report.value!.mood,
+                                reportController.report.value!.mood,
                                 style: h5Regular,
                               ),
                             ],
@@ -274,7 +276,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                                           style: h4SemiBold,
                                         ),
                                         Text(
-                                          controller
+                                          reportController
                                                   .report.value?.bedTracking ??
                                               'Loading...',
                                           style: h5Regular,
@@ -285,8 +287,8 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                                   Spacer(),
                                   Image.asset(
                                     "assets/images/${controller.getIndexedImage(
-                                      value:
-                                          controller.report.value?.bedTracking,
+                                      value: reportController
+                                          .report.value?.bedTracking,
                                       referenceList: controller.sleepQuality,
                                       prefix: 'sleep',
                                     )}",
@@ -296,7 +298,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                               ),
                               sby16,
                               Text(
-                                controller.report.value!.sleep,
+                                reportController.report.value!.sleep,
                                 style: h5Regular,
                               ),
                             ],
@@ -346,7 +348,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                                           style: h4SemiBold,
                                         ),
                                         Text(
-                                          "Level ${controller.report.value?.stressTracking.toString()}",
+                                          "Level ${reportController.report.value?.stressTracking.toString()}",
                                           style: h5Regular,
                                         ),
                                       ],
@@ -354,7 +356,8 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                                   ),
                                   Spacer(),
                                   Text(
-                                    controller.report.value?.stressTracking
+                                    reportController
+                                            .report.value?.stressTracking
                                             .toString() ??
                                         'Loading...',
                                     style: h1SemiBold.copyWith(fontSize: 48),
@@ -363,7 +366,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                               ),
                               sby16,
                               Text(
-                                controller.report.value!.stress,
+                                reportController.report.value!.stress,
                                 style: h5Regular,
                               ),
                             ],
@@ -413,7 +416,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                                           style: h4SemiBold,
                                         ),
                                         Text(
-                                          controller.report.value
+                                          reportController.report.value
                                                   ?.screenTracking ??
                                               'Loading...',
                                           style: h5Regular,
@@ -424,7 +427,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                                   Spacer(),
                                   Image.asset(
                                     "assets/images/${controller.getIndexedImage(
-                                      value: controller
+                                      value: reportController
                                           .report.value?.screenTracking,
                                       referenceList: controller.ScreenTime,
                                       prefix: 'screen',
@@ -435,7 +438,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                               ),
                               sby16,
                               Text(
-                                controller.report.value!.screenTime,
+                                reportController.report.value!.screenTime,
                                 style: h5Regular,
                               ),
                             ],
@@ -485,7 +488,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                                           style: h4SemiBold,
                                         ),
                                         Text(
-                                          controller.report.value
+                                          reportController.report.value
                                                   ?.activityTracking
                                                   .replaceAll('\n', ' ') ??
                                               'Loading...',
@@ -497,7 +500,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                                   Spacer(),
                                   Image.asset(
                                     "assets/images/${controller.getIndexedImage(
-                                      value: controller
+                                      value: reportController
                                           .report.value?.activityTracking,
                                       referenceList: controller.Activity,
                                       prefix: 'step',
@@ -508,7 +511,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                               ),
                               sby16,
                               Text(
-                                controller.report.value!.activity,
+                                reportController.report.value!.activity,
                                 style: h5Regular,
                               ),
                             ],

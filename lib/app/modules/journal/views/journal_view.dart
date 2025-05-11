@@ -98,7 +98,7 @@ class JournalView extends GetView<JournalController> {
                           initialDate: controller.selectedDate.value,
                           firstDate: DateTime(2000, 01, 01),
                           lastDate: DateTime.now(),
-                          confirmText: "Pilih",
+                          confirmText: "Select",
                           builder: (BuildContext context, Widget? child) {
                             return Theme(
                               data: ThemeData.light().copyWith(
