@@ -26,7 +26,7 @@ class BookingHistoryController extends GetxController {
 
   Future<void> fetchData() async {
     isLoading(true);
-    await Future.wait([fetchHistory("Pending"), fetchHistory("Completed")]);
+    await Future.wait([fetchHistory("Pending"), fetchHistory("Success")]);
     isLoading(false);
   }
 
@@ -145,8 +145,10 @@ class BookingHistoryController extends GetxController {
 
   ConsultComplete _mapCompleted(dynamic item) {
     final schedule = item['schedule'];
+    final payment = item['payment'];
+    final user = schedule['user'];
     return ConsultComplete(
-      nama: "Counselor Name",
+      nama: user['name'],
       durasi: "${schedule['start_time']} - ${schedule['end_time']}",
       expertise: "Counselor Expertise",
       tanggal: schedule['available_date'].substring(0, 10),
