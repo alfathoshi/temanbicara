@@ -70,7 +70,6 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
                     ),
                   ),
                 ),
-                const Icon(Icons.share),
               ],
             ),
             Text(

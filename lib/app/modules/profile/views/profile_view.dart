@@ -207,7 +207,7 @@ class ProfileView extends GetView<ProfileController> {
                             ),
                             sby16,
                             GestureDetector(
-                              onTap: () => Get.toNamed(Routes.BOOKING_HISTORY),
+                              onTap: () => Get.toNamed(Routes.ON_BOARDING),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,

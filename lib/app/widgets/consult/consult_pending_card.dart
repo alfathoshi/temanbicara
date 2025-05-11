@@ -156,6 +156,8 @@ class ConsultPendingCard extends StatelessWidget {
                     backColor: primaryColor,
                     height: 40,
                     text: "Complete Payment",
+                    width: double.infinity,
+                    style: h5Bold,
                   ),
                   sby8,
                   MyButtonOutlinedCustom(
@@ -164,6 +166,8 @@ class ConsultPendingCard extends StatelessWidget {
                     backColor: whiteColor,
                     height: 40,
                     text: "Cancel Consultation",
+                    width: double.infinity,
+                    style: h5Bold,
                   ),
                 ],
               ),

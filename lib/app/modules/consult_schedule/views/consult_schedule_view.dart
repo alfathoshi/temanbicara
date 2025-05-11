@@ -1,16 +1,14 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:temanbicara/app/data/Transaction.dart';
 import 'package:temanbicara/app/modules/transaction/views/transaction_view.dart';
-import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/schedule/schedule_details.dart';
+import 'package:temanbicara/app/widgets/schedule/select_date.dart';
 
 import '../controllers/consult_schedule_controller.dart';
 
@@ -24,137 +22,102 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
     final schedules = arguments['schedules'];
     final expertiseList = arguments['expertise'];
     final expertise = (expertiseList as List).join(", ");
+
+    DateTime selectedDate = DateTime.now();
     Map<String, dynamic> selectedSchedule = {};
+    final consultController = Get.put(ConsultScheduleController());
 
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: AppBar(
         toolbarHeight: 85,
-        backgroundColor: Colors.white,
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(24),
-              bottomRight: Radius.circular(24),
-            ),
-            side: BorderSide(color: Colors.black12)),
+        backgroundColor: whiteColor,
         title: Text(
-          'Schedules',
+          'Schedule',
           style: h3Bold,
         ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        physics: NeverScrollableScrollPhysics(),
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                sby24,
-                Container(
-                  height: 127,
+          child: Column(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(8),
+                  bottomRight: Radius.circular(8),
+                ),
+                child: Image.asset(
+                  "assets/images/Hafid.jpg",
                   width: double.infinity,
-                  child: Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(16),
-                          topRight: Radius.circular(16),
-                          bottomLeft: Radius.circular(16),
-                          bottomRight: Radius.circular(16),
-                        ),
-                        child: Image.asset(
-                          'assets/images/Hafid.jpg',
-                          scale: 1.5,
-                          fit: BoxFit.contain,
-                        ),
+                  height: 223,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    sby24,
+                    Text(
+                      '${userName}',
+                      style: h2Bold.copyWith(overflow: TextOverflow.ellipsis),
+                      maxLines: 2,
+                    ),
+                    sby8,
+                    Text(
+                      '${expertise}',
+                      style: h3Bold.copyWith(
+                        overflow: TextOverflow.ellipsis,
+                        color: Color(0xFF7D8A95),
                       ),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 20, right: 8),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '${userName}',
-                                style: h6Bold.copyWith(
-                                    overflow: TextOverflow.ellipsis),
-                                maxLines: 2,
-                              ),
-                              sby8,
-                              Expanded(
-                                child: Container(
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(16),
-                                    color: Colors.white,
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Color.fromRGBO(0, 0, 0, 0.1),
-                                        blurRadius: 6,
-                                        spreadRadius: -1,
-                                        offset: Offset(
-                                          0,
-                                          4,
-                                        ),
-                                      ),
-                                      BoxShadow(
-                                        color: Color.fromRGBO(0, 0, 0, 0.06),
-                                        blurRadius: 4,
-                                        spreadRadius: -1,
-                                        offset: Offset(
-                                          0,
-                                          2,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10.0, horizontal: 20),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'Expertise :',
-                                          style: h7Bold,
-                                        ),
-                                        sby5,
-                                        Text(expertise,
-                                            style:
-                                                h6Medium.copyWith(fontSize: 10))
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                sby24,
-                Text(
-                  "Schedule",
-                  style: h3Bold,
-                ),
-                sby24,
-                ScheduleList(
-                  schedule: schedules,
-                  onSelectionChanged: (selected) {
-                    selectedSchedule = selected;
-                  },
-                ),
-                sby24,
-                MyButton(
-                    get: () async {
-                      if (selectedSchedule.isNotEmpty) {
-                        print(selectedSchedule['time']);
+                      maxLines: 2,
+                    ),
+                    sby24,
+                    Divider(
+                      color: Color(0xFFF4F4F6),
+                    ),
+                    sby24,
+                    Text(
+                      "Select Date",
+                      style: h3Bold,
+                    ),
+                    sby24,
+                    SelectDate(
+                      onDateSelected: (date) {
+                        selectedDate = date;
+                        consultController.updateSelectedDate(date);
+                      },
+                    ),
+                    sby24,
+                    Text(
+                      "Schedules",
+                      style: h3Bold,
+                    ),
+                    sby24,
+                    ScheduleList(
+                      schedule: schedules,
+                      selectedDate: consultController.selectedDate,
+                    ),
+                    sby36,
+                    MyButton(
+                      get: () async {
+                        final selected =
+                            consultController.selectedSchedule.value;
+
+                        if (selected.isEmpty ||
+                            selected['date'] == null ||
+                            selected['time'] == null) {
+                          Get.snackbar(
+                            "Silahkan pilih jadwal konsultasi",
+                            "Please select a date and time before proceeding.",
+                            backgroundColor: error.withOpacity(0.6),
+                            colorText: Colors.white,
+                          );
+                          return;
+                        }
+
                         Get.dialog(
                           Center(
                             child: CircularProgressIndicator(
@@ -165,69 +128,27 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                         );
 
                         await Future.delayed(Duration(seconds: 2));
-
                         Get.back();
+
                         Get.to(
                           () => TransactionView(),
                           arguments: TransactionModel(
                             namaPsikiater: userName,
                             expertise: expertise,
-                            jadwal: selectedSchedule['date']!,
-                            waktu: selectedSchedule['time']!,
-                            selectedID: selectedSchedule['id'],
+                            jadwal: selected['date'],
+                            waktu: selected['time'],
+                            selectedID: selected['id'],
                           ),
                         );
-                      } else {
-                        Get.snackbar(
-                          "Silahkan pilih jadwal konsultasi",
-                          "Please select a date and time before proceeding.",
-                          backgroundColor: error.withOpacity(0.6),
-                          colorText: Colors.white,
-                        );
-                      }
-                    },
-                    color: primaryColor,
-                    text: "Booking Now"),
-                // Center(
-                //   child: SizedBox(
-                //     width: 205,
-                //     height: 42,
-                //     child: ElevatedButton(
-                //       child: Text(
-                //         'Booking Now',
-                //         style: h5Bold.copyWith(color: Colors.white),
-                //       ),
-                //       onPressed: () {
-                //         if (selectedSchedule.isNotEmpty) {
-                //           print(selectedSchedule['time']);
-                //           Get.to(
-                //             () => TransactionView(),
-                //             arguments: TransactionModel(
-                //               namaPsikiater: userName,
-                //               expertise: expertise,
-                //               jadwal: selectedSchedule['date']!,
-                //               waktu: selectedSchedule['time']!,
-                //               selectedID: selectedSchedule['id'],
-                //             ),
-                //           );
-                //         } else {
-                //           Get.snackbar(
-                //             "Silahkan pilih jadwal konsultasi",
-                //             "Please select a date and time before proceeding.",
-                //             backgroundColor: error.withOpacity(0.6),
-                //             colorText: Colors.white,
-                //           );
-                //         }
-                //       },
-                //       style: ButtonStyle(
-                //         backgroundColor:
-                //             WidgetStatePropertyAll<Color>(primaryColor),
-                //       ),
-                //     ),
-                //   ),
-                // ),
-              ],
-            ),
+                      },
+                      color: primaryColor,
+                      text: "Booking Now",
+                    ),
+                    sby36,
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),

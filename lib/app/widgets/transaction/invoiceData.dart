@@ -175,7 +175,8 @@ class InvoiceData extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Application Tax.", style: h6Bold),
-                    Text(CurrencyFormat.convertToIdr(invoice.appTax, 2))
+                    Text(CurrencyFormat.convertToIdr(
+                        invoice.transaction.appTax, 2))
                   ],
                 ),
                 sby12,
@@ -183,7 +184,8 @@ class InvoiceData extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Administration Tax.", style: h6Bold),
-                    Text(CurrencyFormat.convertToIdr(invoice.admTax, 2))
+                    Text(CurrencyFormat.convertToIdr(
+                        invoice.transaction.admTax, 2))
                   ],
                 ),
                 sby24,

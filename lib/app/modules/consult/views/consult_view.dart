@@ -21,15 +21,9 @@ class ConsultView extends GetView<ConsultController> {
       backgroundColor: whiteColor,
       appBar: AppBar(
         toolbarHeight: 85,
-        backgroundColor: Colors.white,
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(24),
-              bottomRight: Radius.circular(24),
-            ),
-            side: BorderSide(color: Colors.black12)),
+        backgroundColor: whiteColor,
         title: Text(
-          'Consult',
+          'Consultation',
           style: h3Bold,
         ),
         centerTitle: true,

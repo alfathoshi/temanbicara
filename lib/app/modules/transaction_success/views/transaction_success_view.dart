@@ -1,52 +1,54 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
-import 'package:temanbicara/app/themes/colors.dart';
+import 'package:temanbicara/app/data/Invoice.dart';
+import 'package:temanbicara/app/data/Transaction.dart';
+import 'package:temanbicara/app/modules/transaction_success/controllers/transaction_success_controller.dart';
+import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
-import 'package:temanbicara/app/widgets/transaction/transactionTimelineView.dart';
-
-import '../controllers/transaction_success_controller.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 
 class TransactionSuccessView extends GetView<TransactionSuccessController> {
   const TransactionSuccessView({super.key});
+
   @override
   Widget build(BuildContext context) {
+    final args = Get.arguments as Map;
+    final consultationData = args['consultationData'];
+    final TransactionModel transaction = args['transaction'];
+    final InvoiceModel invoice = args['invoice'];
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      controller.startCountdown();
+    });
+
     return Scaffold(
-      backgroundColor: whiteColor,
-      appBar: AppBar(
-        backgroundColor: whiteColor,
-        title: Text(
-          'Transaction',
-          style: h3Bold,
-        ),
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.arrow_back_rounded),
-              onPressed: () {
-                Get.back();
-              },
-              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-            );
-          },
-        ),
-        centerTitle: true,
-      ),
-      body: Column(
-        //mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Stack(
-            alignment: Alignment.center,
+      body: Center(
+        child: Obx(() {
+          if (controller.countdown.value == 0) {
+            Future.microtask(() {
+              Get.offAllNamed(
+                Routes.TRANSACTION_INVOICE,
+                arguments: {
+                  'consultationData': consultationData,
+                  'transaction': transaction,
+                  'invoice': invoice,
+                },
+              );
+            });
+          }
+
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TransactionTimeLineViewIndex(index: 4),
-              LottieBuilder.asset(
-                "assets/animations/successIcon.json",
-                repeat: true,
-              )
+              Text("Berhasil wok", style: h1Bold),
+              sby48,
+              Text(
+                "Mengalihkan dalam ${controller.countdown} detik...",
+                style: h6Regular,
+              ),
             ],
-          ),
-        ],
+          );
+        }),
       ),
     );
   }

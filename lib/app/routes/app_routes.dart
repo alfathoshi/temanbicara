@@ -60,6 +60,14 @@ abstract class Routes {
   static const BOOKING_HISTORY = _Paths.BOOKING_HISTORY;
   static const NEW_TRACKING = _Paths.NEW_TRACKING;
   static const MENTAL_MATRIX = _Paths.MENTAL_MATRIX;
+  static const BOARDING_1 = _Paths.BOARDING_1;
+  static const BOARDING_2 = _Paths.BOARDING_2;
+  static const BOARDING_3 = _Paths.BOARDING_3;
+  static const BOARDING_4 = _Paths.BOARDING_4;
+  static const BOARDING_5 = _Paths.BOARDING_5;
+  static const BOARDING_6 = _Paths.BOARDING_6;
+  static const BOARDING_7 = _Paths.BOARDING_7;
+  static const ON_BOARDING = _Paths.ON_BOARDING;
 }
 
 abstract class _Paths {
@@ -119,4 +127,12 @@ abstract class _Paths {
   static const BOOKING_HISTORY = '/booking-history';
   static const NEW_TRACKING = '/new-tracking';
   static const MENTAL_MATRIX = '/mental-matrix';
+  static const BOARDING_1 = '/boarding-1';
+  static const BOARDING_2 = '/boarding-2';
+  static const BOARDING_3 = '/boarding-3';
+  static const BOARDING_4 = '/boarding-4';
+  static const BOARDING_5 = '/boarding-5';
+  static const BOARDING_6 = '/boarding-6';
+  static const BOARDING_7 = '/boarding-7';
+  static const ON_BOARDING = '/on-boarding';
 }
