@@ -7,6 +7,7 @@ import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
+import '../../../widgets/date.dart';
 import '../controllers/report_controller.dart';
 
 class ReportView extends GetView<ReportController> {
@@ -72,11 +73,39 @@ class ReportView extends GetView<ReportController> {
                           ),
                           Row(
                             children: [
-                              Icon(Icons.calendar_month_outlined),
-                              Text(
-                                DateFormat('dd MMM yyyy')
-                                    .format(DateTime.now()),
-                                style: h5Regular,
+                              GestureDetector(
+                                onTap: () async {
+                                  final DateTime? pickedDate =
+                                      await showDatePicker(
+                                    context: context,
+                                    initialDate: controller.selectedDate.value,
+                                    firstDate: DateTime(2000, 01, 01),
+                                    lastDate: DateTime.now(),
+                                    confirmText: "Select",
+                                    builder:
+                                        (BuildContext context, Widget? child) {
+                                      return Theme(
+                                        data: ThemeData.light().copyWith(
+                                          primaryColor: primaryColor,
+                                          colorScheme: ColorScheme.light(
+                                            primary: primaryColor,
+                                          ),
+                                        ),
+                                        child: child!,
+                                      );
+                                    },
+                                  );
+
+                                  if (pickedDate != null) {
+                                    if (!isSameDate(pickedDate,
+                                        controller.selectedDate.value)) {
+                                      controller.updateDate(pickedDate);
+                                      controller.getMatrix();
+                                    }
+                                  }
+                                },
+                                child:
+                                    const Icon(Icons.calendar_month_outlined),
                               ),
                             ],
                           )

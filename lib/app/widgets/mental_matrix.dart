@@ -77,7 +77,7 @@ class MentalMatrix extends StatelessWidget {
                       )
                     : Text(
                         'Isi kondisi kesehatan \nmentalmu hari ini',
-                        style: h7Regular.copyWith(fontWeight: FontWeight.w600),
+                        style: h6Regular,
                       ),
               ),
               isFilled

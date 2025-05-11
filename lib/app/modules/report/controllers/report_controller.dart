@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 import '../../../config/config.dart';
 import '../../../data/ReportModel.dart';
@@ -22,6 +23,11 @@ class ReportController extends GetxController {
   var matrixValue = ''.obs;
   var report = Rxn<ReportModel>();
   var isLoading = false.obs;
+
+  var selectedDate = DateTime.now().obs;
+  void updateDate(DateTime date) {
+    selectedDate.value = DateTime(date.year, date.month, date.day);
+  }
 
   Map<String, String> getMentalMatrixDescription(int score) {
     if (score >= 1 && score <= 20) {
@@ -55,7 +61,8 @@ class ReportController extends GetxController {
           'Content-Type': 'application/json',
         },
         body: json.encode({
-          'date_request': "2025-05-09",
+          'date_request':
+              '${DateFormat('yyyy-MM-dd').format(selectedDate.value)}'
         }),
       );
 

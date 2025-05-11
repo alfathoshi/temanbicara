@@ -1,5 +1,6 @@
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:temanbicara/app/modules/report/controllers/report_controller.dart';
 import 'dart:convert';
 import '../../../config/config.dart';
 import '../../../data/ReportModel.dart';
@@ -48,41 +49,41 @@ class MentalMatrixController extends GetxController {
     '> 8 Hours'
   ];
 
-  Future<void> getReport() async {
-    try {
-      isLoading.value = true;
-      final userId = box.read('id');
-      final token = box.read('token');
+  // Future<void> getReport() async {
+  //   try {
+  //     isLoading.value = true;
+  //     final userId = box.read('id');
+  //     final token = box.read('token');
 
-      var response = await http.post(
-        Uri.parse('${Config.apiEndPoint}/report'),
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json',
-        },
-        body: json.encode({
-          'date_request': "2025-05-08",
-        }),
-      );
+  //     var response = await http.post(
+  //       Uri.parse('${Config.apiEndPoint}/report'),
+  //       headers: {
+  //         'Authorization': 'Bearer $token',
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: json.encode({
+  //         'date_request': "2025-05-08",
+  //       }),
+  //     );
 
-      var data = json.decode(response.body);
-      // print('response body: ${response.body}');
+  //     var data = json.decode(response.body);
+  //     // print('response body: ${response.body}');
 
-      if (response.statusCode == 200 &&
-          data['status'] == true &&
-          data['data'] != null) {
-        report.value = ReportModel.fromJson(data['data'][0]);
-      } else {
-        Get.snackbar('Error', data['message'] ?? 'Gagal Menyiapkan Report',
-            backgroundColor: Colors.red.withOpacity(0.6),
-            colorText: whiteColor);
-      }
-    } catch (e) {
-      print('Error getReport: $e');
-    } finally {
-      isLoading.value = false;
-    }
-  }
+  //     if (response.statusCode == 200 &&
+  //         data['status'] == true &&
+  //         data['data'] != null) {
+  //       report.value = ReportModel.fromJson(data['data'][0]);
+  //     } else {
+  //       Get.snackbar('Error', data['message'] ?? 'Gagal Menyiapkan Report',
+  //           backgroundColor: Colors.red.withOpacity(0.6),
+  //           colorText: whiteColor);
+  //     }
+  //   } catch (e) {
+  //     print('Error getReport: $e');
+  //   } finally {
+  //     isLoading.value = false;
+  //   }
+  // }
 
   String getIndexedImage({
     required String? value,
@@ -92,6 +93,7 @@ class MentalMatrixController extends GetxController {
     if (value == null) return '${prefix}1.png';
     final index = referenceList.indexOf(value.trim());
     if (index != -1) {
+      print(prefix);
       return '$prefix${index + 1}.png';
     }
     return '${prefix}1.png';
@@ -100,6 +102,7 @@ class MentalMatrixController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    getReport();
+    // getReport();
+    ReportController().getMatrix();
   }
 }
