@@ -39,7 +39,7 @@ class Assesment1Controller extends GetxController {
     return nameC.text.isNotEmpty &&
         nicknameC.text.isNotEmpty &&
         phoneC.text.isNotEmpty &&
-        selectedGender != Gender.none;
+        selectedGender.value != Gender.none;
   }
 
   Future<void> saveAssesment() async {
@@ -47,9 +47,9 @@ class Assesment1Controller extends GetxController {
       box.write('name', nameC.text);
       box.write('nickname', nicknameC.text);
       box.write('phone', phoneC.text);
-      if (selectedGender == Gender.male) {
+      if (selectedGender.value == Gender.male) {
         box.write('gender', 'male');
-      } else if (selectedGender == Gender.female) {
+      } else if (selectedGender.value == Gender.female) {
         box.write('gender', 'female');
       }
       String formattedDate =

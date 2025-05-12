@@ -11,7 +11,6 @@ analyzer:
   errors:
     prefer_const_literals_to_create_immutables: ignore
     deprecated_member_use: ignore
-    unrelated_type_equality_checks: ignore
 include: package:flutter_lints/flutter.yaml
 
 linter:
