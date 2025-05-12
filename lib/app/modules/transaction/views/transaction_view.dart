@@ -23,11 +23,18 @@ class TransactionView extends GetView<TransactionController> {
         appBar: AppBar(
           toolbarHeight: 85,
           backgroundColor: whiteColor,
+          centerTitle: true,
           title: Text(
             'Transaction',
             style: h3Bold,
           ),
-          centerTitle: true,
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(1),
+            child: Container(
+              color: grey4Color,
+              height: 0.5,
+            ),
+          ),
         ),
         body: SingleChildScrollView(
           child: Column(

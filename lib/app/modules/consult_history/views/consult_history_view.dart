@@ -16,19 +16,19 @@ class ConsultHistoryView extends GetView<ConsultHistoryController> {
       backgroundColor: whiteColor,
       appBar: AppBar(
         toolbarHeight: 85,
-        backgroundColor: Colors.white,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(24),
-            bottomRight: Radius.circular(24),
-          ),
-          side: BorderSide(color: Colors.black12),
-        ),
+        backgroundColor: whiteColor,
+        centerTitle: true,
         title: Text(
           'Consultation History',
           style: h3Bold,
         ),
-        centerTitle: true,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Container(
+            color: grey4Color,
+            height: 0.5,
+          ),
+        ),
       ),
       body: FutureBuilder(
           future: controller.fetchData(),

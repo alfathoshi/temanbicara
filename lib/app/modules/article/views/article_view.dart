@@ -20,17 +20,18 @@ class ArticleView extends GetView<ArticleController> {
           floating: true,
           toolbarHeight: 85,
           backgroundColor: Colors.white,
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(24),
-                bottomRight: Radius.circular(24),
-              ),
-              side: BorderSide(color: Colors.black12)),
           title: Text(
             'Article',
             style: h3Bold,
           ),
           centerTitle: true,
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(1),
+            child: Container(
+              color: grey4Color,
+              height: 0.5,
+            ),
+          ),
         ),
         SliverToBoxAdapter(
           child: Padding(

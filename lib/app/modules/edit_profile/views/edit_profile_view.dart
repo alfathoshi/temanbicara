@@ -22,17 +22,18 @@ class EditProfileView extends GetView<EditProfileController> {
       appBar: AppBar(
         toolbarHeight: 85,
         backgroundColor: whiteColor,
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(24),
-              bottomRight: Radius.circular(24),
-            ),
-            side: BorderSide(color: Colors.black12)),
+        centerTitle: true,
         title: Text(
           'Edit Profile',
           style: h3Bold,
         ),
-        centerTitle: true,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Container(
+            color: grey4Color,
+            height: 0.5,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(24),
