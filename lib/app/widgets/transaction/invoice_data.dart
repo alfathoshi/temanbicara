@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:temanbicara/app/data/Invoice.dart';
+import 'package:temanbicara/app/data/invoice_model.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
-import 'package:temanbicara/app/widgets/transaction/idrFormatter.dart';
+import 'package:temanbicara/app/widgets/transaction/idr_formatter.dart';
 
 class InvoiceData extends StatelessWidget {
   final InvoiceModel invoice;
@@ -126,7 +126,7 @@ class InvoiceData extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Schedule", style: h6Bold),
-                    Text("${formatScheduleDate(invoice.transaction.jadwal)}")
+                    Text(formatScheduleDate(invoice.transaction.jadwal))
                   ],
                 ),
                 sby12,

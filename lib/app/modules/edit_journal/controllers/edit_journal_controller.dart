@@ -68,7 +68,6 @@ class EditJournalController extends GetxController {
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
-        print(responseData);
 
         if (responseData['status']) {
           Get.back();
@@ -84,7 +83,6 @@ class EditJournalController extends GetxController {
         Get.snackbar('Error', 'Failed to update journal.');
       }
     } catch (e) {
-      print(e);
       Get.snackbar('Error', 'An error occurred: $e');
     } finally {
       isLoading.value = false;
@@ -99,7 +97,6 @@ class EditJournalController extends GetxController {
     final arguments = Get.arguments;
     if (arguments != null) {
       journalId = arguments['id'];
-      print('Journal ID: $journalId');
       titleController.text = arguments['title'] ?? '';
       bodyController.text = arguments['body'] ?? '';
       sliderValue.value = (arguments['stress_level'] ?? 1).toDouble() - 1;

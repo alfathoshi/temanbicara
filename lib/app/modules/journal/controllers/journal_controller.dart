@@ -44,7 +44,6 @@ class JournalController extends GetxController {
       final userId = box.read('id');
 
       final token = box.read('token');
-      print(selectedDate.value);
       var response = await http.post(
         Uri.parse('${Config.apiEndPoint}/journal/get')
             .replace(queryParameters: {
@@ -69,7 +68,12 @@ class JournalController extends GetxController {
         }
       }
     } catch (e) {
-      print(e);
+      Get.snackbar(
+        'Error',
+        'Failed to fetch journal',
+        backgroundColor: error.withOpacity(0.6),
+        colorText: Colors.white,
+      );
     } finally {
       isLoading.value = false;
     }
@@ -78,7 +82,6 @@ class JournalController extends GetxController {
   Future<void> deleteJournal(int journalId) async {
     try {
       final token = box.read('token');
-      print("Token: $token");
 
       var response = await http.delete(
         Uri.parse('${Config.apiEndPoint}/journal/$journalId'),
@@ -89,7 +92,6 @@ class JournalController extends GetxController {
 
       if (response.statusCode == 200) {
         var data = json.decode(response.body);
-        print(data);
         if (data['status']) {
           Get.snackbar(
             'Success',
@@ -108,7 +110,6 @@ class JournalController extends GetxController {
           );
         }
       } else {
-        print(response.body);
         Get.snackbar(
           'Error',
           'Failed to delete journal.',
@@ -117,7 +118,12 @@ class JournalController extends GetxController {
         );
       }
     } catch (e) {
-      print(e);
+      Get.snackbar(
+        'Error',
+        'Failed to delete journal',
+        backgroundColor: error.withOpacity(0.6),
+        colorText: Colors.white,
+      );
     }
   }
 

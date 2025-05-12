@@ -33,6 +33,7 @@ class VerifyOtpController extends GetxController {
 
   Future<void> sendOtp() async {
     try {
+      // ignore: unused_local_variable
       var response = await http.post(
         Uri.parse("${Config.apiEndPoint}/password/otp"),
         headers: {'Content-Type': 'application/json'},
@@ -40,7 +41,6 @@ class VerifyOtpController extends GetxController {
           'email': Get.arguments['email'],
         }),
       );
-      print(response.body);
     } catch (err) {
       rethrow;
     }
@@ -73,7 +73,6 @@ class VerifyOtpController extends GetxController {
         );
       }
     } catch (err) {
-      print(err);
       rethrow;
     }
   }

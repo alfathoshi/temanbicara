@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 import '../../../config/config.dart';
-import '../../../data/ReportModel.dart';
+import '../../../data/report_model.dart';
 import '../../../themes/colors.dart';
 
 class ReportController extends GetxController {
@@ -47,7 +47,7 @@ class ReportController extends GetxController {
     '< 3 hours'
   ];
 
-  final List<String> Activity = [
+  final List<String> activity = [
     '< 500 steps',
     '500-1k steps',
     '1k-3k steps',
@@ -55,7 +55,7 @@ class ReportController extends GetxController {
     '> 6k steps'
   ];
 
-  final List<String> ScreenTime = [
+  final List<String> screenTime = [
     '< 1 hours',
     '1-2 hours',
     '2-3 hours',
@@ -97,10 +97,10 @@ class ReportController extends GetxController {
   Future<void> getMatrix() async {
     try {
       isLoading.value = true;
+      // ignore: unused_local_variable
       final userId = box.read('id');
       final token = box.read('token');
 
-      print(selectedDate);
       var response = await http.post(
         Uri.parse('${Config.apiEndPoint}/report'),
         headers: {
@@ -121,10 +121,11 @@ class ReportController extends GetxController {
       } else {
         Get.snackbar('Failed', 'Report data not found',
             backgroundColor: error.withOpacity(0.6), colorText: Colors.white);
-        print(data['message']);
       }
     } catch (e) {
-      print('Error getReport: $e');
+      Get.snackbar('Error', 'Fetch Matrix',
+          backgroundColor: Colors.red.withOpacity(0.6),
+          colorText: Colors.white);
     } finally {
       isLoading.value = false;
     }
@@ -169,7 +170,6 @@ class ReportController extends GetxController {
         }
       }
     } catch (e) {
-      print('Error: $e');
       isTrackingFilled.value = false;
     }
   }
@@ -188,8 +188,6 @@ class ReportController extends GetxController {
 
       if (response.statusCode == 200) {
         final data = json.decode(response.body);
-        print('Data status: ${data['status']}');
-        print('Data content: ${data['data']}');
 
         if (data['status']) {
           trackingList.value = data['data'];
@@ -199,15 +197,14 @@ class ReportController extends GetxController {
           avgSleep.value = trackingList['average_bed_time'] ?? '';
           avgScreen.value = trackingList['average_screen_time'] ?? '';
           avgActivity.value = trackingList['average_activity'] ?? '';
-        } else {
-          print(data['message']);
-        }
+        } else {}
       } else {
         Get.snackbar('Error', 'Gagal mengambil data statistik');
-        print(response.body);
       }
     } catch (e) {
-      print('Error fetchStatistik: $e');
+      Get.snackbar('Error', 'Failed to fetch statistic',
+          backgroundColor: Colors.red.withOpacity(0.6),
+          colorText: Colors.white);
     } finally {
       isFetching.value = false;
     }

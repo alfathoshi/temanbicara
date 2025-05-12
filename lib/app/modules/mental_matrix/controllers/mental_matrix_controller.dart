@@ -1,7 +1,7 @@
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:temanbicara/app/modules/report/controllers/report_controller.dart';
-import '../../../data/ReportModel.dart';
+import '../../../data/report_model.dart';
 import 'package:get/get.dart';
 
 class MentalMatrixController extends GetxController {
@@ -28,7 +28,7 @@ class MentalMatrixController extends GetxController {
     '< 3 hours'
   ];
 
-  final List<String> Activity = [
+  final List<String> activity = [
     '< 500 steps',
     '500-1k steps',
     '1k-3k steps',
@@ -36,7 +36,7 @@ class MentalMatrixController extends GetxController {
     '> 6k steps'
   ];
 
-  final List<String> ScreenTime = [
+  final List<String> screenTime = [
     '< 1 hours',
     '1-2 hours',
     '2-3 hours',
@@ -91,7 +91,6 @@ class MentalMatrixController extends GetxController {
     if (value == null) return '${prefix}1.png';
     final index = referenceList.indexOf(value.trim());
     if (index != -1) {
-      print(prefix);
       return '$prefix${index + 1}.png';
     }
     return '${prefix}1.png';

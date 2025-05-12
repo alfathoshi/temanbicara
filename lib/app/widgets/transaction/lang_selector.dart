@@ -16,52 +16,48 @@ class LangSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     final bool isSelected = selectedLang == lang;
 
-    return Container(
-      // onTap: () => onSelect(lang),
-      child: Column(
-        children: [
-          RadioMenuButton(
-              value: 'English',
-              groupValue: selectedLang,
-              onChanged: (selectedValue) {
-                Obx() => onSelect(lang);
-              },
-              child: Row(
-                children: [
-                  Image.asset(
-                    'assets/icons/enIcon.png',
-                    scale: 4,
-                  ),
-                  sby12,
-                  Text(
-                    'English',
-                    style: h4Medium,
-                  ),
-                ],
-              )),
-          RadioMenuButton(
-              value: 'Indonesia',
-              groupValue: selectedLang,
-              onChanged: (selectedValue) {
-                Obx() => selectedLang == selectedValue!;
-              },
-              child: Row(
-                children: [
-                  Image.asset(
-                    'assets/icons/inIcon.png',
-                    scale: 4,
-                  ),
-                  sby12,
-                  Text(
-                    'Bahasa Indonesia',
-                    style: h4Medium,
-                  ),
-                ],
-              )),
-        ],
-      ),
+    return Column(
+      children: [
+        RadioMenuButton(
+            value: 'English',
+            groupValue: selectedLang,
+            onChanged: (selectedValue) {
+            },
+            child: Row(
+              children: [
+                Image.asset(
+                  'assets/icons/enIcon.png',
+                  scale: 4,
+                ),
+                sby12,
+                Text(
+                  'English',
+                  style: h4Medium,
+                ),
+              ],
+            )),
+        RadioMenuButton(
+            value: 'Indonesia',
+            groupValue: selectedLang,
+            onChanged: (selectedValue) {
+            },
+            child: Row(
+              children: [
+                Image.asset(
+                  'assets/icons/inIcon.png',
+                  scale: 4,
+                ),
+                sby12,
+                Text(
+                  'Bahasa Indonesia',
+                  style: h4Medium,
+                ),
+              ],
+            )),
+      ],
     );
   }
 }

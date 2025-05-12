@@ -10,7 +10,7 @@ import '../../../widgets/buttons.dart';
 import '../controllers/assesment_3_controller.dart';
 
 class Assesment3View extends GetView<Assesment3Controller> {
-  const Assesment3View({Key? key}) : super(key: key);
+  const Assesment3View({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

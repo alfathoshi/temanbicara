@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:temanbicara/app/data/Transaction.dart';
+import 'package:temanbicara/app/data/transaction_model.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
-import 'package:temanbicara/app/widgets/transaction/concultationPrice.dart';
-import 'package:temanbicara/app/widgets/transaction/paymentMethodRow.dart';
+import 'package:temanbicara/app/widgets/transaction/concultation_price.dart';
+import 'package:temanbicara/app/widgets/transaction/payment_method_row.dart';
 
 List<String> creditCardList = ["Visa", "Mastercard"];
 

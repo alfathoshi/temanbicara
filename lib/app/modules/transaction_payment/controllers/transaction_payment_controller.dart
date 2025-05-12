@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:temanbicara/app/themes/colors.dart';
 
 import '../../../config/config.dart';
 
@@ -41,12 +42,15 @@ class TransactionPaymentController extends GetxController {
 
         if (status == 'settlement') {
           return true;
-        } else {
-          print("Status: $status");
         }
       }
     } catch (e) {
-      print("Error checking payment status: $e");
+      Get.snackbar(
+        'Error',
+        'Failed to chehcking payment status',
+        backgroundColor: error.withOpacity(0.6),
+        colorText: whiteColor,
+      );
     }
     return false;
   }

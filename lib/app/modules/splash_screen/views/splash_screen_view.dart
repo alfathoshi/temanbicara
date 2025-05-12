@@ -9,7 +9,7 @@ import 'package:temanbicara/app/themes/fonts.dart';
 import '../controllers/splash_screen_controller.dart';
 
 class SplashScreenView extends GetView<SplashScreenController> {
-  SplashScreenView({Key? key}) : super(key: key);
+  SplashScreenView({super.key});
   final box = GetStorage();
 
   @override
@@ -41,7 +41,7 @@ class SplashScreenView extends GetView<SplashScreenController> {
               scale: 2,
             ),
             const SizedBox(height: 12),
-            Text('Teman Bicara', style: TextLogo),
+            Text('Teman Bicara', style: textLogo),
           ],
         ),
       ),

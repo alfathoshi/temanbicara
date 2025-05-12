@@ -27,9 +27,4 @@ class Assesment3Controller extends GetxController {
     }
   }
 
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-  }
 }

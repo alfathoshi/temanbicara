@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -7,7 +5,6 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
 class TrackingController extends GetxController {
-  //TODO: Implement TrackingController
   var selectedKualitasTidur = Rxn<String>();
   var activeIndex = Rxn<int>();
 

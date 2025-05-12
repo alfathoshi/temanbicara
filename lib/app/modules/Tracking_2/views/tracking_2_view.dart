@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:temanbicara/app/data/Tracking.dart';
+import 'package:temanbicara/app/data/tracking_model.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
-
 import '../controllers/tracking_2_controller.dart';
 
 class Tracking2View extends GetView<Tracking2Controller> {
@@ -135,7 +132,6 @@ class Tracking2View extends GetView<Tracking2Controller> {
                       padding: const EdgeInsets.symmetric(horizontal: 24),
                       child: MyButton(
                           get: () {
-                            print(controller.selectedNumber.value);
                             Get.toNamed(Routes.TRACKING_3,
                                 arguments: TrackingModel(
                                     "", controller.selectedNumber.value, 0));

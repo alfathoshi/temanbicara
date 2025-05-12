@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
-
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
 import '../../report/controllers/report_controller.dart';
@@ -429,7 +426,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                                     "assets/images/${controller.getIndexedImage(
                                       value: reportController
                                           .report.value?.screenTracking,
-                                      referenceList: controller.ScreenTime,
+                                      referenceList: controller.screenTime,
                                       prefix: 'screen',
                                     )}",
                                     scale: 2,
@@ -502,7 +499,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                                     "assets/images/${controller.getIndexedImage(
                                       value: reportController
                                           .report.value?.activityTracking,
-                                      referenceList: controller.Activity,
+                                      referenceList: controller.activity,
                                       prefix: 'step',
                                     )}",
                                     scale: 1.5,

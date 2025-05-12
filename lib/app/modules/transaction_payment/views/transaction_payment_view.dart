@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:temanbicara/app/data/Invoice.dart';
-import 'package:temanbicara/app/data/Transaction.dart';
+import 'package:temanbicara/app/data/invoice_model.dart';
+import 'package:temanbicara/app/data/transaction_model.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
-import 'package:temanbicara/app/widgets/transaction/transactionPriceDetail.dart';
-import 'package:temanbicara/app/widgets/transaction/transactionRemainingTime.dart';
-import 'package:temanbicara/app/widgets/transaction/transactionTimelineView.dart';
-import 'package:temanbicara/app/widgets/transaction/transactionVANumber.dart';
+import 'package:temanbicara/app/widgets/transaction/transaction_price_detail.dart';
+import 'package:temanbicara/app/widgets/transaction/transaction_remaining_time.dart';
+import 'package:temanbicara/app/widgets/transaction/transaction_timeline_view.dart';
+import 'package:temanbicara/app/widgets/transaction/transaction_va_number.dart';
 
 import '../controllers/transaction_payment_controller.dart';
 
@@ -26,6 +26,7 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
   @override
   Widget build(BuildContext context) {
     final box = GetStorage();
+    // ignore: unused_local_variable
     final userID = box.read('id');
     final data = Get.arguments as Map;
     final TransactionModel transaction = data["transaction"];
@@ -53,7 +54,7 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
             style: h3Bold,
           ),
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(1),
+            preferredSize: const Size.fromHeight(1),
             child: Container(
               color: grey4Color,
               height: 0.5,
@@ -130,7 +131,7 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                                           MaterialStatePropertyAll<Color>(
                                               primaryColor),
                                     ),
-                                    child: Text('OK',
+                                    child: const Text('OK',
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontSize: 14,

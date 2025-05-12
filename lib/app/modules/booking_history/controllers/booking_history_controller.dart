@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/config/config.dart';
-import 'package:temanbicara/app/data/Invoice.dart';
-import 'package:temanbicara/app/data/Transaction.dart';
-import 'package:temanbicara/app/data/consultComplete.dart';
-import 'package:temanbicara/app/data/consultPending.dart';
-import 'package:temanbicara/app/data/consultResponse.dart';
+import 'package:temanbicara/app/data/invoice_model.dart';
+import 'package:temanbicara/app/data/transaction_model.dart';
+import 'package:temanbicara/app/data/consult_complete.dart';
+import 'package:temanbicara/app/data/consult_pending.dart';
+import 'package:temanbicara/app/data/consult_response.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 
@@ -90,7 +90,13 @@ class BookingHistoryController extends GetxController {
         }
       }
     } catch (e) {
-      print('Error checking payment status: $e');
+      Get.snackbar(
+        'Error Payment',
+        'Failed checking payment status',
+        backgroundColor: error.withOpacity(0.6),
+        colorText: Colors.white,
+        snackPosition: SnackPosition.TOP,
+      );
     }
   }
 
@@ -149,6 +155,7 @@ class BookingHistoryController extends GetxController {
 
   ConsultComplete _mapCompleted(dynamic item) {
     final schedule = item['schedule'];
+    // ignore: unused_local_variable
     final payment = item['payment'];
     final user = schedule['user'];
     final expertiseList = user['expertises'] as List;

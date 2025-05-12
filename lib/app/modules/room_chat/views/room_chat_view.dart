@@ -147,7 +147,6 @@ class RoomChatView extends GetView<RoomChatController> {
                 IconButton(
                   icon: const Icon(Icons.send),
                   onPressed: () {
-                    print(controller.dataChat);
                     _sendMessage();
                   },
                 ),

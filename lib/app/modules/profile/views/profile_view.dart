@@ -107,8 +107,6 @@ class ProfileView extends GetView<ProfileController> {
                           sby16,
                           GestureDetector(
                             onTap: () {
-                              var box = GetStorage();
-                              print(box.read('email'));
                               Get.toNamed(Routes.EDIT_PROFILE);
                             },
                             child: Row(

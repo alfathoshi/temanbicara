@@ -13,6 +13,7 @@ class SleepQualityView extends GetView<SleepQualityController> {
   const SleepQualityView({super.key});
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     List<dynamic> dummyData = [
       {"month": "Dec", "date": "31", "sleep_hours": 20},
       {"month": "Dec", "date": "30", "sleep_hours": 5},

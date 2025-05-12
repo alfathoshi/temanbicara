@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-
-import '../data/Transaction.dart';
 import '../modules/Tracking/bindings/tracking_binding.dart';
 import '../modules/Tracking/views/tracking_view.dart';
 import '../modules/Tracking_2/bindings/tracking_2_binding.dart';
@@ -109,6 +107,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
+  // ignore: constant_identifier_names
   static const INITIAL = Routes.SPLASH_SCREEN;
 
   static final routes = [
@@ -159,7 +158,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.CHATBOT_ROOM,
-      page: () => ChatbotRoomView(),
+      page: () => const ChatbotRoomView(),
       binding: ChatbotRoomBinding(),
     ),
     GetPage(
@@ -259,7 +258,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ASSESMENT_4,
-      page: () => const Assesment4View(),
+      page: () =>  const Assesment4View(),
       binding: Assesment4Binding(),
     ),
     GetPage(

@@ -40,7 +40,6 @@ class ForgotPasswordController extends GetxController {
 
       Map<String, dynamic> res = json.decode(response.body);
 
-      print(res);
 
       isCorrect.value = res['status'];
 
@@ -52,7 +51,6 @@ class ForgotPasswordController extends GetxController {
       }
       return;
     } catch (err) {
-      print(err);
       rethrow;
     }
   }

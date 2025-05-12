@@ -10,7 +10,7 @@ import '../../../widgets/wide_button.dart';
 import '../controllers/edit_journal_controller.dart';
 
 class EditJournalView extends GetView<EditJournalController> {
-  const EditJournalView({Key? key}) : super(key: key);
+  const EditJournalView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

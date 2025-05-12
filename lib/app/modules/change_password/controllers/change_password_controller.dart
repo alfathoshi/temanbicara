@@ -32,7 +32,6 @@ class ChangePasswordController extends GetxController {
       }
       final userId = box.read('id');
       final token = box.read('token');
-      print(token);
       final response = await http.post(
         Uri.parse('${Config.apiEndPoint}/change-password'),
         headers: {
@@ -46,7 +45,6 @@ class ChangePasswordController extends GetxController {
           'user_id': userId.toString(),
         }),
       );
-      print(response.body);
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
         box.write('new_password', responseData['new_password']);

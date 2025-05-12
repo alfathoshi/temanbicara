@@ -1,8 +1,7 @@
-// ignore_for_file: prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:temanbicara/app/data/Transaction.dart';
+import 'package:temanbicara/app/data/transaction_model.dart';
 import 'package:temanbicara/app/modules/transaction/views/transaction_view.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
@@ -10,7 +9,6 @@ import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/schedule/schedule_details.dart';
 import 'package:temanbicara/app/widgets/schedule/select_date.dart';
-
 import '../controllers/consult_schedule_controller.dart';
 
 class ConsultScheduleView extends GetView<ConsultScheduleController> {
@@ -24,7 +22,9 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
     final expertiseList = arguments['expertise'];
     final expertise = (expertiseList as List).join(", ");
 
+    // ignore: unused_local_variable
     DateTime selectedDate = DateTime.now();
+    // ignore: unused_local_variable
     Map<String, dynamic> selectedSchedule = {};
     final consultController = Get.put(ConsultScheduleController());
 
@@ -44,7 +44,7 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
           style: h3Bold,
         ),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(1),
+          preferredSize: const Size.fromHeight(1),
           child: Container(
             color: grey4Color,
             height: 0.5,
@@ -56,7 +56,7 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
           child: Column(
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(8),
                   bottomRight: Radius.circular(8),
                 ),
@@ -83,7 +83,7 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                       expertise,
                       style: h3Bold.copyWith(
                         overflow: TextOverflow.ellipsis,
-                        color: Color(0xFF7D8A95),
+                        color: const Color(0xFF7D8A95),
                       ),
                       maxLines: 2,
                     ),
@@ -139,11 +139,11 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                                   barrierDismissible: false,
                                 );
 
-                                await Future.delayed(Duration(seconds: 2));
+                                await Future.delayed(const Duration(seconds: 2));
                                 Get.back();
 
                                 Get.to(
-                                  () => TransactionView(),
+                                  () => const TransactionView(),
                                   arguments: TransactionModel(
                                     namaPsikiater: userName,
                                     expertise: expertise,
@@ -156,7 +156,7 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                               color: primaryColor,
                               text: "Booking Now",
                             )
-                          : SizedBox.shrink();
+                          : const SizedBox.shrink();
                     }),
                     sby36,
                   ],

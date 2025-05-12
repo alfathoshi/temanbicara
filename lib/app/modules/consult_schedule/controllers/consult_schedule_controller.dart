@@ -7,7 +7,6 @@ class ConsultScheduleController extends GetxController {
   void updateSelectedDate(DateTime date) {
     selectedDate.value = date;
     resetSelectedSchedule();
-    print("Selected date: $date");
   }
 
   void resetSelectedSchedule() {
@@ -16,7 +15,6 @@ class ConsultScheduleController extends GetxController {
 
   void updateSelectedSchedule(Map<String, dynamic> schedule) {
     selectedSchedule.value = schedule;
-    print(selectedSchedule.value);
   }
 
   DateTime get currentDate => selectedDate.value;

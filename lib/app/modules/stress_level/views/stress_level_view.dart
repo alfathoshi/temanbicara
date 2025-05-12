@@ -17,7 +17,6 @@ class StressLevelView extends GetView<StressLevelController> {
   Widget build(BuildContext context) {
     Random rng = Random();
     int stressLevel = Get.arguments[1].value;
-    print(stressLevel);
     SlidingUpPanelController slidingUpController = SlidingUpPanelController();
     return Stack(
       children: [

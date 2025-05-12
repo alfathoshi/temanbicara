@@ -4,9 +4,9 @@ import 'dart:math';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:get/get.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:temanbicara/app/themes/colors.dart';
 
 class ChatbotRoomController extends GetxController {
-
   final Gemini gemini = Gemini.instance;
   var messages = <types.Message>[].obs;
   late StreamSubscription subscription;
@@ -35,11 +35,10 @@ class ChatbotRoomController extends GetxController {
     if (index != -1) {
       messages[index] = types.TextMessage(
         author: tebi,
-        createdAt: messages[index].createdAt, 
-        id: messageId, 
-        text: newText, 
+        createdAt: messages[index].createdAt,
+        id: messageId,
+        text: newText,
       );
-      
     }
   }
 
@@ -61,7 +60,7 @@ class ChatbotRoomController extends GetxController {
         author: tebi,
         createdAt: DateTime.now().millisecondsSinceEpoch,
         id: randomString(),
-        text: '. . .', 
+        text: '. . .',
       );
       addMessage(placeholderMessage);
 
@@ -83,7 +82,12 @@ class ChatbotRoomController extends GetxController {
         },
       );
     } catch (e) {
-      print('Error generating content: $e');
+      Get.snackbar(
+        'Error',
+        'Failed to generating content',
+        backgroundColor: error.withOpacity(0.6),
+        colorText: whiteColor,
+      );
     }
   }
 

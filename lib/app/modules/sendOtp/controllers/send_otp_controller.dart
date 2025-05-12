@@ -8,7 +8,6 @@ import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 
 class SendOtpController extends GetxController {
-  //TODO: Implement SendOtpController
   RxBool isLoading = false.obs;
   RxBool isButtonActive = true.obs;
   TextEditingController emailController = TextEditingController();
@@ -54,8 +53,12 @@ class SendOtpController extends GetxController {
       isLoading.value = false;
       return;
     } catch (err) {
-      print(err);
-      rethrow;
+      Get.snackbar(
+        'Error',
+        'Failed to send OTP',
+        backgroundColor: error.withOpacity(0.6),
+        colorText: Colors.white,
+      );
     }
   }
 

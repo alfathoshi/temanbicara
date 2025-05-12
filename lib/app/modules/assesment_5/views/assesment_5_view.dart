@@ -9,7 +9,7 @@ import '../../../widgets/buttons.dart';
 import '../controllers/assesment_5_controller.dart';
 
 class Assesment5View extends GetView<Assesment5Controller> {
-  const Assesment5View({Key? key}) : super(key: key);
+  const Assesment5View({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,8 +106,8 @@ class Assesment5View extends GetView<Assesment5Controller> {
                           child: Text(
                             'Ya',
                             style: controller.isSelected.value == 0
-                                ? ConsultOptionTap
-                                : ConsultOption,
+                                ? consultOptionTap
+                                : consultOption,
                           ),
                         ),
                       )),
@@ -141,8 +141,8 @@ class Assesment5View extends GetView<Assesment5Controller> {
                           child: Text(
                             'Tidak',
                             style: controller.isSelected.value == 1
-                                ? ConsultOptionTap
-                                : ConsultOption,
+                                ? consultOptionTap
+                                : consultOption,
                           ),
                         ),
                       )),

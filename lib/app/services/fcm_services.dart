@@ -21,6 +21,7 @@ class FCMService {
     final url = Uri.parse(
         'https://fcm.googleapis.com/v1/projects/$projectId/messages:send');
 
+    // ignore: unused_local_variable
     final response = await authClient.post(
       url,
       headers: {'Content-Type': 'application/json'},
@@ -39,8 +40,5 @@ class FCMService {
         },
       }),
     );
-    print('FCM response: ${response.statusCode}');
-    print('Target $targetToken');
-    print('FCM body: ${response.body}');
   }
 }

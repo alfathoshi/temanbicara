@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:temanbicara/app/data/Tracking.dart';
+import 'package:temanbicara/app/data/tracking_model.dart';
 import 'package:temanbicara/app/modules/Tracking/controllers/tracking_controller.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
@@ -9,8 +8,7 @@ import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/kualitas_tidur.dart';
 
-// import '../controllers/tracking_controller.dart';
-
+// ignore: must_be_immutable
 class TrackingView extends GetView<TrackingController> {
   TrackingView({super.key});
   List<Map<String, dynamic>> dataKualitasTidur = [
@@ -72,9 +70,9 @@ class TrackingView extends GetView<TrackingController> {
                     () => KualitasTidur(
                       kualitas: kualitas,
                       waktu: dataKualitasTidur[index]['waktu'],
-                      Image: dataKualitasTidur[index]['emosi'],
+                      image: dataKualitasTidur[index]['emosi'],
                       textColor: controller.changeColor(index),
-                      BackgroundColor: controller.changeBackgroundColor(index),
+                      backgroundColor: controller.changeBackgroundColor(index),
                     ),
                   ),
                 );
@@ -88,7 +86,6 @@ class TrackingView extends GetView<TrackingController> {
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: MyButton(
                         get: () {
-                          print(controller.selectedKualitasTidur.value!);
                           Get.toNamed(Routes.TRACKING_2,
                               arguments: TrackingModel(
                                   controller.selectedKualitasTidur.value!,

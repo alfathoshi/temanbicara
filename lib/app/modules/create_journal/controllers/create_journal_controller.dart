@@ -21,6 +21,7 @@ class CreateJournalController extends GetxController {
   var pickedImage = Rx<File?>(null);
 
   Future<void> pickImage() async {
+    // ignore: unused_local_variable
     var status = await Permission.photos.request();
     // if (!status.isGranted) {
     //   Get.snackbar('Permission Denied', 'Gallery access is required');
@@ -45,6 +46,7 @@ class CreateJournalController extends GetxController {
     }
 
     try {
+      // ignore: unused_local_variable
       final userId = box.read('id');
       final token = box.read('token');
 
@@ -76,12 +78,11 @@ class CreateJournalController extends GetxController {
             backgroundColor: primaryColor.withOpacity(0.6),
             colorText: Colors.white);
       } else {
+        // ignore: unused_local_variable
         var body = await response.stream.bytesToString();
-        print(body);
         Get.snackbar('Error', 'Failed to create journal');
       }
     } catch (e) {
-      print(e);
       Get.snackbar('Error', 'An error occurred: $e');
     }
   }

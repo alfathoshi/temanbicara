@@ -62,7 +62,12 @@ class SignupController extends GetxController {
             backgroundColor: error.withOpacity(0.6), colorText: whiteColor);
       }
     } catch (e) {
-      print(e);
+      Get.snackbar(
+        'Error',
+        'Failed to register',
+        backgroundColor: error.withOpacity(0.6),
+        colorText: Colors.white,
+      );
     } finally {
       isLoading.value = false;
     }

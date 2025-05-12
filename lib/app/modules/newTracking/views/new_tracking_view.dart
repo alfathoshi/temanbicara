@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
-
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
 import '../controllers/new_tracking_controller.dart';
@@ -90,7 +87,7 @@ class NewTrackingView extends GetView<NewTrackingController> {
                                       colorFilter:
                                           controller.getColorEmotion(index),
                                       child: Text(controller.emotions[index],
-                                          style: TrackingText.copyWith(
+                                          style: trackingText.copyWith(
                                             color: controller.selectedEmotion
                                                         .value ==
                                                     controller.emotions[index]
@@ -230,7 +227,7 @@ class NewTrackingView extends GetView<NewTrackingController> {
                                           controller.getColorSleep(index),
                                       child:
                                           Text(controller.sleepQuality[index],
-                                              style: TrackingText.copyWith(
+                                              style: trackingText.copyWith(
                                                 color: controller.selectedSleep
                                                             .value ==
                                                         controller
@@ -305,11 +302,11 @@ class NewTrackingView extends GetView<NewTrackingController> {
                                     const SizedBox(
                                       height: 8,
                                     ),
-                                    Text(controller.ScreenTime[index],
-                                        style: TrackingText.copyWith(
+                                    Text(controller.screenTime[index],
+                                        style: trackingText.copyWith(
                                           color: controller
                                                       .selectedScreen.value ==
-                                                  controller.ScreenTime[index]
+                                                  controller.screenTime[index]
                                               ? Colors.black
                                               : Colors.grey,
                                         ))
@@ -379,11 +376,11 @@ class NewTrackingView extends GetView<NewTrackingController> {
                                     const SizedBox(
                                       height: 8,
                                     ),
-                                    Text(controller.Activity[index],
-                                        style: TrackingText.copyWith(
+                                    Text(controller.activity[index],
+                                        style: trackingText.copyWith(
                                           color: controller
                                                       .selectedActivity.value ==
-                                                  controller.Activity[index]
+                                                  controller.activity[index]
                                               ? Colors.black
                                               : Colors.grey,
                                         ))

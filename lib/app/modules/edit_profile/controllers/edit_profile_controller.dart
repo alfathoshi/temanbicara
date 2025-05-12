@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -8,7 +7,6 @@ import 'package:temanbicara/app/config/config.dart';
 import 'package:temanbicara/app/modules/edit_profile/controllers/datepicker_controller.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../config/config.dart';
 
 class EditProfileController extends GetxController {
   final box = GetStorage();
@@ -35,6 +33,7 @@ class EditProfileController extends GetxController {
         DateFormat('yyyy-MM-dd').format(dateController.selectedDate.value);
 
     try {
+      // ignore: unused_local_variable
       final userId = box.read('id');
       final token = box.read('token');
 
@@ -67,7 +66,6 @@ class EditProfileController extends GetxController {
         Get.snackbar('Error', 'Failed to update profile.');
       }
     } catch (e) {
-      print(e);
       Get.snackbar('Error', 'An error occurred: $e');
     } finally {
       isLoading.value = false;

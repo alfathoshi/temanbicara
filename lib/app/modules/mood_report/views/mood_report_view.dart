@@ -16,6 +16,7 @@ class MoodReportView extends GetView<MoodReportController> {
     String mood = Get.arguments[1].value;
 
     SlidingUpPanelController slidingUpController = SlidingUpPanelController();
+    // ignore: unused_local_variable
     List<dynamic> dummyData = [
       {"month": "Dec", "date": "31", "sleep_hours": 20},
       {"month": "Dec", "date": "30", "sleep_hours": 5},
@@ -39,7 +40,6 @@ class MoodReportView extends GetView<MoodReportController> {
             ),
             title: GestureDetector(
               onTap: () {
-                print('ssd');
               },
               child: Text(
                 'Mood',

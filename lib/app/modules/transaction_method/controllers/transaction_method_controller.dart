@@ -13,7 +13,6 @@ class TransactionMethodController extends GetxController {
 
   void setMethod(String method) {
     selectedMethod.value = method;
-    print(selectedMethod.value);
   }
 
   Future<void> createConsultation({

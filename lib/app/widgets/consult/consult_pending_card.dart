@@ -1,15 +1,12 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:temanbicara/app/data/consultPending.dart';
+import 'package:temanbicara/app/data/consult_pending.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/consult/order_details.dart';
-import 'package:temanbicara/app/widgets/transaction/idrFormatter.dart';
+import 'package:temanbicara/app/widgets/transaction/idr_formatter.dart';
 
 class ConsultPendingCard extends StatelessWidget {
   final ConsultPending consultPending;
@@ -32,7 +29,7 @@ class ConsultPendingCard extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(16, 26, 16, 20),
+              padding: const EdgeInsets.fromLTRB(16, 26, 16, 20),
               child: Row(
                 children: [
                   Container(
@@ -102,13 +99,13 @@ class ConsultPendingCard extends StatelessWidget {
                       Text(
                         consultPending.tanggalTenggat,
                         style: h6Bold.copyWith(
-                          color: Color(0xFFFC7070),
+                          color: const Color(0xFFFC7070),
                         ),
                       ),
                       Text(
                         consultPending.waktuTenggat,
                         style: h6Bold.copyWith(
-                          color: Color(0xFFFC7070),
+                          color: const Color(0xFFFC7070),
                         ),
                       )
                     ],
@@ -116,10 +113,10 @@ class ConsultPendingCard extends StatelessWidget {
                 ],
               ),
             ),
-            Divider(),
+            const Divider(),
             sby16,
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 children: [
                   Row(
@@ -155,8 +152,6 @@ class ConsultPendingCard extends StatelessWidget {
                   sby16,
                   MyButtonCustom(
                     get: () {
-                      print("VA Number: ${consultPending.vaNumber}");
-
                       Get.to(
                         OrderDetails(
                           consultPending: consultPending,
@@ -173,7 +168,7 @@ class ConsultPendingCard extends StatelessWidget {
                   sby8,
                   MyButtonOutlinedCustom(
                     get: () {},
-                    foreColor: Color(0xFFFC7070),
+                    foreColor: const Color(0xFFFC7070),
                     backColor: whiteColor,
                     height: 40,
                     text: "Cancel Consultation",

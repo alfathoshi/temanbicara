@@ -1,8 +1,6 @@
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
@@ -75,7 +73,7 @@ class SelectDate extends StatelessWidget {
         ),
         child: EasyDateTimeLinePicker(
           firstDate: DateTime.now(),
-          lastDate: DateTime.now().add(Duration(days: 7)),
+          lastDate: DateTime.now().add(const Duration(days: 7)),
           focusedDate: controller.selectedDate.value,
           onDateChange: (date) {
             controller.updateDate(date);

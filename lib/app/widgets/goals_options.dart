@@ -5,8 +5,8 @@ import 'package:temanbicara/app/modules/assesment_2/controllers/assesment_2_cont
 import '../themes/colors.dart';
 import '../themes/fonts.dart';
 
-class Goalsoptions extends StatelessWidget {
-  const Goalsoptions({super.key, required this.option, required this.index});
+class GoalsOptions extends StatelessWidget {
+  const GoalsOptions({super.key, required this.option, required this.index});
   final String option;
   final int index;
 

@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
-import 'package:temanbicara/app/widgets/goalsOptions.dart';
-
 import '../../../routes/app_pages.dart';
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
 import '../controllers/assesment_2_controller.dart';
 
 class Assesment2View extends GetView<Assesment2Controller> {
-  Assesment2View({Key? key}) : super(key: key);
+  Assesment2View({super.key});
 
   final box = GetStorage();
 
