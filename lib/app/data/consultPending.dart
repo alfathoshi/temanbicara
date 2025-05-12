@@ -16,6 +16,7 @@ class ConsultPending {
   final String transactionId;
   final String expiredDate;
   final String? availableDateRaw;
+  final String expertises;
 
   ConsultPending({
     required this.nama,
@@ -29,6 +30,7 @@ class ConsultPending {
     required this.vaNumber,
     required this.transactionId,
     required this.expiredDate,
+    required this.expertises,
     this.availableDateRaw,
     this.bank = '',
     this.createdAt = '',

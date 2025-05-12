@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/schedule/counselor_card.dart';
 import '../controllers/consult_controller.dart';
 
@@ -23,11 +24,18 @@ class ConsultView extends GetView<ConsultController> {
       appBar: AppBar(
         toolbarHeight: 85,
         backgroundColor: whiteColor,
+        centerTitle: true,
         title: Text(
           'Consultation',
           style: h3Bold,
         ),
-        centerTitle: true,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(1),
+          child: Container(
+            color: grey4Color,
+            height: 0.5,
+          ),
+        ),
       ),
       body: RefreshIndicator(
         onRefresh: controller.fetchData,
@@ -43,7 +51,24 @@ class ConsultView extends GetView<ConsultController> {
                 .toList();
 
             if (filteredData.isEmpty) {
-              return Center(child: Text("No Available Schedules"));
+              return Center(
+                  child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 200,
+                    width: 200,
+                    child: Image.asset(
+                      "assets/images/transaksi-gagal.png",
+                    ),
+                  ),
+                  sby16,
+                  Text(
+                    "Oops! It looks like all slots are full.",
+                    style: h5Bold,
+                  ),
+                ],
+              ));
             }
 
             return ListView.builder(

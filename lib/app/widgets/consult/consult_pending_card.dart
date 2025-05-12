@@ -64,7 +64,16 @@ class ConsultPendingCard extends StatelessWidget {
                           maxLines: 1,
                         ),
                       ),
-                      sby16,
+                      SizedBox(
+                        width: screenWidth - 240,
+                        child: Text(
+                          consultPending.expertises,
+                          style: h7Regular.copyWith(color: grey2Color),
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                        ),
+                      ),
+                      sby12,
                       Text(
                         consultPending.durasi,
                         style: h6Bold,

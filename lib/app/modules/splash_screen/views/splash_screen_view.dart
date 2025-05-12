@@ -11,15 +11,25 @@ import '../controllers/splash_screen_controller.dart';
 class SplashScreenView extends GetView<SplashScreenController> {
   SplashScreenView({Key? key}) : super(key: key);
   final box = GetStorage();
+
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 3)).then((value) {
+      bool isFirstTime = box.read('firstTime') ?? true;
+
+      if (isFirstTime) {
+        box.write('firstTime', false);
+        Get.offAllNamed(Routes.ON_BOARDING);
+        return;
+      }
+
       if (box.read('token') == null) {
         Get.offAllNamed(Routes.LOGIN);
       } else {
         Get.offAllNamed(Routes.NAVIGATION_BAR, arguments: {'indexPage': 0});
       }
     });
+
     return Scaffold(
       backgroundColor: whiteColor,
       body: Center(
@@ -30,13 +40,8 @@ class SplashScreenView extends GetView<SplashScreenController> {
               'assets/images/logo.png',
               scale: 2,
             ),
-            const SizedBox(
-              height: 12,
-            ),
-            Text(
-              'Teman Bicara',
-              style: TextLogo,
-            )
+            const SizedBox(height: 12),
+            Text('Teman Bicara', style: TextLogo),
           ],
         ),
       ),
