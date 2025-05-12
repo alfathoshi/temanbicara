@@ -76,7 +76,7 @@ class BookingHistoryController extends GetxController {
             Get.snackbar(
               'Success',
               'Your payment has been confirmed!',
-              backgroundColor: primaryColor.withOpacity(0.6),
+              backgroundColor: primaryColor.withValues(alpha: 0.6),
               colorText: Colors.white,
               snackPosition: SnackPosition.TOP,
             );
@@ -93,7 +93,7 @@ class BookingHistoryController extends GetxController {
       Get.snackbar(
         'Error Payment',
         'Failed checking payment status',
-        backgroundColor: error.withOpacity(0.6),
+        backgroundColor: error.withValues(alpha: 0.6),
         colorText: Colors.white,
         snackPosition: SnackPosition.TOP,
       );

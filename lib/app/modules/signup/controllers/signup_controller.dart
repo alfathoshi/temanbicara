@@ -47,7 +47,7 @@ class SignupController extends GetxController {
           Get.snackbar(
             'Success',
             'Register berhasil',
-            backgroundColor: primaryColor.withOpacity(0.6),
+            backgroundColor: primaryColor.withValues(alpha: 0.6),
             colorText: Colors.white,
           );
           Get.offAllNamed(
@@ -55,17 +55,19 @@ class SignupController extends GetxController {
           );
         } else {
           Get.snackbar('Error', data['message'],
-              backgroundColor: error.withOpacity(0.6), colorText: whiteColor);
+              backgroundColor: error.withValues(alpha: 0.6),
+              colorText: whiteColor);
         }
       } else {
         Get.snackbar('Error', 'Password tidak sesuai',
-            backgroundColor: error.withOpacity(0.6), colorText: whiteColor);
+            backgroundColor: error.withValues(alpha: 0.6),
+            colorText: whiteColor);
       }
     } catch (e) {
       Get.snackbar(
         'Error',
         'Failed to register',
-        backgroundColor: error.withOpacity(0.6),
+        backgroundColor: error.withValues(alpha: 0.6),
         colorText: Colors.white,
       );
     } finally {

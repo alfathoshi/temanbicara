@@ -203,7 +203,7 @@ class SleepHistoryItem extends StatelessWidget {
       width: MediaQuery.sizeOf(context).width,
       height: 70,
       decoration: BoxDecoration(
-        color: color.withOpacity(0.4),
+        color: color.withValues(alpha: 0.4),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
@@ -215,11 +215,11 @@ class SleepHistoryItem extends StatelessWidget {
               width: 50,
               height: 50,
               decoration: BoxDecoration(
-                color: color.withOpacity(0.8),
+                color: color.withValues(alpha: 0.8),
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: [
                   BoxShadow(
-                    color: color.withOpacity(0.5),
+                    color: color.withValues(alpha: 0.5),
                     spreadRadius: 1,
                     blurRadius: 0.5,
                   ),

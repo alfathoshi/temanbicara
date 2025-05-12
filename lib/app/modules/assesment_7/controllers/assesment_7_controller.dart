@@ -62,7 +62,7 @@ class Assesment7Controller extends GetxController {
         Get.snackbar(
           'Success',
           'Assesment berhasil',
-          backgroundColor: primaryColor.withOpacity(0.6),
+          backgroundColor: primaryColor.withValues(alpha: 0.6),
           colorText: Colors.white,
         );
 
@@ -72,19 +72,18 @@ class Assesment7Controller extends GetxController {
         );
       } else {
         Get.snackbar('Error', data['message'],
-            backgroundColor: Colors.red.withOpacity(0.6),
+            backgroundColor: Colors.red.withValues(alpha: 0.6),
             colorText: Colors.white);
       }
     } catch (e) {
       Get.snackbar(
-          'Error',
-          'Failed to save assesment',
-          backgroundColor: primaryColor.withOpacity(0.6),
-          colorText: Colors.white,
-        );
+        'Error',
+        'Failed to save assesment',
+        backgroundColor: primaryColor.withValues(alpha: 0.6),
+        colorText: Colors.white,
+      );
     } finally {
       isLoading.value = false;
     }
   }
-
 }

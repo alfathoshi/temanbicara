@@ -125,7 +125,7 @@ class Assesment3View extends GetView<Assesment3Controller> {
                                 'Error',
                                 'Silahkan isi assesment',
                                 colorText: whiteColor,
-                                backgroundColor: error.withOpacity(0.6),
+                                backgroundColor: error.withValues(alpha: 0.6),
                               );
                             } else {
                               Get.toNamed(Routes.ASSESMENT_4);

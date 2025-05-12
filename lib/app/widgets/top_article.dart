@@ -37,7 +37,7 @@ class TopArticle extends StatelessWidget {
           height: 149,
           decoration: BoxDecoration(
             color: whiteColor,
-            border: Border.all(color: Colors.black.withOpacity(0.1)),
+            border: Border.all(color: Colors.black.withValues(alpha: 0.1)),
             borderRadius: BorderRadius.circular(15),
           ),
           child: Row(
@@ -48,7 +48,8 @@ class TopArticle extends StatelessWidget {
                   width: 120,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: Colors.black.withOpacity(0.1)),
+                    border:
+                        Border.all(color: Colors.black.withValues(alpha: 0.1)),
                   ),
                   child: Image.asset(
                     'assets/images/$image.png',

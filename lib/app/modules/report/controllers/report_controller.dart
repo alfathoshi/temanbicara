@@ -120,11 +120,12 @@ class ReportController extends GetxController {
         report.value = ReportModel.fromJson(data['data'][0]);
       } else {
         Get.snackbar('Failed', 'Report data not found',
-            backgroundColor: error.withOpacity(0.6), colorText: Colors.white);
+            backgroundColor: error.withValues(alpha: 0.6),
+            colorText: Colors.white);
       }
     } catch (e) {
       Get.snackbar('Error', 'Fetch Matrix',
-          backgroundColor: Colors.red.withOpacity(0.6),
+          backgroundColor: Colors.red.withValues(alpha: 0.6),
           colorText: Colors.white);
     } finally {
       isLoading.value = false;
@@ -203,7 +204,7 @@ class ReportController extends GetxController {
       }
     } catch (e) {
       Get.snackbar('Error', 'Failed to fetch statistic',
-          backgroundColor: Colors.red.withOpacity(0.6),
+          backgroundColor: Colors.red.withValues(alpha: 0.6),
           colorText: Colors.white);
     } finally {
       isFetching.value = false;

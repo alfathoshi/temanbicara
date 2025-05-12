@@ -64,14 +64,15 @@ class JournalController extends GetxController {
           journalList.value = data['data'];
         } else {
           Get.snackbar('Failed', 'Journal Not Found',
-              backgroundColor: error.withOpacity(0.6), colorText: Colors.white);
+              backgroundColor: error.withValues(alpha: 0.6),
+              colorText: Colors.white);
         }
       }
     } catch (e) {
       Get.snackbar(
         'Error',
         'Failed to fetch journal',
-        backgroundColor: error.withOpacity(0.6),
+        backgroundColor: error.withValues(alpha: 0.6),
         colorText: Colors.white,
       );
     } finally {
@@ -97,7 +98,7 @@ class JournalController extends GetxController {
             'Success',
             'Journal deleted successfully',
             colorText: whiteColor,
-            backgroundColor: primaryColor.withOpacity(0.6),
+            backgroundColor: primaryColor.withValues(alpha: 0.6),
           );
           journalList
               .removeWhere((journal) => journal['journal_id'] == journalId);
@@ -106,7 +107,7 @@ class JournalController extends GetxController {
             'Error',
             data['message'],
             colorText: whiteColor,
-            backgroundColor: error.withOpacity(0.6),
+            backgroundColor: error.withValues(alpha: 0.6),
           );
         }
       } else {
@@ -114,14 +115,14 @@ class JournalController extends GetxController {
           'Error',
           'Failed to delete journal.',
           colorText: whiteColor,
-          backgroundColor: error.withOpacity(0.6),
+          backgroundColor: error.withValues(alpha: 0.6),
         );
       }
     } catch (e) {
       Get.snackbar(
         'Error',
         'Failed to delete journal',
-        backgroundColor: error.withOpacity(0.6),
+        backgroundColor: error.withValues(alpha: 0.6),
         colorText: Colors.white,
       );
     }

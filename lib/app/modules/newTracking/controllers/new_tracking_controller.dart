@@ -208,12 +208,12 @@ class NewTrackingController extends GetxController {
         Get.offAllNamed('/navigation-bar');
       } else {
         Get.snackbar('Error', data['message'] ?? 'Gagal menyimpan tracking',
-            backgroundColor: Colors.red.withOpacity(0.6),
+            backgroundColor: Colors.red.withValues(alpha: 0.6),
             colorText: Colors.white);
       }
     } catch (e) {
       Get.snackbar('Error', 'Gagal menyimpan tracking',
-          backgroundColor: Colors.red.withOpacity(0.6),
+          backgroundColor: Colors.red.withValues(alpha: 0.6),
           colorText: Colors.white);
     }
   }

@@ -36,8 +36,8 @@ class ChatContainer extends StatelessWidget {
         decoration: BoxDecoration(
           color: whiteColor,
           border: Border(
-              bottom:
-                  BorderSide(width: 1.5, color: Colors.grey.withOpacity(0.4))),
+              bottom: BorderSide(
+                  width: 1.5, color: Colors.grey.withValues(alpha: 0.4))),
         ),
         child: Row(
           children: [
@@ -67,7 +67,7 @@ class ChatContainer extends StatelessWidget {
                   Text(
                     deskripsi!,
                     style: h7Regular.copyWith(
-                        color: Colors.grey.withOpacity(0.9)),
+                        color: Colors.grey.withValues(alpha: 0.9)),
                     softWrap: true,
                     overflow: TextOverflow.fade,
                   ),
@@ -79,7 +79,8 @@ class ChatContainer extends StatelessWidget {
               padding: const EdgeInsets.only(right: 15),
               child: Text(
                 parsedTime,
-                style: h7Regular.copyWith(color: Colors.grey.withOpacity(0.9)),
+                style: h7Regular.copyWith(
+                    color: Colors.grey.withValues(alpha: 0.9)),
               ),
             )
           ],

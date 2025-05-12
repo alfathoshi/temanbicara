@@ -29,7 +29,7 @@ class ProfileController extends GetxController {
       Get.snackbar(
         'Error',
         'Failed to fetch journal',
-        backgroundColor: error.withOpacity(0.6),
+        backgroundColor: error.withValues(alpha: 0.6),
         colorText: whiteColor,
       );
     }
@@ -90,7 +90,7 @@ class ProfileController extends GetxController {
       Get.snackbar(
         'Error',
         'Failed to fetch profile',
-        backgroundColor: error.withOpacity(0.6),
+        backgroundColor: error.withValues(alpha: 0.6),
         colorText: whiteColor,
       );
     }

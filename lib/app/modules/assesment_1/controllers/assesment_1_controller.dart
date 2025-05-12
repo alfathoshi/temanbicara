@@ -77,18 +77,18 @@ class Assesment1Controller extends GetxController {
           Get.snackbar(
             'Success',
             'Akun berhasil dibuat',
-            backgroundColor: primaryColor.withOpacity(0.6),
+            backgroundColor: primaryColor.withValues(alpha: 0.6),
             colorText: Colors.white,
           );
           Get.toNamed(Routes.ASSESMENT_2);
         } else {
           Get.snackbar('Error', data['message'],
-              backgroundColor: Colors.red.withOpacity(0.6),
+              backgroundColor: Colors.red.withValues(alpha: 0.6),
               colorText: Colors.white);
         }
       } catch (e) {
         Get.snackbar('Error', e.toString(),
-            backgroundColor: Colors.red.withOpacity(0.6),
+            backgroundColor: Colors.red.withValues(alpha: 0.6),
             colorText: Colors.white);
       } finally {
         isLoading.value = false;
@@ -98,7 +98,7 @@ class Assesment1Controller extends GetxController {
         'Error',
         'Silahkan isi data diri',
         colorText: whiteColor,
-        backgroundColor: error.withOpacity(0.6),
+        backgroundColor: error.withValues(alpha: 0.6),
       );
     }
   }

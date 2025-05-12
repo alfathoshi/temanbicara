@@ -31,7 +31,7 @@ class SleepQuality extends StatelessWidget {
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.25),
+                color: Colors.black.withValues(alpha: 0.25),
                 offset: const Offset(1, 1),
                 blurRadius: 5,
                 spreadRadius: 1,

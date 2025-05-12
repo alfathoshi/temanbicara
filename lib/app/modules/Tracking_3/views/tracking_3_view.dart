@@ -132,7 +132,8 @@ class Tracking3View extends GetView<Tracking3Controller> {
                                 'Error',
                                 'Silakan isi Tracking',
                                 colorText: whiteColor,
-                                backgroundColor: Colors.red.withOpacity(0.7),
+                                backgroundColor:
+                                    Colors.red.withValues(alpha: 0.7),
                               );
                             } else {
                               Get.toNamed(Routes.TRACKING_4,

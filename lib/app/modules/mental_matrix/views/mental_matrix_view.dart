@@ -239,7 +239,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                                 blurRadius: 2,
                                 offset: const Offset(0, 2))
                           ],
-                          color: lightPurple.withOpacity(0.45),
+                          color: lightPurple.withValues(alpha: 0.45),
                           borderRadius: BorderRadius.circular(16),
                           border:
                               Border.all(color: Colors.transparent, width: 2),
@@ -379,7 +379,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                                 blurRadius: 2,
                                 offset: const Offset(0, 2))
                           ],
-                          color: lightPink.withOpacity(0.25),
+                          color: lightPink.withValues(alpha: 0.25),
                           borderRadius: BorderRadius.circular(16),
                           border:
                               Border.all(color: Colors.transparent, width: 2),
@@ -451,7 +451,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                                 blurRadius: 2,
                                 offset: const Offset(0, 2))
                           ],
-                          color: orange.withOpacity(0.25),
+                          color: orange.withValues(alpha: 0.25),
                           borderRadius: BorderRadius.circular(16),
                           border:
                               Border.all(color: Colors.transparent, width: 2),

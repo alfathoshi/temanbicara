@@ -91,7 +91,7 @@ class Assesment5View extends GetView<Assesment5Controller> {
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.25),
+                              color: Colors.black.withValues(alpha: 0.25),
                               offset: const Offset(1, 1),
                               blurRadius: 5,
                               spreadRadius: 1,
@@ -126,7 +126,7 @@ class Assesment5View extends GetView<Assesment5Controller> {
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(0.25),
+                              color: Colors.black.withValues(alpha: 0.25),
                               offset: const Offset(1, 1),
                               blurRadius: 5,
                               spreadRadius: 1,
@@ -157,7 +157,7 @@ class Assesment5View extends GetView<Assesment5Controller> {
                       'Error',
                       'Silahkan isi assesment',
                       colorText: whiteColor,
-                      backgroundColor: error.withOpacity(0.6),
+                      backgroundColor: error.withValues(alpha: 0.6),
                     );
                   } else {
                     Get.toNamed(Routes.ASSESMENT_6);

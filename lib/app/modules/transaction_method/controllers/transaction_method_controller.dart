@@ -55,7 +55,7 @@ class TransactionMethodController extends GetxController {
         Get.snackbar(
           'Success',
           'Consultation created successfully.',
-          backgroundColor: primaryColor.withOpacity(0.6),
+          backgroundColor: primaryColor.withValues(alpha: 0.6),
           colorText: Colors.white,
         );
       } else {
@@ -69,7 +69,7 @@ class TransactionMethodController extends GetxController {
         Get.snackbar(
           'Error',
           errorMessage,
-          backgroundColor: Colors.red.withOpacity(0.6),
+          backgroundColor: Colors.red.withValues(alpha: 0.6),
           colorText: Colors.white,
         );
       }
@@ -77,7 +77,7 @@ class TransactionMethodController extends GetxController {
       Get.snackbar(
         'Error',
         'Error creating consultation: $error',
-        backgroundColor: Colors.red.withOpacity(0.6),
+        backgroundColor: Colors.red.withValues(alpha: 0.6),
         colorText: Colors.white,
       );
     }

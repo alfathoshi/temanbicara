@@ -126,7 +126,8 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                                   Get.snackbar(
                                     "Silahkan pilih jadwal konsultasi",
                                     "Please select a date and time before proceeding.",
-                                    backgroundColor: error.withOpacity(0.6),
+                                    backgroundColor:
+                                        error.withValues(alpha: 0.6),
                                     colorText: Colors.white,
                                   );
                                   return;
@@ -139,7 +140,8 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                                   barrierDismissible: false,
                                 );
 
-                                await Future.delayed(const Duration(seconds: 2));
+                                await Future.delayed(
+                                    const Duration(seconds: 2));
                                 Get.back();
 
                                 Get.to(

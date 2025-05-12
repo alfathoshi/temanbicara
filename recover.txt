@@ -476,7 +476,7 @@ index 4e75a69,4e75a69..a52ec87
 --                        Get.snackbar(
 --                          "Silahkan pilih jadwal konsultasi",
 --                          "Please select a date and time before proceeding.",
---                          backgroundColor: error.withOpacity(0.6),
+--                          backgroundColor: error.withValues(alpha: 0.6),
 --                          colorText: Colors.white,
 --                        );
 --                      }
@@ -509,7 +509,7 @@ index 4e75a69,4e75a69..a52ec87
 --                //           Get.snackbar(
 --                //             "Silahkan pilih jadwal konsultasi",
 --                //             "Please select a date and time before proceeding.",
---                //             backgroundColor: error.withOpacity(0.6),
+--                //             backgroundColor: error.withValues(alpha: 0.6),
 --                //             colorText: Colors.white,
 --                //           );
 --                //         }
@@ -538,7 +538,7 @@ index 4e75a69,4e75a69..a52ec87
 ++                          Get.snackbar(
 ++                            "Silahkan pilih jadwal konsultasi",
 ++                            "Please select a date and time before proceeding.",
-++                            backgroundColor: error.withOpacity(0.6),
+++                            backgroundColor: error.withValues(alpha: 0.6),
 ++                            colorText: Colors.white,
 ++                          );
 ++                        }
@@ -940,7 +940,7 @@ index 5c2f29d,5c2f29d..47eb17c
 ++        Get.snackbar(
 ++          'Success',
 ++          'Consultation created successfully.',
-++          backgroundColor: primaryColor.withOpacity(0.6),
+++          backgroundColor: primaryColor.withValues(alpha: 0.6),
 ++          colorText: Colors.white,
 ++        );
 ++      } else {
@@ -954,7 +954,7 @@ index 5c2f29d,5c2f29d..47eb17c
 ++        Get.snackbar(
 ++          'Error',
 ++          errorMessage,
-++          backgroundColor: Colors.red.withOpacity(0.6),
+++          backgroundColor: Colors.red.withValues(alpha: 0.6),
 ++          colorText: Colors.white,
 ++        );
 ++      }
@@ -962,7 +962,7 @@ index 5c2f29d,5c2f29d..47eb17c
 ++      Get.snackbar(
 ++        'Error',
 ++        'Error creating consultation: $error',
-++        backgroundColor: Colors.red.withOpacity(0.6),
+++        backgroundColor: Colors.red.withValues(alpha: 0.6),
 ++        colorText: Colors.white,
 ++      );
 ++    }
@@ -1155,7 +1155,7 @@ index 5d31c62,5d31c62..2964482
 --        Get.snackbar(
 --          'Success',
 --          'Consultation created successfully.',
---          backgroundColor: primaryColor.withOpacity(0.6),
+--          backgroundColor: primaryColor.withValues(alpha: 0.6),
 --          colorText: Colors.white,
 --        );
 ++      if (response.statusCode == 200) {
@@ -1186,7 +1186,7 @@ index 5d31c62,5d31c62..2964482
 --        Get.snackbar(
 --          'Error',
 --          errorMessage,
---          backgroundColor: Colors.red.withOpacity(0.6),
+--          backgroundColor: Colors.red.withValues(alpha: 0.6),
 --          colorText: Colors.white,
 --        );
 ++        print('Status code error: ${response.statusCode}');
@@ -1195,7 +1195,7 @@ index 5d31c62,5d31c62..2964482
 --      Get.snackbar(
 --        'Error',
 --        'Error creating consultation: $error',
---        backgroundColor: Colors.red.withOpacity(0.6),
+--        backgroundColor: Colors.red.withValues(alpha: 0.6),
 --        colorText: Colors.white,
 --      );
 ++    } catch (e) {
@@ -1750,7 +1750,7 @@ index f1b952e,f1b952e..465d773
 --                  arguments: transaction);
 --            } else {
 --              Get.snackbar(
---                backgroundColor: error.withOpacity(0.6),
+--                backgroundColor: error.withValues(alpha: 0.6),
 --                colorText: Colors.white,
 --                "Silahkan pilih Metode Pembayaran",
 --                "Please select payment method before proceeding.",
@@ -1961,7 +1961,7 @@ index 42acdd6,42acdd6..478d464
 --                  arguments: transaction);
 --            } else {
 --              Get.snackbar(
---                backgroundColor: error.withOpacity(0.6),
+--                backgroundColor: error.withValues(alpha: 0.6),
 --                colorText: Colors.white,
 --                "Silahkan pilih Metode Pembayaran",
 --                "Please select payment method before proceeding.",
@@ -2129,7 +2129,7 @@ index 51edddd,51edddd..5ed2945
 --                  arguments: transaction);
 --            } else {
 --              Get.snackbar(
---                backgroundColor: error.withOpacity(0.6),
+--                backgroundColor: error.withValues(alpha: 0.6),
 --                colorText: Colors.white,
 --                "Silahkan pilih Metode Pembayaran",
 --                "Please select payment method before proceeding.",

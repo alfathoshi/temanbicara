@@ -50,7 +50,7 @@ class SelectDate extends StatelessWidget {
             if (states.contains(WidgetState.selected)) {
               return primaryColor;
             } else if (states.contains(WidgetState.disabled)) {
-              return grey4Color.withOpacity(0.1);
+              return grey4Color.withValues(alpha: 0.1);
             }
             return whiteColor;
           }),
@@ -66,7 +66,7 @@ class SelectDate extends StatelessWidget {
             if (states.contains(WidgetState.selected)) {
               return primaryColor;
             } else if (states.contains(WidgetState.disabled)) {
-              return grey4Color.withOpacity(0.1);
+              return grey4Color.withValues(alpha: 0.1);
             }
             return whiteColor;
           }),

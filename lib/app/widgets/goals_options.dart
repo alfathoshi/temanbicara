@@ -22,21 +22,20 @@ class GoalsOptions extends StatelessWidget {
           height: 62,
           width: double.infinity,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50),
-            border: Border.all(
-              color: primaryColor,
-              width: 2,
-            ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.25),
-                offset: const Offset(1, 1),
-                blurRadius: 5,
-                spreadRadius: 1,
+              borderRadius: BorderRadius.circular(50),
+              border: Border.all(
+                color: primaryColor,
+                width: 2,
               ),
-            ],
-            color: whiteColor
-          ),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withValues(alpha: 0.25),
+                  offset: const Offset(1, 1),
+                  blurRadius: 5,
+                  spreadRadius: 1,
+                ),
+              ],
+              color: whiteColor),
           padding: const EdgeInsets.only(left: 24, right: 28),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,7 +56,7 @@ class GoalsOptions extends StatelessWidget {
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
+                        color: Colors.black.withValues(alpha: 0.2),
                         offset: const Offset(4, 4),
                         blurRadius: 8,
                         spreadRadius: 1,

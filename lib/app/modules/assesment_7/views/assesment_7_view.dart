@@ -139,7 +139,7 @@ class Assesment7View extends GetView<Assesment7Controller> {
                         'Error',
                         'Silahkan isi assesment',
                         colorText: whiteColor,
-                        backgroundColor: error.withOpacity(0.6),
+                        backgroundColor: error.withValues(alpha: 0.6),
                       );
                     } else {
                       controller.saveAssesment();

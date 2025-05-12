@@ -73,7 +73,7 @@ class EditJournalController extends GetxController {
           Get.back();
           fetchController.fetchJournals();
           Get.snackbar('Success', 'Journal updated successfully',
-              backgroundColor: primaryColor.withOpacity(0.6),
+              backgroundColor: primaryColor.withValues(alpha: 0.6),
               colorText: Colors.white);
         } else {
           Get.snackbar(

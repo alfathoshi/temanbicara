@@ -18,7 +18,7 @@ class TransactionVaNumberBorder extends StatelessWidget {
       onTap: () async {
         await Clipboard.setData(ClipboardData(text: vaNumber));
         Get.snackbar(
-          backgroundColor: primaryColor.withOpacity(0.6),
+          backgroundColor: primaryColor.withValues(alpha: 0.6),
           colorText: Colors.white,
           "Copied!",
           "VA Number copied to clipboard",
@@ -81,7 +81,7 @@ class TransactionVaNumber extends StatelessWidget {
       onTap: () async {
         await Clipboard.setData(ClipboardData(text: vaNumber));
         Get.snackbar(
-          backgroundColor: primaryColor.withOpacity(0.6),
+          backgroundColor: primaryColor.withValues(alpha: 0.6),
           colorText: Colors.white,
           "Copied!",
           "VA Number copied to clipboard",

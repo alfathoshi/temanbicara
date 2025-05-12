@@ -40,7 +40,7 @@ class ChooseMethod extends StatelessWidget {
                   selectedColor: Colors.white,
                   fillColor: primaryColor,
                   color: black,
-                  borderColor: primaryColor.withOpacity(0.6),
+                  borderColor: primaryColor.withValues(alpha: 0.6),
                   borderWidth: 1,
                   constraints: BoxConstraints(
                     minHeight: 47.0,

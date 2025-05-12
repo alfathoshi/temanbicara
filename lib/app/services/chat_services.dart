@@ -49,7 +49,7 @@ class ChatService {
       Get.snackbar(
         'Error',
         'Failed to get FCM Token',
-        backgroundColor: error.withOpacity(0.6),
+        backgroundColor: error.withValues(alpha: 0.6),
         colorText: whiteColor,
       );
     }

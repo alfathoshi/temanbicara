@@ -39,8 +39,7 @@ class MoodReportView extends GetView<MoodReportController> {
               side: BorderSide(color: Colors.black12),
             ),
             title: GestureDetector(
-              onTap: () {
-              },
+              onTap: () {},
               child: Text(
                 'Mood',
                 style: h3Bold,
@@ -177,7 +176,7 @@ class MoodHistoryItem extends StatelessWidget {
       width: MediaQuery.sizeOf(context).width,
       height: 70,
       decoration: BoxDecoration(
-        color: color.withOpacity(0.5),
+        color: color.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
@@ -192,11 +191,11 @@ class MoodHistoryItem extends StatelessWidget {
                   width: 50,
                   height: 50,
                   decoration: BoxDecoration(
-                    color: color.withOpacity(0.8),
+                    color: color.withValues(alpha: 0.8),
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
-                        color: color.withOpacity(0.8),
+                        color: color.withValues(alpha: 0.8),
                         spreadRadius: 1,
                         blurRadius: 0.5,
                       ),

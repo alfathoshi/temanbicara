@@ -66,7 +66,7 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
                         Get.snackbar(
                           "Payment Method Not Selected",
                           "Please select a payment method before proceeding.",
-                          backgroundColor: Colors.red.withOpacity(0.6),
+                          backgroundColor: Colors.red.withValues(alpha: 0.6),
                           colorText: Colors.white,
                         );
                         return;
@@ -98,7 +98,7 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
                         Get.snackbar(
                           "Booking Failed",
                           "Unable to process your consultation. Please try again.",
-                          backgroundColor: Colors.red.withOpacity(0.6),
+                          backgroundColor: Colors.red.withValues(alpha: 0.6),
                           colorText: Colors.white,
                         );
                         return;

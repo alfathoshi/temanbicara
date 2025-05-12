@@ -73,7 +73,7 @@ class MentalMatrixController extends GetxController {
   //       report.value = ReportModel.fromJson(data['data'][0]);
   //     } else {
   //       Get.snackbar('Error', data['message'] ?? 'Gagal Menyiapkan Report',
-  //           backgroundColor: Colors.red.withOpacity(0.6),
+  //           backgroundColor: Colors.red.withValues(alpha: 0.6),
   //           colorText: whiteColor);
   //     }
   //   } catch (e) {

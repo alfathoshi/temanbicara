@@ -25,7 +25,8 @@ class SendOtpController extends GetxController {
         isLoading.value = false;
         Get.snackbar(
             'Error', "Email tidak valid, tolong isikan email yang valid",
-            backgroundColor: error.withOpacity(0.6), colorText: whiteColor);
+            backgroundColor: error.withValues(alpha: 0.6),
+            colorText: whiteColor);
 
         return;
       }
@@ -56,7 +57,7 @@ class SendOtpController extends GetxController {
       Get.snackbar(
         'Error',
         'Failed to send OTP',
-        backgroundColor: error.withOpacity(0.6),
+        backgroundColor: error.withValues(alpha: 0.6),
         colorText: Colors.white,
       );
     }

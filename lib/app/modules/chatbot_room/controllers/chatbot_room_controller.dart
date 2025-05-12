@@ -85,7 +85,7 @@ class ChatbotRoomController extends GetxController {
       Get.snackbar(
         'Error',
         'Failed to generating content',
-        backgroundColor: error.withOpacity(0.6),
+        backgroundColor: error.withValues(alpha: 0.6),
         colorText: whiteColor,
       );
     }

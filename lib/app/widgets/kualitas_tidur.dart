@@ -28,7 +28,7 @@ class KualitasTidur extends StatelessWidget {
           borderRadius: BorderRadius.circular(50),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFF000000).withOpacity(0.25),
+              color: const Color(0xFF000000).withValues(alpha: 0.25),
               blurRadius: 5,
               spreadRadius: 1,
               offset: const Offset(1, 1),

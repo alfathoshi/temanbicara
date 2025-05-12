@@ -40,7 +40,7 @@ class CreateJournalController extends GetxController {
   Future<void> submitJournal() async {
     if (titleController.text.isEmpty || bodyController.text.isEmpty) {
       Get.snackbar('Error', 'Title and Body are required',
-          backgroundColor: Colors.red.withOpacity(0.6),
+          backgroundColor: Colors.red.withValues(alpha: 0.6),
           colorText: Colors.white);
       return;
     }
@@ -75,7 +75,7 @@ class CreateJournalController extends GetxController {
         fetchController.fetchJournals();
         Get.back();
         Get.snackbar('Success', 'Journal created successfully',
-            backgroundColor: primaryColor.withOpacity(0.6),
+            backgroundColor: primaryColor.withValues(alpha: 0.6),
             colorText: Colors.white);
       } else {
         // ignore: unused_local_variable

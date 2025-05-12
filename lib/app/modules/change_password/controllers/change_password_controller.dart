@@ -27,7 +27,8 @@ class ChangePasswordController extends GetxController {
           newPassController.text.isEmpty ||
           confirmPassController.text.isEmpty) {
         Get.snackbar('Error', "Inputtan tidak boleh kosong!",
-            backgroundColor: error.withOpacity(0.6), colorText: whiteColor);
+            backgroundColor: error.withValues(alpha: 0.6),
+            colorText: whiteColor);
         return false;
       }
       final userId = box.read('id');

@@ -36,7 +36,7 @@ class Tracking4Controller extends GetxController {
         Get.snackbar(
           'Success',
           'Assesment berhasil',
-          backgroundColor: primaryColor.withOpacity(0.6),
+          backgroundColor: primaryColor.withValues(alpha: 0.6),
           colorText: Colors.white,
         );
 
@@ -46,14 +46,14 @@ class Tracking4Controller extends GetxController {
         );
       } else {
         Get.snackbar('Error', data['message'],
-            backgroundColor: Colors.red.withOpacity(0.6),
+            backgroundColor: Colors.red.withValues(alpha: 0.6),
             colorText: Colors.white);
       }
     } catch (e) {
       Get.snackbar(
         'Error',
         'Failed to store tracking',
-        backgroundColor: error.withOpacity(0.6),
+        backgroundColor: error.withValues(alpha: 0.6),
         colorText: Colors.white,
       );
     }

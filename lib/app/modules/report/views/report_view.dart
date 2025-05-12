@@ -98,7 +98,7 @@ class ReportView extends GetView<ReportController> {
                                     );
                                   },
                                 );
-        
+
                                 if (pickedDate != null &&
                                     !isSameDate(pickedDate,
                                         controller.selectedDate.value)) {
@@ -107,8 +107,7 @@ class ReportView extends GetView<ReportController> {
                                   controller.checkTracking();
                                 }
                               },
-                              child:
-                                  const Icon(Icons.calendar_month_outlined),
+                              child: const Icon(Icons.calendar_month_outlined),
                             ),
                           ],
                         )
@@ -136,22 +135,22 @@ class ReportView extends GetView<ReportController> {
             sby24,
             Obx(() {
               final dataList = controller.trackingList['tracking_data'] ?? [];
-        
+
               // print("Data List Length: ${dataList.length}");
-        
+
               if (controller.isFetching.value) {
                 return const Center(child: CircularProgressIndicator());
               }
-        
+
               if (dataList.isEmpty) {
                 return const Text("No mood data found");
               }
-        
+
               final List<PieChartSectionData> sections = [];
               final Map<String, int> moodCounts = {
                 for (var quality in controller.emotions) quality: 0,
               };
-        
+
               for (final item in dataList) {
                 final category = item['mood_level'].toString().trim();
                 // print("Bed time value: $bedTime");
@@ -161,7 +160,7 @@ class ReportView extends GetView<ReportController> {
                   moodCounts[category] = moodCounts[category]! + 1;
                 }
               }
-        
+
               final total = moodCounts.values.reduce((a, b) => a + b);
               for (int i = 0; i < controller.emotions.length; i++) {
                 final category = controller.emotions[i];
@@ -178,7 +177,7 @@ class ReportView extends GetView<ReportController> {
                   ),
                 );
               }
-        
+
               final avgText = controller.avgMood.value;
               // print("avg text: ${avgText}");
               return Container(
@@ -198,8 +197,8 @@ class ReportView extends GetView<ReportController> {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 25, vertical: 20),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -240,7 +239,7 @@ class ReportView extends GetView<ReportController> {
                                       total > 0 ? (count / total) * 100 : 0;
                                   final isTouched =
                                       controller.touchedIndexMood.value == i;
-        
+
                                   return PieChartSectionData(
                                     color: controller.chartColors[i],
                                     value: value.toDouble(),
@@ -310,22 +309,22 @@ class ReportView extends GetView<ReportController> {
             sby24,
             Obx(() {
               final dataList = controller.trackingList['tracking_data'] ?? [];
-        
+
               // print("Data List Length: ${dataList.length}");
-        
+
               if (controller.isFetching.value) {
                 return const Center(child: CircularProgressIndicator());
               }
-        
+
               if (dataList.isEmpty) {
                 return const Text("No sleep data found");
               }
-        
+
               final List<PieChartSectionData> sections = [];
               final Map<String, int> sleepCounts = {
                 for (var quality in controller.sleepQuality) quality: 0,
               };
-        
+
               for (final item in dataList) {
                 final category = item['bed_time'].toString().trim();
                 // print("Bed time value: $bedTime");
@@ -335,7 +334,7 @@ class ReportView extends GetView<ReportController> {
                   sleepCounts[category] = sleepCounts[category]! + 1;
                 }
               }
-        
+
               final total = sleepCounts.values.reduce((a, b) => a + b);
               for (int i = 0; i < controller.sleepQuality.length; i++) {
                 final category = controller.sleepQuality[i];
@@ -352,7 +351,7 @@ class ReportView extends GetView<ReportController> {
                   ),
                 );
               }
-        
+
               final avgText = controller.avgSleep.value;
               // print("avg text: ${avgText}");
               return Container(
@@ -372,8 +371,8 @@ class ReportView extends GetView<ReportController> {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 25, vertical: 20),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -414,7 +413,7 @@ class ReportView extends GetView<ReportController> {
                                       total > 0 ? (count / total) * 100 : 0;
                                   final isTouched =
                                       controller.touchedIndexSleep.value == i;
-        
+
                                   return PieChartSectionData(
                                     color: controller.chartColors[i],
                                     value: value.toDouble(),
@@ -478,17 +477,17 @@ class ReportView extends GetView<ReportController> {
             sby24,
             Obx(() {
               final dataList = controller.trackingList['tracking_data'] ?? [];
-        
+
               // print("Data List Length: ${dataList.length}");
-        
+
               if (controller.isFetching.value) {
                 return const Center(child: CircularProgressIndicator());
               }
-        
+
               if (dataList.isEmpty) {
                 return const Text("No stress data found");
               }
-        
+
               return Container(
                 decoration: BoxDecoration(
                   boxShadow: [
@@ -506,8 +505,8 @@ class ReportView extends GetView<ReportController> {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 25, vertical: 20),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -537,8 +536,7 @@ class ReportView extends GetView<ReportController> {
                               ),
                               pointers: <GaugePointer>[
                                 RangePointer(
-                                  value:
-                                      controller.avgStress.value.toDouble(),
+                                  value: controller.avgStress.value.toDouble(),
                                   cornerStyle: CornerStyle.bothCurve,
                                   width: 0.2,
                                   sizeUnit: GaugeSizeUnit.factor,
@@ -551,8 +549,7 @@ class ReportView extends GetView<ReportController> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Text(
-                                          controller.avgStress.value
-                                              .toString(),
+                                          controller.avgStress.value.toString(),
                                           style: const TextStyle(
                                               fontSize: 24,
                                               fontWeight: FontWeight.bold)),
@@ -574,22 +571,22 @@ class ReportView extends GetView<ReportController> {
             sby24,
             Obx(() {
               final dataList = controller.trackingList['tracking_data'] ?? [];
-        
+
               // print("Data List Length: ${dataList.length}");
-        
+
               if (controller.isFetching.value) {
                 return const Center(child: CircularProgressIndicator());
               }
-        
+
               if (dataList.isEmpty) {
                 return const Text("No Activity data found");
               }
-        
+
               final List<PieChartSectionData> sections = [];
               final Map<String, int> activityCounts = {
                 for (var quality in controller.activity) quality: 0,
               };
-        
+
               for (final item in dataList) {
                 final category = item['activity'].toString().trim();
                 // print("Bed time value: $bedTime");
@@ -599,7 +596,7 @@ class ReportView extends GetView<ReportController> {
                   activityCounts[category] = activityCounts[category]! + 1;
                 }
               }
-        
+
               final total = activityCounts.values.reduce((a, b) => a + b);
               for (int i = 0; i < controller.activity.length; i++) {
                 final category = controller.activity[i];
@@ -616,7 +613,7 @@ class ReportView extends GetView<ReportController> {
                   ),
                 );
               }
-        
+
               final avgText = controller.avgScreen.value;
               // print("avg text: ${avgText}");
               return Container(
@@ -636,8 +633,8 @@ class ReportView extends GetView<ReportController> {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 25, vertical: 20),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -680,7 +677,7 @@ class ReportView extends GetView<ReportController> {
                                   final isTouched =
                                       controller.touchedIndexActivity.value ==
                                           i;
-        
+
                                   return PieChartSectionData(
                                     color: controller.chartColors[i],
                                     value: value.toDouble(),
@@ -744,22 +741,22 @@ class ReportView extends GetView<ReportController> {
             sby24,
             Obx(() {
               final dataList = controller.trackingList['tracking_data'] ?? [];
-        
+
               // print("Data List Length: ${dataList.length}");
-        
+
               if (controller.isFetching.value) {
                 return const Center(child: CircularProgressIndicator());
               }
-        
+
               if (dataList.isEmpty) {
                 return const Text("No Screen data found");
               }
-        
+
               final List<PieChartSectionData> sections = [];
               final Map<String, int> screenCounts = {
                 for (var quality in controller.screenTime) quality: 0,
               };
-        
+
               for (final item in dataList) {
                 final category = item['screen_time'].toString().trim();
                 // print("Bed time value: $bedTime");
@@ -769,7 +766,7 @@ class ReportView extends GetView<ReportController> {
                   screenCounts[category] = screenCounts[category]! + 1;
                 }
               }
-        
+
               final total = screenCounts.values.reduce((a, b) => a + b);
               for (int i = 0; i < controller.screenTime.length; i++) {
                 final category = controller.screenTime[i];
@@ -786,7 +783,7 @@ class ReportView extends GetView<ReportController> {
                   ),
                 );
               }
-        
+
               final avgText = controller.avgScreen.value;
               // print("avg text: ${avgText}");
               return Container(
@@ -806,8 +803,8 @@ class ReportView extends GetView<ReportController> {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 25, vertical: 20),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -832,8 +829,7 @@ class ReportView extends GetView<ReportController> {
                                         pieTouchResponse == null ||
                                         pieTouchResponse.touchedSection ==
                                             null) {
-                                      controller.touchedIndexScreen.value =
-                                          -1;
+                                      controller.touchedIndexScreen.value = -1;
                                       return;
                                     }
                                     controller.touchedIndexScreen.value =
@@ -848,9 +844,8 @@ class ReportView extends GetView<ReportController> {
                                   final value =
                                       total > 0 ? (count / total) * 100 : 0;
                                   final isTouched =
-                                      controller.touchedIndexScreen.value ==
-                                          i;
-        
+                                      controller.touchedIndexScreen.value == i;
+
                                   return PieChartSectionData(
                                     color: controller.chartColors[i],
                                     value: value.toDouble(),
@@ -872,8 +867,8 @@ class ReportView extends GetView<ReportController> {
                                 children: [
                                   Text(avgText.toString(), style: h5SemiBold),
                                   Text("average",
-                                      style: h6Regular.copyWith(
-                                          color: greyColor)),
+                                      style:
+                                          h6Regular.copyWith(color: greyColor)),
                                 ],
                               ),
                             )
@@ -885,8 +880,8 @@ class ReportView extends GetView<ReportController> {
                           alignment: WrapAlignment.center,
                           spacing: 12,
                           runSpacing: 8,
-                          children: List.generate(
-                              controller.screenTime.length, (index) {
+                          children: List.generate(controller.screenTime.length,
+                              (index) {
                             return Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -942,8 +937,7 @@ class ReportView extends GetView<ReportController> {
                   style: h5Regular,
                 ),
                 TextButton(
-                  onPressed: () {
-                  },
+                  onPressed: () {},
                   child: Text(
                     "021-500-454",
                     style: h5Regular.copyWith(color: Colors.blue),
@@ -986,7 +980,7 @@ class ReportCategory extends StatelessWidget {
         borderRadius: BorderRadius.circular(30),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFFBDCF99).withOpacity(0.2),
+            color: const Color(0xFFBDCF99).withValues(alpha: 0.2),
             spreadRadius: 1,
             blurRadius: 1,
             offset: const Offset(0, 1),
