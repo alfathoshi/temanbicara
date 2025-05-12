@@ -73,8 +73,8 @@ class OnBoardingController extends GetxController {
       animateDescription();
       animateImage();
     } else {
-      Get.offAllNamed(Routes.NAVIGATION_BAR, arguments: {"indexPage": 0});
-      // Get.offAllNamed(Routes.SIGN_UP);
+      //Get.offAllNamed(Routes.NAVIGATION_BAR, arguments: {"indexPage": 0});
+      Get.offAllNamed(Routes.SIGNUP);
     }
   }
 

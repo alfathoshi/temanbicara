@@ -125,6 +125,9 @@ class BookingHistoryController extends GetxController {
     final schedule = item['schedule'];
     final payment = item['payment'];
     final expired = _parseExpiredDate(payment['expired_date']);
+    final user = schedule['user'];
+    final expertiseList = user['expertises'] as List;
+    final expertise = expertiseList.isNotEmpty ? expertiseList[0] : null;
 
     return ConsultPending(
       nama: schedule['user']['name'],
@@ -140,6 +143,7 @@ class BookingHistoryController extends GetxController {
       transactionId: (payment['transaction_id'] ?? '').toString(),
       expiredDate: payment['expired_date'] ?? '',
       availableDateRaw: schedule['available_date'] ?? '',
+      expertises: expertise != null ? expertise['type'] : '-',
     );
   }
 
@@ -147,10 +151,13 @@ class BookingHistoryController extends GetxController {
     final schedule = item['schedule'];
     final payment = item['payment'];
     final user = schedule['user'];
+    final expertiseList = user['expertises'] as List;
+    final expertise = expertiseList.isNotEmpty ? expertiseList[0] : null;
+
     return ConsultComplete(
       nama: user['name'],
       durasi: "${schedule['start_time']} - ${schedule['end_time']}",
-      expertise: "Counselor Expertise",
+      expertise: expertise != null ? expertise['type'] : '-',
       tanggal: schedule['available_date'].substring(0, 10),
       waktu: schedule['start_time'],
     );
