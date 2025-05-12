@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:temanbicara/app/data/transaction.dart';
+import 'package:temanbicara/app/data/transaction_model.dart';
 import 'package:temanbicara/app/modules/transaction_method/controllers/transaction_method_controller.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/spaces.dart';

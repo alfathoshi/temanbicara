@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:temanbicara/app/data/invoice.dart';
+import 'package:temanbicara/app/data/invoice_model.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';

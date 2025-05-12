@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:temanbicara/app/data/invoice.dart';
-import 'package:temanbicara/app/data/Transaction.dart';
+import 'package:temanbicara/app/data/invoice_model.dart';
+import 'package:temanbicara/app/data/transaction_model.dart';
 import 'package:temanbicara/app/modules/transaction_success/controllers/transaction_success_controller.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';

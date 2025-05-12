@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:temanbicara/app/data/invoice.dart';
+import 'package:temanbicara/app/data/invoice_model.dart';
 
 class CreatePDF {
   static Future<File> createPDF({
