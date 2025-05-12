@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:temanbicara/app/data/Transaction.dart';
+import 'package:temanbicara/app/data/transaction.dart';
 import 'package:temanbicara/app/modules/transaction/views/transaction_view.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
@@ -24,7 +24,9 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
     final expertiseList = arguments['expertise'];
     final expertise = (expertiseList as List).join(", ");
 
+    // ignore: unused_local_variable
     DateTime selectedDate = DateTime.now();
+    // ignore: unused_local_variable
     Map<String, dynamic> selectedSchedule = {};
     final consultController = Get.put(ConsultScheduleController());
 

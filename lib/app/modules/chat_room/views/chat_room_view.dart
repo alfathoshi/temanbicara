@@ -127,7 +127,6 @@ class ChatRoomView extends GetView<ChatRoomController> {
                       onPressed: () {
                         controller.handleSendPressed(controller.messageC.text);
                         controller.messageC.text = '';
-                        print(controller.args['counselor_id']);
                       },
                     ),
                   ],

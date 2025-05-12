@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:temanbicara/app/data/Transaction.dart';
+import 'package:temanbicara/app/data/transaction.dart';
 import 'package:temanbicara/app/modules/transaction_payment/views/transaction_payment_view.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
-import 'package:temanbicara/app/widgets/transaction/chooseMethod.dart';
-import 'package:temanbicara/app/widgets/transaction/transactionTimelineView.dart';
+import 'package:temanbicara/app/widgets/transaction/choose_method.dart';
+import 'package:temanbicara/app/widgets/transaction/transaction_timeline_view.dart';
 
 import '../controllers/transaction_method_controller.dart';
 
@@ -33,7 +33,7 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
           style: h3Bold,
         ),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(1),
+          preferredSize: const Size.fromHeight(1),
           child: Container(
             color: grey4Color,
             height: 0.5,

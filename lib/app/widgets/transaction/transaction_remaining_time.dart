@@ -44,7 +44,6 @@ class TransactionRemainingTime extends StatelessWidget {
                     ),
                   ),
                   onEnd: () {
-                    print("Timer finished");
                     onTimerEnd();
                   },
                 ),

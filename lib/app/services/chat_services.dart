@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/data/message.dart';
 import 'package:temanbicara/app/services/fcm_services.dart';
+import 'package:temanbicara/app/themes/colors.dart';
 
 class ChatService {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -44,7 +46,12 @@ class ChatService {
         );
       }
     } else {
-      print('FCM tokens tidak ditemukan atau kosong');
+      Get.snackbar(
+        'Error',
+        'Failed to get FCM Token',
+        backgroundColor: error.withOpacity(0.6),
+        colorText: whiteColor,
+      );
     }
   }
 

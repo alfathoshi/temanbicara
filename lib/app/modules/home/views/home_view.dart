@@ -1,16 +1,8 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart';
-import 'package:iconsax/iconsax.dart';
-import 'package:temanbicara/app/modules/chat/views/chat_view.dart';
-import 'package:temanbicara/app/modules/mental_matrix/controllers/mental_matrix_controller.dart';
 import 'package:temanbicara/app/modules/report/controllers/report_controller.dart';
-import 'package:temanbicara/app/modules/report/views/report_view.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
@@ -23,6 +15,7 @@ import 'package:temanbicara/app/widgets/top_article.dart';
 import '../../journal/controllers/journal_controller.dart';
 import '../controllers/home_controller.dart';
 
+// ignore: must_be_immutable
 class HomeView extends GetView<ReportController> {
   GetStorage box = GetStorage();
   HomeView({super.key});
@@ -169,7 +162,7 @@ class HomeView extends GetView<ReportController> {
                             },
                             child: MentalMatrix(
                               color: lightGreen,
-                              icon: Icon(Icons.edit),
+                              icon: const Icon(Icons.edit),
                               image: 'assets/images/limiter.png',
                               title: controller.title.value.isNotEmpty
                                   ? controller.title.value
@@ -354,14 +347,14 @@ class HomeView extends GetView<ReportController> {
                         ),
                         Obx(() {
                           if (journalController.isLoading.value) {
-                            return Center(child: CircularProgressIndicator());
+                            return const Center(child: CircularProgressIndicator());
                           } else if (journalController.journalList.isEmpty) {
-                            return Center(
+                            return const Center(
                               child: Text("No Journal Available"),
                             );
                           } else {
                             return Container(
-                              constraints: BoxConstraints(
+                              constraints: const BoxConstraints(
                                 maxHeight: 150,
                               ),
                               child: ListView.builder(
@@ -435,9 +428,9 @@ class HomeView extends GetView<ReportController> {
                 ),
                 Obx(() {
                   if (_controller.isLoading.value) {
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   } else if (_controller.articles.isEmpty) {
-                    return Center(
+                    return const Center(
                       child: Text("No Data Available"),
                     );
                   } else {

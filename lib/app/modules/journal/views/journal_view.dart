@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:intl/intl.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/widgets/journal_card.dart';
-
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
 import '../../../widgets/date.dart';
@@ -29,7 +26,7 @@ class JournalView extends GetView<JournalController> {
           style: h3Bold,
         ),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(1),
+          preferredSize: const Size.fromHeight(1),
           child: Container(
             color: grey4Color,
             height: 0.5,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:temanbicara/app/modules/detail_artikel/views/detail_artikel_view.dart';
 import 'package:temanbicara/app/themes/colors.dart';

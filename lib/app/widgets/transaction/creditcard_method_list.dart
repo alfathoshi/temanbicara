@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:temanbicara/app/data/Transaction.dart';
-import 'package:temanbicara/app/modules/transaction_method/controllers/transaction_method_controller.dart';
+import 'package:temanbicara/app/data/transaction.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
-import 'package:temanbicara/app/widgets/transaction/concultationPrice.dart';
-import 'package:temanbicara/app/widgets/transaction/paymentMethodRow.dart';
+import 'package:temanbicara/app/widgets/transaction/concultation_price.dart';
+import 'package:temanbicara/app/widgets/transaction/payment_method_row.dart';
 
-List<String> bankTransferList = ["BCA", "BNI", "BRI", "CIMB"];
+List<String> creditCardList = ["Visa", "Mastercard"];
 
-class BankPaymentMethodList extends StatelessWidget {
+class CreditCardMethodList extends StatelessWidget {
   final TransactionModel transaction;
   final Function(String methodType) onMethodSelected;
 
-  const BankPaymentMethodList({
+  const CreditCardMethodList({
     super.key,
     required this.transaction,
     required this.onMethodSelected,
@@ -21,12 +19,8 @@ class BankPaymentMethodList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.find<TransactionMethodController>();
-
-    void onSelect(String bank) {
-      controller.setMethod(bank);
-      print("Selected method (Bank): ${controller.selectedMethod.value}");
-      onMethodSelected(bank);
+    void onSelect(String card) {
+      onMethodSelected(card);
     }
 
     return Column(
@@ -41,24 +35,19 @@ class BankPaymentMethodList extends StatelessWidget {
             padding: const EdgeInsets.all(25),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: bankTransferList.map((bank) {
+              children: creditCardList.map((card) {
                 return Column(
                   children: [
                     GestureDetector(
-                      onTap: () {
-                        print("Bank tapped: $bank");
-                        onSelect(bank);
-                      },
+                      onTap: () => onSelect(card),
                       child: PaymentMethodRow(
-                        label: bank,
-                        value: bank,
-                        logo: "${bank.toLowerCase()}Logo",
-                        onTap: () {
-                          onMethodSelected(bank);
-                        },
+                        label: card,
+                        value: card,
+                        logo: "${card.toLowerCase()}Logo",
+                        isAvailable: false,
                       ),
                     ),
-                    if (bank != bankTransferList.last)
+                    if (card != creditCardList.last)
                       const Padding(
                         padding: EdgeInsets.symmetric(vertical: 15),
                         child: Divider(

@@ -31,7 +31,7 @@ class NewTrackingController extends GetxController {
     '< 3 hours'
   ];
 
-  final List<String> Activity = [
+  final List<String> activity = [
     '< 500 steps',
     '500-1k steps',
     '1k-3k steps',
@@ -39,7 +39,7 @@ class NewTrackingController extends GetxController {
     '> 6k steps'
   ];
 
-  final List<String> ScreenTime = [
+  final List<String> screenTime = [
     '< 1 hours',
     '1-2 hours',
     '2-3 hours',
@@ -56,11 +56,11 @@ class NewTrackingController extends GetxController {
   }
 
   void toggleScreenTime(int index) {
-    selectedScreen.value = ScreenTime[index];
+    selectedScreen.value = screenTime[index];
   }
 
   void toggleActivity(int index) {
-    selectedActivity.value = Activity[index];
+    selectedActivity.value = activity[index];
   }
 
   double getOpacity(int index) {
@@ -122,7 +122,7 @@ class NewTrackingController extends GetxController {
   }
 
   ColorFilter getColorScreen(int index) {
-    return selectedScreen.value == ScreenTime[index]
+    return selectedScreen.value == screenTime[index]
         ? const ColorFilter.mode(Colors.transparent, BlendMode.multiply)
         : const ColorFilter.matrix(<double>[
             0.2126,
@@ -149,7 +149,7 @@ class NewTrackingController extends GetxController {
   }
 
   ColorFilter getColorActivity(int index) {
-    return selectedActivity.value == Activity[index]
+    return selectedActivity.value == activity[index]
         ? const ColorFilter.mode(Colors.transparent, BlendMode.multiply)
         : const ColorFilter.matrix(<double>[
             0.2126,
@@ -177,6 +177,7 @@ class NewTrackingController extends GetxController {
 
   Future<void> storeTracking() async {
     try {
+      // ignore: unused_local_variable
       final userId = box.read('id');
       final token = box.read('token');
 
@@ -211,7 +212,9 @@ class NewTrackingController extends GetxController {
             colorText: Colors.white);
       }
     } catch (e) {
-      print('Error storeTracking: $e');
+      Get.snackbar('Error', 'Gagal menyimpan tracking',
+          backgroundColor: Colors.red.withOpacity(0.6),
+          colorText: Colors.white);
     }
   }
 }

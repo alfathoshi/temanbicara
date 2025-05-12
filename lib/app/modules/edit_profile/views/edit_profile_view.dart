@@ -28,7 +28,7 @@ class EditProfileView extends GetView<EditProfileController> {
           style: h3Bold,
         ),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(1),
+          preferredSize: const Size.fromHeight(1),
           child: Container(
             color: grey4Color,
             height: 0.5,

@@ -15,7 +15,6 @@ class ConsultReportController extends GetxController {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
         });
-    print(response.body);
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {

@@ -57,7 +57,6 @@ class PaymentMethodRow extends StatelessWidget {
                   onChanged: isAvailable
                       ? (String? val) {
                           controller.setMethod(val!);
-                          print("Radio changed to $val");
                           if (onTap != null) onTap!();
                         }
                       : null,

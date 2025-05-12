@@ -1,17 +1,10 @@
 import 'dart:convert';
-import 'dart:math';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
-
 import '../../../config/config.dart';
 
 class ChatController extends GetxController {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final FirebaseMessaging _fcm = FirebaseMessaging.instance;
-
   final listChat = [].obs;
   GetStorage box = GetStorage();
 
@@ -30,7 +23,6 @@ class ChatController extends GetxController {
       listChat.value = data['data'];
       return json.decode(response.body);
     } else {
-      print(response.body);
       throw Exception('Failed to load chat');
     }
   }
@@ -40,7 +32,6 @@ class ChatController extends GetxController {
   void onInit() {
     super.onInit();
     fetchData();
-    print(listChat);
   }
 
   void increment() => count.value++;

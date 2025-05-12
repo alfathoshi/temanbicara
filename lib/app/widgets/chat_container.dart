@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:temanbicara/app/modules/chat/controllers/chat_controller.dart';
-import 'package:temanbicara/app/modules/detail_artikel/views/detail_artikel_view.dart';
-import 'package:temanbicara/app/modules/room_chat/views/room_chat_view.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
-class Chatcontainer extends StatelessWidget {
+class ChatContainer extends StatelessWidget {
   final int id;
   final String time;
   final String? image;
   final String? nama;
   final String? deskripsi;
 
-  const Chatcontainer({
+  const ChatContainer({
     super.key,
     required this.nama,
     required this.deskripsi,
@@ -68,14 +64,12 @@ class Chatcontainer extends StatelessWidget {
                     nama!,
                     style: h6Bold,
                   ),
-                  Container(
-                    child: Text(
-                      deskripsi!,
-                      style: h7Regular.copyWith(
-                          color: Colors.grey.withOpacity(0.9)),
-                      softWrap: true,
-                      overflow: TextOverflow.fade,
-                    ),
+                  Text(
+                    deskripsi!,
+                    style: h7Regular.copyWith(
+                        color: Colors.grey.withOpacity(0.9)),
+                    softWrap: true,
+                    overflow: TextOverflow.fade,
                   ),
                 ],
               ),

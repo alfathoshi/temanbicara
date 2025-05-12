@@ -18,7 +18,7 @@ class ConsultController extends GetxController {
       final response = await http.get(
         Uri.parse('${Config.apiEndPoint}/available-schedule'),
         headers: {
-          'Authorization': 'Bearer ${box.read('token')}',
+          'Authorization': 'Bearer $token',
         },
       );
       if (response.statusCode == 200) {

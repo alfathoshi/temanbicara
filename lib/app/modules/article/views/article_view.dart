@@ -26,7 +26,7 @@ class ArticleView extends GetView<ArticleController> {
           ),
           centerTitle: true,
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(1),
+            preferredSize: const Size.fromHeight(1),
             child: Container(
               color: grey4Color,
               height: 0.5,
@@ -57,7 +57,6 @@ class ArticleView extends GetView<ArticleController> {
             : SliverList.builder(
                 itemCount: article.length,
                 itemBuilder: (context, index) {
-                  print('Index bertipe String: $article');
                   return Padding(
                     padding: const EdgeInsets.only(left: 24, right: 24),
                     child: TopArticle(

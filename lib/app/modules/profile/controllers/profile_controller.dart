@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:temanbicara/app/config/config.dart';
 import 'package:http/http.dart' as http;
+import 'package:temanbicara/app/themes/colors.dart';
 
 class ProfileController extends GetxController {
   final count = 0.obs;
@@ -25,7 +26,12 @@ class ProfileController extends GetxController {
         storedImage = imageTemp;
       }
     } catch (e) {
-      print('Failed to pick image: $e');
+      Get.snackbar(
+        'Error',
+        'Failed to fetch journal',
+        backgroundColor: error.withOpacity(0.6),
+        colorText: whiteColor,
+      );
     }
   }
 
@@ -81,8 +87,12 @@ class ProfileController extends GetxController {
       profileUrl.value = data['data']['profile_url'];
       return;
     } catch (err) {
-      print(err);
-      // rethrow;
+      Get.snackbar(
+        'Error',
+        'Failed to fetch profile',
+        backgroundColor: error.withOpacity(0.6),
+        colorText: whiteColor,
+      );
     }
   }
 

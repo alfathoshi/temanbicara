@@ -7,7 +7,7 @@ import '../../../themes/fonts.dart';
 import '../controllers/schedule_controller.dart';
 
 class ScheduleView extends GetView<ScheduleController> {
-  const ScheduleView({Key? key}) : super(key: key);
+  const ScheduleView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

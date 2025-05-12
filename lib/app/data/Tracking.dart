@@ -1,7 +1,7 @@
 class TrackingModel {
-  final String KualitasTidur;
-  final String MoodLevel;
-  final int StressLevel;
+  final String kualitasTidur;
+  final String moodLevel;
+  final int stressLevel;
 
-  TrackingModel(this.KualitasTidur, this.MoodLevel, this.StressLevel);
+  TrackingModel(this.kualitasTidur, this.moodLevel, this.stressLevel);
 }

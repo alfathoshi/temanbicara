@@ -1,16 +1,13 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:temanbicara/app/data/consultPending.dart';
+import 'package:temanbicara/app/data/consult_pending.dart';
 import 'package:temanbicara/app/modules/booking_history/controllers/booking_history_controller.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
-import 'package:temanbicara/app/widgets/transaction/idrFormatter.dart';
-import 'package:temanbicara/app/widgets/transaction/transactionPaymentTutorial.dart';
-import 'package:temanbicara/app/widgets/transaction/transactionVANumber.dart';
+import 'package:temanbicara/app/widgets/transaction/idr_formatter.dart';
+import 'package:temanbicara/app/widgets/transaction/transaction_payment_tutorial.dart';
+import 'package:temanbicara/app/widgets/transaction/transaction_va_number.dart';
 
 class OrderDetails extends StatelessWidget {
   final ConsultPending consultPending;
@@ -33,7 +30,7 @@ class OrderDetails extends StatelessWidget {
       "CIMBNIAGA": 'CIMBNIAGA',
     };
     return Scaffold(
-      backgroundColor: Color(0xFFFAFAFA),
+      backgroundColor: const Color(0xFFFAFAFA),
       appBar: AppBar(
         toolbarHeight: 85,
         backgroundColor: whiteColor,
@@ -54,11 +51,11 @@ class OrderDetails extends StatelessWidget {
               Container(
                 decoration: BoxDecoration(
                   color: whiteColor,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(20),
                     bottomRight: Radius.circular(20),
                   ),
-                  border: Border(
+                  border: const Border(
                     bottom: BorderSide(
                       color: grey4Color,
                       width: 1.0,
@@ -66,7 +63,7 @@ class OrderDetails extends StatelessWidget {
                   ),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(20, 26, 20, 20),
+                  padding: const EdgeInsets.fromLTRB(20, 26, 20, 20),
                   child: Row(
                     children: [
                       Container(
@@ -109,7 +106,7 @@ class OrderDetails extends StatelessWidget {
                           ),
                           sby5,
                           Text(
-                            consultPending.tanggal + " " + consultPending.waktu,
+                            "${consultPending.tanggal} ${consultPending.waktu}",
                             style: h7SemiBold,
                           ),
                         ],
@@ -130,7 +127,7 @@ class OrderDetails extends StatelessWidget {
                   ),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -218,32 +215,30 @@ class OrderDetails extends StatelessWidget {
                     horizontal: 20,
                     vertical: 16,
                   ),
-                  child: Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Metode Pembayaran",
-                          style: h4Bold,
-                        ),
-                        sby16,
-                        Row(
-                          children: [
-                            Image.asset(
-                              paymentLogos[consultPending.bank]!,
-                              scale: 2,
-                            ),
-                            sbx8,
-                            Text(
-                              paymentName[consultPending.bank]!,
-                              style: h4Bold,
-                            ),
-                          ],
-                        ),
-                        sby16,
-                        TransactionVaNumber(vaNumber: consultPending.vaNumber),
-                      ],
-                    ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Metode Pembayaran",
+                        style: h4Bold,
+                      ),
+                      sby16,
+                      Row(
+                        children: [
+                          Image.asset(
+                            paymentLogos[consultPending.bank]!,
+                            scale: 2,
+                          ),
+                          sbx8,
+                          Text(
+                            paymentName[consultPending.bank]!,
+                            style: h4Bold,
+                          ),
+                        ],
+                      ),
+                      sby16,
+                      TransactionVaNumber(vaNumber: consultPending.vaNumber),
+                    ],
                   ),
                 ),
               ),

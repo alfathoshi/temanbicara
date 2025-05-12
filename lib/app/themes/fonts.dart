@@ -303,7 +303,7 @@ TextStyle h4SemiBoldPrime = GoogleFonts.poppins(
   fontSize: 16,
 );
 
-TextStyle TextLogo = GoogleFonts.poppins(
+TextStyle textLogo = GoogleFonts.poppins(
   fontWeight: FontWeight.bold,
   color: primaryColor,
   fontSize: 18,
@@ -334,18 +334,18 @@ TextStyle sleepQualityTimeTap = GoogleFonts.poppins(
   color: whiteColor,
   fontSize: 13,
 );
-TextStyle ConsultOption = GoogleFonts.poppins(
+TextStyle consultOption = GoogleFonts.poppins(
   fontWeight: FontWeight.w600,
   color: primaryColor,
   fontSize: 16,
 );
-TextStyle ConsultOptionTap = GoogleFonts.poppins(
+TextStyle consultOptionTap = GoogleFonts.poppins(
   fontWeight: FontWeight.w600,
   color: whiteColor,
   fontSize: 16,
 );
 
-TextStyle TrackingText = GoogleFonts.poppins(
+TextStyle trackingText = GoogleFonts.poppins(
   fontWeight: FontWeight.w600,
   color: black,
   fontSize: 10,

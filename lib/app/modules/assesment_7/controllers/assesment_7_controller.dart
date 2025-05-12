@@ -58,7 +58,6 @@ class Assesment7Controller extends GetxController {
       );
 
       var data = json.decode(response.body);
-      print(data);
       if (response.statusCode == 200 && data['status']) {
         Get.snackbar(
           'Success',
@@ -77,15 +76,15 @@ class Assesment7Controller extends GetxController {
             colorText: Colors.white);
       }
     } catch (e) {
-      print(e);
+      Get.snackbar(
+          'Error',
+          'Failed to save assesment',
+          backgroundColor: primaryColor.withOpacity(0.6),
+          colorText: Colors.white,
+        );
     } finally {
       isLoading.value = false;
     }
   }
 
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-  }
 }

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:temanbicara/app/data/Transaction.dart';
+import 'package:temanbicara/app/data/transaction.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
-import 'package:temanbicara/app/widgets/transaction/transactionData.dart';
-import 'package:temanbicara/app/widgets/transaction/transactionTimelineView.dart';
+import 'package:temanbicara/app/widgets/transaction/transaction_data.dart';
+import 'package:temanbicara/app/widgets/transaction/transaction_timeline_view.dart';
 
 import '../controllers/transaction_controller.dart';
 
@@ -29,7 +29,7 @@ class TransactionView extends GetView<TransactionController> {
             style: h3Bold,
           ),
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(1),
+            preferredSize: const Size.fromHeight(1),
             child: Container(
               color: grey4Color,
               height: 0.5,
@@ -40,9 +40,9 @@ class TransactionView extends GetView<TransactionController> {
           child: Column(
             children: [
               sby24,
-              SizedBox(
+              const SizedBox(
                 height: 60,
-                child: const Expanded(
+                child: Expanded(
                   child: TransactionTimeLineViewIndex(index: 1),
                 ),
               ),

@@ -10,7 +10,7 @@ import 'package:temanbicara/app/widgets/schedule/counselor_card.dart';
 import '../controllers/consult_controller.dart';
 
 class ConsultView extends GetView<ConsultController> {
-  ConsultView({Key? key}) : super(key: key);
+  ConsultView({super.key});
 
   @override
   final ConsultController controller = Get.put(ConsultController());
@@ -55,7 +55,7 @@ class ConsultView extends GetView<ConsultController> {
                   child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                     height: 200,
                     width: 200,
                     child: Image.asset(

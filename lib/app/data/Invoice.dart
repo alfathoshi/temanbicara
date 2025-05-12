@@ -1,4 +1,4 @@
-import 'package:temanbicara/app/data/Transaction.dart';
+import 'package:temanbicara/app/data/transaction.dart';
 
 class InvoiceModel {
   final TransactionModel transaction;

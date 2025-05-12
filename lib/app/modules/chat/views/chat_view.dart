@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
-import 'package:temanbicara/app/widgets/chatContainer.dart';
+import 'package:temanbicara/app/widgets/chat_container.dart';
 
 import '../controllers/chat_controller.dart';
 
@@ -60,7 +60,7 @@ class ChatView extends GetView<ChatController> {
                       var data = listData[index];
                       return Padding(
                           padding: const EdgeInsets.only(left: 24, right: 24),
-                          child: Chatcontainer(
+                          child: ChatContainer(
                             id: data['counselor_id'],
                             nama: data['counselor_name'],
                             deskripsi: data['description'],

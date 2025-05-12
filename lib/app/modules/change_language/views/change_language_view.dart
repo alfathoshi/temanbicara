@@ -6,6 +6,7 @@ import 'package:temanbicara/app/themes/fonts.dart';
 
 import '../controllers/change_language_controller.dart';
 
+// ignore: must_be_immutable
 class ChangeLanguageView extends GetView<ChangeLanguageController> {
   ChangeLanguageView({super.key});
   List<Map<dynamic, String>> dataBahasa = [

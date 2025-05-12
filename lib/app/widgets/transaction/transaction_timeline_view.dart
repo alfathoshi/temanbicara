@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:temanbicara/app/widgets/transaction/transactionTimeline.dart';
+import 'package:temanbicara/app/widgets/transaction/transaction_timeline.dart';
 
 class TransactionTimeLineViewIndex extends StatelessWidget {
   final int index;

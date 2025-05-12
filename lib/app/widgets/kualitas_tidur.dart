@@ -1,22 +1,20 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class KualitasTidur extends StatelessWidget {
   final Color textColor;
-  final Color BackgroundColor;
-  final String Image;
+  final Color backgroundColor;
+  final String image;
   final String kualitas;
   final String waktu;
 
   const KualitasTidur({
     super.key,
-    required this.Image,
+    required this.image,
     required this.kualitas,
     required this.waktu,
     required this.textColor,
-    required this.BackgroundColor,
+    required this.backgroundColor,
   });
 
   @override
@@ -36,10 +34,10 @@ class KualitasTidur extends StatelessWidget {
               offset: const Offset(1, 1),
             )
           ],
-          color: BackgroundColor,
+          color: backgroundColor,
         ),
         child: Padding(
-          padding: EdgeInsets.fromLTRB(30, 10, 30, 10),
+          padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -64,7 +62,7 @@ class KualitasTidur extends StatelessWidget {
                 ],
               ),
               CircleAvatar(
-                backgroundImage: ExactAssetImage('assets/images/${Image}.png'),
+                backgroundImage: ExactAssetImage('assets/images/$image.png'),
               )
             ],
           ),

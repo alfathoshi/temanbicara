@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:temanbicara/app/modules/home/views/home_view.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
-
 import '../controllers/tracking_4_controller.dart';
 
 class Tracking4View extends GetView<Tracking4Controller> {

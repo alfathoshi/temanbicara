@@ -32,12 +32,11 @@ class NotificationService {
       final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
           FlutterLocalNotificationsPlugin();
 
+      // ignore: unused_local_variable
       final bool? granted = await flutterLocalNotificationsPlugin
           .resolvePlatformSpecificImplementation<
               AndroidFlutterLocalNotificationsPlugin>()
           ?.requestNotificationsPermission();
-
-      print('Notification permission granted: $granted');
     }
   }
 

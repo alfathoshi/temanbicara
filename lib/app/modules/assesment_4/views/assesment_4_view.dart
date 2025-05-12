@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
-
 import '../../../routes/app_pages.dart';
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
 import '../controllers/assesment_4_controller.dart';
 
 class Assesment4View extends GetView<Assesment4Controller> {
-  const Assesment4View({Key? key}) : super(key: key);
+  const Assesment4View({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,8 +104,8 @@ class Assesment4View extends GetView<Assesment4Controller> {
                           child: Text(
                             'Ya',
                             style: controller.isSelected.value == 0
-                                ? ConsultOptionTap
-                                : ConsultOption,
+                                ? consultOptionTap
+                                : consultOption,
                           ),
                         ),
                       )),
@@ -141,8 +139,8 @@ class Assesment4View extends GetView<Assesment4Controller> {
                           child: Text(
                             'Tidak',
                             style: controller.isSelected.value == 1
-                                ? ConsultOptionTap
-                                : ConsultOption,
+                                ? consultOptionTap
+                                : consultOption,
                           ),
                         ),
                       )),

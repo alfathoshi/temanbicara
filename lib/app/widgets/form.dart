@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
-class form extends StatelessWidget {
-  form({super.key});
+class Form extends StatelessWidget {
+  Form({super.key});
   final TextEditingController nameController = TextEditingController();
   final TextEditingController namePanggilanController = TextEditingController();
 

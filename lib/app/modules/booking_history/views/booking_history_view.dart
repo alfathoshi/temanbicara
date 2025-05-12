@@ -15,7 +15,7 @@ class BookingHistoryView extends GetView<BookingHistoryController> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: Color(0xFFFAFAFA),
+        backgroundColor: const Color(0xFFFAFAFA),
         appBar: AppBar(
           toolbarHeight: 85,
           backgroundColor: whiteColor,
@@ -50,10 +50,11 @@ class BookingHistoryView extends GetView<BookingHistoryController> {
   }
 
   Widget _buildList(RxList list, bool isPending) {
-    if (list.isEmpty)
+    if (list.isEmpty) {
       return _buildEmptyState(isPending
           ? "No Pending Consultations"
           : "No Completed Consultations");
+    }
 
     return Padding(
       padding: const EdgeInsets.only(left: 20, right: 20, top: 30),

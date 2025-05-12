@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
-import 'package:temanbicara/app/widgets/transaction/idrFormatter.dart';
+import 'package:temanbicara/app/widgets/transaction/idr_formatter.dart';
 
 class ConcultationPrice extends StatelessWidget {
   final int price;

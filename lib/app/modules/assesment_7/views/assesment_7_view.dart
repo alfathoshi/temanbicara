@@ -6,7 +6,7 @@ import '../../../themes/fonts.dart';
 import '../controllers/assesment_7_controller.dart';
 
 class Assesment7View extends GetView<Assesment7Controller> {
-  const Assesment7View({Key? key}) : super(key: key);
+  const Assesment7View({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

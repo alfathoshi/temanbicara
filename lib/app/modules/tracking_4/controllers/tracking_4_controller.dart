@@ -30,8 +30,6 @@ class Tracking4Controller extends GetxController {
           'user_id': userId,
         }),
       );
-      print('Response Status Code: ${response.statusCode}');
-      print('Response Body: ${response.body}');
       var data = json.decode(response.body);
 
       if (response.statusCode == 200 && data['status']) {
@@ -52,7 +50,12 @@ class Tracking4Controller extends GetxController {
             colorText: Colors.white);
       }
     } catch (e) {
-      print(e);
+      Get.snackbar(
+        'Error',
+        'Failed to store tracking',
+        backgroundColor: error.withOpacity(0.6),
+        colorText: Colors.white,
+      );
     }
   }
 }

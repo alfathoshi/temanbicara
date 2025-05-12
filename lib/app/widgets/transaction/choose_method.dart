@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:temanbicara/app/data/Transaction.dart';
+import 'package:temanbicara/app/data/transaction.dart';
 import 'package:temanbicara/app/modules/transaction_method/controllers/transaction_method_controller.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
-import 'package:temanbicara/app/widgets/transaction/bankMethodList.dart';
-import 'package:temanbicara/app/widgets/transaction/creditCardMethodList.dart';
-import 'package:temanbicara/app/widgets/transaction/eWalletMethodList.dart';
+import 'package:temanbicara/app/widgets/transaction/bank_method_list.dart';
+import 'package:temanbicara/app/widgets/transaction/creditcard_method_list.dart';
+import 'package:temanbicara/app/widgets/transaction/ewallet_method_list.dart';
 
 class ChooseMethod extends StatelessWidget {
   final TransactionModel transaction;
@@ -21,7 +21,9 @@ class ChooseMethod extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.sizeOf(context).width;
+    // ignore: unused_local_variable
     final radioController = Get.put(RadioButtonController());
+    // ignore: unused_local_variable
     final methodController = Get.find<TransactionMethodController>();
     return GetBuilder<ToggleButtonController>(
       init: ToggleButtonController(),

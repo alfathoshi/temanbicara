@@ -1,17 +1,14 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:temanbicara/app/data/Invoice.dart';
-import 'package:temanbicara/app/data/Transaction.dart';
+import 'package:temanbicara/app/data/invoice.dart';
+import 'package:temanbicara/app/data/transaction.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
-import 'package:temanbicara/app/widgets/transaction/invoiceData.dart';
-import 'package:temanbicara/app/widgets/transaction/transactionTimelineView.dart';
+import 'package:temanbicara/app/widgets/transaction/invoice_data.dart';
+import 'package:temanbicara/app/widgets/transaction/transaction_timeline_view.dart';
 
 import '../controllers/transaction_invoice_controller.dart';
 
@@ -19,11 +16,14 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
   const TransactionInvoiceView({super.key});
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     double screenHeight = MediaQuery.sizeOf(context).height;
 
     final data = Get.arguments as Map;
     final InvoiceModel invoice = data['invoice'];
+    // ignore: unused_local_variable
     final TransactionModel transaction = data['transaction'];
+    // ignore: unused_local_variable
     final consultationData = data['consultationData'];
 
     return PopScope(
@@ -39,7 +39,7 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
             style: h3Bold,
           ),
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(1),
+            preferredSize: const Size.fromHeight(1),
             child: Container(
               color: grey4Color,
               height: 0.5,
@@ -50,14 +50,14 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
           child: Column(
             children: [
               sby24,
-              SizedBox(
+              const SizedBox(
                 height: 60,
                 child: Expanded(
                   child: TransactionTimeLineViewIndex(index: 4),
                 ),
               ),
               Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 28),
+                  padding: const EdgeInsets.symmetric(horizontal: 28),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
