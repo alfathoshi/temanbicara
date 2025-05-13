@@ -29,8 +29,30 @@ class OnBoardingView extends GetView<OnBoardingController> {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    "assets/images/boardingLogo.png",
+                  Container(
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          offset: const Offset(-5, -5),
+                          blurRadius: 7,
+                          color: border,
+                        ),
+                        BoxShadow(
+                          offset: const Offset(5, 5),
+                          blurRadius: 7,
+                          color: border,
+                        ),
+                      ],
+                      color: whiteColor,
+                      borderRadius: BorderRadius.circular(28),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Image.asset(
+                        "assets/images/boardingLogo.png",
+                        scale: 4,
+                      ),
+                    ),
                   ),
                   sby32,
                   Text("Welcome to", style: h3Bold),
