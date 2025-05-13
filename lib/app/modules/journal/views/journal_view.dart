@@ -126,10 +126,15 @@ class JournalView extends GetView<JournalController> {
               ),
               Expanded(
                 child: Obx(() {
+                  if (controller.isLoading.value) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
                   if (controller.journalList.isEmpty) {
                     return Center(
                       child: Text(
-                        'No journals available',
+                        'No journals todoy',
                         style: h6SemiBold,
                       ),
                     );
