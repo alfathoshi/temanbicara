@@ -28,7 +28,7 @@ class SignupController extends GetxController {
       Get.snackbar(
         'Invalid Password',
         'Your password is not strong enough',
-        backgroundColor: Colors.orange.withOpacity(0.8),
+        backgroundColor: Colors.orange.withValues(alpha: 0.8),
         colorText: Colors.white,
       );
       return;
