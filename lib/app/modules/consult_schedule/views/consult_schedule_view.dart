@@ -29,8 +29,13 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
     final consultController = Get.put(ConsultScheduleController());
 
     bool hasScheduleForSelectedDate(DateTime date) {
-      final dateStr = DateFormat('yyyy-MM-dd').format(date);
-      return schedules.any((element) => element['date'] == dateStr);
+      final dateOnly = DateFormat('yyyy-MM-dd').format(date);
+      return schedules.any((element) {
+        final scheduleDateRaw = element['date'];
+        final parsedDate =
+            DateFormat('yyyy-MM-dd').format(DateTime.parse(scheduleDateRaw));
+        return parsedDate == dateOnly;
+      });
     }
 
     return Scaffold(
@@ -81,7 +86,7 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                     sby8,
                     Text(
                       expertise,
-                      style: h3Bold.copyWith(
+                      style: h5Bold.copyWith(
                         overflow: TextOverflow.ellipsis,
                         color: const Color(0xFF7D8A95),
                       ),

@@ -17,6 +17,7 @@ class ConsultView extends GetView<ConsultController> {
 
   @override
   Widget build(BuildContext context) {
+    controller.clearExpertiseFilter();
     controller.fetchData();
 
     return Scaffold(
@@ -61,25 +62,71 @@ class ConsultView extends GetView<ConsultController> {
 
             if (filteredData.isEmpty) {
               final filter = controller.selectedExpertise;
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 200,
-                      width: 200,
-                      child: Image.asset("assets/images/transaksi-gagal.png"),
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 20,
                     ),
-                    sby16,
-                    Text(
-                      filter.isEmpty
-                          ? "Oops! It looks like all slots are full."
-                          : "No counselor found for \"${filter.join(', ')}\".",
-                      style: h5Bold,
-                      textAlign: TextAlign.center,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "Filtered by: ${controller.selectedExpertise.join(', ')}",
+                            style: h7SemiBold.copyWith(color: primaryColor),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            controller.clearExpertiseFilter();
+                          },
+                          child: Container(
+                            width: 69,
+                            height: 23,
+                            decoration: BoxDecoration(
+                              color: whiteColor,
+                              border: Border.all(color: grey4Color),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Clear",
+                                style: h7SemiBold.copyWith(color: error),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                  Spacer(),
+                  Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SizedBox(
+                          height: 200,
+                          width: 200,
+                          child:
+                              Image.asset("assets/images/transaksi-gagal.png"),
+                        ),
+                        sby16,
+                        Text(
+                          filter.isEmpty
+                              ? "Oops! It looks like all slots are full."
+                              : "No counselor found for \"${filter.join(', ')}\".",
+                          style: h5Bold,
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Spacer(),
+                ],
               );
             }
 
@@ -169,6 +216,7 @@ class ConsultView extends GetView<ConsultController> {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
+                            // print(filteredData[index]['schedules']);
                             Get.toNamed(
                               Routes.CONSULT_SCHEDULE,
                               arguments: {
