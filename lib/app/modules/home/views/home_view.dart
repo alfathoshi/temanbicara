@@ -123,18 +123,21 @@ class HomeView extends GetView<ReportController> {
                             const SizedBox(
                               width: 21,
                             ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Hello, ${box.read('name')}',
-                                  style: h3SemiBold,
-                                ),
-                                Text(
-                                  'How${"'s"} your day?',
-                                  style: h4Regular,
-                                )
-                              ],
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Hello, ${box.read('name')}',
+                                    style: h3SemiBold,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  Text(
+                                    'How${"'s"} your day?',
+                                    style: h4Regular,
+                                  )
+                                ],
+                              ),
                             )
                           ],
                         ),
@@ -347,7 +350,8 @@ class HomeView extends GetView<ReportController> {
                         ),
                         Obx(() {
                           if (journalController.isLoading.value) {
-                            return const Center(child: CircularProgressIndicator());
+                            return const Center(
+                                child: CircularProgressIndicator());
                           } else if (journalController.journalList.isEmpty) {
                             return const Center(
                               child: Text("No Journal Today"),

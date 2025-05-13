@@ -67,8 +67,9 @@ class ProfileView extends GetView<ProfileController> {
                   ),
                   sby12,
                   Text(
-                    box.read('name') ?? "Astro",
+                    box.read('name') ?? "null",
                     style: h3Bold,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ],
               ),
