@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
-import 'package:temanbicara/app/widgets/consult/consult_complete_card.dart';
-import 'package:temanbicara/app/widgets/consult/consult_pending_card.dart';
+import 'package:temanbicara/app/widgets/consult/booking_complete_card.dart';
+import 'package:temanbicara/app/widgets/consult/booking_pending_card.dart';
 import '../controllers/booking_history_controller.dart';
 
 class BookingHistoryView extends GetView<BookingHistoryController> {
@@ -64,8 +64,8 @@ class BookingHistoryView extends GetView<BookingHistoryController> {
         itemBuilder: (_, i) => Padding(
           padding: const EdgeInsets.only(bottom: 16),
           child: isPending
-              ? ConsultPendingCard(consultPending: list[i])
-              : ConsultCompleteCard(consultComplete: list[i]),
+              ? BookingPendingCard(bookingPending: list[i])
+              : BookingCompleteCard(bookingComplete: list[i]),
         ),
       ),
     );

@@ -6,15 +6,15 @@ import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/config/config.dart';
 import 'package:temanbicara/app/data/invoice_model.dart';
 import 'package:temanbicara/app/data/transaction_model.dart';
-import 'package:temanbicara/app/data/consult_complete.dart';
-import 'package:temanbicara/app/data/consult_pending.dart';
+import 'package:temanbicara/app/data/booking_complete.dart';
+import 'package:temanbicara/app/data/booking_pending.dart';
 import 'package:temanbicara/app/data/consult_response.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 
 class BookingHistoryController extends GetxController {
-  final pendingList = <ConsultPending>[].obs;
-  final completedList = <ConsultComplete>[].obs;
+  final pendingList = <BookingPending>[].obs;
+  final completedList = <BookingComplete>[].obs;
   final isLoading = false.obs;
   final box = GetStorage();
 
@@ -127,7 +127,7 @@ class BookingHistoryController extends GetxController {
     }
   }
 
-  ConsultPending _mapPending(dynamic item) {
+  BookingPending _mapPending(dynamic item) {
     final schedule = item['schedule'];
     final payment = item['payment'];
     final expired = _parseExpiredDate(payment['expired_date']);
@@ -135,7 +135,7 @@ class BookingHistoryController extends GetxController {
     final expertiseList = user['expertises'] as List;
     final expertise = expertiseList.isNotEmpty ? expertiseList[0] : null;
 
-    return ConsultPending(
+    return BookingPending(
       nama: schedule['user']['name'],
       bank: payment['bank'],
       durasi: _calculateDuration(schedule['start_time'], schedule['end_time']),
@@ -155,7 +155,7 @@ class BookingHistoryController extends GetxController {
     );
   }
 
-  ConsultComplete _mapCompleted(dynamic item) {
+  BookingComplete _mapCompleted(dynamic item) {
     final schedule = item['schedule'];
     // ignore: unused_local_variable
     final payment = item['payment'];
@@ -163,7 +163,7 @@ class BookingHistoryController extends GetxController {
     final expertiseList = user['expertises'] as List;
     final expertise = expertiseList.isNotEmpty ? expertiseList[0] : null;
 
-    return ConsultComplete(
+    return BookingComplete(
       nama: user['name'],
       durasi: "${schedule['start_time']} - ${schedule['end_time']}",
       expertise: expertise != null ? expertise['type'] : '-',
