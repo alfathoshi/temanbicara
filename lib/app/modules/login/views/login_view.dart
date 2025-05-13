@@ -80,7 +80,7 @@ class LoginView extends GetView<LoginController> {
                       child: SizedBox(
                         width: MediaQuery.sizeOf(context).width,
                         child: Text(
-                          "Lupa kata sandi?",
+                          "Forgot password?",
                           textAlign: TextAlign.right,
                           style: GoogleFonts.poppins().copyWith(
                             color: const Color(0xFF60ABEE),
