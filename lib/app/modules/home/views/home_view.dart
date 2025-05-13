@@ -350,7 +350,7 @@ class HomeView extends GetView<ReportController> {
                             return const Center(child: CircularProgressIndicator());
                           } else if (journalController.journalList.isEmpty) {
                             return const Center(
-                              child: Text("No Journal Available"),
+                              child: Text("No Journal Today"),
                             );
                           } else {
                             return Container(
