@@ -12,6 +12,46 @@ import '../controllers/signup_controller.dart';
 class SignupView extends GetView<SignupController> {
   const SignupView({super.key});
 
+  bool _isPasswordValid(String value) {
+    return MinCharactersValidationRule(8).validate(value) &&
+        UppercaseValidationRule().validate(value) &&
+        LowercaseValidationRule().validate(value) &&
+        SpecialCharacterValidationRule().validate(value);
+  }
+
+  Widget? _buildSuffixIcon() {
+    return IconButton(
+      icon: const Icon(Icons.remove_red_eye_outlined),
+      onPressed: () => controller.showPassword(),
+    );
+  }
+
+  bool _isFormValid() {
+    return controller.isButtonActive.value && controller.isPasswordValid.value;
+  }
+
+  Widget _buildValidationRules(Set<ValidationRule> rules, String value) {
+    return ListView(
+      shrinkWrap: true,
+      children: rules.map((rule) {
+        final isValid = rule.validate(value);
+        return Row(
+          children: [
+            Icon(
+              isValid ? Icons.check : Icons.close,
+              color: isValid ? primaryColor : error,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              rule.name,
+              style: h6Regular.copyWith(color: isValid ? primaryColor : error),
+            ),
+          ],
+        );
+      }).toList(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,11 +109,7 @@ class SignupView extends GetView<SignupController> {
                       onChanged: (value) {
                         controller.isEmpty();
                         controller.isPasswordValid.value =
-                            MinCharactersValidationRule(8).validate(value) &&
-                                UppercaseValidationRule().validate(value) &&
-                                LowercaseValidationRule().validate(value) &&
-                                SpecialCharacterValidationRule()
-                                    .validate(value);
+                            _isPasswordValid(value);
                       },
                       validationRules: {
                         MinCharactersValidationRule(8),
@@ -90,54 +126,12 @@ class SignupView extends GetView<SignupController> {
                         if (value.isEmpty) {
                           return const SizedBox.shrink();
                         }
-                        return ListView(
-                          shrinkWrap: true,
-                          children: rules
-                              .map(
-                                (rule) => rule.validate(value)
-                                    ? Row(
-                                        children: [
-                                          Icon(
-                                            Icons.check,
-                                            color: primaryColor,
-                                          ),
-                                          sby12,
-                                          Text(
-                                            rule.name,
-                                            style: TextStyle(
-                                              color: primaryColor,
-                                            ),
-                                          ),
-                                        ],
-                                      )
-                                    : Row(
-                                        children: [
-                                          const Icon(
-                                            Icons.close,
-                                            color: Colors.red,
-                                          ),
-                                          sby12,
-                                          Text(
-                                            rule.name,
-                                            style: const TextStyle(
-                                              color: Colors.red,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                              )
-                              .toList(),
-                        );
+                        return _buildValidationRules(rules, value);
                       },
                       decoration: InputDecoration(
                         hintText: 'Password',
                         hintStyle: const TextStyle(color: greyColor),
-                        suffixIcon: true == true
-                            ? IconButton(
-                                icon: const Icon(Icons.remove_red_eye_outlined),
-                                onPressed: () => controller.showPassword(),
-                              )
-                            : null,
+                        suffixIcon: _buildSuffixIcon(),
                         suffixIconColor: const Color(0xFFc4c4c4),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -164,10 +158,8 @@ class SignupView extends GetView<SignupController> {
                     sby60,
                     sby8,
                     ElevatedButton(
-                      onPressed: controller.isButtonActive.value &&
-                              controller.isPasswordValid.value
-                          ? () => controller.register()
-                          : null,
+                      onPressed:
+                          _isFormValid() ? () => controller.register() : null,
                       style: ElevatedButton.styleFrom(
                           backgroundColor: controller.isButtonActive.value
                               ? primaryColor
