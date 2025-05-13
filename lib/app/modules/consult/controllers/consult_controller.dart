@@ -7,11 +7,12 @@ import 'package:temanbicara/app/config/config.dart';
 class ConsultController extends GetxController {
   var schedules = {}.obs;
   var isLoading = false.obs;
+  var selectedExpertise = <String>[].obs;
+
   final box = GetStorage();
 
   Future<void> fetchData() async {
     try {
-      // final userId = box.read('id');
       final token = box.read('token');
 
       isLoading.value = true;
@@ -24,14 +25,15 @@ class ConsultController extends GetxController {
       if (response.statusCode == 200) {
         schedules.value = json.decode(response.body);
       }
-      // else {
-      //   throw Exception('Failed to load schedule');
-      // }
     } catch (e) {
-      Get.snackbar('Error', e.toString());
+      // Get.snackbar('Error', e.toString());
     } finally {
       isLoading.value = false;
     }
+  }
+
+  void clearExpertiseFilter() {
+    selectedExpertise.clear();
   }
 
   @override
@@ -44,5 +46,11 @@ class ConsultController extends GetxController {
   void onReady() {
     super.onReady();
     fetchData();
+  }
+
+  @override
+  void onClose() {
+    clearExpertiseFilter();
+    super.onClose();
   }
 }
