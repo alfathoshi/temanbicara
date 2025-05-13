@@ -66,7 +66,15 @@ class SignupView extends GetView<SignupController> {
                       obscureText: controller.isSecure.value,
                       controller: controller.passC,
                       keyboardType: TextInputType.text,
-                      onChanged: (value) => controller.isEmpty(),
+                      onChanged: (value) {
+                        controller.isEmpty();
+                        controller.isPasswordValid.value =
+                            MinCharactersValidationRule(8).validate(value) &&
+                                UppercaseValidationRule().validate(value) &&
+                                LowercaseValidationRule().validate(value) &&
+                                SpecialCharacterValidationRule()
+                                    .validate(value);
+                      },
                       validationRules: {
                         MinCharactersValidationRule(8),
                         UppercaseValidationRule(),
@@ -74,6 +82,11 @@ class SignupView extends GetView<SignupController> {
                         SpecialCharacterValidationRule(),
                       },
                       validationRuleBuilder: (rules, value) {
+                        bool allValid =
+                            rules.every((rule) => rule.validate(value));
+                        WidgetsBinding.instance.addPostFrameCallback((_) {
+                          controller.isPasswordValid.value = allValid;
+                        });
                         if (value.isEmpty) {
                           return const SizedBox.shrink();
                         }
@@ -151,13 +164,14 @@ class SignupView extends GetView<SignupController> {
                     sby60,
                     sby8,
                     ElevatedButton(
-                      onPressed: () {
-                        controller.register();
-                      },
+                      onPressed: controller.isButtonActive.value &&
+                              controller.isPasswordValid.value
+                          ? () => controller.register()
+                          : null,
                       style: ElevatedButton.styleFrom(
                           backgroundColor: controller.isButtonActive.value
-                              ? const Color(0xFFc4c4c4)
-                              : primaryColor,
+                              ? primaryColor
+                              : const Color(0xFFc4c4c4),
                           foregroundColor: Colors.white,
                           minimumSize: const Size(
                             double.infinity,

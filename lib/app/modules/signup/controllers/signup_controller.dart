@@ -21,8 +21,18 @@ class SignupController extends GetxController {
   var isSecure = true.obs;
   var isSecureC = true.obs;
   var isLoading = false.obs;
+  var isPasswordValid = false.obs;
 
   Future<void> register() async {
+    if (!isPasswordValid.value) {
+      Get.snackbar(
+        'Invalid Password',
+        'Your password is not strong enough',
+        backgroundColor: Colors.orange.withOpacity(0.8),
+        colorText: Colors.white,
+      );
+      return;
+    }
     isLoading.value = true;
 
     try {
@@ -79,9 +89,9 @@ class SignupController extends GetxController {
     if (passC.text.isNotEmpty &&
         emailC.text.isNotEmpty &&
         confirmPassC.text.isNotEmpty) {
-      isButtonActive(false);
+      isButtonActive.value = true;
     } else {
-      isButtonActive(true);
+      isButtonActive.value = false;
     }
   }
 
