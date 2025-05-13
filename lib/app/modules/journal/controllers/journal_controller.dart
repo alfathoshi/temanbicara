@@ -40,6 +40,7 @@ class JournalController extends GetxController {
 
   Future<void> fetchJournals() async {
     isLoading.value = true;
+    journalList.clear();
     try {
       final userId = box.read('id');
 
@@ -63,7 +64,7 @@ class JournalController extends GetxController {
         if (data['status']) {
           journalList.value = data['data'];
         } else {
-          Get.snackbar('Failed', 'Journal Not Found',
+          Get.snackbar('Not Found', 'Journal Not Found',
               backgroundColor: error.withValues(alpha: 0.6),
               colorText: Colors.white);
         }
