@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:temanbicara/app/config/config.dart';
 import 'package:temanbicara/app/data/consult_pending.dart';
+import 'package:temanbicara/app/modules/booking_history/controllers/booking_history_controller.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/consult/order_details.dart';
 import 'package:temanbicara/app/widgets/transaction/idr_formatter.dart';
+import 'package:http/http.dart' as http;
 
 class ConsultPendingCard extends StatelessWidget {
   final ConsultPending consultPending;
@@ -17,6 +21,7 @@ class ConsultPendingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(CancelConsultationController());
     double screenWidth = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
@@ -76,7 +81,7 @@ class ConsultPendingCard extends StatelessWidget {
                         style: h6Bold,
                       ),
                       Text(
-                        "${consultPending.tanggal} ${consultPending.waktu}",
+                        "${consultPending.tanggal} ${consultPending.waktuMulai}",
                         style: h6Bold,
                       ),
                     ],
@@ -167,7 +172,27 @@ class ConsultPendingCard extends StatelessWidget {
                   ),
                   sby8,
                   MyButtonOutlinedCustom(
-                    get: () {},
+                    get: () async {
+                      showDialog(
+                        context: Get.context!,
+                        barrierDismissible: false,
+                        builder: (_) => Center(
+                          child: CircularProgressIndicator(color: primaryColor),
+                        ),
+                      );
+
+                      final success = await controller.cancelConsultation(
+                        consultPending.consultationID,
+                      );
+
+                      Navigator.of(Get.context!).pop();
+
+                      if (success) {
+                        final pendingController =
+                            Get.find<BookingHistoryController>();
+                        await pendingController.fetchData();
+                      }
+                    },
                     foreColor: const Color(0xFFFC7070),
                     backColor: whiteColor,
                     height: 40,
@@ -182,5 +207,50 @@ class ConsultPendingCard extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class CancelConsultationController extends GetxController {
+  var isCancelling = false.obs;
+
+  Future<bool> cancelConsultation(int uuid) async {
+    try {
+      final token = GetStorage().read('token');
+
+      final response = await http.patch(
+        Uri.parse('${Config.apiEndPoint}/consultation/$uuid/cancel'),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer $token',
+        },
+      );
+
+      final statusCode = response.statusCode;
+      if (statusCode == 200 || statusCode == 201) {
+        Get.snackbar(
+          'Success',
+          'Consultation cancelled successfully',
+          colorText: whiteColor,
+          backgroundColor: primaryColor.withOpacity(0.6),
+        );
+        return true;
+      } else {
+        Get.snackbar(
+          'Error',
+          'Failed to cancel consultation.',
+          colorText: whiteColor,
+          backgroundColor: error.withOpacity(0.6),
+        );
+        return false;
+      }
+    } catch (e) {
+      Get.snackbar(
+        'Error',
+        'Something went wrong: $e',
+        colorText: whiteColor,
+        backgroundColor: error.withOpacity(0.6),
+      );
+      return false;
+    }
   }
 }

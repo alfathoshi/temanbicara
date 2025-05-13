@@ -51,9 +51,9 @@ class BookingHistoryController extends GetxController {
           if (matched != null) {
             final transaction = TransactionModel(
               namaPsikiater: matched.nama,
-              expertise: "Counselor Expertise",
+              expertise: matched.expertises,
               jadwal: matched.availableDateRaw!,
-              waktu: matched.waktu,
+              waktu: "${matched.waktuMulai} - ${matched.waktuSelesai}",
               selectedID: matched.scheduleId,
             );
 
@@ -140,7 +140,8 @@ class BookingHistoryController extends GetxController {
       bank: payment['bank'],
       durasi: _calculateDuration(schedule['start_time'], schedule['end_time']),
       tanggal: _formatFullDate(schedule['available_date']),
-      waktu: _formatTime(schedule['start_time']),
+      waktuMulai: _formatTime(schedule['start_time']),
+      waktuSelesai: _formatTime(schedule['end_time']),
       tanggalTenggat: expired['date']!,
       waktuTenggat: expired['time']!,
       metodePembayaran: "${payment['payment_method']} - ${payment['bank']}",
@@ -150,6 +151,7 @@ class BookingHistoryController extends GetxController {
       expiredDate: payment['expired_date'] ?? '',
       availableDateRaw: schedule['available_date'] ?? '',
       expertises: expertise != null ? expertise['type'] : '-',
+      consultationID: item['consultation_id'],
     );
   }
 

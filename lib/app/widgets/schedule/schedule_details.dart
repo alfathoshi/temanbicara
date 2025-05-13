@@ -59,7 +59,9 @@ class ScheduleList extends StatelessWidget {
           DateFormat('yyyy-MM-dd').format(selectedDate.value);
 
       final daySchedule = schedule.firstWhere(
-        (e) => e['date'] == selectedDateStr,
+        (e) =>
+            DateFormat('yyyy-MM-dd').format(DateTime.parse(e['date'])) ==
+            selectedDateStr,
         orElse: () => null,
       );
 
