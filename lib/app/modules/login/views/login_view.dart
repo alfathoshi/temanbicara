@@ -7,6 +7,7 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/auth_textfield.dart';
 
+import '../../../themes/spaces.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -44,21 +45,14 @@ class LoginView extends GetView<LoginController> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      height: 60,
-                    ),
+                    sby60,
                     Center(
                       child: Text(
                         'Login',
                         style: h1Bold,
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
+                    sby36,
                     AuthTextfield(
                       onChanged: (value) => controller.isEmpty(),
                       showPassword: () {},
@@ -68,9 +62,7 @@ class LoginView extends GetView<LoginController> {
                       passwordField: false,
                       type: TextInputType.emailAddress,
                     ),
-                    const SizedBox(
-                      height: 16,
-                    ),
+                    sby16,
                     AuthTextfield(
                       onChanged: (value) => controller.isEmpty(),
                       showPassword: () => controller.showPassword(),
@@ -80,9 +72,7 @@ class LoginView extends GetView<LoginController> {
                       passwordField: true,
                       type: TextInputType.text,
                     ),
-                    const SizedBox(
-                      height: 12,
-                    ),
+                    sby12,
                     GestureDetector(
                       onTap: () {
                         Get.toNamed(Routes.SEND_OTP);
@@ -98,9 +88,7 @@ class LoginView extends GetView<LoginController> {
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 36,
-                    ),
+                    sby36,
                     ElevatedButton(
                       onPressed: () {
                         controller.login();
@@ -130,9 +118,7 @@ class LoginView extends GetView<LoginController> {
                               ),
                             ),
                     ),
-                    const SizedBox(
-                      height: 24,
-                    ),
+                    sby24,
                   ],
                 ),
               ),
@@ -146,13 +132,13 @@ class LoginView extends GetView<LoginController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Belum punya akun? ',
+                        "Don't have account? ",
                         style: GoogleFonts.poppins(),
                       ),
                       GestureDetector(
                         onTap: () => Get.offAllNamed(Routes.SIGNUP),
                         child: Text(
-                          'Daftar',
+                          'Register',
                           style: GoogleFonts.poppins(
                             color: const Color(0xFF60ABEE),
                           ),

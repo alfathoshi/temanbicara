@@ -13,6 +13,7 @@ dependencies:
   device_preview: ^1.2.0
   dropdown_search: ^6.0.1
   easy_date_timeline: ^2.0.9
+  fancy_password_field: ^2.0.8
   firebase_core: ^3.9.0
   firebase_messaging: ^15.1.5
   fl_chart: ^0.71.0
