@@ -78,7 +78,7 @@ class JournalView extends GetView<JournalController> {
                   ),
                 ),
               ),
-              sbX24,
+              sby24,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -86,36 +86,14 @@ class JournalView extends GetView<JournalController> {
                     'My Journal',
                     style: h5SemiBold,
                   ),
-                  GestureDetector(
-                      onTap: () async {
-                        final DateTime? pickedDate = await showDatePicker(
-                          context: context,
-                          initialDate: controller.selectedDate.value,
-                          firstDate: DateTime(2000, 01, 01),
-                          lastDate: DateTime.now(),
-                          confirmText: "Select",
-                          builder: (BuildContext context, Widget? child) {
-                            return Theme(
-                              data: ThemeData.light().copyWith(
-                                primaryColor: primaryColor,
-                                colorScheme: ColorScheme.light(
-                                  primary: primaryColor,
-                                ),
-                              ),
-                              child: child!,
-                            );
-                          },
-                        );
-
-                        if (pickedDate != null) {
-                          if (!isSameDate(
-                              pickedDate, controller.selectedDate.value)) {
-                            controller.updateDate(pickedDate);
-                            controller.fetchJournals();
-                          }
-                        }
-                      },
-                      child: const Icon(Icons.calendar_month_outlined)),
+                  FlexibleDatePicker(
+                    selectedDate: controller.selectedDate.value,
+                    isIconOnly: true,
+                    onDateChanged: (picked) {
+                      controller.updateDate(picked);
+                      controller.fetchJournals();
+                    },
+                  )
                 ],
               ),
               sby16,

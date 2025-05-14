@@ -5,15 +5,12 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:temanbicara/app/config/config.dart';
-import 'package:temanbicara/app/modules/edit_profile/controllers/datepicker_controller.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 
 enum Gender { none, male, female }
 
 class Assesment1Controller extends GetxController {
-  final DatePickerController dateController = Get.put(DatePickerController());
-
   TextEditingController nameC = TextEditingController();
   TextEditingController nicknameC = TextEditingController();
   TextEditingController phoneC = TextEditingController();
@@ -25,6 +22,11 @@ class Assesment1Controller extends GetxController {
   var selectedGender = Gender.none.obs;
   void toggleGender(Gender gender) {
     selectedGender.value = gender;
+  }
+
+  var selectedDate = DateTime.now().obs;
+  void updateDate(DateTime date) {
+    selectedDate.value = DateTime(date.year, date.month, date.day);
   }
 
   var isSportTap = false.obs;
@@ -53,7 +55,7 @@ class Assesment1Controller extends GetxController {
         box.write('gender', 'female');
       }
       String formattedDate =
-          DateFormat('yyyy-MM-dd').format(dateController.selectedDate.value);
+          DateFormat('yyyy-MM-dd').format(selectedDate.value);
       box.write('birthdate', formattedDate);
       isLoading.value = true;
       try {

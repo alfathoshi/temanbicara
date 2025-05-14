@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:temanbicara/app/modules/edit_profile/controllers/datepicker_controller.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
@@ -11,8 +10,6 @@ import '../controllers/assesment_1_controller.dart';
 
 class Assesment1View extends GetView<Assesment1Controller> {
   Assesment1View({super.key});
-
-  final DatePickerController dateController = Get.put(DatePickerController());
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +163,13 @@ class Assesment1View extends GetView<Assesment1Controller> {
                       sby24,
                       Text('Birthdate', style: textDescriptionSemiBold),
                       sby8,
-                      DatePicker(),
+                      FlexibleDatePicker(
+                        selectedDate: controller.selectedDate.value,
+                        onDateChanged: (picked) {
+                          controller.updateDate(picked);
+                        },
+                        placeholder: 'Tanggal Lahir',
+                      ),
                       sby24,
                       const Expanded(child: SizedBox()),
                       Obx(() => ElevatedButton(

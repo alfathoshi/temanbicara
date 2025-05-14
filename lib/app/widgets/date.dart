@@ -1,74 +1,74 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:temanbicara/app/modules/edit_profile/controllers/datepicker_controller.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
-class DatePicker extends StatelessWidget {
-  DatePicker({super.key});
+class FlexibleDatePicker extends StatelessWidget {
+  final DateTime selectedDate;
+  final void Function(DateTime) onDateChanged;
 
-  final DatePickerController controller = Get.put(DatePickerController());
+  final bool isIconOnly;
+  final String? placeholder;
+
+  const FlexibleDatePicker({
+    super.key,
+    required this.selectedDate,
+    required this.onDateChanged,
+    this.isIconOnly = false,
+    this.placeholder,
+  });
+
   @override
   Widget build(BuildContext context) {
-    if (controller.box.read('birthdate') != null) {
-      controller.selectedDate.value =
-          DateTime.parse(controller.box.read('birthdate'));
-    }
-
-    return Obx(
-      () => Container(
-        width: double.infinity,
-        height: 55,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(
-            color: border,
-            width: 2,
-          ),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: GestureDetector(
-          onTap: () async {
-            final DateTime? pickedDate = await showDatePicker(
-              context: context,
-              initialDate: controller.selectedDate.value,
-              firstDate: DateTime(1980, 01, 01),
-              lastDate: DateTime.now(),
-              confirmText: "Pilih",
-              builder: (BuildContext context, Widget? child) {
-                return Theme(
-                  data: ThemeData.light().copyWith(
-                    primaryColor: primaryColor,
-                    colorScheme: ColorScheme.light(
-                      primary: primaryColor,
-                    ),
-                  ),
-                  child: child!,
-                );
-              },
-            );
-
-            if (pickedDate != null) {
-              if (!isSameDate(pickedDate, controller.selectedDate.value)) {
-                controller.updateDate(pickedDate);
-              }
-            }
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '${controller.selectedDate.value.toLocal()}'.split(' ')[0],
-                  style: textFieldStyle,
+    return GestureDetector(
+      onTap: () async {
+        final DateTime? pickedDate = await showDatePicker(
+          context: context,
+          initialDate: selectedDate,
+          firstDate: DateTime(1980, 1, 1),
+          lastDate: DateTime.now(),
+          confirmText: "Pilih",
+          builder: (BuildContext context, Widget? child) {
+            return Theme(
+              data: ThemeData.light().copyWith(
+                primaryColor: primaryColor,
+                colorScheme: ColorScheme.light(
+                  primary: primaryColor,
                 ),
-                const Icon(Icons.keyboard_arrow_down)
-              ],
+              ),
+              child: child!,
+            );
+          },
+        );
+
+        if (pickedDate != null && !isSameDate(pickedDate, selectedDate)) {
+          onDateChanged(pickedDate);
+        }
+      },
+      child: isIconOnly
+          ? const Icon(Icons.calendar_month_outlined)
+          : Container(
+              width: double.infinity,
+              height: 55,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(
+                  color: border,
+                  width: 2,
+                ),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '${selectedDate.toLocal()}'.split(' ')[0],
+                    style: textFieldStyle,
+                  ),
+                  const Icon(Icons.keyboard_arrow_down),
+                ],
+              ),
             ),
-          ),
-        ),
-      ),
     );
   }
 }

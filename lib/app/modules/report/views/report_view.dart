@@ -76,39 +76,15 @@ class ReportView extends GetView<ReportController> {
                         ),
                         Row(
                           children: [
-                            GestureDetector(
-                              onTap: () async {
-                                final DateTime? pickedDate =
-                                    await showDatePicker(
-                                  context: context,
-                                  initialDate: controller.selectedDate.value,
-                                  firstDate: DateTime(2000, 01, 01),
-                                  lastDate: DateTime.now(),
-                                  confirmText: "Select",
-                                  builder:
-                                      (BuildContext context, Widget? child) {
-                                    return Theme(
-                                      data: ThemeData.light().copyWith(
-                                        primaryColor: primaryColor,
-                                        colorScheme: ColorScheme.light(
-                                          primary: primaryColor,
-                                        ),
-                                      ),
-                                      child: child!,
-                                    );
-                                  },
-                                );
-
-                                if (pickedDate != null &&
-                                    !isSameDate(pickedDate,
-                                        controller.selectedDate.value)) {
-                                  controller.updateDate(pickedDate);
-                                  controller.getMatrix();
-                                  controller.checkTracking();
-                                }
+                            FlexibleDatePicker(
+                              selectedDate: controller.selectedDate.value,
+                              isIconOnly: true,
+                              onDateChanged: (picked) {
+                                controller.updateDate(picked);
+                                controller.getMatrix();
+                                controller.checkTracking();
                               },
-                              child: const Icon(Icons.calendar_month_outlined),
-                            ),
+                            )
                           ],
                         )
                       ],
