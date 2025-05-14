@@ -4,6 +4,7 @@ import 'package:temanbicara/app/themes/spaces.dart';
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
 import '../../../widgets/report/observation_card.dart';
+import '../../../widgets/report/section_card.dart';
 import '../../report/controllers/report_controller.dart';
 import '../controllers/mental_matrix_controller.dart';
 
@@ -249,182 +250,52 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                 ),
               ),
               sby16,
-              Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: border,
-                      offset: const Offset(0, 1),
-                      blurRadius: 2,
-                    )
+              SectionCard(
+                title: "Recommendations",
+                content: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Short Term", style: h3SemiBold),
+                    sby8,
+                    ...report.shortTerm.map(
+                      (item) => Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            sbx8,
+                            Text("•  ", style: h6Regular),
+                            Expanded(child: Text(item, style: h6Regular)),
+                          ],
+                        ),
+                      ),
+                    ),
+                    sby16,
+                    Text("Long Term", style: h3SemiBold),
+                    sby8,
+                    ...report.longTerm.map(
+                      (item) => Padding(
+                        padding: const EdgeInsets.only(bottom: 8),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            sbx8,
+                            Text("•  ", style: h6Regular),
+                            Expanded(child: Text(item, style: h6Regular)),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
-                  color: whiteColor,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(
-                    color: Colors.transparent,
-                    width: 2,
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: primaryColor, width: 1.5),
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 12),
-                          child: Text(
-                            "Recommendations",
-                            style: h7SemiBold.copyWith(color: primaryColor),
-                          ),
-                        ),
-                      ),
-                      sby24,
-                      Text("Short Term", style: h3SemiBold),
-                      const SizedBox(height: 8),
-                      ...report.shortTerm.map(
-                        (item) => Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              sbx8,
-                              Text("•  ", style: h6Regular),
-                              Expanded(child: Text(item, style: h6Regular)),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Text("Long Term", style: h3SemiBold),
-                      const SizedBox(height: 8),
-                      ...report.longTerm.map(
-                        (item) => Padding(
-                          padding: const EdgeInsets.only(bottom: 8),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              sbx8,
-                              Text("•  ", style: h6Regular),
-                              Expanded(child: Text(item, style: h6Regular)),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
               ),
               sby16,
-              Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: border,
-                      offset: const Offset(0, 1),
-                      blurRadius: 2,
-                    )
-                  ],
-                  color: whiteColor,
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(
-                    color: Colors.transparent,
-                    width: 2,
-                  ),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: primaryColor, width: 1.5),
-                            borderRadius: BorderRadius.circular(8)),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 12),
-                          child: Text(
-                            "Closing",
-                            style: h7SemiBold.copyWith(color: primaryColor),
-                          ),
-                        ),
-                      ),
-                      sby24,
-                      Text(report.closing, style: h6Regular),
-                      sby16,
-                    ],
-                  ),
-                ),
+              SectionCard(
+                title: "Closing",
+                content: Text(report.closing, style: h6Regular),
               ),
             ],
           );
         })));
   }
 }
-
-// Obx(
-//         () {
-//           if (controller.isLoading.value) {
-//             return Center(child: CircularProgressIndicator());
-//           }
-
-//           final report = controller.report.value;
-//           // controller.getReport();
-//           if (report == null) return Center(child: Text("No data"));
-//           return Padding(
-//             padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
-//             child: ListView(
-//               children: [
-//                 Text("🧠 Mood:\n${report.mood}",
-//                     style: TextStyle(fontSize: 16)),
-//                 SizedBox(height: 10),
-//                 Text("😴 Sleep:\n${report.sleep}",
-//                     style: TextStyle(fontSize: 16)),
-//                 SizedBox(height: 10),
-//                 Text("💥 Stress:\n${report.stress}",
-//                     style: TextStyle(fontSize: 16)),
-//                 SizedBox(height: 10),
-//                 Text("📱 Screen Time:\n${report.screenTime}",
-//                     style: TextStyle(fontSize: 16)),
-//                 SizedBox(height: 10),
-//                 Text("🏃 Activity:\n${report.activity}",
-//                     style: TextStyle(fontSize: 16)),
-//                 Divider(height: 30),
-//                 Text("📋 Matrix:\n${report.matrix}",
-//                     style: TextStyle(fontSize: 16)),
-//                 SizedBox(height: 10),
-//                 Text("📋 Assessment:\n${report.assessment}",
-//                     style: TextStyle(fontSize: 16)),
-//                 SizedBox(height: 10),
-//                 Text("✅ Closing:\n${report.closing}",
-//                     style: TextStyle(fontSize: 16)),
-//                 SizedBox(height: 20),
-//                 Text("🎯 Short Term Goals:",
-//                     style:
-//                         TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-//                 ...report.shortTerm.map((item) => ListTile(
-//                       contentPadding: EdgeInsets.zero,
-//                       leading: Icon(Icons.check, size: 20),
-//                       title: Text(item, style: TextStyle(fontSize: 15)),
-//                     )),
-//                 SizedBox(height: 20),
-//                 Text("🏁 Long Term Goals:",
-//                     style:
-//                         TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-//                 ...report.longTerm.map(
-//                   (item) => ListTile(
-//                     contentPadding: EdgeInsets.zero,
-//                     leading: Icon(Icons.flag, size: 20),
-//                     title: Text(item, style: TextStyle(fontSize: 15)),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           );
-//         },
-//       ),
