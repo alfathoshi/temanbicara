@@ -10,34 +10,7 @@ import 'firebase_options.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
-// void main() async {
-//   await dotenv.load();
-//   Gemini.init(apiKey: dotenv.env['GOOGLE_API']!);
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await Firebase.initializeApp(
-//     options: DefaultFirebaseOptions.currentPlatform,
-//   );
-//   await FirebaseMessaging.instance.requestPermission();
-//   await NotificationService.init();
-//   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-//     NotificationService.showNotification(message);
-//   });
-//   runApp(
-//     GetMaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       title: "Teman Bicara",
-//       initialRoute: Routes.SPLASH_SCREEN,
-//       getPages: AppPages.routes,
-//     ),
-//   );
-// }
-
-void main() {
-  bootstrap();
-}
-
-// bootstrap.dart
-Future<void> bootstrap() async {
+void main() async {
   await dotenv.load();
   Gemini.init(apiKey: dotenv.env['GOOGLE_API']!);
   WidgetsFlutterBinding.ensureInitialized();
@@ -49,7 +22,6 @@ Future<void> bootstrap() async {
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     NotificationService.showNotification(message);
   });
-
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
