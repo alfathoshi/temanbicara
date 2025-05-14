@@ -219,7 +219,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ASSESMENT_1,
-      page: () => Assesment1View(),
+      page: () => const Assesment1View(),
       binding: Assesment1Binding(),
     ),
     GetPage(

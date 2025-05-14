@@ -9,7 +9,7 @@ import '../../../widgets/gender_selector.dart';
 import '../controllers/assesment_1_controller.dart';
 
 class Assesment1View extends GetView<Assesment1Controller> {
-  Assesment1View({super.key});
+  const Assesment1View({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -163,13 +163,13 @@ class Assesment1View extends GetView<Assesment1Controller> {
                       sby24,
                       Text('Birthdate', style: textDescriptionSemiBold),
                       sby8,
-                      FlexibleDatePicker(
-                        selectedDate: controller.selectedDate.value,
-                        onDateChanged: (picked) {
-                          controller.updateDate(picked);
-                        },
-                        placeholder: 'Tanggal Lahir',
-                      ),
+                      Obx(() => FlexibleDatePicker(
+                            selectedDate: controller.selectedDate.value,
+                            onDateChanged: (picked) {
+                              controller.updateDate(picked);
+                            },
+                            placeholder: 'Tanggal Lahir',
+                          )),
                       sby24,
                       const Expanded(child: SizedBox()),
                       Obx(() => ElevatedButton(

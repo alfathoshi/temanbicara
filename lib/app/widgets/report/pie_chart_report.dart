@@ -31,7 +31,8 @@ class PieChartCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         boxShadow: [
-          BoxShadow(color: Colors.black12, offset: Offset(0, 1), blurRadius: 2)
+          const BoxShadow(
+              color: Colors.black12, offset: Offset(0, 1), blurRadius: 2)
         ],
         color: Colors.white,
         borderRadius: BorderRadius.circular(30),
