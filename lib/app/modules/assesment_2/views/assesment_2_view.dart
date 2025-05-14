@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import '../../../routes/app_pages.dart';
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
@@ -18,30 +18,11 @@ class Assesment2View extends GetView<Assesment2Controller> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: whiteColor,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(87),
-        child: AnnotatedRegion<SystemUiOverlayStyle>(
-          value: SystemUiOverlayStyle.dark,
-          child: Container(
-            padding: EdgeInsets.fromLTRB(
-                24, MediaQuery.of(context).padding.top + 24, 24, 24),
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.1),
-                  blurRadius: 25,
-                  offset: const Offset(0, 1),
-                  spreadRadius: 1,
-                ),
-              ],
-              color: whiteColor,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Image.asset(
-              'assets/images/logo.png',
-              scale: 4,
-            ),
-          ),
+      appBar: CustomAppBar(
+        height: 87,
+        title: Image.asset(
+          'assets/images/logo.png',
+          scale: 4,
         ),
       ),
       body: LayoutBuilder(
