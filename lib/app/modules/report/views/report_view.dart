@@ -7,7 +7,9 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
+import 'package:temanbicara/app/widgets/report/report_matrix.dart';
 import '../../../widgets/date.dart';
+import '../../../widgets/report/pie_chart_report.dart';
 import '../controllers/report_controller.dart';
 
 class ReportView extends GetView<ReportController> {
@@ -93,7 +95,7 @@ class ReportView extends GetView<ReportController> {
                       height: 20,
                     ),
                     Obx(
-                      () => ReportCategory(
+                      () => ReportMatrix(
                         onPressed: () {
                           Get.toNamed(Routes.MENTAL_MATRIX);
                         },
@@ -111,351 +113,78 @@ class ReportView extends GetView<ReportController> {
             sby24,
             Obx(() {
               final dataList = controller.trackingList['tracking_data'] ?? [];
-
-              // print("Data List Length: ${dataList.length}");
-
               if (controller.isFetching.value) {
                 return const Center(child: CircularProgressIndicator());
               }
+              if (dataList.isEmpty) return const Text("No mood data found");
 
-              if (dataList.isEmpty) {
-                return const Text("No mood data found");
-              }
-
-              final List<PieChartSectionData> sections = [];
-              final Map<String, int> moodCounts = {
-                for (var quality in controller.emotions) quality: 0,
-              };
-
+              final moodCounts = {for (var m in controller.emotions) m: 0};
               for (final item in dataList) {
                 final category = item['mood_level'].toString().trim();
-                // print("Bed time value: $bedTime");
-                // print("Category value: $category");
-                // print("controller value: ${controller.sleepQuality}");
                 if (moodCounts.containsKey(category)) {
                   moodCounts[category] = moodCounts[category]! + 1;
                 }
               }
-
-              final total = moodCounts.values.reduce((a, b) => a + b);
-              for (int i = 0; i < controller.emotions.length; i++) {
-                final category = controller.emotions[i];
-                final count = moodCounts[category]!;
-                final double value = total > 0 ? (count / total) * 100 : 0;
-                // print("Sleep Counts: $sleepCounts");
-                // print("Total: $total");
-                sections.add(
-                  PieChartSectionData(
-                    color: controller.chartColors[i],
-                    value: value,
-                    title: '',
-                    radius: 50,
-                  ),
-                );
-              }
-
-              final avgText = controller.avgMood.value;
-              // print("avg text: ${avgText}");
-              return Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: border,
-                      offset: const Offset(0, 1),
-                      blurRadius: 2,
+              return PieChartCard(
+                title: "Mood Statistik",
+                subtitle: "Your mood trends",
+                categories: controller.emotions,
+                dataCounts: moodCounts,
+                chartColors: controller.chartColors,
+                touchedIndex: controller.touchedIndexMood.value,
+                onTouch: (i) => controller.touchedIndexMood.value = i,
+                centerWidget: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      "assets/images/${MentalMatrixController().getIndexedImage(
+                        value: controller.avgMood.value,
+                        referenceList: controller.emotions,
+                        prefix: 'emosi',
+                      )}",
+                      scale: 15,
                     ),
+                    Text(controller.avgMood.value, style: h7SemiBold),
                   ],
-                  color: whiteColor,
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(
-                    color: Colors.transparent,
-                    width: 2,
-                  ),
-                ),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Mood Statistik",
-                        style: h4SemiBold,
-                      ),
-                      Text(
-                        "Your sleep trends and quality",
-                        style: h6Regular,
-                      ),
-                      AspectRatio(
-                        aspectRatio: 1.2,
-                        child: Stack(
-                          children: [
-                            PieChart(
-                              PieChartData(
-                                pieTouchData: PieTouchData(
-                                  touchCallback:
-                                      (FlTouchEvent event, pieTouchResponse) {
-                                    if (!event.isInterestedForInteractions ||
-                                        pieTouchResponse == null ||
-                                        pieTouchResponse.touchedSection ==
-                                            null) {
-                                      controller.touchedIndexMood.value = -1;
-                                      return;
-                                    }
-                                    controller.touchedIndexMood.value =
-                                        pieTouchResponse.touchedSection!
-                                            .touchedSectionIndex;
-                                  },
-                                ),
-                                sections: List.generate(
-                                    controller.emotions.length, (i) {
-                                  final category = controller.emotions[i];
-                                  final count = moodCounts[category]!;
-                                  final value =
-                                      total > 0 ? (count / total) * 100 : 0;
-                                  final isTouched =
-                                      controller.touchedIndexMood.value == i;
-
-                                  return PieChartSectionData(
-                                    color: controller.chartColors[i],
-                                    value: value.toDouble(),
-                                    title: isTouched
-                                        ? '${value.toStringAsFixed(1)}%'
-                                        : '',
-                                    radius: isTouched ? 55 : 50,
-                                    titleStyle: h6SemiBold,
-                                  );
-                                }),
-                                centerSpaceRadius: 50,
-                                sectionsSpace: 2,
-                                borderData: FlBorderData(show: false),
-                              ),
-                            ),
-                            Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    "assets/images/${MentalMatrixController().getIndexedImage(
-                                      value: controller.avgMood.value,
-                                      referenceList: controller.emotions,
-                                      prefix: 'emosi',
-                                    )}",
-                                    scale: 15,
-                                  ),
-                                  sby8,
-                                  Text(avgText.toString(), style: h7SemiBold),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Center(
-                        child: Wrap(
-                          alignment: WrapAlignment.center,
-                          spacing: 12,
-                          runSpacing: 8,
-                          children: List.generate(controller.emotions.length,
-                              (index) {
-                            return Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Container(
-                                  width: 12,
-                                  height: 12,
-                                  decoration: BoxDecoration(
-                                    color: controller.chartColors[index],
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                                sbx5,
-                                Text(controller.emotions[index],
-                                    style: h6Regular),
-                              ],
-                            );
-                          }),
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
               );
             }),
             sby24,
             Obx(() {
               final dataList = controller.trackingList['tracking_data'] ?? [];
-
-              // print("Data List Length: ${dataList.length}");
-
               if (controller.isFetching.value) {
                 return const Center(child: CircularProgressIndicator());
               }
+              if (dataList.isEmpty) return const Text("No sleep data found");
 
-              if (dataList.isEmpty) {
-                return const Text("No sleep data found");
-              }
-
-              final List<PieChartSectionData> sections = [];
-              final Map<String, int> sleepCounts = {
-                for (var quality in controller.sleepQuality) quality: 0,
-              };
-
+              final sleepCounts = {for (var m in controller.sleepQuality) m: 0};
               for (final item in dataList) {
                 final category = item['bed_time'].toString().trim();
-                // print("Bed time value: $bedTime");
-                // print("Category value: $category");
-                // print("controller value: ${controller.sleepQuality}");
                 if (sleepCounts.containsKey(category)) {
                   sleepCounts[category] = sleepCounts[category]! + 1;
                 }
               }
-
-              final total = sleepCounts.values.reduce((a, b) => a + b);
-              for (int i = 0; i < controller.sleepQuality.length; i++) {
-                final category = controller.sleepQuality[i];
-                final count = sleepCounts[category]!;
-                final double value = total > 0 ? (count / total) * 100 : 0;
-                // print("Sleep Counts: $sleepCounts");
-                // print("Total: $total");
-                sections.add(
-                  PieChartSectionData(
-                    color: controller.chartColors[i],
-                    value: value,
-                    title: '',
-                    radius: 50,
-                  ),
-                );
-              }
-
-              final avgText = controller.avgSleep.value;
-              // print("avg text: ${avgText}");
-              return Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: border,
-                      offset: const Offset(0, 1),
-                      blurRadius: 2,
-                    ),
+              return PieChartCard(
+                title: "Sleep Quality",
+                subtitle: "Your sleep trends and quality",
+                categories: controller.sleepQuality,
+                dataCounts: sleepCounts,
+                chartColors: controller.chartColors,
+                touchedIndex: controller.touchedIndexSleep.value,
+                onTouch: (i) => controller.touchedIndexSleep.value = i,
+                centerWidget: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(controller.avgSleep.value, style: h5SemiBold),
+                    const Text("average",
+                        style: TextStyle(fontSize: 14, color: Colors.grey)),
                   ],
-                  color: whiteColor,
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(
-                    color: Colors.transparent,
-                    width: 2,
-                  ),
-                ),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Sleep Quality",
-                        style: h4SemiBold,
-                      ),
-                      Text(
-                        "Your sleep trends and quality",
-                        style: h6Regular,
-                      ),
-                      AspectRatio(
-                        aspectRatio: 1.2,
-                        child: Stack(
-                          children: [
-                            PieChart(
-                              PieChartData(
-                                pieTouchData: PieTouchData(
-                                  touchCallback:
-                                      (FlTouchEvent event, pieTouchResponse) {
-                                    if (!event.isInterestedForInteractions ||
-                                        pieTouchResponse == null ||
-                                        pieTouchResponse.touchedSection ==
-                                            null) {
-                                      controller.touchedIndexSleep.value = -1;
-                                      return;
-                                    }
-                                    controller.touchedIndexSleep.value =
-                                        pieTouchResponse.touchedSection!
-                                            .touchedSectionIndex;
-                                  },
-                                ),
-                                sections: List.generate(
-                                    controller.sleepQuality.length, (i) {
-                                  final category = controller.sleepQuality[i];
-                                  final count = sleepCounts[category]!;
-                                  final value =
-                                      total > 0 ? (count / total) * 100 : 0;
-                                  final isTouched =
-                                      controller.touchedIndexSleep.value == i;
-
-                                  return PieChartSectionData(
-                                    color: controller.chartColors[i],
-                                    value: value.toDouble(),
-                                    title: isTouched
-                                        ? '${value.toStringAsFixed(1)}%'
-                                        : '',
-                                    radius: isTouched ? 55 : 50,
-                                    titleStyle: h6SemiBold,
-                                  );
-                                }),
-                                centerSpaceRadius: 50,
-                                sectionsSpace: 2,
-                                borderData: FlBorderData(show: false),
-                              ),
-                            ),
-                            Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(avgText.toString(), style: h5SemiBold),
-                                  const Text("average",
-                                      style: TextStyle(
-                                          fontSize: 14, color: Colors.grey)),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Center(
-                        child: Wrap(
-                          alignment: WrapAlignment.center,
-                          spacing: 12,
-                          runSpacing: 8,
-                          children: List.generate(
-                              controller.sleepQuality.length, (index) {
-                            return Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Container(
-                                  width: 12,
-                                  height: 12,
-                                  decoration: BoxDecoration(
-                                    color: controller.chartColors[index],
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                                sbx5,
-                                Text(controller.sleepQuality[index],
-                                    style: h6Regular),
-                              ],
-                            );
-                          }),
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
               );
             }),
             sby24,
             Obx(() {
               final dataList = controller.trackingList['tracking_data'] ?? [];
-
-              // print("Data List Length: ${dataList.length}");
-
               if (controller.isFetching.value) {
                 return const Center(child: CircularProgressIndicator());
               }
@@ -547,338 +276,66 @@ class ReportView extends GetView<ReportController> {
             sby24,
             Obx(() {
               final dataList = controller.trackingList['tracking_data'] ?? [];
-
-              // print("Data List Length: ${dataList.length}");
-
               if (controller.isFetching.value) {
                 return const Center(child: CircularProgressIndicator());
               }
+              if (dataList.isEmpty) return const Text("No activity data found");
 
-              if (dataList.isEmpty) {
-                return const Text("No Activity data found");
-              }
-
-              final List<PieChartSectionData> sections = [];
-              final Map<String, int> activityCounts = {
-                for (var quality in controller.activity) quality: 0,
-              };
-
+              final activityCounts = {for (var m in controller.activity) m: 0};
               for (final item in dataList) {
                 final category = item['activity'].toString().trim();
-                // print("Bed time value: $bedTime");
-                // print("Category value: $category");
-                // print("controller value: ${controller.sleepQuality}");
                 if (activityCounts.containsKey(category)) {
                   activityCounts[category] = activityCounts[category]! + 1;
                 }
               }
-
-              final total = activityCounts.values.reduce((a, b) => a + b);
-              for (int i = 0; i < controller.activity.length; i++) {
-                final category = controller.activity[i];
-                final count = activityCounts[category]!;
-                final double value = total > 0 ? (count / total) * 100 : 0;
-                // print("Sleep Counts: $sleepCounts");
-                // print("Total: $total");
-                sections.add(
-                  PieChartSectionData(
-                    color: controller.chartColors[i],
-                    value: value,
-                    title: '',
-                    radius: 50,
-                  ),
-                );
-              }
-
-              final avgText = controller.avgScreen.value;
-              // print("avg text: ${avgText}");
-              return Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: border,
-                      offset: const Offset(0, 1),
-                      blurRadius: 2,
-                    ),
+              return PieChartCard(
+                title: "Activity Balance",
+                subtitle: "How active or restful your days have been",
+                categories: controller.activity,
+                dataCounts: activityCounts,
+                chartColors: controller.chartColors,
+                touchedIndex: controller.touchedIndexActivity.value,
+                onTouch: (i) => controller.touchedIndexActivity.value = i,
+                centerWidget: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(controller.avgActivity.value, style: h5SemiBold),
+                    const Text("average",
+                        style: TextStyle(fontSize: 14, color: Colors.grey)),
                   ],
-                  color: whiteColor,
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(
-                    color: Colors.transparent,
-                    width: 2,
-                  ),
-                ),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Activity Balance",
-                        style: h4SemiBold,
-                      ),
-                      Text(
-                        "How active or restful your days have been",
-                        style: h6Regular,
-                      ),
-                      AspectRatio(
-                        aspectRatio: 1.2,
-                        child: Stack(
-                          children: [
-                            PieChart(
-                              PieChartData(
-                                pieTouchData: PieTouchData(
-                                  touchCallback:
-                                      (FlTouchEvent event, pieTouchResponse) {
-                                    if (!event.isInterestedForInteractions ||
-                                        pieTouchResponse == null ||
-                                        pieTouchResponse.touchedSection ==
-                                            null) {
-                                      controller.touchedIndexActivity.value =
-                                          -1;
-                                      return;
-                                    }
-                                    controller.touchedIndexActivity.value =
-                                        pieTouchResponse.touchedSection!
-                                            .touchedSectionIndex;
-                                  },
-                                ),
-                                sections: List.generate(
-                                    controller.activity.length, (i) {
-                                  final category = controller.activity[i];
-                                  final count = activityCounts[category]!;
-                                  final value =
-                                      total > 0 ? (count / total) * 100 : 0;
-                                  final isTouched =
-                                      controller.touchedIndexActivity.value ==
-                                          i;
-
-                                  return PieChartSectionData(
-                                    color: controller.chartColors[i],
-                                    value: value.toDouble(),
-                                    title: isTouched
-                                        ? '${value.toStringAsFixed(1)}%'
-                                        : '',
-                                    radius: isTouched ? 55 : 50,
-                                    titleStyle: h6SemiBold,
-                                  );
-                                }),
-                                centerSpaceRadius: 50,
-                                sectionsSpace: 2,
-                                borderData: FlBorderData(show: false),
-                              ),
-                            ),
-                            Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(avgText.toString(), style: h5SemiBold),
-                                  const Text("average",
-                                      style: TextStyle(
-                                          fontSize: 14, color: Colors.grey)),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Center(
-                        child: Wrap(
-                          alignment: WrapAlignment.center,
-                          spacing: 12,
-                          runSpacing: 8,
-                          children: List.generate(controller.activity.length,
-                              (index) {
-                            return Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Container(
-                                  width: 12,
-                                  height: 12,
-                                  decoration: BoxDecoration(
-                                    color: controller.chartColors[index],
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                                sbx5,
-                                Text(controller.activity[index],
-                                    style: h6Regular),
-                              ],
-                            );
-                          }),
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
               );
             }),
             sby24,
             Obx(() {
               final dataList = controller.trackingList['tracking_data'] ?? [];
-
-              // print("Data List Length: ${dataList.length}");
-
               if (controller.isFetching.value) {
                 return const Center(child: CircularProgressIndicator());
               }
+              if (dataList.isEmpty) return const Text("No screen data found");
 
-              if (dataList.isEmpty) {
-                return const Text("No Screen data found");
-              }
-
-              final List<PieChartSectionData> sections = [];
-              final Map<String, int> screenCounts = {
-                for (var quality in controller.screenTime) quality: 0,
-              };
-
+              final screenCounts = {for (var m in controller.screenTime) m: 0};
               for (final item in dataList) {
                 final category = item['screen_time'].toString().trim();
-                // print("Bed time value: $bedTime");
-                // print("Category value: $category");
-                // print("controller value: ${controller.sleepQuality}");
                 if (screenCounts.containsKey(category)) {
                   screenCounts[category] = screenCounts[category]! + 1;
                 }
               }
-
-              final total = screenCounts.values.reduce((a, b) => a + b);
-              for (int i = 0; i < controller.screenTime.length; i++) {
-                final category = controller.screenTime[i];
-                final count = screenCounts[category]!;
-                final double value = total > 0 ? (count / total) * 100 : 0;
-                // print("Sleep Counts: $sleepCounts");
-                // print("Total: $total");
-                sections.add(
-                  PieChartSectionData(
-                    color: controller.chartColors[i],
-                    value: value,
-                    title: value > 0 ? '${value.toStringAsFixed(1)}%' : '',
-                    radius: 50,
-                  ),
-                );
-              }
-
-              final avgText = controller.avgScreen.value;
-              // print("avg text: ${avgText}");
-              return Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: border,
-                      offset: const Offset(0, 1),
-                      blurRadius: 2,
-                    ),
+              return PieChartCard(
+                title: "Screen Time",
+                subtitle: "Your spending time on gadget",
+                categories: controller.screenTime,
+                dataCounts: screenCounts,
+                chartColors: controller.chartColors,
+                touchedIndex: controller.touchedIndexScreen.value,
+                onTouch: (i) => controller.touchedIndexScreen.value = i,
+                centerWidget: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(controller.avgScreen.value, style: h5SemiBold),
+                    const Text("average",
+                        style: TextStyle(fontSize: 14, color: Colors.grey)),
                   ],
-                  color: whiteColor,
-                  borderRadius: BorderRadius.circular(30),
-                  border: Border.all(
-                    color: Colors.transparent,
-                    width: 2,
-                  ),
-                ),
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Screen Time",
-                        style: h4SemiBold,
-                      ),
-                      Text(
-                        "Your spending time on gadget",
-                        style: h6Regular,
-                      ),
-                      AspectRatio(
-                        aspectRatio: 1.2,
-                        child: Stack(
-                          children: [
-                            PieChart(
-                              PieChartData(
-                                pieTouchData: PieTouchData(
-                                  touchCallback:
-                                      (FlTouchEvent event, pieTouchResponse) {
-                                    if (!event.isInterestedForInteractions ||
-                                        pieTouchResponse == null ||
-                                        pieTouchResponse.touchedSection ==
-                                            null) {
-                                      controller.touchedIndexScreen.value = -1;
-                                      return;
-                                    }
-                                    controller.touchedIndexScreen.value =
-                                        pieTouchResponse.touchedSection!
-                                            .touchedSectionIndex;
-                                  },
-                                ),
-                                sections: List.generate(
-                                    controller.screenTime.length, (i) {
-                                  final category = controller.screenTime[i];
-                                  final count = screenCounts[category]!;
-                                  final value =
-                                      total > 0 ? (count / total) * 100 : 0;
-                                  final isTouched =
-                                      controller.touchedIndexScreen.value == i;
-
-                                  return PieChartSectionData(
-                                    color: controller.chartColors[i],
-                                    value: value.toDouble(),
-                                    title: isTouched
-                                        ? '${value.toStringAsFixed(1)}%'
-                                        : '',
-                                    radius: isTouched ? 55 : 50,
-                                    titleStyle: h6SemiBold,
-                                  );
-                                }),
-                                centerSpaceRadius: 50,
-                                sectionsSpace: 2,
-                                borderData: FlBorderData(show: false),
-                              ),
-                            ),
-                            Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(avgText.toString(), style: h5SemiBold),
-                                  Text("average",
-                                      style:
-                                          h6Regular.copyWith(color: greyColor)),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Center(
-                        child: Wrap(
-                          alignment: WrapAlignment.center,
-                          spacing: 12,
-                          runSpacing: 8,
-                          children: List.generate(controller.screenTime.length,
-                              (index) {
-                            return Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Container(
-                                  width: 12,
-                                  height: 12,
-                                  decoration: BoxDecoration(
-                                    color: controller.chartColors[index],
-                                    shape: BoxShape.circle,
-                                  ),
-                                ),
-                                sbx5,
-                                Text(controller.screenTime[index],
-                                    style: h6Regular),
-                              ],
-                            );
-                          }),
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
               );
             }),
@@ -924,121 +381,6 @@ class ReportView extends GetView<ReportController> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class ReportCategory extends StatelessWidget {
-  final String image;
-  final Function onPressed;
-  final String title;
-  final String description;
-  final String matrixValue;
-  final Color color;
-
-  const ReportCategory(
-      {super.key,
-      required this.onPressed,
-      required this.title,
-      required this.description,
-      required this.image,
-      required this.matrixValue,
-      required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final double containerWidth = constraints.maxWidth;
-        final double containerHeight = containerWidth * 0.25;
-
-        return Container(
-          margin: const EdgeInsets.only(bottom: 15),
-          width: containerWidth,
-          height: containerHeight,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(30),
-            boxShadow: [
-              BoxShadow(
-                color: const Color(0xFFBDCF99).withValues(alpha: 0.2),
-                spreadRadius: 1,
-                blurRadius: 1,
-                offset: const Offset(0, 1),
-              ),
-            ],
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: containerWidth * 0.05,
-              vertical: containerHeight * 0.1,
-            ),
-            child: GestureDetector(
-              onTap: () => onPressed(),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flexible(
-                    flex: 3,
-                    child: Row(
-                      children: [
-                        Image.asset(
-                          image,
-                          scale: 2.5,
-                          width: containerHeight * 0.5,
-                          height: containerHeight * 0.5,
-                        ),
-                        SizedBox(width: containerWidth * 0.03),
-                        Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                title,
-                                style: h6Bold,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                              ),
-                              Text(
-                                description,
-                                style: h5Regular,
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Flexible(
-                    flex: 1,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/images/lingkaranMatrix.png',
-                          scale: 2,
-                          width: containerHeight * 0.6,
-                          height: containerHeight * 0.6,
-                        ),
-                        Text(
-                          matrixValue,
-                          style: h5Medium.copyWith(
-                            color: primaryColor,
-                            fontSize: containerHeight * 0.2,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
     );
   }
 }
