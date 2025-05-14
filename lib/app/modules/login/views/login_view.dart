@@ -58,7 +58,7 @@ class LoginView extends GetView<LoginController> {
                       showPassword: () {},
                       controller: controller.emailC,
                       obscureText: false,
-                      hintText: 'Email / Username',
+                      hintText: 'Email',
                       passwordField: false,
                       type: TextInputType.emailAddress,
                     ),

@@ -4,20 +4,20 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:temanbicara/app/config/config.dart';
-import 'package:temanbicara/app/modules/edit_profile/controllers/datepicker_controller.dart';
 import 'package:http/http.dart' as http;
-
 
 class EditProfileController extends GetxController {
   final box = GetStorage();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
-  final DatePickerController dateController = Get.put(DatePickerController());
   String profileUrl = GetStorage().read('profile_image');
 
   var isLoading = false.obs;
-
   var selectedDate = DateTime.now().obs;
+  void updateDate(DateTime date) {
+    selectedDate.value = DateTime(date.year, date.month, date.day);
+  }
+
   // void updateDate(DateTime date) {
   //   selectedDate.value = date;
   // }
@@ -29,8 +29,7 @@ class EditProfileController extends GetxController {
 
   Future<void> editProfile() async {
     isLoading.value = true;
-    String formattedDate =
-        DateFormat('yyyy-MM-dd').format(dateController.selectedDate.value);
+    String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate.value);
 
     try {
       // ignore: unused_local_variable
