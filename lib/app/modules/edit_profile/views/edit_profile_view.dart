@@ -114,7 +114,14 @@ class EditProfileView extends GetView<EditProfileController> {
                     style: textDescriptionSemiBold,
                   ),
                   sby8,
-                  DatePicker(),
+                  FlexibleDatePicker(
+  selectedDate: controller.selectedDate.value,
+  onDateChanged: (picked) {
+    controller.updateDate(picked);
+  },
+  placeholder: 'Tanggal Lahir',
+),
+
                   sby16,
                 ],
               ),

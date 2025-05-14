@@ -19,12 +19,16 @@ class GenderSelector extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isSelected = selectedGender == gender;
+    final size = MediaQuery.of(context).size;
+  
+    final double width = size.width * 0.375;
+    final double height = size.height * 0.05;
 
     return GestureDetector(
       onTap: () => onSelect(gender),
       child: Container(
-        width: 150,
-        height: 40,
+        width: width,
+        height: height,
         decoration: BoxDecoration(
           color: isSelected ? primaryColor : whiteColor,
           border: isSelected ? null : Border.all(color: primaryColor, width: 2),
@@ -42,7 +46,7 @@ class GenderSelector extends StatelessWidget {
             ),
             const SizedBox(width: 8),
             Text(
-              gender == Gender.male ? 'Pria' : 'Wanita',
+              gender == Gender.male ? 'Male' : 'Female',
               style: isSelected ? textGenderTrue : textGenderFalse,
             ),
           ],

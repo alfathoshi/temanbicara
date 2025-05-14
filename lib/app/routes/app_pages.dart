@@ -61,10 +61,6 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/mental_matrix/bindings/mental_matrix_binding.dart';
 import '../modules/mental_matrix/views/mental_matrix_view.dart';
-import '../modules/mood_report/bindings/mood_report_binding.dart';
-import '../modules/mood_report/views/mood_report_view.dart';
-import '../modules/mood_tracker/bindings/mood_tracker_binding.dart';
-import '../modules/mood_tracker/views/mood_tracker_view.dart';
 import '../modules/navigation_bar/bindings/navigation_bar_binding.dart';
 import '../modules/navigation_bar/views/navigation_bar_view.dart';
 import '../modules/newTracking/bindings/new_tracking_binding.dart';
@@ -192,11 +188,6 @@ class AppPages {
       binding: ReportBinding(),
     ),
     GetPage(
-      name: _Paths.MOOD_REPORT,
-      page: () => const MoodReportView(),
-      binding: MoodReportBinding(),
-    ),
-    GetPage(
       name: _Paths.SLEEP_QUALITY,
       page: () => const SleepQualityView(),
       binding: SleepQualityBinding(),
@@ -205,11 +196,6 @@ class AppPages {
       name: _Paths.STRESS_LEVEL,
       page: () => const StressLevelView(),
       binding: StressLevelBinding(),
-    ),
-    GetPage(
-      name: _Paths.MOOD_TRACKER,
-      page: () => const MoodTrackerView(),
-      binding: MoodTrackerBinding(),
     ),
     GetPage(
       name: _Paths.TRANSACTION,
@@ -258,7 +244,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ASSESMENT_4,
-      page: () =>  const Assesment4View(),
+      page: () => const Assesment4View(),
       binding: Assesment4Binding(),
     ),
     GetPage(

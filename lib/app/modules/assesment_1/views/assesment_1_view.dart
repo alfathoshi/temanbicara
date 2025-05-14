@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:temanbicara/app/modules/edit_profile/controllers/datepicker_controller.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
@@ -11,8 +10,6 @@ import '../controllers/assesment_1_controller.dart';
 
 class Assesment1View extends GetView<Assesment1Controller> {
   Assesment1View({super.key});
-
-  final DatePickerController dateController = Get.put(DatePickerController());
 
   @override
   Widget build(BuildContext context) {
@@ -62,13 +59,13 @@ class Assesment1View extends GetView<Assesment1Controller> {
                       Text('Fill in your personal info to start the journey',
                           style: h5Regular),
                       sby32,
-                      Text('Nama', style: textDescriptionSemiBold),
+                      Text('Name', style: textDescriptionSemiBold),
                       sby8,
                       TextField(
                         controller: controller.nameC,
                         cursorColor: black,
                         decoration: InputDecoration(
-                          hintText: 'Masukkan Nama Lengkap',
+                          hintText: 'Enter your fullname',
                           hintStyle: h5Regular.copyWith(color: grey2Color),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -81,13 +78,13 @@ class Assesment1View extends GetView<Assesment1Controller> {
                         ),
                       ),
                       sby24,
-                      Text('Nama Panggilan', style: textDescriptionSemiBold),
+                      Text('Nickname', style: textDescriptionSemiBold),
                       sby8,
                       TextField(
                         controller: controller.nicknameC,
                         cursorColor: black,
                         decoration: InputDecoration(
-                          hintText: 'Masukkan Nama Panggilan',
+                          hintText: 'Enter your nickname',
                           hintStyle: h5Regular.copyWith(color: grey2Color),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10),
@@ -100,7 +97,7 @@ class Assesment1View extends GetView<Assesment1Controller> {
                         ),
                       ),
                       sby24,
-                      Text('Nomor Handphone', style: textDescriptionSemiBold),
+                      Text('Phone Number', style: textDescriptionSemiBold),
                       sby8,
                       Stack(
                         alignment: Alignment.centerLeft,
@@ -111,7 +108,7 @@ class Assesment1View extends GetView<Assesment1Controller> {
                             controller: controller.phoneC,
                             decoration: InputDecoration(
                               prefix: const SizedBox(width: 50),
-                              hintText: 'Phone',
+                              hintText: 'Enter your phone number',
                               hintStyle: h5Regular.copyWith(color: greyColor),
                               suffixIconColor: const Color(0xFFc4c4c4),
                               enabledBorder: OutlineInputBorder(
@@ -164,9 +161,15 @@ class Assesment1View extends GetView<Assesment1Controller> {
                         ),
                       ),
                       sby24,
-                      Text('Tanggal Lahir', style: textDescriptionSemiBold),
+                      Text('Birthdate', style: textDescriptionSemiBold),
                       sby8,
-                      DatePicker(),
+                      FlexibleDatePicker(
+                        selectedDate: controller.selectedDate.value,
+                        onDateChanged: (picked) {
+                          controller.updateDate(picked);
+                        },
+                        placeholder: 'Tanggal Lahir',
+                      ),
                       sby24,
                       const Expanded(child: SizedBox()),
                       Obx(() => ElevatedButton(
@@ -181,7 +184,7 @@ class Assesment1View extends GetView<Assesment1Controller> {
                                   borderRadius: BorderRadius.circular(20)),
                             ),
                             child: controller.isLoading.value == false
-                                ? Text('Lanjutkan',
+                                ? Text('Next',
                                     style: h5Bold.copyWith(color: whiteColor))
                                 : SizedBox(
                                     height: 20,

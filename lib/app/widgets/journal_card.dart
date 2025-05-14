@@ -43,25 +43,26 @@ class JournalCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Padding(
+            if (image == '')
+              Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Image.network(
-                  image,
-                  height: 120,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                  loadingBuilder: (context, child, loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return Center(child: CircularProgressIndicator());
-                  },
-                  errorBuilder: (context, error, stackTrace) {
-                    return Text('Failed to load image');
-                  },
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.network(
+                    image,
+                    height: image == '' ? 80 : 120,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return Center(child: CircularProgressIndicator());
+                    },
+                    errorBuilder: (context, error, stackTrace) {
+                      return Text('');
+                    },
+                  ),
                 ),
               ),
-            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
