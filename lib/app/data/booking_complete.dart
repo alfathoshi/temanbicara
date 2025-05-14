@@ -1,11 +1,11 @@
-class ConsultComplete {
+class BookingComplete {
   final String nama;
   final String durasi;
   final String expertise;
   final String tanggal;
   final String waktu;
 
-  ConsultComplete({
+  BookingComplete({
     required this.nama,
     required this.durasi,
     required this.expertise,

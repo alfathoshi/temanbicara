@@ -6,6 +6,7 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import 'package:temanbicara/app/widgets/report/report_matrix.dart';
 import '../../../widgets/date.dart';
 import '../../../widgets/report/pie_chart_report.dart';
@@ -18,21 +19,11 @@ class ReportView extends GetView<ReportController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: whiteColor,
-      appBar: AppBar(
-        toolbarHeight: 85,
-        backgroundColor: Colors.white,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(24),
-            bottomRight: Radius.circular(24),
-          ),
-          side: BorderSide(color: Colors.black12),
-        ),
+      appBar: CustomAppBar(
         title: Text(
-          'Mental Report',
+          "Mental Report",
           style: h3Bold,
         ),
-        centerTitle: true,
       ),
       body: RefreshIndicator(
         onRefresh: () async {

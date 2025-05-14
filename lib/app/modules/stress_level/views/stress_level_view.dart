@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:temanbicara/app/modules/report/logo_helper.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 
 import '../controllers/stress_level_controller.dart';
 
@@ -22,19 +23,11 @@ class StressLevelView extends GetView<StressLevelController> {
       children: [
         Scaffold(
           backgroundColor: whiteColor,
-          appBar: AppBar(
-            backgroundColor: whiteColor,
+          appBar: CustomAppBar(
             title: Text(
-              'Stress Level',
-              style: h2Bold,
+              "Stress Level",
+              style: h3Bold,
             ),
-            leading: GestureDetector(
-              onTap: () {
-                Get.back();
-              },
-              child: const Icon(Icons.arrow_back),
-            ),
-            centerTitle: true,
           ),
           body: SizedBox(
             width: MediaQuery.sizeOf(context).width,

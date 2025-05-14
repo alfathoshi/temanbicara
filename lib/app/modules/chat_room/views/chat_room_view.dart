@@ -8,6 +8,7 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/chat_bubble.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 
 import '../controllers/chat_room_controller.dart';
 
@@ -17,14 +18,7 @@ class ChatRoomView extends GetView<ChatRoomController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: whiteColor,
-      appBar: AppBar(
-        toolbarHeight: 85,
-        backgroundColor: whiteColor,
-        shape: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: border,
-          ),
-        ),
+      appBar: CustomAppBar(
         title: Row(
           children: [
             CircleAvatar(

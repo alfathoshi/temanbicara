@@ -7,6 +7,7 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import 'package:temanbicara/app/widgets/transaction/invoice_data.dart';
 import 'package:temanbicara/app/widgets/transaction/transaction_timeline_view.dart';
 
@@ -30,20 +31,10 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
       canPop: false,
       child: Scaffold(
         backgroundColor: whiteColor,
-        appBar: AppBar(
-          toolbarHeight: 85,
-          backgroundColor: whiteColor,
-          centerTitle: true,
+        appBar: CustomAppBar(
           title: Text(
-            'Transaction',
+            "Transaction",
             style: h3Bold,
-          ),
-          bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(1),
-            child: Container(
-              color: grey4Color,
-              height: 0.5,
-            ),
           ),
         ),
         body: SingleChildScrollView(

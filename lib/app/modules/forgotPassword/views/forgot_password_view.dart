@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 
 import '../controllers/forgot_password_controller.dart';
 
@@ -15,13 +16,11 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: whiteColor,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
+      appBar: CustomAppBar(
         title: Text(
-          'Change Password',
+          "Change Password",
           style: h3Bold,
         ),
-        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),

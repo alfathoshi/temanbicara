@@ -1,8 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 
 import '../controllers/change_language_controller.dart';
 
@@ -19,20 +22,11 @@ class ChangeLanguageView extends GetView<ChangeLanguageController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: whiteColor,
-      appBar: AppBar(
-        toolbarHeight: 85,
-        backgroundColor: Colors.white,
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(24),
-              bottomRight: Radius.circular(24),
-            ),
-            side: BorderSide(color: Colors.black12)),
+      appBar: CustomAppBar(
         title: Text(
-          'Change Language',
+          "Change Language",
           style: h3Bold,
         ),
-        centerTitle: true,
       ),
       body: Obx(
         () => Center(
