@@ -25,7 +25,7 @@ class OnBoardingView extends GetView<OnBoardingController> {
           child: Obx(() {
             final index = controller.currentPage.value;
 
-            if (index == 0) {
+            if (index == -1) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -33,15 +33,13 @@ class OnBoardingView extends GetView<OnBoardingController> {
                     decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(
-                          offset: const Offset(-5, -5),
-                          blurRadius: 7,
-                          color: border,
-                        ),
+                            offset: const Offset(-5, -5),
+                            blurRadius: 7,
+                            color: border),
                         BoxShadow(
-                          offset: const Offset(5, 5),
-                          blurRadius: 7,
-                          color: border,
-                        ),
+                            offset: const Offset(5, 5),
+                            blurRadius: 7,
+                            color: border),
                       ],
                       color: whiteColor,
                       borderRadius: BorderRadius.circular(28),
@@ -56,27 +54,20 @@ class OnBoardingView extends GetView<OnBoardingController> {
                   ),
                   sby32,
                   Text("Welcome to", style: h3Bold),
-                  Text(
-                    "Teman Bicara",
-                    style: h2Bold.copyWith(color: primaryColor),
-                  ),
+                  Text("Teman Bicara",
+                      style: h2Bold.copyWith(color: primaryColor)),
                   sby36,
                   Center(
                     child: SizedBox(
                       height: 300,
-                      child: Image.asset(
-                        "assets/images/boarding1.png",
-                        height: 160,
-                      ),
+                      child: Image.asset("assets/images/boarding1.png",
+                          height: 160),
                     ),
                   ),
                   sby36,
                   MyButtonCustom(
                     text: "Next",
-                    get: () {
-                      controller.nextPage();
-                      controller.animateImage();
-                    },
+                    get: () => controller.nextPage(),
                     height: 64,
                     width: double.infinity,
                     style: h3Bold.copyWith(color: whiteColor),
@@ -87,21 +78,18 @@ class OnBoardingView extends GetView<OnBoardingController> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        'Already have an Account ? ',
-                        style: GoogleFonts.poppins(),
-                      ),
+                      Text('Already have an Account ? ',
+                          style: GoogleFonts.poppins()),
                       GestureDetector(
                         onTap: () => Get.offAllNamed(Routes.LOGIN),
                         child: Text(
                           'Login',
                           style: GoogleFonts.poppins(
-                            color: const Color(0xFF60ABEE),
-                          ),
+                              color: const Color(0xFF60ABEE)),
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ],
               );
             }
@@ -207,8 +195,10 @@ class OnBoardingView extends GetView<OnBoardingController> {
                 sby48,
                 Center(
                   child: AnimatedSmoothIndicator(
-                    activeIndex: controller.currentPage.value - 1,
-                    count: controller.pages.length - 1,
+                    activeIndex: controller.currentPage.value < 0
+                        ? 0
+                        : controller.currentPage.value,
+                    count: controller.pages.length,
                     effect: ExpandingDotsEffect(
                       dotColor: grey2Color,
                       activeDotColor: primaryColor,

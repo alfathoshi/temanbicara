@@ -1,24 +1,42 @@
+// ignore_for_file: unnecessary_overrides
+
 import 'package:get/get.dart';
 import 'package:temanbicara/app/data/on_boarding_data.dart';
+import 'package:temanbicara/app/data/onboarding_model.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 
 class OnBoardingController extends GetxController {
-  final currentPage = 0.obs;
+  final currentPage = (-1).obs;
   final currentImage = ''.obs;
 
-  final pages = onboardingPages;
+  final pages = onboardingRawData.map((e) {
+    final title = (e['title'] as List).cast<String>();
+    final description = (e['description'] as List).cast<String>();
+    final image = e['image'] as String;
+
+    return OnboardingPage(
+      title: title,
+      description: description,
+      image: image,
+    );
+  }).toList();
 
   bool get isLastPage => currentPage.value == pages.length - 1;
 
   void nextPage() {
-    if (!isLastPage) {
+    if (currentPage.value == -1) {
+      currentPage.value = 0;
+      final newImage = pages[0].image;
+      setCurrentImage(newImage);
+      animateDescription();
+      animateImage();
+    } else if (!isLastPage) {
       currentPage.value++;
       final newImage = pages[currentPage.value].image;
       setCurrentImage(newImage);
       animateDescription();
       animateImage();
     } else {
-      //Get.offAllNamed(Routes.NAVIGATION_BAR, arguments: {"indexPage": 0});
       Get.offAllNamed(Routes.SIGNUP);
     }
   }
@@ -36,8 +54,6 @@ class OnBoardingController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    animateDescription();
-    animateImage();
   }
 
   Future<void> setCurrentImage(String newImage) async {
@@ -53,9 +69,7 @@ class OnBoardingController extends GetxController {
   final isTextVisible = List.generate(3, (_) => true.obs);
 
   void animateDescription() async {
-    final desc = (pages[currentPage.value].description as List)
-        .map((e) => e.toString())
-        .toList();
+    final desc = pages[currentPage.value].description;
 
     for (int i = 0; i < 3; i++) {
       isTextVisible[i].value = false;
@@ -70,7 +84,7 @@ class OnBoardingController extends GetxController {
     }
   }
 
-  //image
+  // image
   final imageScale = 0.8.obs;
   final imageOpacity = 0.0.obs;
 
