@@ -79,114 +79,116 @@ class SignupView extends GetView<SignupController> {
         () => Column(
           children: [
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    sby60,
-                    Center(
-                      child: Text(
-                        'Register',
-                        style: h1Bold,
-                      ),
-                    ),
-                    sby36,
-                    AuthTextfield(
-                      onChanged: (value) => controller.isEmpty(),
-                      showPassword: () {},
-                      controller: controller.emailC,
-                      obscureText: false,
-                      hintText: 'Email',
-                      passwordField: false,
-                      type: TextInputType.emailAddress,
-                    ),
-                    sby16,
-                    FancyPasswordField(
-                      obscureText: controller.isSecure.value,
-                      controller: controller.passC,
-                      keyboardType: TextInputType.text,
-                      onChanged: (value) {
-                        controller.isEmpty();
-                        controller.isPasswordValid.value =
-                            _isPasswordValid(value);
-                      },
-                      validationRules: {
-                        MinCharactersValidationRule(8),
-                        UppercaseValidationRule(),
-                        LowercaseValidationRule(),
-                        SpecialCharacterValidationRule(),
-                      },
-                      validationRuleBuilder: (rules, value) {
-                        bool allValid =
-                            rules.every((rule) => rule.validate(value));
-                        WidgetsBinding.instance.addPostFrameCallback((_) {
-                          controller.isPasswordValid.value = allValid;
-                        });
-                        if (value.isEmpty) {
-                          return const SizedBox.shrink();
-                        }
-                        return _buildValidationRules(rules, value);
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Password',
-                        hintStyle: const TextStyle(color: greyColor),
-                        suffixIcon: _buildSuffixIcon(),
-                        suffixIconColor: const Color(0xFFc4c4c4),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                            color: greyColor,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide(color: primaryColor),
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      sby60,
+                      Center(
+                        child: Text(
+                          'Register',
+                          style: h1Bold,
                         ),
                       ),
-                    ),
-                    sby16,
-                    AuthTextfield(
-                      onChanged: (value) => controller.isEmpty(),
-                      showPassword: () => controller.showPasswordC(),
-                      controller: controller.confirmPassC,
-                      obscureText: controller.isSecureC.value,
-                      hintText: 'Password',
-                      passwordField: true,
-                      type: TextInputType.text,
-                    ),
-                    sby60,
-                    sby8,
-                    ElevatedButton(
-                      onPressed:
-                          _isFormValid() ? () => controller.register() : null,
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: controller.isButtonActive.value
-                              ? primaryColor
-                              : const Color(0xFFc4c4c4),
-                          foregroundColor: Colors.white,
-                          minimumSize: const Size(
-                            double.infinity,
-                            44,
-                          ),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10))),
-                      child: controller.isLoading.value == false
-                          ? Text(
-                              'Register',
-                              style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.bold),
-                            )
-                          : SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: CircularProgressIndicator(
-                                color: whiteColor,
-                              ),
+                      sby36,
+                      AuthTextfield(
+                        onChanged: (value) => controller.isEmpty(),
+                        showPassword: () {},
+                        controller: controller.emailC,
+                        obscureText: false,
+                        hintText: 'Email',
+                        passwordField: false,
+                        type: TextInputType.emailAddress,
+                      ),
+                      sby16,
+                      FancyPasswordField(
+                        obscureText: controller.isSecure.value,
+                        controller: controller.passC,
+                        keyboardType: TextInputType.text,
+                        onChanged: (value) {
+                          controller.isEmpty();
+                          controller.isPasswordValid.value =
+                              _isPasswordValid(value);
+                        },
+                        validationRules: {
+                          MinCharactersValidationRule(8),
+                          UppercaseValidationRule(),
+                          LowercaseValidationRule(),
+                          SpecialCharacterValidationRule(),
+                        },
+                        validationRuleBuilder: (rules, value) {
+                          bool allValid =
+                              rules.every((rule) => rule.validate(value));
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            controller.isPasswordValid.value = allValid;
+                          });
+                          if (value.isEmpty) {
+                            return const SizedBox.shrink();
+                          }
+                          return _buildValidationRules(rules, value);
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Password',
+                          hintStyle: const TextStyle(color: greyColor),
+                          suffixIcon: _buildSuffixIcon(),
+                          suffixIconColor: const Color(0xFFc4c4c4),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                              color: greyColor,
                             ),
-                    ),
-                    sby24,
-                  ],
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide(color: primaryColor),
+                          ),
+                        ),
+                      ),
+                      sby16,
+                      AuthTextfield(
+                        onChanged: (value) => controller.isEmpty(),
+                        showPassword: () => controller.showPasswordC(),
+                        controller: controller.confirmPassC,
+                        obscureText: controller.isSecureC.value,
+                        hintText: 'Password',
+                        passwordField: true,
+                        type: TextInputType.text,
+                      ),
+                      sby60,
+                      sby8,
+                      ElevatedButton(
+                        onPressed:
+                            _isFormValid() ? () => controller.register() : null,
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: controller.isButtonActive.value
+                                ? primaryColor
+                                : const Color(0xFFc4c4c4),
+                            foregroundColor: Colors.white,
+                            minimumSize: const Size(
+                              double.infinity,
+                              44,
+                            ),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10))),
+                        child: controller.isLoading.value == false
+                            ? Text(
+                                'Register',
+                                style: GoogleFonts.poppins(
+                                    fontWeight: FontWeight.bold),
+                              )
+                            : SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  color: whiteColor,
+                                ),
+                              ),
+                      ),
+                      sby24,
+                    ],
+                  ),
                 ),
               ),
             ),

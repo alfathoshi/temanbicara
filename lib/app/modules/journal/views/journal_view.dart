@@ -3,10 +3,10 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
+import 'package:temanbicara/app/widgets/date.dart';
 import 'package:temanbicara/app/widgets/journal_card.dart';
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
-import '../../../widgets/date.dart';
 import '../controllers/journal_controller.dart';
 
 class JournalView extends GetView<JournalController> {
