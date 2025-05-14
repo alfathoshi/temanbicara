@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/journal_card.dart';
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
@@ -67,9 +68,7 @@ class JournalView extends GetView<JournalController> {
                             size: 16,
                           ),
                         ),
-                        const SizedBox(
-                          width: 24,
-                        ),
+                        sbX24,
                         Text(
                           'Create Journal',
                           style: h6SemiBold,
@@ -79,9 +78,7 @@ class JournalView extends GetView<JournalController> {
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 24,
-              ),
+              sbX24,
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -121,9 +118,7 @@ class JournalView extends GetView<JournalController> {
                       child: const Icon(Icons.calendar_month_outlined)),
                 ],
               ),
-              const SizedBox(
-                height: 16,
-              ),
+              sby16,
               Expanded(
                 child: Obx(() {
                   if (controller.isLoading.value) {
@@ -150,20 +145,69 @@ class JournalView extends GetView<JournalController> {
                         date: controller.formatDate(date),
                         image: journal['image_url'] ?? '',
                         getDelete: () async {
-                          Get.defaultDialog(
-                              backgroundColor: whiteColor,
-                              title: 'Delete Journal',
-                              middleText:
-                                  'Are you sure you want to delete this journal?',
-                              textCancel: 'Cancel',
-                              textConfirm: 'Delete',
-                              confirmTextColor: Colors.white,
-                              onConfirm: () {
-                                controller.deleteJournal(journal['journal_id']);
-                                Get.back();
-                                controller.fetchJournals();
-                              },
-                              onCancel: () => Get.back());
+                          Get.dialog(
+                            Dialog(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: Container(
+                                padding: EdgeInsets.all(20),
+                                width: Get.width * 0.8,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(24),
+                                  color: whiteColor,
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(Icons.warning, color: error, size: 48),
+                                    sby16,
+                                    Text(
+                                      'Delete Journal',
+                                      style: h4Bold,
+                                    ),
+                                    sby12,
+                                    Text(
+                                      'Are you sure you want to delete this journal?',
+                                      textAlign: TextAlign.center,
+                                      style: h6Regular,
+                                    ),
+                                    sby24,
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        TextButton(
+                                          onPressed: () => Get.back(),
+                                          child: Text(
+                                            'Cancel',
+                                            style: h6Regular,
+                                          ),
+                                        ),
+                                        sbx8,
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: error,
+                                          ),
+                                          onPressed: () {
+                                            controller.deleteJournal(
+                                                journal['journal_id']);
+                                            Get.back();
+                                            controller.fetchJournals();
+                                          },
+                                          child: Text(
+                                            'Delete',
+                                            style: h6Regular.copyWith(
+                                                color: whiteColor),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
+                            barrierDismissible: false,
+                          );
                         },
                       );
                     },
