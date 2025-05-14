@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
+import '../../../widgets/report/observation_card.dart';
 import '../../report/controllers/report_controller.dart';
 import '../controllers/mental_matrix_controller.dart';
 
@@ -157,363 +158,91 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                         ),
                       ),
                       sby24,
-                      Container(
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                                color: border,
-                                blurRadius: 2,
-                                offset: const Offset(0, 2))
-                          ],
-                          color: lightYellow,
-                          borderRadius: BorderRadius.circular(16),
-                          border: Border.all(
-                            color: Colors.transparent,
-                            width: 2,
-                          ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: Colors.yellow),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Image.asset(
-                                        "assets/images/moodSmile.png",
-                                        scale: 1.5,
-                                      ),
-                                    ),
-                                  ),
-                                  sbX12,
-                                  Obx(
-                                    () => Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Mood Tracker",
-                                          style: h4SemiBold,
-                                        ),
-                                        Text(
-                                          reportController
-                                                  .report.value?.moodTracking ??
-                                              'Loading...',
-                                          style: h5Regular,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const Spacer(),
-                                  Image.asset(
-                                    "assets/images/${controller.getIndexedImage(
-                                      value: reportController
-                                          .report.value?.moodTracking,
-                                      referenceList: controller.emotions,
-                                      prefix: 'emosi',
-                                    )}",
-                                    scale: 7,
-                                  ),
-                                ],
-                              ),
-                              sby16,
-                              Text(
-                                reportController.report.value!.mood,
-                                style: h5Regular,
-                              ),
-                            ],
-                          ),
+                      ObservationCard(
+                        backgroundColor: lightYellow,
+                        iconBackgroundColor: Colors.yellow,
+                        iconAsset: "assets/images/moodSmile.png",
+                        iconScale: 1.5,
+                        title: "Mood Tracker",
+                        value: reportController.report.value?.moodTracking,
+                        description: reportController.report.value!.mood,
+                        scale: 7,
+                        indicatorAsset:
+                            "assets/images/${controller.getIndexedImage(
+                          value: reportController.report.value?.moodTracking,
+                          referenceList: controller.emotions,
+                          prefix: 'emosi',
+                        )}",
+                      ),
+                      sby16,
+                      ObservationCard(
+                        backgroundColor: lightPurple.withValues(alpha: 0.5),
+                        iconBackgroundColor: lightPurple,
+                        iconAsset: "assets/images/sleepquality.png",
+                        iconScale: 2,
+                        title: "Sleep Quality",
+                        value: reportController.report.value?.bedTracking,
+                        description: reportController.report.value!.sleep,
+                        scale: 1.7,
+                        indicatorAsset:
+                            "assets/images/${controller.getIndexedImage(
+                          value: reportController.report.value?.bedTracking,
+                          referenceList: controller.sleepQuality,
+                          prefix: 'sleep',
+                        )}",
+                      ),
+                      sby16,
+                      ObservationCard(
+                        backgroundColor: lightBlue,
+                        iconBackgroundColor: Colors.blue,
+                        iconAsset: "assets/images/strees.png",
+                        iconScale: 2,
+                        title: "Stress Level",
+                        value:
+                            "Level ${reportController.report.value?.stressTracking}",
+                        description: reportController.report.value!.stress,
+                        scale: 2,
+                        indicatorText: Text(
+                          reportController.report.value?.stressTracking
+                                  .toString() ??
+                              'Loading...',
+                          style: h1SemiBold.copyWith(fontSize: 48),
                         ),
                       ),
                       sby16,
-                      Container(
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                                color: border,
-                                blurRadius: 2,
-                                offset: const Offset(0, 2))
-                          ],
-                          color: lightPurple.withValues(alpha: 0.45),
-                          borderRadius: BorderRadius.circular(16),
-                          border:
-                              Border.all(color: Colors.transparent, width: 2),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: lightPurple),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: Image.asset(
-                                        "assets/images/sleepquality.png",
-                                        scale: 2,
-                                      ),
-                                    ),
-                                  ),
-                                  sbX12,
-                                  Obx(
-                                    () => Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Sleep Quality",
-                                          style: h4SemiBold,
-                                        ),
-                                        Text(
-                                          reportController
-                                                  .report.value?.bedTracking ??
-                                              'Loading...',
-                                          style: h5Regular,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const Spacer(),
-                                  Image.asset(
-                                    "assets/images/${controller.getIndexedImage(
-                                      value: reportController
-                                          .report.value?.bedTracking,
-                                      referenceList: controller.sleepQuality,
-                                      prefix: 'sleep',
-                                    )}",
-                                    scale: 1.7,
-                                  ),
-                                ],
-                              ),
-                              sby16,
-                              Text(
-                                reportController.report.value!.sleep,
-                                style: h5Regular,
-                              ),
-                            ],
-                          ),
-                        ),
+                      ObservationCard(
+                        backgroundColor: lightPink.withValues(alpha: 0.5),
+                        iconBackgroundColor: lightPink,
+                        iconAsset: "assets/images/screen.png",
+                        iconScale: 2,
+                        title: "Screen Time",
+                        value: reportController.report.value?.screenTracking,
+                        description: reportController.report.value!.screenTime,
+                        scale: 2,
+                        indicatorAsset:
+                            "assets/images/${controller.getIndexedImage(
+                          value: reportController.report.value?.screenTracking,
+                          referenceList: controller.screenTime,
+                          prefix: 'screen',
+                        )}",
                       ),
                       sby16,
-                      Container(
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                                color: border,
-                                blurRadius: 2,
-                                offset: const Offset(0, 2))
-                          ],
-                          color: lightBlue,
-                          borderRadius: BorderRadius.circular(16),
-                          border:
-                              Border.all(color: Colors.transparent, width: 2),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: Colors.blue),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: Image.asset(
-                                        "assets/images/strees.png",
-                                        scale: 2,
-                                      ),
-                                    ),
-                                  ),
-                                  sbX12,
-                                  Obx(
-                                    () => Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Stress Level",
-                                          style: h4SemiBold,
-                                        ),
-                                        Text(
-                                          "Level ${reportController.report.value?.stressTracking.toString()}",
-                                          style: h5Regular,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const Spacer(),
-                                  Text(
-                                    reportController
-                                            .report.value?.stressTracking
-                                            .toString() ??
-                                        'Loading...',
-                                    style: h1SemiBold.copyWith(fontSize: 48),
-                                  ),
-                                ],
-                              ),
-                              sby16,
-                              Text(
-                                reportController.report.value!.stress,
-                                style: h5Regular,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      sby16,
-                      Container(
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                                color: border,
-                                blurRadius: 2,
-                                offset: const Offset(0, 2))
-                          ],
-                          color: lightPink.withValues(alpha: 0.25),
-                          borderRadius: BorderRadius.circular(16),
-                          border:
-                              Border.all(color: Colors.transparent, width: 2),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: lightPink),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: Image.asset(
-                                        "assets/images/screen.png",
-                                        scale: 2,
-                                      ),
-                                    ),
-                                  ),
-                                  sbX12,
-                                  Obx(
-                                    () => Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Screen Time",
-                                          style: h4SemiBold,
-                                        ),
-                                        Text(
-                                          reportController.report.value
-                                                  ?.screenTracking ??
-                                              'Loading...',
-                                          style: h5Regular,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const Spacer(),
-                                  Image.asset(
-                                    "assets/images/${controller.getIndexedImage(
-                                      value: reportController
-                                          .report.value?.screenTracking,
-                                      referenceList: controller.screenTime,
-                                      prefix: 'screen',
-                                    )}",
-                                    scale: 2,
-                                  ),
-                                ],
-                              ),
-                              sby16,
-                              Text(
-                                reportController.report.value!.screenTime,
-                                style: h5Regular,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      sby16,
-                      Container(
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                                color: border,
-                                blurRadius: 2,
-                                offset: const Offset(0, 2))
-                          ],
-                          color: orange.withValues(alpha: 0.25),
-                          borderRadius: BorderRadius.circular(16),
-                          border:
-                              Border.all(color: Colors.transparent, width: 2),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(20),
-                                        color: orange),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: Image.asset(
-                                        "assets/images/activity.png",
-                                        scale: 2,
-                                      ),
-                                    ),
-                                  ),
-                                  sbX12,
-                                  Obx(
-                                    () => Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Activity",
-                                          style: h4SemiBold,
-                                        ),
-                                        Text(
-                                          reportController.report.value
-                                                  ?.activityTracking
-                                                  .replaceAll('\n', ' ') ??
-                                              'Loading...',
-                                          style: h5Regular,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const Spacer(),
-                                  Image.asset(
-                                    "assets/images/${controller.getIndexedImage(
-                                      value: reportController
-                                          .report.value?.activityTracking,
-                                      referenceList: controller.activity,
-                                      prefix: 'step',
-                                    )}",
-                                    scale: 1.5,
-                                  ),
-                                ],
-                              ),
-                              sby16,
-                              Text(
-                                reportController.report.value!.activity,
-                                style: h5Regular,
-                              ),
-                            ],
-                          ),
-                        ),
+                      ObservationCard(
+                        backgroundColor: orange.withValues(alpha: 0.25),
+                        iconBackgroundColor: orange,
+                        iconAsset: "assets/images/activity.png",
+                        iconScale: 2,
+                        title: "Activity",
+                        value: reportController.report.value?.activityTracking,
+                        description: reportController.report.value!.activity,
+                        scale: 1.5,
+                        indicatorAsset:
+                            "assets/images/${controller.getIndexedImage(
+                          value:
+                              reportController.report.value?.activityTracking,
+                          referenceList: controller.activity,
+                          prefix: 'step',
+                        )}",
                       ),
                     ],
                   ),
