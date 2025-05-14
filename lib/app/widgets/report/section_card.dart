@@ -15,7 +15,7 @@ class SectionCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         boxShadow: [
-          BoxShadow(color: border, offset: Offset(0, 1), blurRadius: 2),
+          BoxShadow(color: border, offset: const Offset(0, 1), blurRadius: 2),
         ],
         color: whiteColor,
         borderRadius: BorderRadius.circular(16),
