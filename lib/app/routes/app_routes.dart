@@ -22,10 +22,8 @@ abstract class Routes {
   static const DETAIL_ARTIKEL = _Paths.DETAIL_ARTIKEL;
 
   static const REPORT = _Paths.REPORT;
-  static const MOOD_REPORT = _Paths.MOOD_REPORT;
   static const SLEEP_QUALITY = _Paths.SLEEP_QUALITY;
   static const STRESS_LEVEL = _Paths.STRESS_LEVEL;
-  static const MOOD_TRACKER = _Paths.MOOD_TRACKER;
 
   static const TRANSACTION = _Paths.TRANSACTION;
   static const TRANSACTION_METHOD = _Paths.TRANSACTION_METHOD;
@@ -90,10 +88,8 @@ abstract class _Paths {
   static const DETAIL_ARTIKEL = '/detail-artikel';
 
   static const REPORT = '/report';
-  static const MOOD_REPORT = '/mood-report';
   static const SLEEP_QUALITY = '/sleep-quality';
   static const STRESS_LEVEL = '/stress-level';
-  static const MOOD_TRACKER = '/mood-tracker';
 
   static const TRANSACTION = '/transaction';
   static const TRANSACTION_METHOD = '/transaction-method';
