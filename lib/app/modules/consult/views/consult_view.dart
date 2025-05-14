@@ -8,6 +8,7 @@ import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import 'package:temanbicara/app/widgets/schedule/counselor_card.dart';
+import 'package:temanbicara/app/widgets/schedule/filter_schedule_bar.dart';
 import 'package:temanbicara/app/widgets/schedule/filter_schedule_modal.dart';
 import '../controllers/consult_controller.dart';
 
@@ -62,43 +63,9 @@ class ConsultView extends GetView<ConsultController> {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 20,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            "Filtered by: ${controller.selectedExpertise.join(', ')}",
-                            style: h7SemiBold.copyWith(color: primaryColor),
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            controller.clearExpertiseFilter();
-                          },
-                          child: Container(
-                            width: 69,
-                            height: 23,
-                            decoration: BoxDecoration(
-                              color: whiteColor,
-                              border: Border.all(color: grey4Color),
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: Center(
-                              child: Text(
-                                "Clear",
-                                style: h7SemiBold.copyWith(color: error),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  FilterBarWidget(
+                    selectedFilters: controller.selectedExpertise,
+                    onClear: controller.clearExpertiseFilter,
                   ),
                   Spacer(),
                   Center(
@@ -171,40 +138,9 @@ class ConsultView extends GetView<ConsultController> {
                   ),
                   sby8,
                   if (controller.selectedExpertise.isNotEmpty)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              "Filtered by: ${controller.selectedExpertise.join(', ')}",
-                              style: h7SemiBold.copyWith(color: primaryColor),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              controller.clearExpertiseFilter();
-                            },
-                            child: Container(
-                              width: 69,
-                              height: 23,
-                              decoration: BoxDecoration(
-                                color: whiteColor,
-                                border: Border.all(color: grey4Color),
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "Clear",
-                                  style: h7SemiBold.copyWith(color: error),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    FilterBarWidget(
+                      selectedFilters: controller.selectedExpertise,
+                      onClear: controller.clearExpertiseFilter,
                     ),
                   sby16,
                   Expanded(
