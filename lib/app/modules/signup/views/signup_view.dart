@@ -56,7 +56,7 @@ class SignupView extends GetView<SignupController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: whiteColor,
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         shape: const RoundedRectangleBorder(
