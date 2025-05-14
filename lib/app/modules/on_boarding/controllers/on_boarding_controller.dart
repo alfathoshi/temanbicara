@@ -1,65 +1,67 @@
 import 'package:get/get.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 
+import '../../../data/onboarding_model.dart';
+
 class OnBoardingController extends GetxController {
   final currentPage = 0.obs;
   final currentImage = ''.obs;
 
-  final pages = [
-    {
-      "title": ["Talk Freely", "No Judgement"],
-      "description": [
+  final List<OnboardingPage> pages = [
+    OnboardingPage(
+      title: ["Talk Freely", "No Judgement"],
+      description: [
         "Feeling down? Need someone to talk to?",
         "Our chatbot is always ready to listen",
-        "no judgment, just support."
+        "no judgment, just support.",
       ],
-      "image": "assets/images/boarding2.png",
-    },
-    {
-      "title": ["Express", "How You Feel"],
-      "description": [
+      image: "assets/images/boarding2.png",
+    ),
+    OnboardingPage(
+      title: ["Express", "How You Feel"],
+      description: [
         "Write down your mood and thoughts daily.",
         "Clear your mind and get to know yourself",
-        "better through journaling."
+        "better through journaling.",
       ],
-      "image": "assets/images/boarding3.png",
-    },
-    {
-      "title": ["Track", "Mental Health"],
-      "description": [
+      image: "assets/images/boarding3.png",
+    ),
+    OnboardingPage(
+      title: ["Track", "Mental Health"],
+      description: [
         "Visualize your emotional patterns with graphs ",
         "and daily logs. Understand yourself ",
-        "and take steps toward healing."
+        "and take steps toward healing.",
       ],
-      "image": "assets/images/boarding4.png",
-    },
-    {
-      "title": ["Talk", "to a Professional"],
-      "description": [
+      image: "assets/images/boarding4.png",
+    ),
+    OnboardingPage(
+      title: ["Talk", "to a Professional"],
+      description: [
         "Need professional guidance?",
         "Book a session with trusted psychologists",
-        "secure, easy, and personalized."
+        "secure, easy, and personalized.",
       ],
-      "image": "assets/images/boarding5.png",
-    },
-    {
-      "title": ["Learn", "and Grow"],
-      "description": [
+      image: "assets/images/boarding5.png",
+    ),
+    OnboardingPage(
+      title: ["Learn", "and Grow"],
+      description: [
         "Access articles on mental health,",
         "self-care, overthinking, and more. ",
-        "Read what you need, when you need it."
+        "Read what you need, when you need it.",
       ],
-      "image": "assets/images/boarding6.png",
-    },
-    {
-      "title": ["Become the ", "Best Version of You"],
-      "description": [
+      image: "assets/images/boarding6.png",
+    ),
+    OnboardingPage(
+      title: ["Become the ", "Best Version of You"],
+      description: [
         "Start your journey now.",
         "Teman Bicara is here for you.",
         "Let’s begin your journey toward a healthier you.",
       ],
-      "image": "assets/images/boarding7.png",
-    },
+      image: "assets/images/boarding7.png",
+    ),
   ];
 
   bool get isLastPage => currentPage.value == pages.length - 1;
@@ -67,7 +69,7 @@ class OnBoardingController extends GetxController {
   void nextPage() {
     if (!isLastPage) {
       currentPage.value++;
-      final newImage = pages[currentPage.value]["image"] as String;
+      final newImage = pages[currentPage.value].image;
       setCurrentImage(newImage);
       animateDescription();
       animateImage();
@@ -80,7 +82,7 @@ class OnBoardingController extends GetxController {
   void skipToEnd() async {
     currentPage.value = pages.length - 1;
 
-    final newImage = pages[currentPage.value]["image"] as String;
+    final newImage = pages[currentPage.value].image;
     await setCurrentImage(newImage);
 
     animateDescription();
@@ -107,7 +109,7 @@ class OnBoardingController extends GetxController {
   final isTextVisible = List.generate(3, (_) => true.obs);
 
   void animateDescription() async {
-    final desc = (pages[currentPage.value]["description"] as List)
+    final desc = (pages[currentPage.value].description as List)
         .map((e) => e.toString())
         .toList();
 
