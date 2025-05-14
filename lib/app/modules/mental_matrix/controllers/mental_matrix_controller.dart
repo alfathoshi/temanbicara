@@ -1,6 +1,6 @@
 import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/modules/report/controllers/report_controller.dart';
-import '../../../../data/report_model.dart';
+import '../../../data/report_model.dart';
 import 'package:get/get.dart';
 
 class MentalMatrixController extends GetxController {

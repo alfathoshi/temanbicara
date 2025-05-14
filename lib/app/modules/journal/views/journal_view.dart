@@ -6,6 +6,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/consult/format_date.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import 'package:temanbicara/app/widgets/date.dart';
 import 'package:temanbicara/app/widgets/journal_card.dart';
 import '../../../themes/colors.dart';
@@ -21,20 +22,10 @@ class JournalView extends GetView<JournalController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: whiteColor,
-      appBar: AppBar(
-        toolbarHeight: 85,
-        backgroundColor: whiteColor,
-        centerTitle: true,
+      appBar: CustomAppBar(
         title: Text(
-          'Journal',
+          "Journal",
           style: h3Bold,
-        ),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(
-            color: grey4Color,
-            height: 0.5,
-          ),
         ),
       ),
       body: RefreshIndicator(

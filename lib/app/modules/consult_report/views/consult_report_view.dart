@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:temanbicara/app/data/consult_data.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/consult/history_calculate_duration.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
 import '../controllers/consult_report_controller.dart';
@@ -17,20 +18,10 @@ class ConsultReportView extends GetView<ConsultReportController> {
 
     return Scaffold(
       backgroundColor: whiteColor,
-      appBar: AppBar(
-        toolbarHeight: 85,
-        backgroundColor: whiteColor,
-        centerTitle: true,
+      appBar: CustomAppBar(
         title: Text(
-          'Consultation Report',
+          "Consultation Report",
           style: h3Bold,
-        ),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(
-            color: grey4Color,
-            height: 0.5,
-          ),
         ),
       ),
       body: SingleChildScrollView(

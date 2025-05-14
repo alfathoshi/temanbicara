@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
 import '../controllers/new_tracking_controller.dart';
@@ -11,19 +12,11 @@ class NewTrackingView extends GetView<NewTrackingController> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: AppBar(
-        toolbarHeight: 85,
-        backgroundColor: whiteColor,
-        shape: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: border,
-          ),
-        ),
+      appBar: CustomAppBar(
         title: Text(
-          'Tracking',
+          "Tracking",
           style: h3Bold,
         ),
-        centerTitle: true,
       ),
       backgroundColor: whiteColor,
       body: SingleChildScrollView(

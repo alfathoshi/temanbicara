@@ -5,6 +5,7 @@ import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import 'package:temanbicara/app/widgets/date.dart';
 
 import '../controllers/edit_profile_controller.dart';
@@ -19,20 +20,10 @@ class EditProfileView extends GetView<EditProfileController> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: whiteColor,
-      appBar: AppBar(
-        toolbarHeight: 85,
-        backgroundColor: whiteColor,
-        centerTitle: true,
+      appBar: CustomAppBar(
         title: Text(
-          'Edit Profile',
+          "Edit Profile",
           style: h3Bold,
-        ),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(
-            color: grey4Color,
-            height: 0.5,
-          ),
         ),
       ),
       body: Padding(
@@ -115,13 +106,12 @@ class EditProfileView extends GetView<EditProfileController> {
                   ),
                   sby8,
                   FlexibleDatePicker(
-  selectedDate: controller.selectedDate.value,
-  onDateChanged: (picked) {
-    controller.updateDate(picked);
-  },
-  placeholder: 'Tanggal Lahir',
-),
-
+                    selectedDate: controller.selectedDate.value,
+                    onDateChanged: (picked) {
+                      controller.updateDate(picked);
+                    },
+                    placeholder: 'Tanggal Lahir',
+                  ),
                   sby16,
                 ],
               ),

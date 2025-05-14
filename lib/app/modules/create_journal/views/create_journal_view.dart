@@ -5,6 +5,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import 'package:temanbicara/app/widgets/wide_button.dart';
 
 import '../controllers/create_journal_controller.dart';
@@ -16,19 +17,11 @@ class CreateJournalView extends GetView<CreateJournalController> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: AppBar(
-        toolbarHeight: 85,
-        backgroundColor: whiteColor,
-        shape: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: border,
-          ),
-        ),
+      appBar: CustomAppBar(
         title: Text(
-          'Create Journal',
+          "Journal",
           style: h3Bold,
         ),
-        centerTitle: true,
       ),
       backgroundColor: whiteColor,
       body: SingleChildScrollView(

@@ -1,7 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import '../../../themes/colors.dart';
 import '../controllers/chatbot_room_controller.dart';
 
@@ -12,14 +15,7 @@ class ChatbotRoomView extends GetView<ChatbotRoomController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: whiteColor,
-      appBar: AppBar(
-        toolbarHeight: 85,
-        backgroundColor: whiteColor,
-        shape: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: border,
-          ),
-        ),
+      appBar: CustomAppBar(
         title: CircleAvatar(
           backgroundColor: primaryColor,
           radius: 24,
@@ -28,13 +24,6 @@ class ChatbotRoomView extends GetView<ChatbotRoomController> {
             scale: 5,
           ),
         ),
-        centerTitle: true,
-        actions: const [
-          Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Icon(Iconsax.message_question),
-          )
-        ],
       ),
       body: Obx(
         () => Chat(

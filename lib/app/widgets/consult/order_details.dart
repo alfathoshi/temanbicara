@@ -5,6 +5,7 @@ import 'package:temanbicara/app/modules/booking_history/controllers/booking_hist
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import 'package:temanbicara/app/widgets/transaction/idr_formatter.dart';
 import 'package:temanbicara/app/widgets/transaction/transaction_payment_tutorial.dart';
 import 'package:temanbicara/app/widgets/transaction/transaction_va_number.dart';
@@ -31,14 +32,11 @@ class OrderDetails extends StatelessWidget {
     };
     return Scaffold(
       backgroundColor: const Color(0xFFFAFAFA),
-      appBar: AppBar(
-        toolbarHeight: 85,
-        backgroundColor: whiteColor,
+      appBar: CustomAppBar(
         title: Text(
-          'Order Details',
+          "Order Details",
           style: h3Bold,
         ),
-        centerTitle: true,
       ),
       body: RefreshIndicator(
         onRefresh: () async {

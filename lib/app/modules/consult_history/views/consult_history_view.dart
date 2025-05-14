@@ -1,7 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/consult/consult_history_card.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
 import '../controllers/consult_history_controller.dart';
@@ -16,11 +19,11 @@ class ConsultHistoryView extends GetView<ConsultHistoryController> {
       length: 2,
       child: Scaffold(
         backgroundColor: whiteColor,
-        appBar: AppBar(
-          toolbarHeight: 85,
-          backgroundColor: whiteColor,
-          title: Text('Consultation History', style: h3Bold),
-          centerTitle: true,
+        appBar: CustomAppBar(
+          title: Text(
+            'Consultation History',
+            style: h3Bold,
+          ),
           bottom: TabBar(
             labelColor: primaryColor,
             unselectedLabelColor: grey2Color,

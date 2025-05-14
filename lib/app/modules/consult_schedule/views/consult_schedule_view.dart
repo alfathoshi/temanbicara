@@ -7,6 +7,7 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import 'package:temanbicara/app/widgets/schedule/schedule_details.dart';
 import 'package:temanbicara/app/widgets/schedule/select_date.dart';
 import '../controllers/consult_schedule_controller.dart';
@@ -40,20 +41,10 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
 
     return Scaffold(
       backgroundColor: whiteColor,
-      appBar: AppBar(
-        toolbarHeight: 85,
-        backgroundColor: whiteColor,
-        centerTitle: true,
+      appBar: CustomAppBar(
         title: Text(
-          'Schedule',
+          "Schedule",
           style: h3Bold,
-        ),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(
-            color: grey4Color,
-            height: 0.5,
-          ),
         ),
       ),
       body: SingleChildScrollView(

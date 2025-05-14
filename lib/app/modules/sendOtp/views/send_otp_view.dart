@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 
 import '../controllers/send_otp_controller.dart';
 
@@ -15,13 +16,11 @@ class SendOtpView extends GetView<SendOtpController> {
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
+      appBar: CustomAppBar(
         title: Text(
-          'Send OTP',
+          "Send OTP",
           style: h3Bold,
         ),
-        centerTitle: true,
       ),
       body: SizedBox(
         width: MediaQuery.sizeOf(context).width,
