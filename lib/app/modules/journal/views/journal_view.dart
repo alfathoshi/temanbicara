@@ -1,8 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
+import 'package:temanbicara/app/widgets/consult/format_date.dart';
 import 'package:temanbicara/app/widgets/date.dart';
 import 'package:temanbicara/app/widgets/journal_card.dart';
 import '../../../themes/colors.dart';
@@ -120,7 +123,7 @@ class JournalView extends GetView<JournalController> {
                       return JournalCard(
                         title: journal['title'],
                         body: journal['body'],
-                        date: controller.formatDate(date),
+                        date: formatDate(date),
                         image: journal['image_url'] ?? '',
                         getDelete: () async {
                           Get.dialog(

@@ -21,10 +21,6 @@ class JournalController extends GetxController {
   //   'Bahagia'
   // ];
 
-  String formatDate(DateTime dateTime) {
-    return DateFormat('yyyy-MM-dd HH:mm').format(dateTime);
-  }
-
   // final List<Color> emotionColors = [
   //   Colors.purpleAccent,
   //   Colors.lightGreen,

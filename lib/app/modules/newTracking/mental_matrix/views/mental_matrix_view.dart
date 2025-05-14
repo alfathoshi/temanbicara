@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
-import '../../../themes/colors.dart';
-import '../../../themes/fonts.dart';
-import '../../report/controllers/report_controller.dart';
+import 'package:temanbicara/app/widgets/consult/format_date.dart';
+import '../../../../themes/colors.dart';
+import '../../../../themes/fonts.dart';
+import '../../../report/controllers/report_controller.dart';
 import '../controllers/mental_matrix_controller.dart';
 
 class MentalMatrixView extends GetView<MentalMatrixController> {
@@ -69,9 +70,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                controller
-                                    .formatDate(
-                                        reportController.selectedDate.value)
+                                formatDate(reportController.selectedDate.value)
                                     .toString(),
                                 style: h5Regular,
                               ),
