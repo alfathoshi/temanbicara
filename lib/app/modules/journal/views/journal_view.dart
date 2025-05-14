@@ -123,7 +123,7 @@ class JournalView extends GetView<JournalController> {
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               child: Container(
-                                padding: EdgeInsets.all(20),
+                                padding: const EdgeInsets.all(20),
                                 width: Get.width * 0.8,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(24),

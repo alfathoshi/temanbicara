@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
@@ -62,7 +63,7 @@ class FlexibleDatePicker extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '${selectedDate.toLocal()}'.split(' ')[0],
+                    DateFormat('dd-MM-yyyy').format(selectedDate),
                     style: textFieldStyle,
                   ),
                   const Icon(Icons.keyboard_arrow_down),

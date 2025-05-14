@@ -11,16 +11,6 @@ import '../modules/assesment_1/bindings/assesment_1_binding.dart';
 import '../modules/assesment_1/views/assesment_1_view.dart';
 import '../modules/assesment_2/bindings/assesment_2_binding.dart';
 import '../modules/assesment_2/views/assesment_2_view.dart';
-import '../modules/assesment_3/bindings/assesment_3_binding.dart';
-import '../modules/assesment_3/views/assesment_3_view.dart';
-import '../modules/assesment_4/bindings/assesment_4_binding.dart';
-import '../modules/assesment_4/views/assesment_4_view.dart';
-import '../modules/assesment_5/bindings/assesment_5_binding.dart';
-import '../modules/assesment_5/views/assesment_5_view.dart';
-import '../modules/assesment_6/bindings/assesment_6_binding.dart';
-import '../modules/assesment_6/views/assesment_6_view.dart';
-import '../modules/assesment_7/bindings/assesment_7_binding.dart';
-import '../modules/assesment_7/views/assesment_7_view.dart';
 import '../modules/booking_history/bindings/booking_history_binding.dart';
 import '../modules/booking_history/views/booking_history_view.dart';
 import '../modules/change_language/bindings/change_language_binding.dart';
@@ -229,38 +219,13 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.ASSESMENT_1,
-      page: () => Assesment1View(),
+      page: () => const Assesment1View(),
       binding: Assesment1Binding(),
     ),
     GetPage(
       name: _Paths.ASSESMENT_2,
       page: () => Assesment2View(),
       binding: Assesment2Binding(),
-    ),
-    GetPage(
-      name: _Paths.ASSESMENT_3,
-      page: () => const Assesment3View(),
-      binding: Assesment3Binding(),
-    ),
-    GetPage(
-      name: _Paths.ASSESMENT_4,
-      page: () => const Assesment4View(),
-      binding: Assesment4Binding(),
-    ),
-    GetPage(
-      name: _Paths.ASSESMENT_5,
-      page: () => const Assesment5View(),
-      binding: Assesment5Binding(),
-    ),
-    GetPage(
-      name: _Paths.ASSESMENT_6,
-      page: () => const Assesment6View(),
-      binding: Assesment6Binding(),
-    ),
-    GetPage(
-      name: _Paths.ASSESMENT_7,
-      page: () => const Assesment7View(),
-      binding: Assesment7Binding(),
     ),
     GetPage(
       name: _Paths.TRACKING_3,

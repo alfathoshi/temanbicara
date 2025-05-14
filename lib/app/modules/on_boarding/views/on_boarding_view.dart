@@ -107,13 +107,7 @@ class OnBoardingView extends GetView<OnBoardingController> {
             }
 
             final page = controller.pages[controller.currentPage.value];
-            final title =
-                (page["title"] as List).map((e) => e.toString()).toList();
-            // ignore: unused_local_variable
-            final desc =
-                (page["description"] as List).map((e) => e.toString()).toList();
-            // ignore: unused_local_variable
-            final String image = page["image"] as String;
+            final title = page.title;
 
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,

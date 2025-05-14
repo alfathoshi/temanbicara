@@ -16,7 +16,6 @@ class LogoHelper {
     "Senang": "assets/images/emosi4.png",
     "Bahagia": "assets/images/emosi5.png",
   };
-
   static Map<int, String> stressLevel = {
     5: "assets/images/emosi1.png",
     4: "assets/images/emosi2.png",
