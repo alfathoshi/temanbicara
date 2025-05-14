@@ -62,7 +62,9 @@ class FlexibleDatePicker extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    '${selectedDate.toLocal()}'.split(' ')[0],
+                    (selectedDate != null)
+                        ? '${selectedDate.toLocal()}'.split(' ')[0]
+                        : (placeholder ?? 'Select Date'),
                     style: textFieldStyle,
                   ),
                   const Icon(Icons.keyboard_arrow_down),
