@@ -60,33 +60,68 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                              sbx5,
-                              Image.asset('assets/images/shareInvoice.png'),
-                              sbx5,
-                              Text(
-                                "Share Invoice",
-                                style: h6SemiBold.copyWith(color: primaryColor),
+                          Obx(() {
+                            return InkWell(
+                              onTap: controller.isSharing.value
+                                  ? null
+                                  : () => controller.shareInvoice(invoice),
+                              child: Row(
+                                children: [
+                                  sbx5,
+                                  controller.isSharing.value
+                                      ? SizedBox(
+                                          width: 18,
+                                          height: 18,
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 2,
+                                            color: primaryColor,
+                                          ),
+                                        )
+                                      : Image.asset(
+                                          'assets/images/shareInvoice.png'),
+                                  sbx5,
+                                  Text(
+                                    controller.isSharing.value
+                                        ? "Sharing..."
+                                        : "Share Invoice",
+                                    style: h6SemiBold.copyWith(
+                                        color: primaryColor),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                          InkWell(
-                            onTap: () => controller.downloadInvoice(invoice),
-                            child: Row(
-                              children: [
-                                Image.asset(
-                                    'assets/images/downloadInvoice.png'),
-                                sbx5,
-                                Text(
-                                  "Download Invoice",
-                                  style:
-                                      h6SemiBold.copyWith(color: primaryColor),
-                                ),
-                                sbX12,
-                              ],
-                            ),
-                          ),
+                            );
+                          }),
+                          Obx(() {
+                            return InkWell(
+                              onTap: controller.isDownloading.value
+                                  ? null
+                                  : () => controller.downloadInvoice(invoice),
+                              child: Row(
+                                children: [
+                                  controller.isDownloading.value
+                                      ? SizedBox(
+                                          width: 18,
+                                          height: 18,
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 2,
+                                            color: primaryColor,
+                                          ),
+                                        )
+                                      : Image.asset(
+                                          'assets/images/downloadInvoice.png'),
+                                  sbx5,
+                                  Text(
+                                    controller.isDownloading.value
+                                        ? "Saving..."
+                                        : "Download Invoice",
+                                    style: h6SemiBold.copyWith(
+                                        color: primaryColor),
+                                  ),
+                                  sbX12,
+                                ],
+                              ),
+                            );
+                          }),
                         ],
                       ),
                       sby48,
