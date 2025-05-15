@@ -1,29 +1,48 @@
 // ignore_for_file: unnecessary_overrides
 
+import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:temanbicara/app/data/on_boarding_data.dart';
 import 'package:temanbicara/app/data/onboarding_model.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 
 class OnBoardingController extends GetxController {
   final currentPage = (-1).obs;
   final currentImage = ''.obs;
+  final pages = <OnboardingPage>[].obs;
 
-  final pages = onboardingRawData.map((e) {
-    final title = (e['title'] as List).cast<String>();
-    final description = (e['description'] as List).cast<String>();
-    final image = e['image'] as String;
+  Future<void> loadPages() async {
+    final loadedPages = await loadOnboardingPages();
+    pages.assignAll(loadedPages);
+  }
 
-    return OnboardingPage(
-      title: title,
-      description: description,
-      image: image,
-    );
-  }).toList();
+  Future<List<OnboardingPage>> loadOnboardingPages() async {
+    final jsonString =
+        await rootBundle.loadString('assets/data/on_boarding_data.json');
+    final List<dynamic> jsonData = json.decode(jsonString);
+    print("✅ JSON Loaded:");
+    for (var item in jsonData) {
+      print(item);
+    }
+
+    return jsonData.map((e) {
+      final title = (e['title'] as List).cast<String>();
+      final description = (e['description'] as List).cast<String>();
+      final image = e['image'] as String;
+
+      return OnboardingPage(
+        title: title,
+        description: description,
+        image: image,
+      );
+    }).toList();
+  }
 
   bool get isLastPage => currentPage.value == pages.length - 1;
 
   void nextPage() {
+    if (pages.isEmpty) return;
+
     if (currentPage.value == -1) {
       currentPage.value = 0;
       final newImage = pages[0].image;
@@ -42,11 +61,11 @@ class OnBoardingController extends GetxController {
   }
 
   void skipToEnd() async {
-    currentPage.value = pages.length - 1;
+    if (pages.isEmpty) return;
 
+    currentPage.value = pages.length - 1;
     final newImage = pages[currentPage.value].image;
     await setCurrentImage(newImage);
-
     animateDescription();
     animateImage();
   }
@@ -54,6 +73,7 @@ class OnBoardingController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    loadPages();
   }
 
   Future<void> setCurrentImage(String newImage) async {
