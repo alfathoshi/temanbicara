@@ -1,9 +1,4 @@
-final onboardingRawData = [
-  {
-    "title": ["jokowi", "prabowo"],
-    "description": ["mbiyen aku bangsat", "gus akira nakai", "anis"],
-    "image": "assets/images/boarding1.png",
-  },
+[
   {
     "title": ["Talk Freely", "No Judgement"],
     "description": [
@@ -57,5 +52,5 @@ final onboardingRawData = [
       "Let’s begin your journey toward a healthier you."
     ],
     "image": "assets/images/boarding7.png"
-  },
-];
+  }
+]
