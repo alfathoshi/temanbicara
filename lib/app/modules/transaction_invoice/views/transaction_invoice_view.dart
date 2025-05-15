@@ -71,17 +71,22 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
                               ),
                             ],
                           ),
-                          Row(
-                            children: [
-                              Image.asset('assets/images/downloadInvoice.png'),
-                              sbx5,
-                              Text(
-                                "Download Invoice",
-                                style: h6SemiBold.copyWith(color: primaryColor),
-                              ),
-                              sbX12,
-                            ],
-                          )
+                          InkWell(
+                            onTap: () => controller.downloadInvoice(invoice),
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                    'assets/images/downloadInvoice.png'),
+                                sbx5,
+                                Text(
+                                  "Download Invoice",
+                                  style:
+                                      h6SemiBold.copyWith(color: primaryColor),
+                                ),
+                                sbX12,
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                       sby48,
