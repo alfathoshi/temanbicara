@@ -20,10 +20,6 @@ class OnBoardingController extends GetxController {
     final jsonString =
         await rootBundle.loadString('assets/data/on_boarding_data.json');
     final List<dynamic> jsonData = json.decode(jsonString);
-    print("✅ JSON Loaded:");
-    for (var item in jsonData) {
-      print(item);
-    }
 
     return jsonData.map((e) {
       final title = (e['title'] as List).cast<String>();
