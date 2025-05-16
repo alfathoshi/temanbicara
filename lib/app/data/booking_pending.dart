@@ -1,4 +1,4 @@
-class ConsultPending {
+class BookingPending {
   final String nama;
   final String durasi;
   final String tanggal;
@@ -20,7 +20,7 @@ class ConsultPending {
   final String expertises;
   final int consultationID;
 
-  ConsultPending({
+  BookingPending({
     required this.nama,
     required this.durasi,
     required this.tanggal,

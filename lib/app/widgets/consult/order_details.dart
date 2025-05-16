@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:temanbicara/app/data/consult_pending.dart';
+import 'package:temanbicara/app/data/booking_pending.dart';
 import 'package:temanbicara/app/modules/booking_history/controllers/booking_history_controller.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import 'package:temanbicara/app/widgets/transaction/idr_formatter.dart';
 import 'package:temanbicara/app/widgets/transaction/transaction_payment_tutorial.dart';
 import 'package:temanbicara/app/widgets/transaction/transaction_va_number.dart';
 
 class OrderDetails extends StatelessWidget {
-  final ConsultPending consultPending;
-  const OrderDetails({super.key, required this.consultPending});
+  final BookingPending bookingPending;
+  const OrderDetails({super.key, required this.bookingPending});
 
   @override
   Widget build(BuildContext context) {
@@ -31,18 +32,15 @@ class OrderDetails extends StatelessWidget {
     };
     return Scaffold(
       backgroundColor: const Color(0xFFFAFAFA),
-      appBar: AppBar(
-        toolbarHeight: 85,
-        backgroundColor: whiteColor,
+      appBar: CustomAppBar(
         title: Text(
-          'Order Details',
+          "Order Details",
           style: h3Bold,
         ),
-        centerTitle: true,
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          await controller.checkPaymentStatus(consultPending.transactionId);
+          await controller.checkPaymentStatus(bookingPending.transactionId);
         },
         child: SingleChildScrollView(
           child: Column(
@@ -87,7 +85,7 @@ class OrderDetails extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            consultPending.nama,
+                            bookingPending.nama,
                             style: h4Bold,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
@@ -101,12 +99,12 @@ class OrderDetails extends StatelessWidget {
                           // ),
                           sby5,
                           Text(
-                            consultPending.durasi,
+                            bookingPending.durasi,
                             style: h7SemiBold,
                           ),
                           sby5,
                           Text(
-                            "${consultPending.tanggal} ${consultPending.waktuMulai}",
+                            "${bookingPending.tanggal} ${bookingPending.waktuMulai}",
                             style: h7SemiBold,
                           ),
                         ],
@@ -145,7 +143,7 @@ class OrderDetails extends StatelessWidget {
                           ),
                           Text(
                             CurrencyFormat.convertToIdr(
-                                int.parse(consultPending.totalHarga), 2),
+                                int.parse(bookingPending.totalHarga), 2),
                             style: h6SemiBold,
                           )
                         ],
@@ -188,7 +186,7 @@ class OrderDetails extends StatelessWidget {
                           ),
                           Text(
                             CurrencyFormat.convertToIdr(
-                              int.parse(consultPending.totalHarga) +
+                              int.parse(bookingPending.totalHarga) +
                                   15000 +
                                   1000,
                               2,
@@ -226,18 +224,18 @@ class OrderDetails extends StatelessWidget {
                       Row(
                         children: [
                           Image.asset(
-                            paymentLogos[consultPending.bank]!,
+                            paymentLogos[bookingPending.bank]!,
                             scale: 2,
                           ),
                           sbx8,
                           Text(
-                            paymentName[consultPending.bank]!,
+                            paymentName[bookingPending.bank]!,
                             style: h4Bold,
                           ),
                         ],
                       ),
                       sby16,
-                      TransactionVaNumber(vaNumber: consultPending.vaNumber),
+                      TransactionVaNumber(vaNumber: bookingPending.vaNumber),
                     ],
                   ),
                 ),

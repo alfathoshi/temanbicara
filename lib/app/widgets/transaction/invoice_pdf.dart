@@ -1,38 +1,21 @@
 import 'dart:io';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:path_provider/path_provider.dart';
 import 'package:temanbicara/app/data/invoice_model.dart';
 
 class CreatePDF {
-  static Future<File> createPDF({
-    required String name,
-    required pw.Document pdf,
-  }) async {
-    Directory directory;
-
-    if (Platform.isAndroid) {
-      final dirs = await getExternalStorageDirectories();
-      if (dirs == null || dirs.isEmpty) {
-        throw Exception('No external storage directory found');
-      }
-      directory = dirs.first;
-    } else {
-      directory = await getApplicationDocumentsDirectory();
-    }
-
-    final file = File('${directory.path}/$name');
-    await file.writeAsBytes(await pdf.save());
-    debugPrint('PDF saved at: ${file.path}');
-    return file;
-  }
-
-  static Future<File> generatePDF(InvoiceModel invoice) async {
+  static Future<File> generatePDF(InvoiceModel invoice,
+      {String? outputPath}) async {
     final pdf = pw.Document();
     final imageBytes = await loadImageFromAssets('assets/images/logo.png');
     final image = pw.MemoryImage(imageBytes);
+    final box = GetStorage();
+    final email = box.read('email');
+    final phone = box.read('phone');
+    final name = box.read('name');
 
     pdf.addPage(
       pw.Page(
@@ -42,7 +25,6 @@ class CreatePDF {
           return pw.Column(
             crossAxisAlignment: pw.CrossAxisAlignment.start,
             children: [
-              // HEADER
               pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: [
@@ -53,11 +35,9 @@ class CreatePDF {
                           style: pw.TextStyle(
                               fontSize: 40, fontWeight: pw.FontWeight.bold)),
                       pw.SizedBox(height: 4),
-                      pw.Text("Order ID #dummy",
+                      pw.Text("Order ID ${invoice.invoice}",
                           style: const pw.TextStyle(
-                              color: PdfColor(0.49019607843137253,
-                                  0.5803921568627451, 0.30196078431372547),
-                              fontSize: 12)),
+                              color: PdfColor(0.49, 0.58, 0.30), fontSize: 12)),
                     ],
                   ),
                   pw.Container(
@@ -68,10 +48,7 @@ class CreatePDF {
                   )
                 ],
               ),
-
               pw.SizedBox(height: 48),
-
-              // INFORMASI PEMESAN
               pw.Container(
                 padding: const pw.EdgeInsets.all(8),
                 decoration: pw.BoxDecoration(
@@ -81,25 +58,19 @@ class CreatePDF {
                 child: pw.Row(
                   mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                   children: [
-                    _infoColumn("Pemesan", "dummy"),
-                    _infoColumn("Email", "dummyy"),
-                    _infoColumn("No.HP", "+dummy"),
+                    _infoColumn("Pemesan", name),
+                    _infoColumn("Email", email),
+                    _infoColumn("No.HP", phone),
                   ],
                 ),
               ),
-
               pw.SizedBox(height: 24),
-
               buildInvoiceHeaderSection(invoice),
-
               pw.SizedBox(height: 48),
-
-              // TABEL
               pw.Text("Detail Pembayaran",
                   style: pw.TextStyle(
                       fontWeight: pw.FontWeight.bold, fontSize: 14)),
               pw.SizedBox(height: 12),
-
               pw.Table(
                 border: pw.TableBorder.all(color: PdfColors.grey300),
                 columnWidths: {
@@ -123,17 +94,15 @@ class CreatePDF {
                   _tableRow(["3", "App. TAX", "-", "1", "Rp. 15000"]),
                 ],
               ),
-
               pw.SizedBox(height: 24),
-
-              // RINGKASAN TOTAL
               pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.end,
                 children: [
                   pw.Column(
                     crossAxisAlignment: pw.CrossAxisAlignment.start,
                     children: [
-                      _priceLine("Subtotal", invoice.hargaTotal.toString()),
+                      _priceLine(
+                          "Subtotal", invoice.transaction.harga.toString()),
                       pw.SizedBox(height: 8),
                       _priceLine("Biaya Platform",
                           invoice.transaction.appTax.toString()),
@@ -141,30 +110,28 @@ class CreatePDF {
                       _priceLine(
                           "Biaya Admin", invoice.transaction.admTax.toString()),
                       pw.Divider(),
-                      _priceLine("Total pembayaran", "harga total dummy",
+                      _priceLine(
+                          "Total pembayaran", invoice.hargaTotal.toString(),
                           isBold: true),
                     ],
                   )
                 ],
               ),
-
               pw.SizedBox(height: 24),
-
               pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: [
-                  pw.Text("Waktu dan metode pembayaran",
-                      style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-                  pw.Text("Total pembayaran",
-                      style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                  pw.Text(
+                    "Waktu | metode pembayaran",
+                    style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+                  ),
                 ],
               ),
               pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: [
-                  pw.Text("dummy - ${invoice.transaction.metode}"),
-                  pw.Text("Harga total dummy",
-                      style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
+                  pw.Text(
+                      "${invoice.transaction.jadwal} ${invoice.transaction.waktu} | ${invoice.transaction.metode}"),
                 ],
               )
             ],
@@ -173,10 +140,16 @@ class CreatePDF {
       ),
     );
 
-    return await createPDF(name: 'invoice.pdf', pdf: pdf);
+    final outputFile = File(outputPath ?? await _getDefaultPath());
+    await outputFile.writeAsBytes(await pdf.save());
+    return outputFile;
   }
 
-  // Helper untuk kolom informasi
+  static Future<String> _getDefaultPath() async {
+    final dir = await getTemporaryDirectory();
+    return '${dir.path}/invoice.pdf';
+  }
+
   static pw.Widget _infoColumn(String title, String value) {
     return pw.Column(
       crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -188,28 +161,24 @@ class CreatePDF {
     );
   }
 
-  // Helper baris tabel
   static pw.TableRow _tableRow(List<String> cells, {bool isHeader = false}) {
     return pw.TableRow(
       children: cells
-          .map(
-            (e) => pw.Padding(
-              padding: const pw.EdgeInsets.all(6),
-              child: pw.Text(
-                e,
-                style: pw.TextStyle(
-                  fontWeight:
-                      isHeader ? pw.FontWeight.bold : pw.FontWeight.normal,
-                  fontSize: 10,
+          .map((e) => pw.Padding(
+                padding: const pw.EdgeInsets.all(6),
+                child: pw.Text(
+                  e,
+                  style: pw.TextStyle(
+                    fontWeight:
+                        isHeader ? pw.FontWeight.bold : pw.FontWeight.normal,
+                    fontSize: 10,
+                  ),
                 ),
-              ),
-            ),
-          )
+              ))
           .toList(),
     );
   }
 
-  // Helper untuk ringkasan harga
   static pw.Widget _priceLine(String label, String value,
       {PdfColor color = PdfColors.black, bool isBold = false}) {
     return pw.Row(
@@ -234,7 +203,7 @@ class CreatePDF {
         crossAxisAlignment: pw.CrossAxisAlignment.start,
         children: [
           pw.Container(
-            width: 100, // lebar tetap untuk label
+            width: 100,
             child: pw.Text(label,
                 style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
           ),
@@ -247,7 +216,6 @@ class CreatePDF {
       crossAxisAlignment: pw.CrossAxisAlignment.start,
       mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
       children: [
-        // Kolom kiri
         pw.Column(
           crossAxisAlignment: pw.CrossAxisAlignment.start,
           children: [
@@ -257,7 +225,6 @@ class CreatePDF {
             buildDetail("Durasi", "${trx.durasi} menit"),
           ],
         ),
-        // Kolom kanan
         pw.Column(
           crossAxisAlignment: pw.CrossAxisAlignment.start,
           children: [

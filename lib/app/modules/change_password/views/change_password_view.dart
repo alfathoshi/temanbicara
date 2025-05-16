@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -6,6 +8,7 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 
 import '../controllers/change_password_controller.dart';
 
@@ -20,20 +23,10 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: whiteColor,
-      appBar: AppBar(
-        toolbarHeight: 85,
-        backgroundColor: whiteColor,
-        centerTitle: true,
+      appBar: CustomAppBar(
         title: Text(
-          'Change Password',
+          "Change Password",
           style: h3Bold,
-        ),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(
-            color: grey4Color,
-            height: 0.5,
-          ),
         ),
       ),
       body: Padding(

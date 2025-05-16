@@ -6,15 +6,19 @@ import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/config/config.dart';
 import 'package:temanbicara/app/data/invoice_model.dart';
 import 'package:temanbicara/app/data/transaction_model.dart';
-import 'package:temanbicara/app/data/consult_complete.dart';
-import 'package:temanbicara/app/data/consult_pending.dart';
+import 'package:temanbicara/app/data/booking_complete.dart';
+import 'package:temanbicara/app/data/booking_pending.dart';
 import 'package:temanbicara/app/data/consult_response.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
+import 'package:temanbicara/app/widgets/consult/format_expired_date.dart';
+import 'package:temanbicara/app/widgets/consult/format_full_date.dart';
+import 'package:temanbicara/app/widgets/consult/format_time.dart';
+import 'package:temanbicara/app/widgets/consult/history_calculate_duration.dart';
 
 class BookingHistoryController extends GetxController {
-  final pendingList = <ConsultPending>[].obs;
-  final completedList = <ConsultComplete>[].obs;
+  final pendingList = <BookingPending>[].obs;
+  final completedList = <BookingComplete>[].obs;
   final isLoading = false.obs;
   final box = GetStorage();
 
@@ -127,21 +131,21 @@ class BookingHistoryController extends GetxController {
     }
   }
 
-  ConsultPending _mapPending(dynamic item) {
+  BookingPending _mapPending(dynamic item) {
     final schedule = item['schedule'];
     final payment = item['payment'];
-    final expired = _parseExpiredDate(payment['expired_date']);
+    final expired = parseExpiredDate(payment['expired_date']);
     final user = schedule['user'];
     final expertiseList = user['expertises'] as List;
     final expertise = expertiseList.isNotEmpty ? expertiseList[0] : null;
 
-    return ConsultPending(
+    return BookingPending(
       nama: schedule['user']['name'],
       bank: payment['bank'],
-      durasi: _calculateDuration(schedule['start_time'], schedule['end_time']),
-      tanggal: _formatFullDate(schedule['available_date']),
-      waktuMulai: _formatTime(schedule['start_time']),
-      waktuSelesai: _formatTime(schedule['end_time']),
+      durasi: calculateDuration(schedule['start_time'], schedule['end_time']),
+      tanggal: formatFullDate(schedule['available_date']),
+      waktuMulai: formatTime(schedule['start_time']),
+      waktuSelesai: formatTime(schedule['end_time']),
       tanggalTenggat: expired['date']!,
       waktuTenggat: expired['time']!,
       metodePembayaran: "${payment['payment_method']} - ${payment['bank']}",
@@ -155,7 +159,7 @@ class BookingHistoryController extends GetxController {
     );
   }
 
-  ConsultComplete _mapCompleted(dynamic item) {
+  BookingComplete _mapCompleted(dynamic item) {
     final schedule = item['schedule'];
     // ignore: unused_local_variable
     final payment = item['payment'];
@@ -163,61 +167,12 @@ class BookingHistoryController extends GetxController {
     final expertiseList = user['expertises'] as List;
     final expertise = expertiseList.isNotEmpty ? expertiseList[0] : null;
 
-    return ConsultComplete(
+    return BookingComplete(
       nama: user['name'],
       durasi: "${schedule['start_time']} - ${schedule['end_time']}",
       expertise: expertise != null ? expertise['type'] : '-',
       tanggal: schedule['available_date'].substring(0, 10),
       waktu: schedule['start_time'],
     );
-  }
-
-  Map<String, String> _parseExpiredDate(String expiredDate) {
-    if (expiredDate.isEmpty) return {"date": "-", "time": "-"};
-    final parts = expiredDate.split(' ');
-    if (parts.length != 2) return {"date": "-", "time": "-"};
-    final parsedDate = DateTime.parse(parts[0]);
-    return {
-      "date": "${parsedDate.day} ${_monthName(parsedDate.month)}",
-      "time": parts[1].substring(0, 5)
-    };
-  }
-
-  String _calculateDuration(String? start, String? end) {
-    if (start == null || end == null) return '-';
-    final s = TimeOfDay(
-        hour: int.parse(start.split(':')[0]),
-        minute: int.parse(start.split(':')[1]));
-    final e = TimeOfDay(
-        hour: int.parse(end.split(':')[0]),
-        minute: int.parse(end.split(':')[1]));
-    return "${(e.hour * 60 + e.minute) - (s.hour * 60 + s.minute)} menit";
-  }
-
-  String _formatTime(String? time) =>
-      (time?.split(':').take(2).join(':')) ?? '-';
-
-  String _formatFullDate(String date) {
-    final parsed = DateTime.parse(date);
-    return "${parsed.day} ${_monthName(parsed.month)} ${parsed.year}";
-  }
-
-  String _monthName(int month) {
-    const names = [
-      '',
-      'Januari',
-      'Februari',
-      'Maret',
-      'April',
-      'Mei',
-      'Juni',
-      'Juli',
-      'Agustus',
-      'September',
-      'Oktober',
-      'November',
-      'Desember'
-    ];
-    return names[month];
   }
 }

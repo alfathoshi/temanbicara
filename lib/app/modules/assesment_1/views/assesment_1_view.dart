@@ -1,45 +1,28 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import '../../../widgets/date.dart';
 import '../../../widgets/gender_selector.dart';
 import '../controllers/assesment_1_controller.dart';
 
 class Assesment1View extends GetView<Assesment1Controller> {
-  Assesment1View({super.key});
+  const Assesment1View({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: whiteColor,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(87),
-        child: AnnotatedRegion<SystemUiOverlayStyle>(
-          value: SystemUiOverlayStyle.dark,
-          child: Container(
-            padding: EdgeInsets.fromLTRB(
-                24, MediaQuery.of(context).padding.top + 24, 24, 24),
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black.withValues(alpha: 0.1),
-                  blurRadius: 25,
-                  offset: const Offset(0, 1),
-                  spreadRadius: 1,
-                ),
-              ],
-              color: whiteColor,
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Image.asset(
-              'assets/images/logo.png',
-              scale: 4,
-            ),
-          ),
+      appBar: CustomAppBar(
+        height: 87,
+        title: Image.asset(
+          'assets/images/logo.png',
+          scale: 4,
         ),
       ),
       body: LayoutBuilder(
@@ -163,13 +146,13 @@ class Assesment1View extends GetView<Assesment1Controller> {
                       sby24,
                       Text('Birthdate', style: textDescriptionSemiBold),
                       sby8,
-                      FlexibleDatePicker(
-                        selectedDate: controller.selectedDate.value,
-                        onDateChanged: (picked) {
-                          controller.updateDate(picked);
-                        },
-                        placeholder: 'Tanggal Lahir',
-                      ),
+                      Obx(() => FlexibleDatePicker(
+                            selectedDate: controller.selectedDate.value,
+                            onDateChanged: (picked) {
+                              controller.updateDate(picked);
+                            },
+                            placeholder: 'Tanggal Lahir',
+                          )),
                       sby24,
                       const Expanded(child: SizedBox()),
                       Obx(() => ElevatedButton(
