@@ -11,9 +11,9 @@ import 'package:temanbicara/app/themes/colors.dart';
 class ProfileController extends GetxController {
   final count = 0.obs;
   File? storedImage;
-  RxString name = ''.obs;
   var box = GetStorage();
   RxString profileUrl = "".obs;
+  RxString name = ''.obs;
 
   Future pickImage() async {
     try {
@@ -83,7 +83,7 @@ class ProfileController extends GetxController {
       box.write('nickname', data['data']['nickname']);
       box.write('birthdate', data['data']['birthdate']);
       box.write('profile_image', data['data']['profile_url']);
-      name.value = data['data']['name'];
+
       profileUrl.value = data['data']['profile_url'];
       return;
     } catch (err) {
@@ -97,12 +97,9 @@ class ProfileController extends GetxController {
   }
 
   @override
-  void onClose() {}
-  void increment() => count.value++;
-
-  @override
   void onInit() async {
-    // name.value = GetStorage().read('name');
+    name.value = GetStorage().read('name');
+
     await fetchData();
     super.onInit();
   }

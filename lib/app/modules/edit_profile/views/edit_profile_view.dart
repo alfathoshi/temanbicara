@@ -115,13 +115,12 @@ class EditProfileView extends GetView<EditProfileController> {
                   ),
                   sby8,
                   FlexibleDatePicker(
-  selectedDate: controller.selectedDate.value,
-  onDateChanged: (picked) {
-    controller.updateDate(picked);
-  },
-  placeholder: 'Tanggal Lahir',
-),
-
+                    selectedDate: controller.selectedDate.value,
+                    onDateChanged: (picked) {
+                      controller.updateDate(picked);
+                    },
+                    placeholder: 'Tanggal Lahir',
+                  ),
                   sby16,
                 ],
               ),
@@ -132,6 +131,7 @@ class EditProfileView extends GetView<EditProfileController> {
               child: ElevatedButton(
                 onPressed: () async {
                   await _controller.editProfile();
+
                   Get.offAllNamed(Routes.NAVIGATION_BAR,
                       arguments: {"indexPage": 4});
                 },
