@@ -122,6 +122,7 @@ class EditProfileView extends GetView<EditProfileController> {
               child: ElevatedButton(
                 onPressed: () async {
                   await _controller.editProfile();
+
                   Get.offAllNamed(Routes.NAVIGATION_BAR,
                       arguments: {"indexPage": 4});
                 },

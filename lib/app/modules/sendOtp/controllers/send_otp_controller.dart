@@ -41,6 +41,17 @@ class SendOtpController extends GetxController {
 
       var data = json.decode(response.body);
 
+      if (!data['status']) {
+        Get.snackbar(
+          'Error',
+          data['message'],
+          backgroundColor: error.withValues(alpha: 0.6),
+          colorText: Colors.white,
+        );
+        isLoading.value = false;
+        return;
+      }
+
       if (!isButtonActive.value) {
         isLoading.value = false;
         Get.toNamed(

@@ -38,17 +38,11 @@ class SendOtpView extends GetView<SendOtpController> {
               ),
               Text(
                 'OTP Verification',
-                style: GoogleFonts.poppins().copyWith(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: const Color(0xFF5B5B5B),
-                ),
+                style: verifyOtpTextStyle(16, const Color(0xFF5B5B5B), true),
               ),
               Text(
                 'We will send you one-time password to your email',
-                style: GoogleFonts.poppins().copyWith(
-                  fontSize: 14,
-                ),
+                style: verifyOtpTextStyle(14, black, false),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(
@@ -56,10 +50,7 @@ class SendOtpView extends GetView<SendOtpController> {
               ),
               Text(
                 'Enter your email',
-                style: GoogleFonts.poppins().copyWith(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
+                style: verifyOtpTextStyle(16, black, true),
               ),
               sby8,
               TextField(
@@ -101,8 +92,7 @@ class SendOtpView extends GetView<SendOtpController> {
                   child: controller.isLoading.value == false
                       ? Text(
                           'Send OTP',
-                          style:
-                              GoogleFonts.poppins(fontWeight: FontWeight.bold),
+                          style: verifyOtpTextStyle(14, Colors.white, true),
                         )
                       : SizedBox(
                           height: 20,
@@ -119,4 +109,12 @@ class SendOtpView extends GetView<SendOtpController> {
       ),
     );
   }
+}
+
+TextStyle verifyOtpTextStyle(double size, Color color, bool isBold) {
+  return GoogleFonts.poppins().copyWith(
+    fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
+    fontSize: size,
+    color: color,
+  );
 }

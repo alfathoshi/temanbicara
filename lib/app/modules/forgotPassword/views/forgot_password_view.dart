@@ -52,74 +52,20 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                           style: textDescriptionSemiBold,
                         ),
                         sby8,
-                        TextField(
-                          obscureText: controller.isNewPassObscure.value,
-                          controller: controller.newPasswordController,
-                          cursorColor: black,
-                          decoration: InputDecoration(
-                            suffixIcon: GestureDetector(
-                              onTapUp: (_) {
-                                controller.isNewPassObscure.value = true;
-                              },
-                              onTapDown: (_) {
-                                controller.isNewPassObscure.value = false;
-                              },
-                              child: const Icon(
-                                Icons.remove_red_eye_outlined,
-                                size: 20,
-                              ),
-                            ),
-                            hintText: 'Masukkan Password Baru',
-                            hintStyle: h5Regular.copyWith(color: grey2Color),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                color: greyColor,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(color: primaryColor),
-                            ),
-                          ),
-                        ),
+                        changePasswordTextfield(
+                            "Masukkan Password",
+                            controller.newPasswordController,
+                            controller.isNewPassObscure),
                         sby12,
                         Text(
                           'Confirm Password',
                           style: textDescriptionSemiBold,
                         ),
                         sby8,
-                        TextField(
-                          obscureText: controller.isConfPassObscure.value,
-                          controller: controller.confirmPasswordController,
-                          cursorColor: black,
-                          decoration: InputDecoration(
-                            suffixIcon: GestureDetector(
-                              onTapUp: (_) {
-                                controller.isConfPassObscure.value = true;
-                              },
-                              onTapDown: (_) {
-                                controller.isConfPassObscure.value = false;
-                              },
-                              child: const Icon(
-                                Icons.remove_red_eye_outlined,
-                                size: 20,
-                              ),
-                            ),
-                            hintText: 'Konfirmasi Password',
-                            hintStyle: h5Regular.copyWith(color: grey2Color),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(
-                                color: greyColor,
-                              ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(color: primaryColor),
-                            ),
-                          ),
-                        ),
+                        changePasswordTextfield(
+                            "Konfirmasi Password",
+                            controller.confirmPasswordController,
+                            controller.isConfPassObscure)
                       ],
                     ),
                   ),
@@ -162,4 +108,39 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
       ),
     );
   }
+}
+
+Widget changePasswordTextfield(
+    String hint, TextEditingController textController, RxBool isObscure) {
+  return TextField(
+    obscureText: isObscure.value,
+    controller: textController,
+    cursorColor: black,
+    decoration: InputDecoration(
+      suffixIcon: GestureDetector(
+        onTapUp: (_) {
+          isObscure.value = true;
+        },
+        onTapDown: (_) {
+          isObscure.value = false;
+        },
+        child: const Icon(
+          Icons.remove_red_eye_outlined,
+          size: 20,
+        ),
+      ),
+      hintText: hint,
+      hintStyle: h5Regular.copyWith(color: grey2Color),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: const BorderSide(
+          color: greyColor,
+        ),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+        borderSide: BorderSide(color: primaryColor),
+      ),
+    ),
+  );
 }
