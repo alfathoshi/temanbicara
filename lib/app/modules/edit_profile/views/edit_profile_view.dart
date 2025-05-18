@@ -70,7 +70,7 @@ class EditProfileView extends GetView<EditProfileController> {
                     controller: controller.nameController,
                     cursorColor: black,
                     decoration: InputDecoration(
-                      hintText: 'Masukkan Nama Lengkap',
+                      hintText: 'Masukkan Nama',
                       hintStyle: h5Regular.copyWith(color: grey2Color),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -91,12 +91,13 @@ class EditProfileView extends GetView<EditProfileController> {
                   ),
                   sby8,
                   TextField(
+                    enabled: false,
                     controller: controller.emailController,
                     cursorColor: black,
                     decoration: InputDecoration(
                       hintText: 'Masukkan Nama Lengkap',
                       hintStyle: h5Regular.copyWith(color: grey2Color),
-                      enabledBorder: OutlineInputBorder(
+                      disabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: const BorderSide(
                           color: greyColor,
