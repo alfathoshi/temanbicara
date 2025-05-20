@@ -56,7 +56,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Password saat ini',
+                          'Current Password',
                           style: textDescriptionSemiBold,
                         ),
                         sby8,
@@ -77,7 +77,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                                 size: 20,
                               ),
                             ),
-                            hintText: 'Masukkan Password',
+                            hintText: 'Enter current password',
                             hintStyle: h5Regular.copyWith(color: grey2Color),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -100,7 +100,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                                 Get.toNamed(Routes.SEND_OTP);
                               },
                               child: Text(
-                                'Lupa Password?',
+                                'Forget Password?',
                                 style: h6Medium.copyWith(
                                   color: primaryColor,
                                 ),
@@ -109,7 +109,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                           ],
                         ),
                         Text(
-                          'Password baru',
+                          'New Password',
                           style: textDescriptionSemiBold,
                         ),
                         sby8,
@@ -130,7 +130,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                                 size: 20,
                               ),
                             ),
-                            hintText: 'Masukkan password baru',
+                            hintText: 'Enter new password',
                             hintStyle: h5Regular.copyWith(color: grey2Color),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -146,7 +146,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                         ),
                         sby12,
                         Text(
-                          'Konfirmasi password baru',
+                          'Confirm New Password',
                           style: textDescriptionSemiBold,
                         ),
                         sby8,
@@ -167,7 +167,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                                 size: 20,
                               ),
                             ),
-                            hintText: 'Masukkan ulang password',
+                            hintText: 'Re-enter the new password',
                             hintStyle: h5Regular.copyWith(color: grey2Color),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),

@@ -53,7 +53,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                         ),
                         sby8,
                         changePasswordTextfield(
-                            "Masukkan Password",
+                            "Enter New Password",
                             controller.newPasswordController,
                             controller.isNewPassObscure),
                         sby12,
