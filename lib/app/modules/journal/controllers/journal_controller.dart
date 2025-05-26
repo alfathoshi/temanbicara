@@ -59,6 +59,7 @@ class JournalController extends GetxController {
         var data = json.decode(response.body);
         if (data['status']) {
           journalList.value = data['data'];
+          // print(journalList.value);
         } else {
           Get.snackbar('Not Found', 'Journal Not Found',
               backgroundColor: error.withValues(alpha: 0.6),
