@@ -43,14 +43,14 @@ class JournalCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (image == '')
+            if (image != '')
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Image.network(
                     image,
-                    height: image == '' ? 80 : 120,
+                    height: image == '' ? 80 : 150,
                     width: double.infinity,
                     fit: BoxFit.cover,
                     loadingBuilder: (context, child, loadingProgress) {
@@ -58,7 +58,7 @@ class JournalCard extends StatelessWidget {
                       return Center(child: CircularProgressIndicator());
                     },
                     errorBuilder: (context, error, stackTrace) {
-                      return Text('');
+                      return Text('Kosong');
                     },
                   ),
                 ),
