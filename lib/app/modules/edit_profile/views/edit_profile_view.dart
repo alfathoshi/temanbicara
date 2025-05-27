@@ -91,7 +91,7 @@ class EditProfileView extends GetView<EditProfileController> {
                   ),
                   sby8,
                   TextField(
-                    controller: controller.nameController,
+                    controller: controller.nicknameController,
                     cursorColor: black,
                     decoration: InputDecoration(
                       hintText: 'Enter your nickname...',

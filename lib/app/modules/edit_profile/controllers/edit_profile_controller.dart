@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 class EditProfileController extends GetxController {
   final box = GetStorage();
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController nicknameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   String profileUrl = GetStorage().read('profile_image');
 
@@ -45,6 +46,7 @@ class EditProfileController extends GetxController {
         body: jsonEncode({
           'name': nameController.text,
           'email': emailController.text,
+          'nickname':nicknameController.text,
           'birthdate': formattedDate,
         }),
       );
@@ -53,6 +55,7 @@ class EditProfileController extends GetxController {
       if (response.statusCode == 200) {
         box.write('name', responseData['data']['name']);
         box.write('email', responseData['data']['email']);
+        box.write('nickname', responseData['data']['nickname']);
         box.write('birthdate', responseData['data']['birthdate']);
 
         if (responseData['status']) {
