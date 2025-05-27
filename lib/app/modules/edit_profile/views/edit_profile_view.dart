@@ -53,7 +53,7 @@ class EditProfileView extends GetView<EditProfileController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Nama',
+                    'Name',
                     style: textDescriptionSemiBold,
                   ),
                   sby8,
@@ -61,7 +61,31 @@ class EditProfileView extends GetView<EditProfileController> {
                     controller: controller.nameController,
                     cursorColor: black,
                     decoration: InputDecoration(
-                      hintText: 'Masukkan Nama',
+                      hintText: 'Enter your name...',
+                      hintStyle: h5Regular.copyWith(color: grey2Color),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(
+                          color: greyColor,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(color: primaryColor),
+                      ),
+                    ),
+                  ),
+                  sby16,
+                  Text(
+                    'Nickname',
+                    style: textDescriptionSemiBold,
+                  ),
+                  sby8,
+                  TextField(
+                    controller: controller.nameController,
+                    cursorColor: black,
+                    decoration: InputDecoration(
+                      hintText: 'Enter your nickname...',
                       hintStyle: h5Regular.copyWith(color: grey2Color),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -102,7 +126,7 @@ class EditProfileView extends GetView<EditProfileController> {
                   ),
                   sby16,
                   Text(
-                    'Tanggal Lahir',
+                    'Birthdate',
                     style: textDescriptionSemiBold,
                   ),
                   sby8,
@@ -111,7 +135,7 @@ class EditProfileView extends GetView<EditProfileController> {
                         onDateChanged: (picked) {
                           controller.updateDate(picked);
                         },
-                        placeholder: 'Tanggal Lahir',
+                        placeholder: 'Birthdate',
                       )),
                   sby16,
                 ],
@@ -132,7 +156,7 @@ class EditProfileView extends GetView<EditProfileController> {
                   foregroundColor: WidgetStatePropertyAll(whiteColor),
                 ),
                 child: Text(
-                  'Simpan',
+                  'Save',
                   style: GoogleFonts.poppins(fontWeight: FontWeight.bold),
                 ),
               ),
