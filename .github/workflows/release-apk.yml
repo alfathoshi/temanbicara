@@ -36,6 +36,15 @@ jobs:
       # Langkah 4: Menginstal semua package yang dibutuhkan proyek (dari pubspec.yaml)
       - name: Install dependencies
         run: flutter pub get
+      
+      - name: Gemini Key
+        run: |
+          echo "GOOGLE_API=${{ secrets.GEMINI_KEY }}" >> .env
+
+      - name: Firebase Key
+        run: |
+          mkdir -p assets/firebase
+          echo "${{ secrets.FIREBASE_KEY }}" >> assets/firebase/service-account.json
 
       # Langkah 5: Mengambil teks rahasia dari GitHub Secret dan mengubahnya kembali menjadi file kunci
       - name: Decode Keystore
