@@ -33,13 +33,18 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Create Secret Files
+      - name: Gemini Key
         run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/temanbicara_key.keystore
-          echo "${{ secrets.GOOGLE_SERVICES_JSON_BASE64 }}" | base64 --decode > android/app/google-services.json
-          echo "${{ secrets.ENV_FILE_CONTENT }}" > .env
+          echo "GOOGLE_API=${{ secrets.GEMINI_KEY }}" >> .env
+
+      - name: Firebase Key
+        run: |
           mkdir -p assets/firebase
-          echo "${{ secrets.SERVICE_ACCOUNT_JSON }}" > assets/firebase/service-account.json
+          echo "${{ secrets.FIREBASE_KEY }}" >> assets/firebase/service-account.json
+          
+      # Langkah 5: Mengambil teks rahasia dari GitHub Secret dan mengubahnya kembali menjadi file kunci
+      - name: Decode Keystore
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/temanbicara_key.keystore
 
       - name: Create key.properties file
         run: |
