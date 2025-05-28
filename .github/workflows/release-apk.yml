@@ -53,17 +53,14 @@ jobs:
       - name: Build Signed APK
         run: flutter build apk --release
 
-      # Langkah 8: (Opsional tapi bagus) Mengganti nama file APK agar lebih informatif dengan nomor versi
+      # Langkah 8: Ganti nama APK
       - name: Rename APK
-        run: mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/teman-bicara-${{ github.ref_name }}.apk
+        run: mv build/app/outputs/apk/release/app-release.apk build/app/outputs/apk/release/teman-bicara-${{ github.ref_name }}.apk
 
-      # Langkah 9: Membuat halaman GitHub Release dan mengunggah file APK yang sudah jadi ke sana
+      # Langkah 9: Buat rilis di GitHub
       - name: Create GitHub Release and Upload APK
         uses: softprops/action-gh-release@v2
         with:
-          # Judul rilis akan sama dengan nama tag (misal: "Release v1.0.0")
           name: Release ${{ github.ref_name }}
-          # Membuat catatan rilis secara otomatis dari histori commit
           generate_release_notes: true
-          # Menentukan file mana yang akan diunggah sebagai aset rilis
-          files: build/app/outputs/flutter-apk/teman-bicara-${{ github.ref_name }}.apk
+          files: build/app/outputs/apk/release/teman-bicara-${{ github.ref_name }}.apk
