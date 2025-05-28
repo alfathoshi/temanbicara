@@ -62,7 +62,7 @@ class JournalCard extends StatelessWidget {
                         return Center(child: CircularProgressIndicator());
                       },
                       errorBuilder: (context, error, stackTrace) {
-                        return Text('Kosong');
+                        return Text('Tidak ada gambar');
                       },
                     ),
                   ),
@@ -72,6 +72,7 @@ class JournalCard extends StatelessWidget {
                 child: Text(
                   title,
                   style: h6SemiBold,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               Padding(
@@ -79,6 +80,7 @@ class JournalCard extends StatelessWidget {
                 child: Text(
                   body,
                   style: h7Regular,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
               const Divider(),

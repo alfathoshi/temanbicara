@@ -40,8 +40,6 @@ import '../modules/detail_artikel/bindings/detail_artikel_binding.dart';
 import '../modules/detail_artikel/views/detail_artikel_view.dart';
 import '../modules/edit_journal/bindings/edit_journal_binding.dart';
 import '../modules/edit_journal/views/edit_journal_view.dart';
-import '../modules/edit_profile/bindings/edit_profile_binding.dart';
-import '../modules/edit_profile/views/edit_profile_view.dart';
 import '../modules/forgotPassword/bindings/forgot_password_binding.dart';
 import '../modules/forgotPassword/views/forgot_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -235,11 +233,6 @@ class AppPages {
       name: _Paths.ROOM_CHAT,
       page: () => RoomChatView(),
       binding: RoomChatBinding(),
-    ),
-    GetPage(
-      name: _Paths.EDIT_PROFILE,
-      page: () => EditProfileView(),
-      binding: EditProfileBinding(),
     ),
     GetPage(
       name: _Paths.CHANGE_PASSWORD,

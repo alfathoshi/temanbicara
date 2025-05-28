@@ -182,11 +182,11 @@ class JournalView extends GetView<JournalController> {
                           );
                         },
                         getJournal: () {
-                          Get.offAllNamed(Routes.JOURNAL_DETAIL, arguments: {
+                          Get.toNamed(Routes.JOURNAL_DETAIL, arguments: {
                             'journal_id': journal['journal_id'],
                             'title': journal['title'],
                             'body': journal['body'],
-                            'image': journal['image_url'],
+                            'image_url': journal['image_url'],
                             'created_at': journal['created_at'],
                           });
                         },
