@@ -1,10 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
-
-import '../routes/app_pages.dart';
 import '../themes/colors.dart';
 import '../themes/fonts.dart';
 

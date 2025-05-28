@@ -37,17 +37,16 @@ class CreateJournalController extends GetxController {
     }
   }
 
-  Future<void> submitJournal() async {
+  Future<bool> submitJournal() async {
     if (titleController.text.isEmpty || bodyController.text.isEmpty) {
       Get.snackbar('Error', 'Title and Body are required',
           backgroundColor: Colors.red.withValues(alpha: 0.6),
           colorText: Colors.white);
-      return;
+      return false;
     }
 
     try {
-      // ignore: unused_local_variable
-      final userId = box.read('id');
+      // final userId = box.read('id');
       final token = box.read('token');
 
       var uri = Uri.parse('${Config.apiEndPoint}/journal');
@@ -77,13 +76,14 @@ class CreateJournalController extends GetxController {
         Get.snackbar('Success', 'Journal created successfully',
             backgroundColor: primaryColor.withValues(alpha: 0.6),
             colorText: Colors.white);
+        return true;
       } else {
-        // ignore: unused_local_variable
-        var body = await response.stream.bytesToString();
         Get.snackbar('Error', 'Failed to create journal');
+        return false;
       }
     } catch (e) {
       Get.snackbar('Error', 'An error occurred: $e');
+      return false;
     }
   }
 }
