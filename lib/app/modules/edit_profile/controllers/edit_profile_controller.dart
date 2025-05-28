@@ -37,8 +37,18 @@ class EditProfileController extends GetxController {
           colorText: Colors.white);
       return false;
     }
+
+    if (nameController.text.length > 255 ||
+        nicknameController.text.length > 255) {
+      Get.snackbar('Too long', 'Name & Nickname too long',
+          backgroundColor: Colors.red.withValues(alpha: 0.6),
+          colorText: Colors.white);
+      return false;
+    }
+
     final nameRegExp = RegExp(r'^[a-zA-Z\s]+$');
-    if (!nameRegExp.hasMatch(nameController.text) || !nameRegExp.hasMatch(nicknameController.text)) {
+    if (!nameRegExp.hasMatch(nameController.text) ||
+        !nameRegExp.hasMatch(nicknameController.text)) {
       Get.snackbar('Invalid Chars', 'Special Character are not allowed',
           backgroundColor: Colors.red.withValues(alpha: 0.6),
           colorText: Colors.white);
