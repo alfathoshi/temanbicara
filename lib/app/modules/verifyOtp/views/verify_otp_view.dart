@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 
 import '../controllers/verify_otp_controller.dart';
 
@@ -16,13 +17,11 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
     return Scaffold(
       backgroundColor: whiteColor,
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: whiteColor,
+      appBar: CustomAppBar(
         title: Text(
-          'Verifikasi OTP',
+          "OTP Verification",
           style: h3Bold,
         ),
-        centerTitle: true,
       ),
       body: SizedBox(
         width: MediaQuery.sizeOf(context).width,
@@ -47,7 +46,7 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                 ),
               ),
               Text(
-                'Masukkan OTP yang dikirim ke email ${controller.email}',
+                'Enter the OTP that has been emailed to ${controller.email}',
                 style: GoogleFonts.poppins().copyWith(
                   fontSize: 14,
                 ),
@@ -68,7 +67,7 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
               sby16,
               Obx(
                 () => Text(
-                  'OTP tidak valid, coba lagi',
+                  'OTP invalid, try again',
                   style: GoogleFonts.poppins().copyWith(
                     fontWeight: FontWeight.bold,
                     fontSize: 14,
@@ -83,14 +82,14 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: 'Tidak mendapat email OTP? ',
+                      text: 'Didn\'t get any OTP email? ',
                       style: GoogleFonts.poppins().copyWith(
                         fontSize: 14,
-                        color: const Color(0xFF7E954E),
+                        color: Colors.black,
                       ),
                     ),
                     TextSpan(
-                      text: 'Kirim ulang OTP!',
+                      text: 'Resend OTP!',
                       style: GoogleFonts.poppins().copyWith(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,

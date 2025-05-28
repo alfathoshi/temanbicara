@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
@@ -15,19 +16,11 @@ class EditJournalView extends GetView<EditJournalController> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        toolbarHeight: 85,
-        backgroundColor: whiteColor,
-        shape: UnderlineInputBorder(
-          borderSide: BorderSide(
-            color: border,
-          ),
-        ),
+      appBar: CustomAppBar(
         title: Text(
-          'Edit Journal',
+          "Edit Journal",
           style: h3Bold,
         ),
-        centerTitle: true,
       ),
       backgroundColor: whiteColor,
       body: Padding(

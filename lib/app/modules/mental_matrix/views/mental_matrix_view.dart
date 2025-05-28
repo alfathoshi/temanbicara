@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
+import 'package:temanbicara/app/widgets/consult/format_date.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
 import '../../../widgets/report/observation_card.dart';
@@ -15,21 +17,11 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: whiteColor,
-        appBar: AppBar(
-          toolbarHeight: 85,
-          backgroundColor: Colors.white,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(24),
-              bottomRight: Radius.circular(24),
-            ),
-            side: BorderSide(color: Colors.black12),
-          ),
+        appBar: CustomAppBar(
           title: Text(
-            'Mental Matrix',
+            "Mental Matrix",
             style: h3Bold,
           ),
-          centerTitle: true,
         ),
         body: SingleChildScrollView(child: Obx(() {
           final report = reportController.report.value;
@@ -71,9 +63,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                controller
-                                    .formatDate(
-                                        reportController.selectedDate.value)
+                                formatDate(reportController.selectedDate.value)
                                     .toString(),
                                 style: h5Regular,
                               ),

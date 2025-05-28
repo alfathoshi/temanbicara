@@ -43,8 +43,8 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     await ProfileController().fetchData();
-    ReportController().checkTracking();
-    JournalController().fetchJournals();
+    await ReportController().checkTracking();
+    await JournalController().fetchJournals();
     super.onInit();
   }
 }

@@ -1,5 +1,4 @@
 import 'package:get_storage/get_storage.dart';
-import 'package:intl/intl.dart';
 import 'package:temanbicara/app/modules/report/controllers/report_controller.dart';
 import '../../../data/report_model.dart';
 import 'package:get/get.dart';
@@ -44,9 +43,6 @@ class MentalMatrixController extends GetxController {
     '> 5 hours'
   ];
 
-  String formatDate(DateTime dateTime) {
-    return DateFormat('dd MMM yyyy').format(dateTime);
-  }
   // Future<void> getReport() async {
   //   try {
   //     isLoading.value = true;

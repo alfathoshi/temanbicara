@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -6,6 +8,7 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 
 import '../controllers/change_password_controller.dart';
 
@@ -20,20 +23,10 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: whiteColor,
-      appBar: AppBar(
-        toolbarHeight: 85,
-        backgroundColor: whiteColor,
-        centerTitle: true,
+      appBar: CustomAppBar(
         title: Text(
-          'Change Password',
+          "Change Password",
           style: h3Bold,
-        ),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(
-            color: grey4Color,
-            height: 0.5,
-          ),
         ),
       ),
       body: Padding(
@@ -63,7 +56,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Password saat ini',
+                          'Current Password',
                           style: textDescriptionSemiBold,
                         ),
                         sby8,
@@ -84,7 +77,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                                 size: 20,
                               ),
                             ),
-                            hintText: 'Masukkan Password',
+                            hintText: 'Enter current password',
                             hintStyle: h5Regular.copyWith(color: grey2Color),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -107,7 +100,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                                 Get.toNamed(Routes.SEND_OTP);
                               },
                               child: Text(
-                                'Lupa Password?',
+                                'Forget Password?',
                                 style: h6Medium.copyWith(
                                   color: primaryColor,
                                 ),
@@ -116,7 +109,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                           ],
                         ),
                         Text(
-                          'Password baru',
+                          'New Password',
                           style: textDescriptionSemiBold,
                         ),
                         sby8,
@@ -137,7 +130,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                                 size: 20,
                               ),
                             ),
-                            hintText: 'Masukkan password baru',
+                            hintText: 'Enter new password',
                             hintStyle: h5Regular.copyWith(color: grey2Color),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
@@ -153,7 +146,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                         ),
                         sby12,
                         Text(
-                          'Konfirmasi password baru',
+                          'Confirm New Password',
                           style: textDescriptionSemiBold,
                         ),
                         sby8,
@@ -174,7 +167,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                                 size: 20,
                               ),
                             ),
-                            hintText: 'Masukkan ulang password',
+                            hintText: 'Re-enter the new password',
                             hintStyle: h5Regular.copyWith(color: grey2Color),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),

@@ -14,10 +14,6 @@ class JournalController extends GetxController {
   var isLoading = false.obs;
   var journalList = [].obs;
 
-  String formatDate(DateTime dateTime) {
-    return DateFormat('yyyy-MM-dd HH:mm').format(dateTime);
-  }
-
   var selectedDate = DateTime.now().obs;
   void updateDate(DateTime date) {
     selectedDate.value = DateTime(date.year, date.month, date.day);

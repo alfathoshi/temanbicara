@@ -70,12 +70,8 @@ import '../modules/sendOtp/bindings/send_otp_binding.dart';
 import '../modules/sendOtp/views/send_otp_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
-import '../modules/sleep_quality/bindings/sleep_quality_binding.dart';
-import '../modules/sleep_quality/views/sleep_quality_view.dart';
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';
 import '../modules/splash_screen/views/splash_screen_view.dart';
-import '../modules/stress_level/bindings/stress_level_binding.dart';
-import '../modules/stress_level/views/stress_level_view.dart';
 import '../modules/tracking_4/bindings/tracking_4_binding.dart';
 import '../modules/tracking_4/views/tracking_4_view.dart';
 import '../modules/transaction/bindings/transaction_binding.dart';
@@ -179,16 +175,6 @@ class AppPages {
       name: _Paths.REPORT,
       page: () => const ReportView(),
       binding: ReportBinding(),
-    ),
-    GetPage(
-      name: _Paths.SLEEP_QUALITY,
-      page: () => const SleepQualityView(),
-      binding: SleepQualityBinding(),
-    ),
-    GetPage(
-      name: _Paths.STRESS_LEVEL,
-      page: () => const StressLevelView(),
-      binding: StressLevelBinding(),
     ),
     GetPage(
       name: _Paths.TRANSACTION,

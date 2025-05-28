@@ -7,6 +7,7 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import 'package:temanbicara/app/widgets/schedule/schedule_details.dart';
 import 'package:temanbicara/app/widgets/schedule/select_date.dart';
 import '../controllers/consult_schedule_controller.dart';
@@ -29,26 +30,21 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
     final consultController = Get.put(ConsultScheduleController());
 
     bool hasScheduleForSelectedDate(DateTime date) {
-      final dateStr = DateFormat('yyyy-MM-dd').format(date);
-      return schedules.any((element) => element['date'] == dateStr);
+      final dateOnly = DateFormat('yyyy-MM-dd').format(date);
+      return schedules.any((element) {
+        final scheduleDateRaw = element['date'];
+        final parsedDate =
+            DateFormat('yyyy-MM-dd').format(DateTime.parse(scheduleDateRaw));
+        return parsedDate == dateOnly;
+      });
     }
 
     return Scaffold(
       backgroundColor: whiteColor,
-      appBar: AppBar(
-        toolbarHeight: 85,
-        backgroundColor: whiteColor,
-        centerTitle: true,
+      appBar: CustomAppBar(
         title: Text(
-          'Schedule',
+          "Schedule",
           style: h3Bold,
-        ),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1),
-          child: Container(
-            color: grey4Color,
-            height: 0.5,
-          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -81,7 +77,7 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                     sby8,
                     Text(
                       expertise,
-                      style: h3Bold.copyWith(
+                      style: h5Bold.copyWith(
                         overflow: TextOverflow.ellipsis,
                         color: const Color(0xFF7D8A95),
                       ),

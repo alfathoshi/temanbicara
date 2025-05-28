@@ -19,10 +19,6 @@ class EditProfileController extends GetxController {
     selectedDate.value = DateTime(date.year, date.month, date.day);
   }
 
-  // void updateDate(DateTime date) {
-  //   selectedDate.value = date;
-  // }
-
   var selectedCountry = ''.obs;
   void setCountry(String country) {
     selectedCountry.value = country;
@@ -33,8 +29,6 @@ class EditProfileController extends GetxController {
     String formattedDate = DateFormat('yyyy-MM-dd').format(selectedDate.value);
 
     try {
-      // ignore: unused_local_variable
-      final userId = box.read('id');
       final token = box.read('token');
 
       final response = await http.post(
@@ -59,7 +53,7 @@ class EditProfileController extends GetxController {
         box.write('birthdate', responseData['data']['birthdate']);
 
         if (responseData['status']) {
-          Get.back();
+          Get.snackbar('Success', 'Profile data updated successful');
         } else {
           Get.snackbar(
               'Error', responseData['message'] ?? 'Failed to update profile');
@@ -74,7 +68,6 @@ class EditProfileController extends GetxController {
     }
   }
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();

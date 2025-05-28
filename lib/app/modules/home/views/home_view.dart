@@ -8,6 +8,7 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
+import 'package:temanbicara/app/widgets/consult/format_date.dart';
 import 'package:temanbicara/app/widgets/mental_matrix.dart';
 import 'package:temanbicara/app/widgets/my_journal.dart';
 import 'package:temanbicara/app/widgets/top_article.dart';
@@ -376,7 +377,7 @@ class HomeView extends GetView<ReportController> {
                                     type: 'Journal',
                                     colors: primaryColor,
                                     title: journal['title'] ?? 'No Title',
-                                    date: journalController.formatDate(date),
+                                    date: formatDate(date),
                                   );
                                 },
                               ),

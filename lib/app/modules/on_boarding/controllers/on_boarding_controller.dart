@@ -1,90 +1,67 @@
+// ignore_for_file: unnecessary_overrides
+
+import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:temanbicara/app/data/onboarding_model.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 
-import '../../../data/onboarding_model.dart';
-
 class OnBoardingController extends GetxController {
-  final currentPage = 0.obs;
+  final currentPage = (-1).obs;
   final currentImage = ''.obs;
+  final pages = <OnboardingPage>[].obs;
 
-  final List<OnboardingPage> pages = [
-    OnboardingPage(
-      title: ["Talk Freely", "No Judgement"],
-      description: [
-        "Feeling down? Need someone to talk to?",
-        "Our chatbot is always ready to listen",
-        "no judgment, just support.",
-      ],
-      image: "assets/images/boarding2.png",
-    ),
-    OnboardingPage(
-      title: ["Express", "How You Feel"],
-      description: [
-        "Write down your mood and thoughts daily.",
-        "Clear your mind and get to know yourself",
-        "better through journaling.",
-      ],
-      image: "assets/images/boarding3.png",
-    ),
-    OnboardingPage(
-      title: ["Track", "Mental Health"],
-      description: [
-        "Visualize your emotional patterns with graphs ",
-        "and daily logs. Understand yourself ",
-        "and take steps toward healing.",
-      ],
-      image: "assets/images/boarding4.png",
-    ),
-    OnboardingPage(
-      title: ["Talk", "to a Professional"],
-      description: [
-        "Need professional guidance?",
-        "Book a session with trusted psychologists",
-        "secure, easy, and personalized.",
-      ],
-      image: "assets/images/boarding5.png",
-    ),
-    OnboardingPage(
-      title: ["Learn", "and Grow"],
-      description: [
-        "Access articles on mental health,",
-        "self-care, overthinking, and more. ",
-        "Read what you need, when you need it.",
-      ],
-      image: "assets/images/boarding6.png",
-    ),
-    OnboardingPage(
-      title: ["Become the ", "Best Version of You"],
-      description: [
-        "Start your journey now.",
-        "Teman Bicara is here for you.",
-        "Let’s begin your journey toward a healthier you.",
-      ],
-      image: "assets/images/boarding7.png",
-    ),
-  ];
+  Future<void> loadPages() async {
+    final loadedPages = await loadOnboardingPages();
+    pages.assignAll(loadedPages);
+  }
+
+  Future<List<OnboardingPage>> loadOnboardingPages() async {
+    final jsonString =
+        await rootBundle.loadString('assets/data/on_boarding_data.json');
+    final List<dynamic> jsonData = json.decode(jsonString);
+
+    return jsonData.map((e) {
+      final title = (e['title'] as List).cast<String>();
+      final description = (e['description'] as List).cast<String>();
+      final image = e['image'] as String;
+
+      return OnboardingPage(
+        title: title,
+        description: description,
+        image: image,
+      );
+    }).toList();
+  }
 
   bool get isLastPage => currentPage.value == pages.length - 1;
 
   void nextPage() {
-    if (!isLastPage) {
+    if (pages.isEmpty) return;
+
+    if (currentPage.value == -1) {
+      currentPage.value = 0;
+      final newImage = pages[0].image;
+      setCurrentImage(newImage);
+      animateDescription();
+      animateImage();
+    } else if (!isLastPage) {
       currentPage.value++;
       final newImage = pages[currentPage.value].image;
       setCurrentImage(newImage);
       animateDescription();
       animateImage();
     } else {
-      //Get.offAllNamed(Routes.NAVIGATION_BAR, arguments: {"indexPage": 0});
       Get.offAllNamed(Routes.SIGNUP);
     }
   }
 
   void skipToEnd() async {
-    currentPage.value = pages.length - 1;
+    if (pages.isEmpty) return;
 
+    currentPage.value = pages.length - 1;
     final newImage = pages[currentPage.value].image;
     await setCurrentImage(newImage);
-
     animateDescription();
     animateImage();
   }
@@ -92,8 +69,7 @@ class OnBoardingController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    animateDescription();
-    animateImage();
+    loadPages();
   }
 
   Future<void> setCurrentImage(String newImage) async {
@@ -109,9 +85,7 @@ class OnBoardingController extends GetxController {
   final isTextVisible = List.generate(3, (_) => true.obs);
 
   void animateDescription() async {
-    final desc = (pages[currentPage.value].description as List)
-        .map((e) => e.toString())
-        .toList();
+    final desc = pages[currentPage.value].description;
 
     for (int i = 0; i < 3; i++) {
       isTextVisible[i].value = false;
@@ -126,7 +100,7 @@ class OnBoardingController extends GetxController {
     }
   }
 
-  //image
+  // image
   final imageScale = 0.8.obs;
   final imageOpacity = 0.0.obs;
 

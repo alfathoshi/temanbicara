@@ -1,10 +1,13 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
-import 'package:temanbicara/app/widgets/consult/consult_complete_card.dart';
-import 'package:temanbicara/app/widgets/consult/consult_pending_card.dart';
+import 'package:temanbicara/app/widgets/consult/booking_complete_card.dart';
+import 'package:temanbicara/app/widgets/consult/booking_pending_card.dart';
+import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import '../controllers/booking_history_controller.dart';
 
 class BookingHistoryView extends GetView<BookingHistoryController> {
@@ -16,11 +19,11 @@ class BookingHistoryView extends GetView<BookingHistoryController> {
       length: 2,
       child: Scaffold(
         backgroundColor: const Color(0xFFFAFAFA),
-        appBar: AppBar(
-          toolbarHeight: 85,
-          backgroundColor: whiteColor,
-          title: Text('Booking History', style: h3Bold),
-          centerTitle: true,
+        appBar: CustomAppBar(
+          title: Text(
+            'Booking History',
+            style: h3Bold,
+          ),
           bottom: TabBar(
             labelColor: primaryColor,
             unselectedLabelColor: grey2Color,
@@ -64,8 +67,8 @@ class BookingHistoryView extends GetView<BookingHistoryController> {
         itemBuilder: (_, i) => Padding(
           padding: const EdgeInsets.only(bottom: 16),
           child: isPending
-              ? ConsultPendingCard(consultPending: list[i])
-              : ConsultCompleteCard(consultComplete: list[i]),
+              ? BookingPendingCard(bookingPending: list[i])
+              : BookingCompleteCard(bookingComplete: list[i]),
         ),
       ),
     );

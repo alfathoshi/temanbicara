@@ -67,7 +67,7 @@ class ProfileView extends GetView<ProfileController> {
                   ),
                   sby12,
                   Text(
-                    box.read('name') ?? "null",
+                    controller.box.read('name'),
                     style: h3Bold,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -81,7 +81,7 @@ class ProfileView extends GetView<ProfileController> {
               decoration: BoxDecoration(
                 color: whiteColor,
                 boxShadow: [
-                  BoxShadow(
+                  const BoxShadow(
                     color: Color.fromRGBO(99, 99, 99, 0.2),
                     blurRadius: 8,
                     spreadRadius: 0,

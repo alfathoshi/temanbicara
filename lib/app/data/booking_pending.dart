@@ -1,8 +1,9 @@
-class ConsultPending {
+class BookingPending {
   final String nama;
   final String durasi;
   final String tanggal;
-  final String waktu;
+  final String waktuMulai;
+  final String waktuSelesai;
   final String tanggalTenggat;
   final String waktuTenggat;
   final String metodePembayaran;
@@ -17,12 +18,14 @@ class ConsultPending {
   final String expiredDate;
   final String? availableDateRaw;
   final String expertises;
+  final int consultationID;
 
-  ConsultPending({
+  BookingPending({
     required this.nama,
     required this.durasi,
     required this.tanggal,
-    required this.waktu,
+    required this.waktuMulai,
+    required this.waktuSelesai,
     required this.tanggalTenggat,
     required this.waktuTenggat,
     required this.metodePembayaran,
@@ -31,6 +34,7 @@ class ConsultPending {
     required this.transactionId,
     required this.expiredDate,
     required this.expertises,
+    required this.consultationID,
     this.availableDateRaw,
     this.bank = '',
     this.createdAt = '',
