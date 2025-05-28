@@ -83,63 +83,31 @@ class EditJournalView extends GetView<EditJournalController> {
             ),
             sby16,
             Text(
-              'Stress Level',
+              'Upload Image',
               style: h6SemiBold,
             ),
-            Obx(
-              () => Column(
-                children: [
-                  Slider(
-                    value: controller.sliderValue.value,
-                    divisions: 4,
-                    min: 0,
-                    max: 4,
-                    onChanged: (value) {
-                      controller.sliderValue.value = value;
-                    },
-                    activeColor: primaryColor,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      for (int i = 1; i <= 5; i++)
-                        Text(
-                          i.toString(),
-                          style: h6SemiBold,
-                        ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            sby16,
-            Text(
-              'Select Your Emotions',
-              style: h6SemiBold,
-            ),
-            sby16,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: List.generate(
-                5,
-                (index) {
-                  return GestureDetector(
-                    onTap: () {
-                      controller.toggleEmotion(index);
-                    },
-                    child: Obx(
-                      () => Opacity(
-                        opacity: controller.getOpacity(index),
-                        child: Image.asset(
-                          'assets/images/emosi${index + 1}.png',
-                          scale: 10,
-                        ),
-                      ),
-                    ),
-                  );
+            const SizedBox(height: 8),
+            Obx(() {
+              return GestureDetector(
+                onTap: () {
+                  controller.pickImage();
                 },
-              ),
-            ),
+                child: Container(
+                  width: double.infinity,
+                  height: 150,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: greyColor),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: controller.pickedImage.value != null
+                      ? Image.file(controller.pickedImage.value!,
+                          fit: BoxFit.cover)
+                      : const Center(
+                          child: Icon(Icons.add_a_photo,
+                              size: 40, color: grey2Color)),
+                ),
+              );
+            }),
             sby16,
             Expanded(
               child: Center(
@@ -150,8 +118,6 @@ class EditJournalView extends GetView<EditJournalController> {
                       'id': controller.journalId,
                       'title': controller.titleController.text,
                       'body': controller.bodyController.text,
-                      'stress_level': controller.sliderValue.value + 1,
-                      'mood_level': controller.selectedEmotion.value,
                     });
                   },
                   color: primaryColor,

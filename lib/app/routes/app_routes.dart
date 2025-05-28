@@ -64,6 +64,7 @@ abstract class Routes {
   static const BOARDING_6 = _Paths.BOARDING_6;
   static const BOARDING_7 = _Paths.BOARDING_7;
   static const ON_BOARDING = _Paths.ON_BOARDING;
+  static const JOURNAL_DETAIL = _Paths.JOURNAL_DETAIL;
 }
 
 abstract class _Paths {
@@ -124,4 +125,5 @@ abstract class _Paths {
   static const BOARDING_6 = '/boarding-6';
   static const BOARDING_7 = '/boarding-7';
   static const ON_BOARDING = '/on-boarding';
+  static const JOURNAL_DETAIL = '/journal-detail';
 }
