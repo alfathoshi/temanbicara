@@ -30,7 +30,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.24.5' # Anda bisa sesuaikan dengan versi Flutter Anda
+          flutter-version: '3.32.0' # Anda bisa sesuaikan dengan versi Flutter Anda
           cache: true
 
       # Langkah 4: Menginstal semua package yang dibutuhkan proyek (dari pubspec.yaml)
