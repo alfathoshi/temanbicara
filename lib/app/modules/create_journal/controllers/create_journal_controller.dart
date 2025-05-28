@@ -53,8 +53,14 @@ class CreateJournalController extends GetxController {
       return false;
     }
 
+    if (titleController.text.length > 255) {
+      Get.snackbar('Invalid Title', 'Title too long',
+          backgroundColor: Colors.red.withValues(alpha: 0.6),
+          colorText: Colors.white);
+      return false;
+    }
+
     try {
-      // final userId = box.read('id');
       final token = box.read('token');
 
       var uri = Uri.parse('${Config.apiEndPoint}/journal');
