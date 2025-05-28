@@ -21,17 +21,25 @@ class CreateJournalController extends GetxController {
   var pickedImage = Rx<File?>(null);
 
   Future<void> pickImage() async {
-    // ignore: unused_local_variable
     var status = await Permission.photos.request();
-    // if (!status.isGranted) {
-    //   Get.snackbar('Permission Denied', 'Gallery access is required');
-    //   return;
-    // }
+    if (!status.isGranted) {
+      Get.snackbar('Permission Denied', 'Gallery access is required');
+      return;
+    }
 
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
-      pickedImage.value = File(pickedFile.path);
+      File imageFile = File(pickedFile.path);
+      int fileSize = await imageFile.length();
+      if (fileSize > (2 * 1024 * 1024)) {
+        Get.snackbar('Error', 'Image size is more than 2mb',
+            backgroundColor: Colors.red.withValues(alpha: 0.6),
+            colorText: Colors.white);
+        pickedImage.value = null;
+      } else {
+        pickedImage.value = imageFile;
+      }
     } else {
       Get.snackbar('Cancelled', 'No image selected');
     }
