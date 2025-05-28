@@ -40,11 +40,11 @@ abstract class Routes {
   static const CHAT = _Paths.CHAT;
   static const ROOM_CHAT = _Paths.ROOM_CHAT;
   static const CONSULTATION = _Paths.CONSULTATION;
-  static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
+
   static const CHANGE_PASSWORD = _Paths.CHANGE_PASSWORD;
   static const CHANGE_LANGUAGE = _Paths.CHANGE_LANGUAGE;
   static const CONSULT_SCHEDULE = _Paths.CONSULT_SCHEDULE;
-  static const EDIT_JOURNAL = _Paths.EDIT_JOURNAL;
+
   static const CHAT_ROOM = _Paths.CHAT_ROOM;
   static const CONSULT_HISTORY = _Paths.CONSULT_HISTORY;
   static const CONSULT_REPORT = _Paths.CONSULT_REPORT;
@@ -65,6 +65,7 @@ abstract class Routes {
   static const BOARDING_7 = _Paths.BOARDING_7;
   static const ON_BOARDING = _Paths.ON_BOARDING;
   static const JOURNAL_DETAIL = _Paths.JOURNAL_DETAIL;
+  static const EDIT_PROFILE = _Paths.EDIT_PROFILE;
 }
 
 abstract class _Paths {
@@ -103,11 +104,11 @@ abstract class _Paths {
   static const CHAT = '/chat';
   static const ROOM_CHAT = '/room-chat';
   static const CONSULTATION = '/consultation';
-  static const EDIT_PROFILE = '/edit-profile';
+
   static const CHANGE_PASSWORD = '/change-password';
   static const CHANGE_LANGUAGE = '/change-language';
   static const CONSULT_SCHEDULE = '/consult-schedule';
-  static const EDIT_JOURNAL = '/edit-journal';
+
   static const CHAT_ROOM = '/chat-room';
   static const CONSULT_HISTORY = '/consult-history';
   static const CONSULT_REPORT = '/consult-report';
@@ -126,4 +127,5 @@ abstract class _Paths {
   static const BOARDING_7 = '/boarding-7';
   static const ON_BOARDING = '/on-boarding';
   static const JOURNAL_DETAIL = '/journal-detail';
+  static const EDIT_PROFILE = '/edit-profile';
 }

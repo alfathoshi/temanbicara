@@ -38,8 +38,8 @@ import '../modules/create_journal/bindings/create_journal_binding.dart';
 import '../modules/create_journal/views/create_journal_view.dart';
 import '../modules/detail_artikel/bindings/detail_artikel_binding.dart';
 import '../modules/detail_artikel/views/detail_artikel_view.dart';
-import '../modules/edit_journal/bindings/edit_journal_binding.dart';
-import '../modules/edit_journal/views/edit_journal_view.dart';
+import '../modules/edit_profile/bindings/edit_profile_binding.dart';
+import '../modules/edit_profile/views/edit_profile_view.dart';
 import '../modules/forgotPassword/bindings/forgot_password_binding.dart';
 import '../modules/forgotPassword/views/forgot_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -250,11 +250,6 @@ class AppPages {
       binding: ConsultScheduleBinding(),
     ),
     GetPage(
-      name: _Paths.EDIT_JOURNAL,
-      page: () => const EditJournalView(),
-      binding: EditJournalBinding(),
-    ),
-    GetPage(
       name: _Paths.CHAT_ROOM,
       page: () => const ChatRoomView(),
       binding: ChatRoomBinding(),
@@ -308,6 +303,11 @@ class AppPages {
       name: _Paths.JOURNAL_DETAIL,
       page: () => const JournalDetailView(),
       binding: JournalDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.EDIT_PROFILE,
+      page: () => const EditProfileView(),
+      binding: EditProfileBinding(),
     ),
   ];
 }
