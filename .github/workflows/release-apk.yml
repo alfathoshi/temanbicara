@@ -6,7 +6,7 @@ name: Build and Release APK
 on:
   push:
     tags:
-      - 'v*.*.*'
+      - "v*.*.*"
 
 jobs:
   build-and-release:
@@ -23,20 +23,20 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
-      
+          java-version: "17"
+          distribution: "temurin"
+
       # Langkah 3: Setup Flutter SDK di mesin virtual
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.32.0' # Anda bisa sesuaikan dengan versi Flutter Anda
+          flutter-version: "3.32.0" # Anda bisa sesuaikan dengan versi Flutter Anda
           cache: true
 
       # Langkah 4: Menginstal semua package yang dibutuhkan proyek (dari pubspec.yaml)
       - name: Install dependencies
         run: flutter pub get
-      
+
       - name: Gemini Key
         run: |
           echo "GOOGLE_API=${{ secrets.GEMINI_KEY }}" >> .env
@@ -49,7 +49,7 @@ jobs:
       # Langkah 5: Mengambil teks rahasia dari GitHub Secret dan mengubahnya kembali menjadi file kunci
       - name: Decode Keystore
         run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/temanbicara_key.keystore
-      
+
       # Langkah 6: Membuat file properti kunci untuk memberitahu Flutter/Gradle di mana menemukan kunci & password
       - name: Create key.properties file
         run: |
@@ -61,6 +61,9 @@ jobs:
       # Langkah 7: Proses inti, membuat file APK rilis yang sudah ditandatangani
       - name: Build Signed APK
         run: flutter build apk --release
+
+      - name: Find APK Location
+        run: ls -R build/app/outputs
 
       # Langkah 8: Ganti nama APK
       - name: Rename APK
