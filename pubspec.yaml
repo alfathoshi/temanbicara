@@ -31,7 +31,7 @@ dependencies:
   get_storage: ^2.1.1
   google_fonts: ^6.2.1
   google_generative_ai: ^0.4.6
-  googleapis_auth: ^1.6.0
+  googleapis_auth: ^2.0.0
   http: ^1.2.2
   iconsax: ^0.0.8
   image_picker: ^1.1.2
