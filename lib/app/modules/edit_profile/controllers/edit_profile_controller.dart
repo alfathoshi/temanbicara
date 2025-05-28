@@ -20,10 +20,30 @@ class EditProfileController extends GetxController {
     selectedDate.value = DateTime(date.year, date.month, date.day);
   }
 
-  Future<void> editProfile() async {
+  Future<bool> editProfile() async {
     isLoading.value = true;
-
     String birthdate = DateFormat('yyyy-MM-dd').format(selectedDate.value);
+
+    if (nameController.text.isEmpty || nicknameController.text.isEmpty) {
+      Get.snackbar('Error', 'name or nickname are required',
+          backgroundColor: Colors.red.withValues(alpha: 0.6),
+          colorText: Colors.white);
+      return false;
+    }
+
+    if (nameController.text.length < 3 || nicknameController.text.length < 3) {
+      Get.snackbar('Too short', 'Name & Nickname min 3 characters',
+          backgroundColor: Colors.red.withValues(alpha: 0.6),
+          colorText: Colors.white);
+      return false;
+    }
+    final nameRegExp = RegExp(r'^[a-zA-Z\s]+$');
+    if (!nameRegExp.hasMatch(nameController.text) || !nameRegExp.hasMatch(nicknameController.text)) {
+      Get.snackbar('Invalid Chars', 'Special Character are not allowed',
+          backgroundColor: Colors.red.withValues(alpha: 0.6),
+          colorText: Colors.white);
+      return false;
+    }
 
     try {
       final token = box.read('token');
@@ -53,15 +73,19 @@ class EditProfileController extends GetxController {
           Get.snackbar('Success', 'Profile data updated successful',
               backgroundColor: primaryColor.withValues(alpha: 0.6),
               colorText: Colors.white);
+          return true;
         } else {
           Get.snackbar(
               'Error', responseData['message'] ?? 'Failed to update profile');
+          return false;
         }
       } else {
         Get.snackbar('Error', 'Failed to update profile.');
+        return false;
       }
     } catch (e) {
       Get.snackbar('Error', 'An error occurred: $e');
+      return false;
     } finally {
       isLoading.value = false;
     }
@@ -70,8 +94,8 @@ class EditProfileController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    nameController.text = box.read('name');
-    nicknameController.text = box.read('nickname');
+    nameController.text = box.read('name') ?? '';
+    nicknameController.text = box.read('nickname') ?? '';
     emailController.text = box.read('email');
     String storedBirthdate = box.read('birthdate');
     storedBirthdate.isNotEmpty

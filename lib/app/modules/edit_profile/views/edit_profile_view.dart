@@ -143,10 +143,11 @@ class EditProfileView extends GetView<EditProfileController> {
               height: 54,
               child: ElevatedButton(
                 onPressed: () async {
-                  await controller.editProfile();
-
-                  Get.offAllNamed(Routes.NAVIGATION_BAR,
-                      arguments: {"indexPage": 4});
+                  bool isSuccess = await controller.editProfile();
+                  isSuccess
+                      ? Get.offAllNamed(Routes.NAVIGATION_BAR,
+                          arguments: {"indexPage": 4})
+                      : '';
                 },
                 style: ButtonStyle(
                   backgroundColor: WidgetStatePropertyAll(primaryColor),
