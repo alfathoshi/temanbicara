@@ -10,16 +10,19 @@ class TopArticle extends StatelessWidget {
   final String? judul;
   final String? deskripsi;
   final String? author;
+  // final DateTime date;
   const TopArticle({
     super.key,
     this.judul,
     this.deskripsi,
     this.author,
     this.image,
+    // required this.date,
   });
 
   @override
   Widget build(BuildContext context) {
+    // print("tanggal $date");
     return InkWell(
       onTap: () {
         Get.to(
@@ -28,6 +31,7 @@ class TopArticle extends StatelessWidget {
             judul: judul,
             deskripsi: deskripsi,
             author: author,
+            // date: date,
           ),
         );
       },
@@ -82,6 +86,10 @@ class TopArticle extends StatelessWidget {
                         author ?? "Unknown Author",
                         style: h6Medium,
                       ),
+                      // Text(
+                      //   formatDate(date),
+                      //   style: h7Regular,
+                      // ),
                     ],
                   ),
                 ),

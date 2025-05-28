@@ -111,7 +111,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.DETAIL_ARTIKEL,
-      page: () => const DetailArtikelView(),
+      page: () => DetailArtikelView(),
       binding: DetailArtikelBinding(),
     ),
     GetPage(
@@ -163,11 +163,6 @@ class AppPages {
       name: _Paths.TRACKING_2,
       page: () => Tracking2View(),
       binding: Tracking2Binding(),
-    ),
-    GetPage(
-      name: _Paths.DETAIL_ARTIKEL,
-      page: () => const DetailArtikelView(),
-      binding: DetailArtikelBinding(),
     ),
     GetPage(
       name: _Paths.REPORT,

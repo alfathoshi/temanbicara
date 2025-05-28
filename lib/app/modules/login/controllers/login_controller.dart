@@ -88,7 +88,7 @@ class LoginController extends GetxController {
           );
         }
       } else {
-        Get.snackbar('Error', data['message'],
+        Get.snackbar('Error', "Email tidak terdaftar",
             backgroundColor: error.withValues(alpha: 0.6),
             colorText: whiteColor);
       }

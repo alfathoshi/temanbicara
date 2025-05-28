@@ -63,7 +63,8 @@ class ArticleView extends GetView<ArticleController> {
                       judul: article[index]["title"],
                       deskripsi: article[index]["content"],
                       author: article[index]["user"]["name"],
-                      image: article[index]["image"],
+                      image: article[index]["image"] ?? 'logo',
+                      // date: article[index]['created_at'],
                     ),
                   );
                 })

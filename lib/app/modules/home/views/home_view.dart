@@ -457,6 +457,7 @@ class HomeView extends GetView<ReportController> {
                               deskripsi: articles[index]["content"],
                               author: articles[index]["user"]["name"],
                               image: articles[index]["image"] ?? 'logo',
+                              // date: articles[index]['created_at'],
                             ),
                           );
                         },

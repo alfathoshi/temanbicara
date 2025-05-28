@@ -4,7 +4,7 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/custom_appbar.dart';
-import 'package:temanbicara/app/widgets/top_article.dart';
+
 import '../controllers/detail_artikel_controller.dart';
 
 class DetailArtikelView extends GetView<DetailArtikelController> {
@@ -12,8 +12,10 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
   final String? judul;
   final String? deskripsi;
   final String? author;
+  // final DateTime date;
 
   const DetailArtikelView({
+    // this.date,
     this.image,
     this.judul,
     this.deskripsi,
@@ -85,14 +87,15 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
                 itemCount: 3,
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: const EdgeInsets.only(right: 24),
-                    child: TopArticle(
-                      judul: judul ?? "No Title",
-                      deskripsi: deskripsi ?? "No Description",
-                      author: author ?? "Unknown Author",
-                      image: image ?? "default_image",
-                    ),
-                  );
+                      padding: const EdgeInsets.only(right: 24),
+                      child: Text('data')
+                      // TopArticle(
+                      //     judul: judul ?? "No Title",
+                      //     deskripsi: deskripsi ?? "No Description",
+                      //     author: author ?? "Unknown Author",
+                      //     image: image ?? "default_image",
+                      //     date: date),
+                      );
                 },
               ),
             ),
