@@ -16,7 +16,6 @@ import 'package:temanbicara/app/widgets/top_article.dart';
 import '../../journal/controllers/journal_controller.dart';
 import '../controllers/home_controller.dart';
 
-
 // ignore: must_be_immutable
 class HomeView extends GetView<HomeController> {
   GetStorage box = GetStorage();
@@ -174,9 +173,10 @@ class HomeView extends GetView<HomeController> {
                               detail: reportController.detail.value.isNotEmpty
                                   ? reportController.detail.value
                                   : 'Complete your tracking to see your mental matrix.',
-                              matrixValue: reportController.isTrackingFilled.value
-                                  ? reportController.matrixValue.value
-                                  : '',
+                              matrixValue:
+                                  reportController.isTrackingFilled.value
+                                      ? reportController.matrixValue.value
+                                      : '',
                               isFilled: reportController.isTrackingFilled.value,
                             ),
                           ),
@@ -409,7 +409,7 @@ class HomeView extends GetView<HomeController> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Top Article',
+                              'New Article',
                               style: h4SemiBold,
                             ),
                             GestureDetector(
@@ -439,8 +439,9 @@ class HomeView extends GetView<HomeController> {
                       child: Text("No Data Available"),
                     );
                   } else {
-                    final List articles = controller.articles['data'] ?? [];
-                    
+                    final List articles =
+                        controller.articles['data']['data'] ?? [];
+
                     final double containerHeight =
                         articles.length <= 2 ? articles.length * 180.0 : 530.0;
                     return Container(
@@ -458,7 +459,7 @@ class HomeView extends GetView<HomeController> {
                               deskripsi: articles[index]["content"],
                               author: articles[index]["user"]["name"],
                               image: articles[index]["image"] ?? 'logo',
-                              // date: articles[index]['created_at'],
+                              date: articles[index]['created_at'],
                             ),
                           );
                         },

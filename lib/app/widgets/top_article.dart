@@ -1,28 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:temanbicara/app/modules/detail_artikel/views/detail_artikel_view.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 
 class TopArticle extends StatelessWidget {
-  final String? image;
   final String? judul;
   final String? deskripsi;
   final String? author;
-  // final DateTime date;
+  final String? image;
+  final String? date;
   const TopArticle({
     super.key,
     this.judul,
     this.deskripsi,
     this.author,
     this.image,
-    // required this.date,
+    this.date,
   });
 
   @override
   Widget build(BuildContext context) {
-    // print("tanggal $date");
+    // print(date);
+    String displayDate = "Tanggal tidak tersedia";
+    if (date != null && date!.isNotEmpty) {
+      try {
+        DateTime parsedDate = DateTime.parse(date!);
+        displayDate = DateFormat('dd MMMM yyyy').format(parsedDate);
+      } catch (e) {
+        print("Error parsing date in TopArticle ('$date'): $e");
+        displayDate = date!;
+      }
+    }
+
+    bool isNetworkImage =
+        image != null && image != 'logo' && image!.startsWith('http');
+
     return InkWell(
       onTap: () {
         Get.to(
@@ -81,15 +96,21 @@ class TopArticle extends StatelessWidget {
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      sby8,
-                      Text(
-                        author ?? "Unknown Author",
-                        style: h6Medium,
-                      ),
-                      // Text(
-                      //   formatDate(date),
-                      //   style: h7Regular,
-                      // ),
+                      sby24,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            author ?? "Unknown Author",
+                            style: h6Medium,
+                          ),
+                          Text(
+                            displayDate,
+                            style: h7Regular,
+                            textAlign: TextAlign.end,
+                          ),
+                        ],
+                      )
                     ],
                   ),
                 ),

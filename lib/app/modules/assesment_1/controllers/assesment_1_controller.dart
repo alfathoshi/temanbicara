@@ -90,7 +90,7 @@ class Assesment1Controller extends GetxController {
           );
           Get.toNamed(Routes.ASSESMENT_2);
         } else {
-          Get.snackbar('Failed', 'Phone number must be number',
+          Get.snackbar('Failed', 'Phone number must contains digits only',
               backgroundColor: Colors.red.withValues(alpha: 0.6),
               colorText: Colors.white);
         }
