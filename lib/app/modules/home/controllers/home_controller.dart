@@ -65,21 +65,16 @@ class HomeController extends GetxController {
   }
 
   Future<void> _loadInitialData() async {
-    // Anda bisa menambahkan indikator loading di sini jika perlu
-    // isLoading.value = true;
     try {
-      // Jalankan secara paralel jika memungkinkan untuk performa lebih baik
       await Future.wait([
         _profileController.fetchData(),
         _reportController.getMatrix().then((_) async {
-          // Memastikan getMatrix selesai sebelum checkTracking
           await _reportController.checkTracking();
         }),
         _journalController.fetchJournals(),
         fetchData()
       ]);
     } catch (e) {
-      print("Error loading initial data for Home: $e");
       // Handle error
     }
   }
