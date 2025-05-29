@@ -14,9 +14,13 @@ class ChatRoomController extends GetxController {
   final messageC = TextEditingController();
 
   final ChatService chatService = ChatService();
+  var canSendMessage = false.obs;
 
   Future<void> handleSendPressed(String message) async {
-    await chatService.sendMessage(args['counselor_id'].toString(), message);
+    if (message.trim().isNotEmpty) {
+      await chatService.sendMessage(otherUser.id, message);
+      canSendMessage.value = false; 
+    }
   }
 
   @override

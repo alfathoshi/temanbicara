@@ -31,7 +31,6 @@ class ChatContainer extends StatelessWidget {
             arguments: {'name': nama, 'counselor_id': id});
       },
       child: Container(
-        width: 393,
         height: 90,
         decoration: BoxDecoration(
           color: whiteColor,
@@ -54,34 +53,33 @@ class ChatContainer extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 13, 17, 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    nama!,
-                    style: h6Bold,
-                  ),
-                  Text(
-                    deskripsi!,
-                    style: h7Regular.copyWith(
-                        color: Colors.grey.withValues(alpha: 0.9)),
-                    softWrap: true,
-                    overflow: TextOverflow.fade,
-                  ),
-                ],
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 13, 17, 12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      nama!,
+                      style: h6Bold,
+                    ),
+                    Text(
+                      deskripsi!,
+                      style: h7Regular.copyWith(
+                          color: Colors.grey.withValues(alpha: 0.9)),
+                      softWrap: true,
+                      overflow: TextOverflow.fade,
+                    ),
+                  ],
+                ),
               ),
             ),
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.only(right: 15),
-              child: Text(
-                parsedTime,
-                style: h7Regular.copyWith(
-                    color: Colors.grey.withValues(alpha: 0.9)),
-              ),
+            Text(
+              parsedTime,
+              overflow: TextOverflow.fade,
+              style: h7Regular.copyWith(
+                  color: Colors.grey.withValues(alpha: 0.9)),
             )
           ],
         ),

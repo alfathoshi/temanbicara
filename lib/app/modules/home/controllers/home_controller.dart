@@ -14,6 +14,7 @@ class HomeController extends GetxController {
   var isLoading = false.obs;
   var journals = {}.obs;
   var articles = {}.obs;
+  RxString profileUrl = "".obs;
   RxString name = ''.obs;
 
   Future<void> fetchData() async {

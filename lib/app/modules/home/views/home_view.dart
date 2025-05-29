@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:temanbicara/app/modules/profile/controllers/profile_controller.dart';
 import 'package:temanbicara/app/modules/report/controllers/report_controller.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
@@ -16,13 +17,13 @@ import 'package:temanbicara/app/widgets/top_article.dart';
 import '../../journal/controllers/journal_controller.dart';
 import '../controllers/home_controller.dart';
 
-
 // ignore: must_be_immutable
 class HomeView extends GetView<HomeController> {
   GetStorage box = GetStorage();
   HomeView({super.key});
   final ReportController reportController = Get.find<ReportController>();
   final JournalController journalController = Get.find<JournalController>();
+  final ProfileController profileController = Get.find<ProfileController>();
 
   @override
   Widget build(BuildContext context) {
@@ -107,40 +108,44 @@ class HomeView extends GetView<HomeController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 30,
-                              backgroundColor: border,
-                              child: CircleAvatar(
-                                radius: 28,
-                                backgroundColor: whiteColor,
-                                child: Image.asset(
-                                  'assets/images/profile.png',
-                                  scale: 2,
+                        Obx(
+                          () => Row(
+                            children: [
+                              CircleAvatar(
+                                radius: 30,
+                                backgroundColor: border,
+                                child: CircleAvatar(
+                                  radius: 28,
+                                  backgroundColor: whiteColor,
+                                  backgroundImage:
+                                      NetworkImage(controller.profileUrl.value),
+                                  child: Image.asset(
+                                    'assets/images/profile.png',
+                                    scale: 2,
+                                  ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(
-                              width: 21,
-                            ),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Hello, ${box.read('name')}',
-                                    style: h3SemiBold,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  Text(
-                                    'How${"'s"} your day?',
-                                    style: h4Regular,
-                                  )
-                                ],
+                              const SizedBox(
+                                width: 21,
                               ),
-                            )
-                          ],
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Hello, ${box.read('name')}',
+                                      style: h3SemiBold,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Text(
+                                      'How${"'s"} your day?',
+                                      style: h4Regular,
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                         const SizedBox(
                           height: 24,
@@ -174,9 +179,10 @@ class HomeView extends GetView<HomeController> {
                               detail: reportController.detail.value.isNotEmpty
                                   ? reportController.detail.value
                                   : 'Complete your tracking to see your mental matrix.',
-                              matrixValue: reportController.isTrackingFilled.value
-                                  ? reportController.matrixValue.value
-                                  : '',
+                              matrixValue:
+                                  reportController.isTrackingFilled.value
+                                      ? reportController.matrixValue.value
+                                      : '',
                               isFilled: reportController.isTrackingFilled.value,
                             ),
                           ),
@@ -409,7 +415,7 @@ class HomeView extends GetView<HomeController> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Top Article',
+                              'New Article',
                               style: h4SemiBold,
                             ),
                             GestureDetector(
@@ -439,7 +445,9 @@ class HomeView extends GetView<HomeController> {
                       child: Text("No Data Available"),
                     );
                   } else {
-                    final List articles = controller.articles['data'] ?? [];
+                    final List articles =
+                        controller.articles['data']['data'] ?? [];
+
                     final double containerHeight =
                         articles.length <= 2 ? articles.length * 180.0 : 530.0;
                     return Container(
@@ -457,7 +465,7 @@ class HomeView extends GetView<HomeController> {
                               deskripsi: articles[index]["content"],
                               author: articles[index]["user"]["name"],
                               image: articles[index]["image"] ?? 'logo',
-                              // date: articles[index]['created_at'],
+                              date: articles[index]['created_at'],
                             ),
                           );
                         },

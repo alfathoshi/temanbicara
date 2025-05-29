@@ -43,11 +43,11 @@ class ChatRoomView extends GetView<ChatRoomController> {
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: controller.chatService.getMessages(controller.user.id,
-            controller.otherUser.id), // Stream data dari Firebase
+            controller.otherUser.id), 
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-                child: CircularProgressIndicator()); // Loading indicator
+                child: CircularProgressIndicator()); 
           }
 
           if (snapshot.hasError) {
