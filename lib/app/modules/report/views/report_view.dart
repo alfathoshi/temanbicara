@@ -6,6 +6,7 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
+import 'package:temanbicara/app/widgets/consult/format_date.dart';
 import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import 'package:temanbicara/app/widgets/report/report_matrix.dart';
 import '../../../widgets/date.dart';
@@ -66,19 +67,23 @@ class ReportView extends GetView<ReportController> {
                             style: h6Medium,
                           ),
                         ),
-                        Row(
-                          children: [
-                            FlexibleDatePicker(
-                              selectedDate: controller.selectedDate.value,
-                              isIconOnly: true,
-                              onDateChanged: (picked) {
-                                controller.updateDate(picked);
-                                controller.getMatrix();
-                                controller.checkTracking();
-                              },
-                            )
-                          ],
-                        )
+                        Obx(
+                          () => Row(
+                            children: [
+                              Text(formatDate(controller.selectedDate.value)),
+                              sbx8,
+                              FlexibleDatePicker(
+                                selectedDate: controller.selectedDate.value,
+                                isIconOnly: true,
+                                onDateChanged: (picked) {
+                                  controller.updateDate(picked);
+                                  controller.getMatrix();
+                                  controller.checkTracking();
+                                },
+                              )
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(
