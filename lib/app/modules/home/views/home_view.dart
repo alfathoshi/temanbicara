@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:temanbicara/app/modules/profile/controllers/profile_controller.dart';
 import 'package:temanbicara/app/modules/report/controllers/report_controller.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
@@ -22,6 +23,7 @@ class HomeView extends GetView<HomeController> {
   HomeView({super.key});
   final ReportController reportController = Get.find<ReportController>();
   final JournalController journalController = Get.find<JournalController>();
+  final ProfileController profileController = Get.find<ProfileController>();
 
   @override
   Widget build(BuildContext context) {
@@ -106,40 +108,44 @@ class HomeView extends GetView<HomeController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 30,
-                              backgroundColor: border,
-                              child: CircleAvatar(
-                                radius: 28,
-                                backgroundColor: whiteColor,
-                                child: Image.asset(
-                                  'assets/images/profile.png',
-                                  scale: 2,
+                        Obx(
+                          () => Row(
+                            children: [
+                              CircleAvatar(
+                                radius: 30,
+                                backgroundColor: border,
+                                child: CircleAvatar(
+                                  radius: 28,
+                                  backgroundColor: whiteColor,
+                                  backgroundImage:
+                                      NetworkImage(controller.profileUrl.value),
+                                  child: Image.asset(
+                                    'assets/images/profile.png',
+                                    scale: 2,
+                                  ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(
-                              width: 21,
-                            ),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Hello, ${box.read('name')}',
-                                    style: h3SemiBold,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  Text(
-                                    'How${"'s"} your day?',
-                                    style: h4Regular,
-                                  )
-                                ],
+                              const SizedBox(
+                                width: 21,
                               ),
-                            )
-                          ],
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Hello, ${box.read('name')}',
+                                      style: h3SemiBold,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Text(
+                                      'How${"'s"} your day?',
+                                      style: h4Regular,
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                         const SizedBox(
                           height: 24,

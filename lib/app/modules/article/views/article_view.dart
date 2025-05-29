@@ -5,6 +5,7 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/top_article.dart';
 
+import '../../../widgets/custom_appbar.dart';
 import '../controllers/article_controller.dart';
 
 class ArticleView extends GetView<ArticleController> {
@@ -12,6 +13,12 @@ class ArticleView extends GetView<ArticleController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: CustomAppBar(
+        title: Text(
+          "Article",
+          style: h3Bold,
+        ),
+      ),
       backgroundColor: whiteColor,
       body: Obx(() {
         if (controller.isLoadingInitial.value && controller.articles.isEmpty) {
@@ -24,18 +31,6 @@ class ArticleView extends GetView<ArticleController> {
           child: CustomScrollView(
             controller: controller.scrollController,
             slivers: [
-              SliverAppBar(
-                pinned: true,
-                floating: true,
-                toolbarHeight: 85,
-                backgroundColor: Colors.white,
-                title: Text('Article', style: h3Bold),
-                centerTitle: true,
-                bottom: PreferredSize(
-                  preferredSize: const Size.fromHeight(1),
-                  child: Container(color: grey4Color, height: 0.5),
-                ),
-              ),
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.only(left: 24, top: 20, bottom: 20),
