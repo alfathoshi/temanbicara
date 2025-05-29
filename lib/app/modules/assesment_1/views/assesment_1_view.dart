@@ -45,6 +45,7 @@ class Assesment1View extends GetView<Assesment1Controller> {
                       Text('Name', style: textDescriptionSemiBold),
                       sby8,
                       TextField(
+                        style: h6Regular,
                         controller: controller.nameC,
                         cursorColor: black,
                         decoration: InputDecoration(
@@ -64,6 +65,7 @@ class Assesment1View extends GetView<Assesment1Controller> {
                       Text('Nickname', style: textDescriptionSemiBold),
                       sby8,
                       TextField(
+                        style: h6Regular,
                         controller: controller.nicknameC,
                         cursorColor: black,
                         decoration: InputDecoration(
@@ -86,6 +88,7 @@ class Assesment1View extends GetView<Assesment1Controller> {
                         alignment: Alignment.centerLeft,
                         children: [
                           TextField(
+                            style: h6Regular,
                             keyboardType: TextInputType.phone,
                             cursorColor: black,
                             controller: controller.phoneC,
@@ -151,31 +154,33 @@ class Assesment1View extends GetView<Assesment1Controller> {
                             onDateChanged: (picked) {
                               controller.updateDate(picked);
                             },
-                            placeholder: 'Tanggal Lahir',
+                            placeholder: 'Enter your birthdate',
                           )),
                       sby24,
                       const Expanded(child: SizedBox()),
-                      Obx(() => ElevatedButton(
-                            onPressed: () {
-                              controller.saveAssesment();
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: primaryColor,
-                              foregroundColor: Colors.white,
-                              minimumSize: const Size(double.infinity, 44),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)),
-                            ),
-                            child: controller.isLoading.value == false
-                                ? Text('Next',
-                                    style: h5Bold.copyWith(color: whiteColor))
-                                : SizedBox(
-                                    height: 20,
-                                    width: 20,
-                                    child: CircularProgressIndicator(
-                                        color: whiteColor),
-                                  ),
-                          )),
+                      Obx(
+                        () => ElevatedButton(
+                          onPressed: () {
+                            controller.saveAssesment();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: primaryColor,
+                            foregroundColor: Colors.white,
+                            minimumSize: const Size(double.infinity, 44),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                          ),
+                          child: controller.isLoading.value == false
+                              ? Text('Next',
+                                  style: h5Bold.copyWith(color: whiteColor))
+                              : SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator(
+                                      color: whiteColor),
+                                ),
+                        ),
+                      ),
                     ],
                   ),
                 ),

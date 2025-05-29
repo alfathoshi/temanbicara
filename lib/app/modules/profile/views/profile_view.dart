@@ -67,7 +67,7 @@ class ProfileView extends GetView<ProfileController> {
                   ),
                   sby12,
                   Text(
-                    controller.box.read('name'),
+                    controller.box.read('name') ?? 'kosong',
                     style: h3Bold,
                     overflow: TextOverflow.ellipsis,
                   ),

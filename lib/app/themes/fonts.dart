@@ -265,7 +265,7 @@ TextStyle textTitle = GoogleFonts.poppins(
 );
 TextStyle textFieldStyle = GoogleFonts.poppins(
   fontWeight: FontWeight.w400,
-  color: greyColor,
+  color: font,
   fontSize: 13,
 );
 TextStyle textGenderTrue = GoogleFonts.poppins(

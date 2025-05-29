@@ -29,6 +29,7 @@ class HomeController extends GetxController {
       );
       if (response.statusCode == 200) {
         articles.value = json.decode(response.body);
+        print(articles.values);
       }
       // else {
       //   throw Exception('Failed to load schedule');
@@ -40,11 +41,41 @@ class HomeController extends GetxController {
     }
   }
 
+  late final ReportController _reportController;
+  late final ProfileController _profileController;
+  late final JournalController _journalController;
+
+  Future<void> refreshMentalMatrixData() async {
+    isLoading.value = true; // jika ada state loading
+    await _reportController.getMatrix();
+    await _reportController
+        .checkTracking(); // _reportController dari Get.find()
+    // Mungkin perlu update() jika tidak semua state reaktif atau ada kalkulasi manual
+    isLoading.value = false;
+  }
+
   @override
   void onInit() async {
-    await ProfileController().fetchData();
-    await ReportController().checkTracking();
-    await JournalController().fetchJournals();
     super.onInit();
+    _reportController = Get.find<ReportController>();
+    _profileController = Get.find<ProfileController>();
+    _journalController = Get.find<JournalController>();
+
+    _loadInitialData();
+  }
+
+  Future<void> _loadInitialData() async {
+    try {
+      await Future.wait([
+        _profileController.fetchData(),
+        _reportController.getMatrix().then((_) async {
+          await _reportController.checkTracking();
+        }),
+        _journalController.fetchJournals(),
+        fetchData()
+      ]);
+    } catch (e) {
+      // Handle error
+    }
   }
 }

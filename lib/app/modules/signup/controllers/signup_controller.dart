@@ -64,7 +64,7 @@ class SignupController extends GetxController {
             Routes.ASSESMENT_1,
           );
         } else {
-          Get.snackbar('Error', data['message'],
+          Get.snackbar('Error', "Email sudah terdaftar",
               backgroundColor: error.withValues(alpha: 0.6),
               colorText: whiteColor);
         }

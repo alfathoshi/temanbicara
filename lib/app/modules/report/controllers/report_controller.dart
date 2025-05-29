@@ -97,8 +97,7 @@ class ReportController extends GetxController {
   Future<void> getMatrix() async {
     try {
       isLoading.value = true;
-      // ignore: unused_local_variable
-      final userId = box.read('id');
+
       final token = box.read('token');
 
       var response = await http.post(

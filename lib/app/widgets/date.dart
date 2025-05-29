@@ -20,6 +20,12 @@ class FlexibleDatePicker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String displayText;
+    if (isSameDate(selectedDate, DateTime.now())) {
+      displayText = placeholder ?? "Choose";
+    } else {
+      displayText = DateFormat('dd-MM-yyyy').format(selectedDate);
+    }
     return GestureDetector(
       onTap: () async {
         final DateTime? pickedDate = await showDatePicker(
@@ -63,8 +69,10 @@ class FlexibleDatePicker extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    DateFormat('dd-MM-yyyy').format(selectedDate),
-                    style: textFieldStyle,
+                    displayText,
+                    style: isSameDate(selectedDate, DateTime.now())
+                        ? h5Regular.copyWith(color: greyColor)
+                        : h6Regular,
                   ),
                   const Icon(Icons.keyboard_arrow_down),
                 ],

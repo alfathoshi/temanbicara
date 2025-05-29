@@ -59,24 +59,27 @@ class JournalCard extends StatelessWidget {
                         return Center(child: CircularProgressIndicator());
                       },
                       errorBuilder: (context, error, stackTrace) {
-                        return Text('Tidak ada gambar');
+                        return Text(
+                          'Tidak ada gambar',
+                          style: h7Regular,
+                        );
                       },
                     ),
                   ),
                 ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(left: 16),
                 child: Text(
                   title,
-                  style: h6SemiBold,
+                  style: h4SemiBold,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 8),
+                padding: const EdgeInsets.only(left: 16, right: 16),
                 child: Text(
                   body,
-                  style: h7Regular,
+                  style: h5Regular,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
