@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 
 import '../../../config/config.dart';
@@ -14,34 +17,31 @@ class EditJournalController extends GetxController {
   final TextEditingController bodyController = TextEditingController();
   final fetchController = Get.find<JournalController>();
   late int journalId;
-  var sliderValue = 0.0.obs;
-  var selectedEmotion = ''.obs;
-  final List<String> emotions = [
-    'Depresi',
-    'Sedih',
-    'Netral',
-    'Senang',
-    'Bahagia'
-  ];
 
   var isLoading = false.obs;
 
-  void toggleEmotion(int index) {
-    selectedEmotion.value = emotions[index];
-  }
+  var pickedImage = Rx<File?>(null);
 
-  double getOpacity(int index) {
-    return selectedEmotion.value == emotions[index] ? 1.0 : 0.5;
+  Future<void> pickImage() async {
+    // ignore: unused_local_variable
+    var status = await Permission.photos.request();
+    // if (!status.isGranted) {
+    //   Get.snackbar('Permission Denied', 'Gallery access is required');
+    //   return;
+    // }
+
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      pickedImage.value = File(pickedFile.path);
+    } else {
+      Get.snackbar('Cancelled', 'No image selected');
+    }
   }
 
   Future<void> updateJournal() async {
     if (titleController.text.isEmpty || bodyController.text.isEmpty) {
       Get.snackbar('Error', 'Title and Body are required');
-      return;
-    }
-
-    if (selectedEmotion.isEmpty) {
-      Get.snackbar('Error', 'Please select your emotion');
       return;
     }
 
@@ -60,8 +60,6 @@ class EditJournalController extends GetxController {
         body: jsonEncode({
           'title': titleController.text,
           'body': bodyController.text,
-          'stress_level': sliderValue.value + 1,
-          'mood_level': selectedEmotion.value,
           'user_id': userId,
         }),
       );
@@ -99,8 +97,6 @@ class EditJournalController extends GetxController {
       journalId = arguments['id'];
       titleController.text = arguments['title'] ?? '';
       bodyController.text = arguments['body'] ?? '';
-      sliderValue.value = (arguments['stress_level'] ?? 1).toDouble() - 1;
-      selectedEmotion.value = arguments['mood_level'] ?? '';
     }
   }
 

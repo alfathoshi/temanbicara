@@ -181,6 +181,15 @@ class JournalView extends GetView<JournalController> {
                             barrierDismissible: false,
                           );
                         },
+                        getJournal: () {
+                          Get.toNamed(Routes.JOURNAL_DETAIL, arguments: {
+                            'journal_id': journal['journal_id'],
+                            'title': journal['title'],
+                            'body': journal['body'],
+                            'image_url': journal['image_url'],
+                            'created_at': journal['created_at'],
+                          });
+                        },
                       );
                     },
                   );

@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
-
 import '../themes/colors.dart';
 import '../themes/fonts.dart';
 
@@ -12,7 +11,7 @@ class JournalCard extends StatelessWidget {
   final String date;
   final String image;
   final Function()? getDelete;
-  final Function()? getEdit;
+  final Function()? getJournal;
 
   const JournalCard({
     super.key,
@@ -20,7 +19,7 @@ class JournalCard extends StatelessWidget {
     required this.body,
     required this.date,
     this.getDelete,
-    this.getEdit,
+    required this.getJournal,
     required this.image,
   });
 
@@ -32,80 +31,85 @@ class JournalCard extends StatelessWidget {
         left: 16,
         right: 16,
       ),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: border,
+      child: GestureDetector(
+        onTap: getJournal,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: border,
+            ),
           ),
-        ),
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (image != '')
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Padding(
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (image != '')
+                Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Image.network(
-                    image,
-                    height: image == '' ? 80 : 150,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                    loadingBuilder: (context, child, loadingProgress) {
-                      if (loadingProgress == null) return child;
-                      return Center(child: CircularProgressIndicator());
-                    },
-                    errorBuilder: (context, error, stackTrace) {
-                      return Text('Kosong');
-                    },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.network(
+                      image,
+                      height: image == '' ? 80 : 150,
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Center(child: CircularProgressIndicator());
+                      },
+                      errorBuilder: (context, error, stackTrace) {
+                        return Text('Tidak ada gambar');
+                      },
+                    ),
                   ),
                 ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  title,
+                  style: h6SemiBold,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                title,
-                style: h6SemiBold,
+              Padding(
+                padding: const EdgeInsets.only(left: 8),
+                child: Text(
+                  body,
+                  style: h7Regular,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8),
-              child: Text(
-                body,
-                style: h7Regular,
-              ),
-            ),
-            const Divider(),
-            Padding(
-              padding: const EdgeInsets.only(left: 8, right: 8),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    date,
-                    style: h7Regular,
-                  ),
-                  Row(
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          getDelete?.call();
-                        },
-                        icon: Icon(
-                          Icons.delete,
-                          size: 24,
-                          color: Colors.red,
+              const Divider(),
+              Padding(
+                padding: const EdgeInsets.only(left: 8, right: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      date,
+                      style: h7Regular,
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            getDelete?.call();
+                          },
+                          icon: Icon(
+                            Icons.delete,
+                            size: 24,
+                            color: Colors.red,
+                          ),
                         ),
-                      ),
-                      sbX12,
-                    ],
-                  )
-                ],
-              ),
-            )
-          ],
+                        sbX12,
+                      ],
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

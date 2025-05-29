@@ -13,21 +13,6 @@ class JournalController extends GetxController {
   final box = GetStorage();
   var isLoading = false.obs;
   var journalList = [].obs;
-  // final List<String> emotions = [
-  //   'Depresi',
-  //   'Sedih',
-  //   'Netral',
-  //   'Senang',
-  //   'Bahagia'
-  // ];
-
-  // final List<Color> emotionColors = [
-  //   Colors.purpleAccent,
-  //   Colors.lightGreen,
-  //   Colors.yellow,
-  //   Colors.orange,
-  //   Colors.redAccent,
-  // ];
 
   var selectedDate = DateTime.now().obs;
   void updateDate(DateTime date) {

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+
 import '../modules/Tracking/bindings/tracking_binding.dart';
 import '../modules/Tracking/views/tracking_view.dart';
 import '../modules/Tracking_2/bindings/tracking_2_binding.dart';
@@ -39,14 +40,14 @@ import '../modules/detail_artikel/bindings/detail_artikel_binding.dart';
 import '../modules/detail_artikel/views/detail_artikel_view.dart';
 import '../modules/edit_journal/bindings/edit_journal_binding.dart';
 import '../modules/edit_journal/views/edit_journal_view.dart';
-import '../modules/edit_profile/bindings/edit_profile_binding.dart';
-import '../modules/edit_profile/views/edit_profile_view.dart';
 import '../modules/forgotPassword/bindings/forgot_password_binding.dart';
 import '../modules/forgotPassword/views/forgot_password_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/journal/bindings/journal_binding.dart';
 import '../modules/journal/views/journal_view.dart';
+import '../modules/journal_detail/bindings/journal_detail_binding.dart';
+import '../modules/journal_detail/views/journal_detail_view.dart';
 import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/mental_matrix/bindings/mental_matrix_binding.dart';
@@ -234,11 +235,6 @@ class AppPages {
       binding: RoomChatBinding(),
     ),
     GetPage(
-      name: _Paths.EDIT_PROFILE,
-      page: () => EditProfileView(),
-      binding: EditProfileBinding(),
-    ),
-    GetPage(
       name: _Paths.CHANGE_PASSWORD,
       page: () => ChangePasswordView(),
       binding: ChangePasswordBinding(),
@@ -307,6 +303,11 @@ class AppPages {
       name: _Paths.ON_BOARDING,
       page: () => const OnBoardingView(),
       binding: OnBoardingBinding(),
+    ),
+    GetPage(
+      name: _Paths.JOURNAL_DETAIL,
+      page: () => const JournalDetailView(),
+      binding: JournalDetailBinding(),
     ),
   ];
 }

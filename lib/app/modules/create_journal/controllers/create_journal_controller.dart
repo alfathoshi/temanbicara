@@ -21,33 +21,40 @@ class CreateJournalController extends GetxController {
   var pickedImage = Rx<File?>(null);
 
   Future<void> pickImage() async {
-    // ignore: unused_local_variable
     var status = await Permission.photos.request();
-    // if (!status.isGranted) {
-    //   Get.snackbar('Permission Denied', 'Gallery access is required');
-    //   return;
-    // }
+    if (!status.isGranted) {
+      Get.snackbar('Permission Denied', 'Gallery access is required');
+      return;
+    }
 
     final picker = ImagePicker();
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
-      pickedImage.value = File(pickedFile.path);
+      File imageFile = File(pickedFile.path);
+      int fileSize = await imageFile.length();
+      if (fileSize > (2 * 1024 * 1024)) {
+        Get.snackbar('Error', 'Image size is more than 2mb',
+            backgroundColor: Colors.red.withValues(alpha: 0.6),
+            colorText: Colors.white);
+        pickedImage.value = null;
+      } else {
+        pickedImage.value = imageFile;
+      }
     } else {
       Get.snackbar('Cancelled', 'No image selected');
     }
   }
 
-  Future<void> submitJournal() async {
+  Future<bool> submitJournal() async {
     if (titleController.text.isEmpty || bodyController.text.isEmpty) {
       Get.snackbar('Error', 'Title and Body are required',
           backgroundColor: Colors.red.withValues(alpha: 0.6),
           colorText: Colors.white);
-      return;
+      return false;
     }
 
     try {
-      // ignore: unused_local_variable
-      final userId = box.read('id');
+      // final userId = box.read('id');
       final token = box.read('token');
 
       var uri = Uri.parse('${Config.apiEndPoint}/journal');
@@ -77,13 +84,14 @@ class CreateJournalController extends GetxController {
         Get.snackbar('Success', 'Journal created successfully',
             backgroundColor: primaryColor.withValues(alpha: 0.6),
             colorText: Colors.white);
+        return true;
       } else {
-        // ignore: unused_local_variable
-        var body = await response.stream.bytesToString();
         Get.snackbar('Error', 'Failed to create journal');
+        return false;
       }
     } catch (e) {
       Get.snackbar('Error', 'An error occurred: $e');
+      return false;
     }
   }
 }

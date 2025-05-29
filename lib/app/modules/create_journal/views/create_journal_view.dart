@@ -129,10 +129,12 @@ class CreateJournalView extends GetView<CreateJournalController> {
               ),
               Center(
                 child: WideButton(
-                  get: () {
-                    controller.submitJournal();
-                    Get.offAllNamed(Routes.NAVIGATION_BAR,
-                        arguments: {"indexPage": 1});
+                  get: () async {
+                    bool isSuccess = await controller.submitJournal();
+                    if (isSuccess) {
+                      Get.offAllNamed(Routes.NAVIGATION_BAR,
+                          arguments: {"indexPage": 1});
+                    }
                   },
                   color: primaryColor,
                   text: 'Create Journal',
