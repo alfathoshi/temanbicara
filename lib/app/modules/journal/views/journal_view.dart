@@ -80,14 +80,16 @@ class JournalView extends GetView<JournalController> {
                     'My Journal',
                     style: h5SemiBold,
                   ),
-                  FlexibleDatePicker(
-                    selectedDate: controller.selectedDate.value,
-                    isIconOnly: true,
-                    onDateChanged: (picked) {
-                      controller.updateDate(picked);
-                      controller.fetchJournals();
-                    },
-                  )
+                  Obx(
+                    () => FlexibleDatePicker(
+                      selectedDate: controller.selectedDate.value,
+                      isIconOnly: true,
+                      onDateChanged: (picked) {
+                        controller.updateDate(picked);
+                        controller.fetchJournals();
+                      },
+                    ),
+                  ),
                 ],
               ),
               sby16,
