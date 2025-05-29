@@ -40,7 +40,6 @@ class Assesment1Controller extends GetxController {
   bool isFilled() {
     return nameC.text.isNotEmpty &&
         nicknameC.text.isNotEmpty &&
-        phoneC.text.isNotEmpty &&
         selectedGender.value != Gender.none;
   }
 
@@ -48,12 +47,19 @@ class Assesment1Controller extends GetxController {
     if (isFilled()) {
       box.write('name', nameC.text);
       box.write('nickname', nicknameC.text);
-      box.write('phone', phoneC.text);
+      if (phoneC.text.isNotEmpty) {
+        box.write('phone', phoneC.text);
+      } else {
+        Get.snackbar('Failed', 'Field',
+            backgroundColor: Colors.red.withValues(alpha: 0.6),
+            colorText: Colors.white);
+      }
       if (selectedGender.value == Gender.male) {
         box.write('gender', 'male');
       } else if (selectedGender.value == Gender.female) {
         box.write('gender', 'female');
       }
+
       String formattedDate =
           DateFormat('yyyy-MM-dd').format(selectedDate.value);
       box.write('birthdate', formattedDate);
@@ -84,7 +90,7 @@ class Assesment1Controller extends GetxController {
           );
           Get.toNamed(Routes.ASSESMENT_2);
         } else {
-          Get.snackbar('Error', data['message'],
+          Get.snackbar('Failed', 'Phone number must be number',
               backgroundColor: Colors.red.withValues(alpha: 0.6),
               colorText: Colors.white);
         }
@@ -96,12 +102,9 @@ class Assesment1Controller extends GetxController {
         isLoading.value = false;
       }
     } else {
-      Get.snackbar(
-        'Error',
-        'Silahkan isi data diri',
-        colorText: whiteColor,
-        backgroundColor: error.withValues(alpha: 0.6),
-      );
+      Get.snackbar('Failed', 'Field all parmeters',
+          backgroundColor: Colors.red.withValues(alpha: 0.6),
+          colorText: Colors.white);
     }
   }
 }

@@ -440,6 +440,7 @@ class HomeView extends GetView<HomeController> {
                     );
                   } else {
                     final List articles = controller.articles['data'] ?? [];
+                    
                     final double containerHeight =
                         articles.length <= 2 ? articles.length * 180.0 : 530.0;
                     return Container(
