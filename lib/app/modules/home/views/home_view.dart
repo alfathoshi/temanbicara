@@ -16,13 +16,13 @@ import 'package:temanbicara/app/widgets/top_article.dart';
 import '../../journal/controllers/journal_controller.dart';
 import '../controllers/home_controller.dart';
 
+
 // ignore: must_be_immutable
-class HomeView extends GetView<ReportController> {
+class HomeView extends GetView<HomeController> {
   GetStorage box = GetStorage();
   HomeView({super.key});
-  final HomeController _controller = Get.put(HomeController());
-  final ReportController reportController = Get.put(ReportController());
-  final JournalController journalController = Get.put(JournalController());
+  final ReportController reportController = Get.find<ReportController>();
+  final JournalController journalController = Get.find<JournalController>();
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class HomeView extends GetView<ReportController> {
       body: RefreshIndicator(
         onRefresh: () async {
           await Future.wait([
-            _controller.fetchData(),
+            controller.fetchData(),
             journalController.fetchJournals(),
             reportController.checkTracking()
           ]);
@@ -158,7 +158,7 @@ class HomeView extends GetView<ReportController> {
                         Obx(
                           () => GestureDetector(
                             onTap: () {
-                              if (controller.isTrackingFilled.value) {
+                              if (reportController.isTrackingFilled.value) {
                                 Get.toNamed(Routes.REPORT);
                               } else {
                                 Get.toNamed(Routes.NEW_TRACKING);
@@ -168,16 +168,16 @@ class HomeView extends GetView<ReportController> {
                               color: lightGreen,
                               icon: const Icon(Icons.edit),
                               image: 'assets/images/limiter.png',
-                              title: controller.title.value.isNotEmpty
-                                  ? controller.title.value
+                              title: reportController.title.value.isNotEmpty
+                                  ? reportController.title.value
                                   : '',
-                              detail: controller.detail.value.isNotEmpty
-                                  ? controller.detail.value
+                              detail: reportController.detail.value.isNotEmpty
+                                  ? reportController.detail.value
                                   : 'Complete your tracking to see your mental matrix.',
-                              matrixValue: controller.isTrackingFilled.value
-                                  ? controller.matrixValue.value
+                              matrixValue: reportController.isTrackingFilled.value
+                                  ? reportController.matrixValue.value
                                   : '',
-                              isFilled: controller.isTrackingFilled.value,
+                              isFilled: reportController.isTrackingFilled.value,
                             ),
                           ),
                         ),
@@ -414,7 +414,7 @@ class HomeView extends GetView<ReportController> {
                             ),
                             GestureDetector(
                               onTap: () async {
-                                final data = _controller.articles;
+                                final data = controller.articles;
                                 Get.toNamed(
                                   Routes.ARTICLE,
                                   arguments: data['data'] ?? [],
@@ -432,14 +432,14 @@ class HomeView extends GetView<ReportController> {
                   ),
                 ),
                 Obx(() {
-                  if (_controller.isLoading.value) {
+                  if (controller.isLoading.value) {
                     return const Center(child: CircularProgressIndicator());
-                  } else if (_controller.articles.isEmpty) {
+                  } else if (controller.articles.isEmpty) {
                     return const Center(
                       child: Text("No Data Available"),
                     );
                   } else {
-                    final List articles = _controller.articles['data'] ?? [];
+                    final List articles = controller.articles['data'] ?? [];
                     final double containerHeight =
                         articles.length <= 2 ? articles.length * 180.0 : 530.0;
                     return Container(

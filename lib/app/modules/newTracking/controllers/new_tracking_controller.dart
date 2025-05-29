@@ -6,6 +6,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:temanbicara/app/themes/colors.dart';
 import '../../../config/config.dart';
+import '../../home/controllers/home_controller.dart';
+import '../../report/controllers/report_controller.dart';
 
 class NewTrackingController extends GetxController {
   var sliderValue = 0.0.obs;
@@ -14,6 +16,7 @@ class NewTrackingController extends GetxController {
   var selectedScreen = ''.obs;
   var selectedActivity = ''.obs;
   final box = GetStorage();
+  var isLoading = false.obs;
 
   final List<String> emotions = [
     'Depressed',
@@ -175,10 +178,9 @@ class NewTrackingController extends GetxController {
           ]);
   }
 
-  Future<void> storeTracking() async {
+  Future<bool> storeTracking() async {
+    isLoading.value = true;
     try {
-      // ignore: unused_local_variable
-      final userId = box.read('id');
       final token = box.read('token');
 
       var response = await http.post(
@@ -205,16 +207,26 @@ class NewTrackingController extends GetxController {
           backgroundColor: primaryColor,
           colorText: Colors.white,
         );
+        final reportController = Get.find<ReportController>();
+        await reportController.checkTracking();
+        final homeController = Get.find<HomeController>();
+        await homeController.refreshMentalMatrixData();
+        isLoading.value = false;
         Get.offAllNamed('/navigation-bar');
+        return true;
       } else {
-        Get.snackbar('Tracking Failed', "Field all parmeters" ,
+        Get.snackbar('Tracking Failed', "Field all parmeters",
             backgroundColor: Colors.red.withValues(alpha: 0.6),
             colorText: Colors.white);
+        isLoading.value = false;
+        return false;
       }
     } catch (e) {
       Get.snackbar('Error', 'Gagal menyimpan tracking',
           backgroundColor: Colors.red.withValues(alpha: 0.6),
           colorText: Colors.white);
+      isLoading.value = false;
+      return false;
     }
   }
 }
