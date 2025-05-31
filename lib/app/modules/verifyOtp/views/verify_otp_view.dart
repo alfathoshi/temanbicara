@@ -79,29 +79,42 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                 ),
               ),
               sby32,
-              Text.rich(
-                TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'Didn\'t get any OTP email? ',
-                      style: GoogleFonts.poppins().copyWith(
-                        fontSize: 14,
-                        color: Colors.black,
+              Obx(() {
+                bool canResend = controller.resendSeconds.value == 0;
+                return Text.rich(
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                        text: 'Didn\'t get any OTP email? ',
+                        style: GoogleFonts.poppins().copyWith(
+                          fontSize: 14,
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
-                    TextSpan(
-                      text: 'Resend OTP!',
-                      style: GoogleFonts.poppins().copyWith(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        color: const Color(0xFF7E954E),
-                      ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () => controller.sendOtp(),
-                    ),
-                  ],
-                ),
-              ),
+                      canResend
+                          ? TextSpan(
+                              text: 'Resend OTP!',
+                              style: GoogleFonts.poppins().copyWith(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                                color: const Color(0xFF7E954E),
+                              ),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () => controller.sendOtp(),
+                            )
+                          : TextSpan(
+                              text:
+                                  'Resend in ${controller.resendSeconds.value}s',
+                              style: GoogleFonts.poppins().copyWith(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                                color: Colors.grey,
+                              ),
+                            ),
+                    ],
+                  ),
+                );
+              }),
               sby32,
               Obx(
                 () => ElevatedButton(

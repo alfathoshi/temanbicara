@@ -1,6 +1,7 @@
-import 'dart:convert';
-import 'dart:nativewrappers/_internal/vm/lib/async_patch.dart';
+// ignore_for_file: unused_local_variable
 
+import 'dart:convert';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:temanbicara/app/config/config.dart';
@@ -36,8 +37,11 @@ class VerifyOtpController extends GetxController {
   }
 
   Future<void> sendOtp() async {
+    if (resendSeconds.value > 0) {
+      return;
+    }
+
     try {
-      // ignore: unused_local_variable
       var response = await http.post(
         Uri.parse("${Config.apiEndPoint}/password/otp"),
         headers: {'Content-Type': 'application/json'},
@@ -45,9 +49,28 @@ class VerifyOtpController extends GetxController {
           'email': Get.arguments['email'],
         }),
       );
+      startResendTimer();
     } catch (err) {
       rethrow;
     }
+  }
+
+  void startResendTimer() {
+    resendSeconds.value = 60;
+    resendTimer?.cancel();
+    resendTimer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (resendSeconds.value > 0) {
+        resendSeconds.value--;
+      } else {
+        timer.cancel();
+      }
+    });
+  }
+
+  @override
+  void onClose() {
+    resendTimer?.cancel();
+    super.onClose();
   }
 
   Future<void> verifyOtp() async {
@@ -90,6 +113,9 @@ class VerifyOtpController extends GetxController {
         }
       });
     }
+
+    startResendTimer();
+
     super.onInit();
   }
 
