@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:temanbicara/app/config/config.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
-import 'package:temanbicara/app/themes/colors.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 class SendOtpController extends GetxController {
   RxBool isLoading = false.obs;
@@ -23,11 +23,11 @@ class SendOtpController extends GetxController {
     try {
       if (!validateEmail(emailController.text)) {
         isLoading.value = false;
-        Get.snackbar(
-            'Error', "Email tidak valid, tolong isikan email yang valid",
-            backgroundColor: error.withValues(alpha: 0.6),
-            colorText: whiteColor);
-
+        CustomSnackbar.showSnackbar(
+          title: "Failed",
+          message: "Invalid Email",
+          status: false,
+        );
         return;
       }
 
@@ -42,17 +42,21 @@ class SendOtpController extends GetxController {
       var data = json.decode(response.body);
 
       if (!data['status']) {
-        Get.snackbar(
-          'Error',
-          data['message'],
-          backgroundColor: error.withValues(alpha: 0.6),
-          colorText: Colors.white,
+        CustomSnackbar.showSnackbar(
+          title: "Invalid",
+          message: "Email is not recognized ",
+          status: false,
         );
         isLoading.value = false;
         return;
       }
 
       if (!isButtonActive.value) {
+        CustomSnackbar.showSnackbar(
+          title: "Request Sent",
+          message: "Please check your email",
+          status: true,
+        );
         isLoading.value = false;
         Get.toNamed(
           Routes.VERIFY_OTP,
@@ -65,11 +69,10 @@ class SendOtpController extends GetxController {
       isLoading.value = false;
       return;
     } catch (err) {
-      Get.snackbar(
-        'Error',
-        'Failed to send OTP',
-        backgroundColor: error.withValues(alpha: 0.6),
-        colorText: Colors.white,
+      CustomSnackbar.showSnackbar(
+        title: "Error",
+        message: "Failed to Send OTP",
+        status: false,
       );
     }
   }

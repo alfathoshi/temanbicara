@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:nativewrappers/_internal/vm/lib/async_patch.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,6 +13,9 @@ class VerifyOtpController extends GetxController {
   RxInt focusedIndex = 0.obs;
   String email = Get.arguments['email'];
   RxBool isCorrect = true.obs;
+
+  RxInt resendSeconds = 0.obs;
+  Timer? resendTimer;
 
   final count = 0.obs;
   List<TextEditingController> controllers =

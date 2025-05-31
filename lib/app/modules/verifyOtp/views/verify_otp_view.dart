@@ -7,6 +7,7 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/custom_appbar.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 import '../controllers/verify_otp_controller.dart';
 
@@ -106,6 +107,14 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                 () => ElevatedButton(
                   onPressed: () async {
                     controller.isLoading.value = true;
+                    if (controller.focusedIndex == 0) {
+                      CustomSnackbar.showSnackbar(
+                        title: "Oops!",
+                        message: "Please Fill the Fields",
+                        status: false,
+                      );
+                    }
+
                     if (!controller.isButtonActive.value) {
                       // Get.toNamed(Routes.FORGOT_PASSWORD);
                       await controller.verifyOtp();
