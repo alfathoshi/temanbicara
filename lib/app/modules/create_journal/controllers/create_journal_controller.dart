@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import 'package:temanbicara/app/themes/colors.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 import '../../../config/config.dart';
 import '../../journal/controllers/journal_controller.dart';
@@ -87,12 +88,18 @@ class CreateJournalController extends GetxController {
         pickedImage.value = null;
         fetchController.fetchJournals();
         Get.back();
-        Get.snackbar('Success', 'Journal created successfully',
-            backgroundColor: primaryColor.withValues(alpha: 0.6),
-            colorText: Colors.white);
+        CustomSnackbar.showSnackbar(
+            context: Get.context!,
+            title: 'Journal Created',
+            message: 'Journal created successfully',
+            status: true);
         return true;
       } else {
-        Get.snackbar('Error', 'Failed to create journal');
+        CustomSnackbar.showSnackbar(
+            context: Get.context!,
+            title: 'Failed',
+            message: 'Failed to create journal',
+            status: false);
         return false;
       }
     } catch (e) {

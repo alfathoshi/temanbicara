@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 import '../../../config/config.dart';
 import '../../../themes/colors.dart';
 
@@ -80,21 +81,29 @@ class EditProfileController extends GetxController {
         box.write('birthdate', responseData['data']['birthdate']);
 
         if (responseData['status']) {
-          Get.snackbar('Success', 'Profile data updated successful',
-              backgroundColor: primaryColor.withValues(alpha: 0.6),
-              colorText: Colors.white);
+          CustomSnackbar.showSnackbar(
+              context: Get.context!,
+              title: 'Congrats',
+              message: 'Your Profile has been updated',
+              status: true);
           return true;
         } else {
-          Get.snackbar(
-              'Error', responseData['message'] ?? 'Failed to update profile');
+          CustomSnackbar.showSnackbar(
+              context: Get.context!,
+              title: 'Failed',
+              message: 'Failed to create journal',
+              status: false);
           return false;
         }
       } else {
-        Get.snackbar('Error', 'Failed to update profile.');
+        CustomSnackbar.showSnackbar(
+            context: Get.context!,
+            title: 'Failed',
+            message: 'Failed to create journal',
+            status: false);
         return false;
       }
     } catch (e) {
-      Get.snackbar('Error', 'An error occurred: $e');
       return false;
     } finally {
       isLoading.value = false;

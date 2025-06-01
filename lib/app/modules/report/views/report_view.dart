@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:temanbicara/app/modules/mental_matrix/controllers/mental_matrix_controller.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
@@ -15,6 +16,114 @@ import '../controllers/report_controller.dart';
 
 class ReportView extends GetView<ReportController> {
   const ReportView({super.key});
+  Widget _buildPieChartCardShimmer() {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 24),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: border,
+            offset: const Offset(0, 1),
+            blurRadius: 2,
+          ),
+        ],
+        color: whiteColor,
+        borderRadius: BorderRadius.circular(30),
+      ),
+      child: Shimmer.fromColors(
+        baseColor: Colors.grey[300]!,
+        highlightColor: Colors.grey[100]!,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Container(width: 150.0, height: 20.0, color: Colors.white),
+              const SizedBox(height: 8),
+              Container(width: 200.0, height: 16.0, color: Colors.white),
+              sby24,
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  AspectRatio(
+                    aspectRatio: 3,
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  sby24,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(
+                      3,
+                      (index) => Padding(
+                        padding: const EdgeInsets.only(bottom: 10.0),
+                        child: Container(
+                          width: double.infinity,
+                          height: 12.0,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildStressGaugeCardShimmer() {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 24),
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: border,
+            offset: const Offset(0, 1),
+            blurRadius: 2,
+          ),
+        ],
+        color: whiteColor,
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(
+          color: Colors.transparent,
+          width: 2,
+        ),
+      ),
+      child: Shimmer.fromColors(
+        baseColor: Colors.grey[300]!,
+        highlightColor: Colors.grey[100]!,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(width: 120, height: 24.0, color: Colors.white),
+              const SizedBox(height: 8),
+              Container(width: 180, height: 18.0, color: Colors.white),
+              sby16,
+              AspectRatio(
+                aspectRatio: 1.6,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +218,7 @@ class ReportView extends GetView<ReportController> {
             Obx(() {
               final dataList = controller.trackingList['tracking_data'] ?? [];
               if (controller.isFetching.value) {
-                return const Center(child: CircularProgressIndicator());
+                return _buildPieChartCardShimmer();
               }
               if (dataList.isEmpty) return const Text("No mood data found");
 
@@ -148,7 +257,7 @@ class ReportView extends GetView<ReportController> {
             Obx(() {
               final dataList = controller.trackingList['tracking_data'] ?? [];
               if (controller.isFetching.value) {
-                return const Center(child: CircularProgressIndicator());
+                return _buildPieChartCardShimmer();
               }
               if (dataList.isEmpty) return const Text("No sleep data found");
 
@@ -181,7 +290,7 @@ class ReportView extends GetView<ReportController> {
             Obx(() {
               final dataList = controller.trackingList['tracking_data'] ?? [];
               if (controller.isFetching.value) {
-                return const Center(child: CircularProgressIndicator());
+                return _buildStressGaugeCardShimmer();
               }
 
               if (dataList.isEmpty) {
@@ -272,7 +381,7 @@ class ReportView extends GetView<ReportController> {
             Obx(() {
               final dataList = controller.trackingList['tracking_data'] ?? [];
               if (controller.isFetching.value) {
-                return const Center(child: CircularProgressIndicator());
+                return _buildPieChartCardShimmer();
               }
               if (dataList.isEmpty) return const Text("No activity data found");
 
@@ -305,7 +414,7 @@ class ReportView extends GetView<ReportController> {
             Obx(() {
               final dataList = controller.trackingList['tracking_data'] ?? [];
               if (controller.isFetching.value) {
-                return const Center(child: CircularProgressIndicator());
+                return _buildPieChartCardShimmer();
               }
               if (dataList.isEmpty) return const Text("No screen data found");
 

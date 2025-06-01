@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../themes/colors.dart';
+
 class CustomSnackbar {
-  static void showSnackbar({
-    required BuildContext context,
-    required String title,
-    required String message,
-  }) {
+  static void showSnackbar(
+      {required BuildContext context,
+      required String title,
+      required String message,
+      required bool status}) {
     Get.snackbar(
       '',
       '',
@@ -31,15 +33,18 @@ class CustomSnackbar {
               color: const Color(0xffEEF6EF),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: const Row(
+            child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.check_circle_outline, color: Colors.green, size: 24),
-                SizedBox(width: 8),
+                Icon(
+                    status ? Icons.check_circle_outline : Icons.cancel_outlined,
+                    color: status ? Colors.green : error,
+                    size: 24),
+                const SizedBox(width: 8),
                 Text(
-                  'Success',
+                  status ? 'Success' : 'Failed',
                   style: TextStyle(
-                    color: Colors.green,
+                    color: status ? Colors.green : error,
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
                   ),
