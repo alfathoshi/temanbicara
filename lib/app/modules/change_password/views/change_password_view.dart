@@ -197,7 +197,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                   }
                 },
                 color: primaryColor,
-                text: 'Simpan')
+                text: 'Save')
           ],
         ),
       ),

@@ -1,13 +1,12 @@
 // ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/custom_appbar.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 import '../controllers/send_otp_controller.dart';
 
@@ -35,7 +34,7 @@ class SendOtpView extends GetView<SendOtpController> {
             ),
             child: ConstrainedBox(
               constraints: BoxConstraints(
-                minHeight: constraints.maxHeight, // Ini kuncinya!
+                minHeight: constraints.maxHeight,
               ),
               child: IntrinsicHeight(
                 child: Column(
@@ -81,36 +80,39 @@ class SendOtpView extends GetView<SendOtpController> {
                     sby32,
                     Obx(
                       () => ElevatedButton(
-                        onPressed: controller.isButtonActive.value
-                            ? null
-                            : () async {
-                                await controller.sendOtp();
-                              },
+                        onPressed: () async {
+                          if (controller.emailController.value.text.isEmpty) {
+                            CustomSnackbar.showSnackbar(
+                              title: "Oops",
+                              message: "Please Fill the Field!",
+                              status: false,
+                            );
+                            return;
+                          }
+                          await controller.sendOtp();
+                        },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: controller.isButtonActive.value
-                              ? const Color(0xFFc4c4c4)
-                              : primaryColor,
+                          backgroundColor: primaryColor,
                           foregroundColor: Colors.white,
-                          minimumSize: const Size(double.infinity, 44),
+                          minimumSize: const Size(double.infinity, 56),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(20),
                           ),
                         ),
                         child: controller.isLoading.value == false
                             ? Text(
                                 'Send OTP',
-                                style:
-                                    verifyOtpTextStyle(14, Colors.white, true),
+                                style: verifyOtpTextStyle(16, whiteColor, true),
                               )
                             : SizedBox(
                                 height: 20,
                                 width: 20,
                                 child: CircularProgressIndicator(
-                                    color: whiteColor),
+                                  color: whiteColor,
+                                ),
                               ),
                       ),
                     ),
-                    Spacer(), // Biar bagian bawah tetap ada minimal padding
                   ],
                 ),
               ),

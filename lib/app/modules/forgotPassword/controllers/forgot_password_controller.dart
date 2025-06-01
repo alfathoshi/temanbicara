@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:temanbicara/app/config/config.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 class ForgotPasswordController extends GetxController {
   TextEditingController confirmPasswordController = TextEditingController();
@@ -17,13 +18,27 @@ class ForgotPasswordController extends GetxController {
 
   Future<void> changePassword() async {
     try {
-      isLoading.value = true;
-      if (confirmPasswordController.text != newPasswordController.text) {
+      if (confirmPasswordController.text.isEmpty ||
+          newPasswordController.text.isEmpty) {
         isLoading.value = false;
-        Get.snackbar(
-            "Error Occured", "New and confirm password can't be different");
+        CustomSnackbar.showSnackbar(
+          title: "Oops",
+          message: "Please Fill the Field!",
+          status: false,
+        );
         return;
       }
+      if (confirmPasswordController.text != newPasswordController.text) {
+        isLoading.value = false;
+        CustomSnackbar.showSnackbar(
+          title: "Password Mismatch",
+          message: "New password don't match",
+          status: false,
+        );
+        return;
+      }
+
+      isLoading.value = true;
 
       var response = await http.post(
         Uri.parse("${Config.apiEndPoint}/password"),
@@ -39,16 +54,25 @@ class ForgotPasswordController extends GetxController {
       );
 
       Map<String, dynamic> res = json.decode(response.body);
-
-
       isCorrect.value = res['status'];
 
       if (isCorrect.value) {
-        isLoading.value = false;
-        Get.offAllNamed(
-          Routes.LOGIN,
+        CustomSnackbar.showSnackbar(
+          title: "Success",
+          message: "Password Changed!",
+          status: true,
+        );
+      } else {
+        CustomSnackbar.showSnackbar(
+          title: "Invalid",
+          message: "OTP is Already Expired",
+          status: false,
         );
       }
+      isLoading.value = false;
+      Get.offAllNamed(
+        Routes.LOGIN,
+      );
       return;
     } catch (err) {
       rethrow;

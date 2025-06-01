@@ -106,7 +106,7 @@ class LoginView extends GetView<LoginController> {
                               borderRadius: BorderRadius.circular(10))),
                       child: controller.isLoading.value == false
                           ? Text(
-                              'Masuk',
+                              'Login',
                               style: GoogleFonts.poppins(
                                   fontWeight: FontWeight.bold),
                             )
