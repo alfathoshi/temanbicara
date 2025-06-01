@@ -202,24 +202,6 @@ class ProfileView extends GetView<ProfileController> {
                               ),
                             ),
                             sby16,
-                            GestureDetector(
-                              onTap: () => Get.toNamed(Routes.ON_BOARDING),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'About Us',
-                                    style: h4SemiBold,
-                                  ),
-                                  const Icon(
-                                    Icons.chevron_right_outlined,
-                                    size: 32,
-                                  )
-                                ],
-                              ),
-                            ),
-                            sby24,
                             Text(
                               'Logout',
                               style: h4SemiBold.copyWith(color: error),
