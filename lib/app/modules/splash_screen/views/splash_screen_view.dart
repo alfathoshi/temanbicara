@@ -15,7 +15,8 @@ class SplashScreenView extends GetView<SplashScreenController> {
   @override
   Widget build(BuildContext context) {
     Future.delayed(const Duration(seconds: 3)).then((value) {
-      bool isFirstTime = box.read('firstTime') ?? true;
+      bool isFirstTime =
+          box.hasData('firstTime') ? box.read('firstTime') : true;
 
       if (isFirstTime) {
         box.write('firstTime', false);
