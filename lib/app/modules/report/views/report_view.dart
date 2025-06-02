@@ -158,7 +158,7 @@ class ReportView extends GetView<ReportController> {
         title: Text(
           "Mental Report",
           style: h3Bold,
-        ),
+        ),       
       ),
       body: RefreshIndicator(
         onRefresh: () async {

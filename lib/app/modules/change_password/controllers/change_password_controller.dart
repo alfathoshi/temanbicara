@@ -16,10 +16,24 @@ class ChangePasswordController extends GetxController {
   final TextEditingController newPassController = TextEditingController();
   final TextEditingController confirmPassController = TextEditingController();
   RxBool isOldPassObscure = true.obs;
+  RxBool isButtonActive = false.obs;
   RxBool isNewPassObscure = true.obs;
   RxBool isConfPassObscure = true.obs;
+  RxBool isPasswordValid = false.obs;
 
   var isLoading = false.obs;
+
+  void showPasswordOld() {
+    isOldPassObscure.value = !isOldPassObscure.value;
+  }
+
+  void showPasswordNew() {
+    isNewPassObscure.value = !isNewPassObscure.value;
+  }
+
+  void showPasswordConf() {
+    isConfPassObscure.value = !isConfPassObscure.value;
+  }
 
   Future<bool> changePassword() async {
     isLoading.value = true;
@@ -41,6 +55,15 @@ class ChangePasswordController extends GetxController {
           message: "New password don't match",
           status: false,
         );
+        return false;
+      }
+
+      if (!isPasswordValid.value) {
+        isLoading.value = false;
+        CustomSnackbar.showSnackbar(
+            title: "Invalid Password",
+            message: "Not Strong Enough",
+            status: false);
         return false;
       }
 
