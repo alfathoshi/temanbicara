@@ -94,19 +94,17 @@ class LoginView extends GetView<LoginController> {
                         controller.login();
                       },
                       style: ElevatedButton.styleFrom(
-                          backgroundColor: controller.isButtonActive.value
-                              ? const Color(0xFFc4c4c4)
-                              : primaryColor,
+                          backgroundColor: primaryColor,
                           foregroundColor: Colors.white,
                           minimumSize: const Size(
                             double.infinity,
-                            44,
+                            56,
                           ),
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10))),
+                              borderRadius: BorderRadius.circular(20))),
                       child: controller.isLoading.value == false
                           ? Text(
-                              'Masuk',
+                              'Login',
                               style: GoogleFonts.poppins(
                                   fontWeight: FontWeight.bold),
                             )

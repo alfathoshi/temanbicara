@@ -1,10 +1,13 @@
-import 'dart:convert';
+// ignore_for_file: unused_local_variable, prefer_const_constructors
 
+import 'dart:convert';
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:temanbicara/app/config/config.dart';
 import 'package:http/http.dart' as http;
 import 'package:temanbicara/app/routes/app_pages.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 class VerifyOtpController extends GetxController {
   RxBool isLoading = false.obs;
@@ -12,6 +15,9 @@ class VerifyOtpController extends GetxController {
   RxInt focusedIndex = 0.obs;
   String email = Get.arguments['email'];
   RxBool isCorrect = true.obs;
+
+  RxInt resendSeconds = 0.obs;
+  Timer? resendTimer;
 
   final count = 0.obs;
   List<TextEditingController> controllers =
@@ -32,8 +38,11 @@ class VerifyOtpController extends GetxController {
   }
 
   Future<void> sendOtp() async {
+    if (resendSeconds.value > 0) {
+      return;
+    }
+
     try {
-      // ignore: unused_local_variable
       var response = await http.post(
         Uri.parse("${Config.apiEndPoint}/password/otp"),
         headers: {'Content-Type': 'application/json'},
@@ -41,9 +50,28 @@ class VerifyOtpController extends GetxController {
           'email': Get.arguments['email'],
         }),
       );
+      startResendTimer();
     } catch (err) {
       rethrow;
     }
+  }
+
+  void startResendTimer() {
+    resendSeconds.value = 60;
+    resendTimer?.cancel();
+    resendTimer = Timer.periodic(Duration(seconds: 1), (timer) {
+      if (resendSeconds.value > 0) {
+        resendSeconds.value--;
+      } else {
+        timer.cancel();
+      }
+    });
+  }
+
+  @override
+  void onClose() {
+    resendTimer?.cancel();
+    super.onClose();
   }
 
   Future<void> verifyOtp() async {
@@ -64,6 +92,11 @@ class VerifyOtpController extends GetxController {
       isCorrect.value = res['status'];
 
       if (isCorrect.value) {
+        CustomSnackbar.showSnackbar(
+          title: "Success",
+          message: "OTP Verified!",
+          status: true,
+        );
         Get.toNamed(
           Routes.FORGOT_PASSWORD,
           arguments: {
@@ -86,6 +119,9 @@ class VerifyOtpController extends GetxController {
         }
       });
     }
+
+    startResendTimer();
+
     super.onInit();
   }
 

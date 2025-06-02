@@ -6,8 +6,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:temanbicara/app/config/config.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
-import 'package:temanbicara/app/themes/colors.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 class LoginController extends GetxController {
   final box = GetStorage();
@@ -31,6 +31,14 @@ class LoginController extends GetxController {
   var isLoading = false.obs;
 
   Future<void> login() async {
+    if (emailC.text.isEmpty || passC.text.isEmpty) {
+      CustomSnackbar.showSnackbar(
+        title: "Oops!",
+        message: "Please Fill the Fields!",
+        status: false,
+      );
+      return;
+    }
     isLoading.value = true;
 
     try {
@@ -44,14 +52,14 @@ class LoginController extends GetxController {
       );
 
       var data = json.decode(response.body);
+      //print(response.body);
 
       if (response.statusCode == 200 && data['status']) {
         if (data['data']['role'] != 'General') {
-          Get.snackbar(
-            'Gagal',
-            'Akun tidak terdaftar',
-            backgroundColor: error.withValues(alpha: 0.6),
-            colorText: Colors.white,
+          CustomSnackbar.showSnackbar(
+            title: "Invalid Credential",
+            message: "Please Try Again",
+            status: false,
           );
           return;
         }
@@ -63,11 +71,10 @@ class LoginController extends GetxController {
         box.write('name', data['data']['name']);
         final currentUserID = data['data']['id'].toString();
         await saveFcmToken(currentUserID);
-        Get.snackbar(
-          'Success',
-          'Login berhasil',
-          backgroundColor: primaryColor.withValues(alpha: 0.6),
-          colorText: Colors.white,
+        CustomSnackbar.showSnackbar(
+          title: "Success",
+          message: "Logged In",
+          status: true,
         );
 
         if (data['data']['name'] == null) {
@@ -88,16 +95,17 @@ class LoginController extends GetxController {
           );
         }
       } else {
-        Get.snackbar('Error', "Email tidak terdaftar",
-            backgroundColor: error.withValues(alpha: 0.6),
-            colorText: whiteColor);
+        CustomSnackbar.showSnackbar(
+          title: "Invalid Credential",
+          message: "Please Try Again",
+          status: false,
+        );
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Failed to login',
-        backgroundColor: error.withValues(alpha: 0.6),
-        colorText: Colors.white,
+      CustomSnackbar.showSnackbar(
+        title: "Error",
+        message: "Login Failed",
+        status: false,
       );
     } finally {
       isLoading.value = false;

@@ -1,11 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:temanbicara/app/routes/app_pages.dart';
-import 'package:temanbicara/app/themes/colors.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 import '../../../config/config.dart';
 
@@ -23,14 +22,42 @@ class SignupController extends GetxController {
   var isLoading = false.obs;
   var isPasswordValid = false.obs;
 
+  bool validateEmail(String value) {
+    const pattern = r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'"
+        r'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-'
+        r'\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*'
+        r'[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4]'
+        r'[0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9]'
+        r'[0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\'
+        r'x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])';
+    final regex = RegExp(pattern);
+
+    return value.isNotEmpty && !regex.hasMatch(value);
+  }
+
   Future<void> register() async {
-    if (!isPasswordValid.value) {
-      Get.snackbar(
-        'Invalid Password',
-        'Your password is not strong enough',
-        backgroundColor: Colors.orange.withValues(alpha: 0.8),
-        colorText: Colors.white,
+    if (emailC.text.isEmpty ||
+        confirmPassC.text.isEmpty ||
+        passC.text.isEmpty) {
+      CustomSnackbar.showSnackbar(
+          title: "Oops!", message: "Please Fill the Fields!", status: false);
+      return;
+    }
+
+    if (validateEmail(emailC.text)) {
+      CustomSnackbar.showSnackbar(
+        title: "Invalid",
+        message: "Invalid Email",
+        status: false,
       );
+      return;
+    }
+
+    if (!isPasswordValid.value) {
+      CustomSnackbar.showSnackbar(
+          title: "Invalid Password",
+          message: "Not Strong Enough",
+          status: false);
       return;
     }
     isLoading.value = true;
@@ -48,37 +75,39 @@ class SignupController extends GetxController {
         );
 
         var data = json.decode(response.body);
-
+        //print(response.body);
         if (response.statusCode == 200 && data['status']) {
           box.write('token', data['token']);
           box.write('id', data['data']['id']);
           box.write('email', data['data']['email']);
           box.write('password', data['data']['password']);
-          Get.snackbar(
-            'Success',
-            'Register berhasil',
-            backgroundColor: primaryColor.withValues(alpha: 0.6),
-            colorText: Colors.white,
+          CustomSnackbar.showSnackbar(
+            title: "Success",
+            message: "Registered!",
+            status: true,
           );
           Get.offAllNamed(
             Routes.ASSESMENT_1,
           );
         } else {
-          Get.snackbar('Error', "Email sudah terdaftar",
-              backgroundColor: error.withValues(alpha: 0.6),
-              colorText: whiteColor);
+          CustomSnackbar.showSnackbar(
+            title: "Invalid",
+            message: "Invalid Email",
+            status: false,
+          );
         }
       } else {
-        Get.snackbar('Error', 'Password tidak sesuai',
-            backgroundColor: error.withValues(alpha: 0.6),
-            colorText: whiteColor);
+        CustomSnackbar.showSnackbar(
+          title: "Password Mismatch",
+          message: "New password don't match",
+          status: false,
+        );
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Failed to register',
-        backgroundColor: error.withValues(alpha: 0.6),
-        colorText: Colors.white,
+      CustomSnackbar.showSnackbar(
+        title: "Error!",
+        message: "Failed to Registered",
+        status: false,
       );
     } finally {
       isLoading.value = false;
