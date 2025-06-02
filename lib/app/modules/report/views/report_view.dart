@@ -127,9 +127,13 @@ class ReportView extends GetView<ReportController> {
 
   Widget _buildMentalMatrixShimmer(BuildContext context) {
     return Center(
-      child: Shimmer.fromColors(
-        baseColor: Colors.grey[300]!,
-        highlightColor: Colors.grey[100]!,
+      child: Shimmer(
+        gradient: LinearGradient(
+          colors: [Colors.grey[300]!, Colors.grey[100]!],
+          stops: [0.4, 0.7],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
         child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
