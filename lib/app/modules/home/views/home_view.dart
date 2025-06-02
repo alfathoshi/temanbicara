@@ -15,6 +15,7 @@ import 'package:temanbicara/app/widgets/mental_matrix.dart';
 import 'package:temanbicara/app/widgets/my_journal.dart';
 import 'package:temanbicara/app/widgets/top_article.dart';
 
+import '../../../widgets/journal_shimmer.dart';
 import '../../journal/controllers/journal_controller.dart';
 import '../controllers/home_controller.dart';
 
@@ -362,7 +363,7 @@ class HomeView extends GetView<HomeController> {
                         ),
                         Obx(() {
                           if (journalController.isLoading.value) {
-                            return _buildJournalCardShimmer();
+                            return buildJournalCardShimmer();
                           } else if (journalController.journalList.isEmpty) {
                             return const Center(
                               child: Text("No Journal Today"),
@@ -487,87 +488,7 @@ class HomeView extends GetView<HomeController> {
   }
 }
 
-Widget _buildJournalCardShimmer() {
-  return Padding(
-    padding: const EdgeInsets.only(
-      bottom: 16,
-      left: 16,
-      right: 16,
-    ),
-    child: Shimmer.fromColors(
-      baseColor: Colors.grey[300]!,
-      highlightColor: Colors.grey[100]!,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(
-            color: border,
-          ),
-        ),
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding:
-                  const EdgeInsets.only(left: 16, right: 16, bottom: 8, top: 8),
-              child: Container(
-                height: 20,
-                width: 80,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(4)),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    height: 16,
-                    width: 80,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(4)),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.only(left: 16, right: 8, top: 4, bottom: 4),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    height: 14,
-                    width: 80,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(4)),
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        height: 24,
-                        width: 24,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12)),
-                      ),
-                      sbX12,
-                    ],
-                  )
-                ],
-              ),
-            )
-          ],
-        ),
-      ),
-    ),
-  );
-}
+
 
 Widget _buildTopArticleShimmer() {
   return Padding(
