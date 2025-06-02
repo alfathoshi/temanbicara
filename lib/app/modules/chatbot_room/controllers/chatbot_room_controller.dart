@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:get/get.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
-import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 class ChatbotRoomController extends GetxController {

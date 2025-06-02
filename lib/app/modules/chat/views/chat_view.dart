@@ -63,7 +63,7 @@ class ChatView extends GetView<ChatController> {
 
                       if (snapshot.hasError) {
                         lastMessage = "Error memuat pesan.";
-                        print("Error stream: ${snapshot.error}");
+                        // print("Error stream: ${snapshot.error}");
                       }
 
                       if (snapshot.hasData && snapshot.data!.docs.isNotEmpty) {
