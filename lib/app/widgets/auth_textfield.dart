@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:temanbicara/app/themes/colors.dart';
+import 'package:temanbicara/app/themes/fonts.dart';
 
 class AuthTextfield extends StatelessWidget {
   final ValueChanged onChanged;
@@ -31,7 +32,7 @@ class AuthTextfield extends StatelessWidget {
       keyboardType: type,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: const TextStyle(color: greyColor),
+        hintStyle: h5Regular.copyWith(color: grey4Color),
         suffixIcon: passwordField == true
             ? IconButton(
                 icon: Icon(

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
+import 'package:temanbicara/app/widgets/auth_textfield.dart';
 import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import '../controllers/forgot_password_controller.dart';
 import 'package:fancy_password_field/fancy_password_field.dart';
@@ -17,6 +18,19 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
         UppercaseValidationRule().validate(value) &&
         LowercaseValidationRule().validate(value) &&
         SpecialCharacterValidationRule().validate(value);
+  }
+
+  Widget? _buildSuffixIcon() {
+    return IconButton(
+      icon: Icon(
+        controller.isNewPassObscure.value
+            ? Icons.visibility_off_outlined
+            : Icons.visibility_outlined,
+        size: 20,
+        color: black,
+      ),
+      onPressed: () => controller.isNewPassObscure(false),
+    );
   }
 
   Widget _buildValidationRules(Set<ValidationRule> rules, String value) {
@@ -81,56 +95,74 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                       children: [
                         Text('New Password', style: textDescriptionSemiBold),
                         sby8,
-                        FancyPasswordField(
-                          showPasswordIcon: Icon(
-                            Icons.visibility_outlined,
-                            size: 20,
-                          ),
-                          hidePasswordIcon: Icon(
-                            Icons.visibility_off_outlined,
-                            size: 20,
-                          ),
-                          controller: controller.newPasswordController,
-                          validationRules: {
-                            MinCharactersValidationRule(8),
-                            UppercaseValidationRule(),
-                            LowercaseValidationRule(),
-                            SpecialCharacterValidationRule(),
-                          },
-                          validationRuleBuilder: (rules, value) {
-                            bool allValid =
-                                rules.every((rule) => rule.validate(value));
-                            WidgetsBinding.instance.addPostFrameCallback((_) {
-                              controller.isButtonActive.value = allValid;
-                            });
-                            if (value.isEmpty) {
-                              return const SizedBox.shrink();
-                            }
-                            return _buildValidationRules(rules, value);
-                          },
-                          decoration: InputDecoration(
-                            contentPadding:
-                                const EdgeInsets.symmetric(horizontal: 12),
-                            hintText: "Enter New Password",
-                            hintStyle: h5Regular.copyWith(color: grey2Color),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: const BorderSide(color: greyColor),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide(color: primaryColor),
-                            ),
-                          ),
-                        ),
+                        Obx(() => FancyPasswordField(
+                              controller: controller.newPasswordController,
+                              keyboardType: TextInputType.text,
+                              obscureText: controller
+                                  .isNewPassObscure.value, // Kontrol manual
+                              onChanged: (value) {
+                                controller.isButtonActive.value =
+                                    value.isNotEmpty;
+                              },
+                              validationRules: {
+                                MinCharactersValidationRule(8),
+                                UppercaseValidationRule(),
+                                LowercaseValidationRule(),
+                                SpecialCharacterValidationRule(),
+                              },
+                              validationRuleBuilder: (rules, value) {
+                                bool allValid =
+                                    rules.every((rule) => rule.validate(value));
+                                WidgetsBinding.instance
+                                    .addPostFrameCallback((_) {
+                                  controller.isButtonActive.value = allValid;
+                                });
+                                if (value.isEmpty) {
+                                  return const SizedBox.shrink();
+                                }
+                                return _buildValidationRules(rules, value);
+                              },
+                              decoration: InputDecoration(
+                                hintText: "Enter New Password",
+                                hintStyle:
+                                    h5Regular.copyWith(color: grey4Color),
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    controller.isNewPassObscure.value
+                                        ? Icons.visibility_off_outlined
+                                        : Icons.visibility_outlined,
+                                    size: 20,
+                                  ),
+                                  onPressed: () {
+                                    controller.isNewPassObscure.value =
+                                        !controller.isNewPassObscure.value;
+                                  },
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide:
+                                      const BorderSide(color: greyColor),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: BorderSide(color: primaryColor),
+                                ),
+                              ),
+                            )),
                         sby12,
                         Text('Confirm Password',
                             style: textDescriptionSemiBold),
                         sby8,
-                        changePasswordTextfield(
-                          "Confirm New Password",
-                          controller.confirmPasswordController,
-                          controller.isConfPassObscure,
+                        Obx(
+                          () => AuthTextfield(
+                            onChanged: (value) {},
+                            showPassword: () => controller.showPasswordC(),
+                            controller: controller.confirmPasswordController,
+                            obscureText: controller.isConfPassObscure.value,
+                            hintText: 'Password',
+                            passwordField: true,
+                            type: TextInputType.text,
+                          ),
                         ),
                       ],
                     ),

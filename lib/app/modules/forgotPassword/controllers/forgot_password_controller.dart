@@ -16,6 +16,10 @@ class ForgotPasswordController extends GetxController {
   RxBool isNewPassObscure = true.obs;
   RxBool isConfPassObscure = true.obs;
 
+  void showPasswordC() {
+    isConfPassObscure.value = !isConfPassObscure.value;
+  }
+
   Future<void> changePassword() async {
     try {
       if (confirmPasswordController.text.isEmpty ||
