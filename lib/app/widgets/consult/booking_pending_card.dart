@@ -9,6 +9,7 @@ import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/consult/order_details.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 import 'package:temanbicara/app/widgets/transaction/idr_formatter.dart';
 import 'package:http/http.dart' as http;
 
@@ -227,29 +228,21 @@ class CancelBookingController extends GetxController {
 
       final statusCode = response.statusCode;
       if (statusCode == 200 || statusCode == 201) {
-        Get.snackbar(
-          'Success',
-          'Consultation cancelled successfully',
-          colorText: whiteColor,
-          backgroundColor: primaryColor.withOpacity(0.6),
+        CustomSnackbar.showSnackbar(
+          title: "Success!",
+          message: "Consultation Cancelled!",
+          status: true,
         );
         return true;
       } else {
-        Get.snackbar(
-          'Error',
-          'Failed to cancel consultation.',
-          colorText: whiteColor,
-          backgroundColor: error.withOpacity(0.6),
+        CustomSnackbar.showSnackbar(
+          title: "Oops!",
+          message: "Cancelling Consultation Failed!",
+          status: false,
         );
         return false;
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Something went wrong: $e',
-        colorText: whiteColor,
-        backgroundColor: error.withOpacity(0.6),
-      );
       return false;
     }
   }

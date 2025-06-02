@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
@@ -10,11 +9,11 @@ import 'package:temanbicara/app/data/booking_complete.dart';
 import 'package:temanbicara/app/data/booking_pending.dart';
 import 'package:temanbicara/app/data/consult_response.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
-import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/widgets/consult/format_expired_date.dart';
 import 'package:temanbicara/app/widgets/consult/format_full_date.dart';
 import 'package:temanbicara/app/widgets/consult/format_time.dart';
 import 'package:temanbicara/app/widgets/consult/history_calculate_duration.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 class BookingHistoryController extends GetxController {
   final pendingList = <BookingPending>[].obs;
@@ -77,12 +76,10 @@ class BookingHistoryController extends GetxController {
               amount: int.parse(matched.totalHarga),
             );
 
-            Get.snackbar(
-              'Success',
-              'Your payment has been confirmed!',
-              backgroundColor: primaryColor.withValues(alpha: 0.6),
-              colorText: Colors.white,
-              snackPosition: SnackPosition.TOP,
+            CustomSnackbar.showSnackbar(
+              title: "Success!",
+              message: "Payment Confirmed!",
+              status: true,
             );
 
             Get.offAllNamed(Routes.TRANSACTION_SUCCESS, arguments: {
@@ -94,12 +91,10 @@ class BookingHistoryController extends GetxController {
         }
       }
     } catch (e) {
-      Get.snackbar(
-        'Error Payment',
-        'Failed checking payment status',
-        backgroundColor: error.withValues(alpha: 0.6),
-        colorText: Colors.white,
-        snackPosition: SnackPosition.TOP,
+      CustomSnackbar.showSnackbar(
+        title: "Oops!",
+        message: "Payment Status Checking Failed!",
+        status: false,
       );
     }
   }
@@ -127,7 +122,7 @@ class BookingHistoryController extends GetxController {
         }
       }
     } catch (e) {
-      Get.snackbar('Error', e.toString());
+      isLoading.value = false;
     }
   }
 

@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/config/config.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 class TransactionMethodController extends GetxController {
   var selectedMethod = ''.obs;
@@ -52,11 +53,10 @@ class TransactionMethodController extends GetxController {
         consultationResult = responseData['data'];
         update();
 
-        Get.snackbar(
-          'Success',
-          'Consultation created successfully.',
-          backgroundColor: primaryColor.withValues(alpha: 0.6),
-          colorText: Colors.white,
+        CustomSnackbar.showSnackbar(
+          title: "Success!",
+          message: "Consultation Created!",
+          status: true,
         );
       } else {
         String errorMessage = 'Failed to create consultation.';
@@ -64,21 +64,15 @@ class TransactionMethodController extends GetxController {
         try {
           final responseBody = json.decode(response.body);
           errorMessage = responseBody['message'] ?? errorMessage;
-        } catch (_) {}
-
-        Get.snackbar(
-          'Error',
-          errorMessage,
-          backgroundColor: Colors.red.withValues(alpha: 0.6),
-          colorText: Colors.white,
-        );
+        } catch (e) {
+          selectedMethod.value = '';
+        }
       }
     } catch (error) {
-      Get.snackbar(
-        'Error',
-        'Error creating consultation: $error',
-        backgroundColor: Colors.red.withValues(alpha: 0.6),
-        colorText: Colors.white,
+      CustomSnackbar.showSnackbar(
+        title: "Oops!",
+        message: "Creating Consultation Failed!",
+        status: false,
       );
     }
   }

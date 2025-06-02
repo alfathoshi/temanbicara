@@ -45,14 +45,8 @@ class ChatService {
           body: message,
         );
       }
-    } else {
-      Get.snackbar(
-        'Error',
-        'Failed to get FCM Token',
-        backgroundColor: error.withValues(alpha: 0.6),
-        colorText: whiteColor,
-      );
     }
+    // else {}
   }
 
   Stream<QuerySnapshot> getMessages(String userID, otherUserID) {

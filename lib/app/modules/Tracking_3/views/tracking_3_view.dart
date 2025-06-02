@@ -7,6 +7,7 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 import '../controllers/tracking_3_controller.dart';
 
@@ -128,12 +129,10 @@ class Tracking3View extends GetView<Tracking3Controller> {
                       child: MyButton(
                           get: () {
                             if (controller.selectedNumber.value == 0) {
-                              Get.snackbar(
-                                'Error',
-                                'Silakan isi Tracking',
-                                colorText: whiteColor,
-                                backgroundColor:
-                                    Colors.red.withValues(alpha: 0.7),
+                              CustomSnackbar.showSnackbar(
+                                title: "Oops!",
+                                message: "Please Fill the Fields!",
+                                status: false,
                               );
                             } else {
                               Get.toNamed(Routes.TRACKING_4,

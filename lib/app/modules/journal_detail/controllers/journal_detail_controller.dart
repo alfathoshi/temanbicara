@@ -41,7 +41,6 @@ class JournalDetailController extends GetxController {
         } catch (e) {
           displayDate.value = 'Format Tanggal Salah';
           // print('Error parsing date in ViewJournalController: $e. Raw date: ${createdAtRaw.value}');
-          // Bisa ditambahkan Get.snackbar untuk notifikasi error jika diperlukan
         }
       } else {
         displayDate.value = 'Tanggal Tidak Ada';
@@ -52,7 +51,6 @@ class JournalDetailController extends GetxController {
       body.value = 'Tidak dapat memuat detail jurnal.';
       displayDate.value = '';
       // Mungkin perlu navigasi kembali atau menampilkan pesan error yang lebih jelas di UI
-      // Get.snackbar('Error', 'Data jurnal tidak ditemukan.', backgroundColor: Colors.redAccent, colorText: Colors.white);
     }
   }
 

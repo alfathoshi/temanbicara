@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:temanbicara/app/config/config.dart';
 import 'package:http/http.dart' as http;
-import 'package:temanbicara/app/themes/colors.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 class ProfileController extends GetxController {
   final count = 0.obs;
@@ -26,12 +26,7 @@ class ProfileController extends GetxController {
         storedImage = imageTemp;
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Failed to fetch journal',
-        backgroundColor: error.withValues(alpha: 0.6),
-        colorText: whiteColor,
-      );
+      count.value = 0;
     }
   }
 
@@ -55,7 +50,11 @@ class ProfileController extends GetxController {
       final response = await request.send();
       final res = await http.Response.fromStream(response);
       if (json.decode(res.body)['status']) {
-        Get.snackbar('Success', 'Foto profile berhasil diupdate');
+        CustomSnackbar.showSnackbar(
+          title: "Success!",
+          message: "Photo Updated!",
+          status: true,
+        );
       }
       fetchData();
       return;
@@ -87,12 +86,7 @@ class ProfileController extends GetxController {
       profileUrl.value = data['data']['profile_url'];
       return;
     } catch (err) {
-      Get.snackbar(
-        'Error',
-        'Failed to fetch profile',
-        backgroundColor: error.withValues(alpha: 0.6),
-        colorText: whiteColor,
-      );
+      count.value = 0;
     }
   }
 

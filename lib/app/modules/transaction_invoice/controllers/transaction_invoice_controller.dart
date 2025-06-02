@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:temanbicara/app/data/invoice_model.dart';
 import 'package:temanbicara/app/themes/colors.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 import 'package:temanbicara/app/widgets/transaction/invoice_pdf.dart';
 import 'package:temanbicara/app/utils/platform_channel.dart';
 
@@ -32,18 +33,16 @@ class TransactionInvoiceController extends GetxController {
 
       await CreatePDF.generatePDF(invoice, outputPath: filePath);
 
-      Get.snackbar(
-        'Success!',
-        'Your invoice has been saved to the Download folder.',
-        backgroundColor: primaryColor.withOpacity(0.7),
-        colorText: whiteColor,
+      CustomSnackbar.showSnackbar(
+        title: "Downloaded!",
+        message: "Check your Download Folder!",
+        status: true,
       );
     } catch (e) {
-      Get.snackbar(
-        'Oops!',
-        'Failed to save invoice. Please try again.',
-        backgroundColor: error.withOpacity(0.7),
-        colorText: whiteColor,
+      CustomSnackbar.showSnackbar(
+        title: "Oops!",
+        message: "Failed to Save Invoice!",
+        status: false,
       );
     } finally {
       isDownloading.value = false;
@@ -62,11 +61,10 @@ class TransactionInvoiceController extends GetxController {
 
       await NativeShare.shareFile(file.path);
     } catch (e) {
-      Get.snackbar(
-        'Oops!',
-        'Failed to share invoice: $e',
-        backgroundColor: error.withOpacity(0.85),
-        colorText: whiteColor,
+      CustomSnackbar.showSnackbar(
+        title: "Oops!",
+        message: "Failed to Share Invoice!",
+        status: false,
       );
     } finally {
       isSharing.value = false;

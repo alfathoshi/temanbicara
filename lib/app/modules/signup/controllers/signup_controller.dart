@@ -105,7 +105,7 @@ class SignupController extends GetxController {
       }
     } catch (e) {
       CustomSnackbar.showSnackbar(
-        title: "Error!",
+        title: "Oops!",
         message: "Failed to Register!",
         status: false,
       );

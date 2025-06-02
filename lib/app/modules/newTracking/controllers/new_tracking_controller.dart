@@ -203,7 +203,7 @@ class NewTrackingController extends GetxController {
       if (response.statusCode == 200 && data['status']) {
         CustomSnackbar.showSnackbar(
             context: Get.context!,
-            title: 'Congrats',
+            title: 'Congrats!',
             message: "Today's Tracking Saved!",
             status: true);
         final reportController = Get.find<ReportController>();
@@ -215,17 +215,15 @@ class NewTrackingController extends GetxController {
         return true;
       } else {
         CustomSnackbar.showSnackbar(
-            context: Get.context!,
-            title: 'Oops!',
-            message: 'Please Fill the Fields!',
-            status: true);
+          context: Get.context!,
+          title: 'Oops!',
+          message: 'Please Fill the Fields!',
+          status: false,
+        );
         isLoading.value = false;
         return false;
       }
     } catch (e) {
-      Get.snackbar('Error', 'Gagal menyimpan tracking',
-          backgroundColor: Colors.red.withValues(alpha: 0.6),
-          colorText: Colors.white);
       isLoading.value = false;
       return false;
     }

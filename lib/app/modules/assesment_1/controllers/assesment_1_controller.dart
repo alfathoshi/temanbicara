@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -7,6 +9,7 @@ import 'package:intl/intl.dart';
 import 'package:temanbicara/app/config/config.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 enum Gender { none, male, female }
 
@@ -50,9 +53,11 @@ class Assesment1Controller extends GetxController {
       if (phoneC.text.isNotEmpty) {
         box.write('phone', phoneC.text);
       } else {
-        Get.snackbar('Failed', 'Field',
-            backgroundColor: Colors.red.withValues(alpha: 0.6),
-            colorText: Colors.white);
+        CustomSnackbar.showSnackbar(
+          title: "Oops!",
+          message: "Please Fill the Fields!",
+          status: false,
+        );
       }
       if (selectedGender.value == Gender.male) {
         box.write('gender', 'male');
@@ -82,29 +87,30 @@ class Assesment1Controller extends GetxController {
 
         var data = json.decode(response.body);
         if (response.statusCode == 200 && data['status']) {
-          Get.snackbar(
-            'Success',
-            'Akun berhasil dibuat',
-            backgroundColor: primaryColor.withValues(alpha: 0.6),
-            colorText: Colors.white,
+          CustomSnackbar.showSnackbar(
+            title: "Success!",
+            message: "Account Created!",
+            status: true,
           );
           Get.toNamed(Routes.ASSESMENT_2);
         } else {
-          Get.snackbar('Failed', 'Phone number must contains digits only',
-              backgroundColor: Colors.red.withValues(alpha: 0.6),
-              colorText: Colors.white);
+          CustomSnackbar.showSnackbar(
+            title: "Invalid!",
+            message: "Invalid Phone Number!",
+            status: false,
+          );
         }
       } catch (e) {
-        Get.snackbar('Error', e.toString(),
-            backgroundColor: Colors.red.withValues(alpha: 0.6),
-            colorText: Colors.white);
+        isLoading.value = false;
       } finally {
         isLoading.value = false;
       }
     } else {
-      Get.snackbar('Failed', 'Fill all parmeters',
-          backgroundColor: Colors.red.withValues(alpha: 0.6),
-          colorText: Colors.white);
+      CustomSnackbar.showSnackbar(
+        title: "Oops!",
+        message: "Please Fill the Fields!",
+        status: false,
+      );
     }
   }
 }

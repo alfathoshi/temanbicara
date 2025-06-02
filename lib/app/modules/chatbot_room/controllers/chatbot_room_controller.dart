@@ -5,6 +5,7 @@ import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:get/get.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:temanbicara/app/themes/colors.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 class ChatbotRoomController extends GetxController {
   final Gemini gemini = Gemini.instance;
@@ -82,11 +83,10 @@ class ChatbotRoomController extends GetxController {
         },
       );
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Failed to generating content',
-        backgroundColor: error.withValues(alpha: 0.6),
-        colorText: whiteColor,
+      CustomSnackbar.showSnackbar(
+        title: "Oops!",
+        message: "Generating Content Failed!",
+        status: false,
       );
     }
   }
