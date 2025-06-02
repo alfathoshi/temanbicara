@@ -94,7 +94,7 @@ class VerifyOtpController extends GetxController {
 
       if (isCorrect.value) {
         CustomSnackbar.showSnackbar(
-          title: "Success",
+          title: "Success!",
           message: "OTP Verified!",
           status: true,
         );

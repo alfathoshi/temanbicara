@@ -83,7 +83,7 @@ class SendOtpView extends GetView<SendOtpController> {
                         onPressed: () async {
                           if (controller.emailController.value.text.isEmpty) {
                             CustomSnackbar.showSnackbar(
-                              title: "Oops",
+                              title: "Oops!",
                               message: "Please Fill the Field!",
                               status: false,
                             );

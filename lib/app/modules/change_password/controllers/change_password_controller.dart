@@ -51,8 +51,8 @@ class ChangePasswordController extends GetxController {
       }
       if (newPassController.text != confirmPassController.text) {
         CustomSnackbar.showSnackbar(
-          title: "Password Mismatch",
-          message: "New password don't match",
+          title: "Password Mismatch!",
+          message: "New Password don't Match!",
           status: false,
         );
         return false;
@@ -61,8 +61,8 @@ class ChangePasswordController extends GetxController {
       if (!isPasswordValid.value) {
         isLoading.value = false;
         CustomSnackbar.showSnackbar(
-            title: "Invalid Password",
-            message: "Not Strong Enough",
+            title: "Invalid Password!",
+            message: "Not Strong Enough!",
             status: false);
         return false;
       }
@@ -88,7 +88,7 @@ class ChangePasswordController extends GetxController {
         if (responseData['status']) {
           CustomSnackbar.showSnackbar(
             title: "Success!",
-            message: "Password changed successfully",
+            message: "Password Changed!",
             status: true,
           );
           await Future.delayed(Duration(milliseconds: 500));
@@ -96,7 +96,7 @@ class ChangePasswordController extends GetxController {
           return true;
         } else {
           CustomSnackbar.showSnackbar(
-            title: "Error!",
+            title: "Oops!",
             message: "Please Fill the Fields!",
             status: false,
           );
@@ -107,8 +107,8 @@ class ChangePasswordController extends GetxController {
       } else {
         if (responseData['message'] == "Password lama tidak sesuai") {
           CustomSnackbar.showSnackbar(
-            title: "Incorrect Password",
-            message: "Please try again later",
+            title: "Incorrect Password!",
+            message: "Please try Again!",
             status: false,
           );
         }

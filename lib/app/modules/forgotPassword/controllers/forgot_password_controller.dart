@@ -27,7 +27,7 @@ class ForgotPasswordController extends GetxController {
           newPasswordController.text.isEmpty) {
         isLoading.value = false;
         CustomSnackbar.showSnackbar(
-          title: "Oops",
+          title: "Oops!",
           message: "Please Fill the Fields!",
           status: false,
         );
@@ -37,8 +37,8 @@ class ForgotPasswordController extends GetxController {
       if (confirmPasswordController.text != newPasswordController.text) {
         isLoading.value = false;
         CustomSnackbar.showSnackbar(
-          title: "Password Mismatch",
-          message: "New password doesn't match.",
+          title: "Password Mismatch!",
+          message: "New password doesn't match!",
           status: false,
         );
         return;
@@ -47,8 +47,8 @@ class ForgotPasswordController extends GetxController {
       if (!isPasswordValid.value) {
         isLoading.value = false;
         CustomSnackbar.showSnackbar(
-            title: "Invalid Password",
-            message: "Not Strong Enough",
+            title: "Invalid Password!",
+            message: "Not Strong Enough!",
             status: false);
         return;
       }
@@ -71,15 +71,15 @@ class ForgotPasswordController extends GetxController {
 
       if (isCorrect.value) {
         CustomSnackbar.showSnackbar(
-          title: "Success",
+          title: "Success!",
           message: "Password Changed!",
           status: true,
         );
         Get.offAllNamed(Routes.LOGIN);
       } else {
         CustomSnackbar.showSnackbar(
-          title: "Invalid",
-          message: "OTP is Already Expired",
+          title: "Invalid!",
+          message: "OTP is Already Expired!",
           status: false,
         );
         Get.toNamed(Routes.LOGIN);
