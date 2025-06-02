@@ -48,6 +48,8 @@ dependencies:
   table_calendar: ^3.1.2
   timeline_tile: ^2.0.0
   uuid: ^4.5.1
+  social_sharing_plus: ^1.2.3
+  email_validator: ^3.0.0
 
 dev_dependencies:
   flutter_lints: ^3.0.0

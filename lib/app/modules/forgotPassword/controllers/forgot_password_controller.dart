@@ -15,6 +15,11 @@ class ForgotPasswordController extends GetxController {
   RxBool isButtonActive = false.obs;
   RxBool isNewPassObscure = true.obs;
   RxBool isConfPassObscure = true.obs;
+  RxBool isPasswordValid = false.obs;
+
+  void showPasswordC() {
+    isConfPassObscure.value = !isConfPassObscure.value;
+  }
 
   Future<void> changePassword() async {
     try {
@@ -28,13 +33,23 @@ class ForgotPasswordController extends GetxController {
         );
         return;
       }
+
       if (confirmPasswordController.text != newPasswordController.text) {
         isLoading.value = false;
         CustomSnackbar.showSnackbar(
           title: "Password Mismatch",
-          message: "New password don't match",
+          message: "New password doesn't match.",
           status: false,
         );
+        return;
+      }
+
+      if (!isPasswordValid.value) {
+        isLoading.value = false;
+        CustomSnackbar.showSnackbar(
+            title: "Invalid Password",
+            message: "Not Strong Enough",
+            status: false);
         return;
       }
 
@@ -43,14 +58,12 @@ class ForgotPasswordController extends GetxController {
       var response = await http.post(
         Uri.parse("${Config.apiEndPoint}/password"),
         headers: {'Content-Type': 'application/json'},
-        body: json.encode(
-          {
-            "otp": Get.arguments['otp'],
-            "user_id": Get.arguments['user_id'],
-            "new_password": newPasswordController.text,
-            "confirm_password": confirmPasswordController.text,
-          },
-        ),
+        body: json.encode({
+          "otp": Get.arguments['otp'],
+          "user_id": Get.arguments['user_id'],
+          "new_password": newPasswordController.text,
+          "confirm_password": confirmPasswordController.text,
+        }),
       );
 
       Map<String, dynamic> res = json.decode(response.body);
@@ -62,20 +75,19 @@ class ForgotPasswordController extends GetxController {
           message: "Password Changed!",
           status: true,
         );
+        Get.offAllNamed(Routes.LOGIN);
       } else {
         CustomSnackbar.showSnackbar(
           title: "Invalid",
           message: "OTP is Already Expired",
           status: false,
         );
+        Get.toNamed(Routes.LOGIN);
       }
-      isLoading.value = false;
-      Get.offAllNamed(
-        Routes.LOGIN,
-      );
-      return;
     } catch (err) {
       rethrow;
+    } finally {
+      isLoading.value = false;
     }
   }
 

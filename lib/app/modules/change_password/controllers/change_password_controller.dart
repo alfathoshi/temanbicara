@@ -92,7 +92,7 @@ class ChangePasswordController extends GetxController {
         return false;
       }
     } catch (e) {
-      Get.snackbar('Error', 'An error occurred: $e');
+      // Get.snackbar('Error', 'An error occurred: $e');
       return false;
     } finally {
       isLoading.value = false;
