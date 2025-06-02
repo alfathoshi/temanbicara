@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, curly_braces_in_flow_control_structures
 
 import 'package:fancy_password_field/fancy_password_field.dart';
 import 'package:flutter/material.dart';
