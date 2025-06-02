@@ -419,7 +419,7 @@ class HomeView extends GetView<HomeController> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'New Article',
+                              'Latest articles',
                               style: h4SemiBold,
                             ),
                             GestureDetector(

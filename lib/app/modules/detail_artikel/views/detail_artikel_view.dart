@@ -5,6 +5,7 @@ import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/custom_appbar.dart';
 
+import '../../../widgets/top_article.dart';
 import '../controllers/detail_artikel_controller.dart';
 
 class DetailArtikelView extends GetView<DetailArtikelController> {
@@ -12,10 +13,10 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
   final String? judul;
   final String? deskripsi;
   final String? author;
-  // final DateTime date;
+  final String? date;
 
   const DetailArtikelView({
-    // this.date,
+    this.date,
     this.image,
     this.judul,
     this.deskripsi,
@@ -53,21 +54,23 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
               children: [
                 SizedBox(
                   width: 300,
-                  child: Text(
-                    judul ?? "No Title",
-                    softWrap: true,
-                    maxLines: 3,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
+                  child: Text(judul ?? "No Title",
+                      softWrap: true, maxLines: 3, style: h4Bold),
                 ),
               ],
             ),
-            Text(
-              author ?? "Unknown Author",
-              style: h6SemiBold,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  author ?? "Unknown Author",
+                  style: h6SemiBold,
+                ),
+                Text(
+                  date ?? "Date",
+                  style: h5Regular,
+                )
+              ],
             ),
             sby24,
             SizedBox(
@@ -79,7 +82,12 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
                 textAlign: TextAlign.justify,
               ),
             ),
-            sby12,
+            sby48,
+            Text(
+              'Latest articles',
+              style: h4Bold,
+            ),
+            sby16,
             SizedBox(
               height: 160,
               child: ListView.builder(
@@ -87,15 +95,17 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
                 itemCount: 3,
                 itemBuilder: (context, index) {
                   return Padding(
-                      padding: const EdgeInsets.only(right: 24),
-                      child: Text('data')
-                      // TopArticle(
-                      //     judul: judul ?? "No Title",
-                      //     deskripsi: deskripsi ?? "No Description",
-                      //     author: author ?? "Unknown Author",
-                      //     image: image ?? "default_image",
-                      //     date: date),
-                      );
+                    padding: const EdgeInsets.only(right: 24),
+                    child: SizedBox(
+                      width: 300,
+                      child: TopArticle(
+                          judul: judul ?? "No Title",
+                          deskripsi: deskripsi ?? "No Description",
+                          author: author ?? "Unknown Author",
+                          image: image ?? "default_image",
+                          date: date ?? 'date'),
+                    ),
+                  );
                 },
               ),
             ),

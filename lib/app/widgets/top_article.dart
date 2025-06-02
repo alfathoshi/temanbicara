@@ -5,6 +5,7 @@ import 'package:temanbicara/app/modules/detail_artikel/views/detail_artikel_view
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
+import 'package:temanbicara/app/widgets/consult/format_date.dart';
 
 class TopArticle extends StatelessWidget {
   final String? judul;
@@ -23,7 +24,6 @@ class TopArticle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  
     String displayDate = "Tanggal tidak tersedia";
     if (date != null && date!.isNotEmpty) {
       try {
@@ -46,7 +46,7 @@ class TopArticle extends StatelessWidget {
             judul: judul,
             deskripsi: deskripsi,
             author: author,
-            // date: date,
+            date: formatDate(DateTime.parse(date!)),
           ),
         );
       },
