@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:temanbicara/app/config/config.dart';
 import 'package:http/http.dart' as http;
 import 'package:temanbicara/app/routes/app_pages.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 class VerifyOtpController extends GetxController {
   RxBool isLoading = false.obs;
@@ -91,6 +92,11 @@ class VerifyOtpController extends GetxController {
       isCorrect.value = res['status'];
 
       if (isCorrect.value) {
+        CustomSnackbar.showSnackbar(
+          title: "Success",
+          message: "OTP Verified!",
+          status: true,
+        );
         Get.toNamed(
           Routes.FORGOT_PASSWORD,
           arguments: {

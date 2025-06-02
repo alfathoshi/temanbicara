@@ -70,7 +70,7 @@ class SignupController extends GetxController {
         );
 
         var data = json.decode(response.body);
-        print(response.body);
+        //print(response.body);
         if (response.statusCode == 200 && data['status']) {
           box.write('token', data['token']);
           box.write('id', data['data']['id']);

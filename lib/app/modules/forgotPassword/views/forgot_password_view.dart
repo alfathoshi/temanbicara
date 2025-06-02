@@ -98,9 +98,10 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                         Obx(() => FancyPasswordField(
                               controller: controller.newPasswordController,
                               keyboardType: TextInputType.text,
-                              obscureText: controller
-                                  .isNewPassObscure.value, // Kontrol manual
+                              obscureText: controller.isNewPassObscure.value,
                               onChanged: (value) {
+                                controller.isPasswordValid.value =
+                                    _isPasswordValid(value);
                                 controller.isButtonActive.value =
                                     value.isNotEmpty;
                               },
@@ -125,7 +126,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                               decoration: InputDecoration(
                                 hintText: "Enter New Password",
                                 hintStyle:
-                                    h5Regular.copyWith(color: grey4Color),
+                                    h4Regular.copyWith(color: grey4Color),
                                 suffixIcon: IconButton(
                                   icon: Icon(
                                     controller.isNewPassObscure.value

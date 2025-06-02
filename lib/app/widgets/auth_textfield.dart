@@ -32,7 +32,7 @@ class AuthTextfield extends StatelessWidget {
       keyboardType: type,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: h5Regular.copyWith(color: grey4Color),
+        hintStyle: h4Regular.copyWith(color: grey4Color),
         suffixIcon: passwordField == true
             ? IconButton(
                 icon: Icon(
