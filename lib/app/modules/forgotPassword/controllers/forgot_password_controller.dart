@@ -28,7 +28,7 @@ class ForgotPasswordController extends GetxController {
         isLoading.value = false;
         CustomSnackbar.showSnackbar(
           title: "Oops",
-          message: "Please Fill the Field!",
+          message: "Please Fill the Fields!",
           status: false,
         );
         return;

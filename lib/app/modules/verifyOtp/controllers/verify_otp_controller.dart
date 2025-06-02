@@ -50,6 +50,7 @@ class VerifyOtpController extends GetxController {
           'email': Get.arguments['email'],
         }),
       );
+      print(response.body);
       startResendTimer();
     } catch (err) {
       rethrow;
