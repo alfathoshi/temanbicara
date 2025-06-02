@@ -6,7 +6,7 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 
 class ChatContainer extends StatelessWidget {
-  final int id;
+  final String id;
   final String time;
   final String? image;
   final String? nama;
@@ -23,8 +23,6 @@ class ChatContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String parsedTime =
-        DateFormat('HH:mm').format(DateFormat('HH:mm:ss').parse(time));
     return InkWell(
       onTap: () {
         Get.toNamed(Routes.CHAT_ROOM,
@@ -65,21 +63,22 @@ class ChatContainer extends StatelessWidget {
                       style: h6Bold,
                     ),
                     Text(
-                      deskripsi!,
+                      deskripsi ?? '...',
                       style: h7Regular.copyWith(
                           color: Colors.grey.withValues(alpha: 0.9)),
                       softWrap: true,
-                      overflow: TextOverflow.fade,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                     ),
                   ],
                 ),
               ),
             ),
             Text(
-              parsedTime,
+              time,
               overflow: TextOverflow.fade,
-              style: h7Regular.copyWith(
-                  color: Colors.grey.withValues(alpha: 0.9)),
+              style:
+                  h7Regular.copyWith(color: Colors.grey.withValues(alpha: 0.9)),
             )
           ],
         ),

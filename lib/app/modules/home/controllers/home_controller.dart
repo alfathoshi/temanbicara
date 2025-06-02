@@ -80,6 +80,8 @@ class HomeController extends GetxController {
         _journalController.fetchJournals(),
         fetchData()
       ]);
-    } catch (e) {}
+    } catch (e) {
+      isLoading.value = false;
+    }
   }
 }

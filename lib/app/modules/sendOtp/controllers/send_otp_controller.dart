@@ -40,7 +40,6 @@ class SendOtpController extends GetxController {
       );
 
       var data = json.decode(response.body);
-      print(response.body);
       if (!data['status']) {
         CustomSnackbar.showSnackbar(
           title: "Invalid",
