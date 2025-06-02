@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/consult/format_date.dart';
@@ -17,6 +18,100 @@ class JournalView extends GetView<JournalController> {
   JournalView({super.key});
   @override
   final JournalController controller = Get.put(JournalController());
+  Widget _buildJournalCardShimmer() {
+    return Padding(
+      padding: const EdgeInsets.only(
+        bottom: 16,
+        left: 16,
+        right: 16,
+      ),
+      child: Shimmer.fromColors(
+        baseColor: Colors.grey[300]!,
+        highlightColor: Colors.grey[100]!,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(
+              color: border,
+            ),
+          ),
+          width: double.infinity,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 150,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
+                child: Container(
+                  height: 20,
+                  width: 80,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(4)),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      height: 16,
+                      width: 80,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(4)),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 16, right: 8, top: 4, bottom: 4),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      height: 14,
+                      width: 80,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(4)),
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          height: 24,
+                          width: 24,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12)),
+                        ),
+                        sbX12,
+                      ],
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,13 +176,19 @@ class JournalView extends GetView<JournalController> {
                     style: h5SemiBold,
                   ),
                   Obx(
-                    () => FlexibleDatePicker(
-                      selectedDate: controller.selectedDate.value,
-                      isIconOnly: true,
-                      onDateChanged: (picked) {
-                        controller.updateDate(picked);
-                        controller.fetchJournals();
-                      },
+                    () => Row(
+                      children: [
+                        Text(formatDate(controller.selectedDate.value)),
+                        sbx8,
+                        FlexibleDatePicker(
+                          selectedDate: controller.selectedDate.value,
+                          isIconOnly: true,
+                          onDateChanged: (picked) {
+                            controller.updateDate(picked);
+                            controller.fetchJournals();
+                          },
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -96,8 +197,11 @@ class JournalView extends GetView<JournalController> {
               Expanded(
                 child: Obx(() {
                   if (controller.isLoading.value) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
+                    return ListView.builder(
+                      itemCount: 3,
+                      itemBuilder: (context, index) {
+                        return _buildJournalCardShimmer();
+                      },
                     );
                   }
                   if (controller.journalList.isEmpty) {
@@ -125,7 +229,7 @@ class JournalView extends GetView<JournalController> {
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               child: Container(
-                                padding: const EdgeInsets.all(20),
+                                padding: const EdgeInsets.all(16),
                                 width: Get.width * 0.8,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(24),
@@ -148,7 +252,8 @@ class JournalView extends GetView<JournalController> {
                                     ),
                                     sby24,
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         TextButton(
                                           onPressed: () => Get.back(),

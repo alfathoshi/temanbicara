@@ -1,16 +1,14 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:get/get.dart';
 
+import '../themes/colors.dart';
+
 class CustomSnackbar {
-  static void showSnackbar({
-    BuildContext? context,
-    required String title,
-    required String message,
-    required bool status,
-  }) {
+  static void showSnackbar(
+      {required BuildContext context,
+      required String title,
+      required String message,
+      required bool status}) {
     Get.snackbar(
       '',
       '',
@@ -32,24 +30,17 @@ class CustomSnackbar {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: Colors.transparent,
+              color: status ? Colors.green.withValues(alpha: 0.2) : error.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                status
-                    ? Icon(
-                        Icons.check_circle_outline,
-                        color: Colors.green,
-                        size: 24,
-                      )
-                    : Icon(
-                        Icons.cancel_outlined,
-                        color: error,
-                        size: 24,
-                      ),
-                SizedBox(width: 8),
+                Icon(
+                    status ? Icons.check_circle_outline : Icons.cancel_outlined,
+                    color: status ? Colors.green : error,
+                    size: 24),
+                const SizedBox(width: 8),
                 Text(
                   status ? 'Success' : 'Failed',
                   style: TextStyle(

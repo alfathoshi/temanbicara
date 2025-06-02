@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
-import 'package:temanbicara/app/themes/colors.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 import '../../../config/config.dart';
 import '../../home/controllers/home_controller.dart';
 import '../../report/controllers/report_controller.dart';
@@ -201,12 +201,11 @@ class NewTrackingController extends GetxController {
       var data = json.decode(response.body);
 
       if (response.statusCode == 200 && data['status']) {
-        Get.snackbar(
-          'Success',
-          'Tracking berhasil disimpan!',
-          backgroundColor: primaryColor,
-          colorText: Colors.white,
-        );
+        CustomSnackbar.showSnackbar(
+            context: Get.context!,
+            title: 'Congrats',
+            message: 'Tracking saved successfully',
+            status: true);
         final reportController = Get.find<ReportController>();
         await reportController.checkTracking();
         final homeController = Get.find<HomeController>();
@@ -215,9 +214,11 @@ class NewTrackingController extends GetxController {
         Get.offAllNamed('/navigation-bar');
         return true;
       } else {
-        Get.snackbar('Tracking Failed', "Field all parmeters",
-            backgroundColor: Colors.red.withValues(alpha: 0.6),
-            colorText: Colors.white);
+        CustomSnackbar.showSnackbar(
+            context: Get.context!,
+            title: 'Tracking Failed',
+            message: 'Field all parameters',
+            status: true);
         isLoading.value = false;
         return false;
       }

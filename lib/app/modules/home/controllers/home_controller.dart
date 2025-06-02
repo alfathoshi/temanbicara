@@ -11,6 +11,7 @@ import '../../../config/config.dart';
 import '../../journal/controllers/journal_controller.dart';
 import '../../report/controllers/report_controller.dart';
 
+// ignore: avoid_print
 class HomeController extends GetxController {
   final box = GetStorage();
   var isLoading = false.obs;
@@ -32,13 +33,9 @@ class HomeController extends GetxController {
       );
       if (response.statusCode == 200) {
         articles.value = json.decode(response.body);
-        print(articles.values);
       }
-      // else {
-      //   throw Exception('Failed to load schedule');
-      // }
     } catch (e) {
-      Get.snackbar('Error', e.toString());
+      print(e);
     } finally {
       isLoading.value = false;
     }
@@ -49,11 +46,13 @@ class HomeController extends GetxController {
   late final JournalController _journalController;
 
   Future<void> refreshMentalMatrixData() async {
-    isLoading.value = true; // jika ada state loading
-    await _reportController.getMatrix();
-    await _reportController
-        .checkTracking(); // _reportController dari Get.find()
-    // Mungkin perlu update() jika tidak semua state reaktif atau ada kalkulasi manual
+    isLoading.value = true;
+    await _reportController.getMatrix(
+      dateToFetch: DateTime.now(),
+      showSnackbarOnFailure: false,
+    );
+    await _reportController.checkTracking();
+
     isLoading.value = false;
   }
 
@@ -71,14 +70,17 @@ class HomeController extends GetxController {
     try {
       await Future.wait([
         _profileController.fetchData(),
-        _reportController.getMatrix().then((_) async {
+        _reportController
+            .getMatrix(
+          dateToFetch: _reportController.selectedDate.value,
+          showSnackbarOnFailure: false,
+        )
+            .then((matrixSuccess) async {
           await _reportController.checkTracking();
         }),
         _journalController.fetchJournals(),
         fetchData()
       ]);
-    } catch (e) {
-      // Handle error
-    }
+    } catch (e) {}
   }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -9,6 +11,7 @@ import 'package:intl/intl.dart';
 import '../../../config/config.dart';
 import '../../../data/report_model.dart';
 import '../../../themes/colors.dart';
+import '../../../widgets/custom_snackbar.dart';
 
 class ReportController extends GetxController {
   var trackingList = {}.obs;
@@ -94,7 +97,11 @@ class ReportController extends GetxController {
     greenChart,
   ];
 
-  Future<void> getMatrix() async {
+  Future<bool> getMatrix({
+    required DateTime dateToFetch,
+    bool showSnackbarOnFailure = true,
+  }) async {
+    isLoading.value = true;
     try {
       isLoading.value = true;
 
@@ -106,9 +113,8 @@ class ReportController extends GetxController {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
         },
-        body: json.encode({
-          'date_request': DateFormat('yyyy-MM-dd').format(selectedDate.value)
-        }),
+        body: json.encode(
+            {'date_request': DateFormat('yyyy-MM-dd').format(dateToFetch)}),
       );
 
       var data = json.decode(response.body);
@@ -117,22 +123,31 @@ class ReportController extends GetxController {
           data['status'] == true &&
           data['data'] != null) {
         report.value = ReportModel.fromJson(data['data'][0]);
+        isLoading.value = false;
+        return true;
       } else {
-        Get.snackbar('Failed', 'Report data not found',
-            backgroundColor: error.withValues(alpha: 0.6),
-            colorText: Colors.white);
+        if (showSnackbarOnFailure) {
+          CustomSnackbar.showSnackbar(
+              context: Get.context!,
+              title: 'Failed',
+              message: 'Tracking unavailable for the selected date.',
+              status: false);
+        }
+        isLoading.value = false;
+        return false;
       }
     } catch (e) {
-      Get.snackbar('Error', 'Fetch Matrix',
-          backgroundColor: Colors.red.withValues(alpha: 0.6),
-          colorText: Colors.white);
+      isLoading.value = false;
+      return false;
     } finally {
       isLoading.value = false;
     }
   }
 
   Future<void> checkTracking() async {
+    isLoading.value = true;
     try {
+      isLoading.value = true;
       final token = box.read('token');
       final response = await http.get(
         Uri.parse('${Config.apiEndPoint}/tracking'),
@@ -164,13 +179,16 @@ class ReportController extends GetxController {
             detail.value = desc['detail']!;
             matrixValue.value = score.toString();
             isTrackingFilled.value = true;
+            isLoading.value = false;
           } else {
             isTrackingFilled.value = false;
+            isLoading.value = false;
           }
         }
       }
     } catch (e) {
       isTrackingFilled.value = false;
+      isLoading.value = false;
     }
   }
 
@@ -198,13 +216,9 @@ class ReportController extends GetxController {
           avgScreen.value = trackingList['average_screen_time'] ?? '';
           avgActivity.value = trackingList['average_activity'] ?? '';
         } else {}
-      } else {
-        Get.snackbar('Error', 'Gagal mengambil data statistik');
       }
     } catch (e) {
-      Get.snackbar('Error', 'Failed to fetch statistic',
-          backgroundColor: Colors.red.withValues(alpha: 0.6),
-          colorText: Colors.white);
+      print(e);
     } finally {
       isFetching.value = false;
     }
@@ -214,6 +228,6 @@ class ReportController extends GetxController {
   void onInit() {
     super.onInit();
     fetchStatistik();
-    getMatrix();
+    checkTracking();
   }
 }
