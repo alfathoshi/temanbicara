@@ -4,16 +4,32 @@ import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:table_calendar/table_calendar.dart';
+import 'package:temanbicara/app/data/message.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/chat_bubble.dart';
 import 'package:temanbicara/app/widgets/custom_appbar.dart';
 
+import '../../../widgets/date_separator.dart';
 import '../controllers/chat_room_controller.dart';
+
+abstract class ChatDisplayItem {}
+
+class MessageDisplayItem extends ChatDisplayItem {
+  final Message message;
+  MessageDisplayItem(this.message);
+}
+
+class DateSeparatorDisplayItem extends ChatDisplayItem {
+  final DateTime date;
+  DateSeparatorDisplayItem(this.date);
+}
 
 class ChatRoomView extends GetView<ChatRoomController> {
   const ChatRoomView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,46 +58,67 @@ class ChatRoomView extends GetView<ChatRoomController> {
         ),
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: controller.chatService.getMessages(controller.user.id,
-            controller.otherUser.id), 
+        stream: controller.chatService
+            .getMessages(controller.user.id, controller.otherUser.id),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-                child: CircularProgressIndicator()); 
+            return const Center(child: CircularProgressIndicator());
           }
 
           if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           }
 
-          List<types.TextMessage> newMessages = snapshot.data!.docs.map((doc) {
-            var user = types.User(id: doc['senderID']);
-            return types.TextMessage(
-              id: doc.id,
-              author: user,
-              text: doc['message'],
-              createdAt: doc['timestamp'].millisecondsSinceEpoch,
-            );
-          }).toList();
+          final messagesDocs = snapshot.data!.docs;
+          List<Message> chronologicalMessages = messagesDocs
+              .map((doc) => Message.fromMap(doc.data() as Map<String, dynamic>))
+              .toList()
+              .reversed
+              .toList();
 
+          List<ChatDisplayItem> displayItems = [];
+          DateTime?
+              lastDisplayedDateHeader; // Untuk melacak tanggal terakhir header yang ditampilkan
+
+          for (var message in chronologicalMessages) {
+            DateTime messageDay = DateTime(
+                message.timestamp.toDate().year,
+                message.timestamp.toDate().month,
+                message.timestamp.toDate().day);
+
+            if (lastDisplayedDateHeader == null ||
+                !isSameDay(lastDisplayedDateHeader, messageDay)) {
+              displayItems.add(DateSeparatorDisplayItem(messageDay));
+              lastDisplayedDateHeader = messageDay;
+            }
+
+            displayItems.add(MessageDisplayItem(message));
+          }
           return Column(
             children: [
               Expanded(
                 child: ListView.builder(
                   reverse: true,
-                  itemCount: newMessages.length,
+                  itemCount: displayItems.length,
                   itemBuilder: (context, index) {
-                    final message = newMessages[index];
-                    bool isUserMessage =
-                        message.author.id == controller.user.id;
+                    final item = displayItems[displayItems.length - 1 - index];
 
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: ChatBubble(
-                        text: message.text,
-                        isUserMessage: isUserMessage,
-                      ),
-                    );
+                    if (item is DateSeparatorDisplayItem) {
+                      return DateSeparatorWidget(date: item.date);
+                    } else if (item is MessageDisplayItem) {
+                      final message = item.message;
+                      bool isUserMessage =
+                          message.senderID == controller.user.id;
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: ChatBubble(
+                          text: message.message,
+                          isUserMessage: isUserMessage,
+                          timestamp: message.timestamp,
+                        ),
+                      );
+                    }
+                    return const SizedBox.shrink();
                   },
                 ),
               ),
