@@ -11,7 +11,6 @@ import '../../../config/config.dart';
 import '../../journal/controllers/journal_controller.dart';
 import '../../report/controllers/report_controller.dart';
 
-// ignore: avoid_print
 class HomeController extends GetxController {
   final box = GetStorage();
   var isLoading = false.obs;
@@ -81,6 +80,8 @@ class HomeController extends GetxController {
         _journalController.fetchJournals(),
         fetchData()
       ]);
-    } catch (e) {}
+    } catch (e) {
+      isLoading.value = false;
+    }
   }
 }

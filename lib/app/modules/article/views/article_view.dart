@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/top_article.dart';

@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/consult/format_date.dart';
