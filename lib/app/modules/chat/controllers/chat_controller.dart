@@ -4,6 +4,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 import '../../../config/config.dart';
 import '../../../services/chat_services.dart';
 
@@ -43,7 +44,11 @@ class ChatController extends GetxController {
           listChat.value = uniqueCounselorList;
         } else {
           listChat.clear();
-          Get.snackbar("Info", data['message'] ?? "No chat data found.");
+          CustomSnackbar.showSnackbar(
+            title: "Oops!",
+            message: "No Chat Found!",
+            status: false,
+          );
         }
       } else {
         listChat.clear();
@@ -51,8 +56,6 @@ class ChatController extends GetxController {
       }
     } catch (e) {
       listChat.clear();
-      Get.snackbar("Error", "Failed to fetch chat list: ${e.toString()}");
-      print("Error fetching chat list: $e");
     } finally {
       isLoading.value = false;
     }

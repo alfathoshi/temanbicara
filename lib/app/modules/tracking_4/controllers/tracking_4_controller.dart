@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 import '../../../config/config.dart';
 
@@ -33,29 +34,19 @@ class Tracking4Controller extends GetxController {
       var data = json.decode(response.body);
 
       if (response.statusCode == 200 && data['status']) {
-        Get.snackbar(
-          'Success',
-          'Assesment berhasil',
-          backgroundColor: primaryColor.withValues(alpha: 0.6),
-          colorText: Colors.white,
+        CustomSnackbar.showSnackbar(
+          title: "Success!",
+          message: "Assessment Finished!",
+          status: true,
         );
 
         Get.offAllNamed(
           Routes.NAVIGATION_BAR,
           arguments: {"indexPage": 0},
         );
-      } else {
-        Get.snackbar('Error', data['message'],
-            backgroundColor: Colors.red.withValues(alpha: 0.6),
-            colorText: Colors.white);
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Failed to store tracking',
-        backgroundColor: error.withValues(alpha: 0.6),
-        colorText: Colors.white,
-      );
+      rethrow;
     }
   }
 }

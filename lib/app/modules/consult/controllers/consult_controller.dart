@@ -26,7 +26,7 @@ class ConsultController extends GetxController {
         schedules.value = json.decode(response.body);
       }
     } catch (e) {
-      // Get.snackbar('Error', e.toString());
+      isLoading.value = false;
     } finally {
       isLoading.value = false;
     }

@@ -24,7 +24,7 @@ class SendOtpController extends GetxController {
       if (!validateEmail(emailController.text)) {
         isLoading.value = false;
         CustomSnackbar.showSnackbar(
-          title: "Failed!",
+          title: "Invalid!",
           message: "Invalid Email!",
           status: false,
         );
@@ -52,8 +52,8 @@ class SendOtpController extends GetxController {
 
       if (!isButtonActive.value) {
         CustomSnackbar.showSnackbar(
-          title: "Request Sent",
-          message: "Please Check your Email",
+          title: "Request Sent!",
+          message: "Please Check your Email!",
           status: true,
         );
         isLoading.value = false;
@@ -69,7 +69,7 @@ class SendOtpController extends GetxController {
       return;
     } catch (err) {
       CustomSnackbar.showSnackbar(
-        title: "Error!",
+        title: "Oops!",
         message: "Failed to Send OTP!",
         status: false,
       );

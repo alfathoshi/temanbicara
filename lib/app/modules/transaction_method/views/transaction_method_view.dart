@@ -9,6 +9,7 @@ import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/custom_appbar.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 import 'package:temanbicara/app/widgets/transaction/choose_method.dart';
 import 'package:temanbicara/app/widgets/transaction/transaction_timeline_view.dart';
 
@@ -54,11 +55,10 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
                   MyButton(
                     get: () async {
                       if (controller.selectedMethod.value.isEmpty) {
-                        Get.snackbar(
-                          "Payment Method Not Selected",
-                          "Please select a payment method before proceeding.",
-                          backgroundColor: Colors.red.withValues(alpha: 0.6),
-                          colorText: Colors.white,
+                        CustomSnackbar.showSnackbar(
+                          title: "Oops!",
+                          message: "Mind Choosing a Payment Method?",
+                          status: false,
                         );
                         return;
                       }
@@ -86,11 +86,10 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
                       Navigator.of(Get.context!).pop();
 
                       if (controller.consultationResult == null) {
-                        Get.snackbar(
-                          "Booking Failed",
-                          "Unable to process your consultation. Please try again.",
-                          backgroundColor: Colors.red.withValues(alpha: 0.6),
-                          colorText: Colors.white,
+                        CustomSnackbar.showSnackbar(
+                          title: "Failed!",
+                          message: "Unable to Process Consultation!",
+                          status: false,
                         );
                         return;
                       }

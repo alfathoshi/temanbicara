@@ -46,7 +46,7 @@ class ConsultHistoryController extends GetxController {
         }
       }
     } catch (e) {
-      Get.snackbar('Error', e.toString());
+      isLoading.value = false;
     }
   }
 

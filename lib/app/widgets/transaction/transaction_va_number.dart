@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 class TransactionVaNumberBorder extends StatelessWidget {
   final String vaNumber;
@@ -17,11 +18,10 @@ class TransactionVaNumberBorder extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         await Clipboard.setData(ClipboardData(text: vaNumber));
-        Get.snackbar(
-          backgroundColor: primaryColor.withValues(alpha: 0.6),
-          colorText: Colors.white,
-          "Copied!",
-          "VA Number copied to clipboard",
+        CustomSnackbar.showSnackbar(
+          title: "Success!",
+          message: "VA Number Copied!",
+          status: true,
         );
       },
       child: Container(
@@ -80,11 +80,10 @@ class TransactionVaNumber extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         await Clipboard.setData(ClipboardData(text: vaNumber));
-        Get.snackbar(
-          backgroundColor: primaryColor.withValues(alpha: 0.6),
-          colorText: Colors.white,
-          "Copied!",
-          "VA Number copied to clipboard",
+        CustomSnackbar.showSnackbar(
+          title: "Success!",
+          message: "VA Number Copied!",
+          status: true,
         );
       },
       child: Column(

@@ -24,7 +24,11 @@ class CreateJournalController extends GetxController {
   Future<void> pickImage() async {
     var status = await Permission.photos.request();
     if (!status.isGranted) {
-      Get.snackbar('Permission Denied', 'Gallery access is required');
+      CustomSnackbar.showSnackbar(
+        title: "Oops!",
+        message: "Gallery Access Required!",
+        status: false,
+      );
       return;
     }
 
@@ -34,15 +38,21 @@ class CreateJournalController extends GetxController {
       File imageFile = File(pickedFile.path);
       int fileSize = await imageFile.length();
       if (fileSize > (2 * 1024 * 1024)) {
-        Get.snackbar('Error', 'Image size is more than 2mb',
-            backgroundColor: error.withValues(alpha: 0.6),
-            colorText: Colors.white);
+        CustomSnackbar.showSnackbar(
+          title: "Oops!",
+          message: "Image Must not Exceed 2MB!",
+          status: false,
+        );
         pickedImage.value = null;
       } else {
         pickedImage.value = imageFile;
       }
     } else {
-      Get.snackbar('Cancelled', 'No image selected');
+      CustomSnackbar.showSnackbar(
+        title: "Oops!",
+        message: "No Image Selected!",
+        status: false,
+      );
     }
   }
 
@@ -60,7 +70,7 @@ class CreateJournalController extends GetxController {
     if (titleController.text.length > 255) {
       CustomSnackbar.showSnackbar(
           context: Get.context!,
-          title: 'Invalid Title!',
+          title: 'Invalid!',
           message: 'Title too Long!',
           status: false);
       return false;
@@ -103,15 +113,13 @@ class CreateJournalController extends GetxController {
       } else {
         CustomSnackbar.showSnackbar(
             context: Get.context!,
-            title: 'Error!',
+            title: 'Oops!',
             message: 'Failed to Create Journal!',
             status: false);
         isLoading.value = false;
         return false;
       }
     } catch (e) {
-      Get.snackbar('Error', 'An error occurred: $e');
-      isLoading.value = false;
       return false;
     }
   }

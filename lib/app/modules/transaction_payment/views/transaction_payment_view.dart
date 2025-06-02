@@ -9,6 +9,7 @@ import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/custom_appbar.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 import 'package:temanbicara/app/widgets/transaction/transaction_price_detail.dart';
 import 'package:temanbicara/app/widgets/transaction/transaction_remaining_time.dart';
 import 'package:temanbicara/app/widgets/transaction/transaction_timeline_view.dart';
@@ -224,8 +225,11 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                               },
                             );
                           } else {
-                            Get.snackbar(
-                                "Not Paid", "Transaction belum dibayar.");
+                            CustomSnackbar.showSnackbar(
+                              title: "Oops!",
+                              message: "Mind Re-Checking your Payment?",
+                              status: false,
+                            );
                           }
                         },
                         color: primaryColor,

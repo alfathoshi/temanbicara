@@ -26,33 +26,39 @@ class EditProfileController extends GetxController {
     String birthdate = DateFormat('yyyy-MM-dd').format(selectedDate.value);
 
     if (nameController.text.isEmpty || nicknameController.text.isEmpty) {
-      Get.snackbar('Error', 'name or nickname are required',
-          backgroundColor: error.withValues(alpha: 0.6),
-          colorText: Colors.white);
-      return false;
+      CustomSnackbar.showSnackbar(
+        title: "Oops!",
+        message: "Please Fill the Fields!",
+        status: false,
+      );
     }
 
     if (nameController.text.length < 3 || nicknameController.text.length < 3) {
-      Get.snackbar('Too short', 'Name & Nickname min 3 characters',
-          backgroundColor: error.withValues(alpha: 0.6),
-          colorText: Colors.white);
-      return false;
+      CustomSnackbar.showSnackbar(
+        title: "Invalid!",
+        message: "Really? Thats too Short!",
+        status: false,
+      );
     }
 
     if (nameController.text.length > 255 ||
         nicknameController.text.length > 255) {
-      Get.snackbar('Too long', 'Name & Nickname too long',
-          backgroundColor: error.withValues(alpha: 0.6),
-          colorText: Colors.white);
+      CustomSnackbar.showSnackbar(
+        title: "Invalid!",
+        message: "Such a Long Name!",
+        status: false,
+      );
       return false;
     }
 
     final nameRegExp = RegExp(r'^[a-zA-Z\s]+$');
     if (!nameRegExp.hasMatch(nameController.text) ||
         !nameRegExp.hasMatch(nicknameController.text)) {
-      Get.snackbar('Invalid Chars', 'Special Character are not allowed',
-          backgroundColor: error.withValues(alpha: 0.6),
-          colorText: Colors.white);
+      CustomSnackbar.showSnackbar(
+        title: "Invalid!",
+        message: "No Special Characters!",
+        status: false,
+      );
       return false;
     }
 
@@ -90,16 +96,16 @@ class EditProfileController extends GetxController {
         } else {
           CustomSnackbar.showSnackbar(
               context: Get.context!,
-              title: 'Error!',
-              message: 'Failed to Create Journal!',
+              title: 'Oops!',
+              message: 'Creating Journal Failed!',
               status: false);
           return false;
         }
       } else {
         CustomSnackbar.showSnackbar(
             context: Get.context!,
-            title: 'Error!',
-            message: 'Failed to Create Journal!',
+            title: 'Oops!',
+            message: 'Creating Journal Failed!',
             status: false);
         return false;
       }

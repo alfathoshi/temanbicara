@@ -100,8 +100,6 @@ class ChangePasswordController extends GetxController {
             message: "Please Fill the Fields!",
             status: false,
           );
-          Get.snackbar('Error',
-              responseData['message'] ?? 'Gagal memperbaharui password');
           return false;
         }
       } else {
@@ -115,7 +113,6 @@ class ChangePasswordController extends GetxController {
         return false;
       }
     } catch (e) {
-      // Get.snackbar('Error', 'An error occurred: $e');
       return false;
     } finally {
       isLoading.value = false;

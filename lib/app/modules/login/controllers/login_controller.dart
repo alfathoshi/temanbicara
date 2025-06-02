@@ -57,8 +57,8 @@ class LoginController extends GetxController {
       if (response.statusCode == 200 && data['status']) {
         if (data['data']['role'] != 'General') {
           CustomSnackbar.showSnackbar(
-            title: "Invalid Credential",
-            message: "Please Try Again",
+            title: "Invalid Credential!",
+            message: "Please Try Again!",
             status: false,
           );
           return;
@@ -72,8 +72,8 @@ class LoginController extends GetxController {
         final currentUserID = data['data']['id'].toString();
         await saveFcmToken(currentUserID);
         CustomSnackbar.showSnackbar(
-          title: "Success",
-          message: "Logged In",
+          title: "Success!",
+          message: "Logged In!",
           status: true,
         );
 
@@ -96,15 +96,15 @@ class LoginController extends GetxController {
         }
       } else {
         CustomSnackbar.showSnackbar(
-          title: "Invalid Credential",
-          message: "Please Try Again",
+          title: "Invalid Credential!",
+          message: "Please Try Again!",
           status: false,
         );
       }
     } catch (e) {
       CustomSnackbar.showSnackbar(
-        title: "Error",
-        message: "Login Failed",
+        title: "Error!",
+        message: "Login Failed!",
         status: false,
       );
     } finally {
