@@ -5,7 +5,7 @@ import '../themes/colors.dart';
 
 class CustomSnackbar {
   static void showSnackbar(
-      {required BuildContext context,
+      {BuildContext? context,
       required String title,
       required String message,
       required bool status}) {
@@ -30,7 +30,9 @@ class CustomSnackbar {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: status ? Colors.green.withValues(alpha: 0.2) : error.withValues(alpha: 0.2),
+              color: status
+                  ? Colors.green.withValues(alpha: 0.2)
+                  : error.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
