@@ -75,8 +75,8 @@ class JournalController extends GetxController {
         if (data['status']) {
           CustomSnackbar.showSnackbar(
               context: Get.context!,
-              title: 'Journal Deleted',
-              message: 'Journal deleted successfully',
+              title: 'Deleted!',
+              message: 'Journal Deleted!',
               status: true);
           journalList
               .removeWhere((journal) => journal['journal_id'] == journalId);

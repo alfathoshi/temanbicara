@@ -204,7 +204,7 @@ class NewTrackingController extends GetxController {
         CustomSnackbar.showSnackbar(
             context: Get.context!,
             title: 'Congrats',
-            message: 'Tracking saved successfully',
+            message: "Today's Tracking Saved!",
             status: true);
         final reportController = Get.find<ReportController>();
         await reportController.checkTracking();
@@ -216,8 +216,8 @@ class NewTrackingController extends GetxController {
       } else {
         CustomSnackbar.showSnackbar(
             context: Get.context!,
-            title: 'Tracking Failed',
-            message: 'Field all parameters',
+            title: 'Oops!',
+            message: 'Please Fill the Fields!',
             status: true);
         isLoading.value = false;
         return false;

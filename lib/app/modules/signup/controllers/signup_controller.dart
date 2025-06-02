@@ -46,8 +46,8 @@ class SignupController extends GetxController {
 
     if (validateEmail(emailC.text)) {
       CustomSnackbar.showSnackbar(
-        title: "Invalid",
-        message: "Invalid Email",
+        title: "Invalid!",
+        message: "Invalid Email!",
         status: false,
       );
       return;
@@ -55,8 +55,8 @@ class SignupController extends GetxController {
 
     if (!isPasswordValid.value) {
       CustomSnackbar.showSnackbar(
-          title: "Invalid Password",
-          message: "Not Strong Enough",
+          title: "Invalid Password!",
+          message: "Not Strong Enough!",
           status: false);
       return;
     }
@@ -82,7 +82,7 @@ class SignupController extends GetxController {
           box.write('email', data['data']['email']);
           box.write('password', data['data']['password']);
           CustomSnackbar.showSnackbar(
-            title: "Success",
+            title: "Success!",
             message: "Registered!",
             status: true,
           );
@@ -91,22 +91,22 @@ class SignupController extends GetxController {
           );
         } else {
           CustomSnackbar.showSnackbar(
-            title: "Invalid",
-            message: "Invalid Email",
+            title: "Invalid!",
+            message: "Invalid Email!",
             status: false,
           );
         }
       } else {
         CustomSnackbar.showSnackbar(
-          title: "Password Mismatch",
-          message: "New password don't match",
+          title: "Password Mismatch!",
+          message: "New Password don't Match!",
           status: false,
         );
       }
     } catch (e) {
       CustomSnackbar.showSnackbar(
         title: "Error!",
-        message: "Failed to Registered",
+        message: "Failed to Register!",
         status: false,
       );
     } finally {

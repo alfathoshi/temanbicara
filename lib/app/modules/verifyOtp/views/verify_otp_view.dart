@@ -127,7 +127,7 @@ class VerifyOtpView extends GetView<VerifyOtpController> {
                       if (controller.focusedIndex == 0) {
                         CustomSnackbar.showSnackbar(
                           title: "Oops!",
-                          message: "Please Fill the Fields",
+                          message: "Please Fill the Fields!",
                           status: false,
                         );
                         return;

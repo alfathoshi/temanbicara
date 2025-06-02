@@ -128,10 +128,11 @@ class ReportController extends GetxController {
       } else {
         if (showSnackbarOnFailure) {
           CustomSnackbar.showSnackbar(
-              context: Get.context!,
-              title: 'Failed',
-              message: 'Tracking unavailable for the selected date.',
-              status: false);
+            context: Get.context!,
+            title: 'Oops!',
+            message: 'No Tracking Available!',
+            status: false,
+          );
         }
         isLoading.value = false;
         return false;

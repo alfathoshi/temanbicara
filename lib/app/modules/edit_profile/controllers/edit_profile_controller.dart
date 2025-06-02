@@ -83,23 +83,23 @@ class EditProfileController extends GetxController {
         if (responseData['status']) {
           CustomSnackbar.showSnackbar(
               context: Get.context!,
-              title: 'Congrats',
-              message: 'Your Profile has been updated',
+              title: 'Congrats!',
+              message: 'Profile Updated!',
               status: true);
           return true;
         } else {
           CustomSnackbar.showSnackbar(
               context: Get.context!,
-              title: 'Failed',
-              message: 'Failed to create journal',
+              title: 'Error!',
+              message: 'Failed to Create Journal!',
               status: false);
           return false;
         }
       } else {
         CustomSnackbar.showSnackbar(
             context: Get.context!,
-            title: 'Failed',
-            message: 'Failed to create journal',
+            title: 'Error!',
+            message: 'Failed to Create Journal!',
             status: false);
         return false;
       }

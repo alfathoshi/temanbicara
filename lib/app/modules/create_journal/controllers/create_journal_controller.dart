@@ -49,8 +49,8 @@ class CreateJournalController extends GetxController {
     if (titleController.text.isEmpty || bodyController.text.isEmpty) {
       CustomSnackbar.showSnackbar(
           context: Get.context!,
-          title: 'Failed',
-          message: 'Title and Body are required',
+          title: 'Oops!',
+          message: 'Please Fill the Fields!',
           status: false);
       return false;
     }
@@ -58,8 +58,8 @@ class CreateJournalController extends GetxController {
     if (titleController.text.length > 255) {
       CustomSnackbar.showSnackbar(
           context: Get.context!,
-          title: 'Invalid Title',
-          message: 'Title too long',
+          title: 'Invalid Title!',
+          message: 'Title too Long!',
           status: false);
       return false;
     }
@@ -93,15 +93,15 @@ class CreateJournalController extends GetxController {
         Get.back();
         CustomSnackbar.showSnackbar(
             context: Get.context!,
-            title: 'Journal Created',
-            message: 'Journal created successfully',
+            title: 'Created!',
+            message: 'New Journal Added!',
             status: true);
         return true;
       } else {
         CustomSnackbar.showSnackbar(
             context: Get.context!,
-            title: 'Failed',
-            message: 'Failed to create journal',
+            title: 'Error!',
+            message: 'Failed to Create Journal!',
             status: false);
         return false;
       }
