@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/top_article.dart';
@@ -24,7 +25,6 @@ class ArticleView extends GetView<ArticleController> {
         if (controller.isLoadingInitial.value && controller.articles.isEmpty) {
           return Center(child: CircularProgressIndicator(color: primaryColor));
         }
-
         return RefreshIndicator(
           onRefresh: controller.refreshArticles,
           color: primaryColor,
@@ -58,7 +58,7 @@ class ArticleView extends GetView<ArticleController> {
                         deskripsi: articleItem["content"],
                         author: articleItem["user"]?["name"],
                         image: articleItem["image"] ?? 'logo',
-                        date: articleItem['created_at'],
+                        date: articleItem['created_at'] ?? '',
                       ),
                     );
                   },
@@ -78,7 +78,7 @@ class ArticleView extends GetView<ArticleController> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20.0),
                     child: Center(
-                        child: Text("Semua artikel sudah ditampilkan.",
+                        child: Text("All articles are displayed",
                             style: h7Regular.copyWith(color: greyColor))),
                   ),
                 ),

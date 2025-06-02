@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:temanbicara/app/modules/profile/controllers/profile_controller.dart';
 import 'package:temanbicara/app/modules/report/controllers/report_controller.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
@@ -117,12 +118,8 @@ class HomeView extends GetView<HomeController> {
                                 child: CircleAvatar(
                                   radius: 28,
                                   backgroundColor: whiteColor,
-                                  backgroundImage:
-                                      NetworkImage(controller.profileUrl.value),
-                                  child: Image.asset(
-                                    'assets/images/profile.png',
-                                    scale: 2,
-                                  ),
+                                  backgroundImage: NetworkImage(
+                                      profileController.profileUrl.value),
                                 ),
                               ),
                               const SizedBox(
@@ -161,31 +158,39 @@ class HomeView extends GetView<HomeController> {
                           height: 16,
                         ),
                         Obx(
-                          () => GestureDetector(
-                            onTap: () {
-                              if (reportController.isTrackingFilled.value) {
-                                Get.toNamed(Routes.REPORT);
-                              } else {
-                                Get.toNamed(Routes.NEW_TRACKING);
-                              }
-                            },
-                            child: MentalMatrix(
-                              color: lightGreen,
-                              icon: const Icon(Icons.edit),
-                              image: 'assets/images/limiter.png',
-                              title: reportController.title.value.isNotEmpty
-                                  ? reportController.title.value
-                                  : '',
-                              detail: reportController.detail.value.isNotEmpty
-                                  ? reportController.detail.value
-                                  : 'Complete your tracking to see your mental matrix.',
-                              matrixValue:
-                                  reportController.isTrackingFilled.value
-                                      ? reportController.matrixValue.value
+                          () {
+                            if (controller.isLoading.value) {
+                              return _buildMentalMatrixShimmer(context);
+                            } else {
+                              return GestureDetector(
+                                onTap: () {
+                                  if (reportController.isTrackingFilled.value) {
+                                    Get.toNamed(Routes.REPORT);
+                                  } else {
+                                    Get.toNamed(Routes.NEW_TRACKING);
+                                  }
+                                },
+                                child: MentalMatrix(
+                                  color: lightGreen,
+                                  icon: const Icon(Icons.edit),
+                                  image: 'assets/images/limiter.png',
+                                  title: reportController.title.value.isNotEmpty
+                                      ? reportController.title.value
                                       : '',
-                              isFilled: reportController.isTrackingFilled.value,
-                            ),
-                          ),
+                                  detail: reportController
+                                          .detail.value.isNotEmpty
+                                      ? reportController.detail.value
+                                      : 'Complete your tracking to see your mental matrix.',
+                                  matrixValue:
+                                      reportController.isTrackingFilled.value
+                                          ? reportController.matrixValue.value
+                                          : '',
+                                  isFilled:
+                                      reportController.isTrackingFilled.value,
+                                ),
+                              );
+                            }
+                          },
                         ),
                       ],
                     ),
@@ -357,8 +362,7 @@ class HomeView extends GetView<HomeController> {
                         ),
                         Obx(() {
                           if (journalController.isLoading.value) {
-                            return const Center(
-                                child: CircularProgressIndicator());
+                            return _buildJournalCardShimmer();
                           } else if (journalController.journalList.isEmpty) {
                             return const Center(
                               child: Text("No Journal Today"),
@@ -415,7 +419,7 @@ class HomeView extends GetView<HomeController> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'New Article',
+                              'Latest articles',
                               style: h4SemiBold,
                             ),
                             GestureDetector(
@@ -439,7 +443,7 @@ class HomeView extends GetView<HomeController> {
                 ),
                 Obx(() {
                   if (controller.isLoading.value) {
-                    return const Center(child: CircularProgressIndicator());
+                    return _buildTopArticleShimmer();
                   } else if (controller.articles.isEmpty) {
                     return const Center(
                       child: Text("No Data Available"),
@@ -481,4 +485,190 @@ class HomeView extends GetView<HomeController> {
       ),
     );
   }
+}
+
+Widget _buildJournalCardShimmer() {
+  return Padding(
+    padding: const EdgeInsets.only(
+      bottom: 16,
+      left: 16,
+      right: 16,
+    ),
+    child: Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: border,
+          ),
+        ),
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding:
+                  const EdgeInsets.only(left: 16, right: 16, bottom: 8, top: 8),
+              child: Container(
+                height: 20,
+                width: 80,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(4)),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 16,
+                    width: 80,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(4)),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.only(left: 16, right: 8, top: 4, bottom: 4),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: 14,
+                    width: 80,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(4)),
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        height: 24,
+                        width: 24,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12)),
+                      ),
+                      sbX12,
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+Widget _buildTopArticleShimmer() {
+  return Padding(
+    padding: const EdgeInsets.only(left: 24, right: 24, bottom: 20.0),
+    child: Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: border,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            children: [
+              Container(
+                width: 80,
+                height: 80.0,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+              ),
+              sbX12,
+              Expanded(
+                child: Column(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(4.0)),
+                    ),
+                    sby8,
+                    Container(
+                      width: double.infinity,
+                      height: 14.0,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(4.0)),
+                    ),
+                    sby5,
+                    Container(
+                      width: double.infinity,
+                      height: 14.0,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(4.0)),
+                    ),
+                    sby5,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: 40,
+                          height: 12.0,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(4.0)),
+                        ),
+                        Container(
+                          width: 20,
+                          height: 12.0,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(4.0)),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+Widget _buildMentalMatrixShimmer(BuildContext context) {
+  return Center(
+    child: Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(30),
+          border: Border.all(
+            color: border,
+            width: 1,
+          ),
+        ),
+        height: 83,
+        width: MediaQuery.sizeOf(context).width,
+      ),
+    ),
+  );
 }

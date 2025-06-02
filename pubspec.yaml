@@ -41,7 +41,9 @@ dependencies:
   path_provider: ^2.1.5
   pdf: ^3.11.3
   permission_handler: ^12.0.0+1
+  shimmer: ^3.0.0
   smooth_page_indicator: ^1.2.1
+  social_sharing_plus: ^1.2.3
   syncfusion_flutter_gauges: ^29.1.38
   table_calendar: ^3.1.2
   timeline_tile: ^2.0.0
@@ -71,5 +73,3 @@ flutter_launcher_icons:
   image_path: "assets/images/logo.png"
   adaptive_icon_foreground: "assets/images/logo_foreground.png"
   adaptive_icon_background: "#ffffff"
-
- 

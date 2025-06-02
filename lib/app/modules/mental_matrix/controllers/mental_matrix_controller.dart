@@ -43,42 +43,6 @@ class MentalMatrixController extends GetxController {
     '> 5 hours'
   ];
 
-  // Future<void> getReport() async {
-  //   try {
-  //     isLoading.value = true;
-  //     final userId = box.read('id');
-  //     final token = box.read('token');
-
-  //     var response = await http.post(
-  //       Uri.parse('${Config.apiEndPoint}/report'),
-  //       headers: {
-  //         'Authorization': 'Bearer $token',
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: json.encode({
-  //         'date_request': "2025-05-08",
-  //       }),
-  //     );
-
-  //     var data = json.decode(response.body);
-  //     // print('response body: ${response.body}');
-
-  //     if (response.statusCode == 200 &&
-  //         data['status'] == true &&
-  //         data['data'] != null) {
-  //       report.value = ReportModel.fromJson(data['data'][0]);
-  //     } else {
-  //       Get.snackbar('Error', data['message'] ?? 'Gagal Menyiapkan Report',
-  //           backgroundColor: Colors.red.withValues(alpha: 0.6),
-  //           colorText: whiteColor);
-  //     }
-  //   } catch (e) {
-  //     print('Error getReport: $e');
-  //   } finally {
-  //     isLoading.value = false;
-  //   }
-  // }
-
   String getIndexedImage({
     required String? value,
     required List<String> referenceList,
@@ -96,6 +60,6 @@ class MentalMatrixController extends GetxController {
   void onInit() {
     super.onInit();
     // getReport();
-    ReportController().getMatrix();
+    ReportController().checkTracking();
   }
 }
