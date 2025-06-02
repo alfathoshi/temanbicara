@@ -300,10 +300,14 @@ class HomeView extends GetView<HomeController> {
                                       borderRadius: BorderRadius.circular(8),
                                       color: lightBlue,
                                     ),
-                                    child: Text(
-                                      '“I’m so sorry \nabout your cat. \nAre you okay \nright now? \nWanna talk?”',
-                                      style: h6Regular,
-                                    ),
+                                    child: Obx(() => Text(
+                                          controller.randomShortTermGoal.value
+                                                  .isNotEmpty
+                                              ? '“${controller.randomShortTermGoal.value}”'
+                                              : '“Loading your goal...”',
+                                          style: h6Regular,
+                                          textAlign: TextAlign.center,
+                                        )),
                                   ),
                                   const SizedBox(
                                     height: 16,
@@ -487,8 +491,6 @@ class HomeView extends GetView<HomeController> {
     );
   }
 }
-
-
 
 Widget _buildTopArticleShimmer() {
   return Padding(

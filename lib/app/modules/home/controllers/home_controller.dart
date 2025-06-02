@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print, empty_catches
 
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -18,6 +19,7 @@ class HomeController extends GetxController {
   var articles = {}.obs;
   RxString profileUrl = "".obs;
   RxString name = ''.obs;
+  var randomShortTermGoal = ''.obs;
 
   Future<void> fetchData() async {
     final token = box.read('token');
@@ -40,9 +42,23 @@ class HomeController extends GetxController {
     }
   }
 
+  Future<void> _updateRandomShortTermGoal() {
+    if (_reportController.report.value != null &&
+        _reportController.report.value!.shortTerm.isNotEmpty) {
+      final shortTermGoals = _reportController.report.value!.shortTerm;
+      final randomIndex = Random().nextInt(shortTermGoals.length);
+      randomShortTermGoal.value = shortTermGoals[randomIndex];
+    } else {
+      randomShortTermGoal.value = '“Set your goals and crush them!”';
+    }
+
+    return Future.value();
+  }
+
   late final ReportController _reportController;
   late final ProfileController _profileController;
   late final JournalController _journalController;
+  Worker? _reportEverWorker;
 
   Future<void> refreshMentalMatrixData() async {
     isLoading.value = true;
@@ -51,7 +67,7 @@ class HomeController extends GetxController {
       showSnackbarOnFailure: false,
     );
     await _reportController.checkTracking();
-
+    _updateRandomShortTermGoal();
     isLoading.value = false;
   }
 
@@ -63,10 +79,14 @@ class HomeController extends GetxController {
     _journalController = Get.find<JournalController>();
 
     _loadInitialData();
+    _reportEverWorker = ever(_reportController.report, (_) {
+      _updateRandomShortTermGoal();
+    });
   }
 
   Future<void> _loadInitialData() async {
     try {
+      isLoading.value = true;
       await Future.wait([
         _profileController.fetchData(),
         _reportController
@@ -74,14 +94,24 @@ class HomeController extends GetxController {
           dateToFetch: _reportController.selectedDate.value,
           showSnackbarOnFailure: false,
         )
-            .then((matrixSuccess) async {
+            .then((_) async {
           await _reportController.checkTracking();
+          _updateRandomShortTermGoal();
         }),
         _journalController.fetchJournals(),
         fetchData()
       ]);
     } catch (e) {
+      _updateRandomShortTermGoal();
+      isLoading.value = false;
+    } finally {
       isLoading.value = false;
     }
+  }
+
+  @override
+  void onClose() {
+    _reportEverWorker?.dispose();
+    super.onClose();
   }
 }

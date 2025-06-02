@@ -19,6 +19,7 @@ class CreateJournalController extends GetxController {
   final TextEditingController bodyController = TextEditingController();
   final fetchController = Get.find<JournalController>();
   var pickedImage = Rx<File?>(null);
+  var isLoading = false.obs;
 
   Future<void> pickImage() async {
     var status = await Permission.photos.request();
@@ -56,6 +57,7 @@ class CreateJournalController extends GetxController {
   }
 
   Future<bool> submitJournal() async {
+    isLoading.value = true;
     if (titleController.text.isEmpty || bodyController.text.isEmpty) {
       CustomSnackbar.showSnackbar(
           context: Get.context!,
@@ -106,6 +108,7 @@ class CreateJournalController extends GetxController {
             title: 'Created!',
             message: 'New Journal Added!',
             status: true);
+        isLoading.value = false;
         return true;
       } else {
         CustomSnackbar.showSnackbar(
@@ -113,6 +116,7 @@ class CreateJournalController extends GetxController {
             title: 'Oops!',
             message: 'Failed to Create Journal!',
             status: false);
+        isLoading.value = false;
         return false;
       }
     } catch (e) {
