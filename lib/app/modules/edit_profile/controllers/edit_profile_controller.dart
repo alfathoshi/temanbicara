@@ -27,14 +27,14 @@ class EditProfileController extends GetxController {
 
     if (nameController.text.isEmpty || nicknameController.text.isEmpty) {
       Get.snackbar('Error', 'name or nickname are required',
-          backgroundColor: Colors.red.withValues(alpha: 0.6),
+          backgroundColor: error.withValues(alpha: 0.6),
           colorText: Colors.white);
       return false;
     }
 
     if (nameController.text.length < 3 || nicknameController.text.length < 3) {
       Get.snackbar('Too short', 'Name & Nickname min 3 characters',
-          backgroundColor: Colors.red.withValues(alpha: 0.6),
+          backgroundColor: error.withValues(alpha: 0.6),
           colorText: Colors.white);
       return false;
     }
@@ -42,7 +42,7 @@ class EditProfileController extends GetxController {
     if (nameController.text.length > 255 ||
         nicknameController.text.length > 255) {
       Get.snackbar('Too long', 'Name & Nickname too long',
-          backgroundColor: Colors.red.withValues(alpha: 0.6),
+          backgroundColor: error.withValues(alpha: 0.6),
           colorText: Colors.white);
       return false;
     }
@@ -51,7 +51,7 @@ class EditProfileController extends GetxController {
     if (!nameRegExp.hasMatch(nameController.text) ||
         !nameRegExp.hasMatch(nicknameController.text)) {
       Get.snackbar('Invalid Chars', 'Special Character are not allowed',
-          backgroundColor: Colors.red.withValues(alpha: 0.6),
+          backgroundColor: error.withValues(alpha: 0.6),
           colorText: Colors.white);
       return false;
     }

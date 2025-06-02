@@ -6,11 +6,10 @@ import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-
-import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 import '../../../config/config.dart';
+import '../../../themes/colors.dart';
 import '../../journal/controllers/journal_controller.dart';
 
 class CreateJournalController extends GetxController {
@@ -35,7 +34,7 @@ class CreateJournalController extends GetxController {
       int fileSize = await imageFile.length();
       if (fileSize > (2 * 1024 * 1024)) {
         Get.snackbar('Error', 'Image size is more than 2mb',
-            backgroundColor: Colors.red.withValues(alpha: 0.6),
+            backgroundColor: error.withValues(alpha: 0.6),
             colorText: Colors.white);
         pickedImage.value = null;
       } else {
@@ -48,16 +47,20 @@ class CreateJournalController extends GetxController {
 
   Future<bool> submitJournal() async {
     if (titleController.text.isEmpty || bodyController.text.isEmpty) {
-      Get.snackbar('Error', 'Title and Body are required',
-          backgroundColor: Colors.red.withValues(alpha: 0.6),
-          colorText: Colors.white);
+      CustomSnackbar.showSnackbar(
+          context: Get.context!,
+          title: 'Failed',
+          message: 'Title and Body are required',
+          status: false);
       return false;
     }
 
     if (titleController.text.length > 255) {
-      Get.snackbar('Invalid Title', 'Title too long',
-          backgroundColor: Colors.red.withValues(alpha: 0.6),
-          colorText: Colors.white);
+      CustomSnackbar.showSnackbar(
+          context: Get.context!,
+          title: 'Invalid Title',
+          message: 'Title too long',
+          status: false);
       return false;
     }
 

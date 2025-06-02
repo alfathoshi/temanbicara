@@ -4,7 +4,6 @@ import 'package:temanbicara/app/themes/fonts.dart';
 
 class MentalMatrix extends StatelessWidget {
   final Color color;
-
   final Icon icon;
   final String title;
   final String detail;

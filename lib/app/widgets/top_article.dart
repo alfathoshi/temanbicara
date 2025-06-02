@@ -23,7 +23,7 @@ class TopArticle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print(date);
+  
     String displayDate = "Tanggal tidak tersedia";
     if (date != null && date!.isNotEmpty) {
       try {

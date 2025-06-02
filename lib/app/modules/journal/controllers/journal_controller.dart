@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 
 import '../../../config/config.dart';
+import '../../../widgets/custom_snackbar.dart';
 
 class JournalController extends GetxController {
   final box = GetStorage();
@@ -44,11 +45,6 @@ class JournalController extends GetxController {
         var data = json.decode(response.body);
         if (data['status']) {
           journalList.value = data['data'];
-          // print(journalList.value);
-        } else {
-          Get.snackbar('Not Found', 'Journal Not Found',
-              backgroundColor: error.withValues(alpha: 0.6),
-              colorText: Colors.white);
         }
       }
     } catch (e) {
@@ -77,12 +73,11 @@ class JournalController extends GetxController {
       if (response.statusCode == 200) {
         var data = json.decode(response.body);
         if (data['status']) {
-          Get.snackbar(
-            'Success',
-            'Journal deleted successfully',
-            colorText: whiteColor,
-            backgroundColor: primaryColor.withValues(alpha: 0.6),
-          );
+          CustomSnackbar.showSnackbar(
+              context: Get.context!,
+              title: 'Journal Deleted',
+              message: 'Journal deleted successfully',
+              status: true);
           journalList
               .removeWhere((journal) => journal['journal_id'] == journalId);
         } else {

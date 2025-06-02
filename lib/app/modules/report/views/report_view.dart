@@ -125,6 +125,27 @@ class ReportView extends GetView<ReportController> {
     );
   }
 
+  Widget _buildMentalMatrixShimmer(BuildContext context) {
+    return Center(
+      child: Shimmer.fromColors(
+        baseColor: Colors.grey[300]!,
+        highlightColor: Colors.grey[100]!,
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(30),
+            border: Border.all(
+              color: border,
+              width: 1,
+            ),
+          ),
+          height: 83,
+          width: MediaQuery.sizeOf(context).width,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -137,7 +158,6 @@ class ReportView extends GetView<ReportController> {
       ),
       body: RefreshIndicator(
         onRefresh: () async {
-          controller.getMatrix();
           controller.fetchStatistik();
           controller.checkTracking();
         },
@@ -184,10 +204,13 @@ class ReportView extends GetView<ReportController> {
                               FlexibleDatePicker(
                                 selectedDate: controller.selectedDate.value,
                                 isIconOnly: true,
-                                onDateChanged: (picked) {
-                                  controller.updateDate(picked);
-                                  controller.getMatrix();
-                                  controller.checkTracking();
+                                onDateChanged: (pickedDate) async {
+                                  bool success = await controller.getMatrix(
+                                      dateToFetch: pickedDate);
+                                  if (success) {
+                                    controller.updateDate(pickedDate);
+                                    controller.checkTracking();
+                                  }
                                 },
                               )
                             ],
@@ -198,18 +221,22 @@ class ReportView extends GetView<ReportController> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Obx(
-                      () => ReportMatrix(
-                        onPressed: () {
-                          Get.toNamed(Routes.MENTAL_MATRIX);
-                        },
-                        title: "Mental Health Matrix",
-                        description: controller.title.value,
-                        image: "assets/images/limiter.png",
-                        matrixValue: controller.matrixValue.value,
-                        color: lightGreen,
-                      ),
-                    ),
+                    Obx(() {
+                      if (controller.isLoading.value) {
+                        return _buildMentalMatrixShimmer(context);
+                      } else {
+                        return ReportMatrix(
+                          onPressed: () {
+                            Get.toNamed(Routes.MENTAL_MATRIX);
+                          },
+                          title: "Mental Health Matrix",
+                          description: controller.title.value,
+                          image: "assets/images/limiter.png",
+                          matrixValue: controller.matrixValue.value,
+                          color: lightGreen,
+                        );
+                      }
+                    }),
                   ],
                 ),
               ),

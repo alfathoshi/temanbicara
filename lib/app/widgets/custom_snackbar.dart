@@ -30,7 +30,7 @@ class CustomSnackbar {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: const Color(0xffEEF6EF),
+              color: status ? Colors.green.withValues(alpha: 0.2) : error.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Row(
