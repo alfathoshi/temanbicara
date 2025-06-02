@@ -168,6 +168,8 @@ class SignupView extends GetView<SignupController> {
                       sby8,
                       ElevatedButton(
                         onPressed: () {
+                          // print(
+                          // controller.validateEmail(controller.emailC.text));
                           controller.register();
                         },
                         style: ElevatedButton.styleFrom(
