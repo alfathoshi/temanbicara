@@ -1,14 +1,46 @@
+// ignore_for_file: unused_element, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/custom_appbar.dart';
-
 import '../controllers/forgot_password_controller.dart';
+import 'package:fancy_password_field/fancy_password_field.dart';
 
 class ForgotPasswordView extends GetView<ForgotPasswordController> {
   const ForgotPasswordView({super.key});
+
+  bool _isPasswordValid(String value) {
+    return MinCharactersValidationRule(8).validate(value) &&
+        UppercaseValidationRule().validate(value) &&
+        LowercaseValidationRule().validate(value) &&
+        SpecialCharacterValidationRule().validate(value);
+  }
+
+  Widget _buildValidationRules(Set<ValidationRule> rules, String value) {
+    return ListView(
+      shrinkWrap: true,
+      children: rules.map((rule) {
+        final isValid = rule.validate(value);
+        return Row(
+          children: [
+            Icon(
+              isValid ? Icons.check : Icons.close,
+              color: isValid ? primaryColor : error,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              rule.name,
+              style: h6Regular.copyWith(color: isValid ? primaryColor : error),
+            ),
+          ],
+        );
+      }).toList(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -17,6 +49,7 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
         resizeToAvoidBottomInset: false,
         backgroundColor: whiteColor,
         appBar: CustomAppBar(
+          backLeading: false,
           title: Text(
             "Change Password",
             style: h3Bold,
@@ -34,78 +67,100 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
                     borderRadius: BorderRadius.circular(8),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withValues(alpha: 0.2),
+                        color: Colors.grey.withOpacity(0.2),
                         spreadRadius: 2,
                         blurRadius: 6,
                         offset: const Offset(0, 3),
                       ),
                     ],
                   ),
-                  child: Obx(
-                    () => Padding(
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'New Password',
-                            style: textDescriptionSemiBold,
+                  child: Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('New Password', style: textDescriptionSemiBold),
+                        sby8,
+                        FancyPasswordField(
+                          showPasswordIcon: Icon(
+                            Icons.visibility_outlined,
+                            size: 20,
                           ),
-                          sby8,
-                          changePasswordTextfield(
-                              "Enter New Password",
-                              controller.newPasswordController,
-                              controller.isNewPassObscure),
-                          sby12,
-                          Text(
-                            'Confirm Password',
-                            style: textDescriptionSemiBold,
+                          hidePasswordIcon: Icon(
+                            Icons.visibility_off_outlined,
+                            size: 20,
                           ),
-                          sby8,
-                          changePasswordTextfield(
-                            "Confirm New Password",
-                            controller.confirmPasswordController,
-                            controller.isConfPassObscure,
-                          )
-                        ],
-                      ),
+                          controller: controller.newPasswordController,
+                          validationRules: {
+                            MinCharactersValidationRule(8),
+                            UppercaseValidationRule(),
+                            LowercaseValidationRule(),
+                            SpecialCharacterValidationRule(),
+                          },
+                          validationRuleBuilder: (rules, value) {
+                            bool allValid =
+                                rules.every((rule) => rule.validate(value));
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              controller.isButtonActive.value = allValid;
+                            });
+                            if (value.isEmpty) {
+                              return const SizedBox.shrink();
+                            }
+                            return _buildValidationRules(rules, value);
+                          },
+                          decoration: InputDecoration(
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 12),
+                            hintText: "Enter New Password",
+                            hintStyle: h5Regular.copyWith(color: grey2Color),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(color: greyColor),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide(color: primaryColor),
+                            ),
+                          ),
+                        ),
+                        sby12,
+                        Text('Confirm Password',
+                            style: textDescriptionSemiBold),
+                        sby8,
+                        changePasswordTextfield(
+                          "Confirm New Password",
+                          controller.confirmPasswordController,
+                          controller.isConfPassObscure,
+                        ),
+                      ],
                     ),
                   ),
                 ),
               ),
               sby36,
-              Obx(
-                () => ElevatedButton(
-                  onPressed: () async {
-                    await controller.changePassword();
-                  },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: controller.isButtonActive.value
-                          ? const Color(0xFFc4c4c4)
-                          : primaryColor,
+              Obx(() => ElevatedButton(
+                    onPressed: () {
+                      controller.changePassword();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: primaryColor,
                       foregroundColor: Colors.white,
-                      minimumSize: const Size(
-                        double.infinity,
-                        56,
-                      ),
+                      minimumSize: const Size(double.infinity, 56),
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20))),
-                  child: controller.isLoading.value == false
-                      ? Text(
-                          'Confirm',
-                          style: h4Bold.copyWith(
-                            color: whiteColor,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    child: controller.isLoading.value
+                        ? SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(color: whiteColor),
+                          )
+                        : Text(
+                            'Confirm',
+                            style: h4Bold.copyWith(color: whiteColor),
                           ),
-                        )
-                      : SizedBox(
-                          height: 20,
-                          width: 20,
-                          child: CircularProgressIndicator(
-                            color: whiteColor,
-                          ),
-                        ),
-                ),
-              ),
+                  )),
             ],
           ),
         ),
@@ -116,35 +171,32 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
 
 Widget changePasswordTextfield(
     String hint, TextEditingController textController, RxBool isObscure) {
-  return TextField(
-    obscureText: isObscure.value,
-    controller: textController,
-    cursorColor: black,
-    decoration: InputDecoration(
-      suffixIcon: GestureDetector(
-        onTapUp: (_) {
-          isObscure.value = true;
-        },
-        onTapDown: (_) {
-          isObscure.value = false;
-        },
-        child: const Icon(
-          Icons.remove_red_eye_outlined,
-          size: 20,
+  return Obx(() => TextField(
+        obscureText: isObscure.value,
+        controller: textController,
+        cursorColor: black,
+        decoration: InputDecoration(
+          suffixIcon: GestureDetector(
+            onTap: () {
+              isObscure.value = !isObscure.value;
+            },
+            child: Icon(
+              isObscure.value
+                  ? Icons.visibility_off_outlined
+                  : Icons.visibility_outlined,
+              size: 20,
+            ),
+          ),
+          hintText: hint,
+          hintStyle: h5Regular.copyWith(color: grey2Color),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: const BorderSide(color: greyColor),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: primaryColor),
+          ),
         ),
-      ),
-      hintText: hint,
-      hintStyle: h5Regular.copyWith(color: grey2Color),
-      enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: const BorderSide(
-          color: greyColor,
-        ),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-        borderSide: BorderSide(color: primaryColor),
-      ),
-    ),
-  );
+      ));
 }

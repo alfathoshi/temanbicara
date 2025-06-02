@@ -23,7 +23,13 @@ class SignupView extends GetView<SignupController> {
 
   Widget? _buildSuffixIcon() {
     return IconButton(
-      icon: const Icon(Icons.remove_red_eye_outlined),
+      icon: Icon(
+        controller.isSecure.value
+            ? Icons.visibility_off_outlined
+            : Icons.visibility_outlined,
+        size: 20,
+        color: black,
+      ),
       onPressed: () => controller.showPassword(),
     );
   }

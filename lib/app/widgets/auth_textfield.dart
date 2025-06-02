@@ -34,11 +34,15 @@ class AuthTextfield extends StatelessWidget {
         hintStyle: const TextStyle(color: greyColor),
         suffixIcon: passwordField == true
             ? IconButton(
-                icon: const Icon(Icons.remove_red_eye_outlined),
+                icon: Icon(
+                  obscureText
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
+                  size: 20,
+                ),
                 onPressed: showPassword,
               )
             : null,
-        suffixIconColor: const Color(0xFFc4c4c4),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(
