@@ -39,8 +39,8 @@ class TransactionRemainingTime extends StatelessWidget {
                     const Duration(
                       days: 0,
                       hours: 0,
-                      minutes: 10,
-                      seconds: 10,
+                      minutes: 20,
+                      seconds: 0,
                     ),
                   ),
                   onEnd: () {

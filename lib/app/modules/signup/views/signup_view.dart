@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element
+
 import 'package:fancy_password_field/fancy_password_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -159,19 +161,18 @@ class SignupView extends GetView<SignupController> {
                       sby60,
                       sby8,
                       ElevatedButton(
-                        onPressed:
-                            _isFormValid() ? () => controller.register() : null,
+                        onPressed: () {
+                          controller.register();
+                        },
                         style: ElevatedButton.styleFrom(
-                            backgroundColor: controller.isButtonActive.value
-                                ? primaryColor
-                                : const Color(0xFFc4c4c4),
+                            backgroundColor: primaryColor,
                             foregroundColor: Colors.white,
                             minimumSize: const Size(
                               double.infinity,
-                              44,
+                              56,
                             ),
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10))),
+                                borderRadius: BorderRadius.circular(20))),
                         child: controller.isLoading.value == false
                             ? Text(
                                 'Register',
