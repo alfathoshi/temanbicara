@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:get/get.dart';
 
 import '../modules/Tracking/bindings/tracking_binding.dart';
