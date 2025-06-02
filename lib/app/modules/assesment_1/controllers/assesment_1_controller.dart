@@ -102,7 +102,7 @@ class Assesment1Controller extends GetxController {
         isLoading.value = false;
       }
     } else {
-      Get.snackbar('Failed', 'Field all parmeters',
+      Get.snackbar('Failed', 'Fill all parmeters',
           backgroundColor: Colors.red.withValues(alpha: 0.6),
           colorText: Colors.white);
     }

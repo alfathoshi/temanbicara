@@ -26,6 +26,8 @@ class SplashScreenView extends GetView<SplashScreenController> {
 
       if (box.read('token') == null) {
         Get.offAllNamed(Routes.LOGIN);
+      } else if (box.read('name') == null) {
+        Get.offAllNamed(Routes.ASSESMENT_1);
       } else {
         Get.offAllNamed(Routes.NAVIGATION_BAR, arguments: {'indexPage': 0});
       }

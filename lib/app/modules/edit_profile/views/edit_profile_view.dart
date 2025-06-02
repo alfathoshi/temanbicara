@@ -23,30 +23,30 @@ class EditProfileView extends GetView<EditProfileController> {
           style: h3Bold,
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          children: [
-            sby24,
-            Center(
-              child: Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  CircleAvatar(
-                    radius: 60,
-                    backgroundColor: border,
-                    child: CircleAvatar(
-                      radius: 58,
-                      backgroundColor: whiteColor,
-                      backgroundImage: NetworkImage(controller.profileUrl),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            children: [
+              sby24,
+              Center(
+                child: Stack(
+                  alignment: Alignment.bottomRight,
+                  children: [
+                    CircleAvatar(
+                      radius: 60,
+                      backgroundColor: border,
+                      child: CircleAvatar(
+                        radius: 58,
+                        backgroundColor: whiteColor,
+                        backgroundImage: NetworkImage(controller.profileUrl),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            sby36,
-            Expanded(
-              child: Column(
+              sby36,
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
@@ -137,29 +137,29 @@ class EditProfileView extends GetView<EditProfileController> {
                   sby16,
                 ],
               ),
-            ),
-            SizedBox(
-              width: double.infinity,
-              height: 54,
-              child: ElevatedButton(
-                onPressed: () async {
-                  bool isSuccess = await controller.editProfile();
-                  isSuccess
-                      ? Get.offAllNamed(Routes.NAVIGATION_BAR,
-                          arguments: {"indexPage": 4})
-                      : '';
-                },
-                style: ButtonStyle(
-                  backgroundColor: WidgetStatePropertyAll(primaryColor),
-                  foregroundColor: WidgetStatePropertyAll(whiteColor),
+              SizedBox(
+                width: double.infinity,
+                height: 54,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    bool isSuccess = await controller.editProfile();
+                    isSuccess
+                        ? Get.offAllNamed(Routes.NAVIGATION_BAR,
+                            arguments: {"indexPage": 4})
+                        : '';
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(primaryColor),
+                    foregroundColor: WidgetStatePropertyAll(whiteColor),
+                  ),
+                  child: Text(
+                    'Save',
+                    style: h4Bold.copyWith(color: whiteColor),
+                  ),
                 ),
-                child: Text(
-                  'Save',
-                  style: h4Bold.copyWith(color: whiteColor),
-                ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, empty_catches
 
 import 'dart:convert';
 
@@ -11,7 +11,6 @@ import '../../../config/config.dart';
 import '../../journal/controllers/journal_controller.dart';
 import '../../report/controllers/report_controller.dart';
 
-// ignore: avoid_print
 class HomeController extends GetxController {
   final box = GetStorage();
   var isLoading = false.obs;

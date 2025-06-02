@@ -20,19 +20,6 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
         SpecialCharacterValidationRule().validate(value);
   }
 
-  Widget? _buildSuffixIcon() {
-    return IconButton(
-      icon: Icon(
-        controller.isNewPassObscure.value
-            ? Icons.visibility_off_outlined
-            : Icons.visibility_outlined,
-        size: 20,
-        color: black,
-      ),
-      onPressed: () => controller.isNewPassObscure(false),
-    );
-  }
-
   Widget _buildValidationRules(Set<ValidationRule> rules, String value) {
     return ListView(
       shrinkWrap: true,
