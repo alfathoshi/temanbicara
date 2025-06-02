@@ -7,9 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:temanbicara/app/widgets/custom_snackbar.dart';
-
 import '../../../config/config.dart';
-import '../../../themes/colors.dart';
 import '../../journal/controllers/journal_controller.dart';
 
 class CreateJournalController extends GetxController {

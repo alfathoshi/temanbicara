@@ -7,7 +7,6 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 import '../../../config/config.dart';
-import '../../../themes/colors.dart';
 
 class EditProfileController extends GetxController {
   final box = GetStorage();

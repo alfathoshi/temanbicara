@@ -8,7 +8,6 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:temanbicara/app/config/config.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
-import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 enum Gender { none, male, female }
