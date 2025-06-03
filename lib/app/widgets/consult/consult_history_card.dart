@@ -8,6 +8,8 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
+import 'package:temanbicara/app/widgets/consult/format_full_date.dart';
+import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 class ConsultHistoryCard extends StatelessWidget {
   final String nama;
@@ -46,10 +48,10 @@ class ConsultHistoryCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
         boxShadow: [
           BoxShadow(
-            color: const Color(0x0D000000), 
+            color: const Color(0x0D000000),
             offset: const Offset(0, 1),
-            blurRadius: 10, 
-            spreadRadius: 0, 
+            blurRadius: 10,
+            spreadRadius: 0,
           ),
         ],
       ),
@@ -113,6 +115,8 @@ class ConsultHistoryCard extends StatelessWidget {
           sby12,
           MyButtonCustom(
             get: () {
+              print(tanggal + waktuMulai);
+              print(tanggal + waktuSelesai);
               if (isDone) {
                 ConsultHistory consultHistory = ConsultHistory(
                   nama: nama,
@@ -131,13 +135,25 @@ class ConsultHistoryCard extends StatelessWidget {
                   arguments: consultHistory,
                 );
               } else {
-                Get.toNamed(
-                  Routes.CHAT_ROOM,
-                  arguments: {
-                    'name': nama,
-                    'counselor_id': counselorId,
-                  },
-                );
+                DateTime now = DateTime.now();
+                DateTime startTime = parseDateWithMonthName(waktuMulai);
+                DateTime endTime = parseDateWithMonthName(waktuSelesai);
+
+                if (now.isAfter(startTime) && now.isBefore(endTime)) {
+                  Get.toNamed(
+                    Routes.CHAT_ROOM,
+                    arguments: {
+                      'name': nama,
+                      'counselor_id': counselorId,
+                    },
+                  );
+                } else {
+                  CustomSnackbar.showSnackbar(
+                    title: "Oops!",
+                    message: "Only Available during Schedule",
+                    status: false,
+                  );
+                }
               }
             },
             foreColor: whiteColor,
@@ -146,7 +162,7 @@ class ConsultHistoryCard extends StatelessWidget {
             height: 28,
             width: double.infinity,
             style: h6Bold.copyWith(color: whiteColor),
-          ),
+          )
         ],
       ),
     );
