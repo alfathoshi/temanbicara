@@ -8,7 +8,7 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
-import 'package:temanbicara/app/widgets/consult/format_full_date.dart';
+import 'package:temanbicara/app/widgets/consult/format_string_to_date.dart';
 import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 class ConsultHistoryCard extends StatelessWidget {
@@ -115,8 +115,8 @@ class ConsultHistoryCard extends StatelessWidget {
           sby12,
           MyButtonCustom(
             get: () {
-              print(tanggal + waktuMulai);
-              print(tanggal + waktuSelesai);
+              // print(tanggal + waktuMulai);
+              // print(tanggal + waktuSelesai);
               if (isDone) {
                 ConsultHistory consultHistory = ConsultHistory(
                   nama: nama,

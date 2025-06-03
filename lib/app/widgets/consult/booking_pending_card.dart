@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -173,26 +175,29 @@ class BookingPendingCard extends StatelessWidget {
                   ),
                   sby8,
                   MyButtonOutlinedCustom(
-                    get: () async {
-                      showDialog(
-                        context: Get.context!,
-                        barrierDismissible: false,
-                        builder: (_) => Center(
-                          child: CircularProgressIndicator(color: primaryColor),
-                        ),
-                      );
+                    get: () {
+                      showCancelConfirmation(context, () async {
+                        showDialog(
+                          context: Get.context!,
+                          barrierDismissible: false,
+                          builder: (_) => Center(
+                            child:
+                                CircularProgressIndicator(color: primaryColor),
+                          ),
+                        );
 
-                      final success = await controller.cancelBooking(
-                        bookingPending.consultationID,
-                      );
+                        final success = await controller.cancelBooking(
+                          bookingPending.consultationID,
+                        );
 
-                      Navigator.of(Get.context!).pop();
+                        Navigator.of(Get.context!).pop();
 
-                      if (success) {
-                        final pendingController =
-                            Get.find<BookingHistoryController>();
-                        await pendingController.fetchData();
-                      }
+                        if (success) {
+                          final pendingController =
+                              Get.find<BookingHistoryController>();
+                          await pendingController.fetchData();
+                        }
+                      });
                     },
                     foreColor: const Color(0xFFFC7070),
                     backColor: whiteColor,
@@ -246,4 +251,57 @@ class CancelBookingController extends GetxController {
       return false;
     }
   }
+}
+
+void showCancelConfirmation(BuildContext context, VoidCallback onConfirm) {
+  showModalBottomSheet(
+    context: context,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+    ),
+    backgroundColor: whiteColor,
+    isScrollControlled: true,
+    builder: (context) => Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 50,
+            height: 5,
+            decoration: BoxDecoration(
+              color: Colors.grey[300],
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          const SizedBox(height: 12),
+          Text(
+            'Are You Sure?',
+            style: h3Bold,
+            textAlign: TextAlign.center,
+          ),
+          sby12,
+          Image.asset(
+            "assets/images/transaksi-gagal.png",
+            scale: 9,
+          ),
+          Text(
+            'This Action Will Cancel your Consultation!',
+            style: h6SemiBold.copyWith(color: error),
+            textAlign: TextAlign.center,
+          ),
+          const SizedBox(height: 24),
+          MyButton(
+            get: () {
+              Navigator.of(context).pop();
+              onConfirm();
+            },
+            color: primaryColor,
+            text: "Yes, Cancel",
+          ),
+          sby12,
+        ],
+      ),
+    ),
+  );
 }

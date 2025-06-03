@@ -37,10 +37,14 @@ class TransactionRemainingTime extends StatelessWidget {
                   format: CountDownTimerFormat.minutesSeconds,
                   endTime: DateTime.now().add(
                     const Duration(
+                      // days: 0,
+                      // hours: 0,
+                      // minutes: 20,
+                      // seconds: 0,
                       days: 0,
                       hours: 0,
                       minutes: 20,
-                      seconds: 0,
+                      seconds: 00,
                     ),
                   ),
                   onEnd: () {

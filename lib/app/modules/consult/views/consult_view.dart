@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,14 +14,9 @@ import '../controllers/consult_controller.dart';
 
 class ConsultView extends GetView<ConsultController> {
   ConsultView({super.key});
-  @override
-  final ConsultController controller = Get.put(ConsultController());
 
   @override
   Widget build(BuildContext context) {
-    controller.clearExpertiseFilter();
-    controller.fetchData();
-
     return Scaffold(
       backgroundColor: whiteColor,
       appBar: CustomAppBar(

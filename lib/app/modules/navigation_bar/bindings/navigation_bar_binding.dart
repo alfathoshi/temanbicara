@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:temanbicara/app/modules/consult/controllers/consult_controller.dart';
 
 import '../../home/controllers/home_controller.dart';
 import '../../journal/controllers/journal_controller.dart';
@@ -23,6 +24,9 @@ class NavigationBarBinding extends Bindings {
     );
     Get.lazyPut<JournalController>(
       () => JournalController(),
+    );
+    Get.lazyPut<ConsultController>(
+      () => ConsultController(),
     );
   }
 }

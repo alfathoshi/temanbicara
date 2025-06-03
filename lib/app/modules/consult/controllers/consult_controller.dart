@@ -39,12 +39,13 @@ class ConsultController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    fetchData();
+    clearExpertiseFilter();
   }
 
   @override
   void onReady() {
     super.onReady();
+    clearExpertiseFilter();
     fetchData();
   }
 

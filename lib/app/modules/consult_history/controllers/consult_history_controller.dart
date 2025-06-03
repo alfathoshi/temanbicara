@@ -35,10 +35,11 @@ class ConsultHistoryController extends GetxController {
           'Content-Type': 'application/json',
         },
       );
+      print(response.body);
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        if (data['status'] == true) {
+        if (data['status'] == true && data['status_payment'] == "Success") {
           final list = data['data'] as List;
 
           final filtered = list.where((e) => e['status'] != 'Cancelled');
