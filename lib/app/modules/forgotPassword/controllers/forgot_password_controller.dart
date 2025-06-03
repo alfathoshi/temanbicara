@@ -91,7 +91,10 @@ class ForgotPasswordController extends GetxController {
     }
   }
 
-  final count = 0.obs;
-
-  void increment() => count.value++;
+  @override
+  void onClose() {
+    newPasswordController.dispose();
+    confirmPasswordController.dispose();
+    super.onClose();
+  }
 }
