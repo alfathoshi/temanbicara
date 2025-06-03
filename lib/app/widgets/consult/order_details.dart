@@ -217,7 +217,7 @@ class OrderDetails extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Metode Pembayaran",
+                        "Payment Method",
                         style: h4Bold,
                       ),
                       sby16,

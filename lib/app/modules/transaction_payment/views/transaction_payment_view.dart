@@ -48,6 +48,7 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
       child: Scaffold(
         backgroundColor: whiteColor,
         appBar: CustomAppBar(
+          backLeading: false,
           title: Text(
             "Transaction",
             style: h3Bold,
@@ -227,7 +228,7 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                           } else {
                             CustomSnackbar.showSnackbar(
                               title: "Oops!",
-                              message: "Mind Re-Checking your Payment?",
+                              message: "Mind Checking your Payment?",
                               status: false,
                             );
                           }
