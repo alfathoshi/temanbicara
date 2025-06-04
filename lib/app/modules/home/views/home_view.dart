@@ -454,8 +454,13 @@ class HomeView extends GetView<HomeController> {
                       child: Text("No Data Available"),
                     );
                   } else {
-                    final List articles =
-                        controller.articles['data']['data'] ?? [];
+                    final List articles = (controller.articles != null &&
+                            controller.articles is Map &&
+                            controller.articles.containsKey('data') &&
+                            controller.articles['data'] is Map &&
+                            controller.articles['data'].containsKey('data'))
+                        ? controller.articles['data']['data'] ?? []
+                        : [];
 
                     final double containerHeight =
                         articles.length <= 2 ? articles.length * 180.0 : 530.0;
@@ -470,11 +475,11 @@ class HomeView extends GetView<HomeController> {
                           return Padding(
                             padding: const EdgeInsets.only(left: 24, right: 24),
                             child: TopArticle(
-                              judul: articles[index]["title"],
-                              deskripsi: articles[index]["content"],
-                              author: articles[index]["user"]["name"],
+                              judul: articles[index]["title"] ?? 'asd',
+                              deskripsi: articles[index]["content"] ?? '',
+                              author: articles[index]["user"]["name"] ?? '',
                               image: articles[index]["image_url"] ?? 'logo',
-                              date: articles[index]['created_at'],
+                              date: articles[index]['created_at'] ?? '',
                             ),
                           );
                         },
