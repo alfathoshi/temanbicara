@@ -17,7 +17,7 @@ class TransactionModel {
       {required this.namaPsikiater,
       required this.expertise,
       this.topik = "Consultation",
-      this.metode = "Call",
+      this.metode = "Chat",
       this.durasi = 90,
       this.sesi = 1,
       required this.jadwal,

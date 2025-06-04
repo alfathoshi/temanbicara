@@ -7,6 +7,7 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
+import 'package:temanbicara/app/widgets/consult/history_calculate_duration.dart';
 import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import 'package:temanbicara/app/widgets/transaction/transaction_data.dart';
 import 'package:temanbicara/app/widgets/transaction/transaction_timeline_view.dart';
@@ -18,6 +19,11 @@ class TransactionView extends GetView<TransactionController> {
   @override
   Widget build(BuildContext context) {
     final TransactionModel transaction = Get.arguments as TransactionModel;
+    String durationStr = transaction.waktu;
+    List<String> times = durationStr.split(' - ');
+
+    String start = times[0];
+    String end = times[1];
 
     return Scaffold(
         backgroundColor: whiteColor,
@@ -46,16 +52,17 @@ class TransactionView extends GetView<TransactionController> {
                     Text("Details", style: h4Bold),
                     sby8,
                     TransactionData(
-                        namaPsikiater: transaction.namaPsikiater,
-                        expertise: transaction.expertise,
-                        topik: transaction.topik,
-                        metode: transaction.metode,
-                        durasi: transaction.durasi,
-                        jmlSesi: transaction.sesi,
-                        jadwalSesi: transaction.jadwal,
-                        waktuSesi: transaction.waktu,
-                        kadaluarsa: transaction.kadaluarsa,
-                        harga: transaction.harga),
+                      namaPsikiater: transaction.namaPsikiater,
+                      expertise: transaction.expertise,
+                      topik: transaction.topik,
+                      metode: transaction.metode,
+                      durasi: calculateDuration(start, end),
+                      jmlSesi: transaction.sesi,
+                      jadwalSesi: transaction.jadwal,
+                      waktuSesi: transaction.waktu,
+                      kadaluarsa: transaction.kadaluarsa,
+                      harga: transaction.harga,
+                    ),
                     sby36,
                     MyButton(
                         get: () {

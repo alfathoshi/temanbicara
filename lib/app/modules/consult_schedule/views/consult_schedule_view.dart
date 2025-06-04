@@ -7,6 +7,7 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
+import 'package:temanbicara/app/widgets/consult/history_calculate_duration.dart';
 import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 import 'package:temanbicara/app/widgets/schedule/schedule_details.dart';
