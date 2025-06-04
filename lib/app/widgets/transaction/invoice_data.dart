@@ -110,7 +110,7 @@ class InvoiceData extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Duration", style: h6Bold),
-                    Text(invoice.transaction.durasi.toString())
+                    Text(invoice.transaction.durasi)
                   ],
                 ),
                 sby12,
