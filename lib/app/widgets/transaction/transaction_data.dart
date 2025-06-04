@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:temanbicara/app/themes/colors.dart';
@@ -12,8 +14,9 @@ class TransactionData extends StatelessWidget {
       jadwalSesi,
       waktuSesi,
       kadaluarsa,
-      expertise;
-  final int durasi, jmlSesi, harga;
+      expertise,
+      durasi;
+  final jmlSesi, harga;
   const TransactionData(
       {super.key,
       required this.namaPsikiater,
@@ -79,7 +82,7 @@ class TransactionData extends StatelessWidget {
                 sby24,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text("Topik", style: h6Bold), Text(topik)],
+                  children: [Text("Topic", style: h6Bold), Text(topik)],
                 ),
                 sby24,
                 const Divider(

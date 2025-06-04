@@ -7,6 +7,7 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
+import 'package:temanbicara/app/widgets/consult/history_calculate_duration.dart';
 import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 import 'package:temanbicara/app/widgets/schedule/schedule_details.dart';
@@ -128,6 +129,13 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                                   return;
                                 }
 
+                                String durationStr = selected['time'];
+                                List<String> times = durationStr.split(' - ');
+
+                                String start = times[0];
+                                String end = times[1];
+                                print(calculateDuration(start, end));
+
                                 Get.dialog(
                                   Center(
                                       child: CircularProgressIndicator(
@@ -142,6 +150,7 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                                 Get.to(
                                   () => const TransactionView(),
                                   arguments: TransactionModel(
+                                    durasi: calculateDuration(start, end),
                                     namaPsikiater: userName,
                                     expertise: expertise,
                                     jadwal: selected['date'],

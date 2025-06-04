@@ -138,7 +138,6 @@ class ConsultHistoryCard extends StatelessWidget {
                 DateTime now = DateTime.now();
                 DateTime startTime = parseDateWithMonthName(waktuMulai);
                 DateTime endTime = parseDateWithMonthName(waktuSelesai);
-
                 if (now.isAfter(startTime) && now.isBefore(endTime)) {
                   Get.toNamed(
                     Routes.CHAT_ROOM,
