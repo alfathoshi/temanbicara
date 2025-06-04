@@ -20,6 +20,14 @@ class Assesment2View extends GetView<Assesment2Controller> {
       backgroundColor: whiteColor,
       appBar: CustomAppBar(
         height: 87,
+        leading: GestureDetector(
+          onTap: () {
+            Get.offAllNamed(Routes.NAVIGATION_BAR, arguments: {"indexPage": 0});
+          },
+          child: const Icon(
+            Icons.arrow_back_outlined,
+          ),
+        ),
         title: Image.asset(
           'assets/images/logo.png',
           scale: 4,

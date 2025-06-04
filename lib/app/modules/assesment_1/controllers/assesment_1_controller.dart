@@ -91,7 +91,7 @@ class Assesment1Controller extends GetxController {
             message: "Account Created!",
             status: true,
           );
-          Get.toNamed(Routes.ASSESMENT_2);
+          Get.offNamed(Routes.ASSESMENT_2);
         } else {
           CustomSnackbar.showSnackbar(
             title: "Invalid!",
