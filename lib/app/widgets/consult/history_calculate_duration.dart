@@ -14,7 +14,7 @@ String calculateDuration(String? start, String? end) {
     );
 
     final duration = (e.hour * 60 + e.minute) - (s.hour * 60 + s.minute);
-    return "$duration menit";
+    return "$duration minutes";
   } catch (_) {
     return '-';
   }
