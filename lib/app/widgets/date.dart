@@ -33,7 +33,7 @@ class FlexibleDatePicker extends StatelessWidget {
           initialDate: selectedDate,
           firstDate: DateTime(1980, 1, 1),
           lastDate: DateTime.now(),
-          confirmText: "Pilih",
+          confirmText: "Ok",
           builder: (BuildContext context, Widget? child) {
             return Theme(
               data: ThemeData.light().copyWith(

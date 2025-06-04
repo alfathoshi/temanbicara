@@ -35,7 +35,6 @@ class ConsultHistoryController extends GetxController {
           'Content-Type': 'application/json',
         },
       );
-      // print(response.body);
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
