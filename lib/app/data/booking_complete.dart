@@ -1,15 +1,15 @@
+import 'package:temanbicara/app/data/transaction_model.dart';
+
 class BookingComplete {
-  final String nama;
-  final String durasi;
-  final String expertise;
-  final String tanggal;
-  final String waktu;
+  final String invoice;
+  final String bookingDate;
+  final TransactionModel transaction;
+  final String metode;
 
   BookingComplete({
-    required this.nama,
-    required this.durasi,
-    required this.expertise,
-    required this.tanggal,
-    required this.waktu,
+    required this.invoice,
+    required this.metode,
+    required this.transaction,
+    required this.bookingDate,
   });
 }

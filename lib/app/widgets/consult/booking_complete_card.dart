@@ -50,32 +50,37 @@ class BookingCompleteCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    bookingComplete.nama,
+                    "a",
+                    // bookingComplete.transaction.namaPsikiater,
                     style: h4Bold,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
                   ),
                   sby5,
                   Text(
-                    bookingComplete.expertise,
+                    "a",
+                    // bookingComplete.transaction.expertise,
                     style: h7Regular.copyWith(
                       color: grey2Color,
                     ),
                   ),
                   sby5,
                   Text(
-                    bookingComplete.durasi,
+                    "a",
+                    // bookingComplete.transaction.durasi,
                     style: h7SemiBold,
                   ),
                   Row(
                     children: [
                       Text(
-                        bookingComplete.tanggal,
+                        "a",
+                        // bookingComplete.transaction.jadwal,
                         style: h7SemiBold,
                       ),
                       sbx5,
                       Text(
-                        bookingComplete.waktu,
+                        "a",
+                        // bookingComplete.transaction.waktu,
                         style: h7SemiBold,
                       ),
                     ],
