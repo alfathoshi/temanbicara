@@ -161,7 +161,6 @@ class BookingHistoryController extends GetxController {
   BookingComplete _mapCompleted(dynamic item) {
     final schedule = item['schedule'];
     final payment = item['payment'];
-    // final expired = parseExpiredDate(payment['expired_date']);
     final user = schedule['user'];
     final expertiseList = user['expertises'] as List;
     final expertise = expertiseList.isNotEmpty ? expertiseList[0] : null;
@@ -169,16 +168,16 @@ class BookingHistoryController extends GetxController {
     return BookingComplete(
       invoice: 'invoice',
       transaction: TransactionModel(
-        namaPsikiater: user['user']['name'],
-        expertise: expertise,
+        namaPsikiater: user['name'],
+        expertise: expertise != null ? expertise['type'] : '-',
         durasi: calculateDuration(schedule['start_time'], schedule['end_time']),
         jadwal: formatFullDate(schedule['available_date']),
         waktu:
             "${formatTime(schedule['start_time'])} - ${formatTime(schedule['end_time'])}",
         selectedID: 0,
       ),
-      bookingDate: 'tes',
-      metode: payment['bank'],
+      bookingDate: formatFullDate(item['created_at']),
+      metode: payment['payment_method'] ?? '-',
     );
   }
 }
