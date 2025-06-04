@@ -139,7 +139,7 @@ class SignupView extends GetView<SignupController> {
                         },
                         decoration: InputDecoration(
                           hintText: 'Password',
-                          hintStyle: const TextStyle(color: greyColor),
+                          hintStyle: h4Regular.copyWith(color: grey4Color),
                           suffixIcon: _buildSuffixIcon(),
                           suffixIconColor: const Color(0xFFc4c4c4),
                           enabledBorder: OutlineInputBorder(
@@ -160,7 +160,7 @@ class SignupView extends GetView<SignupController> {
                         showPassword: () => controller.showPasswordC(),
                         controller: controller.confirmPassC,
                         obscureText: controller.isSecureC.value,
-                        hintText: 'Password',
+                        hintText: 'Confirm Password',
                         passwordField: true,
                         type: TextInputType.text,
                       ),
