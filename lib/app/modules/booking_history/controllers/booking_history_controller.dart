@@ -58,6 +58,10 @@ class BookingHistoryController extends GetxController {
               jadwal: matched.availableDateRaw!,
               waktu: "${matched.waktuMulai} - ${matched.waktuSelesai}",
               selectedID: matched.scheduleId,
+              durasi: calculateDuration(
+                matched.waktuMulai,
+                matched.waktuSelesai,
+              ),
             );
 
             final invoice = InvoiceModel(

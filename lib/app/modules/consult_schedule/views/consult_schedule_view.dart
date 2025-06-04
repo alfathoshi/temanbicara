@@ -129,6 +129,13 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                                   return;
                                 }
 
+                                String durationStr = selected['time'];
+                                List<String> times = durationStr.split(' - ');
+
+                                String start = times[0];
+                                String end = times[1];
+                                print(calculateDuration(start, end));
+
                                 Get.dialog(
                                   Center(
                                       child: CircularProgressIndicator(
@@ -143,6 +150,7 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                                 Get.to(
                                   () => const TransactionView(),
                                   arguments: TransactionModel(
+                                    durasi: calculateDuration(start, end),
                                     namaPsikiater: userName,
                                     expertise: expertise,
                                     jadwal: selected['date'],
