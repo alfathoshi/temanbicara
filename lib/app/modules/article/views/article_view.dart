@@ -53,9 +53,9 @@ class ArticleView extends GetView<ArticleController> {
                       child: TopArticle(
                         judul: articleItem["title"],
                         deskripsi: articleItem["content"],
-                        author: articleItem["user"]?["name"],
-                        image: articleItem["image"] ?? 'logo',
-                        date: articleItem['created_at'] ?? '',
+                        author: articleItem["user"]["name"],
+                        image: articleItem["image_url"],
+                        date: articleItem['created_at'],
                       ),
                     );
                   },

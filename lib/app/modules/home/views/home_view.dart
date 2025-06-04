@@ -473,7 +473,7 @@ class HomeView extends GetView<HomeController> {
                               judul: articles[index]["title"],
                               deskripsi: articles[index]["content"],
                               author: articles[index]["user"]["name"],
-                              image: articles[index]["image"] ?? 'logo',
+                              image: articles[index]["image_url"] ?? 'logo',
                               date: articles[index]['created_at'],
                             ),
                           );

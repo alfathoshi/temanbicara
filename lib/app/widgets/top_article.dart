@@ -37,9 +37,6 @@ class TopArticle extends StatelessWidget {
       }
     }
 
-    bool isNetworkImage =
-        image != null && image != 'logo' && image!.startsWith('http');
-
     return InkWell(
       onTap: () {
         Get.to(
@@ -55,50 +52,59 @@ class TopArticle extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.only(bottom: 12),
         child: Container(
-          height: 149,
+          height: 140,
           decoration: BoxDecoration(
             color: whiteColor,
             border: Border.all(color: Colors.black.withValues(alpha: 0.1)),
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(16),
           ),
           child: Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 12, right: 12),
+                padding: const EdgeInsets.all(2),
                 child: Container(
                   width: 120,
+                  height: 140,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
-                    border:
-                        Border.all(color: Colors.black.withValues(alpha: 0.1)),
+                    border: Border.all(color: border, width: 1),
                   ),
-                  child: Image.asset(
-                    'assets/images/$image.png',
-                    scale: 4,
+                  child: Expanded(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(14),
+                      child: Image.network(
+                        image ?? '',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 ),
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 13, 17, 12),
+                  padding: const EdgeInsets.all(12),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        judul ?? "No Title",
-                        style: h6Bold,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            judul ?? "No Title",
+                            style: h6Bold,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          sby5,
+                          Text(
+                            deskripsi ?? "No Description",
+                            style: h7Regular,
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
                       ),
-                      sby5,
-                      Text(
-                        deskripsi ?? "No Description",
-                        style: h7Regular,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      sby24,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

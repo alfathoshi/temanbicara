@@ -42,12 +42,15 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
           children: [
             if (image != null && image!.isNotEmpty)
               Center(
-                child: Image.asset(
-                  'assets/images/$image.png',
-                  height: 221,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) =>
-                      const Icon(Icons.image_not_supported, size: 100),
+                child: SizedBox(
+                  height: 150,
+                  width: double.infinity,
+                  child: ClipRRect(
+                    child: Image.network(
+                      image!,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ),
             const SizedBox(height: 20),
@@ -82,33 +85,6 @@ class DetailArtikelView extends GetView<DetailArtikelController> {
                 overflow: TextOverflow.fade,
                 softWrap: true,
                 textAlign: TextAlign.justify,
-              ),
-            ),
-            sby48,
-            Text(
-              'Latest articles',
-              style: h4Bold,
-            ),
-            sby16,
-            SizedBox(
-              height: 160,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 3,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 24),
-                    child: SizedBox(
-                      width: 300,
-                      child: TopArticle(
-                          judul: judul ?? "No Title",
-                          deskripsi: deskripsi ?? "No Description",
-                          author: author ?? "Unknown Author",
-                          image: image ?? "default_image",
-                          date: date ?? 'date'),
-                    ),
-                  );
-                },
               ),
             ),
           ],
