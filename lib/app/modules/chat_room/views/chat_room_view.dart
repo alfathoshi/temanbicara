@@ -79,7 +79,7 @@ class ChatRoomView extends GetView<ChatRoomController> {
 
           List<ChatDisplayItem> displayItems = [];
           DateTime?
-              lastDisplayedDateHeader; // Untuk melacak tanggal terakhir header yang ditampilkan
+              lastDisplayedDateHeader;
 
           for (var message in chronologicalMessages) {
             DateTime messageDay = DateTime(
