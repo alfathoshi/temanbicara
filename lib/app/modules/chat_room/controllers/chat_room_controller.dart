@@ -19,7 +19,7 @@ class ChatRoomController extends GetxController {
   Future<void> handleSendPressed(String message) async {
     if (message.trim().isNotEmpty) {
       await chatService.sendMessage(otherUser.id, message);
-      canSendMessage.value = false; 
+      canSendMessage.value = false;
     }
   }
 

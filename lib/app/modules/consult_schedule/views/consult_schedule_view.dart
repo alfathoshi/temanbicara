@@ -134,7 +134,6 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
 
                                 String start = times[0];
                                 String end = times[1];
-                                print(calculateDuration(start, end));
 
                                 Get.dialog(
                                   Center(
