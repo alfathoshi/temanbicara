@@ -30,6 +30,8 @@ class JournalView extends GetView<JournalController> {
         ),
       ),
       body: RefreshIndicator(
+        color: primaryColor,
+          backgroundColor: whiteColor,
         onRefresh: () {
           return controller.fetchJournals();
         },

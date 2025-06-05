@@ -187,56 +187,56 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                           );
                         },
                         color: primaryColor,
-                        text: "Home",
+                        text: "Back to home",
                       ),
                     ),
-                    sby48,
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 45),
-                      child: MyButton(
-                        get: () async {
-                          final uuid = consultationData['transaction_id'];
-                          final isSuccess =
-                              await controller.checkPaymentStatus(uuid);
+                    // sby48,
+                    // Padding(
+                    //   padding: const EdgeInsets.only(bottom: 45),
+                    //   child: MyButton(
+                    //     get: () async {
+                    //       final uuid = consultationData['transaction_id'];
+                    //       final isSuccess =
+                    //           await controller.checkPaymentStatus(uuid);
 
-                          if (isSuccess) {
-                            Get.dialog(
-                              Center(
-                                  child: CircularProgressIndicator(
-                                      color: primaryColor)),
-                              barrierDismissible: false,
-                            );
+                    //       if (isSuccess) {
+                    //         Get.dialog(
+                    //           Center(
+                    //               child: CircularProgressIndicator(
+                    //                   color: primaryColor)),
+                    //           barrierDismissible: false,
+                    //         );
 
-                            await Future.delayed(const Duration(seconds: 2));
-                            Get.back();
+                    //         await Future.delayed(const Duration(seconds: 2));
+                    //         Get.back();
 
-                            Get.offAllNamed(
-                              Routes.TRANSACTION_SUCCESS,
-                              arguments: {
-                                'consultationData': consultationData,
-                                'transaction': transaction,
-                                'invoice': InvoiceModel(
-                                  transaction: transaction,
-                                  invoice: "dummy",
-                                  metodePembayaran: "Bank Transfer",
-                                  hargaTotal: transaction.admTax +
-                                      transaction.appTax +
-                                      transaction.harga,
-                                ),
-                              },
-                            );
-                          } else {
-                            CustomSnackbar.showSnackbar(
-                              title: "Oops!",
-                              message: "Mind Checking your Payment?",
-                              status: false,
-                            );
-                          }
-                        },
-                        color: primaryColor,
-                        text: "Check Payment Status",
-                      ),
-                    ),
+                    //         Get.offAllNamed(
+                    //           Routes.TRANSACTION_SUCCESS,
+                    //           arguments: {
+                    //             'consultationData': consultationData,
+                    //             'transaction': transaction,
+                    //             'invoice': InvoiceModel(
+                    //               transaction: transaction,
+                    //               invoice: "dummy",
+                    //               metodePembayaran: "Bank Transfer",
+                    //               hargaTotal: transaction.admTax +
+                    //                   transaction.appTax +
+                    //                   transaction.harga,
+                    //             ),
+                    //           },
+                    //         );
+                    //       } else {
+                    //         CustomSnackbar.showSnackbar(
+                    //           title: "Oops!",
+                    //           message: "Mind Checking your Payment?",
+                    //           status: false,
+                    //         );
+                    //       }
+                    //     },
+                    //     color: primaryColor,
+                    //     text: "Check Payment Status",
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

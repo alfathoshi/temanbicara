@@ -20,7 +20,7 @@ class MyButton extends StatelessWidget {
         get?.call();
       },
       style: ElevatedButton.styleFrom(
-        backgroundColor: primaryColor,
+        backgroundColor: color,
         foregroundColor: Colors.white,
         minimumSize: const Size(
           double.infinity,

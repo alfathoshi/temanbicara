@@ -26,7 +26,7 @@ class MentalMatrixView extends GetView<MentalMatrixController> {
         body: SingleChildScrollView(child: Obx(() {
           final report = reportController.report.value;
           if (report == null) {
-            return const Center(child: CircularProgressIndicator());
+            return  Center(child: CircularProgressIndicator(color: primaryColor));
           }
 
           return Column(

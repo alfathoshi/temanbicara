@@ -16,10 +16,10 @@ import '../../../widgets/custom_snackbar.dart';
 class ReportController extends GetxController {
   var trackingList = {}.obs;
   var tracing = [].obs;
-  var avgMood = "Tidak ada data".obs;
-  var avgSleep = "Tidak ada data".obs;
-  var avgScreen = "Tidak ada data".obs;
-  var avgActivity = "Tidak ada data".obs;
+  var avgMood = " data".obs;
+  var avgSleep = "No data".obs;
+  var avgScreen = "No data".obs;
+  var avgActivity = "No data".obs;
   var avgStress = 0.obs;
   var isFetching = false.obs;
   final box = GetStorage();

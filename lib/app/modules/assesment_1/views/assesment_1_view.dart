@@ -177,7 +177,7 @@ class Assesment1View extends GetView<Assesment1Controller> {
                                   height: 20,
                                   width: 20,
                                   child: CircularProgressIndicator(
-                                      color: whiteColor),
+                                      color: primaryColor),
                                 ),
                         ),
                       ),

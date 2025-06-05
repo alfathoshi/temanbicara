@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/chat_container.dart';
 
@@ -30,12 +31,17 @@ class ChatView extends GetView<ChatController> {
         ),
         Obx(() {
           if (controller.isLoading.value && controller.listChat.isEmpty) {
-            return const SliverFillRemaining(
-              child: Center(child: CircularProgressIndicator()),
+            return  SliverFillRemaining(
+              child: Center(child: CircularProgressIndicator(color: primaryColor)),
             );
           } else if (controller.listChat.isEmpty) {
-            return const SliverFillRemaining(
-              child: Center(child: Text("Tidak Ada Chat")),
+            return SliverFillRemaining(
+              child: Center(
+                child: Text(
+                  "No chat available",
+                  style: h6SemiBold,
+                ),
+              ),
             );
           } else {
             final List<Map<String, dynamic>> listData = controller.listChat;

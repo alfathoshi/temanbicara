@@ -63,7 +63,7 @@ class ChatRoomView extends GetView<ChatRoomController> {
             .getMessages(controller.user.id, controller.otherUser.id),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return  Center(child: CircularProgressIndicator(color: primaryColor));
           }
 
           if (snapshot.hasError) {

@@ -25,6 +25,7 @@ class ArticleView extends GetView<ArticleController> {
         return RefreshIndicator(
           onRefresh: controller.refreshArticles,
           color: primaryColor,
+          backgroundColor: whiteColor,
           child: CustomScrollView(
             controller: controller.scrollController,
             slivers: [
@@ -37,12 +38,13 @@ class ArticleView extends GetView<ArticleController> {
               if (controller.articles.isEmpty &&
                   !controller.isLoadingInitial.value)
                 SliverToBoxAdapter(
-                    child: Center(
-                        child: Padding(
-                  padding: const EdgeInsets.all(30.0),
-                  child: Text('Tidak ada artikel tersedia saat ini.',
-                      style: h6Regular),
-                )))
+                  child: Center(
+                    child: Text(
+                      "No artilce published",
+                      style: h6SemiBold,
+                    ),
+                  ),
+                )
               else
                 SliverList.builder(
                   itemCount: controller.articles.length,

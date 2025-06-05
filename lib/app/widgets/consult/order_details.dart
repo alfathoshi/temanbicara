@@ -39,6 +39,8 @@ class OrderDetails extends StatelessWidget {
         ),
       ),
       body: RefreshIndicator(
+        color: primaryColor,
+        backgroundColor: whiteColor,
         onRefresh: () async {
           await controller.checkPaymentStatus(bookingPending.transactionId);
         },

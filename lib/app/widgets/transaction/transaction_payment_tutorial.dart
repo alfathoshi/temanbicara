@@ -50,7 +50,7 @@ class TransactionPaymentTutorial extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String> tutorialSteps =
-        tutorialStepsMap[method] ?? ["Tidak ada panduan untuk metode ini."];
+        tutorialStepsMap[method] ?? ["No guide for this method"];
 
     return Obx(() => GestureDetector(
           onTap: controller.toggleExpanded,

@@ -161,6 +161,8 @@ class ReportView extends GetView<ReportController> {
         ),       
       ),
       body: RefreshIndicator(
+        color: primaryColor,
+          backgroundColor: whiteColor,
         onRefresh: () async {
           controller.fetchStatistik();
           controller.checkTracking();

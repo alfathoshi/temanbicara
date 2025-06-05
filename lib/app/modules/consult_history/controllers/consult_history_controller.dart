@@ -38,10 +38,10 @@ class ConsultHistoryController extends GetxController {
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        if (data['status'] == true && data['status_payment'] == "Success") {
+        if (data['status'] == true) {
           final list = data['data'] as List;
 
-          final filtered = list.where((e) => e['status'] != 'Cancelled');
+          final filtered = list.where((e) => e['status'] != 'Cancelled' && e['status_payment'] == 'Success');
           consultList.value = filtered.map(_mapToConsultModel).toList();
         }
       }

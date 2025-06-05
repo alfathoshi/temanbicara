@@ -35,10 +35,11 @@ class BookingHistoryView extends GetView<BookingHistoryController> {
         ),
         body: RefreshIndicator(
           color: primaryColor,
+          backgroundColor: whiteColor,
           onRefresh: controller.fetchData,
           child: Obx(() {
             if (controller.isLoading.value) {
-              return const Center(child: CircularProgressIndicator());
+              return  Center(child: CircularProgressIndicator(color: primaryColor,));
             }
             return TabBarView(
               children: [

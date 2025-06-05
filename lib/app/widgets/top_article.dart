@@ -26,7 +26,7 @@ class TopArticle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String displayDate = "Tanggal tidak tersedia";
+    String displayDate = "Date is not available";
     if (date != null && date!.isNotEmpty) {
       try {
         DateTime parsedDate = DateTime.parse(date!);

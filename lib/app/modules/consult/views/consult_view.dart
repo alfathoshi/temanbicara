@@ -26,10 +26,12 @@ class ConsultView extends GetView<ConsultController> {
         ),
       ),
       body: RefreshIndicator(
+        color: primaryColor,
+        backgroundColor: whiteColor,
         onRefresh: controller.fetchData,
         child: Obx(() {
           if (controller.isLoading.value) {
-            return Center(child: CircularProgressIndicator());
+            return Center(child: CircularProgressIndicator(color: primaryColor));
           } else if (controller.schedules.isEmpty) {
             return Center(child: Text("No Data Available"));
           } else {

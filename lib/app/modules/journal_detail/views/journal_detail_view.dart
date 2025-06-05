@@ -105,7 +105,7 @@ class JournalDetailView extends GetView<JournalDetailController> {
                     fit: BoxFit.cover,
                     loadingBuilder: (context, child, loadingProgress) {
                       if (loadingProgress == null) return child;
-                      return const Center(child: CircularProgressIndicator());
+                      return  Center(child: CircularProgressIndicator(color: primaryColor));
                     },
                     errorBuilder: (context, error, stackTrace) {
                       return const Center(
@@ -115,7 +115,7 @@ class JournalDetailView extends GetView<JournalDetailController> {
                             Icon(Iconsax.gallery_slash,
                                 size: 40, color: grey2Color),
                             SizedBox(height: 8),
-                            Text('Gambar tidak tersedia',
+                            Text('Image not available',
                                 style: TextStyle(color: grey2Color)),
                           ],
                         ),

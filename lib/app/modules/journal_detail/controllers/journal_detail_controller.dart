@@ -28,9 +28,9 @@ class JournalDetailController extends GetxController {
 
     if (arguments != null) {
       journalId.value = arguments['journal_id']?.toString() ?? '';
-      title.value = arguments['title']?.toString() ?? 'Judul Tidak Ditemukan';
+      title.value = arguments['title']?.toString() ?? 'Titile not found';
       body.value =
-          arguments['body']?.toString() ?? 'Isi Jurnal Tidak Ditemukan';
+          arguments['body']?.toString() ?? 'Content not found';
       imageUrl.value = arguments['image_url']?.toString() ?? '';
       createdAtRaw.value = arguments['created_at']?.toString() ?? '';
 
@@ -43,12 +43,12 @@ class JournalDetailController extends GetxController {
           // print('Error parsing date in ViewJournalController: $e. Raw date: ${createdAtRaw.value}');
         }
       } else {
-        displayDate.value = 'Tanggal Tidak Ada';
+        displayDate.value = 'No date';
       }
     } else {
       // Jika tidak ada argumen, set nilai default atau tampilkan error
-      title.value = 'Data Jurnal Error';
-      body.value = 'Tidak dapat memuat detail jurnal.';
+      title.value = 'Error to load journal';
+      body.value = 'Can not load journal';
       displayDate.value = '';
       // Mungkin perlu navigasi kembali atau menampilkan pesan error yang lebih jelas di UI
     }

@@ -32,6 +32,8 @@ class HomeView extends GetView<HomeController> {
     return Scaffold(
       backgroundColor: whiteColor,
       body: RefreshIndicator(
+        color: primaryColor,
+        backgroundColor: whiteColor,
         onRefresh: () async {
           await Future.wait([
             controller.fetchData(),
@@ -369,8 +371,11 @@ class HomeView extends GetView<HomeController> {
                           if (journalController.isLoading.value) {
                             return buildJournalCardShimmer();
                           } else if (journalController.journalList.isEmpty) {
-                            return const Center(
-                              child: Text("No Journal Today"),
+                            return Center(
+                              child: Text(
+                                "No journal today",
+                                style: h6SemiBold,
+                              ),
                             );
                           } else {
                             return Container(
@@ -449,18 +454,23 @@ class HomeView extends GetView<HomeController> {
                 Obx(() {
                   if (controller.isLoading.value) {
                     return _buildTopArticleShimmer();
-                  } else if (controller.articles.isEmpty) {
-                    return const Center(
-                      child: Text("No Data Available"),
+                  } else if (controller.articles['status'] == false) {
+                    return Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Center(
+                        child: Text(
+                          "No artilce published",
+                          style: h6SemiBold,
+                        ),
+                      ),
                     );
                   } else {
-                    final List articles = (controller.articles != null &&
-                            controller.articles is Map &&
-                            controller.articles.containsKey('data') &&
-                            controller.articles['data'] is Map &&
-                            controller.articles['data'].containsKey('data'))
-                        ? controller.articles['data']['data'] ?? []
-                        : [];
+                    final List articles =
+                        (controller.articles.containsKey('data') &&
+                                controller.articles['data'] is Map &&
+                                controller.articles['data'].containsKey('data'))
+                            ? controller.articles['data']['data'] ?? []
+                            : [];
 
                     final double containerHeight =
                         articles.length <= 2 ? articles.length * 180.0 : 530.0;
