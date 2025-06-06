@@ -173,9 +173,17 @@ class ConsultView extends GetView<ConsultController> {
                     child: ListView.builder(
                       itemCount: filteredData.length,
                       itemBuilder: (context, index) {
+                        final schedules =
+                            filteredData[index]['schedules'] as List;
+                        int totalSchedules = 0;
+
+                        for (var item in schedules) {
+                          final schedulesByDate =
+                              item['schedulesByDate'] as List;
+                          totalSchedules += schedulesByDate.length;
+                        }
                         return GestureDetector(
                           onTap: () {
-                            //print(filteredData[index]['schedules']);
                             Get.toNamed(
                               Routes.CONSULT_SCHEDULE,
                               arguments: {
@@ -195,9 +203,7 @@ class ConsultView extends GetView<ConsultController> {
                                     .split('|')
                                     .map((e) => e.trim())
                                     .join(', '),
-                            schedule: (filteredData[index]['schedules'] as List)
-                                .length
-                                .toString(),
+                            schedule: totalSchedules.toString(),
                           ),
                         );
                       },
