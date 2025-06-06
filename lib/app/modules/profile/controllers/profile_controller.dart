@@ -97,7 +97,7 @@ class ProfileController extends GetxController {
       profileUrl.value = data['data']['profile_url'];
       return;
     } catch (err) {
-      count.value = 0;
+      isLoading.value = false;
     } finally {
       isLoading.value = false;
     }

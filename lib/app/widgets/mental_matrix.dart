@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 
 class MentalMatrix extends StatelessWidget {
   final Color color;
@@ -35,7 +36,7 @@ class MentalMatrix extends StatelessWidget {
             ),
           ],
           color: color,
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(24),
           border: Border.all(
             color: Colors.transparent,
             width: 2,
@@ -52,7 +53,7 @@ class MentalMatrix extends StatelessWidget {
                 image,
                 scale: 2.5,
               ),
-              const SizedBox(width: 16),
+              sbx8,
               Expanded(
                 child: isFilled
                     ? Column(
@@ -74,10 +75,11 @@ class MentalMatrix extends StatelessWidget {
                         ],
                       )
                     : Text(
-                        'Isi kondisi kesehatan \nmentalmu hari ini',
+                        detail,
                         style: h6Regular,
                       ),
               ),
+              sbx8,
               isFilled
                   ? Stack(
                       alignment: Alignment.center,

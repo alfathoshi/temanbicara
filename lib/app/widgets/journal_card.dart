@@ -28,14 +28,14 @@ class JournalCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(
         bottom: 16,
-        left: 16,
-        right: 16,
+        left: 8,
+        right: 8,
       ),
       child: GestureDetector(
         onTap: getJournal,
         child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(16),
             border: Border.all(
               color: border,
             ),
@@ -45,27 +45,27 @@ class JournalCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               if (image.isNotEmpty)
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Image.network(
-                      image,
-                      height: 150,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                      loadingBuilder: (context, child, loadingProgress) {
-                        if (loadingProgress == null) return child;
-                        return Center(child: CircularProgressIndicator(color: primaryColor));
-                      },
-                      errorBuilder: (context, error, stackTrace) {
-                        return SizedBox.shrink();
-                      },
-                    ),
+                ClipRRect(
+                  borderRadius: BorderRadiusGeometry.only(
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15),
+                  ),
+                  child: Image.network(
+                    image,
+                    height: 150,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return Container();
+                    },
+                    errorBuilder: (context, error, stackTrace) {
+                      return SizedBox.shrink();
+                    },
                   ),
                 ),
               Padding(
-                padding: const EdgeInsets.only(left: 16),
+                padding: const EdgeInsets.fromLTRB(8, 16, 8, 0),
                 child: Text(
                   title,
                   style: h4SemiBold,
@@ -73,16 +73,17 @@ class JournalCard extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
+                padding: const EdgeInsets.all(8),
                 child: Text(
                   body,
                   style: h5Regular,
                   overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
                 ),
               ),
               const Divider(),
               Padding(
-                padding: const EdgeInsets.only(left: 8),
+                padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -90,21 +91,16 @@ class JournalCard extends StatelessWidget {
                       date,
                       style: h7Regular,
                     ),
-                    Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            getDelete?.call();
-                          },
-                          icon: Icon(
-                            Icons.delete,
-                            size: 24,
-                            color: Colors.red,
-                          ),
-                        ),
-                        sbX12,
-                      ],
-                    )
+                    IconButton(
+                      onPressed: () {
+                        getDelete?.call();
+                      },
+                      icon: Icon(
+                        Icons.delete,
+                        size: 24,
+                        color: Colors.red,
+                      ),
+                    ),
                   ],
                 ),
               )

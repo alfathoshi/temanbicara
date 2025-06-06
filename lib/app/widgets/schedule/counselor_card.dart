@@ -9,11 +9,13 @@ class CounselorCard extends StatelessWidget {
   final String username;
   final String expertise;
   final String schedule;
+  final String image;
   const CounselorCard(
       {super.key,
       required this.username,
       required this.expertise,
-      required this.schedule});
+      required this.schedule,
+      required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +55,8 @@ class CounselorCard extends StatelessWidget {
                   width: 120,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(26),
-                    child: Image.asset(
-                      'assets/images/psikolog.png',
+                    child: Image.network(
+                      image,
                       fit: BoxFit.cover,
                     ),
                   ),

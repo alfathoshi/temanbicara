@@ -29,190 +29,90 @@ class JournalView extends GetView<JournalController> {
           style: h3Bold,
         ),
       ),
-      body: RefreshIndicator(
-        color: primaryColor,
-          backgroundColor: whiteColor,
-        onRefresh: () {
-          return controller.fetchJournals();
-        },
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              GestureDetector(
-                onTap: () => Get.toNamed(Routes.CREATE_JOURNAL),
-                child: Container(
-                  width: double.infinity,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: border),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      left: 16,
-                      right: 16,
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16,16,16,0),
+            child: GestureDetector(
+              onTap: () => Get.toNamed(Routes.CREATE_JOURNAL),
+              child: Container(
+                width: double.infinity,
+                height: 50,
+                decoration: BoxDecoration(
+                  border: Border.all(color: border),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: primaryColor,
+                      foregroundColor: whiteColor,
+                      radius: 16,
+                      child: const Icon(Iconsax.add, size: 16),
                     ),
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: primaryColor,
-                          foregroundColor: whiteColor,
-                          radius: 16,
-                          child: const Icon(
-                            Iconsax.add,
-                            size: 16,
-                          ),
-                        ),
-                        sbX24,
-                        Text(
-                          'Create Journal',
-                          style: h6SemiBold,
-                        ),
-                      ],
-                    ),
-                  ),
+                    sbX24,
+                    Text('Create Journal', style: h6SemiBold),
+                  ],
                 ),
               ),
-              sby24,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'My Journal',
-                    style: h5SemiBold,
-                  ),
-                  Obx(
-                    () => Row(
-                      children: [
-                        Text(formatDate(controller.selectedDate.value)),
-                        sbx8,
-                        FlexibleDatePicker(
-                          selectedDate: controller.selectedDate.value,
-                          isIconOnly: true,
-                          onDateChanged: (picked) {
-                            controller.updateDate(picked);
-                            controller.fetchJournals();
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              sby16,
-              Expanded(
-                child: Obx(() {
-                  if (controller.isLoading.value) {
-                    return ListView.builder(
-                      itemCount: 3,
-                      itemBuilder: (context, index) {
-                        return buildJournalCardShimmer();
-                      },
-                    );
-                  }
-                  if (controller.journalList.isEmpty) {
-                    return Center(
-                      child: Text(
-                        'No journals today',
-                        style: h6SemiBold,
-                      ),
-                    );
-                  }
+            ),
+          ),
+          Expanded(
+            child: RefreshIndicator(
+              color: primaryColor,
+              backgroundColor: whiteColor,
+              onRefresh: () => controller.fetchJournals(),
+              child: Obx(() {
+                if (controller.isLoading.value) {
                   return ListView.builder(
+                    padding: const EdgeInsets.all(16),
                     itemCount: controller.journalList.length,
+                    physics: const AlwaysScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
-                      final journal = controller.journalList[index];
-                      DateTime date = DateTime.parse(journal['created_at']);
-                      return JournalCard(
-                        title: journal['title'],
-                        body: journal['body'],
-                        date: formatDate(date),
-                        image: journal['image_url'] ?? '',
-                        getDelete: () async {
-                          Get.dialog(
-                            Dialog(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              child: Container(
-                                padding: const EdgeInsets.all(16),
-                                width: Get.width * 0.8,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(24),
-                                  color: whiteColor,
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(Icons.warning, color: error, size: 48),
-                                    sby16,
-                                    Text(
-                                      'Delete Journal',
-                                      style: h4Bold,
-                                    ),
-                                    sby12,
-                                    Text(
-                                      'Are you sure you want to delete this journal?',
-                                      textAlign: TextAlign.center,
-                                      style: h6Regular,
-                                    ),
-                                    sby24,
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        TextButton(
-                                          onPressed: () => Get.back(),
-                                          child: Text(
-                                            'Cancel',
-                                            style: h6Regular,
-                                          ),
-                                        ),
-                                        sbx8,
-                                        ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: error,
-                                          ),
-                                          onPressed: () {
-                                            controller.deleteJournal(
-                                                journal['journal_id']);
-                                            Get.back();
-                                            controller.fetchJournals();
-                                          },
-                                          child: Text(
-                                            'Delete',
-                                            style: h6Regular.copyWith(
-                                                color: whiteColor),
-                                          ),
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                            barrierDismissible: false,
-                          );
-                        },
-                        getJournal: () {
-                          Get.toNamed(Routes.JOURNAL_DETAIL, arguments: {
-                            'journal_id': journal['journal_id'],
-                            'title': journal['title'],
-                            'body': journal['body'],
-                            'image_url': journal['image_url'],
-                            'created_at': journal['created_at'],
-                          });
-                        },
-                      );
+                      return buildJournalCardShimmer();
                     },
                   );
-                }),
-              ),
-            ],
+                }
+
+                final journals = controller.journalList;
+
+                if (journals.isEmpty) {
+                  return ListView(
+                    padding: const EdgeInsets.all(16),
+                    physics: const AlwaysScrollableScrollPhysics(),
+                    children: [
+                      SizedBox(
+                        height: Get.height * 0.5,
+                        child: Center(
+                          child: Text('No journals today', style: h6SemiBold),
+                        ),
+                      ),
+                    ],
+                  );
+                }
+
+                return ListView.builder(
+                  padding: const EdgeInsets.all(16),
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  itemCount: journals.length,
+                  itemBuilder: (context, index) {
+                    final journal = journals[index];
+                    DateTime date = DateTime.parse(journal['created_at']);
+                    return JournalCard(
+                      title: journal['title'],
+                      body: journal['body'],
+                      date: formatDate(date),
+                      image: journal['image_url'] ?? '',
+                      getDelete: () {/* kode delete */},
+                      getJournal: () {/* kode open detail */},
+                    );
+                  },
+                );
+              }),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
