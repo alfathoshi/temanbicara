@@ -1,16 +1,27 @@
-![image](https://github.com/user-attachments/assets/5f5e72b2-84cb-4f83-ab70-0b8fac66820f)![image](https://github.com/user-attachments/assets/a7e09285-6e27-4749-9f0e-4e7a8dd8a9b9)# Teman Bicara  
-**Your Personal Mental Health Companion**  
+<p align="center">
+  # Teman Bicara 🗣️
+  <br/>
+  <i>Your Personal Mental Health Companion</i>
+</p>
 
-[![Last Commit](https://img.shields.io/github/last-commit/alfathoshi/temanbicara?color=blue)](https://github.com/alfathoshi/temanbicara/commits/main)
-[![Release](https://img.shields.io/github/v/release/alfathoshi/temanbicara?color=green)](https://github.com/alfathoshi/temanbicara/releases)
-[![Issues](https://img.shields.io/github/issues/alfathoshi/temanbicara)](https://github.com/alfathoshi/temanbicara/issues)
-[![License](https://img.shields.io/github/license/alfathoshi/temanbicara)](LICENSE)
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/c9104244-d7ce-48f2-8f84-ce426f678f31" alt="Teman Bicara" width="150"/>
+</p>
 
 ---
 
-## 🛠️ Tools and Technologies
+<p align="center">
+  > **Teman Bicara** — mobile application aimed to support users' mental wellness. From AI-based mental health tracking to journaling and professional consultations, this app helps users build awareness and take control of their emotional well-being.
+</p>
 
-<p align="left"> <img alt="Flutter" src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white"/> <img alt="Dart" src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white"/> <img alt="Firebase" src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black"/> <img alt="Laravel" src="https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white"/> <img alt="MySQL" src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white"/> <img alt="Supabase" src="https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white"/> <img alt="GetX" src="https://img.shields.io/badge/GetX-68D391?style=for-the-badge&logo=github&logoColor=white"/> <img alt="Firebase Realtime DB" src="https://img.shields.io/badge/Firebase_Realtime_DB-FFCA28?style=for-the-badge&logo=firebase&logoColor=black"/> <img alt="Midtrans" src="https://img.shields.io/badge/Midtrans-0086C3?style=for-the-badge&logo=google-pay&logoColor=white"/> </p>
+---
+
+<p align="center">
+  [![Last Commit](https://img.shields.io/github/last-commit/alfathoshi/temanbicara?style=for-the-badge&color=blue)](https://github.com/alfathoshi/temanbicara/commits/main)
+  [![Latest Release](https://img.shields.io/github/v/release/alfathoshi/temanbicara?style=for-the-badge&color=green)](https://github.com/alfathoshi/temanbicara/releases)
+  [![Open Issues](https://img.shields.io/github/issues/alfathoshi/temanbicara?style=for-the-badge)](https://github.com/alfathoshi/temanbicara/issues)
+  [![License](https://img.shields.io/github/license/alfathoshi/temanbicara?style=for-the-badge)](LICENSE)
+</p>
 
 ---
 
