@@ -1,4 +1,4 @@
-# Teman Bicara  
+![image](https://github.com/user-attachments/assets/5f5e72b2-84cb-4f83-ab70-0b8fac66820f)![image](https://github.com/user-attachments/assets/a7e09285-6e27-4749-9f0e-4e7a8dd8a9b9)# Teman Bicara  
 **Your Personal Mental Health Companion**  
 
 [![Last Commit](https://img.shields.io/github/last-commit/alfathoshi/temanbicara?color=blue)](https://github.com/alfathoshi/temanbicara/commits/main)
@@ -160,22 +160,22 @@ From AI-based mental health tracking to journaling and professional consultation
 Thanks to these amazing people for contributing to Teman Bicara:
 
 <a href="https://github.com/alfathoshi">
-  <img src="https://avatars.githubusercontent.com/u/alfathoshi?v=4" width="60" alt="Muhammad Bintang Al-Fath"/>
+  <img src="https://avatars.githubusercontent.com/u/134042931?v=4" width="60" alt="Muhammad Bintang Al-Fath"/>
 </a>
 <a href="https://github.com/Raga-Git">
-  <img src="https://avatars.githubusercontent.com/u/Raga-Git?v=4" width="60" alt="Ragadhitya Janatantra Koeshutama"/>
+  <img src="https://avatars.githubusercontent.com/u/57023126?s=130&v=4" width="60" alt="Ragadhitya Janatantra Koeshutama"/>
 </a>
 <a href="https://github.com/RevanArturito">
-  <img src="https://avatars.githubusercontent.com/u/RevanArturito?v=4" width="60" alt="Cokorda Arturito Revan Putra Diarta"/>
+  <img src="https://avatars.githubusercontent.com/u/152382596?s=130&v=4" width="60" alt="Cokorda Arturito Revan Putra Diarta"/>
 </a>
 <a href="https://github.com/Febry3">
-  <img src="https://avatars.githubusercontent.com/u/Febry3?v=4" width="60" alt="Febry Twenido Firmanio"/>
+  <img src="https://avatars.githubusercontent.com/u/121351049?s=130&v=4" width="60" alt="Febry Twenido Firmanio"/>
 </a>
 <a href="https://github.com/hafiiddd">
-  <img src="https://avatars.githubusercontent.com/u/hafiiddd?v=4" width="60" alt="Hafid Alakhyar"/>
+  <img src="https://avatars.githubusercontent.com/u/120325516?s=130&v=4" width="60" alt="Hafid Alakhyar"/>
 </a>
 <a href="https://github.com/GinaSoraya">
-  <img src="https://avatars.githubusercontent.com/u/GinaSoraya?v=4" width="60" alt="Gina Soraya"/>
+  <img src="https://avatars.githubusercontent.com/u/153975036?s=130&v=4" width="60" alt="Gina Soraya"/>
 </a>
 
 ---
@@ -184,9 +184,8 @@ Thanks to these amazing people for contributing to Teman Bicara:
 
 ```bash
 lib/
-├── models/          # Data classes
-├── views/           # UI pages
-├── viewmodels/      # Business logic / state
+├──
+├── modules/         # MVC
 ├── services/        # API & DB handling
 ├── widgets/         # Custom reusable components
 ├── utils/           # Constants & helpers
