@@ -25,7 +25,7 @@ class ChatContainer extends StatelessWidget {
     return InkWell(
       onTap: () {
         Get.toNamed(Routes.CHAT_ROOM,
-            arguments: {'name': nama, 'counselor_id': id});
+            arguments: {'name': nama, 'counselor_id': id, 'image': image});
       },
       child: Container(
         height: 90,
@@ -44,10 +44,8 @@ class ChatContainer extends StatelessWidget {
               ),
               child: CircleAvatar(
                 radius: 30,
-                child: Image.asset(
-                  'assets/images/$image.png',
-                  scale: 2,
-                ),
+                backgroundImage: NetworkImage(image!),
+                backgroundColor: Colors.grey[200],
               ),
             ),
             Expanded(
