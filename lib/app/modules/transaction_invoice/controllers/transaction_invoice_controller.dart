@@ -13,9 +13,11 @@ class TransactionInvoiceController extends GetxController {
   Future<String> getDownloadPath() async {
     if (Platform.isAndroid) {
       final directory = Directory('/storage/emulated/0/Download');
-      if (await directory.exists()) return directory.path;
-      final fallback = await getExternalStorageDirectory();
-      return fallback?.path ?? '';
+      if (await directory.exists()) {
+        return directory.path;
+      } else {
+        throw Exception("Download folder not found.");
+      }
     } else {
       final dir = await getApplicationDocumentsDirectory();
       return dir.path;
