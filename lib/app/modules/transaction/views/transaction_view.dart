@@ -33,9 +33,7 @@ class TransactionView extends GetView<TransactionController> {
               sby24,
               const SizedBox(
                 height: 60,
-                child: Expanded(
-                  child: TransactionTimeLineViewIndex(index: 1),
-                ),
+                child: TransactionTimeLineViewIndex(index: 1),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 28),
