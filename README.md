@@ -1,27 +1,21 @@
 <p align="center">
+  <img src="https://github.com/user-attachments/assets/c9104244-d7ce-48f2-8f84-ce426f678f31" alt="Teman Bicara" width="150"/>
+</p>
+
+<p align="center">
   # Teman Bicara 🗣️
   <br/>
   <i>Your Personal Mental Health Companion</i>
 </p>
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/c9104244-d7ce-48f2-8f84-ce426f678f31" alt="Teman Bicara" width="150"/>
-</p>
+---
+
+**Teman Bicara** — mobile application aimed to support users' mental wellness. From AI-based mental health tracking to journaling and professional consultations, this app helps users build awareness and take control of their emotional well-being.
 
 ---
 
-<p align="center">
-  > **Teman Bicara** — mobile application aimed to support users' mental wellness. From AI-based mental health tracking to journaling and professional consultations, this app helps users build awareness and take control of their emotional well-being.
-</p>
-
----
-
-<p align="center">
-  [![Last Commit](https://img.shields.io/github/last-commit/alfathoshi/temanbicara?style=for-the-badge&color=blue)](https://github.com/alfathoshi/temanbicara/commits/main)
-  [![Latest Release](https://img.shields.io/github/v/release/alfathoshi/temanbicara?style=for-the-badge&color=green)](https://github.com/alfathoshi/temanbicara/releases)
-  [![Open Issues](https://img.shields.io/github/issues/alfathoshi/temanbicara?style=for-the-badge)](https://github.com/alfathoshi/temanbicara/issues)
-  [![License](https://img.shields.io/github/license/alfathoshi/temanbicara?style=for-the-badge)](LICENSE)
-</p>
+[![Last Commit](https://img.shields.io/github/last-commit/alfathoshi/temanbicara?color=blue)](https://github.com/alfathoshi/temanbicara/commits/main)
+[![Release](https://img.shields.io/github/v/release/alfathoshi/temanbicara?color=green)](https://github.com/alfathoshi/temanbicara/releases)
 
 ---
 
