@@ -21,10 +21,12 @@ class ConsultHistoryCard extends StatelessWidget {
   final String? problem;
   final String? summary;
   final String? description;
+  final String profileUrl;
 
   ConsultHistoryCard({
     super.key,
     required this.nama,
+    required this.profileUrl,
     required this.tanggal,
     required this.waktuMulai,
     required this.waktuSelesai,
@@ -68,8 +70,8 @@ class ConsultHistoryCard extends StatelessWidget {
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.asset(
-                    'assets/images/psikolog.png',
+                  child: Image.network(
+                    profileUrl,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -129,6 +131,7 @@ class ConsultHistoryCard extends StatelessWidget {
                   summary: summary,
                   description: description,
                   durasi: "$waktuMulai - $waktuSelesai",
+                  profileUrl: profileUrl,
                 );
                 Get.toNamed(
                   Routes.CONSULT_REPORT,

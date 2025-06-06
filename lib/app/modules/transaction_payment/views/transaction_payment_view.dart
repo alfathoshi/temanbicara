@@ -175,6 +175,13 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                       ),
                     ),
                     sby24,
+                    Center(
+                      child: Text(
+                        "Already Made a Payment?",
+                        style: h7Regular,
+                      ),
+                    ),
+                    sby8,
                     GestureDetector(
                       onTap: () async {
                         final uuid = consultationData['transaction_id'];
@@ -217,8 +224,8 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                       },
                       child: Center(
                         child: Text(
-                          "Already Made a Payment ?",
-                          style: h6Regular,
+                          "Check your Payment Status",
+                          style: h6Regular.copyWith(color: primaryColor),
                         ),
                       ),
                     ),

@@ -77,10 +77,9 @@ class BookingDetails extends StatelessWidget {
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8),
-                          child: Image.asset(
-                            'assets/images/psikolog.png',
-                            scale: 1.5,
-                            fit: BoxFit.fill,
+                          child: Image.network(
+                            bookingComplete.profileUrl,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),

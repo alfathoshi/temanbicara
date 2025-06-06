@@ -210,12 +210,14 @@ class ConsultView extends GetView<ConsultController> {
 
                             return GestureDetector(
                               onTap: () {
+                                // print(filteredData[index]['profile_url']);
                                 Get.toNamed(
                                   Routes.CONSULT_SCHEDULE,
                                   arguments: {
                                     'user_name': filteredData[index]['name'],
                                     'schedules': filteredData[index]
                                         ['schedules'],
+                                    'image': filteredData[index]['profile_url'],
                                     'expertise': filteredData[index]
                                         ['expertise'],
                                   },

@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, unnecessary_brace_in_string_interps
 
 import 'package:flutter/material.dart';
 import 'package:temanbicara/app/themes/colors.dart';
@@ -57,6 +57,8 @@ class CounselorCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(26),
                     child: Image.network(
                       image,
+                      width: double.infinity,
+                      height: 223,
                       fit: BoxFit.cover,
                     ),
                   ),

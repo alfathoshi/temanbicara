@@ -7,7 +7,6 @@ import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/consult/format_date.dart';
 import 'package:temanbicara/app/widgets/custom_appbar.dart';
-import 'package:temanbicara/app/widgets/date.dart';
 import 'package:temanbicara/app/widgets/journal_card.dart';
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
@@ -32,7 +31,7 @@ class JournalView extends GetView<JournalController> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(16,16,16,0),
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
             child: GestureDetector(
               onTap: () => Get.toNamed(Routes.CREATE_JOURNAL),
               child: Container(

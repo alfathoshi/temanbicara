@@ -9,9 +9,11 @@ class ConsultHistory {
   final String? problem;
   final String? summary;
   final String? description;
+  final String profileUrl;
 
   ConsultHistory({
     required this.status,
+    required this.profileUrl,
     required this.nama,
     required this.counselorId,
     required this.tanggal,

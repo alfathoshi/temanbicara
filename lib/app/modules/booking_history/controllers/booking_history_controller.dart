@@ -62,11 +62,12 @@ class BookingHistoryController extends GetxController {
                 matched.waktuMulai,
                 matched.waktuSelesai,
               ),
+              profileUrl: matched.profileUrl,
             );
 
             final invoice = InvoiceModel(
               transaction: transaction,
-              invoice: "INV-${matched.paymentId}",
+              invoice: "Invoice",
               metodePembayaran: matched.metodePembayaran,
               hargaTotal: int.parse(matched.totalHarga) + 15000 + 1000,
             );
@@ -153,8 +154,9 @@ class BookingHistoryController extends GetxController {
       transactionId: (payment['transaction_id'] ?? '').toString(),
       expiredDate: payment['expired_date'] ?? '',
       availableDateRaw: schedule['available_date'] ?? '',
-      expertises: expertise != null ? expertise['type'] : '-',
+      expertises: expertise != null ? expertise['type'] : 'None',
       consultationID: item['consultation_id'],
+      profileUrl: user['profile_url'],
     );
   }
 
@@ -169,15 +171,17 @@ class BookingHistoryController extends GetxController {
       invoice: 'invoice',
       transaction: TransactionModel(
         namaPsikiater: user['name'],
-        expertise: expertise != null ? expertise['type'] : '-',
+        expertise: expertise != null ? expertise['type'] : 'None',
         durasi: calculateDuration(schedule['start_time'], schedule['end_time']),
         jadwal: formatFullDate(schedule['available_date']),
         waktu:
             "${formatTime(schedule['start_time'])} - ${formatTime(schedule['end_time'])}",
         selectedID: 0,
+        profileUrl: user['profile_url'],
       ),
       bookingDate: formatFullDate(item['created_at']),
       metode: payment['payment_method'] ?? '-',
+      profileUrl: user['profile_url'],
     );
   }
 }

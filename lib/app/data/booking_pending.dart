@@ -19,6 +19,7 @@ class BookingPending {
   final String? availableDateRaw;
   final String expertises;
   final int consultationID;
+  final String profileUrl;
 
   BookingPending({
     required this.nama,
@@ -34,6 +35,7 @@ class BookingPending {
     required this.transactionId,
     required this.expiredDate,
     required this.expertises,
+    required this.profileUrl,
     required this.consultationID,
     this.availableDateRaw,
     this.bank = '',

@@ -75,10 +75,9 @@ class OrderDetails extends StatelessWidget {
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8),
-                          child: Image.asset(
-                            'assets/images/psikolog.png',
-                            scale: 1.5,
-                            fit: BoxFit.fill,
+                          child: Image.network(
+                            bookingPending.profileUrl,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
@@ -92,13 +91,12 @@ class OrderDetails extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                           ),
-                          sby12,
-                          // Text(
-                          //   "dummy",
-                          //   style: h7Regular.copyWith(
-                          //     color: grey2Color,
-                          //   ),
-                          // ),
+                          Text(
+                            bookingPending.expertises,
+                            style: h7Regular.copyWith(
+                              color: grey2Color,
+                            ),
+                          ),
                           sby5,
                           Text(
                             bookingPending.durasi,

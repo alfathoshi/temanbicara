@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
+// ignore_for_file: prefer_typing_uninitialized_variables, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -15,11 +15,13 @@ class TransactionData extends StatelessWidget {
       waktuSesi,
       kadaluarsa,
       expertise,
+      image,
       durasi;
   final jmlSesi, harga;
   const TransactionData(
       {super.key,
       required this.namaPsikiater,
+      required this.image,
       required this.expertise,
       required this.topik,
       required this.metode,
@@ -51,7 +53,10 @@ class TransactionData extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const CircleAvatar(radius: 20),
+                    CircleAvatar(
+                      radius: 20,
+                      backgroundImage: NetworkImage(image),
+                    ),
                     sbX12,
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
