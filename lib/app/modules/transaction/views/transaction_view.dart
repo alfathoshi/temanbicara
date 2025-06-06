@@ -54,6 +54,7 @@ class TransactionView extends GetView<TransactionController> {
                       waktuSesi: transaction.waktu,
                       kadaluarsa: transaction.kadaluarsa,
                       harga: transaction.harga,
+                      image: transaction.profileUrl,
                     ),
                     sby36,
                     MyButton(

@@ -216,6 +216,7 @@ class ConsultView extends GetView<ConsultController> {
                                     'user_name': filteredData[index]['name'],
                                     'schedules': filteredData[index]
                                         ['schedules'],
+                                    'image': filteredData[index]['profile_url'],
                                     'expertise': filteredData[index]
                                         ['expertise'],
                                   },

@@ -62,6 +62,7 @@ class BookingHistoryController extends GetxController {
                 matched.waktuMulai,
                 matched.waktuSelesai,
               ),
+              profileUrl: '',
             );
 
             final invoice = InvoiceModel(
@@ -155,6 +156,7 @@ class BookingHistoryController extends GetxController {
       availableDateRaw: schedule['available_date'] ?? '',
       expertises: expertise != null ? expertise['type'] : '-',
       consultationID: item['consultation_id'],
+      profileUrl: user['profile_url'],
     );
   }
 
@@ -175,9 +177,11 @@ class BookingHistoryController extends GetxController {
         waktu:
             "${formatTime(schedule['start_time'])} - ${formatTime(schedule['end_time'])}",
         selectedID: 0,
+        profileUrl: user['profile_url'],
       ),
       bookingDate: formatFullDate(item['created_at']),
       metode: payment['payment_method'] ?? '-',
+      profileUrl: user['profile_url'],
     );
   }
 }

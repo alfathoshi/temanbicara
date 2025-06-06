@@ -46,11 +46,9 @@ class BookingCompleteCard extends StatelessWidget {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: Image.asset(
-                      'assets/images/psikolog.png',
-                      scale: 1.5,
-                      fit: BoxFit.fill,
-                    ),
+                    child: bookingComplete.profileUrl.isEmpty
+                        ? Image.asset('assets/images/psikolog.png')
+                        : Image.network(bookingComplete.profileUrl),
                   ),
                 ),
                 sbX12,

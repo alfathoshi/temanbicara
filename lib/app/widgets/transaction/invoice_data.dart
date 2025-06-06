@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:temanbicara/app/data/invoice_model.dart';
@@ -35,7 +37,12 @@ class InvoiceData extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const CircleAvatar(radius: 20),
+                    CircleAvatar(
+                      radius: 20,
+                      backgroundImage: invoice.transaction.profileUrl.isEmpty
+                          ? AssetImage("assets/images/psikolog.png")
+                          : NetworkImage(invoice.transaction.profileUrl),
+                    ),
                     sbX12,
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
