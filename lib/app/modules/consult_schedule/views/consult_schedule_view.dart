@@ -24,7 +24,7 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
     final schedules = arguments['schedules'];
     final expertiseList = arguments['expertise'];
     final expertise = (expertiseList as List).join(", ");
-    final image = arguments['image'];
+    final image = arguments['image'].toString();
 
     // ignore: unused_local_variable
     DateTime selectedDate = DateTime.now();

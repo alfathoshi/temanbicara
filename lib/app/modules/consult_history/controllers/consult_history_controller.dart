@@ -41,7 +41,8 @@ class ConsultHistoryController extends GetxController {
         if (data['status'] == true) {
           final list = data['data'] as List;
 
-          final filtered = list.where((e) => e['status'] != 'Cancelled' && e['status_payment'] == 'Success');
+          final filtered = list.where((e) =>
+              e['status'] != 'Cancelled' && e['status_payment'] == 'Success');
           consultList.value = filtered.map(_mapToConsultModel).toList();
         }
       }
@@ -72,6 +73,7 @@ class ConsultHistoryController extends GetxController {
       problem: item['problem'],
       summary: item['summary'],
       description: item['description'],
+      profileUrl: item['counselor_profile_url'].toString(),
     );
   }
 }
