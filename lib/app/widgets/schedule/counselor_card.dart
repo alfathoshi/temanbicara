@@ -55,14 +55,12 @@ class CounselorCard extends StatelessWidget {
                   width: 120,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(26),
-                    child: image.isEmpty
-                        ? Image.asset("assets/image/psikolog.png")
-                        : Image.network(
-                            image,
-                            width: double.infinity,
-                            height: 223,
-                            fit: BoxFit.cover,
-                          ),
+                    child: Image.network(
+                      image,
+                      width: double.infinity,
+                      height: 223,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               ),

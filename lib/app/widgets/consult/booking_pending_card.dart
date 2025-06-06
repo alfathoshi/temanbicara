@@ -49,9 +49,10 @@ class BookingPendingCard extends StatelessWidget {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: bookingPending.profileUrl.isEmpty
-                          ? Image.asset('assets/images/psikolog.png')
-                          : Image.network(bookingPending.profileUrl),
+                      child: Image.network(
+                        bookingPending.profileUrl,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   sbX12,

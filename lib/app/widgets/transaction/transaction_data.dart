@@ -55,9 +55,7 @@ class TransactionData extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 20,
-                      backgroundImage: image.isEmpty
-                          ? AssetImage("assets/images/psikolog.png")
-                          : NetworkImage(image),
+                      backgroundImage: NetworkImage(image),
                     ),
                     sbX12,
                     Column(

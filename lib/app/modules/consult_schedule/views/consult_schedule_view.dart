@@ -24,7 +24,7 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
     final schedules = arguments['schedules'];
     final expertiseList = arguments['expertise'];
     final expertise = (expertiseList as List).join(", ");
-    final image = arguments['profile_url'] as String;
+    final image = arguments['image'];
 
     // ignore: unused_local_variable
     DateTime selectedDate = DateTime.now();
@@ -59,14 +59,12 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                   bottomLeft: Radius.circular(8),
                   bottomRight: Radius.circular(8),
                 ),
-                child: image.isEmpty
-                    ? Image.asset("assets/image/psikolog.png")
-                    : Image.network(
-                        image,
-                        width: double.infinity,
-                        height: 223,
-                        fit: BoxFit.cover,
-                      ),
+                child: Image.network(
+                  image,
+                  width: double.infinity,
+                  height: 223,
+                  fit: BoxFit.cover,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),

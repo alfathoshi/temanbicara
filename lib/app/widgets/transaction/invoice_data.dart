@@ -39,9 +39,8 @@ class InvoiceData extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 20,
-                      backgroundImage: invoice.transaction.profileUrl.isEmpty
-                          ? AssetImage("assets/images/psikolog.png")
-                          : NetworkImage(invoice.transaction.profileUrl),
+                      backgroundImage:
+                          NetworkImage(invoice.transaction.profileUrl),
                     ),
                     sbX12,
                     Column(
