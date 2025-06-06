@@ -78,7 +78,7 @@ class BookingDetails extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: Image.asset(
-                            'assets/images/Hafid.jpg',
+                            'assets/images/psikolog.png',
                             scale: 1.5,
                             fit: BoxFit.fill,
                           ),

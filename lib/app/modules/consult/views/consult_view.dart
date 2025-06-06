@@ -175,7 +175,7 @@ class ConsultView extends GetView<ConsultController> {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                            // print(filteredData[index]['schedules']);
+                            //print(filteredData[index]['schedules']);
                             Get.toNamed(
                               Routes.CONSULT_SCHEDULE,
                               arguments: {
@@ -196,9 +196,8 @@ class ConsultView extends GetView<ConsultController> {
                                     .map((e) => e.trim())
                                     .join(', '),
                             schedule: (filteredData[index]['schedules'] as List)
-                                    .isNotEmpty
-                                ? filteredData[index]['schedules'][0]['date']
-                                : 'No schedule',
+                                .length
+                                .toString(),
                           ),
                         );
                       },

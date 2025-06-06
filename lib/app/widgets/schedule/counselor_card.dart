@@ -38,7 +38,7 @@ class CounselorCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(26),
                   color: Colors.white,
-                  border: Border.all(color: whiteColor, width: 2),
+                  border: Border.all(color: whiteColor, width: 3),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.08),
@@ -54,7 +54,7 @@ class CounselorCard extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(26),
                     child: Image.asset(
-                      'assets/images/Hafid.jpg',
+                      'assets/images/psikolog.png',
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -98,7 +98,7 @@ class CounselorCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'selalu ada kecuali kiamat',
+                        '${schedule} schedules available',
                         style: TextStyle(
                           fontSize: 10,
                           color: grey2Color,
