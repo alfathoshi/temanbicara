@@ -115,7 +115,7 @@ class JournalView extends GetView<JournalController> {
                   if (controller.journalList.isEmpty) {
                     return Center(
                       child: Text(
-                        'No journals todoy',
+                        'No journals today',
                         style: h6SemiBold,
                       ),
                     );

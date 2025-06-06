@@ -12,12 +12,22 @@ class ProfileController extends GetxController {
   final count = 0.obs;
   File? storedImage;
   var box = GetStorage();
+  var isLoading = false.obs;
   RxString profileUrl = "".obs;
   RxString name = ''.obs;
 
   Future pickImage() async {
     try {
-      var status = await Permission.photos.request();
+      PermissionStatus status;
+
+      if (Platform.isAndroid) {
+        status = await Permission.photos.request();
+        if (status.isDenied || status.isPermanentlyDenied) {
+          status = await Permission.storage.request();
+        }
+      } else {
+        status = await Permission.photos.request();
+      }
       if (status.isGranted) {
         final image =
             await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -65,6 +75,7 @@ class ProfileController extends GetxController {
 
   Future<void> fetchData() async {
     try {
+      isLoading.value = true;
       final response = await http.get(
         Uri.parse('${Config.apiEndPoint}/profile'),
         headers: {
@@ -87,6 +98,8 @@ class ProfileController extends GetxController {
       return;
     } catch (err) {
       count.value = 0;
+    } finally {
+      isLoading.value = false;
     }
   }
 
