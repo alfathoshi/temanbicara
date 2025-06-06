@@ -31,9 +31,38 @@ class ConsultView extends GetView<ConsultController> {
         onRefresh: controller.fetchData,
         child: Obx(() {
           if (controller.isLoading.value) {
-            return Center(child: CircularProgressIndicator(color: primaryColor));
+            return Center(
+                child: CircularProgressIndicator(color: primaryColor));
           } else if (controller.schedules.isEmpty) {
-            return Center(child: Text("No Data Available"));
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FilterBarWidget(
+                  selectedFilters: controller.selectedExpertise,
+                  onClear: controller.clearExpertiseFilter,
+                ),
+                Spacer(),
+                Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(
+                        height: 200,
+                        width: 200,
+                        child: Image.asset("assets/images/transaksi-gagal.png"),
+                      ),
+                      sby16,
+                      Text(
+                        "Oops! It looks like all slots are full.",
+                        style: h5Bold,
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+                Spacer(),
+              ],
+            );
           } else {
             final selectedFilters = controller.selectedExpertise
                 .map((e) => e.toLowerCase())
