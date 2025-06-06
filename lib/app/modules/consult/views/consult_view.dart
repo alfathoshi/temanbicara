@@ -73,28 +73,6 @@ class ConsultView extends GetView<ConsultController> {
               ),
               sby8,
               Obx(() {
-                final selectedFilters = controller.selectedExpertise
-                    .map((e) => e.toLowerCase())
-                    .toList();
-
-                final List filteredData =
-                    controller.schedules['data'].where((counselor) {
-                  final hasSchedule =
-                      (counselor['schedules'] as List).isNotEmpty;
-                  if (selectedFilters.isEmpty) return hasSchedule;
-
-                  final raw = (counselor['expertise'] as List?)?.first ?? '';
-                  final expertiseList = raw
-                      .toString()
-                      .split('|')
-                      .map((e) => e.trim().toLowerCase())
-                      .toList();
-
-                  return hasSchedule &&
-                      expertiseList
-                          .any((item) => selectedFilters.contains(item));
-                }).toList();
-
                 if (controller.isLoading.value) {
                   return Expanded(
                     child: ListView.builder(
@@ -145,8 +123,29 @@ class ConsultView extends GetView<ConsultController> {
                       },
                     ),
                   );
-                } else if (controller.schedules.isEmpty ||
-                    filteredData.isEmpty) {
+                }
+                final selectedFilters = controller.selectedExpertise
+                    .map((e) => e.toLowerCase())
+                    .toList();
+
+                final List filteredData =
+                    controller.schedules['data'].where((counselor) {
+                  final hasSchedule =
+                      (counselor['schedules'] as List).isNotEmpty;
+                  if (selectedFilters.isEmpty) return hasSchedule;
+
+                  final raw = (counselor['expertise'] as List?)?.first ?? '';
+                  final expertiseList = raw
+                      .toString()
+                      .split('|')
+                      .map((e) => e.trim().toLowerCase())
+                      .toList();
+
+                  return hasSchedule &&
+                      expertiseList
+                          .any((item) => selectedFilters.contains(item));
+                }).toList();
+                if (controller.schedules.isEmpty || filteredData.isEmpty) {
                   final filter = controller.selectedExpertise;
                   return Expanded(
                     child: Column(
