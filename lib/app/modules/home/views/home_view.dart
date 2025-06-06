@@ -282,9 +282,10 @@ class HomeView extends GetView<HomeController> {
                                     'Do you need an expert?',
                                     style: h6SemiBold,
                                   ),
+                                  sby8,
                                   Text(
                                     'Talk about your problems \nwith a professional psychologist',
-                                    style: h7Regular,
+                                    style: h6Regular,
                                   ),
                                   const SizedBox(
                                     height: 16,
@@ -417,10 +418,13 @@ class HomeView extends GetView<HomeController> {
                           if (journalController.isLoading.value) {
                             return buildJournalCardShimmer();
                           } else if (journalController.journalList.isEmpty) {
-                            return Center(
-                              child: Text(
-                                "No journal today",
-                                style: h6SemiBold,
+                            return Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Center(
+                                child: Text(
+                                  "No journals today",
+                                  style: h6Medium,
+                                ),
                               ),
                             );
                           } else {
@@ -505,8 +509,8 @@ class HomeView extends GetView<HomeController> {
                       padding: const EdgeInsets.all(16.0),
                       child: Center(
                         child: Text(
-                          "No artilce published",
-                          style: h6SemiBold,
+                          "No articles published",
+                          style: h6Medium,
                         ),
                       ),
                     );

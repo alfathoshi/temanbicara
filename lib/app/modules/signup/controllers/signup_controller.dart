@@ -82,8 +82,8 @@ class SignupController extends GetxController {
           box.write('email', data['data']['email']);
           box.write('password', data['data']['password']);
           CustomSnackbar.showSnackbar(
-            title: "Success!",
-            message: "Registered!",
+            title: "Registered!",
+            message: "Your account has registered",
             status: true,
           );
           Get.offAllNamed(

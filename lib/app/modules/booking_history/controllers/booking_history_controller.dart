@@ -82,7 +82,7 @@ class BookingHistoryController extends GetxController {
             );
 
             CustomSnackbar.showSnackbar(
-              title: "Success!",
+              title: "All Done!",
               message: "Payment Confirmed!",
               status: true,
             );

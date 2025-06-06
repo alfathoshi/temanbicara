@@ -32,8 +32,8 @@ class Tracking4Controller extends GetxController {
 
       if (response.statusCode == 200 && data['status']) {
         CustomSnackbar.showSnackbar(
-          title: "Success!",
-          message: "Assessment Finished!",
+          title: "Assessment Finished!",
+          message: "Your profile has completed",
           status: true,
         );
 

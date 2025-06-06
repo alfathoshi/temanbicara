@@ -54,8 +54,8 @@ class TransactionMethodController extends GetxController {
         update();
 
         CustomSnackbar.showSnackbar(
-          title: "Success!",
-          message: "Consultation Created!",
+          title: "Consultation Created!",
+          message: "Your consult has scheduled",
           status: true,
         );
       } else {

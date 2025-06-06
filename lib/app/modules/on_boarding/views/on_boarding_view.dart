@@ -21,75 +21,78 @@ class OnBoardingView extends GetView<OnBoardingController> {
       backgroundColor: whiteColor,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32),
+          padding: const EdgeInsets.all(32),
           child: Obx(() {
             final index = controller.currentPage.value;
 
             if (index == -1) {
               return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                            offset: const Offset(-5, -5),
-                            blurRadius: 7,
-                            color: border),
-                        BoxShadow(
-                            offset: const Offset(5, 5),
-                            blurRadius: 7,
-                            color: border),
-                      ],
-                      color: whiteColor,
-                      borderRadius: BorderRadius.circular(28),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Image.asset(
-                        "assets/images/boardingLogo.png",
-                        scale: 4,
-                      ),
-                    ),
-                  ),
-                  sby32,
-                  Text("Welcome to", style: h3Bold),
-                  Text("Teman Bicara",
-                      style: h2Bold.copyWith(color: primaryColor)),
-                  sby36,
-                  Center(
-                    child: SizedBox(
-                      height: 300,
-                      child: Image.asset("assets/images/boarding1.png",
-                          height: 160),
-                    ),
-                  ),
-                  sby36,
-                  MyButtonCustom(
-                    text: "Next",
-                    get: () => controller.nextPage(),
-                    height: 64,
-                    width: double.infinity,
-                    style: h3Bold.copyWith(color: whiteColor),
-                    backColor: primaryColor,
-                    foreColor: whiteColor,
-                  ),
-                  sby12,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Column(
                     children: [
-                      Text('Already have an Account ? ',
-                          style: GoogleFonts.poppins()),
-                      GestureDetector(
-                        onTap: () => Get.offAllNamed(Routes.LOGIN),
-                        child: Text(
-                          'Login',
-                          style: GoogleFonts.poppins(
-                              color: const Color(0xFF60ABEE)),
+                      sby48,
+                      Text("Welcome to", style: h2Bold),
+                      Text(
+                        "Teman Bicara",
+                        style: h2Bold.copyWith(color: primaryColor),
+                      ),
+                      sby48,
+                      Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                                offset: const Offset(-5, -5),
+                                blurRadius: 7,
+                                color: border),
+                            BoxShadow(
+                                offset: const Offset(5, 5),
+                                blurRadius: 7,
+                                color: border),
+                          ],
+                          color: whiteColor,
+                          borderRadius: BorderRadius.circular(32),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Image.asset(
+                            "assets/images/boardingLogo.png",
+                            scale: 4,
+                          ),
                         ),
                       ),
                     ],
                   ),
+                  Column(
+                    children: [
+                      MyButtonCustom(
+                        text: "Get Started",
+                        get: () => controller.nextPage(),
+                        height: 64,
+                        width: double.infinity,
+                        style: h3Bold.copyWith(color: whiteColor),
+                        backColor: primaryColor,
+                        foreColor: whiteColor,
+                        icon: Image.asset('assets/images/boarding1arrow.png'),
+                      ),
+                      sby12,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text('Already have an account ? ',
+                              style: GoogleFonts.poppins()),
+                          GestureDetector(
+                            onTap: () => Get.offAllNamed(Routes.LOGIN),
+                            child: Text(
+                              'Login',
+                              style: GoogleFonts.poppins(
+                                  color: const Color(0xFF60ABEE)),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  )
                 ],
               );
             }
@@ -122,7 +125,7 @@ class OnBoardingView extends GetView<OnBoardingController> {
                         get: controller.skipToEnd,
                         foreColor: primaryColor,
                         backColor: whiteColor,
-                        text: "lewati",
+                        text: "Skip",
                         height: 45,
                         width: 100,
                         style: h5SemiBold.copyWith(color: primaryColor),

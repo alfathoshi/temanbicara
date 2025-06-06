@@ -18,7 +18,7 @@ class TransactionVaNumberBorder extends StatelessWidget {
       onTap: () async {
         await Clipboard.setData(ClipboardData(text: vaNumber));
         CustomSnackbar.showSnackbar(
-          title: "Success!",
+          title: "Copied!",
           message: "VA Number Copied!",
           status: true,
         );
@@ -80,7 +80,7 @@ class TransactionVaNumber extends StatelessWidget {
       onTap: () async {
         await Clipboard.setData(ClipboardData(text: vaNumber));
         CustomSnackbar.showSnackbar(
-          title: "Success!",
+          title: "Copied!",
           message: "VA Number Copied!",
           status: true,
         );

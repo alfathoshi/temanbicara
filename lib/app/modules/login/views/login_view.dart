@@ -106,8 +106,7 @@ class LoginView extends GetView<LoginController> {
                         child: controller.isLoading.value == false
                             ? Text(
                                 'Login',
-                                style: GoogleFonts.poppins(
-                                    fontWeight: FontWeight.bold),
+                                style: h4Bold.copyWith(color: whiteColor)
                               )
                             : SizedBox(
                                 height: 20,

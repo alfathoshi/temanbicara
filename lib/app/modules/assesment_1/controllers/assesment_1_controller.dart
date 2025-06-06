@@ -87,7 +87,7 @@ class Assesment1Controller extends GetxController {
         var data = json.decode(response.body);
         if (response.statusCode == 200 && data['status']) {
           CustomSnackbar.showSnackbar(
-            title: "Success!",
+            title: "Yeay!",
             message: "Account Created!",
             status: true,
           );

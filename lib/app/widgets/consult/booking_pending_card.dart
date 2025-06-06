@@ -233,8 +233,8 @@ class CancelBookingController extends GetxController {
       final statusCode = response.statusCode;
       if (statusCode == 200 || statusCode == 201) {
         CustomSnackbar.showSnackbar(
-          title: "Success!",
-          message: "Consultation Cancelled!",
+          title: "Consultation Cancelled!",
+          message: "Your consult has cancelled",
           status: true,
         );
         return true;

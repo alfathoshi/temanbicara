@@ -61,8 +61,8 @@ class ProfileController extends GetxController {
       final res = await http.Response.fromStream(response);
       if (json.decode(res.body)['status']) {
         CustomSnackbar.showSnackbar(
-          title: "Success!",
-          message: "Photo Updated!",
+          title: "Photo Updated!",
+          message: "Your photo has updated",
           status: true,
         );
       }

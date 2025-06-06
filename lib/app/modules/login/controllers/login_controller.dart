@@ -72,7 +72,7 @@ class LoginController extends GetxController {
         final currentUserID = data['data']['id'].toString();
         await saveFcmToken(currentUserID);
         CustomSnackbar.showSnackbar(
-          title: "Success!",
+          title: "Welcome!",
           message: "Logged In!",
           status: true,
         );
