@@ -3,7 +3,7 @@
 </p>
 
 <p align="center">
-  # Teman Bicara 🗣️
+  <h1>Teman Bicara</h1>
   <br/>
   <i>Your Personal Mental Health Companion</i>
 </p>
