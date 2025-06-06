@@ -59,7 +59,7 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                   bottomRight: Radius.circular(8),
                 ),
                 child: Image.asset(
-                  "assets/images/Hafid.jpg",
+                  "assets/images/psikolog.png",
                   width: double.infinity,
                   height: 223,
                   fit: BoxFit.cover,

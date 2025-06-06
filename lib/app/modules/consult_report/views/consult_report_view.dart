@@ -42,7 +42,7 @@ class ConsultReportView extends GetView<ConsultReportController> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(14),
                       child: Image.asset(
-                        'assets/images/Hafid.jpg',
+                        'assets/images/psikolog.png',
                         fit: BoxFit.cover,
                       ),
                     ),
