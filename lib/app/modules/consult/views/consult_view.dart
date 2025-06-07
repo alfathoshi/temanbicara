@@ -134,17 +134,16 @@ class ConsultView extends GetView<ConsultController> {
                       (counselor['schedules'] as List).isNotEmpty;
                   if (selectedFilters.isEmpty) return hasSchedule;
 
-                  final raw = (counselor['expertise'] as List?)?.first ?? '';
-                  final expertiseList = raw
-                      .toString()
-                      .split('|')
-                      .map((e) => e.trim().toLowerCase())
-                      .toList();
+                  final expertiseList =
+                      (counselor['expertise'] as List<dynamic>)
+                          .map((e) => e.toString().toLowerCase())
+                          .toList();
 
                   return hasSchedule &&
                       expertiseList
                           .any((item) => selectedFilters.contains(item));
                 }).toList();
+
                 if (controller.schedules.isEmpty || filteredData.isEmpty) {
                   final filter = controller.selectedExpertise;
                   return Expanded(
@@ -223,14 +222,9 @@ class ConsultView extends GetView<ConsultController> {
                               },
                               child: CounselorCard(
                                 username: filteredData[index]['name'],
-                                expertise:
-                                    ((filteredData[index]['expertise'] as List?)
-                                                ?.first ??
-                                            '')
-                                        .toString()
-                                        .split('|')
-                                        .map((e) => e.trim())
-                                        .join(', '),
+                                expertise: (filteredData[index]['expertise']
+                                        as List<dynamic>)
+                                    .join(', '),
                                 schedule: totalSchedules.toString(),
                                 image: filteredData[index]['profile_url'],
                               ),
