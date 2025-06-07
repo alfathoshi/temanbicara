@@ -9,6 +9,7 @@ import 'package:temanbicara/app/data/booking_complete.dart';
 import 'package:temanbicara/app/data/booking_pending.dart';
 import 'package:temanbicara/app/data/consult_response.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
+import 'package:temanbicara/app/widgets/consult/format_date.dart';
 import 'package:temanbicara/app/widgets/consult/format_expired_date.dart';
 import 'package:temanbicara/app/widgets/consult/format_full_date.dart';
 import 'package:temanbicara/app/widgets/consult/format_time.dart';
@@ -67,7 +68,8 @@ class BookingHistoryController extends GetxController {
 
             final invoice = InvoiceModel(
               transaction: transaction,
-              invoice: "Invoice",
+              invoice:
+                  "INV-${transaction.selectedID}-${convertDateToDDMMYYYY(transaction.jadwal)}",
               metodePembayaran: matched.metodePembayaran,
               hargaTotal: int.parse(matched.totalHarga) + 15000 + 1000,
             );
@@ -176,7 +178,7 @@ class BookingHistoryController extends GetxController {
         jadwal: formatFullDate(schedule['available_date']),
         waktu:
             "${formatTime(schedule['start_time'])} - ${formatTime(schedule['end_time'])}",
-        selectedID: 0,
+        selectedID: item['schedule_id'],
         profileUrl: user['profile_url'],
       ),
       bookingDate: formatFullDate(item['created_at']),
