@@ -31,7 +31,7 @@ class JournalView extends GetView<JournalController> {
       ),
       body: RefreshIndicator(
         color: primaryColor,
-          backgroundColor: whiteColor,
+        backgroundColor: whiteColor,
         onRefresh: () {
           return controller.fetchJournals();
         },
@@ -131,55 +131,51 @@ class JournalView extends GetView<JournalController> {
                         date: formatDate(date),
                         image: journal['image_url'] ?? '',
                         getDelete: () async {
-                          Get.dialog(
-                            Dialog(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              child: Container(
-                                padding: const EdgeInsets.all(16),
-                                width: Get.width * 0.8,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(24),
-                                  color: whiteColor,
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Icon(Icons.warning, color: error, size: 48),
-                                    sby16,
-                                    Text(
-                                      'Delete Journal',
-                                      style: h4Bold,
-                                    ),
-                                    sby12,
-                                    Text(
-                                      'Are you sure you want to delete this journal?',
-                                      textAlign: TextAlign.center,
-                                      style: h6Regular,
-                                    ),
-                                    sby24,
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        TextButton(
+                          Get.bottomSheet(
+                            Container(
+                              padding: const EdgeInsets.all(24),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(Icons.warning, color: error, size: 48),
+                                  sby16,
+                                  Text(
+                                    'Delete Journal',
+                                    style: h4Bold,
+                                  ),
+                                  sby12,
+                                  Text(
+                                    'Are you sure you want to delete this journal?',
+                                    textAlign: TextAlign.center,
+                                    style: h6Regular,
+                                  ),
+                                  sby24,
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Expanded(
+                                        child: TextButton(
                                           onPressed: () => Get.back(),
                                           child: Text(
                                             'Cancel',
-                                            style: h6Regular,
+                                            style: h6Regular.copyWith(
+                                                color: Colors.grey[600]),
                                           ),
                                         ),
-                                        sbx8,
-                                        ElevatedButton(
+                                      ),
+                                      sbx8,
+                                      Expanded(
+                                        child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
                                             backgroundColor: error,
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 12),
                                           ),
                                           onPressed: () {
                                             controller.deleteJournal(
                                                 journal['journal_id']);
-                                            Get.back();
                                             controller.fetchJournals();
+                                            Get.back();
                                           },
                                           child: Text(
                                             'Delete',
@@ -187,13 +183,18 @@ class JournalView extends GetView<JournalController> {
                                                 color: whiteColor),
                                           ),
                                         ),
-                                      ],
-                                    )
-                                  ],
-                                ),
+                                      ),
+                                    ],
+                                  )
+                                ],
                               ),
                             ),
-                            barrierDismissible: false,
+                            backgroundColor: whiteColor,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(20),
+                              ),
+                            ),
                           );
                         },
                         getJournal: () {
