@@ -8,18 +8,13 @@ import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
+import 'package:temanbicara/app/utils/validation.dart';
 import 'package:temanbicara/app/widgets/auth_textfield.dart';
+import 'package:temanbicara/app/widgets/password_validation.dart';
 import '../controllers/signup_controller.dart';
 
 class SignupView extends GetView<SignupController> {
   const SignupView({super.key});
-
-  bool _isPasswordValid(String value) {
-    return MinCharactersValidationRule(8).validate(value) &&
-        UppercaseValidationRule().validate(value) &&
-        LowercaseValidationRule().validate(value) &&
-        SpecialCharacterValidationRule().validate(value);
-  }
 
   Widget? _buildSuffixIcon() {
     return IconButton(
@@ -36,28 +31,6 @@ class SignupView extends GetView<SignupController> {
 
   bool _isFormValid() {
     return controller.isButtonActive.value && controller.isPasswordValid.value;
-  }
-
-  Widget _buildValidationRules(Set<ValidationRule> rules, String value) {
-    return ListView(
-      shrinkWrap: true,
-      children: rules.map((rule) {
-        final isValid = rule.validate(value);
-        return Row(
-          children: [
-            Icon(
-              isValid ? Icons.check : Icons.close,
-              color: isValid ? primaryColor : error,
-            ),
-            const SizedBox(width: 8),
-            Text(
-              rule.name,
-              style: h6Regular.copyWith(color: isValid ? primaryColor : error),
-            ),
-          ],
-        );
-      }).toList(),
-    );
   }
 
   @override
@@ -118,24 +91,12 @@ class SignupView extends GetView<SignupController> {
                         onChanged: (value) {
                           controller.isEmpty();
                           controller.isPasswordValid.value =
-                              _isPasswordValid(value);
+                              ValidationUtils.isPasswordValid(value);
                         },
-                        validationRules: {
-                          MinCharactersValidationRule(8),
-                          UppercaseValidationRule(),
-                          LowercaseValidationRule(),
-                          SpecialCharacterValidationRule(),
-                        },
+                        validationRules: ValidationUtils.passwordRules,
                         validationRuleBuilder: (rules, value) {
-                          bool allValid =
-                              rules.every((rule) => rule.validate(value));
-                          WidgetsBinding.instance.addPostFrameCallback((_) {
-                            controller.isPasswordValid.value = allValid;
-                          });
-                          if (value.isEmpty) {
-                            return const SizedBox.shrink();
-                          }
-                          return _buildValidationRules(rules, value);
+                          return PasswordValidationView(
+                              rules: rules, value: value);
                         },
                         decoration: InputDecoration(
                           hintText: 'Password',
