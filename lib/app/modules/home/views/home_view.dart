@@ -38,7 +38,8 @@ class HomeView extends GetView<HomeController> {
           await Future.wait([
             controller.fetchData(),
             journalController.fetchJournals(),
-            reportController.checkTracking()
+            reportController.checkTracking(),
+            profileController.fetchData()
           ]);
         },
         child: CustomScrollView(slivers: [
@@ -113,39 +114,83 @@ class HomeView extends GetView<HomeController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Obx(
-                          () => Row(
-                            children: [
-                              CircleAvatar(
-                                radius: 30,
-                                backgroundColor: border,
-                                child: CircleAvatar(
-                                  radius: 28,
-                                  backgroundColor: whiteColor,
-                                  backgroundImage: NetworkImage(
-                                      profileController.profileUrl.value),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 21,
-                              ),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Hello, ${box.read('name')}',
-                                      style: h3SemiBold,
-                                      overflow: TextOverflow.ellipsis,
+                          () {
+                            if (profileController.isLoading.value) {
+                              return Row(
+                                children: [
+                                  Shimmer.fromColors(
+                                    baseColor: Colors.grey[300]!,
+                                    highlightColor: Colors.grey[100]!,
+                                    child: const CircleAvatar(
+                                      radius: 30,
+                                      backgroundColor: Colors.white,
                                     ),
-                                    Text(
-                                      'How${"'s"} your day?',
-                                      style: h4Regular,
-                                    )
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
+                                  ),
+                                  const SizedBox(width: 21),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Shimmer.fromColors(
+                                          baseColor: Colors.grey[300]!,
+                                          highlightColor: Colors.grey[100]!,
+                                          child: Container(
+                                            width: 120,
+                                            height: 18,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Shimmer.fromColors(
+                                          baseColor: Colors.grey[300]!,
+                                          highlightColor: Colors.grey[100]!,
+                                          child: Container(
+                                            width: 90,
+                                            height: 14,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              );
+                            } else {
+                              return Row(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 30,
+                                    backgroundColor: border,
+                                    child: CircleAvatar(
+                                      radius: 28,
+                                      backgroundColor: whiteColor,
+                                      backgroundImage: NetworkImage(
+                                          profileController.profileUrl.value),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 21),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'Hello, ${box.read('name')}',
+                                          style: h3SemiBold,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        Text(
+                                          'How\'s your day?',
+                                          style: h4Regular,
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              );
+                            }
+                          },
                         ),
                         const SizedBox(
                           height: 24,
@@ -180,10 +225,10 @@ class HomeView extends GetView<HomeController> {
                                   title: reportController.title.value.isNotEmpty
                                       ? reportController.title.value
                                       : '',
-                                  detail: reportController
-                                          .detail.value.isNotEmpty
-                                      ? reportController.detail.value
-                                      : 'Complete your tracking to see your mental matrix.',
+                                  detail:
+                                      reportController.detail.value.isNotEmpty
+                                          ? reportController.detail.value
+                                          : "You haven’t tracked yet today!",
                                   matrixValue:
                                       reportController.isTrackingFilled.value
                                           ? reportController.matrixValue.value
@@ -237,9 +282,10 @@ class HomeView extends GetView<HomeController> {
                                     'Do you need an expert?',
                                     style: h6SemiBold,
                                   ),
+                                  sby8,
                                   Text(
                                     'Talk about your problems \nwith a professional psychologist',
-                                    style: h7Regular,
+                                    style: h6Regular,
                                   ),
                                   const SizedBox(
                                     height: 16,
@@ -305,7 +351,8 @@ class HomeView extends GetView<HomeController> {
                                     child: Obx(() => Text(
                                           controller.randomShortTermGoal.value
                                                   .isNotEmpty
-                                              ? '“${controller.randomShortTermGoal.value}”'
+                                              ? controller
+                                                  .randomShortTermGoal.value
                                               : '“Loading your goal...”',
                                           style: h6Regular,
                                           textAlign: TextAlign.center,
@@ -371,10 +418,13 @@ class HomeView extends GetView<HomeController> {
                           if (journalController.isLoading.value) {
                             return buildJournalCardShimmer();
                           } else if (journalController.journalList.isEmpty) {
-                            return Center(
-                              child: Text(
-                                "No journal today",
-                                style: h6SemiBold,
+                            return Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Center(
+                                child: Text(
+                                  "No journals today",
+                                  style: h6Medium,
+                                ),
                               ),
                             );
                           } else {
@@ -459,8 +509,8 @@ class HomeView extends GetView<HomeController> {
                       padding: const EdgeInsets.all(16.0),
                       child: Center(
                         child: Text(
-                          "No artilce published",
-                          style: h6SemiBold,
+                          "No articles published",
+                          style: h6Medium,
                         ),
                       ),
                     );

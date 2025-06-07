@@ -24,6 +24,7 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
     final schedules = arguments['schedules'];
     final expertiseList = arguments['expertise'];
     final expertise = (expertiseList as List).join(", ");
+    final image = arguments['image'].toString();
 
     // ignore: unused_local_variable
     DateTime selectedDate = DateTime.now();
@@ -58,8 +59,8 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                   bottomLeft: Radius.circular(8),
                   bottomRight: Radius.circular(8),
                 ),
-                child: Image.asset(
-                  "assets/images/Hafid.jpg",
+                child: Image.network(
+                  image,
                   width: double.infinity,
                   height: 223,
                   fit: BoxFit.cover,
@@ -155,6 +156,7 @@ class ConsultScheduleView extends GetView<ConsultScheduleController> {
                                     jadwal: selected['date'],
                                     waktu: selected['time'],
                                     selectedID: selected['id'],
+                                    profileUrl: image,
                                   ),
                                 );
                               },

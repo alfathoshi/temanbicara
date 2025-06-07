@@ -20,7 +20,17 @@ class CreateJournalController extends GetxController {
   var isLoading = false.obs;
 
   Future<void> pickImage() async {
-    var status = await Permission.photos.request();
+    PermissionStatus status;
+
+      if (Platform.isAndroid) {
+        status = await Permission.photos.request();
+        if (status.isDenied || status.isPermanentlyDenied) {
+          status = await Permission.storage.request();
+        }
+      } else {
+        status = await Permission.photos.request();
+      }
+    
     if (!status.isGranted) {
       CustomSnackbar.showSnackbar(
         title: "Oops!",
@@ -35,7 +45,7 @@ class CreateJournalController extends GetxController {
     if (pickedFile != null) {
       File imageFile = File(pickedFile.path);
       int fileSize = await imageFile.length();
-      if (fileSize > (2 * 1024 * 1024)) {
+      if (fileSize > (5 * 1024 * 1024)) {
         CustomSnackbar.showSnackbar(
           title: "Oops!",
           message: "Image Must not Exceed 2MB!",

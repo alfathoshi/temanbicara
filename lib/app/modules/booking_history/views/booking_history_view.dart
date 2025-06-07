@@ -39,12 +39,24 @@ class BookingHistoryView extends GetView<BookingHistoryController> {
           onRefresh: controller.fetchData,
           child: Obx(() {
             if (controller.isLoading.value) {
-              return  Center(child: CircularProgressIndicator(color: primaryColor,));
+              return Center(
+                  child: CircularProgressIndicator(
+                color: primaryColor,
+              ));
             }
             return TabBarView(
+              physics: AlwaysScrollableScrollPhysics(),
               children: [
-                _buildList(controller.pendingList, true),
-                _buildList(controller.completedList, false)
+                RefreshIndicator(
+                    color: primaryColor,
+                    backgroundColor: whiteColor,
+                    onRefresh: controller.fetchData,
+                    child: _buildList(controller.pendingList, true)),
+                RefreshIndicator(
+                    color: primaryColor,
+                    backgroundColor: whiteColor,
+                    onRefresh: controller.fetchData,
+                    child: _buildList(controller.completedList, false))
               ],
             );
           }),
@@ -76,29 +88,26 @@ class BookingHistoryView extends GetView<BookingHistoryController> {
   }
 
   Widget _buildEmptyState(String message) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset("assets/images/noBooking.png"),
-          sby24,
-          Text(message, style: h4Bold),
-          const SizedBox(height: 24),
-          ElevatedButton(
-            onPressed: controller.fetchData,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: primaryColor,
-              foregroundColor: whiteColor,
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
-            ),
-            child: const Text('Refresh',
-                style: TextStyle(fontWeight: FontWeight.bold)),
+    return ListView(
+      physics: const AlwaysScrollableScrollPhysics(),
+      padding: const EdgeInsets.only(top: 100),
+      children: [
+        SizedBox(
+          height: Get.height * 0.5,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                "assets/images/noBooking.png",
+                scale: 1.5,
+              ),
+              sby24,
+              Text(message, style: h4Bold),
+              const SizedBox(height: 24),
+            ],
           ),
-          sby36,
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

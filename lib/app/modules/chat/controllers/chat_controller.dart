@@ -19,7 +19,7 @@ class ChatController extends GetxController {
     try {
       isLoading.value = true;
       final response = await http.get(
-        Uri.parse("${Config.apiEndPoint}/consultation"),
+        Uri.parse("${Config.apiEndPoint}/consultation/user"),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer ${box.read('token')}',

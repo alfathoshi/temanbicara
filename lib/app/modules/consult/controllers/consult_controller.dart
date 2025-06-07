@@ -39,6 +39,7 @@ class ConsultController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    fetchData();
     clearExpertiseFilter();
   }
 
@@ -46,7 +47,6 @@ class ConsultController extends GetxController {
   void onReady() {
     super.onReady();
     clearExpertiseFilter();
-    fetchData();
   }
 
   @override

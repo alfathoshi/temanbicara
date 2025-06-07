@@ -49,10 +49,9 @@ class BookingPendingCard extends StatelessWidget {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: Image.asset(
-                        'assets/images/Hafid.jpg',
-                        scale: 1.5,
-                        fit: BoxFit.fill,
+                      child: Image.network(
+                        bookingPending.profileUrl,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -234,8 +233,8 @@ class CancelBookingController extends GetxController {
       final statusCode = response.statusCode;
       if (statusCode == 200 || statusCode == 201) {
         CustomSnackbar.showSnackbar(
-          title: "Success!",
-          message: "Consultation Cancelled!",
+          title: "Consultation Cancelled!",
+          message: "Your consult has cancelled",
           status: true,
         );
         return true;

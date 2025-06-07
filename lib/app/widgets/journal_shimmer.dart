@@ -8,8 +8,6 @@ Widget buildJournalCardShimmer() {
   return Padding(
     padding: const EdgeInsets.only(
       bottom: 16,
-      left: 16,
-      right: 16,
     ),
     child: Shimmer.fromColors(
       baseColor: Colors.grey[300]!,

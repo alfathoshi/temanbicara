@@ -5,6 +5,7 @@ import 'package:temanbicara/app/data/booking_complete.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
+import 'package:temanbicara/app/widgets/consult/format_date.dart';
 import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import 'package:temanbicara/app/widgets/transaction/idr_formatter.dart';
 
@@ -47,7 +48,7 @@ class BookingDetails extends StatelessWidget {
                     children: [
                       Text("Invoice", style: h6SemiBold),
                       Text(
-                        bookingComplete.invoice,
+                        "INV-${bookingComplete.transaction.selectedID}-${convertIndoDateToDDMMYYYY(bookingComplete.transaction.jadwal)}",
                         style: h6Regular,
                       )
                     ],
@@ -77,10 +78,9 @@ class BookingDetails extends StatelessWidget {
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8),
-                          child: Image.asset(
-                            'assets/images/Hafid.jpg',
-                            scale: 1.5,
-                            fit: BoxFit.fill,
+                          child: Image.network(
+                            bookingComplete.profileUrl,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),

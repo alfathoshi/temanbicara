@@ -42,12 +42,9 @@ class ChatRoomView extends GetView<ChatRoomController> {
               backgroundColor: black,
               radius: 25,
               child: CircleAvatar(
-                backgroundColor: whiteColor,
-                radius: 24,
-                child: Image.asset(
-                  'assets/images/profile.png',
-                  scale: 3,
-                ),
+                radius: 30,
+                backgroundImage: NetworkImage(controller.args['image']),
+                backgroundColor: Colors.grey[200],
               ),
             ),
             sbX12,
@@ -63,7 +60,8 @@ class ChatRoomView extends GetView<ChatRoomController> {
             .getMessages(controller.user.id, controller.otherUser.id),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return  Center(child: CircularProgressIndicator(color: primaryColor));
+            return Center(
+                child: CircularProgressIndicator(color: primaryColor));
           }
 
           if (snapshot.hasError) {
@@ -78,8 +76,7 @@ class ChatRoomView extends GetView<ChatRoomController> {
               .toList();
 
           List<ChatDisplayItem> displayItems = [];
-          DateTime?
-              lastDisplayedDateHeader;
+          DateTime? lastDisplayedDateHeader;
 
           for (var message in chronologicalMessages) {
             DateTime messageDay = DateTime(

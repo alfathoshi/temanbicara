@@ -8,6 +8,7 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
+import 'package:temanbicara/app/widgets/consult/format_date.dart';
 import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 import 'package:temanbicara/app/widgets/transaction/transaction_price_detail.dart';
@@ -147,7 +148,8 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                     TransactionPriceDetail(
                       invoice: InvoiceModel(
                         transaction: transaction,
-                        invoice: "invoice",
+                        invoice:
+                            "INV-${transaction.selectedID}-${convertDateToDDMMYYYY(transaction.jadwal)}",
                         metodePembayaran: paymentMethod!,
                         hargaTotal: transaction.appTax +
                             transaction.admTax +
@@ -175,6 +177,13 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                       ),
                     ),
                     sby24,
+                    Center(
+                      child: Text(
+                        "Already Made a Payment?",
+                        style: h7Regular,
+                      ),
+                    ),
+                    sby8,
                     GestureDetector(
                       onTap: () async {
                         final uuid = consultationData['transaction_id'];
@@ -199,7 +208,7 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                               'transaction': transaction,
                               'invoice': InvoiceModel(
                                 transaction: transaction,
-                                invoice: "dummy",
+                                invoice: "",
                                 metodePembayaran: "Bank Transfer",
                                 hargaTotal: transaction.admTax +
                                     transaction.appTax +
@@ -217,8 +226,8 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                       },
                       child: Center(
                         child: Text(
-                          "Already Made a Payment ?",
-                          style: h6Regular,
+                          "Check your Payment Status",
+                          style: h6Regular.copyWith(color: primaryColor),
                         ),
                       ),
                     ),

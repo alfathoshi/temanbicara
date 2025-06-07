@@ -87,7 +87,7 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
 
                       if (controller.consultationResult == null) {
                         CustomSnackbar.showSnackbar(
-                          title: "Failed!",
+                          title: "Oops!",
                           message: "Unable to Process Consultation!",
                           status: false,
                         );

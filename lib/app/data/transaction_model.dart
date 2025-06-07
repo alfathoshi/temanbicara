@@ -12,10 +12,12 @@ class TransactionModel {
   final int selectedID;
   final int appTax;
   final int admTax;
+  final String profileUrl;
 
   TransactionModel({
     required this.namaPsikiater,
     required this.expertise,
+    required this.profileUrl,
     this.topik = "Consultation",
     this.metode = "Chat",
     required this.durasi,

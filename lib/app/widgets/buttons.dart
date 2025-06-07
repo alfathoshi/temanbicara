@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
+import 'package:temanbicara/app/themes/spaces.dart';
 
 class MyButton extends StatelessWidget {
   final Function()? get;
@@ -27,7 +28,7 @@ class MyButton extends StatelessWidget {
           56,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(16),
         ),
       ),
       child: Text(
@@ -81,8 +82,8 @@ class MyButtonCustom extends StatelessWidget {
             text,
             style: style,
           ),
+          sbx8,
           if (icon != null) ...[
-            const Spacer(),
             icon!,
           ],
         ],

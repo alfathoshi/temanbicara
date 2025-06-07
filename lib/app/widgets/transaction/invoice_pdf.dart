@@ -5,6 +5,7 @@ import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:path_provider/path_provider.dart';
 import 'package:temanbicara/app/data/invoice_model.dart';
+import 'package:temanbicara/app/widgets/consult/format_date.dart';
 
 class CreatePDF {
   static Future<File> generatePDF(InvoiceModel invoice,
@@ -35,7 +36,8 @@ class CreatePDF {
                           style: pw.TextStyle(
                               fontSize: 40, fontWeight: pw.FontWeight.bold)),
                       pw.SizedBox(height: 4),
-                      pw.Text("Order ID ${invoice.invoice}",
+                      pw.Text(
+                          "INV-${invoice.transaction.selectedID}-${convertDateToDDMMYYYY(invoice.transaction.jadwal)}",
                           style: const pw.TextStyle(
                               color: PdfColor(0.49, 0.58, 0.30), fontSize: 12)),
                     ],
@@ -58,16 +60,16 @@ class CreatePDF {
                 child: pw.Row(
                   mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                   children: [
-                    _infoColumn("Pemesan", name),
+                    _infoColumn("Name", name),
                     _infoColumn("Email", email),
-                    _infoColumn("No.HP", phone),
+                    _infoColumn("Phone Number", phone),
                   ],
                 ),
               ),
               pw.SizedBox(height: 24),
               buildInvoiceHeaderSection(invoice),
               pw.SizedBox(height: 48),
-              pw.Text("Detail Pembayaran",
+              pw.Text("Transaction Detail",
                   style: pw.TextStyle(
                       fontWeight: pw.FontWeight.bold, fontSize: 14)),
               pw.SizedBox(height: 12),
@@ -81,7 +83,7 @@ class CreatePDF {
                   4: const pw.FractionColumnWidth(0.15),
                 },
                 children: [
-                  _tableRow(["No.", "Produk", "Deskripsi", "Jumlah", "Total"],
+                  _tableRow(["No.", "Product", "Description", "Qty.", "Total"],
                       isHeader: true),
                   _tableRow([
                     "1",
@@ -104,14 +106,13 @@ class CreatePDF {
                       _priceLine(
                           "Subtotal", invoice.transaction.harga.toString()),
                       pw.SizedBox(height: 8),
-                      _priceLine("Biaya Platform",
+                      _priceLine("Application Tax",
                           invoice.transaction.appTax.toString()),
                       pw.SizedBox(height: 8),
-                      _priceLine(
-                          "Biaya Admin", invoice.transaction.admTax.toString()),
+                      _priceLine("Administration Tax",
+                          invoice.transaction.admTax.toString()),
                       pw.Divider(),
-                      _priceLine(
-                          "Total pembayaran", invoice.hargaTotal.toString(),
+                      _priceLine("Total", invoice.hargaTotal.toString(),
                           isBold: true),
                     ],
                   )
@@ -122,7 +123,7 @@ class CreatePDF {
                 mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                 children: [
                   pw.Text(
-                    "Waktu | metode pembayaran",
+                    "Time | Payment Method",
                     style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
                   ),
                 ],
@@ -219,19 +220,19 @@ class CreatePDF {
         pw.Column(
           crossAxisAlignment: pw.CrossAxisAlignment.start,
           children: [
-            buildDetail("Nama Psikiater", trx.namaPsikiater),
-            buildDetail("Topik", trx.topik),
-            buildDetail("Metode", trx.metode),
-            buildDetail("Durasi", "${trx.durasi} menit"),
+            buildDetail("Counselor Name", trx.namaPsikiater),
+            buildDetail("Topic", trx.topik),
+            buildDetail("Method", trx.metode),
+            buildDetail("Duration", trx.durasi),
           ],
         ),
         pw.Column(
           crossAxisAlignment: pw.CrossAxisAlignment.start,
           children: [
-            buildDetail("Jadwal", trx.jadwal),
-            buildDetail("Waktu", trx.waktu),
-            buildDetail("Harga Sesi", "Rp${trx.harga}"),
-            buildDetail("Jumlah Sesi", trx.sesi.toString()),
+            buildDetail("Schedule", trx.jadwal),
+            buildDetail("Time", trx.waktu),
+            buildDetail("Price", "Rp${trx.harga}"),
+            buildDetail("Session", trx.sesi.toString()),
           ],
         ),
       ],

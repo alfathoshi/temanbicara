@@ -18,7 +18,6 @@ class JournalController extends GetxController {
 
   Future<void> fetchJournals() async {
     isLoading.value = true;
-    journalList.clear();
     try {
       final userId = box.read('id');
 

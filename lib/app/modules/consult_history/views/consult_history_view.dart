@@ -39,7 +39,8 @@ class ConsultHistoryView extends GetView<ConsultHistoryController> {
           onRefresh: controller.fetchData,
           child: Obx(() {
             if (controller.isLoading.value) {
-              return  Center(child: CircularProgressIndicator(color: primaryColor));
+              return Center(
+                  child: CircularProgressIndicator(color: primaryColor));
             }
 
             final pendingList = controller.consultList
@@ -120,6 +121,7 @@ class ConsultHistoryView extends GetView<ConsultHistoryController> {
               problem: item.problem,
               summary: item.summary,
               description: item.description,
+              profileUrl: item.profileUrl,
             ),
           );
         },

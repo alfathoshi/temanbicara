@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace, unnecessary_brace_in_string_interps
 
 import 'package:flutter/material.dart';
 import 'package:temanbicara/app/themes/colors.dart';
@@ -9,11 +9,13 @@ class CounselorCard extends StatelessWidget {
   final String username;
   final String expertise;
   final String schedule;
+  final String image;
   const CounselorCard(
       {super.key,
       required this.username,
       required this.expertise,
-      required this.schedule});
+      required this.schedule,
+      required this.image});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class CounselorCard extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(26),
                   color: Colors.white,
-                  border: Border.all(color: whiteColor, width: 2),
+                  border: Border.all(color: whiteColor, width: 3),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.08),
@@ -53,8 +55,10 @@ class CounselorCard extends StatelessWidget {
                   width: 120,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(26),
-                    child: Image.asset(
-                      'assets/images/Hafid.jpg',
+                    child: Image.network(
+                      image,
+                      width: double.infinity,
+                      height: 223,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -98,7 +102,7 @@ class CounselorCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'selalu ada kecuali kiamat',
+                        '${schedule} schedules available',
                         style: TextStyle(
                           fontSize: 10,
                           color: grey2Color,

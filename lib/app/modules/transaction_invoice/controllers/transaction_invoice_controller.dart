@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:temanbicara/app/data/invoice_model.dart';
+import 'package:temanbicara/app/widgets/consult/format_date.dart';
 import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 import 'package:temanbicara/app/widgets/transaction/invoice_pdf.dart';
 import 'package:temanbicara/app/utils/platform_channel.dart';
@@ -13,9 +14,11 @@ class TransactionInvoiceController extends GetxController {
   Future<String> getDownloadPath() async {
     if (Platform.isAndroid) {
       final directory = Directory('/storage/emulated/0/Download');
-      if (await directory.exists()) return directory.path;
-      final fallback = await getExternalStorageDirectory();
-      return fallback?.path ?? '';
+      if (await directory.exists()) {
+        return directory.path;
+      } else {
+        throw Exception("Download folder not found.");
+      }
     } else {
       final dir = await getApplicationDocumentsDirectory();
       return dir.path;
@@ -28,7 +31,7 @@ class TransactionInvoiceController extends GetxController {
 
       final downloadDir = await getDownloadPath();
       final filePath =
-          '$downloadDir/invoice_${DateTime.now().millisecondsSinceEpoch}.pdf';
+          '$downloadDir/invoice_${invoice.transaction.selectedID}_${convertDateToDDMMYYYY(invoice.transaction.jadwal)}.pdf';
 
       await CreatePDF.generatePDF(invoice, outputPath: filePath);
 

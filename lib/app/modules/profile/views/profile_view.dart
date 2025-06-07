@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
@@ -31,46 +32,91 @@ class ProfileView extends GetView<ProfileController> {
                   children: [
                     sby12,
                     Obx(
-                      () => Stack(
-                        alignment: Alignment.bottomRight,
-                        children: [
-                          CircleAvatar(
-                            radius: 80,
-                            backgroundColor: border,
-                            child: CircleAvatar(
-                              radius: 78,
-                              backgroundColor: whiteColor,
-                              backgroundImage:
-                                  NetworkImage(controller.profileUrl.value),
-                            ),
-                          ),
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: primaryColor,
-                            ),
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.camera_alt,
-                                size: 16,
-                                color: whiteColor,
+                      () {
+                        if (controller.isLoading.value) {
+                          return Column(
+                            children: [
+                              Stack(
+                                alignment: Alignment.bottomRight,
+                                children: [
+                                  Shimmer.fromColors(
+                                    baseColor: Colors.grey[300]!,
+                                    highlightColor: Colors.grey[100]!,
+                                    child: const CircleAvatar(
+                                      radius: 80,
+                                      backgroundColor: Colors.white,
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: primaryColor,
+                                    ),
+                                    child: Icon(
+                                      Icons.camera_alt,
+                                      size: 16,
+                                      color: whiteColor,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              onPressed: () async {
-                                await controller.pickImage();
-                                await controller.changeImage();
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    sby12,
-                    Text(
-                      controller.box.read('name') ?? 'username',
-                      style: h3Bold,
-                      overflow: TextOverflow.ellipsis,
+                              sby24,
+                              Text(
+                                controller.box.read('name') ?? 'username',
+                                style: h3Bold,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          );
+                        } else {
+                          return Column(
+                            children: [
+                              Stack(
+                                alignment: Alignment.bottomRight,
+                                children: [
+                                  CircleAvatar(
+                                    radius: 80,
+                                    backgroundColor: border,
+                                    child: CircleAvatar(
+                                      radius: 78,
+                                      backgroundColor: whiteColor,
+                                      backgroundImage: NetworkImage(
+                                          controller.profileUrl.value),
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 40,
+                                    height: 40,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: primaryColor,
+                                    ),
+                                    child: IconButton(
+                                      icon: Icon(
+                                        Icons.camera_alt,
+                                        size: 16,
+                                        color: whiteColor,
+                                      ),
+                                      onPressed: () async {
+                                        await controller.pickImage();
+                                        await controller.changeImage();
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              sby24,
+                              Text(
+                                controller.box.read('name') ?? 'username',
+                                style: h3Bold,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          );
+                        }
+                      },
                     ),
                   ],
                 ),
@@ -84,7 +130,7 @@ class ProfileView extends GetView<ProfileController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(31, 36, 31, 24),
+                    padding: const EdgeInsets.fromLTRB(32, 16, 32, 24),
                     child: Column(
                       children: [
                         Align(

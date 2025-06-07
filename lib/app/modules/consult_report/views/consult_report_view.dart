@@ -40,12 +40,11 @@ class ConsultReportView extends GetView<ConsultReportController> {
                       color: Colors.black,
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(14),
-                      child: Image.asset(
-                        'assets/images/Hafid.jpg',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                        borderRadius: BorderRadius.circular(14),
+                        child: Image.network(
+                          data.profileUrl,
+                          fit: BoxFit.cover,
+                        )),
                   ),
                   sbX12,
                   Expanded(

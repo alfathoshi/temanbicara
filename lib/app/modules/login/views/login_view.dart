@@ -17,7 +17,7 @@ class LoginView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: whiteColor,
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         shape: const RoundedRectangleBorder(
@@ -40,84 +40,85 @@ class LoginView extends GetView<LoginController> {
         () => Column(
           children: [
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    sby60,
-                    Center(
-                      child: Text(
-                        'Login',
-                        style: h1Bold,
-                      ),
-                    ),
-                    sby36,
-                    AuthTextfield(
-                      onChanged: (value) => controller.isEmpty(),
-                      showPassword: () {},
-                      controller: controller.emailC,
-                      obscureText: false,
-                      hintText: 'Email',
-                      passwordField: false,
-                      type: TextInputType.emailAddress,
-                    ),
-                    sby16,
-                    AuthTextfield(
-                      onChanged: (value) => controller.isEmpty(),
-                      showPassword: () => controller.showPassword(),
-                      controller: controller.passC,
-                      obscureText: controller.isSecure.value,
-                      hintText: 'Password',
-                      passwordField: true,
-                      type: TextInputType.text,
-                    ),
-                    sby12,
-                    GestureDetector(
-                      onTap: () {
-                        Get.toNamed(Routes.SEND_OTP);
-                      },
-                      child: SizedBox(
-                        width: MediaQuery.sizeOf(context).width,
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      sby60,
+                      Center(
                         child: Text(
-                          "Forgot password?",
-                          textAlign: TextAlign.right,
-                          style: GoogleFonts.poppins().copyWith(
-                            color: const Color(0xFF60ABEE),
+                          'Login',
+                          style: h1Bold,
+                        ),
+                      ),
+                      sby36,
+                      AuthTextfield(
+                        onChanged: (value) => controller.isEmpty(),
+                        showPassword: () {},
+                        controller: controller.emailC,
+                        obscureText: false,
+                        hintText: 'Email',
+                        passwordField: false,
+                        type: TextInputType.emailAddress,
+                      ),
+                      sby16,
+                      AuthTextfield(
+                        onChanged: (value) => controller.isEmpty(),
+                        showPassword: () => controller.showPassword(),
+                        controller: controller.passC,
+                        obscureText: controller.isSecure.value,
+                        hintText: 'Password',
+                        passwordField: true,
+                        type: TextInputType.text,
+                      ),
+                      sby12,
+                      GestureDetector(
+                        onTap: () {
+                          Get.toNamed(Routes.SEND_OTP);
+                        },
+                        child: SizedBox(
+                          width: MediaQuery.sizeOf(context).width,
+                          child: Text(
+                            "Forgot password?",
+                            textAlign: TextAlign.right,
+                            style: GoogleFonts.poppins().copyWith(
+                              color: const Color(0xFF60ABEE),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    sby36,
-                    ElevatedButton(
-                      onPressed: () {
-                        controller.login();
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: primaryColor,
-                          foregroundColor: Colors.white,
-                          minimumSize: const Size(
-                            double.infinity,
-                            56,
-                          ),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20))),
-                      child: controller.isLoading.value == false
-                          ? Text(
-                              'Login',
-                              style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.bold),
-                            )
-                          : SizedBox(
-                              height: 20,
-                              width: 20,
-                              child: CircularProgressIndicator(
-                                color: whiteColor,
-                              ),
+                      sby36,
+                      ElevatedButton(
+                        onPressed: () {
+                          controller.login();
+                        },
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: primaryColor,
+                            foregroundColor: Colors.white,
+                            minimumSize: const Size(
+                              double.infinity,
+                              56,
                             ),
-                    ),
-                    sby24,
-                  ],
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20))),
+                        child: controller.isLoading.value == false
+                            ? Text(
+                                'Login',
+                                style: h4Bold.copyWith(color: whiteColor)
+                              )
+                            : SizedBox(
+                                height: 20,
+                                width: 20,
+                                child: CircularProgressIndicator(
+                                  color: whiteColor,
+                                ),
+                              ),
+                      ),
+                      sby24,
+                    ],
+                  ),
                 ),
               ),
             ),

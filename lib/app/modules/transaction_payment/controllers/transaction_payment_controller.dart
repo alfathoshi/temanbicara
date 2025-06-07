@@ -46,8 +46,8 @@ class TransactionPaymentController extends GetxController {
       }
     } catch (e) {
       CustomSnackbar.showSnackbar(
-        title: "Failed!",
-        message: "Payment Status Checking Failed!",
+        title: "Try Again",
+        message: "Payment status checking failed",
         status: false,
       );
     }

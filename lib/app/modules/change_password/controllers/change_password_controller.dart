@@ -87,7 +87,7 @@ class ChangePasswordController extends GetxController {
         box.write('new_password', responseData['new_password']);
         if (responseData['status']) {
           CustomSnackbar.showSnackbar(
-            title: "Success!",
+            title: "Yeay!",
             message: "Password Changed!",
             status: true,
           );

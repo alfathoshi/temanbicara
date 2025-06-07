@@ -43,9 +43,7 @@ class TransactionInvoiceView extends GetView<TransactionInvoiceController> {
               sby24,
               const SizedBox(
                 height: 60,
-                child: Expanded(
-                  child: TransactionTimeLineViewIndex(index: 4),
-                ),
+                child: TransactionTimeLineViewIndex(index: 4),
               ),
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 28),

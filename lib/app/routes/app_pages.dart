@@ -1,13 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:get/get.dart';
-
-import '../modules/Tracking/bindings/tracking_binding.dart';
-import '../modules/Tracking/views/tracking_view.dart';
-import '../modules/Tracking_2/bindings/tracking_2_binding.dart';
-import '../modules/Tracking_2/views/tracking_2_view.dart';
-import '../modules/Tracking_3/bindings/tracking_3_binding.dart';
-import '../modules/Tracking_3/views/tracking_3_view.dart';
 import '../modules/article/bindings/article_binding.dart';
 import '../modules/article/views/article_view.dart';
 import '../modules/assesment_1/bindings/assesment_1_binding.dart';
@@ -16,8 +9,7 @@ import '../modules/assesment_2/bindings/assesment_2_binding.dart';
 import '../modules/assesment_2/views/assesment_2_view.dart';
 import '../modules/booking_history/bindings/booking_history_binding.dart';
 import '../modules/booking_history/views/booking_history_view.dart';
-import '../modules/change_language/bindings/change_language_binding.dart';
-import '../modules/change_language/views/change_language_view.dart';
+
 import '../modules/change_password/bindings/change_password_binding.dart';
 import '../modules/change_password/views/change_password_view.dart';
 import '../modules/chat/bindings/chat_binding.dart';
@@ -64,16 +56,12 @@ import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/report/bindings/report_binding.dart';
 import '../modules/report/views/report_view.dart';
-import '../modules/room_chat/bindings/room_chat_binding.dart';
-import '../modules/room_chat/views/room_chat_view.dart';
 import '../modules/sendOtp/bindings/send_otp_binding.dart';
 import '../modules/sendOtp/views/send_otp_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';
 import '../modules/splash_screen/views/splash_screen_view.dart';
-import '../modules/tracking_4/bindings/tracking_4_binding.dart';
-import '../modules/tracking_4/views/tracking_4_view.dart';
 import '../modules/transaction/bindings/transaction_binding.dart';
 import '../modules/transaction/views/transaction_view.dart';
 import '../modules/transaction_invoice/bindings/transaction_invoice_binding.dart';
@@ -157,16 +145,6 @@ class AppPages {
       binding: SignupBinding(),
     ),
     GetPage(
-      name: _Paths.TRACKING,
-      page: () => TrackingView(),
-      binding: TrackingBinding(),
-    ),
-    GetPage(
-      name: _Paths.TRACKING_2,
-      page: () => Tracking2View(),
-      binding: Tracking2Binding(),
-    ),
-    GetPage(
       name: _Paths.REPORT,
       page: () => const ReportView(),
       binding: ReportBinding(),
@@ -212,34 +190,14 @@ class AppPages {
       binding: Assesment2Binding(),
     ),
     GetPage(
-      name: _Paths.TRACKING_3,
-      page: () => Tracking3View(),
-      binding: Tracking3Binding(),
-    ),
-    GetPage(
-      name: _Paths.TRACKING_4,
-      page: () => Tracking4View(),
-      binding: Tracking4Binding(),
-    ),
-    GetPage(
       name: _Paths.CHAT,
       page: () => const ChatView(),
       binding: ChatBinding(),
     ),
     GetPage(
-      name: _Paths.ROOM_CHAT,
-      page: () => RoomChatView(),
-      binding: RoomChatBinding(),
-    ),
-    GetPage(
       name: _Paths.CHANGE_PASSWORD,
       page: () => ChangePasswordView(),
       binding: ChangePasswordBinding(),
-    ),
-    GetPage(
-      name: _Paths.CHANGE_LANGUAGE,
-      page: () => ChangeLanguageView(),
-      binding: ChangeLanguageBinding(),
     ),
     GetPage(
       name: _Paths.CONSULT_SCHEDULE,

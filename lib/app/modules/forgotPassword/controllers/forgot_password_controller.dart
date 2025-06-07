@@ -71,8 +71,8 @@ class ForgotPasswordController extends GetxController {
 
       if (isCorrect.value) {
         CustomSnackbar.showSnackbar(
-          title: "Success!",
-          message: "Password Changed!",
+          title: "Password Changed!",
+          message: "Your password has changed",
           status: true,
         );
         Get.offAllNamed(Routes.LOGIN);

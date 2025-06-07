@@ -46,10 +46,9 @@ class BookingCompleteCard extends StatelessWidget {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
-                    child: Image.asset(
-                      'assets/images/Hafid.jpg',
-                      scale: 1.5,
-                      fit: BoxFit.fill,
+                    child: Image.network(
+                      bookingComplete.profileUrl,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),

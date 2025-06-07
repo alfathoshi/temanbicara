@@ -1,9 +1,12 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:temanbicara/app/data/invoice_model.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
+import 'package:temanbicara/app/widgets/consult/format_date.dart';
 import 'package:temanbicara/app/widgets/transaction/idr_formatter.dart';
 
 class InvoiceData extends StatelessWidget {
@@ -35,7 +38,11 @@ class InvoiceData extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const CircleAvatar(radius: 20),
+                    CircleAvatar(
+                      radius: 20,
+                      backgroundImage:
+                          NetworkImage(invoice.transaction.profileUrl),
+                    ),
                     sbX12,
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,7 +75,8 @@ class InvoiceData extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Invoice", style: h6Bold),
-                    Text(invoice.invoice)
+                    Text(
+                        "INV-${invoice.transaction.selectedID}-${convertDateToDDMMYYYY(invoice.transaction.jadwal)}")
                   ],
                 ),
                 sby24,

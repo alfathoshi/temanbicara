@@ -129,8 +129,6 @@ class SignupView extends GetView<SignupController> {
                       sby8,
                       ElevatedButton(
                         onPressed: () {
-                          // print(
-                          // controller.validateEmail(controller.emailC.text));
                           controller.register();
                         },
                         style: ElevatedButton.styleFrom(
@@ -175,7 +173,7 @@ class SignupView extends GetView<SignupController> {
                         style: GoogleFonts.poppins(),
                       ),
                       GestureDetector(
-                        onTap: () => Get.toNamed(Routes.LOGIN),
+                        onTap: () => Get.offAllNamed(Routes.LOGIN),
                         child: Text(
                           'Login',
                           style: GoogleFonts.poppins(
