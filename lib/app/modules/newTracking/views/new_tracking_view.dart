@@ -7,6 +7,7 @@ import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import '../../../themes/colors.dart';
 import '../../../themes/fonts.dart';
 import '../../../themes/spaces.dart';
+import '../../../widgets/loading_overlay.dart';
 import '../controllers/new_tracking_controller.dart';
 
 class NewTrackingView extends GetView<NewTrackingController> {
@@ -422,25 +423,9 @@ class NewTrackingView extends GetView<NewTrackingController> {
               ),
             ),
           ),
-          Obx(() {
-            if (controller.isLoading.value) {
-              return Positioned.fill(
-                child: Container(
-                  color: Colors.black.withOpacity(0.25),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 2.5, sigmaY: 2.5),
-                    child: Center(
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            } else {
-              return const SizedBox.shrink();
-            }
-          }),
+          Obx(() => LoadingOverlay(
+                isLoading: controller.isLoading.value,
+              ))
         ],
       ),
     );

@@ -10,6 +10,7 @@ import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/custom_appbar.dart';
 import 'package:temanbicara/app/widgets/wide_button.dart';
 
+import '../../../widgets/loading_overlay.dart';
 import '../controllers/create_journal_controller.dart';
 
 class CreateJournalView extends GetView<CreateJournalController> {
@@ -148,25 +149,9 @@ class CreateJournalView extends GetView<CreateJournalController> {
               ),
             ),
           ),
-          Obx(() {
-            if (controller.isLoading.value) {
-              return Positioned.fill(
-                child: Container(
-                  color: Colors.black.withOpacity(0.25),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 2.5, sigmaY: 2.5),
-                    child: Center(
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(primaryColor),
-                      ),
-                    ),
-                  ),
-                ),
-              );
-            } else {
-              return const SizedBox.shrink();
-            }
-          }),
+          Obx(() => LoadingOverlay(
+                isLoading: controller.isLoading.value,
+              ))
         ],
       ),
     );
