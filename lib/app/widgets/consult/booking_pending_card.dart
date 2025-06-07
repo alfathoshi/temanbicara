@@ -37,20 +37,18 @@ class BookingPendingCard extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(16, 26, 16, 20),
+              padding: const EdgeInsets.fromLTRB(8, 8, 4, 4),
               child: Row(
                 children: [
                   Container(
-                    width: 68,
-                    height: 77,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: Colors.black,
-                    ),
+                    height: 100,
+                    width: 100,
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(12),
                       child: Image.network(
                         bookingPending.profileUrl,
+                        width: double.infinity,
+                        height: 223,
                         fit: BoxFit.cover,
                       ),
                     ),

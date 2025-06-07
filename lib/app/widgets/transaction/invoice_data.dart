@@ -155,20 +155,6 @@ class InvoiceData extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Expired Time", style: h6Bold),
-                    Text(invoice.transaction.kadaluarsa)
-                  ],
-                ),
-                sby24,
-                const Divider(
-                  height: 1,
-                  thickness: 1.5,
-                  color: grey4Color,
-                ),
-                sby24,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
                     Text("Payment Method", style: h6Bold),
                     Text(invoice.metodePembayaran.toString())
                   ],

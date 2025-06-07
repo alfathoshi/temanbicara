@@ -42,7 +42,6 @@ class TransactionData extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Container(
-          height: 530,
           width: double.infinity,
           decoration: BoxDecoration(
               border: Border.all(color: primaryColor, width: 2),
@@ -139,20 +138,6 @@ class TransactionData extends StatelessWidget {
                   children: [
                     Text("Time", style: h6Bold),
                     Text(waktuSesi.toString())
-                  ],
-                ),
-                sby24,
-                const Divider(
-                  height: 1,
-                  thickness: 1.5,
-                  color: grey4Color,
-                ),
-                sby24,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Expired Time", style: h6Bold),
-                    Text(kadaluarsa)
                   ],
                 ),
                 sby24,

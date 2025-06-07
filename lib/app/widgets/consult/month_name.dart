@@ -1,18 +1,18 @@
 String monthName(int month) {
   const names = [
     '',
-    'Januari',
-    'Februari',
-    'Maret',
+    'January',
+    'February',
+    'March',
     'April',
-    'Mei',
-    'Juni',
-    'Juli',
-    'Agustus',
+    'May',
+    'June',
+    'July',
+    'August',
     'September',
-    'Oktober',
+    'October',
     'November',
-    'Desember'
+    'December'
   ];
   return names[month];
 }

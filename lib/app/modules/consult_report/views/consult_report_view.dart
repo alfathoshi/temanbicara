@@ -53,12 +53,13 @@ class ConsultReportView extends GetView<ConsultReportController> {
                       children: [
                         Text(data.nama,
                             style: h4Bold, overflow: TextOverflow.ellipsis),
-                        sby12,
+                        Text(data.expertise,
+                            style: h6Regular, overflow: TextOverflow.ellipsis),
+                        sby8,
                         Text(
                           calculateDuration(data.waktuMulai, data.waktuSelesai),
                           style: h7SemiBold,
                         ),
-                        sby5,
                         Text(
                           "${data.tanggal} | ${data.waktuMulai} - ${data.waktuSelesai}",
                           style: h7SemiBold,

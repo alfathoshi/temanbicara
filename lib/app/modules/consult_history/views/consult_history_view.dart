@@ -122,6 +122,7 @@ class ConsultHistoryView extends GetView<ConsultHistoryController> {
               summary: item.summary,
               description: item.description,
               profileUrl: item.profileUrl,
+              expertise: item.expertise,
             ),
           );
         },

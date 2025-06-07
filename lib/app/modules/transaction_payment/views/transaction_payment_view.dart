@@ -227,7 +227,7 @@ class TransactionPaymentView extends GetView<TransactionPaymentController> {
                       child: Center(
                         child: Text(
                           "Check your Payment Status",
-                          style: h6Regular.copyWith(color: primaryColor),
+                          style: h6SemiBold.copyWith(color: primaryColor),
                         ),
                       ),
                     ),

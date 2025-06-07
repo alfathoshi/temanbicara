@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/data/consult_data.dart';
-import 'package:temanbicara/app/widgets/consult/format_full_date.dart';
 import 'package:temanbicara/app/widgets/consult/format_time.dart';
 import 'package:temanbicara/app/widgets/consult/history_calculate_duration.dart';
 
@@ -44,6 +43,8 @@ class ConsultHistoryController extends GetxController {
           final filtered = list.where((e) =>
               e['status'] != 'Cancelled' && e['status_payment'] == 'Success');
           consultList.value = filtered.map(_mapToConsultModel).toList();
+
+          // print(filtered);
         }
       }
     } catch (e) {
@@ -58,9 +59,11 @@ class ConsultHistoryController extends GetxController {
     final startTime = item['start_time'] ?? '-';
     final endTime = item['end_time'] ?? '-';
     final rawDate = item['date'] ?? '';
+    final expertise =
+        (item['expertise'] ?? '').toString().split(' ').join(', ');
 
     final durasi = calculateDuration(startTime, endTime);
-    final tanggal = formatFullDate(rawDate);
+    final tanggal = rawDate;
 
     return ConsultHistory(
       status: status,
@@ -74,6 +77,7 @@ class ConsultHistoryController extends GetxController {
       summary: item['summary'],
       description: item['description'],
       profileUrl: item['counselor_profile_url'].toString(),
+      expertise: expertise,
     );
   }
 }

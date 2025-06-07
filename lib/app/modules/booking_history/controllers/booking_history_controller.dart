@@ -138,8 +138,8 @@ class BookingHistoryController extends GetxController {
     final payment = item['payment'];
     final expired = parseExpiredDate(payment['expired_date']);
     final user = schedule['user'];
-    final expertiseList = user['expertises'] as List;
-    final expertise = expertiseList.isNotEmpty ? expertiseList[0] : null;
+    final expertise =
+        user['expertiseString'].toString().trim().split(' ').join(', ');
 
     return BookingPending(
       nama: schedule['user']['name'],
@@ -156,7 +156,7 @@ class BookingHistoryController extends GetxController {
       transactionId: (payment['transaction_id'] ?? '').toString(),
       expiredDate: payment['expired_date'] ?? '',
       availableDateRaw: schedule['available_date'] ?? '',
-      expertises: expertise != null ? expertise['type'] : 'None',
+      expertises: expertise.isEmpty ? "None" : expertise,
       consultationID: item['consultation_id'],
       profileUrl: user['profile_url'],
     );
@@ -166,18 +166,17 @@ class BookingHistoryController extends GetxController {
     final schedule = item['schedule'];
     final payment = item['payment'];
     final user = schedule['user'];
-    final expertiseList = user['expertises'] as List;
-    final expertise = expertiseList.isNotEmpty ? expertiseList[0] : null;
+    final expertise =
+        user['expertiseString'].toString().trim().split(' ').join(', ');
 
     return BookingComplete(
       invoice: 'invoice',
       transaction: TransactionModel(
         namaPsikiater: user['name'],
-        expertise: expertise != null ? expertise['type'] : 'None',
+        expertise: expertise.isEmpty ? 'None' : expertise,
         durasi: calculateDuration(schedule['start_time'], schedule['end_time']),
         jadwal: formatFullDate(schedule['available_date']),
-        waktu:
-            "${formatTime(schedule['start_time'])} - ${formatTime(schedule['end_time'])}",
+        waktu: formatTime(schedule['start_time']),
         selectedID: item['schedule_id'],
         profileUrl: user['profile_url'],
       ),

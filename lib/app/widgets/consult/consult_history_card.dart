@@ -1,14 +1,15 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_interpolation_to_compose_strings
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:temanbicara/app/data/consult_data.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
-import 'package:temanbicara/app/widgets/consult/format_string_to_date.dart';
+import 'package:temanbicara/app/widgets/consult/format_full_date.dart';
 import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 
 class ConsultHistoryCard extends StatelessWidget {
@@ -22,11 +23,13 @@ class ConsultHistoryCard extends StatelessWidget {
   final String? summary;
   final String? description;
   final String profileUrl;
+  final String expertise;
 
   ConsultHistoryCard({
     super.key,
     required this.nama,
     required this.profileUrl,
+    required this.expertise,
     required this.tanggal,
     required this.waktuMulai,
     required this.waktuSelesai,
@@ -81,31 +84,48 @@ class ConsultHistoryCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(nama, style: h4Bold, overflow: TextOverflow.ellipsis),
-                    sby12,
-                    Text(
-                      "$tanggal | $waktuMulai - $waktuSelesai",
-                      style: h7Regular.copyWith(color: grey3Color),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(nama,
+                            style: h4Bold, overflow: TextOverflow.ellipsis),
+                        Text(
+                          expertise,
+                          style: h7Regular.copyWith(color: grey3Color),
+                        ),
+                      ],
                     ),
                     sby12,
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color:
-                              isDone ? primaryColor : const Color(0xFF60ABEE),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "${formatFullDate(tanggal)} | $waktuMulai - $waktuSelesai",
+                          style: h7Regular.copyWith(color: grey3Color),
                         ),
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Text(
-                        isDone ? "Completed" : "Upcoming",
-                        style: h7SemiBold.copyWith(
-                          fontSize: 9,
-                          color:
-                              isDone ? primaryColor : const Color(0xFF60ABEE),
+                        sby8,
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 4),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: isDone
+                                  ? primaryColor
+                                  : const Color(0xFF60ABEE),
+                            ),
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          child: Text(
+                            isDone ? "Completed" : "Upcoming",
+                            style: h7SemiBold.copyWith(
+                              fontSize: 9,
+                              color: isDone
+                                  ? primaryColor
+                                  : const Color(0xFF60ABEE),
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     )
                   ],
                 ),
@@ -117,12 +137,10 @@ class ConsultHistoryCard extends StatelessWidget {
           sby12,
           MyButtonCustom(
             get: () {
-              // print(tanggal + waktuMulai);
-              // print(tanggal + waktuSelesai);
               if (isDone) {
                 ConsultHistory consultHistory = ConsultHistory(
                   nama: nama,
-                  tanggal: tanggal,
+                  tanggal: formatFullDate(tanggal),
                   waktuMulai: waktuMulai,
                   waktuSelesai: waktuSelesai,
                   counselorId: counselorId,
@@ -132,6 +150,7 @@ class ConsultHistoryCard extends StatelessWidget {
                   description: description,
                   durasi: "$waktuMulai - $waktuSelesai",
                   profileUrl: profileUrl,
+                  expertise: expertise,
                 );
                 Get.toNamed(
                   Routes.CONSULT_REPORT,
@@ -139,14 +158,21 @@ class ConsultHistoryCard extends StatelessWidget {
                 );
               } else {
                 DateTime now = DateTime.now();
-                DateTime startTime = parseDateWithMonthName(waktuMulai);
-                DateTime endTime = parseDateWithMonthName(waktuSelesai);
+
+                var date = DateTime.parse(tanggal);
+
+                DateTime startTime = DateTime.parse(
+                    DateFormat('yyyy-MM-dd').format(date) + " " + waktuMulai);
+                DateTime endTime = DateTime.parse(
+                    DateFormat('yyyy-MM-dd').format(date) + " " + waktuSelesai);
+
                 if (now.isAfter(startTime) && now.isBefore(endTime)) {
                   Get.toNamed(
                     Routes.CHAT_ROOM,
                     arguments: {
                       'name': nama,
                       'counselor_id': counselorId,
+                      'image': profileUrl,
                     },
                   );
                 } else {

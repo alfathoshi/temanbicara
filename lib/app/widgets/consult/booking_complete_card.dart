@@ -1,7 +1,8 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:temanbicara/app/data/booking_complete.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
@@ -23,74 +24,115 @@ class BookingCompleteCard extends StatelessWidget {
           bookingComplete: bookingComplete,
         ));
       },
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 15),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            border: Border.all(
-              color: grey4Color,
-            ),
+      child: Container(
+        width: double.infinity,
+        height: 131,
+        decoration: BoxDecoration(
+          color: whiteColor,
+          border: Border.all(
+            color: Color(0xFFEEEEEE).withOpacity(0.4),
+            width: 2,
           ),
-          height: 140,
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(16, 26, 16, 20),
-            child: Row(
-              children: [
-                Container(
-                  width: 68,
-                  height: 85,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    color: Colors.black,
-                  ),
+          borderRadius: BorderRadius.circular(28),
+        ),
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(4, 0, 16, 0),
+          child: Row(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(26),
+                  color: Colors.white,
+                  border: Border.all(color: whiteColor, width: 3),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.08),
+                      offset: Offset(2, 2),
+                      blurRadius: 6,
+                      spreadRadius: 0,
+                    ),
+                  ],
+                ),
+                child: Container(
+                  height: 110,
+                  width: 110,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(26),
                     child: Image.network(
                       bookingComplete.profileUrl,
+                      width: double.infinity,
+                      height: 223,
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                sbX12,
-                Column(
+              ),
+              sbX12,
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20),
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      bookingComplete.transaction.namaPsikiater,
-                      style: h4Bold,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    ),
-                    sby5,
-                    Text(
-                      bookingComplete.transaction.expertise,
-                      style: h7Regular.copyWith(
-                        color: grey2Color,
-                      ),
-                    ),
-                    sby5,
-                    Text(
-                      bookingComplete.transaction.durasi,
-                      style: h7SemiBold,
-                    ),
-                    Row(
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          bookingComplete.transaction.jadwal,
-                          style: h7SemiBold,
+                          bookingComplete.transaction.namaPsikiater,
+                          style: h4Bold,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
                         ),
-                        sbx5,
+                        sby5,
                         Text(
-                          bookingComplete.transaction.waktu,
-                          style: h7SemiBold,
+                          bookingComplete.transaction.expertise,
+                          style: h7Regular.copyWith(
+                            color: grey2Color,
+                          ),
+                        ),
+                      ],
+                    ),
+                    sby5,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(
+                              Iconsax.clock,
+                              size: 12,
+                            ),
+                            sbx5,
+                            Text(
+                              bookingComplete.transaction.durasi,
+                              style: h7SemiBold,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              Iconsax.calendar_2,
+                              size: 12,
+                            ),
+                            sbx5,
+                            Text(
+                              '${bookingComplete.transaction.waktu},',
+                              style: h7SemiBold,
+                            ),
+                            sbx5,
+                            Text(
+                              bookingComplete.transaction.jadwal,
+                              style: h7SemiBold,
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
