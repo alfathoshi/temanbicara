@@ -69,13 +69,11 @@ class TopArticle extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                     border: Border.all(color: border, width: 1),
                   ),
-                  child: Expanded(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(14),
-                      child: Image.network(
-                        image ?? '',
-                        fit: BoxFit.cover,
-                      ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(14),
+                    child: Image.network(
+                      image ?? '',
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),

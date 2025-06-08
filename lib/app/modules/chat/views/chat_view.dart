@@ -65,8 +65,20 @@ class ChatView extends GetView<ChatController> {
                       final counselorId = data['counselor_id'].toString();
                       final counselorName =
                           data['counselor_name'] ?? 'Counselor';
-                      final startTime = data['start_time'] ?? '';
+                      final dateStr = data['date'] as String? ?? '';
+                      final startTimeStr = data['start_time'] as String? ?? '';
+                      final endTimeStr = data['end_time'] as String? ?? '';
                       final image = data['counselor_profile_url'];
+
+                      final datePart = dateStr.split(' ')[0];
+                      final fullStartTime =
+                          datePart.isNotEmpty && startTimeStr.isNotEmpty
+                              ? "$datePart $startTimeStr"
+                              : "";
+                      final fullEndTime =
+                          datePart.isNotEmpty && endTimeStr.isNotEmpty
+                              ? "$datePart $endTimeStr"
+                              : "";
 
                       return Padding(
                         padding: const EdgeInsets.symmetric(
@@ -75,7 +87,7 @@ class ChatView extends GetView<ChatController> {
                           stream: controller.getLastMessageStream(counselorId),
                           builder: (context, snapshot) {
                             String lastMessage = "Memuat pesan...";
-                            String displayTime = startTime;
+                            String displayTime = fullStartTime;
 
                             if (snapshot.hasError) {
                               lastMessage = "Error memuat pesan.";
@@ -105,6 +117,8 @@ class ChatView extends GetView<ChatController> {
                               nama: counselorName,
                               deskripsi: lastMessage,
                               image: image,
+                              startTime: fullStartTime,
+                              endTime: fullEndTime,
                               time: displayTime,
                             );
                           },

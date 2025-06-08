@@ -121,50 +121,85 @@ class ChatRoomView extends GetView<ChatRoomController> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: controller.messageC,
-                        cursorColor: black,
-                        decoration: InputDecoration(
-                          hintText: 'Tulis pesan disini...',
-                          hintStyle: h5Regular.copyWith(color: grey2Color),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(16),
-                            borderSide: const BorderSide(
-                              color: greyColor,
+                  padding: const EdgeInsets.all(8.0),
+                  child: Obx(() {
+                    switch (controller.chatStatus.value) {
+                      case ChatStatus.active:
+                        return Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                controller: controller.messageC,
+                                cursorColor: black,
+                                decoration: InputDecoration(
+                                  hintText: 'Tulis pesan disini...',
+                                  hintStyle:
+                                      h5Regular.copyWith(color: grey2Color),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(16),
+                                    borderSide: const BorderSide(
+                                      color: greyColor,
+                                    ),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(color: primaryColor),
+                                  ),
+                                ),
+                                onSubmitted: (text) {
+                                  controller.handleSendPressed(text);
+                                  controller.messageC.text = '';
+                                },
+                              ),
                             ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide(color: primaryColor),
-                          ),
-                        ),
-                        onSubmitted: (text) {
-                          controller.handleSendPressed(text);
-                          controller.messageC.text = '';
-                        },
-                      ),
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Iconsax.send1,
-                        color: primaryColor,
-                      ),
-                      onPressed: () {
-                        controller.handleSendPressed(controller.messageC.text);
-                        controller.messageC.text = '';
-                      },
-                    ),
-                  ],
-                ),
-              ),
+                            IconButton(
+                              icon: Icon(
+                                Iconsax.send1,
+                                color: primaryColor,
+                              ),
+                              onPressed: () {
+                                controller.handleSendPressed(
+                                    controller.messageC.text);
+                                controller.messageC.text = '';
+                              },
+                            ),
+                          ],
+                        );
+                      case ChatStatus.notStarted:
+                        // KEMBALIKAN CONTAINER "BELUM MULAI"
+                        return _buildDisabledChatInput(
+                            "Sesi konsultasi belum dimulai");
+                      case ChatStatus.ended:
+                        // KEMBALIKAN CONTAINER "SUDAH BERAKHIR"
+                        return _buildDisabledChatInput(
+                            "Sesi konsultasi telah berakhir");
+                      case ChatStatus.loading:
+                        // Tampilan pas awal loading, bisa kosong atau loading indicator kecil
+                        return const SizedBox.shrink();
+                    }
+                  })),
             ],
           );
         },
       ),
     );
   }
+}
+
+Widget _buildDisabledChatInput(String message) {
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+    margin: const EdgeInsets.all(8),
+    decoration: BoxDecoration(
+      color: Colors.grey[200],
+      borderRadius: BorderRadius.circular(16),
+    ),
+    child: Center(
+      child: Text(
+        message,
+        style: h5Regular.copyWith(color: Colors.grey[600]),
+        textAlign: TextAlign.center,
+      ),
+    ),
+  );
 }
