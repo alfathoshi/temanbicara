@@ -6,6 +6,8 @@ import 'package:temanbicara/app/themes/fonts.dart';
 
 class ChatContainer extends StatelessWidget {
   final String id;
+  final String startTime;
+  final String endTime;
   final String time;
   final String? image;
   final String? nama;
@@ -17,6 +19,8 @@ class ChatContainer extends StatelessWidget {
     required this.deskripsi,
     required this.image,
     required this.id,
+    required this.startTime,
+    required this.endTime,
     required this.time,
   });
 
@@ -24,8 +28,13 @@ class ChatContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed(Routes.CHAT_ROOM,
-            arguments: {'name': nama, 'counselor_id': id, 'image': image});
+        Get.toNamed(Routes.CHAT_ROOM, arguments: {
+          'name': nama,
+          'counselor_id': id,
+          'image': image,
+          'start_time': startTime,
+          'end_time': endTime,
+        });
       },
       child: Container(
         height: 90,
@@ -72,7 +81,7 @@ class ChatContainer extends StatelessWidget {
               ),
             ),
             Text(
-              time,
+              startTime,
               overflow: TextOverflow.fade,
               style:
                   h7Regular.copyWith(color: Colors.grey.withValues(alpha: 0.9)),
