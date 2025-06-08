@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/data/transaction_model.dart';
 import 'package:temanbicara/app/modules/transaction_payment/views/transaction_payment_view.dart';
+import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/themes/spaces.dart';
@@ -86,6 +87,8 @@ class TransactionMethodView extends GetView<TransactionMethodController> {
                       Navigator.of(Get.context!).pop();
 
                       if (controller.consultationResult == null) {
+                        Get.offAllNamed(Routes.NAVIGATION_BAR,
+                            arguments: {"indexPage": 0});
                         CustomSnackbar.showSnackbar(
                           title: "Oops!",
                           message: "Unable to Process Consultation!",
