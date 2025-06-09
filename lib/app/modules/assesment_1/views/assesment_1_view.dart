@@ -166,7 +166,7 @@ class Assesment1View extends GetView<Assesment1Controller> {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: primaryColor,
                             foregroundColor: Colors.white,
-                            minimumSize: const Size(double.infinity, 44),
+                            minimumSize: const Size(double.infinity, 56),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20)),
                           ),
