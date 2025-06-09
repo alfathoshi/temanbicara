@@ -158,11 +158,11 @@ class ReportView extends GetView<ReportController> {
         title: Text(
           "Mental Report",
           style: h3Bold,
-        ),       
+        ),
       ),
       body: RefreshIndicator(
         color: primaryColor,
-          backgroundColor: whiteColor,
+        backgroundColor: whiteColor,
         onRefresh: () async {
           controller.fetchStatistik();
           controller.checkTracking();
@@ -263,7 +263,7 @@ class ReportView extends GetView<ReportController> {
                 }
               }
               return PieChartCard(
-                title: "Mood Statistik",
+                title: "Mood Statistic",
                 subtitle: "Your mood trends",
                 categories: controller.emotions,
                 dataCounts: moodCounts,
