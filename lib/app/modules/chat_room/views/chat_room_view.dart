@@ -166,15 +166,12 @@ class ChatRoomView extends GetView<ChatRoomController> {
                           ],
                         );
                       case ChatStatus.notStarted:
-                        // KEMBALIKAN CONTAINER "BELUM MULAI"
                         return _buildDisabledChatInput(
-                            "Sesi konsultasi belum dimulai");
+                            "Your session has not started");
                       case ChatStatus.ended:
-                        // KEMBALIKAN CONTAINER "SUDAH BERAKHIR"
                         return _buildDisabledChatInput(
-                            "Sesi konsultasi telah berakhir");
+                            "Your session has ended");
                       case ChatStatus.loading:
-                        // Tampilan pas awal loading, bisa kosong atau loading indicator kecil
                         return const SizedBox.shrink();
                     }
                   })),

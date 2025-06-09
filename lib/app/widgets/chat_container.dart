@@ -81,7 +81,7 @@ class ChatContainer extends StatelessWidget {
               ),
             ),
             Text(
-              startTime,
+              time,
               overflow: TextOverflow.fade,
               style:
                   h7Regular.copyWith(color: Colors.grey.withValues(alpha: 0.9)),
