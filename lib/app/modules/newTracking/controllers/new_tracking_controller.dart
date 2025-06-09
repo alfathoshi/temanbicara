@@ -207,10 +207,6 @@ class NewTrackingController extends GetxController {
             title: 'Congrats!',
             message: "Today's Tracking Saved!",
             status: true);
-        final reportController = Get.find<ReportController>();
-        await reportController.checkTracking();
-        final homeController = Get.find<HomeController>();
-        await homeController.refreshMentalMatrixData();
         isLoading.value = false;
         Get.offAllNamed(Routes.NAVIGATION_BAR, arguments: {"indexPage": 0});
         return true;

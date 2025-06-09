@@ -77,6 +77,8 @@ class HomeController extends GetxController {
     _reportController = Get.find<ReportController>();
     _profileController = Get.find<ProfileController>();
     _journalController = Get.find<JournalController>();
+    refreshMentalMatrixData();
+    _reportController.checkTracking();
 
     _loadInitialData();
     _reportEverWorker = ever(_reportController.report, (_) {
