@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/c9104244-d7ce-48f2-8f84-ce426f678f31" alt="Teman Bicara" width="150"/>
+  <img src="https://github.com/user-attachments/assets/217f47d8-bc57-4862-b7b4-e93d57e0adf9" alt="Teman Bicara" width="150"/>
 </p>
 
 <p align="center">
