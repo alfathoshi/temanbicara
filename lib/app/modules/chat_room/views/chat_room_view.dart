@@ -132,7 +132,7 @@ class ChatRoomView extends GetView<ChatRoomController> {
                                 controller: controller.messageC,
                                 cursorColor: black,
                                 decoration: InputDecoration(
-                                  hintText: 'Tulis pesan disini...',
+                                  hintText: 'Message...',
                                   hintStyle:
                                       h5Regular.copyWith(color: grey2Color),
                                   enabledBorder: OutlineInputBorder(
