@@ -24,6 +24,12 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Setup dummy env & asset
+        run: |
+            mkdir -p assets/firebase
+            echo "DUMMY=1" > .env
+            echo "{}" > assets/firebase/service-account.json
+    
       - name: Run analyzer (ignore asset warnings)
         run: |
             flutter analyze | tee analyze.log || true
