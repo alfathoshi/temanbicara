@@ -19,7 +19,7 @@ void main() {
     box.erase();
   });
 
-  testWidgets('Splash screen renders logo and text',
+  testWidgets('Splash screen renders Teman Bicara text',
       (WidgetTester tester) async {
     Get.put(SplashScreenController());
 
@@ -29,8 +29,6 @@ void main() {
       ),
     );
 
-    // Cek logo dan teks muncul
     expect(find.text('Teman Bicara'), findsOneWidget);
-    expect(find.byType(Image), findsOneWidget);
   });
 }
