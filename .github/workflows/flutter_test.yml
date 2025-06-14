@@ -43,5 +43,6 @@ jobs:
                 echo "Only warnings, safe to continue"
             fi
 
-      - name: Run tests
-        run: flutter test
+      - name: Run tests (verbose)
+        run: flutter test --verbose
+
