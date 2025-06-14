@@ -6,7 +6,6 @@ import 'package:temanbicara/app/themes/colors.dart';
 import 'package:temanbicara/app/themes/fonts.dart';
 import 'package:temanbicara/app/widgets/buttons.dart';
 import 'package:temanbicara/app/widgets/custom_appbar.dart';
-import 'package:temanbicara/app/widgets/wide_button.dart';
 import '../../../widgets/loading_overlay.dart';
 import '../controllers/create_journal_controller.dart';
 

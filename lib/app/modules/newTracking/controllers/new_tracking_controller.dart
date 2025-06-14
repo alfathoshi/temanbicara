@@ -7,8 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:temanbicara/app/routes/app_pages.dart';
 import 'package:temanbicara/app/widgets/custom_snackbar.dart';
 import '../../../config/config.dart';
-import '../../home/controllers/home_controller.dart';
-import '../../report/controllers/report_controller.dart';
 
 class NewTrackingController extends GetxController {
   var sliderValue = 0.0.obs;
