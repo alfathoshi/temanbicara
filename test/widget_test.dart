@@ -35,7 +35,7 @@ void main() {
 
   setUpAll(() async {
     TestWidgetsFlutterBinding.ensureInitialized();
-    box = DummyGetStorage(); 
+    box = DummyGetStorage();
   });
 
   testWidgets('Splash screen renders Teman Bicara text', (tester) async {
@@ -44,13 +44,13 @@ void main() {
 
     await tester.pumpWidget(
       GetMaterialApp(
-        home: SplashScreenView(), 
+        home: SplashScreenView(),
         getPages: AppPages.routes,
       ),
     );
 
-    await tester.pump(const Duration(seconds: 3));
-    await tester.pumpAndSettle();
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 300));
 
     expect(find.text('Teman Bicara'), findsOneWidget);
   });
