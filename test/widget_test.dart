@@ -7,23 +7,30 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:temanbicara/app/modules/splash_screen/controllers/splash_screen_controller.dart';
+import 'package:temanbicara/app/modules/splash_screen/views/splash_screen_view.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+  setUp(() async {
+    await GetStorage.init();
+    final box = GetStorage();
+    box.erase();
+  });
 
-    // await tester.pumpWidget(const MyApp());
+  testWidgets('Splash screen renders logo and text',
+      (WidgetTester tester) async {
+    Get.put(SplashScreenController());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    await tester.pumpWidget(
+      const GetMaterialApp(
+        home: SplashScreenView(),
+      ),
+    );
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Cek logo dan teks muncul
+    expect(find.text('Teman Bicara'), findsOneWidget);
+    expect(find.byType(Image), findsOneWidget);
   });
 }
