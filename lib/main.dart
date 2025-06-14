@@ -9,7 +9,7 @@ import 'app/routes/app_pages.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-void main() async {
+Future<void> main() async {
   await dotenv.load();
   await GetStorage.init();
   Gemini.init(apiKey: dotenv.env['GOOGLE_API']!);
@@ -22,6 +22,10 @@ void main() async {
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     NotificationService.showNotification(message);
   });
+  runTemanBicaraApp();
+}
+
+void runTemanBicaraApp() {
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
