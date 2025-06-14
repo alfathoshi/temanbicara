@@ -52,25 +52,34 @@ class DummyGetStorage implements GetStorage {
 
 void main() {
   setUpAll(() async {
-    TestWidgetsFlutterBinding.ensureInitialized();
+    try {
+      TestWidgetsFlutterBinding.ensureInitialized();
 
-    // Set mock asset handler buat ngehindarin error image not found
-    TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
-        .setMockMessageHandler('flutter/assets', (message) async {
-      final image = await ui.instantiateImageCodec(
-        Uint8List.fromList(List.filled(100, 0)),
-        targetWidth: 1,
-        targetHeight: 1,
-      );
-      final frame = await image.getNextFrame();
-      final byteData = await frame.image.toByteData(format: ui.ImageByteFormat.png);
-      return byteData?.buffer.asByteData();
-    });
+      // Set mock asset handler buat image
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
+          .setMockMessageHandler('flutter/assets', (message) async {
+        final image = await ui.instantiateImageCodec(
+          Uint8List.fromList(List.filled(100, 0)),
+          targetWidth: 1,
+          targetHeight: 1,
+        );
+        final frame = await image.getNextFrame();
+        final byteData =
+            await frame.image.toByteData(format: ui.ImageByteFormat.png);
+        return byteData?.buffer.asByteData();
+      });
 
-    await GetStorage.init(); // Init storage beneran, bukan dummy
-    final box = GetStorage();
-    await box.write('firstTime', false);
-    await box.write('token', null);
+      await GetStorage.init();
+      final box = GetStorage();
+      await box.write('firstTime', false);
+      await box.write('token', null);
+
+      print('✅ setUpAll selesai tanpa error');
+    } catch (e, stack) {
+      print('setUpAll ERROR: $e');
+      print('Stack trace:\n$stack');
+      rethrow; // biar tetep gagal dan kita bisa lihat errornya
+    }
   });
 
   testWidgets('Splash screen renders Teman Bicara text', (tester) async {
