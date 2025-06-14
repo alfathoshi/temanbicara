@@ -44,7 +44,6 @@ class ChatService {
         );
       }
     }
-    // else {}
   }
 
   Stream<QuerySnapshot> getMessages(String userID, otherUserID) {

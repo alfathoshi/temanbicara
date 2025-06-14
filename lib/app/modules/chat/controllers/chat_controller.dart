@@ -52,9 +52,18 @@ class ChatController extends GetxController {
         }
       } else {
         listChat.clear();
-        throw Exception('Failed to load chat list: ${response.reasonPhrase}');
+        CustomSnackbar.showSnackbar(
+          title: "Try Again",
+          message: "No Chat Found!",
+          status: false,
+        );
       }
     } catch (e) {
+      CustomSnackbar.showSnackbar(
+        title: "Something went wrong",
+        message: "No Chat Found!",
+        status: false,
+      );
       listChat.clear();
     } finally {
       isLoading.value = false;
