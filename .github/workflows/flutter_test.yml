@@ -27,10 +27,10 @@ jobs:
       - name: Setup dummy env & asset
         run: |
             mkdir -p assets/firebase
-            echo "DUMMY=1" > .env
-            echo "{}" > assets/firebase/service-account.json
             mkdir -p assets/images
             echo "" > assets/images/logo.png
+            echo "DUMMY=1" > .env
+            echo "{}" > assets/firebase/service-account.json
     
       - name: Run analyzer (ignore asset warnings)
         run: |
