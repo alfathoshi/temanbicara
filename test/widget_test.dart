@@ -13,10 +13,13 @@ import 'package:temanbicara/app/modules/splash_screen/controllers/splash_screen_
 import 'package:temanbicara/app/modules/splash_screen/views/splash_screen_view.dart';
 
 void main() {
-  setUp(() async {
+  setUpAll(() async {
     await GetStorage.init();
+  });
+
+  setUp(() async {
     final box = GetStorage();
-    box.erase();
+    await box.erase();
   });
 
   testWidgets('Splash screen renders Teman Bicara text',
@@ -28,6 +31,8 @@ void main() {
         home: SplashScreenView(),
       ),
     );
+
+    await tester.pump(const Duration(seconds: 3));
 
     expect(find.text('Teman Bicara'), findsOneWidget);
   });
