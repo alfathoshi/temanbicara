@@ -29,6 +29,7 @@ jobs:
             mkdir -p assets/firebase
             echo "DUMMY=1" > .env
             echo "{}" > assets/firebase/service-account.json
+            echo "dummy image" > assets/images/logo.png
     
       - name: Run analyzer (ignore asset warnings)
         run: |

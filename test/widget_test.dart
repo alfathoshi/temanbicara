@@ -10,25 +10,35 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/modules/splash_screen/controllers/splash_screen_controller.dart';
 import 'package:temanbicara/app/modules/splash_screen/views/splash_screen_view.dart';
+import 'package:temanbicara/app/routes/app_pages.dart';
 
 void main() {
-  testWidgets('Splash screen renders Teman Bicara text',
-      (WidgetTester tester) async {
-    await GetStorage.init();
+  void main() {
+    setUpAll(() async {
+      TestWidgetsFlutterBinding.ensureInitialized();
+      await GetStorage.init(); // init storage
+    });
 
-    final box = GetStorage();
-    await box.erase();
+    testWidgets('Splash screen renders Teman Bicara text',
+        (WidgetTester tester) async {
+      // Simulasi GetStorage (mock data)
+      final box = GetStorage();
+      await box.write('firstTime', false);
+      await box.write('token', null); // biar route tetep stay di splash
 
-    Get.put(SplashScreenController());
+      await tester.pumpWidget(
+        GetMaterialApp(
+          home: const SplashScreenView(),
+          getPages: AppPages.routes,
+        ),
+      );
 
-    await tester.pumpWidget(
-      const GetMaterialApp(
-        home: SplashScreenView(),
-      ),
-    );
+      await tester
+          .pump(const Duration(seconds: 3)); // biar future.delayed kelar
+      await tester.pumpAndSettle(); // tunggu animasi & route selesai
 
-    await tester.pump(const Duration(seconds: 3));
-
-    expect(find.text('Teman Bicara'), findsOneWidget);
-  });
+      // Expect teks muncul
+      expect(find.text('Teman Bicara'), findsOneWidget);
+    });
+  }
 }
