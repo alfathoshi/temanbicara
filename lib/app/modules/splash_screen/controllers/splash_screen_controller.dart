@@ -1,31 +1,48 @@
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:temanbicara/app/routes/app_pages.dart';
+import 'package:temanbicara/app/utils/localstorage.dart';
 
 class SplashScreenController extends GetxController {
-  final box = GetStorage();
+  
+  final LocalStorage storage;
+  final Duration delay;
+  final void Function(String route, {dynamic arguments})? navigate;
+
+  SplashScreenController({
+    required this.storage,
+    this.delay = const Duration(seconds: 3),
+    this.navigate,
+  });
 
   void handleRouting() {
-    bool isFirstTime = box.hasData('firstTime') ? box.read('firstTime') : true;
+    bool isFirstTime = storage.has('firstTime') ? storage.read('firstTime') : true;
 
     if (isFirstTime) {
-      box.write('firstTime', false);
-      Get.offAllNamed(Routes.ON_BOARDING);
+      storage.write('firstTime', false);
+      _go(Routes.ON_BOARDING);
       return;
     }
 
-    if (box.read('token') == null) {
-      Get.offAllNamed(Routes.LOGIN);
-    } else if (box.read('name') == null) {
-      Get.offAllNamed(Routes.ASSESMENT_1);
+    if (storage.read('token') == null) {
+      _go(Routes.LOGIN);
+    } else if (storage.read('name') == null) {
+      _go(Routes.ASSESMENT_1);
     } else {
-      Get.offAllNamed(Routes.NAVIGATION_BAR, arguments: {'indexPage': 0});
+      _go(Routes.NAVIGATION_BAR, arguments: {'indexPage': 0});
+    }
+  }
+
+  void _go(String route, {dynamic arguments}) {
+    if (navigate != null) {
+      navigate!(route, arguments: arguments);
+    } else {
+      Get.offAllNamed(route, arguments: arguments);
     }
   }
 
   @override
   void onReady() {
-    Future.delayed(const Duration(seconds: 3), handleRouting);
+    Future.delayed(delay, handleRouting);
     super.onReady();
   }
-}
+}   

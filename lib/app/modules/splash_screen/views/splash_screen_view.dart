@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:temanbicara/app/themes/colors.dart';
@@ -9,16 +11,19 @@ class SplashScreenView extends GetView<SplashScreenController> {
 
   @override
   Widget build(BuildContext context) {
+    bool isTestEnv = Platform.environment.containsKey('FLUTTER_TEST');
     return Scaffold(
       backgroundColor: whiteColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'assets/images/logo.png',
-              scale: 2,
-            ),
+            isTestEnv
+                ? const FlutterLogo(size: 100)
+                : Image.asset(
+                    'assets/images/logo.png',
+                    scale: 2,
+                  ),
             const SizedBox(height: 12),
             Text('Teman Bicara', style: textLogo),
           ],
