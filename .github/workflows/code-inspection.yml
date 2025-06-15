@@ -1,4 +1,4 @@
-name: Build for Sonar
+name: Continous Inspection
 on:
   push:
     branches:
@@ -12,23 +12,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      #2 Setup Java
+          fetch-depth: 0  
+
       - name: Set Up Java
         uses: actions/setup-java@v3.12.0
         with:
           distribution: 'oracle'
           java-version: '17'
-      #3 Setup Flutter
+
       - name: Set Up Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.32.0'
           channel: 'stable'
-      #4 Install Dependencies
+
       - name: Install Dependencies
         run: flutter pub get
-      #6 Run Sonar cloud scan
+
       - name: SonarCloud Scan
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
