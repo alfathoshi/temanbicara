@@ -3,7 +3,6 @@ on:
   push:
     tags:
       - 'v*.*.*'
-
 jobs:
   build-and-release:
     name: Build and Release APK
@@ -15,53 +14,42 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0  
-
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
-      
       - name: Set up Flutter (Latest Stable)
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.32.0' 
           cache: true
-
       - name: Install dependencies
         run: flutter pub get
-
       - name: Gemini Key
         run: |
           echo "GOOGLE_API=${{ secrets.GEMINI_KEY }}" >> .env
-
       - name: Firebase Key
         run: |
           mkdir -p assets/firebase
           echo "${{ secrets.FIREBASE_KEY }}" >> assets/firebase/service-account.json
-          
       - name: Decode Keystore
         run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > android/app/temanbicara_key.keystore
-
       - name: Create key.properties file
         run: |
           echo "storeFile=temanbicara_key.keystore" > android/key.properties
           echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}" >> android/key.properties
           echo "keyAlias=${{ secrets.KEY_ALIAS }}" >> android/key.properties
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}" >> android/key.properties
-
       - name: Build Signed APK
         run: flutter build apk --release
-
       - name: Rename APK
         run: mv build/app/outputs/apk/release/app-release.apk build/app/outputs/apk/release/teman-bicara-${{ github.ref_name }}.apk
-
       - name: Get previous tag
         id: get_prev_tag
         run: |
           PREV_TAG=$(git tag --sort=-creatordate | grep -v ${{ github.ref_name }} | head -n 1)
           echo "prev_tag=$PREV_TAG" >> $GITHUB_OUTPUT
-
       - name: Generate changelog
         id: changelog
         run: |
@@ -72,7 +60,6 @@ jobs:
           echo "changelog<<EOF" >> $GITHUB_OUTPUT
           echo "$changelog_content" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
-
       - name: Create GitHub Release and Upload APK
         uses: softprops/action-gh-release@v2
         with:

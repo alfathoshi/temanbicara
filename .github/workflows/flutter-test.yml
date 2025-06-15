@@ -1,11 +1,9 @@
 name: Continuous Testing
-
 on:
   push:
     branches: [main, develop]
   pull_request:
     branches: [main, develop]
-
 jobs:
   test:
     name: Run Flutter Tests
@@ -14,16 +12,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.32.0'
           channel: stable
-
       - name: Install dependencies
         run: flutter pub get
-
       - name: Setup dummy env & asset
         run: |
             mkdir -p assets/firebase
@@ -31,7 +26,6 @@ jobs:
             echo "" > assets/images/logo.png
             echo "DUMMY=1" > .env
             echo "{}" > assets/firebase/service-account.json
-    
       - name: Run analyzer (ignore asset warnings)
         run: |
             flutter analyze | tee analyze.log || true
@@ -42,7 +36,5 @@ jobs:
             else
                 echo "Only warnings, safe to continue"
             fi
-
       - name: Run tests
         run: flutter test
-
